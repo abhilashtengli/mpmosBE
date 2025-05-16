@@ -120,26 +120,49 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   Serializable: 'Serializable'
 });
 
+exports.Prisma.UserScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  email: 'email',
+  password: 'password',
+  role: 'role',
+  userCode: 'userCode',
+  isVerified: 'isVerified',
+  verificationCode: 'verificationCode',
+  resetPasswordToken: 'resetPasswordToken',
+  resetTokenExpires: 'resetTokenExpires',
+  verificationExpires: 'verificationExpires',
+  createdAt: 'createdAt',
+  updateAt: 'updateAt'
+};
+
 exports.Prisma.ProjectScalarFieldEnum = {
   id: 'id',
   implementingAgency: 'implementingAgency',
   title: 'title',
   locationState: 'locationState',
   director: 'director',
+  budget: 'budget',
+  status: 'status',
+  startDate: 'startDate',
+  endDate: 'endDate',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  userId: 'userId'
 };
 
 exports.Prisma.QuarterScalarFieldEnum = {
   id: 'id',
   number: 'number',
-  year: 'year'
+  year: 'year',
+  isActive: 'isActive'
 };
 
 exports.Prisma.InputDistributionScalarFieldEnum = {
   id: 'id',
   projectId: 'projectId',
   quarterId: 'quarterId',
+  userId: 'userId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -199,18 +222,24 @@ exports.Prisma.TrainingScalarFieldEnum = {
   pdfKey: 'pdfKey',
   units: 'units',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  userId: 'userId'
 };
 
 exports.Prisma.FLDScalarFieldEnum = {
   id: 'id',
   projectId: 'projectId',
   quarterId: 'quarterId',
+  description: 'description',
+  district: 'district',
+  village: 'village',
+  block: 'block',
   target: 'target',
   achieved: 'achieved',
   units: 'units',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  userId: 'userId'
 };
 
 exports.Prisma.AwarenessProgramScalarFieldEnum = {
@@ -229,7 +258,8 @@ exports.Prisma.AwarenessProgramScalarFieldEnum = {
   imageKey: 'imageKey',
   units: 'units',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  userId: 'userId'
 };
 
 exports.Prisma.InfrastructureDevelopmentScalarFieldEnum = {
@@ -245,7 +275,8 @@ exports.Prisma.InfrastructureDevelopmentScalarFieldEnum = {
   imageUrl: 'imageUrl',
   imageKey: 'imageKey',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  userId: 'userId'
 };
 
 exports.Prisma.UpcomingEventScalarFieldEnum = {
@@ -253,7 +284,10 @@ exports.Prisma.UpcomingEventScalarFieldEnum = {
   title: 'title',
   date: 'date',
   location: 'location',
-  description: 'description'
+  description: 'description',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  userId: 'userId'
 };
 
 exports.Prisma.PublicationScalarFieldEnum = {
@@ -264,14 +298,20 @@ exports.Prisma.PublicationScalarFieldEnum = {
   thumbnailUrl: 'thumbnailUrl',
   thumbnailKey: 'thumbnailKey',
   pdfUrl: 'pdfUrl',
-  pdfKey: 'pdfKey'
+  pdfKey: 'pdfKey',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  userId: 'userId'
 };
 
 exports.Prisma.GalleryScalarFieldEnum = {
   id: 'id',
   title: 'title',
   imageUrl: 'imageUrl',
-  imageKey: 'imageKey'
+  imageKey: 'imageKey',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  userId: 'userId'
 };
 
 exports.Prisma.ProjectDetailsScalarFieldEnum = {
@@ -285,7 +325,10 @@ exports.Prisma.ProjectDetailsScalarFieldEnum = {
   objectives: 'objectives',
   director: 'director',
   coDirectors: 'coDirectors',
-  achievements: 'achievements'
+  achievements: 'achievements',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  userId: 'userId'
 };
 
 exports.Prisma.SortOrder = {
@@ -302,9 +345,18 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
+exports.Role = exports.$Enums.Role = {
+  admin: 'admin',
+  director: 'director'
+};
 
+exports.Status = exports.$Enums.Status = {
+  Active: 'Active',
+  Completed: 'Completed'
+};
 
 exports.Prisma.ModelName = {
+  User: 'User',
   Project: 'Project',
   Quarter: 'Quarter',
   InputDistribution: 'InputDistribution',

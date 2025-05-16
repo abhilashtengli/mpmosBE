@@ -9,270 +9,367 @@ generator client {
   output   = "../src/generated/prisma"
 }
 
+enum Role {
+  admin
+  director
+}
+
+enum Status {
+  Active
+  Completed
+}
+
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
+model User {
+  id                  String    @id @default(uuid())
+  name                String
+  email               String    @unique
+  password            String
+  role                Role
+  userCode            String
+  isVerified          Boolean   @default(false) @map("is_verified")
+  verificationCode    String?   @map("verification_code")
+  resetPasswordToken  String?   @map("reset_password_token")
+  resetTokenExpires   DateTime? @map("reset_token_expires")
+  verificationExpires DateTime?
+  createdAt           DateTime  @default(now()) @map("created_at")
+  updateAt            DateTime  @default(now()) @updatedAt @map("updated_at")
 
+  projects                   Project[]
+  trainings                  Training[]
+  flds                       FLD[]
+  awarenessPrograms          AwarenessProgram[]
+  infrastructureDevelopments InfrastructureDevelopment[]
+  inputDistributions         InputDistribution[]
+  upcomingEvents             UpcomingEvent[]
+  publications               Publication[]
+  galleries                  Gallery[]
+  projectDetails             ProjectDetails[]
+
+  @@index([email])
+  @@index([userCode])
+  @@index([role])
+  @@map("user")
+}
 
 model Project {
-id                       String                     @id @default(uuid())
-implementingAgency       String
-title                    String                     @db.VarChar(255)
-locationState            String
-director                 String
-createdAt                DateTime                   @default(now())
-updatedAt                DateTime                   @updatedAt
-trainings                Training[]
-flds                     FLD[]
-awarenessPrograms        AwarenessProgram[]
-infrastructureDevelopments InfrastructureDevelopment[]
-inputDistributions       InputDistribution[]
+  id                         String                      @id @default(uuid())
+  implementingAgency         String
+  title                      String                      @db.VarChar(255)
+  locationState              String
+  director                   String
+  budget                     Decimal?                    @db.Decimal(12, 2)
+  status                     Status                      @default(Active)
+  startDate                  DateTime?
+  endDate                    DateTime?
+  createdAt                  DateTime                    @default(now())
+  updatedAt                  DateTime                    @updatedAt
+  trainings                  Training[]
+  flds                       FLD[]
+  awarenessPrograms          AwarenessProgram[]
+  infrastructureDevelopments InfrastructureDevelopment[]
+  inputDistributions         InputDistribution[]
 
-// Indexes for frequently queried fields
-@@index([title])
-@@index([implementingAgency])
-@@index([locationState])
-@@index([createdAt])
+  User   User?   @relation(fields: [userId], references: [id])
+  userId String? @map("user_id")
+
+  // Indexes for frequently queried fields
+  @@index([title])
+  @@index([implementingAgency])
+  @@index([locationState])
+  @@index([userId])
+  @@index([status])
+  @@index([createdAt])
+  @@map("projects")
 }
 
 model Quarter {
-id                       String                     @id @default(uuid())
-number                   Int                        // Should be between 1 and 4
-year                     Int
-trainings                Training[]
-flds                     FLD[]
-awarenessPrograms        AwarenessProgram[]
-inputDistributions       InputDistribution[]
-infrastructureDevelopments InfrastructureDevelopment[]
+  id                         String                      @id @default(uuid())
+  number                     Int // Should be between 1 and 4
+  year                       Int
+  isActive                   Boolean                     @default(true)
+  trainings                  Training[]
+  flds                       FLD[]
+  awarenessPrograms          AwarenessProgram[]
+  inputDistributions         InputDistribution[]
+  infrastructureDevelopments InfrastructureDevelopment[]
 
-@@unique([number, year])
-@@index([year])  // Often filtered by year
+  // Validator for number - implement in application code instead of @range
+  // as Prisma doesn't support @range validator
 
-// Validator for number - implement in application code instead of @range
-// as Prisma doesn't support @range validator
+  @@unique([number, year])
+  @@index([year])
+  @@index([isActive]) // Often filtered by year
+  @@map("quarters")
 }
 
 model InputDistribution {
-id                       String                     @id @default(uuid())
-project                  Project                    @relation(fields: [projectId], references: [id], onDelete: Cascade)
-projectId                String
-quarter                  Quarter                    @relation(fields: [quarterId], references: [id], onDelete: Cascade)
-quarterId                String
-predefinedItems          PredefinedInputDistribution[]
-customItems              CustomInputDistribution[]
-createdAt                DateTime                   @default(now())
-updatedAt                DateTime                   @updatedAt
+  id              String                        @id @default(uuid())
+  project         Project                       @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  projectId       String                        @map("project_id")
+  quarter         Quarter                       @relation(fields: [quarterId], references: [id], onDelete: Cascade)
+  quarterId       String                        @map("quarter_id")
+  predefinedItems PredefinedInputDistribution[]
+  customItems     CustomInputDistribution[]
+  User            User?                         @relation(fields: [userId], references: [id])
+  userId          String?                       @map("user_id")
+  createdAt       DateTime                      @default(now())
+  updatedAt       DateTime                      @updatedAt
 
-// Indexes for foreign keys and timestamps - improve join performance
-@@index([projectId])
-@@index([quarterId])
-@@index([createdAt])
+  // Indexes for foreign keys and timestamps - improve join performance
+  @@index([projectId])
+  @@index([quarterId])
+  @@index([userId])
+  @@index([createdAt])
+  @@map("input_distributions")
 }
 
 model PredefinedInputDistribution {
-id                       String                     @id @default(uuid())
-inputDistribution        InputDistribution          @relation(fields: [inputDistributionId], references: [id], onDelete: Cascade)
-inputDistributionId      String
-activityType             String                     // Seed Distribution/Planting materials/Fertilizers/etc.
-name                     String
-target                   Int
-achieved                 Int
-district                 String
-village                  String
-block                    String
-remarks                  String?                    @db.VarChar(300)
-units                    String?
-imageUrl                 String?
-imageKey                 String?
-createdAt                DateTime                   @default(now())
-updatedAt                DateTime                   @updatedAt
+  id                  String            @id @default(uuid())
+  inputDistribution   InputDistribution @relation(fields: [inputDistributionId], references: [id], onDelete: Cascade)
+  inputDistributionId String            @map("input_distribution_id")
+  activityType        String // Seed Distribution/Planting materials/Fertilizers/etc.
+  name                String            @db.VarChar(200)
+  target              Int
+  achieved            Int
+  district            String            @db.VarChar(100)
+  village             String            @db.VarChar(100)
+  block               String            @db.VarChar(100)
+  remarks             String?           @db.VarChar(300)
+  units               String?           @db.VarChar(20)
+  imageUrl            String?
+  imageKey            String?
+  createdAt           DateTime          @default(now())
+  updatedAt           DateTime          @updatedAt
 
-// Indexes for foreign keys and filtering fields
-@@index([inputDistributionId])
-@@index([activityType])
-@@index([district, village, block]) // Compound index for location filtering
+  // Indexes for foreign keys and filtering fields
+  @@index([inputDistributionId])
+  @@index([activityType])
+  @@index([district, village, block]) // Compound index for location filtering
+  @@map("predefined_input_distributions")
 }
 
 model CustomInputDistribution {
-id                       String                     @id @default(uuid())
-inputDistribution        InputDistribution          @relation(fields: [inputDistributionId], references: [id], onDelete: Cascade)
-inputDistributionId      String
-activityType             String                     // Manually added
-name                     String
-target                   Int
-achieved                 Int
-district                 String
-village                  String
-block                    String
-remarks                  String?                    @db.VarChar(300)
-units                    String?
-imageUrl                 String?
-imageKey                 String?
-createdAt                DateTime                   @default(now())
-updatedAt                DateTime                   @updatedAt
+  id                  String            @id @default(uuid())
+  inputDistribution   InputDistribution @relation(fields: [inputDistributionId], references: [id], onDelete: Cascade)
+  inputDistributionId String            @map("input_distribution_id")
+  activityType        String            @db.VarChar(100) // Manually added
+  name                String            @db.VarChar(200)
+  target              Int
+  achieved            Int
+  district            String            @db.VarChar(100)
+  village             String            @db.VarChar(100)
+  block               String            @db.VarChar(100)
+  remarks             String?           @db.VarChar(300)
+  units               String?           @db.VarChar(20)
+  imageUrl            String?
+  imageKey            String?
+  createdAt           DateTime          @default(now())
+  updatedAt           DateTime          @updatedAt
 
-// Indexes for foreign keys and filtering fields
-@@index([inputDistributionId])
-@@index([activityType])
-@@index([district, village, block]) // Compound index for location filtering
+  // Indexes for foreign keys and filtering fields
+  @@index([inputDistributionId])
+  @@index([activityType])
+  @@index([district, village, block]) // Compound index for location filtering
+  @@map("custom_input_distributions")
 }
 
 model Training {
-id                       String                     @id @default(uuid())
-project                  Project                    @relation(fields: [projectId], references: [id], onDelete: Cascade)
-projectId                String
-quarter                  Quarter                    @relation(fields: [quarterId], references: [id], onDelete: Cascade)
-quarterId                String
-title                    String
-target                   Int
-achieved                 Int
-district                 String
-village                  String
-block                    String
-beneficiaryMale          Int                        @default(0)
-beneficiaryFemale        Int                        @default(0)
-remarks                  String?                    @db.VarChar(300)
-imageUrl                 String?
-imageKey                 String?
-pdfUrl                   String?
-pdfKey                   String?
-units                    String?
-createdAt                DateTime                   @default(now())
-updatedAt                DateTime                   @updatedAt
+  id                String   @id @default(uuid())
+  project           Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  projectId         String   @map("project_id")
+  quarter           Quarter  @relation(fields: [quarterId], references: [id], onDelete: Cascade)
+  quarterId         String   @map("quarter_id")
+  title             String   @db.VarChar(255)
+  target            Int
+  achieved          Int
+  district          String   @db.VarChar(100)
+  village           String   @db.VarChar(100)
+  block             String   @db.VarChar(100)
+  beneficiaryMale   Int      @default(0) @map("beneficiary_male")
+  beneficiaryFemale Int      @default(0) @map("beneficiary_female")
+  remarks           String?  @db.VarChar(300)
+  imageUrl          String?  @map("image_url")
+  imageKey          String?  @map("image_key")
+  pdfUrl            String?  @map("pdf_url")
+  pdfKey            String?  @map("pdf_key")
+  units             String?
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  User              User?    @relation(fields: [userId], references: [id])
+  userId            String?  @map("user_id")
 
-// Indexes for better query performance
-@@index([projectId])
-@@index([quarterId])
-@@index([title])
-@@index([district, village, block])
-@@index([createdAt])
+  // Indexes for better query performance
+  @@index([projectId])
+  @@index([quarterId])
+  @@index([userId])
+  @@index([title])
+  @@index([district, village, block])
+  @@index([createdAt])
+  @@map("trainings")
 }
 
 model FLD {
-id                       String                     @id @default(uuid())
-project                  Project                    @relation(fields: [projectId], references: [id], onDelete: Cascade)
-projectId                String
-quarter                  Quarter                    @relation(fields: [quarterId], references: [id], onDelete: Cascade)
-quarterId                String
-target                   Int
-achieved                 Int
-units                    String?
-createdAt                DateTime                   @default(now())
-updatedAt                DateTime                   @updatedAt
+  id          String   @id @default(uuid())
+  project     Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  projectId   String   @map("project_id")
+  quarter     Quarter  @relation(fields: [quarterId], references: [id], onDelete: Cascade)
+  quarterId   String   @map("quarter_id")
+  description String?  @db.VarChar(200)
+  district    String   @db.VarChar(100)
+  village     String   @db.VarChar(100)
+  block       String   @db.VarChar(100)
+  target      Int
+  achieved    Int
+  units       String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  User        User?    @relation(fields: [userId], references: [id])
+  userId      String?  @map("user_id")
 
-// Indexes for foreign keys
-@@index([projectId])
-@@index([quarterId])
+  // Indexes for foreign keys
+  @@index([projectId])
+  @@index([quarterId])
+  @@index([userId])
+  @@map("flds")
 }
 
 model AwarenessProgram {
-id                       String                     @id @default(uuid())
-project                  Project                    @relation(fields: [projectId], references: [id], onDelete: Cascade)
-projectId                String
-quarter                  Quarter                    @relation(fields: [quarterId], references: [id], onDelete: Cascade)
-quarterId                String
-title                    String
-target                   Int
-achieved                 Int
-district                 String
-village                  String
-block                    String
-beneficiaryMale          Int                        @default(0)
-beneficiaryFemale        Int                        @default(0)
-imageUrl                 String?
-imageKey                 String?
-units                    String?
-createdAt                DateTime                   @default(now())
-updatedAt                DateTime                   @updatedAt
+  id                String   @id @default(uuid())
+  project           Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  projectId         String   @map("project_id")
+  quarter           Quarter  @relation(fields: [quarterId], references: [id], onDelete: Cascade)
+  quarterId         String   @map("quarter_id")
+  title             String   @db.VarChar(100)
+  target            Int
+  achieved          Int
+  district          String   @db.VarChar(100)
+  village           String   @db.VarChar(100)
+  block             String   @db.VarChar(100)
+  beneficiaryMale   Int      @default(0) @map("beneficiary_male")
+  beneficiaryFemale Int      @default(0) @map("beneficiary_female")
+  imageUrl          String?
+  imageKey          String?
+  units             String?
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  User              User?    @relation(fields: [userId], references: [id])
+  userId            String?  @map("user_id")
 
-// Indexes for better query performance
-@@index([projectId])
-@@index([quarterId])
-@@index([title])
-@@index([district, village, block])
-@@index([createdAt])
+  // Indexes for better query performance
+  @@index([projectId])
+  @@index([quarterId])
+  @@index([title])
+  @@index([district, village, block])
+  @@index([createdAt])
 }
 
 model InfrastructureDevelopment {
-id                       String                     @id @default(uuid())
-project                  Project                    @relation(fields: [projectId], references: [id], onDelete: Cascade)
-projectId                String
-quarter                  Quarter                    @relation(fields: [quarterId], references: [id], onDelete: Cascade)
-quarterId                String
-target                   Int
-achieved                 Int
-district                 String
-village                  String
-block                    String
-remarks                  String?                    @db.VarChar(300)
-imageUrl                 String?
-imageKey                 String?
-createdAt                DateTime                   @default(now())
-updatedAt                DateTime                   @updatedAt
+  id        String   @id @default(uuid())
+  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  projectId String   @map("project_id")
+  quarter   Quarter  @relation(fields: [quarterId], references: [id], onDelete: Cascade)
+  quarterId String   @map("quarter_id")
+  target    Int
+  achieved  Int
+  district  String   @db.VarChar(100)
+  village   String   @db.VarChar(100)
+  block     String   @db.VarChar(100)
+  remarks   String?  @db.VarChar(300)
+  imageUrl  String?
+  imageKey  String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  User      User?    @relation(fields: [userId], references: [id])
+  userId    String?  @map("user_id")
 
-// Indexes for better query performance
-@@index([projectId])
-@@index([quarterId])
-@@index([district, village, block])
-@@index([createdAt])
+  // Indexes for better query performance
+  @@index([projectId])
+  @@index([quarterId])
+  @@index([userId])
+  @@index([district, village, block])
+  @@index([createdAt])
+  @@map("infrastructure_developments")
 }
-
 
 model UpcomingEvent {
   id          String   @id @default(uuid())
-  title       String
+  title       String   @db.VarChar(100)
   date        DateTime
-  location    String
-  description String?
+  location    String   @db.VarChar(100)
+  description String?  @db.VarChar(300)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  User        User?    @relation(fields: [userId], references: [id])
+  userId      String?  @map("user_id")
 
   @@index([date]) // For sorting/filtering by date
   @@index([location]) // For location-based queries
+  @@index([userId])
+  @@map("upcoming_events")
 }
 
 model Publication {
   id           String   @id @default(uuid())
-  title        String
-  type         String   // nutrition guide, cultivation guide, health guide
-  category     String?
+  title        String   @db.VarChar(100)
+  type         String   @db.VarChar(100) // nutrition guide, cultivation guide, health guide 
+  category     String?  @db.VarChar(100)
   thumbnailUrl String?
   thumbnailKey String?
   pdfUrl       String?
   pdfKey       String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  User         User?    @relation(fields: [userId], references: [id])
+  userId       String?  @map("user_id")
 
-  @@index([title]) // For search by title
-  @@index([type]) // For filtering by publication type
-  @@index([category]) // For category-based filtering
+  @@index([title])
+  @@index([type])
+  @@index([category])
+  @@index([userId])
+  @@map("publications")
 }
 
 model Gallery {
   id        String   @id @default(uuid())
-  title     String
+  title     String   @db.VarChar(100)
   imageUrl  String
   imageKey  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  User      User?    @relation(fields: [userId], references: [id])
+  userId    String?  @map("user_id")
 
   @@index([title]) // For search functionality
 }
 
 model ProjectDetails {
   id           String   @id @default(uuid())
-  title        String
-  region       String   // NEH or AICRP
+  title        String   @db.VarChar(100)
+  region       String // NEH or AICRP 
   year         Int
   budget       Float?
-  center       String?
-  location     String?
+  center       String?  @db.VarChar(100)
+  location     String?  @db.VarChar(100)
   objectives   String[] // Array of objectives
-  director     String
+  director     String   @db.VarChar(100)
   coDirectors  String[] // Array of co-directors
   achievements String[] // Array of achievements
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  User         User?    @relation(fields: [userId], references: [id])
+  userId       String?  @map("user_id")
 
-  // Comprehensive indexing for all filterable fields
   @@index([title])
   @@index([region])
   @@index([year])
   @@index([center])
   @@index([location])
   @@index([director])
+  @@index([userId])
+  @@map("project_details")
 }

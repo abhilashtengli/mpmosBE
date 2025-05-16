@@ -14,6 +14,11 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
 
 
 /**
+ * Model User
+ * 
+ */
+export type User = $Result.DefaultSelection<Prisma.$UserPayload>
+/**
  * Model Project
  * 
  */
@@ -80,14 +85,43 @@ export type Gallery = $Result.DefaultSelection<Prisma.$GalleryPayload>
 export type ProjectDetails = $Result.DefaultSelection<Prisma.$ProjectDetailsPayload>
 
 /**
+ * Enums
+ */
+export namespace $Enums {
+  export const Role: {
+  admin: 'admin',
+  director: 'director'
+};
+
+export type Role = (typeof Role)[keyof typeof Role]
+
+
+export const Status: {
+  Active: 'Active',
+  Completed: 'Completed'
+};
+
+export type Status = (typeof Status)[keyof typeof Status]
+
+}
+
+export type Role = $Enums.Role
+
+export const Role: typeof $Enums.Role
+
+export type Status = $Enums.Status
+
+export const Status: typeof $Enums.Status
+
+/**
  * ##  Prisma Client ʲˢ
  *
  * Type-safe database client for TypeScript & Node.js
  * @example
  * ```
  * const prisma = new PrismaClient()
- * // Fetch zero or more Projects
- * const projects = await prisma.project.findMany()
+ * // Fetch zero or more Users
+ * const users = await prisma.user.findMany()
  * ```
  *
  *
@@ -107,8 +141,8 @@ export class PrismaClient<
    * @example
    * ```
    * const prisma = new PrismaClient()
-   * // Fetch zero or more Projects
-   * const projects = await prisma.project.findMany()
+   * // Fetch zero or more Users
+   * const users = await prisma.user.findMany()
    * ```
    *
    *
@@ -205,6 +239,16 @@ export class PrismaClient<
   }>>
 
       /**
+   * `prisma.user`: Exposes CRUD operations for the **User** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Users
+    * const users = await prisma.user.findMany()
+    * ```
+    */
+  get user(): Prisma.UserDelegate<ExtArgs, ClientOptions>;
+
+  /**
    * `prisma.project`: Exposes CRUD operations for the **Project** model.
     * Example usage:
     * ```ts
@@ -773,6 +817,7 @@ export namespace Prisma {
 
 
   export const ModelName: {
+    User: 'User',
     Project: 'Project',
     Quarter: 'Quarter',
     InputDistribution: 'InputDistribution',
@@ -804,10 +849,84 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "project" | "quarter" | "inputDistribution" | "predefinedInputDistribution" | "customInputDistribution" | "training" | "fLD" | "awarenessProgram" | "infrastructureDevelopment" | "upcomingEvent" | "publication" | "gallery" | "projectDetails"
+      modelProps: "user" | "project" | "quarter" | "inputDistribution" | "predefinedInputDistribution" | "customInputDistribution" | "training" | "fLD" | "awarenessProgram" | "infrastructureDevelopment" | "upcomingEvent" | "publication" | "gallery" | "projectDetails"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
+      User: {
+        payload: Prisma.$UserPayload<ExtArgs>
+        fields: Prisma.UserFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.UserFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.UserFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPayload>
+          }
+          findFirst: {
+            args: Prisma.UserFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.UserFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPayload>
+          }
+          findMany: {
+            args: Prisma.UserFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPayload>[]
+          }
+          create: {
+            args: Prisma.UserCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPayload>
+          }
+          createMany: {
+            args: Prisma.UserCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.UserCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPayload>[]
+          }
+          delete: {
+            args: Prisma.UserDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPayload>
+          }
+          update: {
+            args: Prisma.UserUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPayload>
+          }
+          deleteMany: {
+            args: Prisma.UserDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.UserUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.UserUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPayload>[]
+          }
+          upsert: {
+            args: Prisma.UserUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPayload>
+          }
+          aggregate: {
+            args: Prisma.UserAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateUser>
+          }
+          groupBy: {
+            args: Prisma.UserGroupByArgs<ExtArgs>
+            result: $Utils.Optional<UserGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.UserCountArgs<ExtArgs>
+            result: $Utils.Optional<UserCountAggregateOutputType> | number
+          }
+        }
+      }
       Project: {
         payload: Prisma.$ProjectPayload<ExtArgs>
         fields: Prisma.ProjectFieldRefs
@@ -1854,6 +1973,7 @@ export namespace Prisma {
     omit?: Prisma.GlobalOmitConfig
   }
   export type GlobalOmitConfig = {
+    user?: UserOmit
     project?: ProjectOmit
     quarter?: QuarterOmit
     inputDistribution?: InputDistributionOmit
@@ -1954,6 +2074,118 @@ export namespace Prisma {
   /**
    * Count Types
    */
+
+
+  /**
+   * Count Type UserCountOutputType
+   */
+
+  export type UserCountOutputType = {
+    projects: number
+    trainings: number
+    flds: number
+    awarenessPrograms: number
+    infrastructureDevelopments: number
+    inputDistributions: number
+    upcomingEvents: number
+    publications: number
+    galleries: number
+    projectDetails: number
+  }
+
+  export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    projects?: boolean | UserCountOutputTypeCountProjectsArgs
+    trainings?: boolean | UserCountOutputTypeCountTrainingsArgs
+    flds?: boolean | UserCountOutputTypeCountFldsArgs
+    awarenessPrograms?: boolean | UserCountOutputTypeCountAwarenessProgramsArgs
+    infrastructureDevelopments?: boolean | UserCountOutputTypeCountInfrastructureDevelopmentsArgs
+    inputDistributions?: boolean | UserCountOutputTypeCountInputDistributionsArgs
+    upcomingEvents?: boolean | UserCountOutputTypeCountUpcomingEventsArgs
+    publications?: boolean | UserCountOutputTypeCountPublicationsArgs
+    galleries?: boolean | UserCountOutputTypeCountGalleriesArgs
+    projectDetails?: boolean | UserCountOutputTypeCountProjectDetailsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserCountOutputType
+     */
+    select?: UserCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountProjectsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ProjectWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountTrainingsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TrainingWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountFldsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FLDWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountAwarenessProgramsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AwarenessProgramWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountInfrastructureDevelopmentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: InfrastructureDevelopmentWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountInputDistributionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: InputDistributionWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountUpcomingEventsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UpcomingEventWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountPublicationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PublicationWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountGalleriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: GalleryWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountProjectDetailsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ProjectDetailsWhereInput
+  }
 
 
   /**
@@ -2135,13 +2367,1449 @@ export namespace Prisma {
    */
 
   /**
+   * Model User
+   */
+
+  export type AggregateUser = {
+    _count: UserCountAggregateOutputType | null
+    _min: UserMinAggregateOutputType | null
+    _max: UserMaxAggregateOutputType | null
+  }
+
+  export type UserMinAggregateOutputType = {
+    id: string | null
+    name: string | null
+    email: string | null
+    password: string | null
+    role: $Enums.Role | null
+    userCode: string | null
+    isVerified: boolean | null
+    verificationCode: string | null
+    resetPasswordToken: string | null
+    resetTokenExpires: Date | null
+    verificationExpires: Date | null
+    createdAt: Date | null
+    updateAt: Date | null
+  }
+
+  export type UserMaxAggregateOutputType = {
+    id: string | null
+    name: string | null
+    email: string | null
+    password: string | null
+    role: $Enums.Role | null
+    userCode: string | null
+    isVerified: boolean | null
+    verificationCode: string | null
+    resetPasswordToken: string | null
+    resetTokenExpires: Date | null
+    verificationExpires: Date | null
+    createdAt: Date | null
+    updateAt: Date | null
+  }
+
+  export type UserCountAggregateOutputType = {
+    id: number
+    name: number
+    email: number
+    password: number
+    role: number
+    userCode: number
+    isVerified: number
+    verificationCode: number
+    resetPasswordToken: number
+    resetTokenExpires: number
+    verificationExpires: number
+    createdAt: number
+    updateAt: number
+    _all: number
+  }
+
+
+  export type UserMinAggregateInputType = {
+    id?: true
+    name?: true
+    email?: true
+    password?: true
+    role?: true
+    userCode?: true
+    isVerified?: true
+    verificationCode?: true
+    resetPasswordToken?: true
+    resetTokenExpires?: true
+    verificationExpires?: true
+    createdAt?: true
+    updateAt?: true
+  }
+
+  export type UserMaxAggregateInputType = {
+    id?: true
+    name?: true
+    email?: true
+    password?: true
+    role?: true
+    userCode?: true
+    isVerified?: true
+    verificationCode?: true
+    resetPasswordToken?: true
+    resetTokenExpires?: true
+    verificationExpires?: true
+    createdAt?: true
+    updateAt?: true
+  }
+
+  export type UserCountAggregateInputType = {
+    id?: true
+    name?: true
+    email?: true
+    password?: true
+    role?: true
+    userCode?: true
+    isVerified?: true
+    verificationCode?: true
+    resetPasswordToken?: true
+    resetTokenExpires?: true
+    verificationExpires?: true
+    createdAt?: true
+    updateAt?: true
+    _all?: true
+  }
+
+  export type UserAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which User to aggregate.
+     */
+    where?: UserWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Users to fetch.
+     */
+    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: UserWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Users from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Users.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Users
+    **/
+    _count?: true | UserCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: UserMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: UserMaxAggregateInputType
+  }
+
+  export type GetUserAggregateType<T extends UserAggregateArgs> = {
+        [P in keyof T & keyof AggregateUser]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateUser[P]>
+      : GetScalarType<T[P], AggregateUser[P]>
+  }
+
+
+
+
+  export type UserGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserWhereInput
+    orderBy?: UserOrderByWithAggregationInput | UserOrderByWithAggregationInput[]
+    by: UserScalarFieldEnum[] | UserScalarFieldEnum
+    having?: UserScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: UserCountAggregateInputType | true
+    _min?: UserMinAggregateInputType
+    _max?: UserMaxAggregateInputType
+  }
+
+  export type UserGroupByOutputType = {
+    id: string
+    name: string
+    email: string
+    password: string
+    role: $Enums.Role
+    userCode: string
+    isVerified: boolean
+    verificationCode: string | null
+    resetPasswordToken: string | null
+    resetTokenExpires: Date | null
+    verificationExpires: Date | null
+    createdAt: Date
+    updateAt: Date
+    _count: UserCountAggregateOutputType | null
+    _min: UserMinAggregateOutputType | null
+    _max: UserMaxAggregateOutputType | null
+  }
+
+  type GetUserGroupByPayload<T extends UserGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<UserGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof UserGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], UserGroupByOutputType[P]>
+            : GetScalarType<T[P], UserGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type UserSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    email?: boolean
+    password?: boolean
+    role?: boolean
+    userCode?: boolean
+    isVerified?: boolean
+    verificationCode?: boolean
+    resetPasswordToken?: boolean
+    resetTokenExpires?: boolean
+    verificationExpires?: boolean
+    createdAt?: boolean
+    updateAt?: boolean
+    projects?: boolean | User$projectsArgs<ExtArgs>
+    trainings?: boolean | User$trainingsArgs<ExtArgs>
+    flds?: boolean | User$fldsArgs<ExtArgs>
+    awarenessPrograms?: boolean | User$awarenessProgramsArgs<ExtArgs>
+    infrastructureDevelopments?: boolean | User$infrastructureDevelopmentsArgs<ExtArgs>
+    inputDistributions?: boolean | User$inputDistributionsArgs<ExtArgs>
+    upcomingEvents?: boolean | User$upcomingEventsArgs<ExtArgs>
+    publications?: boolean | User$publicationsArgs<ExtArgs>
+    galleries?: boolean | User$galleriesArgs<ExtArgs>
+    projectDetails?: boolean | User$projectDetailsArgs<ExtArgs>
+    _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["user"]>
+
+  export type UserSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    email?: boolean
+    password?: boolean
+    role?: boolean
+    userCode?: boolean
+    isVerified?: boolean
+    verificationCode?: boolean
+    resetPasswordToken?: boolean
+    resetTokenExpires?: boolean
+    verificationExpires?: boolean
+    createdAt?: boolean
+    updateAt?: boolean
+  }, ExtArgs["result"]["user"]>
+
+  export type UserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    email?: boolean
+    password?: boolean
+    role?: boolean
+    userCode?: boolean
+    isVerified?: boolean
+    verificationCode?: boolean
+    resetPasswordToken?: boolean
+    resetTokenExpires?: boolean
+    verificationExpires?: boolean
+    createdAt?: boolean
+    updateAt?: boolean
+  }, ExtArgs["result"]["user"]>
+
+  export type UserSelectScalar = {
+    id?: boolean
+    name?: boolean
+    email?: boolean
+    password?: boolean
+    role?: boolean
+    userCode?: boolean
+    isVerified?: boolean
+    verificationCode?: boolean
+    resetPasswordToken?: boolean
+    resetTokenExpires?: boolean
+    verificationExpires?: boolean
+    createdAt?: boolean
+    updateAt?: boolean
+  }
+
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "password" | "role" | "userCode" | "isVerified" | "verificationCode" | "resetPasswordToken" | "resetTokenExpires" | "verificationExpires" | "createdAt" | "updateAt", ExtArgs["result"]["user"]>
+  export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    projects?: boolean | User$projectsArgs<ExtArgs>
+    trainings?: boolean | User$trainingsArgs<ExtArgs>
+    flds?: boolean | User$fldsArgs<ExtArgs>
+    awarenessPrograms?: boolean | User$awarenessProgramsArgs<ExtArgs>
+    infrastructureDevelopments?: boolean | User$infrastructureDevelopmentsArgs<ExtArgs>
+    inputDistributions?: boolean | User$inputDistributionsArgs<ExtArgs>
+    upcomingEvents?: boolean | User$upcomingEventsArgs<ExtArgs>
+    publications?: boolean | User$publicationsArgs<ExtArgs>
+    galleries?: boolean | User$galleriesArgs<ExtArgs>
+    projectDetails?: boolean | User$projectDetailsArgs<ExtArgs>
+    _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type UserIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $UserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "User"
+    objects: {
+      projects: Prisma.$ProjectPayload<ExtArgs>[]
+      trainings: Prisma.$TrainingPayload<ExtArgs>[]
+      flds: Prisma.$FLDPayload<ExtArgs>[]
+      awarenessPrograms: Prisma.$AwarenessProgramPayload<ExtArgs>[]
+      infrastructureDevelopments: Prisma.$InfrastructureDevelopmentPayload<ExtArgs>[]
+      inputDistributions: Prisma.$InputDistributionPayload<ExtArgs>[]
+      upcomingEvents: Prisma.$UpcomingEventPayload<ExtArgs>[]
+      publications: Prisma.$PublicationPayload<ExtArgs>[]
+      galleries: Prisma.$GalleryPayload<ExtArgs>[]
+      projectDetails: Prisma.$ProjectDetailsPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      name: string
+      email: string
+      password: string
+      role: $Enums.Role
+      userCode: string
+      isVerified: boolean
+      verificationCode: string | null
+      resetPasswordToken: string | null
+      resetTokenExpires: Date | null
+      verificationExpires: Date | null
+      createdAt: Date
+      updateAt: Date
+    }, ExtArgs["result"]["user"]>
+    composites: {}
+  }
+
+  type UserGetPayload<S extends boolean | null | undefined | UserDefaultArgs> = $Result.GetResult<Prisma.$UserPayload, S>
+
+  type UserCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<UserFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: UserCountAggregateInputType | true
+    }
+
+  export interface UserDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['User'], meta: { name: 'User' } }
+    /**
+     * Find zero or one User that matches the filter.
+     * @param {UserFindUniqueArgs} args - Arguments to find a User
+     * @example
+     * // Get one User
+     * const user = await prisma.user.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends UserFindUniqueArgs>(args: SelectSubset<T, UserFindUniqueArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one User that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {UserFindUniqueOrThrowArgs} args - Arguments to find a User
+     * @example
+     * // Get one User
+     * const user = await prisma.user.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends UserFindUniqueOrThrowArgs>(args: SelectSubset<T, UserFindUniqueOrThrowArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first User that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserFindFirstArgs} args - Arguments to find a User
+     * @example
+     * // Get one User
+     * const user = await prisma.user.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends UserFindFirstArgs>(args?: SelectSubset<T, UserFindFirstArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first User that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserFindFirstOrThrowArgs} args - Arguments to find a User
+     * @example
+     * // Get one User
+     * const user = await prisma.user.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends UserFindFirstOrThrowArgs>(args?: SelectSubset<T, UserFindFirstOrThrowArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Users that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Users
+     * const users = await prisma.user.findMany()
+     * 
+     * // Get first 10 Users
+     * const users = await prisma.user.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const userWithIdOnly = await prisma.user.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends UserFindManyArgs>(args?: SelectSubset<T, UserFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a User.
+     * @param {UserCreateArgs} args - Arguments to create a User.
+     * @example
+     * // Create one User
+     * const User = await prisma.user.create({
+     *   data: {
+     *     // ... data to create a User
+     *   }
+     * })
+     * 
+     */
+    create<T extends UserCreateArgs>(args: SelectSubset<T, UserCreateArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Users.
+     * @param {UserCreateManyArgs} args - Arguments to create many Users.
+     * @example
+     * // Create many Users
+     * const user = await prisma.user.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends UserCreateManyArgs>(args?: SelectSubset<T, UserCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Users and returns the data saved in the database.
+     * @param {UserCreateManyAndReturnArgs} args - Arguments to create many Users.
+     * @example
+     * // Create many Users
+     * const user = await prisma.user.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Users and only return the `id`
+     * const userWithIdOnly = await prisma.user.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends UserCreateManyAndReturnArgs>(args?: SelectSubset<T, UserCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a User.
+     * @param {UserDeleteArgs} args - Arguments to delete one User.
+     * @example
+     * // Delete one User
+     * const User = await prisma.user.delete({
+     *   where: {
+     *     // ... filter to delete one User
+     *   }
+     * })
+     * 
+     */
+    delete<T extends UserDeleteArgs>(args: SelectSubset<T, UserDeleteArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one User.
+     * @param {UserUpdateArgs} args - Arguments to update one User.
+     * @example
+     * // Update one User
+     * const user = await prisma.user.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends UserUpdateArgs>(args: SelectSubset<T, UserUpdateArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Users.
+     * @param {UserDeleteManyArgs} args - Arguments to filter Users to delete.
+     * @example
+     * // Delete a few Users
+     * const { count } = await prisma.user.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends UserDeleteManyArgs>(args?: SelectSubset<T, UserDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Users.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Users
+     * const user = await prisma.user.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends UserUpdateManyArgs>(args: SelectSubset<T, UserUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Users and returns the data updated in the database.
+     * @param {UserUpdateManyAndReturnArgs} args - Arguments to update many Users.
+     * @example
+     * // Update many Users
+     * const user = await prisma.user.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Users and only return the `id`
+     * const userWithIdOnly = await prisma.user.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends UserUpdateManyAndReturnArgs>(args: SelectSubset<T, UserUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one User.
+     * @param {UserUpsertArgs} args - Arguments to update or create a User.
+     * @example
+     * // Update or create a User
+     * const user = await prisma.user.upsert({
+     *   create: {
+     *     // ... data to create a User
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the User we want to update
+     *   }
+     * })
+     */
+    upsert<T extends UserUpsertArgs>(args: SelectSubset<T, UserUpsertArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Users.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserCountArgs} args - Arguments to filter Users to count.
+     * @example
+     * // Count the number of Users
+     * const count = await prisma.user.count({
+     *   where: {
+     *     // ... the filter for the Users we want to count
+     *   }
+     * })
+    **/
+    count<T extends UserCountArgs>(
+      args?: Subset<T, UserCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], UserCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a User.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends UserAggregateArgs>(args: Subset<T, UserAggregateArgs>): Prisma.PrismaPromise<GetUserAggregateType<T>>
+
+    /**
+     * Group by User.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends UserGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: UserGroupByArgs['orderBy'] }
+        : { orderBy?: UserGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, UserGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUserGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the User model
+   */
+  readonly fields: UserFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for User.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    projects<T extends User$projectsArgs<ExtArgs> = {}>(args?: Subset<T, User$projectsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    trainings<T extends User$trainingsArgs<ExtArgs> = {}>(args?: Subset<T, User$trainingsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TrainingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    flds<T extends User$fldsArgs<ExtArgs> = {}>(args?: Subset<T, User$fldsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FLDPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    awarenessPrograms<T extends User$awarenessProgramsArgs<ExtArgs> = {}>(args?: Subset<T, User$awarenessProgramsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AwarenessProgramPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    infrastructureDevelopments<T extends User$infrastructureDevelopmentsArgs<ExtArgs> = {}>(args?: Subset<T, User$infrastructureDevelopmentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InfrastructureDevelopmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    inputDistributions<T extends User$inputDistributionsArgs<ExtArgs> = {}>(args?: Subset<T, User$inputDistributionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InputDistributionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    upcomingEvents<T extends User$upcomingEventsArgs<ExtArgs> = {}>(args?: Subset<T, User$upcomingEventsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UpcomingEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    publications<T extends User$publicationsArgs<ExtArgs> = {}>(args?: Subset<T, User$publicationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PublicationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    galleries<T extends User$galleriesArgs<ExtArgs> = {}>(args?: Subset<T, User$galleriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GalleryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    projectDetails<T extends User$projectDetailsArgs<ExtArgs> = {}>(args?: Subset<T, User$projectDetailsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProjectDetailsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the User model
+   */
+  interface UserFieldRefs {
+    readonly id: FieldRef<"User", 'String'>
+    readonly name: FieldRef<"User", 'String'>
+    readonly email: FieldRef<"User", 'String'>
+    readonly password: FieldRef<"User", 'String'>
+    readonly role: FieldRef<"User", 'Role'>
+    readonly userCode: FieldRef<"User", 'String'>
+    readonly isVerified: FieldRef<"User", 'Boolean'>
+    readonly verificationCode: FieldRef<"User", 'String'>
+    readonly resetPasswordToken: FieldRef<"User", 'String'>
+    readonly resetTokenExpires: FieldRef<"User", 'DateTime'>
+    readonly verificationExpires: FieldRef<"User", 'DateTime'>
+    readonly createdAt: FieldRef<"User", 'DateTime'>
+    readonly updateAt: FieldRef<"User", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * User findUnique
+   */
+  export type UserFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
+     * Filter, which User to fetch.
+     */
+    where: UserWhereUniqueInput
+  }
+
+  /**
+   * User findUniqueOrThrow
+   */
+  export type UserFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
+     * Filter, which User to fetch.
+     */
+    where: UserWhereUniqueInput
+  }
+
+  /**
+   * User findFirst
+   */
+  export type UserFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
+     * Filter, which User to fetch.
+     */
+    where?: UserWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Users to fetch.
+     */
+    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Users.
+     */
+    cursor?: UserWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Users from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Users.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Users.
+     */
+    distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
+  }
+
+  /**
+   * User findFirstOrThrow
+   */
+  export type UserFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
+     * Filter, which User to fetch.
+     */
+    where?: UserWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Users to fetch.
+     */
+    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Users.
+     */
+    cursor?: UserWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Users from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Users.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Users.
+     */
+    distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
+  }
+
+  /**
+   * User findMany
+   */
+  export type UserFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
+     * Filter, which Users to fetch.
+     */
+    where?: UserWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Users to fetch.
+     */
+    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Users.
+     */
+    cursor?: UserWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Users from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Users.
+     */
+    skip?: number
+    distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
+  }
+
+  /**
+   * User create
+   */
+  export type UserCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
+     * The data needed to create a User.
+     */
+    data: XOR<UserCreateInput, UserUncheckedCreateInput>
+  }
+
+  /**
+   * User createMany
+   */
+  export type UserCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Users.
+     */
+    data: UserCreateManyInput | UserCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * User createManyAndReturn
+   */
+  export type UserCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * The data used to create many Users.
+     */
+    data: UserCreateManyInput | UserCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * User update
+   */
+  export type UserUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
+     * The data needed to update a User.
+     */
+    data: XOR<UserUpdateInput, UserUncheckedUpdateInput>
+    /**
+     * Choose, which User to update.
+     */
+    where: UserWhereUniqueInput
+  }
+
+  /**
+   * User updateMany
+   */
+  export type UserUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Users.
+     */
+    data: XOR<UserUpdateManyMutationInput, UserUncheckedUpdateManyInput>
+    /**
+     * Filter which Users to update
+     */
+    where?: UserWhereInput
+    /**
+     * Limit how many Users to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * User updateManyAndReturn
+   */
+  export type UserUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * The data used to update Users.
+     */
+    data: XOR<UserUpdateManyMutationInput, UserUncheckedUpdateManyInput>
+    /**
+     * Filter which Users to update
+     */
+    where?: UserWhereInput
+    /**
+     * Limit how many Users to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * User upsert
+   */
+  export type UserUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
+     * The filter to search for the User to update in case it exists.
+     */
+    where: UserWhereUniqueInput
+    /**
+     * In case the User found by the `where` argument doesn't exist, create a new User with this data.
+     */
+    create: XOR<UserCreateInput, UserUncheckedCreateInput>
+    /**
+     * In case the User was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<UserUpdateInput, UserUncheckedUpdateInput>
+  }
+
+  /**
+   * User delete
+   */
+  export type UserDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
+     * Filter which User to delete.
+     */
+    where: UserWhereUniqueInput
+  }
+
+  /**
+   * User deleteMany
+   */
+  export type UserDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Users to delete
+     */
+    where?: UserWhereInput
+    /**
+     * Limit how many Users to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * User.projects
+   */
+  export type User$projectsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Project
+     */
+    select?: ProjectSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Project
+     */
+    omit?: ProjectOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProjectInclude<ExtArgs> | null
+    where?: ProjectWhereInput
+    orderBy?: ProjectOrderByWithRelationInput | ProjectOrderByWithRelationInput[]
+    cursor?: ProjectWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ProjectScalarFieldEnum | ProjectScalarFieldEnum[]
+  }
+
+  /**
+   * User.trainings
+   */
+  export type User$trainingsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Training
+     */
+    select?: TrainingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Training
+     */
+    omit?: TrainingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TrainingInclude<ExtArgs> | null
+    where?: TrainingWhereInput
+    orderBy?: TrainingOrderByWithRelationInput | TrainingOrderByWithRelationInput[]
+    cursor?: TrainingWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: TrainingScalarFieldEnum | TrainingScalarFieldEnum[]
+  }
+
+  /**
+   * User.flds
+   */
+  export type User$fldsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FLD
+     */
+    select?: FLDSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FLD
+     */
+    omit?: FLDOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FLDInclude<ExtArgs> | null
+    where?: FLDWhereInput
+    orderBy?: FLDOrderByWithRelationInput | FLDOrderByWithRelationInput[]
+    cursor?: FLDWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: FLDScalarFieldEnum | FLDScalarFieldEnum[]
+  }
+
+  /**
+   * User.awarenessPrograms
+   */
+  export type User$awarenessProgramsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AwarenessProgram
+     */
+    select?: AwarenessProgramSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AwarenessProgram
+     */
+    omit?: AwarenessProgramOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AwarenessProgramInclude<ExtArgs> | null
+    where?: AwarenessProgramWhereInput
+    orderBy?: AwarenessProgramOrderByWithRelationInput | AwarenessProgramOrderByWithRelationInput[]
+    cursor?: AwarenessProgramWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: AwarenessProgramScalarFieldEnum | AwarenessProgramScalarFieldEnum[]
+  }
+
+  /**
+   * User.infrastructureDevelopments
+   */
+  export type User$infrastructureDevelopmentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InfrastructureDevelopment
+     */
+    select?: InfrastructureDevelopmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InfrastructureDevelopment
+     */
+    omit?: InfrastructureDevelopmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InfrastructureDevelopmentInclude<ExtArgs> | null
+    where?: InfrastructureDevelopmentWhereInput
+    orderBy?: InfrastructureDevelopmentOrderByWithRelationInput | InfrastructureDevelopmentOrderByWithRelationInput[]
+    cursor?: InfrastructureDevelopmentWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: InfrastructureDevelopmentScalarFieldEnum | InfrastructureDevelopmentScalarFieldEnum[]
+  }
+
+  /**
+   * User.inputDistributions
+   */
+  export type User$inputDistributionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InputDistribution
+     */
+    select?: InputDistributionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InputDistribution
+     */
+    omit?: InputDistributionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InputDistributionInclude<ExtArgs> | null
+    where?: InputDistributionWhereInput
+    orderBy?: InputDistributionOrderByWithRelationInput | InputDistributionOrderByWithRelationInput[]
+    cursor?: InputDistributionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: InputDistributionScalarFieldEnum | InputDistributionScalarFieldEnum[]
+  }
+
+  /**
+   * User.upcomingEvents
+   */
+  export type User$upcomingEventsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UpcomingEvent
+     */
+    select?: UpcomingEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UpcomingEvent
+     */
+    omit?: UpcomingEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UpcomingEventInclude<ExtArgs> | null
+    where?: UpcomingEventWhereInput
+    orderBy?: UpcomingEventOrderByWithRelationInput | UpcomingEventOrderByWithRelationInput[]
+    cursor?: UpcomingEventWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: UpcomingEventScalarFieldEnum | UpcomingEventScalarFieldEnum[]
+  }
+
+  /**
+   * User.publications
+   */
+  export type User$publicationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Publication
+     */
+    select?: PublicationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Publication
+     */
+    omit?: PublicationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PublicationInclude<ExtArgs> | null
+    where?: PublicationWhereInput
+    orderBy?: PublicationOrderByWithRelationInput | PublicationOrderByWithRelationInput[]
+    cursor?: PublicationWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PublicationScalarFieldEnum | PublicationScalarFieldEnum[]
+  }
+
+  /**
+   * User.galleries
+   */
+  export type User$galleriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Gallery
+     */
+    select?: GallerySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Gallery
+     */
+    omit?: GalleryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GalleryInclude<ExtArgs> | null
+    where?: GalleryWhereInput
+    orderBy?: GalleryOrderByWithRelationInput | GalleryOrderByWithRelationInput[]
+    cursor?: GalleryWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: GalleryScalarFieldEnum | GalleryScalarFieldEnum[]
+  }
+
+  /**
+   * User.projectDetails
+   */
+  export type User$projectDetailsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProjectDetails
+     */
+    select?: ProjectDetailsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProjectDetails
+     */
+    omit?: ProjectDetailsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProjectDetailsInclude<ExtArgs> | null
+    where?: ProjectDetailsWhereInput
+    orderBy?: ProjectDetailsOrderByWithRelationInput | ProjectDetailsOrderByWithRelationInput[]
+    cursor?: ProjectDetailsWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ProjectDetailsScalarFieldEnum | ProjectDetailsScalarFieldEnum[]
+  }
+
+  /**
+   * User without action
+   */
+  export type UserDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Model Project
    */
 
   export type AggregateProject = {
     _count: ProjectCountAggregateOutputType | null
+    _avg: ProjectAvgAggregateOutputType | null
+    _sum: ProjectSumAggregateOutputType | null
     _min: ProjectMinAggregateOutputType | null
     _max: ProjectMaxAggregateOutputType | null
+  }
+
+  export type ProjectAvgAggregateOutputType = {
+    budget: Decimal | null
+  }
+
+  export type ProjectSumAggregateOutputType = {
+    budget: Decimal | null
   }
 
   export type ProjectMinAggregateOutputType = {
@@ -2150,8 +3818,13 @@ export namespace Prisma {
     title: string | null
     locationState: string | null
     director: string | null
+    budget: Decimal | null
+    status: $Enums.Status | null
+    startDate: Date | null
+    endDate: Date | null
     createdAt: Date | null
     updatedAt: Date | null
+    userId: string | null
   }
 
   export type ProjectMaxAggregateOutputType = {
@@ -2160,8 +3833,13 @@ export namespace Prisma {
     title: string | null
     locationState: string | null
     director: string | null
+    budget: Decimal | null
+    status: $Enums.Status | null
+    startDate: Date | null
+    endDate: Date | null
     createdAt: Date | null
     updatedAt: Date | null
+    userId: string | null
   }
 
   export type ProjectCountAggregateOutputType = {
@@ -2170,11 +3848,24 @@ export namespace Prisma {
     title: number
     locationState: number
     director: number
+    budget: number
+    status: number
+    startDate: number
+    endDate: number
     createdAt: number
     updatedAt: number
+    userId: number
     _all: number
   }
 
+
+  export type ProjectAvgAggregateInputType = {
+    budget?: true
+  }
+
+  export type ProjectSumAggregateInputType = {
+    budget?: true
+  }
 
   export type ProjectMinAggregateInputType = {
     id?: true
@@ -2182,8 +3873,13 @@ export namespace Prisma {
     title?: true
     locationState?: true
     director?: true
+    budget?: true
+    status?: true
+    startDate?: true
+    endDate?: true
     createdAt?: true
     updatedAt?: true
+    userId?: true
   }
 
   export type ProjectMaxAggregateInputType = {
@@ -2192,8 +3888,13 @@ export namespace Prisma {
     title?: true
     locationState?: true
     director?: true
+    budget?: true
+    status?: true
+    startDate?: true
+    endDate?: true
     createdAt?: true
     updatedAt?: true
+    userId?: true
   }
 
   export type ProjectCountAggregateInputType = {
@@ -2202,8 +3903,13 @@ export namespace Prisma {
     title?: true
     locationState?: true
     director?: true
+    budget?: true
+    status?: true
+    startDate?: true
+    endDate?: true
     createdAt?: true
     updatedAt?: true
+    userId?: true
     _all?: true
   }
 
@@ -2245,6 +3951,18 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
+     * Select which fields to average
+    **/
+    _avg?: ProjectAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ProjectSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: ProjectMinAggregateInputType
@@ -2275,6 +3993,8 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: ProjectCountAggregateInputType | true
+    _avg?: ProjectAvgAggregateInputType
+    _sum?: ProjectSumAggregateInputType
     _min?: ProjectMinAggregateInputType
     _max?: ProjectMaxAggregateInputType
   }
@@ -2285,9 +4005,16 @@ export namespace Prisma {
     title: string
     locationState: string
     director: string
+    budget: Decimal | null
+    status: $Enums.Status
+    startDate: Date | null
+    endDate: Date | null
     createdAt: Date
     updatedAt: Date
+    userId: string | null
     _count: ProjectCountAggregateOutputType | null
+    _avg: ProjectAvgAggregateOutputType | null
+    _sum: ProjectSumAggregateOutputType | null
     _min: ProjectMinAggregateOutputType | null
     _max: ProjectMaxAggregateOutputType | null
   }
@@ -2312,13 +4039,19 @@ export namespace Prisma {
     title?: boolean
     locationState?: boolean
     director?: boolean
+    budget?: boolean
+    status?: boolean
+    startDate?: boolean
+    endDate?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    userId?: boolean
     trainings?: boolean | Project$trainingsArgs<ExtArgs>
     flds?: boolean | Project$fldsArgs<ExtArgs>
     awarenessPrograms?: boolean | Project$awarenessProgramsArgs<ExtArgs>
     infrastructureDevelopments?: boolean | Project$infrastructureDevelopmentsArgs<ExtArgs>
     inputDistributions?: boolean | Project$inputDistributionsArgs<ExtArgs>
+    User?: boolean | Project$UserArgs<ExtArgs>
     _count?: boolean | ProjectCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["project"]>
 
@@ -2328,8 +4061,14 @@ export namespace Prisma {
     title?: boolean
     locationState?: boolean
     director?: boolean
+    budget?: boolean
+    status?: boolean
+    startDate?: boolean
+    endDate?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    userId?: boolean
+    User?: boolean | Project$UserArgs<ExtArgs>
   }, ExtArgs["result"]["project"]>
 
   export type ProjectSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -2338,8 +4077,14 @@ export namespace Prisma {
     title?: boolean
     locationState?: boolean
     director?: boolean
+    budget?: boolean
+    status?: boolean
+    startDate?: boolean
+    endDate?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    userId?: boolean
+    User?: boolean | Project$UserArgs<ExtArgs>
   }, ExtArgs["result"]["project"]>
 
   export type ProjectSelectScalar = {
@@ -2348,21 +4093,31 @@ export namespace Prisma {
     title?: boolean
     locationState?: boolean
     director?: boolean
+    budget?: boolean
+    status?: boolean
+    startDate?: boolean
+    endDate?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    userId?: boolean
   }
 
-  export type ProjectOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "implementingAgency" | "title" | "locationState" | "director" | "createdAt" | "updatedAt", ExtArgs["result"]["project"]>
+  export type ProjectOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "implementingAgency" | "title" | "locationState" | "director" | "budget" | "status" | "startDate" | "endDate" | "createdAt" | "updatedAt" | "userId", ExtArgs["result"]["project"]>
   export type ProjectInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     trainings?: boolean | Project$trainingsArgs<ExtArgs>
     flds?: boolean | Project$fldsArgs<ExtArgs>
     awarenessPrograms?: boolean | Project$awarenessProgramsArgs<ExtArgs>
     infrastructureDevelopments?: boolean | Project$infrastructureDevelopmentsArgs<ExtArgs>
     inputDistributions?: boolean | Project$inputDistributionsArgs<ExtArgs>
+    User?: boolean | Project$UserArgs<ExtArgs>
     _count?: boolean | ProjectCountOutputTypeDefaultArgs<ExtArgs>
   }
-  export type ProjectIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
-  export type ProjectIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type ProjectIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    User?: boolean | Project$UserArgs<ExtArgs>
+  }
+  export type ProjectIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    User?: boolean | Project$UserArgs<ExtArgs>
+  }
 
   export type $ProjectPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Project"
@@ -2372,6 +4127,7 @@ export namespace Prisma {
       awarenessPrograms: Prisma.$AwarenessProgramPayload<ExtArgs>[]
       infrastructureDevelopments: Prisma.$InfrastructureDevelopmentPayload<ExtArgs>[]
       inputDistributions: Prisma.$InputDistributionPayload<ExtArgs>[]
+      User: Prisma.$UserPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -2379,8 +4135,13 @@ export namespace Prisma {
       title: string
       locationState: string
       director: string
+      budget: Prisma.Decimal | null
+      status: $Enums.Status
+      startDate: Date | null
+      endDate: Date | null
       createdAt: Date
       updatedAt: Date
+      userId: string | null
     }, ExtArgs["result"]["project"]>
     composites: {}
   }
@@ -2780,6 +4541,7 @@ export namespace Prisma {
     awarenessPrograms<T extends Project$awarenessProgramsArgs<ExtArgs> = {}>(args?: Subset<T, Project$awarenessProgramsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AwarenessProgramPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     infrastructureDevelopments<T extends Project$infrastructureDevelopmentsArgs<ExtArgs> = {}>(args?: Subset<T, Project$infrastructureDevelopmentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InfrastructureDevelopmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     inputDistributions<T extends Project$inputDistributionsArgs<ExtArgs> = {}>(args?: Subset<T, Project$inputDistributionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InputDistributionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    User<T extends Project$UserArgs<ExtArgs> = {}>(args?: Subset<T, Project$UserArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2814,8 +4576,13 @@ export namespace Prisma {
     readonly title: FieldRef<"Project", 'String'>
     readonly locationState: FieldRef<"Project", 'String'>
     readonly director: FieldRef<"Project", 'String'>
+    readonly budget: FieldRef<"Project", 'Decimal'>
+    readonly status: FieldRef<"Project", 'Status'>
+    readonly startDate: FieldRef<"Project", 'DateTime'>
+    readonly endDate: FieldRef<"Project", 'DateTime'>
     readonly createdAt: FieldRef<"Project", 'DateTime'>
     readonly updatedAt: FieldRef<"Project", 'DateTime'>
+    readonly userId: FieldRef<"Project", 'String'>
   }
     
 
@@ -3065,6 +4832,10 @@ export namespace Prisma {
      */
     data: ProjectCreateManyInput | ProjectCreateManyInput[]
     skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProjectIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -3135,6 +4906,10 @@ export namespace Prisma {
      * Limit how many Projects to update.
      */
     limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProjectIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -3324,6 +5099,25 @@ export namespace Prisma {
   }
 
   /**
+   * Project.User
+   */
+  export type Project$UserArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+  }
+
+  /**
    * Project without action
    */
   export type ProjectDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3368,18 +5162,21 @@ export namespace Prisma {
     id: string | null
     number: number | null
     year: number | null
+    isActive: boolean | null
   }
 
   export type QuarterMaxAggregateOutputType = {
     id: string | null
     number: number | null
     year: number | null
+    isActive: boolean | null
   }
 
   export type QuarterCountAggregateOutputType = {
     id: number
     number: number
     year: number
+    isActive: number
     _all: number
   }
 
@@ -3398,18 +5195,21 @@ export namespace Prisma {
     id?: true
     number?: true
     year?: true
+    isActive?: true
   }
 
   export type QuarterMaxAggregateInputType = {
     id?: true
     number?: true
     year?: true
+    isActive?: true
   }
 
   export type QuarterCountAggregateInputType = {
     id?: true
     number?: true
     year?: true
+    isActive?: true
     _all?: true
   }
 
@@ -3503,6 +5303,7 @@ export namespace Prisma {
     id: string
     number: number
     year: number
+    isActive: boolean
     _count: QuarterCountAggregateOutputType | null
     _avg: QuarterAvgAggregateOutputType | null
     _sum: QuarterSumAggregateOutputType | null
@@ -3528,6 +5329,7 @@ export namespace Prisma {
     id?: boolean
     number?: boolean
     year?: boolean
+    isActive?: boolean
     trainings?: boolean | Quarter$trainingsArgs<ExtArgs>
     flds?: boolean | Quarter$fldsArgs<ExtArgs>
     awarenessPrograms?: boolean | Quarter$awarenessProgramsArgs<ExtArgs>
@@ -3540,21 +5342,24 @@ export namespace Prisma {
     id?: boolean
     number?: boolean
     year?: boolean
+    isActive?: boolean
   }, ExtArgs["result"]["quarter"]>
 
   export type QuarterSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     number?: boolean
     year?: boolean
+    isActive?: boolean
   }, ExtArgs["result"]["quarter"]>
 
   export type QuarterSelectScalar = {
     id?: boolean
     number?: boolean
     year?: boolean
+    isActive?: boolean
   }
 
-  export type QuarterOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "number" | "year", ExtArgs["result"]["quarter"]>
+  export type QuarterOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "number" | "year" | "isActive", ExtArgs["result"]["quarter"]>
   export type QuarterInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     trainings?: boolean | Quarter$trainingsArgs<ExtArgs>
     flds?: boolean | Quarter$fldsArgs<ExtArgs>
@@ -3579,6 +5384,7 @@ export namespace Prisma {
       id: string
       number: number
       year: number
+      isActive: boolean
     }, ExtArgs["result"]["quarter"]>
     composites: {}
   }
@@ -4010,6 +5816,7 @@ export namespace Prisma {
     readonly id: FieldRef<"Quarter", 'String'>
     readonly number: FieldRef<"Quarter", 'Int'>
     readonly year: FieldRef<"Quarter", 'Int'>
+    readonly isActive: FieldRef<"Quarter", 'Boolean'>
   }
     
 
@@ -4550,6 +6357,7 @@ export namespace Prisma {
     id: string | null
     projectId: string | null
     quarterId: string | null
+    userId: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -4558,6 +6366,7 @@ export namespace Prisma {
     id: string | null
     projectId: string | null
     quarterId: string | null
+    userId: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -4566,6 +6375,7 @@ export namespace Prisma {
     id: number
     projectId: number
     quarterId: number
+    userId: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -4576,6 +6386,7 @@ export namespace Prisma {
     id?: true
     projectId?: true
     quarterId?: true
+    userId?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -4584,6 +6395,7 @@ export namespace Prisma {
     id?: true
     projectId?: true
     quarterId?: true
+    userId?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -4592,6 +6404,7 @@ export namespace Prisma {
     id?: true
     projectId?: true
     quarterId?: true
+    userId?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -4673,6 +6486,7 @@ export namespace Prisma {
     id: string
     projectId: string
     quarterId: string
+    userId: string | null
     createdAt: Date
     updatedAt: Date
     _count: InputDistributionCountAggregateOutputType | null
@@ -4698,12 +6512,14 @@ export namespace Prisma {
     id?: boolean
     projectId?: boolean
     quarterId?: boolean
+    userId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     project?: boolean | ProjectDefaultArgs<ExtArgs>
     quarter?: boolean | QuarterDefaultArgs<ExtArgs>
     predefinedItems?: boolean | InputDistribution$predefinedItemsArgs<ExtArgs>
     customItems?: boolean | InputDistribution$customItemsArgs<ExtArgs>
+    User?: boolean | InputDistribution$UserArgs<ExtArgs>
     _count?: boolean | InputDistributionCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["inputDistribution"]>
 
@@ -4711,45 +6527,53 @@ export namespace Prisma {
     id?: boolean
     projectId?: boolean
     quarterId?: boolean
+    userId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     project?: boolean | ProjectDefaultArgs<ExtArgs>
     quarter?: boolean | QuarterDefaultArgs<ExtArgs>
+    User?: boolean | InputDistribution$UserArgs<ExtArgs>
   }, ExtArgs["result"]["inputDistribution"]>
 
   export type InputDistributionSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     projectId?: boolean
     quarterId?: boolean
+    userId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     project?: boolean | ProjectDefaultArgs<ExtArgs>
     quarter?: boolean | QuarterDefaultArgs<ExtArgs>
+    User?: boolean | InputDistribution$UserArgs<ExtArgs>
   }, ExtArgs["result"]["inputDistribution"]>
 
   export type InputDistributionSelectScalar = {
     id?: boolean
     projectId?: boolean
     quarterId?: boolean
+    userId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type InputDistributionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "projectId" | "quarterId" | "createdAt" | "updatedAt", ExtArgs["result"]["inputDistribution"]>
+  export type InputDistributionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "projectId" | "quarterId" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["inputDistribution"]>
   export type InputDistributionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     project?: boolean | ProjectDefaultArgs<ExtArgs>
     quarter?: boolean | QuarterDefaultArgs<ExtArgs>
     predefinedItems?: boolean | InputDistribution$predefinedItemsArgs<ExtArgs>
     customItems?: boolean | InputDistribution$customItemsArgs<ExtArgs>
+    User?: boolean | InputDistribution$UserArgs<ExtArgs>
     _count?: boolean | InputDistributionCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type InputDistributionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     project?: boolean | ProjectDefaultArgs<ExtArgs>
     quarter?: boolean | QuarterDefaultArgs<ExtArgs>
+    User?: boolean | InputDistribution$UserArgs<ExtArgs>
   }
   export type InputDistributionIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     project?: boolean | ProjectDefaultArgs<ExtArgs>
     quarter?: boolean | QuarterDefaultArgs<ExtArgs>
+    User?: boolean | InputDistribution$UserArgs<ExtArgs>
   }
 
   export type $InputDistributionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4759,11 +6583,13 @@ export namespace Prisma {
       quarter: Prisma.$QuarterPayload<ExtArgs>
       predefinedItems: Prisma.$PredefinedInputDistributionPayload<ExtArgs>[]
       customItems: Prisma.$CustomInputDistributionPayload<ExtArgs>[]
+      User: Prisma.$UserPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       projectId: string
       quarterId: string
+      userId: string | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["inputDistribution"]>
@@ -5164,6 +6990,7 @@ export namespace Prisma {
     quarter<T extends QuarterDefaultArgs<ExtArgs> = {}>(args?: Subset<T, QuarterDefaultArgs<ExtArgs>>): Prisma__QuarterClient<$Result.GetResult<Prisma.$QuarterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     predefinedItems<T extends InputDistribution$predefinedItemsArgs<ExtArgs> = {}>(args?: Subset<T, InputDistribution$predefinedItemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PredefinedInputDistributionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     customItems<T extends InputDistribution$customItemsArgs<ExtArgs> = {}>(args?: Subset<T, InputDistribution$customItemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CustomInputDistributionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    User<T extends InputDistribution$UserArgs<ExtArgs> = {}>(args?: Subset<T, InputDistribution$UserArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5196,6 +7023,7 @@ export namespace Prisma {
     readonly id: FieldRef<"InputDistribution", 'String'>
     readonly projectId: FieldRef<"InputDistribution", 'String'>
     readonly quarterId: FieldRef<"InputDistribution", 'String'>
+    readonly userId: FieldRef<"InputDistribution", 'String'>
     readonly createdAt: FieldRef<"InputDistribution", 'DateTime'>
     readonly updatedAt: FieldRef<"InputDistribution", 'DateTime'>
   }
@@ -5639,6 +7467,25 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: CustomInputDistributionScalarFieldEnum | CustomInputDistributionScalarFieldEnum[]
+  }
+
+  /**
+   * InputDistribution.User
+   */
+  export type InputDistribution$UserArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
   }
 
   /**
@@ -8158,6 +10005,7 @@ export namespace Prisma {
     units: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    userId: string | null
   }
 
   export type TrainingMaxAggregateOutputType = {
@@ -8180,6 +10028,7 @@ export namespace Prisma {
     units: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    userId: string | null
   }
 
   export type TrainingCountAggregateOutputType = {
@@ -8202,6 +10051,7 @@ export namespace Prisma {
     units: number
     createdAt: number
     updatedAt: number
+    userId: number
     _all: number
   }
 
@@ -8240,6 +10090,7 @@ export namespace Prisma {
     units?: true
     createdAt?: true
     updatedAt?: true
+    userId?: true
   }
 
   export type TrainingMaxAggregateInputType = {
@@ -8262,6 +10113,7 @@ export namespace Prisma {
     units?: true
     createdAt?: true
     updatedAt?: true
+    userId?: true
   }
 
   export type TrainingCountAggregateInputType = {
@@ -8284,6 +10136,7 @@ export namespace Prisma {
     units?: true
     createdAt?: true
     updatedAt?: true
+    userId?: true
     _all?: true
   }
 
@@ -8393,6 +10246,7 @@ export namespace Prisma {
     units: string | null
     createdAt: Date
     updatedAt: Date
+    userId: string | null
     _count: TrainingCountAggregateOutputType | null
     _avg: TrainingAvgAggregateOutputType | null
     _sum: TrainingSumAggregateOutputType | null
@@ -8434,8 +10288,10 @@ export namespace Prisma {
     units?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    userId?: boolean
     project?: boolean | ProjectDefaultArgs<ExtArgs>
     quarter?: boolean | QuarterDefaultArgs<ExtArgs>
+    User?: boolean | Training$UserArgs<ExtArgs>
   }, ExtArgs["result"]["training"]>
 
   export type TrainingSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -8458,8 +10314,10 @@ export namespace Prisma {
     units?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    userId?: boolean
     project?: boolean | ProjectDefaultArgs<ExtArgs>
     quarter?: boolean | QuarterDefaultArgs<ExtArgs>
+    User?: boolean | Training$UserArgs<ExtArgs>
   }, ExtArgs["result"]["training"]>
 
   export type TrainingSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -8482,8 +10340,10 @@ export namespace Prisma {
     units?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    userId?: boolean
     project?: boolean | ProjectDefaultArgs<ExtArgs>
     quarter?: boolean | QuarterDefaultArgs<ExtArgs>
+    User?: boolean | Training$UserArgs<ExtArgs>
   }, ExtArgs["result"]["training"]>
 
   export type TrainingSelectScalar = {
@@ -8506,20 +10366,24 @@ export namespace Prisma {
     units?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    userId?: boolean
   }
 
-  export type TrainingOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "projectId" | "quarterId" | "title" | "target" | "achieved" | "district" | "village" | "block" | "beneficiaryMale" | "beneficiaryFemale" | "remarks" | "imageUrl" | "imageKey" | "pdfUrl" | "pdfKey" | "units" | "createdAt" | "updatedAt", ExtArgs["result"]["training"]>
+  export type TrainingOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "projectId" | "quarterId" | "title" | "target" | "achieved" | "district" | "village" | "block" | "beneficiaryMale" | "beneficiaryFemale" | "remarks" | "imageUrl" | "imageKey" | "pdfUrl" | "pdfKey" | "units" | "createdAt" | "updatedAt" | "userId", ExtArgs["result"]["training"]>
   export type TrainingInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     project?: boolean | ProjectDefaultArgs<ExtArgs>
     quarter?: boolean | QuarterDefaultArgs<ExtArgs>
+    User?: boolean | Training$UserArgs<ExtArgs>
   }
   export type TrainingIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     project?: boolean | ProjectDefaultArgs<ExtArgs>
     quarter?: boolean | QuarterDefaultArgs<ExtArgs>
+    User?: boolean | Training$UserArgs<ExtArgs>
   }
   export type TrainingIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     project?: boolean | ProjectDefaultArgs<ExtArgs>
     quarter?: boolean | QuarterDefaultArgs<ExtArgs>
+    User?: boolean | Training$UserArgs<ExtArgs>
   }
 
   export type $TrainingPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -8527,6 +10391,7 @@ export namespace Prisma {
     objects: {
       project: Prisma.$ProjectPayload<ExtArgs>
       quarter: Prisma.$QuarterPayload<ExtArgs>
+      User: Prisma.$UserPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -8548,6 +10413,7 @@ export namespace Prisma {
       units: string | null
       createdAt: Date
       updatedAt: Date
+      userId: string | null
     }, ExtArgs["result"]["training"]>
     composites: {}
   }
@@ -8944,6 +10810,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     project<T extends ProjectDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ProjectDefaultArgs<ExtArgs>>): Prisma__ProjectClient<$Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     quarter<T extends QuarterDefaultArgs<ExtArgs> = {}>(args?: Subset<T, QuarterDefaultArgs<ExtArgs>>): Prisma__QuarterClient<$Result.GetResult<Prisma.$QuarterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    User<T extends Training$UserArgs<ExtArgs> = {}>(args?: Subset<T, Training$UserArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -8992,6 +10859,7 @@ export namespace Prisma {
     readonly units: FieldRef<"Training", 'String'>
     readonly createdAt: FieldRef<"Training", 'DateTime'>
     readonly updatedAt: FieldRef<"Training", 'DateTime'>
+    readonly userId: FieldRef<"Training", 'String'>
   }
     
 
@@ -9388,6 +11256,25 @@ export namespace Prisma {
   }
 
   /**
+   * Training.User
+   */
+  export type Training$UserArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+  }
+
+  /**
    * Training without action
    */
   export type TrainingDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -9432,33 +11319,48 @@ export namespace Prisma {
     id: string | null
     projectId: string | null
     quarterId: string | null
+    description: string | null
+    district: string | null
+    village: string | null
+    block: string | null
     target: number | null
     achieved: number | null
     units: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    userId: string | null
   }
 
   export type FLDMaxAggregateOutputType = {
     id: string | null
     projectId: string | null
     quarterId: string | null
+    description: string | null
+    district: string | null
+    village: string | null
+    block: string | null
     target: number | null
     achieved: number | null
     units: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    userId: string | null
   }
 
   export type FLDCountAggregateOutputType = {
     id: number
     projectId: number
     quarterId: number
+    description: number
+    district: number
+    village: number
+    block: number
     target: number
     achieved: number
     units: number
     createdAt: number
     updatedAt: number
+    userId: number
     _all: number
   }
 
@@ -9477,33 +11379,48 @@ export namespace Prisma {
     id?: true
     projectId?: true
     quarterId?: true
+    description?: true
+    district?: true
+    village?: true
+    block?: true
     target?: true
     achieved?: true
     units?: true
     createdAt?: true
     updatedAt?: true
+    userId?: true
   }
 
   export type FLDMaxAggregateInputType = {
     id?: true
     projectId?: true
     quarterId?: true
+    description?: true
+    district?: true
+    village?: true
+    block?: true
     target?: true
     achieved?: true
     units?: true
     createdAt?: true
     updatedAt?: true
+    userId?: true
   }
 
   export type FLDCountAggregateInputType = {
     id?: true
     projectId?: true
     quarterId?: true
+    description?: true
+    district?: true
+    village?: true
+    block?: true
     target?: true
     achieved?: true
     units?: true
     createdAt?: true
     updatedAt?: true
+    userId?: true
     _all?: true
   }
 
@@ -9597,11 +11514,16 @@ export namespace Prisma {
     id: string
     projectId: string
     quarterId: string
+    description: string | null
+    district: string
+    village: string
+    block: string
     target: number
     achieved: number
     units: string | null
     createdAt: Date
     updatedAt: Date
+    userId: string | null
     _count: FLDCountAggregateOutputType | null
     _avg: FLDAvgAggregateOutputType | null
     _sum: FLDSumAggregateOutputType | null
@@ -9627,64 +11549,90 @@ export namespace Prisma {
     id?: boolean
     projectId?: boolean
     quarterId?: boolean
+    description?: boolean
+    district?: boolean
+    village?: boolean
+    block?: boolean
     target?: boolean
     achieved?: boolean
     units?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    userId?: boolean
     project?: boolean | ProjectDefaultArgs<ExtArgs>
     quarter?: boolean | QuarterDefaultArgs<ExtArgs>
+    User?: boolean | FLD$UserArgs<ExtArgs>
   }, ExtArgs["result"]["fLD"]>
 
   export type FLDSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     projectId?: boolean
     quarterId?: boolean
+    description?: boolean
+    district?: boolean
+    village?: boolean
+    block?: boolean
     target?: boolean
     achieved?: boolean
     units?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    userId?: boolean
     project?: boolean | ProjectDefaultArgs<ExtArgs>
     quarter?: boolean | QuarterDefaultArgs<ExtArgs>
+    User?: boolean | FLD$UserArgs<ExtArgs>
   }, ExtArgs["result"]["fLD"]>
 
   export type FLDSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     projectId?: boolean
     quarterId?: boolean
+    description?: boolean
+    district?: boolean
+    village?: boolean
+    block?: boolean
     target?: boolean
     achieved?: boolean
     units?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    userId?: boolean
     project?: boolean | ProjectDefaultArgs<ExtArgs>
     quarter?: boolean | QuarterDefaultArgs<ExtArgs>
+    User?: boolean | FLD$UserArgs<ExtArgs>
   }, ExtArgs["result"]["fLD"]>
 
   export type FLDSelectScalar = {
     id?: boolean
     projectId?: boolean
     quarterId?: boolean
+    description?: boolean
+    district?: boolean
+    village?: boolean
+    block?: boolean
     target?: boolean
     achieved?: boolean
     units?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    userId?: boolean
   }
 
-  export type FLDOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "projectId" | "quarterId" | "target" | "achieved" | "units" | "createdAt" | "updatedAt", ExtArgs["result"]["fLD"]>
+  export type FLDOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "projectId" | "quarterId" | "description" | "district" | "village" | "block" | "target" | "achieved" | "units" | "createdAt" | "updatedAt" | "userId", ExtArgs["result"]["fLD"]>
   export type FLDInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     project?: boolean | ProjectDefaultArgs<ExtArgs>
     quarter?: boolean | QuarterDefaultArgs<ExtArgs>
+    User?: boolean | FLD$UserArgs<ExtArgs>
   }
   export type FLDIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     project?: boolean | ProjectDefaultArgs<ExtArgs>
     quarter?: boolean | QuarterDefaultArgs<ExtArgs>
+    User?: boolean | FLD$UserArgs<ExtArgs>
   }
   export type FLDIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     project?: boolean | ProjectDefaultArgs<ExtArgs>
     quarter?: boolean | QuarterDefaultArgs<ExtArgs>
+    User?: boolean | FLD$UserArgs<ExtArgs>
   }
 
   export type $FLDPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -9692,16 +11640,22 @@ export namespace Prisma {
     objects: {
       project: Prisma.$ProjectPayload<ExtArgs>
       quarter: Prisma.$QuarterPayload<ExtArgs>
+      User: Prisma.$UserPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       projectId: string
       quarterId: string
+      description: string | null
+      district: string
+      village: string
+      block: string
       target: number
       achieved: number
       units: string | null
       createdAt: Date
       updatedAt: Date
+      userId: string | null
     }, ExtArgs["result"]["fLD"]>
     composites: {}
   }
@@ -10098,6 +12052,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     project<T extends ProjectDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ProjectDefaultArgs<ExtArgs>>): Prisma__ProjectClient<$Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     quarter<T extends QuarterDefaultArgs<ExtArgs> = {}>(args?: Subset<T, QuarterDefaultArgs<ExtArgs>>): Prisma__QuarterClient<$Result.GetResult<Prisma.$QuarterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    User<T extends FLD$UserArgs<ExtArgs> = {}>(args?: Subset<T, FLD$UserArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -10130,11 +12085,16 @@ export namespace Prisma {
     readonly id: FieldRef<"FLD", 'String'>
     readonly projectId: FieldRef<"FLD", 'String'>
     readonly quarterId: FieldRef<"FLD", 'String'>
+    readonly description: FieldRef<"FLD", 'String'>
+    readonly district: FieldRef<"FLD", 'String'>
+    readonly village: FieldRef<"FLD", 'String'>
+    readonly block: FieldRef<"FLD", 'String'>
     readonly target: FieldRef<"FLD", 'Int'>
     readonly achieved: FieldRef<"FLD", 'Int'>
     readonly units: FieldRef<"FLD", 'String'>
     readonly createdAt: FieldRef<"FLD", 'DateTime'>
     readonly updatedAt: FieldRef<"FLD", 'DateTime'>
+    readonly userId: FieldRef<"FLD", 'String'>
   }
     
 
@@ -10531,6 +12491,25 @@ export namespace Prisma {
   }
 
   /**
+   * FLD.User
+   */
+  export type FLD$UserArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+  }
+
+  /**
    * FLD without action
    */
   export type FLDDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -10592,6 +12571,7 @@ export namespace Prisma {
     units: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    userId: string | null
   }
 
   export type AwarenessProgramMaxAggregateOutputType = {
@@ -10611,6 +12591,7 @@ export namespace Prisma {
     units: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    userId: string | null
   }
 
   export type AwarenessProgramCountAggregateOutputType = {
@@ -10630,6 +12611,7 @@ export namespace Prisma {
     units: number
     createdAt: number
     updatedAt: number
+    userId: number
     _all: number
   }
 
@@ -10665,6 +12647,7 @@ export namespace Prisma {
     units?: true
     createdAt?: true
     updatedAt?: true
+    userId?: true
   }
 
   export type AwarenessProgramMaxAggregateInputType = {
@@ -10684,6 +12667,7 @@ export namespace Prisma {
     units?: true
     createdAt?: true
     updatedAt?: true
+    userId?: true
   }
 
   export type AwarenessProgramCountAggregateInputType = {
@@ -10703,6 +12687,7 @@ export namespace Prisma {
     units?: true
     createdAt?: true
     updatedAt?: true
+    userId?: true
     _all?: true
   }
 
@@ -10809,6 +12794,7 @@ export namespace Prisma {
     units: string | null
     createdAt: Date
     updatedAt: Date
+    userId: string | null
     _count: AwarenessProgramCountAggregateOutputType | null
     _avg: AwarenessProgramAvgAggregateOutputType | null
     _sum: AwarenessProgramSumAggregateOutputType | null
@@ -10847,8 +12833,10 @@ export namespace Prisma {
     units?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    userId?: boolean
     project?: boolean | ProjectDefaultArgs<ExtArgs>
     quarter?: boolean | QuarterDefaultArgs<ExtArgs>
+    User?: boolean | AwarenessProgram$UserArgs<ExtArgs>
   }, ExtArgs["result"]["awarenessProgram"]>
 
   export type AwarenessProgramSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -10868,8 +12856,10 @@ export namespace Prisma {
     units?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    userId?: boolean
     project?: boolean | ProjectDefaultArgs<ExtArgs>
     quarter?: boolean | QuarterDefaultArgs<ExtArgs>
+    User?: boolean | AwarenessProgram$UserArgs<ExtArgs>
   }, ExtArgs["result"]["awarenessProgram"]>
 
   export type AwarenessProgramSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -10889,8 +12879,10 @@ export namespace Prisma {
     units?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    userId?: boolean
     project?: boolean | ProjectDefaultArgs<ExtArgs>
     quarter?: boolean | QuarterDefaultArgs<ExtArgs>
+    User?: boolean | AwarenessProgram$UserArgs<ExtArgs>
   }, ExtArgs["result"]["awarenessProgram"]>
 
   export type AwarenessProgramSelectScalar = {
@@ -10910,20 +12902,24 @@ export namespace Prisma {
     units?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    userId?: boolean
   }
 
-  export type AwarenessProgramOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "projectId" | "quarterId" | "title" | "target" | "achieved" | "district" | "village" | "block" | "beneficiaryMale" | "beneficiaryFemale" | "imageUrl" | "imageKey" | "units" | "createdAt" | "updatedAt", ExtArgs["result"]["awarenessProgram"]>
+  export type AwarenessProgramOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "projectId" | "quarterId" | "title" | "target" | "achieved" | "district" | "village" | "block" | "beneficiaryMale" | "beneficiaryFemale" | "imageUrl" | "imageKey" | "units" | "createdAt" | "updatedAt" | "userId", ExtArgs["result"]["awarenessProgram"]>
   export type AwarenessProgramInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     project?: boolean | ProjectDefaultArgs<ExtArgs>
     quarter?: boolean | QuarterDefaultArgs<ExtArgs>
+    User?: boolean | AwarenessProgram$UserArgs<ExtArgs>
   }
   export type AwarenessProgramIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     project?: boolean | ProjectDefaultArgs<ExtArgs>
     quarter?: boolean | QuarterDefaultArgs<ExtArgs>
+    User?: boolean | AwarenessProgram$UserArgs<ExtArgs>
   }
   export type AwarenessProgramIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     project?: boolean | ProjectDefaultArgs<ExtArgs>
     quarter?: boolean | QuarterDefaultArgs<ExtArgs>
+    User?: boolean | AwarenessProgram$UserArgs<ExtArgs>
   }
 
   export type $AwarenessProgramPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -10931,6 +12927,7 @@ export namespace Prisma {
     objects: {
       project: Prisma.$ProjectPayload<ExtArgs>
       quarter: Prisma.$QuarterPayload<ExtArgs>
+      User: Prisma.$UserPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -10949,6 +12946,7 @@ export namespace Prisma {
       units: string | null
       createdAt: Date
       updatedAt: Date
+      userId: string | null
     }, ExtArgs["result"]["awarenessProgram"]>
     composites: {}
   }
@@ -11345,6 +13343,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     project<T extends ProjectDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ProjectDefaultArgs<ExtArgs>>): Prisma__ProjectClient<$Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     quarter<T extends QuarterDefaultArgs<ExtArgs> = {}>(args?: Subset<T, QuarterDefaultArgs<ExtArgs>>): Prisma__QuarterClient<$Result.GetResult<Prisma.$QuarterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    User<T extends AwarenessProgram$UserArgs<ExtArgs> = {}>(args?: Subset<T, AwarenessProgram$UserArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -11390,6 +13389,7 @@ export namespace Prisma {
     readonly units: FieldRef<"AwarenessProgram", 'String'>
     readonly createdAt: FieldRef<"AwarenessProgram", 'DateTime'>
     readonly updatedAt: FieldRef<"AwarenessProgram", 'DateTime'>
+    readonly userId: FieldRef<"AwarenessProgram", 'String'>
   }
     
 
@@ -11786,6 +13786,25 @@ export namespace Prisma {
   }
 
   /**
+   * AwarenessProgram.User
+   */
+  export type AwarenessProgram$UserArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+  }
+
+  /**
    * AwarenessProgram without action
    */
   export type AwarenessProgramDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -11840,6 +13859,7 @@ export namespace Prisma {
     imageKey: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    userId: string | null
   }
 
   export type InfrastructureDevelopmentMaxAggregateOutputType = {
@@ -11856,6 +13876,7 @@ export namespace Prisma {
     imageKey: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    userId: string | null
   }
 
   export type InfrastructureDevelopmentCountAggregateOutputType = {
@@ -11872,6 +13893,7 @@ export namespace Prisma {
     imageKey: number
     createdAt: number
     updatedAt: number
+    userId: number
     _all: number
   }
 
@@ -11900,6 +13922,7 @@ export namespace Prisma {
     imageKey?: true
     createdAt?: true
     updatedAt?: true
+    userId?: true
   }
 
   export type InfrastructureDevelopmentMaxAggregateInputType = {
@@ -11916,6 +13939,7 @@ export namespace Prisma {
     imageKey?: true
     createdAt?: true
     updatedAt?: true
+    userId?: true
   }
 
   export type InfrastructureDevelopmentCountAggregateInputType = {
@@ -11932,6 +13956,7 @@ export namespace Prisma {
     imageKey?: true
     createdAt?: true
     updatedAt?: true
+    userId?: true
     _all?: true
   }
 
@@ -12035,6 +14060,7 @@ export namespace Prisma {
     imageKey: string | null
     createdAt: Date
     updatedAt: Date
+    userId: string | null
     _count: InfrastructureDevelopmentCountAggregateOutputType | null
     _avg: InfrastructureDevelopmentAvgAggregateOutputType | null
     _sum: InfrastructureDevelopmentSumAggregateOutputType | null
@@ -12070,8 +14096,10 @@ export namespace Prisma {
     imageKey?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    userId?: boolean
     project?: boolean | ProjectDefaultArgs<ExtArgs>
     quarter?: boolean | QuarterDefaultArgs<ExtArgs>
+    User?: boolean | InfrastructureDevelopment$UserArgs<ExtArgs>
   }, ExtArgs["result"]["infrastructureDevelopment"]>
 
   export type InfrastructureDevelopmentSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -12088,8 +14116,10 @@ export namespace Prisma {
     imageKey?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    userId?: boolean
     project?: boolean | ProjectDefaultArgs<ExtArgs>
     quarter?: boolean | QuarterDefaultArgs<ExtArgs>
+    User?: boolean | InfrastructureDevelopment$UserArgs<ExtArgs>
   }, ExtArgs["result"]["infrastructureDevelopment"]>
 
   export type InfrastructureDevelopmentSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -12106,8 +14136,10 @@ export namespace Prisma {
     imageKey?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    userId?: boolean
     project?: boolean | ProjectDefaultArgs<ExtArgs>
     quarter?: boolean | QuarterDefaultArgs<ExtArgs>
+    User?: boolean | InfrastructureDevelopment$UserArgs<ExtArgs>
   }, ExtArgs["result"]["infrastructureDevelopment"]>
 
   export type InfrastructureDevelopmentSelectScalar = {
@@ -12124,20 +14156,24 @@ export namespace Prisma {
     imageKey?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    userId?: boolean
   }
 
-  export type InfrastructureDevelopmentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "projectId" | "quarterId" | "target" | "achieved" | "district" | "village" | "block" | "remarks" | "imageUrl" | "imageKey" | "createdAt" | "updatedAt", ExtArgs["result"]["infrastructureDevelopment"]>
+  export type InfrastructureDevelopmentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "projectId" | "quarterId" | "target" | "achieved" | "district" | "village" | "block" | "remarks" | "imageUrl" | "imageKey" | "createdAt" | "updatedAt" | "userId", ExtArgs["result"]["infrastructureDevelopment"]>
   export type InfrastructureDevelopmentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     project?: boolean | ProjectDefaultArgs<ExtArgs>
     quarter?: boolean | QuarterDefaultArgs<ExtArgs>
+    User?: boolean | InfrastructureDevelopment$UserArgs<ExtArgs>
   }
   export type InfrastructureDevelopmentIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     project?: boolean | ProjectDefaultArgs<ExtArgs>
     quarter?: boolean | QuarterDefaultArgs<ExtArgs>
+    User?: boolean | InfrastructureDevelopment$UserArgs<ExtArgs>
   }
   export type InfrastructureDevelopmentIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     project?: boolean | ProjectDefaultArgs<ExtArgs>
     quarter?: boolean | QuarterDefaultArgs<ExtArgs>
+    User?: boolean | InfrastructureDevelopment$UserArgs<ExtArgs>
   }
 
   export type $InfrastructureDevelopmentPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -12145,6 +14181,7 @@ export namespace Prisma {
     objects: {
       project: Prisma.$ProjectPayload<ExtArgs>
       quarter: Prisma.$QuarterPayload<ExtArgs>
+      User: Prisma.$UserPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -12160,6 +14197,7 @@ export namespace Prisma {
       imageKey: string | null
       createdAt: Date
       updatedAt: Date
+      userId: string | null
     }, ExtArgs["result"]["infrastructureDevelopment"]>
     composites: {}
   }
@@ -12556,6 +14594,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     project<T extends ProjectDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ProjectDefaultArgs<ExtArgs>>): Prisma__ProjectClient<$Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     quarter<T extends QuarterDefaultArgs<ExtArgs> = {}>(args?: Subset<T, QuarterDefaultArgs<ExtArgs>>): Prisma__QuarterClient<$Result.GetResult<Prisma.$QuarterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    User<T extends InfrastructureDevelopment$UserArgs<ExtArgs> = {}>(args?: Subset<T, InfrastructureDevelopment$UserArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -12598,6 +14637,7 @@ export namespace Prisma {
     readonly imageKey: FieldRef<"InfrastructureDevelopment", 'String'>
     readonly createdAt: FieldRef<"InfrastructureDevelopment", 'DateTime'>
     readonly updatedAt: FieldRef<"InfrastructureDevelopment", 'DateTime'>
+    readonly userId: FieldRef<"InfrastructureDevelopment", 'String'>
   }
     
 
@@ -12994,6 +15034,25 @@ export namespace Prisma {
   }
 
   /**
+   * InfrastructureDevelopment.User
+   */
+  export type InfrastructureDevelopment$UserArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+  }
+
+  /**
    * InfrastructureDevelopment without action
    */
   export type InfrastructureDevelopmentDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -13028,6 +15087,9 @@ export namespace Prisma {
     date: Date | null
     location: string | null
     description: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    userId: string | null
   }
 
   export type UpcomingEventMaxAggregateOutputType = {
@@ -13036,6 +15098,9 @@ export namespace Prisma {
     date: Date | null
     location: string | null
     description: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    userId: string | null
   }
 
   export type UpcomingEventCountAggregateOutputType = {
@@ -13044,6 +15109,9 @@ export namespace Prisma {
     date: number
     location: number
     description: number
+    createdAt: number
+    updatedAt: number
+    userId: number
     _all: number
   }
 
@@ -13054,6 +15122,9 @@ export namespace Prisma {
     date?: true
     location?: true
     description?: true
+    createdAt?: true
+    updatedAt?: true
+    userId?: true
   }
 
   export type UpcomingEventMaxAggregateInputType = {
@@ -13062,6 +15133,9 @@ export namespace Prisma {
     date?: true
     location?: true
     description?: true
+    createdAt?: true
+    updatedAt?: true
+    userId?: true
   }
 
   export type UpcomingEventCountAggregateInputType = {
@@ -13070,6 +15144,9 @@ export namespace Prisma {
     date?: true
     location?: true
     description?: true
+    createdAt?: true
+    updatedAt?: true
+    userId?: true
     _all?: true
   }
 
@@ -13151,6 +15228,9 @@ export namespace Prisma {
     date: Date
     location: string
     description: string | null
+    createdAt: Date
+    updatedAt: Date
+    userId: string | null
     _count: UpcomingEventCountAggregateOutputType | null
     _min: UpcomingEventMinAggregateOutputType | null
     _max: UpcomingEventMaxAggregateOutputType | null
@@ -13176,6 +15256,10 @@ export namespace Prisma {
     date?: boolean
     location?: boolean
     description?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    userId?: boolean
+    User?: boolean | UpcomingEvent$UserArgs<ExtArgs>
   }, ExtArgs["result"]["upcomingEvent"]>
 
   export type UpcomingEventSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -13184,6 +15268,10 @@ export namespace Prisma {
     date?: boolean
     location?: boolean
     description?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    userId?: boolean
+    User?: boolean | UpcomingEvent$UserArgs<ExtArgs>
   }, ExtArgs["result"]["upcomingEvent"]>
 
   export type UpcomingEventSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -13192,6 +15280,10 @@ export namespace Prisma {
     date?: boolean
     location?: boolean
     description?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    userId?: boolean
+    User?: boolean | UpcomingEvent$UserArgs<ExtArgs>
   }, ExtArgs["result"]["upcomingEvent"]>
 
   export type UpcomingEventSelectScalar = {
@@ -13200,19 +15292,36 @@ export namespace Prisma {
     date?: boolean
     location?: boolean
     description?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    userId?: boolean
   }
 
-  export type UpcomingEventOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "date" | "location" | "description", ExtArgs["result"]["upcomingEvent"]>
+  export type UpcomingEventOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "date" | "location" | "description" | "createdAt" | "updatedAt" | "userId", ExtArgs["result"]["upcomingEvent"]>
+  export type UpcomingEventInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    User?: boolean | UpcomingEvent$UserArgs<ExtArgs>
+  }
+  export type UpcomingEventIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    User?: boolean | UpcomingEvent$UserArgs<ExtArgs>
+  }
+  export type UpcomingEventIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    User?: boolean | UpcomingEvent$UserArgs<ExtArgs>
+  }
 
   export type $UpcomingEventPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "UpcomingEvent"
-    objects: {}
+    objects: {
+      User: Prisma.$UserPayload<ExtArgs> | null
+    }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       title: string
       date: Date
       location: string
       description: string | null
+      createdAt: Date
+      updatedAt: Date
+      userId: string | null
     }, ExtArgs["result"]["upcomingEvent"]>
     composites: {}
   }
@@ -13607,6 +15716,7 @@ export namespace Prisma {
    */
   export interface Prisma__UpcomingEventClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    User<T extends UpcomingEvent$UserArgs<ExtArgs> = {}>(args?: Subset<T, UpcomingEvent$UserArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -13641,6 +15751,9 @@ export namespace Prisma {
     readonly date: FieldRef<"UpcomingEvent", 'DateTime'>
     readonly location: FieldRef<"UpcomingEvent", 'String'>
     readonly description: FieldRef<"UpcomingEvent", 'String'>
+    readonly createdAt: FieldRef<"UpcomingEvent", 'DateTime'>
+    readonly updatedAt: FieldRef<"UpcomingEvent", 'DateTime'>
+    readonly userId: FieldRef<"UpcomingEvent", 'String'>
   }
     
 
@@ -13657,6 +15770,10 @@ export namespace Prisma {
      * Omit specific fields from the UpcomingEvent
      */
     omit?: UpcomingEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UpcomingEventInclude<ExtArgs> | null
     /**
      * Filter, which UpcomingEvent to fetch.
      */
@@ -13676,6 +15793,10 @@ export namespace Prisma {
      */
     omit?: UpcomingEventOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UpcomingEventInclude<ExtArgs> | null
+    /**
      * Filter, which UpcomingEvent to fetch.
      */
     where: UpcomingEventWhereUniqueInput
@@ -13693,6 +15814,10 @@ export namespace Prisma {
      * Omit specific fields from the UpcomingEvent
      */
     omit?: UpcomingEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UpcomingEventInclude<ExtArgs> | null
     /**
      * Filter, which UpcomingEvent to fetch.
      */
@@ -13742,6 +15867,10 @@ export namespace Prisma {
      */
     omit?: UpcomingEventOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UpcomingEventInclude<ExtArgs> | null
+    /**
      * Filter, which UpcomingEvent to fetch.
      */
     where?: UpcomingEventWhereInput
@@ -13790,6 +15919,10 @@ export namespace Prisma {
      */
     omit?: UpcomingEventOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UpcomingEventInclude<ExtArgs> | null
+    /**
      * Filter, which UpcomingEvents to fetch.
      */
     where?: UpcomingEventWhereInput
@@ -13833,6 +15966,10 @@ export namespace Prisma {
      */
     omit?: UpcomingEventOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UpcomingEventInclude<ExtArgs> | null
+    /**
      * The data needed to create a UpcomingEvent.
      */
     data: XOR<UpcomingEventCreateInput, UpcomingEventUncheckedCreateInput>
@@ -13866,6 +16003,10 @@ export namespace Prisma {
      */
     data: UpcomingEventCreateManyInput | UpcomingEventCreateManyInput[]
     skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UpcomingEventIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -13880,6 +16021,10 @@ export namespace Prisma {
      * Omit specific fields from the UpcomingEvent
      */
     omit?: UpcomingEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UpcomingEventInclude<ExtArgs> | null
     /**
      * The data needed to update a UpcomingEvent.
      */
@@ -13932,6 +16077,10 @@ export namespace Prisma {
      * Limit how many UpcomingEvents to update.
      */
     limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UpcomingEventIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -13946,6 +16095,10 @@ export namespace Prisma {
      * Omit specific fields from the UpcomingEvent
      */
     omit?: UpcomingEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UpcomingEventInclude<ExtArgs> | null
     /**
      * The filter to search for the UpcomingEvent to update in case it exists.
      */
@@ -13973,6 +16126,10 @@ export namespace Prisma {
      */
     omit?: UpcomingEventOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UpcomingEventInclude<ExtArgs> | null
+    /**
      * Filter which UpcomingEvent to delete.
      */
     where: UpcomingEventWhereUniqueInput
@@ -13993,6 +16150,25 @@ export namespace Prisma {
   }
 
   /**
+   * UpcomingEvent.User
+   */
+  export type UpcomingEvent$UserArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+  }
+
+  /**
    * UpcomingEvent without action
    */
   export type UpcomingEventDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -14004,6 +16180,10 @@ export namespace Prisma {
      * Omit specific fields from the UpcomingEvent
      */
     omit?: UpcomingEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UpcomingEventInclude<ExtArgs> | null
   }
 
 
@@ -14026,6 +16206,9 @@ export namespace Prisma {
     thumbnailKey: string | null
     pdfUrl: string | null
     pdfKey: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    userId: string | null
   }
 
   export type PublicationMaxAggregateOutputType = {
@@ -14037,6 +16220,9 @@ export namespace Prisma {
     thumbnailKey: string | null
     pdfUrl: string | null
     pdfKey: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    userId: string | null
   }
 
   export type PublicationCountAggregateOutputType = {
@@ -14048,6 +16234,9 @@ export namespace Prisma {
     thumbnailKey: number
     pdfUrl: number
     pdfKey: number
+    createdAt: number
+    updatedAt: number
+    userId: number
     _all: number
   }
 
@@ -14061,6 +16250,9 @@ export namespace Prisma {
     thumbnailKey?: true
     pdfUrl?: true
     pdfKey?: true
+    createdAt?: true
+    updatedAt?: true
+    userId?: true
   }
 
   export type PublicationMaxAggregateInputType = {
@@ -14072,6 +16264,9 @@ export namespace Prisma {
     thumbnailKey?: true
     pdfUrl?: true
     pdfKey?: true
+    createdAt?: true
+    updatedAt?: true
+    userId?: true
   }
 
   export type PublicationCountAggregateInputType = {
@@ -14083,6 +16278,9 @@ export namespace Prisma {
     thumbnailKey?: true
     pdfUrl?: true
     pdfKey?: true
+    createdAt?: true
+    updatedAt?: true
+    userId?: true
     _all?: true
   }
 
@@ -14167,6 +16365,9 @@ export namespace Prisma {
     thumbnailKey: string | null
     pdfUrl: string | null
     pdfKey: string | null
+    createdAt: Date
+    updatedAt: Date
+    userId: string | null
     _count: PublicationCountAggregateOutputType | null
     _min: PublicationMinAggregateOutputType | null
     _max: PublicationMaxAggregateOutputType | null
@@ -14195,6 +16396,10 @@ export namespace Prisma {
     thumbnailKey?: boolean
     pdfUrl?: boolean
     pdfKey?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    userId?: boolean
+    User?: boolean | Publication$UserArgs<ExtArgs>
   }, ExtArgs["result"]["publication"]>
 
   export type PublicationSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -14206,6 +16411,10 @@ export namespace Prisma {
     thumbnailKey?: boolean
     pdfUrl?: boolean
     pdfKey?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    userId?: boolean
+    User?: boolean | Publication$UserArgs<ExtArgs>
   }, ExtArgs["result"]["publication"]>
 
   export type PublicationSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -14217,6 +16426,10 @@ export namespace Prisma {
     thumbnailKey?: boolean
     pdfUrl?: boolean
     pdfKey?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    userId?: boolean
+    User?: boolean | Publication$UserArgs<ExtArgs>
   }, ExtArgs["result"]["publication"]>
 
   export type PublicationSelectScalar = {
@@ -14228,13 +16441,27 @@ export namespace Prisma {
     thumbnailKey?: boolean
     pdfUrl?: boolean
     pdfKey?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    userId?: boolean
   }
 
-  export type PublicationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "type" | "category" | "thumbnailUrl" | "thumbnailKey" | "pdfUrl" | "pdfKey", ExtArgs["result"]["publication"]>
+  export type PublicationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "type" | "category" | "thumbnailUrl" | "thumbnailKey" | "pdfUrl" | "pdfKey" | "createdAt" | "updatedAt" | "userId", ExtArgs["result"]["publication"]>
+  export type PublicationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    User?: boolean | Publication$UserArgs<ExtArgs>
+  }
+  export type PublicationIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    User?: boolean | Publication$UserArgs<ExtArgs>
+  }
+  export type PublicationIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    User?: boolean | Publication$UserArgs<ExtArgs>
+  }
 
   export type $PublicationPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Publication"
-    objects: {}
+    objects: {
+      User: Prisma.$UserPayload<ExtArgs> | null
+    }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       title: string
@@ -14244,6 +16471,9 @@ export namespace Prisma {
       thumbnailKey: string | null
       pdfUrl: string | null
       pdfKey: string | null
+      createdAt: Date
+      updatedAt: Date
+      userId: string | null
     }, ExtArgs["result"]["publication"]>
     composites: {}
   }
@@ -14638,6 +16868,7 @@ export namespace Prisma {
    */
   export interface Prisma__PublicationClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    User<T extends Publication$UserArgs<ExtArgs> = {}>(args?: Subset<T, Publication$UserArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -14675,6 +16906,9 @@ export namespace Prisma {
     readonly thumbnailKey: FieldRef<"Publication", 'String'>
     readonly pdfUrl: FieldRef<"Publication", 'String'>
     readonly pdfKey: FieldRef<"Publication", 'String'>
+    readonly createdAt: FieldRef<"Publication", 'DateTime'>
+    readonly updatedAt: FieldRef<"Publication", 'DateTime'>
+    readonly userId: FieldRef<"Publication", 'String'>
   }
     
 
@@ -14691,6 +16925,10 @@ export namespace Prisma {
      * Omit specific fields from the Publication
      */
     omit?: PublicationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PublicationInclude<ExtArgs> | null
     /**
      * Filter, which Publication to fetch.
      */
@@ -14710,6 +16948,10 @@ export namespace Prisma {
      */
     omit?: PublicationOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PublicationInclude<ExtArgs> | null
+    /**
      * Filter, which Publication to fetch.
      */
     where: PublicationWhereUniqueInput
@@ -14727,6 +16969,10 @@ export namespace Prisma {
      * Omit specific fields from the Publication
      */
     omit?: PublicationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PublicationInclude<ExtArgs> | null
     /**
      * Filter, which Publication to fetch.
      */
@@ -14776,6 +17022,10 @@ export namespace Prisma {
      */
     omit?: PublicationOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PublicationInclude<ExtArgs> | null
+    /**
      * Filter, which Publication to fetch.
      */
     where?: PublicationWhereInput
@@ -14824,6 +17074,10 @@ export namespace Prisma {
      */
     omit?: PublicationOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PublicationInclude<ExtArgs> | null
+    /**
      * Filter, which Publications to fetch.
      */
     where?: PublicationWhereInput
@@ -14867,6 +17121,10 @@ export namespace Prisma {
      */
     omit?: PublicationOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PublicationInclude<ExtArgs> | null
+    /**
      * The data needed to create a Publication.
      */
     data: XOR<PublicationCreateInput, PublicationUncheckedCreateInput>
@@ -14900,6 +17158,10 @@ export namespace Prisma {
      */
     data: PublicationCreateManyInput | PublicationCreateManyInput[]
     skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PublicationIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -14914,6 +17176,10 @@ export namespace Prisma {
      * Omit specific fields from the Publication
      */
     omit?: PublicationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PublicationInclude<ExtArgs> | null
     /**
      * The data needed to update a Publication.
      */
@@ -14966,6 +17232,10 @@ export namespace Prisma {
      * Limit how many Publications to update.
      */
     limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PublicationIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -14980,6 +17250,10 @@ export namespace Prisma {
      * Omit specific fields from the Publication
      */
     omit?: PublicationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PublicationInclude<ExtArgs> | null
     /**
      * The filter to search for the Publication to update in case it exists.
      */
@@ -15007,6 +17281,10 @@ export namespace Prisma {
      */
     omit?: PublicationOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PublicationInclude<ExtArgs> | null
+    /**
      * Filter which Publication to delete.
      */
     where: PublicationWhereUniqueInput
@@ -15027,6 +17305,25 @@ export namespace Prisma {
   }
 
   /**
+   * Publication.User
+   */
+  export type Publication$UserArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+  }
+
+  /**
    * Publication without action
    */
   export type PublicationDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -15038,6 +17335,10 @@ export namespace Prisma {
      * Omit specific fields from the Publication
      */
     omit?: PublicationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PublicationInclude<ExtArgs> | null
   }
 
 
@@ -15056,6 +17357,9 @@ export namespace Prisma {
     title: string | null
     imageUrl: string | null
     imageKey: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    userId: string | null
   }
 
   export type GalleryMaxAggregateOutputType = {
@@ -15063,6 +17367,9 @@ export namespace Prisma {
     title: string | null
     imageUrl: string | null
     imageKey: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    userId: string | null
   }
 
   export type GalleryCountAggregateOutputType = {
@@ -15070,6 +17377,9 @@ export namespace Prisma {
     title: number
     imageUrl: number
     imageKey: number
+    createdAt: number
+    updatedAt: number
+    userId: number
     _all: number
   }
 
@@ -15079,6 +17389,9 @@ export namespace Prisma {
     title?: true
     imageUrl?: true
     imageKey?: true
+    createdAt?: true
+    updatedAt?: true
+    userId?: true
   }
 
   export type GalleryMaxAggregateInputType = {
@@ -15086,6 +17399,9 @@ export namespace Prisma {
     title?: true
     imageUrl?: true
     imageKey?: true
+    createdAt?: true
+    updatedAt?: true
+    userId?: true
   }
 
   export type GalleryCountAggregateInputType = {
@@ -15093,6 +17409,9 @@ export namespace Prisma {
     title?: true
     imageUrl?: true
     imageKey?: true
+    createdAt?: true
+    updatedAt?: true
+    userId?: true
     _all?: true
   }
 
@@ -15173,6 +17492,9 @@ export namespace Prisma {
     title: string
     imageUrl: string
     imageKey: string
+    createdAt: Date
+    updatedAt: Date
+    userId: string | null
     _count: GalleryCountAggregateOutputType | null
     _min: GalleryMinAggregateOutputType | null
     _max: GalleryMaxAggregateOutputType | null
@@ -15197,6 +17519,10 @@ export namespace Prisma {
     title?: boolean
     imageUrl?: boolean
     imageKey?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    userId?: boolean
+    User?: boolean | Gallery$UserArgs<ExtArgs>
   }, ExtArgs["result"]["gallery"]>
 
   export type GallerySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -15204,6 +17530,10 @@ export namespace Prisma {
     title?: boolean
     imageUrl?: boolean
     imageKey?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    userId?: boolean
+    User?: boolean | Gallery$UserArgs<ExtArgs>
   }, ExtArgs["result"]["gallery"]>
 
   export type GallerySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -15211,6 +17541,10 @@ export namespace Prisma {
     title?: boolean
     imageUrl?: boolean
     imageKey?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    userId?: boolean
+    User?: boolean | Gallery$UserArgs<ExtArgs>
   }, ExtArgs["result"]["gallery"]>
 
   export type GallerySelectScalar = {
@@ -15218,18 +17552,35 @@ export namespace Prisma {
     title?: boolean
     imageUrl?: boolean
     imageKey?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    userId?: boolean
   }
 
-  export type GalleryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "imageUrl" | "imageKey", ExtArgs["result"]["gallery"]>
+  export type GalleryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "imageUrl" | "imageKey" | "createdAt" | "updatedAt" | "userId", ExtArgs["result"]["gallery"]>
+  export type GalleryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    User?: boolean | Gallery$UserArgs<ExtArgs>
+  }
+  export type GalleryIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    User?: boolean | Gallery$UserArgs<ExtArgs>
+  }
+  export type GalleryIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    User?: boolean | Gallery$UserArgs<ExtArgs>
+  }
 
   export type $GalleryPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Gallery"
-    objects: {}
+    objects: {
+      User: Prisma.$UserPayload<ExtArgs> | null
+    }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       title: string
       imageUrl: string
       imageKey: string
+      createdAt: Date
+      updatedAt: Date
+      userId: string | null
     }, ExtArgs["result"]["gallery"]>
     composites: {}
   }
@@ -15624,6 +17975,7 @@ export namespace Prisma {
    */
   export interface Prisma__GalleryClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    User<T extends Gallery$UserArgs<ExtArgs> = {}>(args?: Subset<T, Gallery$UserArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -15657,6 +18009,9 @@ export namespace Prisma {
     readonly title: FieldRef<"Gallery", 'String'>
     readonly imageUrl: FieldRef<"Gallery", 'String'>
     readonly imageKey: FieldRef<"Gallery", 'String'>
+    readonly createdAt: FieldRef<"Gallery", 'DateTime'>
+    readonly updatedAt: FieldRef<"Gallery", 'DateTime'>
+    readonly userId: FieldRef<"Gallery", 'String'>
   }
     
 
@@ -15673,6 +18028,10 @@ export namespace Prisma {
      * Omit specific fields from the Gallery
      */
     omit?: GalleryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GalleryInclude<ExtArgs> | null
     /**
      * Filter, which Gallery to fetch.
      */
@@ -15692,6 +18051,10 @@ export namespace Prisma {
      */
     omit?: GalleryOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GalleryInclude<ExtArgs> | null
+    /**
      * Filter, which Gallery to fetch.
      */
     where: GalleryWhereUniqueInput
@@ -15709,6 +18072,10 @@ export namespace Prisma {
      * Omit specific fields from the Gallery
      */
     omit?: GalleryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GalleryInclude<ExtArgs> | null
     /**
      * Filter, which Gallery to fetch.
      */
@@ -15758,6 +18125,10 @@ export namespace Prisma {
      */
     omit?: GalleryOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GalleryInclude<ExtArgs> | null
+    /**
      * Filter, which Gallery to fetch.
      */
     where?: GalleryWhereInput
@@ -15806,6 +18177,10 @@ export namespace Prisma {
      */
     omit?: GalleryOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GalleryInclude<ExtArgs> | null
+    /**
      * Filter, which Galleries to fetch.
      */
     where?: GalleryWhereInput
@@ -15849,6 +18224,10 @@ export namespace Prisma {
      */
     omit?: GalleryOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GalleryInclude<ExtArgs> | null
+    /**
      * The data needed to create a Gallery.
      */
     data: XOR<GalleryCreateInput, GalleryUncheckedCreateInput>
@@ -15882,6 +18261,10 @@ export namespace Prisma {
      */
     data: GalleryCreateManyInput | GalleryCreateManyInput[]
     skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GalleryIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -15896,6 +18279,10 @@ export namespace Prisma {
      * Omit specific fields from the Gallery
      */
     omit?: GalleryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GalleryInclude<ExtArgs> | null
     /**
      * The data needed to update a Gallery.
      */
@@ -15948,6 +18335,10 @@ export namespace Prisma {
      * Limit how many Galleries to update.
      */
     limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GalleryIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -15962,6 +18353,10 @@ export namespace Prisma {
      * Omit specific fields from the Gallery
      */
     omit?: GalleryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GalleryInclude<ExtArgs> | null
     /**
      * The filter to search for the Gallery to update in case it exists.
      */
@@ -15989,6 +18384,10 @@ export namespace Prisma {
      */
     omit?: GalleryOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GalleryInclude<ExtArgs> | null
+    /**
      * Filter which Gallery to delete.
      */
     where: GalleryWhereUniqueInput
@@ -16009,6 +18408,25 @@ export namespace Prisma {
   }
 
   /**
+   * Gallery.User
+   */
+  export type Gallery$UserArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+  }
+
+  /**
    * Gallery without action
    */
   export type GalleryDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -16020,6 +18438,10 @@ export namespace Prisma {
      * Omit specific fields from the Gallery
      */
     omit?: GalleryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GalleryInclude<ExtArgs> | null
   }
 
 
@@ -16054,6 +18476,9 @@ export namespace Prisma {
     center: string | null
     location: string | null
     director: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    userId: string | null
   }
 
   export type ProjectDetailsMaxAggregateOutputType = {
@@ -16065,6 +18490,9 @@ export namespace Prisma {
     center: string | null
     location: string | null
     director: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    userId: string | null
   }
 
   export type ProjectDetailsCountAggregateOutputType = {
@@ -16079,6 +18507,9 @@ export namespace Prisma {
     director: number
     coDirectors: number
     achievements: number
+    createdAt: number
+    updatedAt: number
+    userId: number
     _all: number
   }
 
@@ -16102,6 +18533,9 @@ export namespace Prisma {
     center?: true
     location?: true
     director?: true
+    createdAt?: true
+    updatedAt?: true
+    userId?: true
   }
 
   export type ProjectDetailsMaxAggregateInputType = {
@@ -16113,6 +18547,9 @@ export namespace Prisma {
     center?: true
     location?: true
     director?: true
+    createdAt?: true
+    updatedAt?: true
+    userId?: true
   }
 
   export type ProjectDetailsCountAggregateInputType = {
@@ -16127,6 +18564,9 @@ export namespace Prisma {
     director?: true
     coDirectors?: true
     achievements?: true
+    createdAt?: true
+    updatedAt?: true
+    userId?: true
     _all?: true
   }
 
@@ -16228,6 +18668,9 @@ export namespace Prisma {
     director: string
     coDirectors: string[]
     achievements: string[]
+    createdAt: Date
+    updatedAt: Date
+    userId: string | null
     _count: ProjectDetailsCountAggregateOutputType | null
     _avg: ProjectDetailsAvgAggregateOutputType | null
     _sum: ProjectDetailsSumAggregateOutputType | null
@@ -16261,6 +18704,10 @@ export namespace Prisma {
     director?: boolean
     coDirectors?: boolean
     achievements?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    userId?: boolean
+    User?: boolean | ProjectDetails$UserArgs<ExtArgs>
   }, ExtArgs["result"]["projectDetails"]>
 
   export type ProjectDetailsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -16275,6 +18722,10 @@ export namespace Prisma {
     director?: boolean
     coDirectors?: boolean
     achievements?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    userId?: boolean
+    User?: boolean | ProjectDetails$UserArgs<ExtArgs>
   }, ExtArgs["result"]["projectDetails"]>
 
   export type ProjectDetailsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -16289,6 +18740,10 @@ export namespace Prisma {
     director?: boolean
     coDirectors?: boolean
     achievements?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    userId?: boolean
+    User?: boolean | ProjectDetails$UserArgs<ExtArgs>
   }, ExtArgs["result"]["projectDetails"]>
 
   export type ProjectDetailsSelectScalar = {
@@ -16303,13 +18758,27 @@ export namespace Prisma {
     director?: boolean
     coDirectors?: boolean
     achievements?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    userId?: boolean
   }
 
-  export type ProjectDetailsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "region" | "year" | "budget" | "center" | "location" | "objectives" | "director" | "coDirectors" | "achievements", ExtArgs["result"]["projectDetails"]>
+  export type ProjectDetailsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "region" | "year" | "budget" | "center" | "location" | "objectives" | "director" | "coDirectors" | "achievements" | "createdAt" | "updatedAt" | "userId", ExtArgs["result"]["projectDetails"]>
+  export type ProjectDetailsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    User?: boolean | ProjectDetails$UserArgs<ExtArgs>
+  }
+  export type ProjectDetailsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    User?: boolean | ProjectDetails$UserArgs<ExtArgs>
+  }
+  export type ProjectDetailsIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    User?: boolean | ProjectDetails$UserArgs<ExtArgs>
+  }
 
   export type $ProjectDetailsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "ProjectDetails"
-    objects: {}
+    objects: {
+      User: Prisma.$UserPayload<ExtArgs> | null
+    }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       title: string
@@ -16322,6 +18791,9 @@ export namespace Prisma {
       director: string
       coDirectors: string[]
       achievements: string[]
+      createdAt: Date
+      updatedAt: Date
+      userId: string | null
     }, ExtArgs["result"]["projectDetails"]>
     composites: {}
   }
@@ -16716,6 +19188,7 @@ export namespace Prisma {
    */
   export interface Prisma__ProjectDetailsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    User<T extends ProjectDetails$UserArgs<ExtArgs> = {}>(args?: Subset<T, ProjectDetails$UserArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -16756,6 +19229,9 @@ export namespace Prisma {
     readonly director: FieldRef<"ProjectDetails", 'String'>
     readonly coDirectors: FieldRef<"ProjectDetails", 'String[]'>
     readonly achievements: FieldRef<"ProjectDetails", 'String[]'>
+    readonly createdAt: FieldRef<"ProjectDetails", 'DateTime'>
+    readonly updatedAt: FieldRef<"ProjectDetails", 'DateTime'>
+    readonly userId: FieldRef<"ProjectDetails", 'String'>
   }
     
 
@@ -16772,6 +19248,10 @@ export namespace Prisma {
      * Omit specific fields from the ProjectDetails
      */
     omit?: ProjectDetailsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProjectDetailsInclude<ExtArgs> | null
     /**
      * Filter, which ProjectDetails to fetch.
      */
@@ -16791,6 +19271,10 @@ export namespace Prisma {
      */
     omit?: ProjectDetailsOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProjectDetailsInclude<ExtArgs> | null
+    /**
      * Filter, which ProjectDetails to fetch.
      */
     where: ProjectDetailsWhereUniqueInput
@@ -16808,6 +19292,10 @@ export namespace Prisma {
      * Omit specific fields from the ProjectDetails
      */
     omit?: ProjectDetailsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProjectDetailsInclude<ExtArgs> | null
     /**
      * Filter, which ProjectDetails to fetch.
      */
@@ -16857,6 +19345,10 @@ export namespace Prisma {
      */
     omit?: ProjectDetailsOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProjectDetailsInclude<ExtArgs> | null
+    /**
      * Filter, which ProjectDetails to fetch.
      */
     where?: ProjectDetailsWhereInput
@@ -16905,6 +19397,10 @@ export namespace Prisma {
      */
     omit?: ProjectDetailsOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProjectDetailsInclude<ExtArgs> | null
+    /**
      * Filter, which ProjectDetails to fetch.
      */
     where?: ProjectDetailsWhereInput
@@ -16948,6 +19444,10 @@ export namespace Prisma {
      */
     omit?: ProjectDetailsOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProjectDetailsInclude<ExtArgs> | null
+    /**
      * The data needed to create a ProjectDetails.
      */
     data: XOR<ProjectDetailsCreateInput, ProjectDetailsUncheckedCreateInput>
@@ -16981,6 +19481,10 @@ export namespace Prisma {
      */
     data: ProjectDetailsCreateManyInput | ProjectDetailsCreateManyInput[]
     skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProjectDetailsIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -16995,6 +19499,10 @@ export namespace Prisma {
      * Omit specific fields from the ProjectDetails
      */
     omit?: ProjectDetailsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProjectDetailsInclude<ExtArgs> | null
     /**
      * The data needed to update a ProjectDetails.
      */
@@ -17047,6 +19555,10 @@ export namespace Prisma {
      * Limit how many ProjectDetails to update.
      */
     limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProjectDetailsIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -17061,6 +19573,10 @@ export namespace Prisma {
      * Omit specific fields from the ProjectDetails
      */
     omit?: ProjectDetailsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProjectDetailsInclude<ExtArgs> | null
     /**
      * The filter to search for the ProjectDetails to update in case it exists.
      */
@@ -17088,6 +19604,10 @@ export namespace Prisma {
      */
     omit?: ProjectDetailsOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProjectDetailsInclude<ExtArgs> | null
+    /**
      * Filter which ProjectDetails to delete.
      */
     where: ProjectDetailsWhereUniqueInput
@@ -17108,6 +19628,25 @@ export namespace Prisma {
   }
 
   /**
+   * ProjectDetails.User
+   */
+  export type ProjectDetails$UserArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+  }
+
+  /**
    * ProjectDetails without action
    */
   export type ProjectDetailsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -17119,6 +19658,10 @@ export namespace Prisma {
      * Omit specific fields from the ProjectDetails
      */
     omit?: ProjectDetailsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProjectDetailsInclude<ExtArgs> | null
   }
 
 
@@ -17136,14 +19679,38 @@ export namespace Prisma {
   export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
 
+  export const UserScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    email: 'email',
+    password: 'password',
+    role: 'role',
+    userCode: 'userCode',
+    isVerified: 'isVerified',
+    verificationCode: 'verificationCode',
+    resetPasswordToken: 'resetPasswordToken',
+    resetTokenExpires: 'resetTokenExpires',
+    verificationExpires: 'verificationExpires',
+    createdAt: 'createdAt',
+    updateAt: 'updateAt'
+  };
+
+  export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
+
   export const ProjectScalarFieldEnum: {
     id: 'id',
     implementingAgency: 'implementingAgency',
     title: 'title',
     locationState: 'locationState',
     director: 'director',
+    budget: 'budget',
+    status: 'status',
+    startDate: 'startDate',
+    endDate: 'endDate',
     createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
+    updatedAt: 'updatedAt',
+    userId: 'userId'
   };
 
   export type ProjectScalarFieldEnum = (typeof ProjectScalarFieldEnum)[keyof typeof ProjectScalarFieldEnum]
@@ -17152,7 +19719,8 @@ export namespace Prisma {
   export const QuarterScalarFieldEnum: {
     id: 'id',
     number: 'number',
-    year: 'year'
+    year: 'year',
+    isActive: 'isActive'
   };
 
   export type QuarterScalarFieldEnum = (typeof QuarterScalarFieldEnum)[keyof typeof QuarterScalarFieldEnum]
@@ -17162,6 +19730,7 @@ export namespace Prisma {
     id: 'id',
     projectId: 'projectId',
     quarterId: 'quarterId',
+    userId: 'userId',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -17230,7 +19799,8 @@ export namespace Prisma {
     pdfKey: 'pdfKey',
     units: 'units',
     createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
+    updatedAt: 'updatedAt',
+    userId: 'userId'
   };
 
   export type TrainingScalarFieldEnum = (typeof TrainingScalarFieldEnum)[keyof typeof TrainingScalarFieldEnum]
@@ -17240,11 +19810,16 @@ export namespace Prisma {
     id: 'id',
     projectId: 'projectId',
     quarterId: 'quarterId',
+    description: 'description',
+    district: 'district',
+    village: 'village',
+    block: 'block',
     target: 'target',
     achieved: 'achieved',
     units: 'units',
     createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
+    updatedAt: 'updatedAt',
+    userId: 'userId'
   };
 
   export type FLDScalarFieldEnum = (typeof FLDScalarFieldEnum)[keyof typeof FLDScalarFieldEnum]
@@ -17266,7 +19841,8 @@ export namespace Prisma {
     imageKey: 'imageKey',
     units: 'units',
     createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
+    updatedAt: 'updatedAt',
+    userId: 'userId'
   };
 
   export type AwarenessProgramScalarFieldEnum = (typeof AwarenessProgramScalarFieldEnum)[keyof typeof AwarenessProgramScalarFieldEnum]
@@ -17285,7 +19861,8 @@ export namespace Prisma {
     imageUrl: 'imageUrl',
     imageKey: 'imageKey',
     createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
+    updatedAt: 'updatedAt',
+    userId: 'userId'
   };
 
   export type InfrastructureDevelopmentScalarFieldEnum = (typeof InfrastructureDevelopmentScalarFieldEnum)[keyof typeof InfrastructureDevelopmentScalarFieldEnum]
@@ -17296,7 +19873,10 @@ export namespace Prisma {
     title: 'title',
     date: 'date',
     location: 'location',
-    description: 'description'
+    description: 'description',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+    userId: 'userId'
   };
 
   export type UpcomingEventScalarFieldEnum = (typeof UpcomingEventScalarFieldEnum)[keyof typeof UpcomingEventScalarFieldEnum]
@@ -17310,7 +19890,10 @@ export namespace Prisma {
     thumbnailUrl: 'thumbnailUrl',
     thumbnailKey: 'thumbnailKey',
     pdfUrl: 'pdfUrl',
-    pdfKey: 'pdfKey'
+    pdfKey: 'pdfKey',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+    userId: 'userId'
   };
 
   export type PublicationScalarFieldEnum = (typeof PublicationScalarFieldEnum)[keyof typeof PublicationScalarFieldEnum]
@@ -17320,7 +19903,10 @@ export namespace Prisma {
     id: 'id',
     title: 'title',
     imageUrl: 'imageUrl',
-    imageKey: 'imageKey'
+    imageKey: 'imageKey',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+    userId: 'userId'
   };
 
   export type GalleryScalarFieldEnum = (typeof GalleryScalarFieldEnum)[keyof typeof GalleryScalarFieldEnum]
@@ -17337,7 +19923,10 @@ export namespace Prisma {
     objectives: 'objectives',
     director: 'director',
     coDirectors: 'coDirectors',
-    achievements: 'achievements'
+    achievements: 'achievements',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+    userId: 'userId'
   };
 
   export type ProjectDetailsScalarFieldEnum = (typeof ProjectDetailsScalarFieldEnum)[keyof typeof ProjectDetailsScalarFieldEnum]
@@ -17387,6 +19976,27 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Role'
+   */
+  export type EnumRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Role'>
+    
+
+
+  /**
+   * Reference to a field of type 'Role[]'
+   */
+  export type ListEnumRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Role[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Boolean'
+   */
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+  /**
    * Reference to a field of type 'DateTime'
    */
   export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
@@ -17397,6 +20007,34 @@ export namespace Prisma {
    * Reference to a field of type 'DateTime[]'
    */
   export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Decimal'
+   */
+  export type DecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal'>
+    
+
+
+  /**
+   * Reference to a field of type 'Decimal[]'
+   */
+  export type ListDecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Status'
+   */
+  export type EnumStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Status'>
+    
+
+
+  /**
+   * Reference to a field of type 'Status[]'
+   */
+  export type ListEnumStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Status[]'>
     
 
 
@@ -17431,6 +20069,128 @@ export namespace Prisma {
    */
 
 
+  export type UserWhereInput = {
+    AND?: UserWhereInput | UserWhereInput[]
+    OR?: UserWhereInput[]
+    NOT?: UserWhereInput | UserWhereInput[]
+    id?: StringFilter<"User"> | string
+    name?: StringFilter<"User"> | string
+    email?: StringFilter<"User"> | string
+    password?: StringFilter<"User"> | string
+    role?: EnumRoleFilter<"User"> | $Enums.Role
+    userCode?: StringFilter<"User"> | string
+    isVerified?: BoolFilter<"User"> | boolean
+    verificationCode?: StringNullableFilter<"User"> | string | null
+    resetPasswordToken?: StringNullableFilter<"User"> | string | null
+    resetTokenExpires?: DateTimeNullableFilter<"User"> | Date | string | null
+    verificationExpires?: DateTimeNullableFilter<"User"> | Date | string | null
+    createdAt?: DateTimeFilter<"User"> | Date | string
+    updateAt?: DateTimeFilter<"User"> | Date | string
+    projects?: ProjectListRelationFilter
+    trainings?: TrainingListRelationFilter
+    flds?: FLDListRelationFilter
+    awarenessPrograms?: AwarenessProgramListRelationFilter
+    infrastructureDevelopments?: InfrastructureDevelopmentListRelationFilter
+    inputDistributions?: InputDistributionListRelationFilter
+    upcomingEvents?: UpcomingEventListRelationFilter
+    publications?: PublicationListRelationFilter
+    galleries?: GalleryListRelationFilter
+    projectDetails?: ProjectDetailsListRelationFilter
+  }
+
+  export type UserOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    email?: SortOrder
+    password?: SortOrder
+    role?: SortOrder
+    userCode?: SortOrder
+    isVerified?: SortOrder
+    verificationCode?: SortOrderInput | SortOrder
+    resetPasswordToken?: SortOrderInput | SortOrder
+    resetTokenExpires?: SortOrderInput | SortOrder
+    verificationExpires?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updateAt?: SortOrder
+    projects?: ProjectOrderByRelationAggregateInput
+    trainings?: TrainingOrderByRelationAggregateInput
+    flds?: FLDOrderByRelationAggregateInput
+    awarenessPrograms?: AwarenessProgramOrderByRelationAggregateInput
+    infrastructureDevelopments?: InfrastructureDevelopmentOrderByRelationAggregateInput
+    inputDistributions?: InputDistributionOrderByRelationAggregateInput
+    upcomingEvents?: UpcomingEventOrderByRelationAggregateInput
+    publications?: PublicationOrderByRelationAggregateInput
+    galleries?: GalleryOrderByRelationAggregateInput
+    projectDetails?: ProjectDetailsOrderByRelationAggregateInput
+  }
+
+  export type UserWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    email?: string
+    AND?: UserWhereInput | UserWhereInput[]
+    OR?: UserWhereInput[]
+    NOT?: UserWhereInput | UserWhereInput[]
+    name?: StringFilter<"User"> | string
+    password?: StringFilter<"User"> | string
+    role?: EnumRoleFilter<"User"> | $Enums.Role
+    userCode?: StringFilter<"User"> | string
+    isVerified?: BoolFilter<"User"> | boolean
+    verificationCode?: StringNullableFilter<"User"> | string | null
+    resetPasswordToken?: StringNullableFilter<"User"> | string | null
+    resetTokenExpires?: DateTimeNullableFilter<"User"> | Date | string | null
+    verificationExpires?: DateTimeNullableFilter<"User"> | Date | string | null
+    createdAt?: DateTimeFilter<"User"> | Date | string
+    updateAt?: DateTimeFilter<"User"> | Date | string
+    projects?: ProjectListRelationFilter
+    trainings?: TrainingListRelationFilter
+    flds?: FLDListRelationFilter
+    awarenessPrograms?: AwarenessProgramListRelationFilter
+    infrastructureDevelopments?: InfrastructureDevelopmentListRelationFilter
+    inputDistributions?: InputDistributionListRelationFilter
+    upcomingEvents?: UpcomingEventListRelationFilter
+    publications?: PublicationListRelationFilter
+    galleries?: GalleryListRelationFilter
+    projectDetails?: ProjectDetailsListRelationFilter
+  }, "id" | "email">
+
+  export type UserOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    email?: SortOrder
+    password?: SortOrder
+    role?: SortOrder
+    userCode?: SortOrder
+    isVerified?: SortOrder
+    verificationCode?: SortOrderInput | SortOrder
+    resetPasswordToken?: SortOrderInput | SortOrder
+    resetTokenExpires?: SortOrderInput | SortOrder
+    verificationExpires?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updateAt?: SortOrder
+    _count?: UserCountOrderByAggregateInput
+    _max?: UserMaxOrderByAggregateInput
+    _min?: UserMinOrderByAggregateInput
+  }
+
+  export type UserScalarWhereWithAggregatesInput = {
+    AND?: UserScalarWhereWithAggregatesInput | UserScalarWhereWithAggregatesInput[]
+    OR?: UserScalarWhereWithAggregatesInput[]
+    NOT?: UserScalarWhereWithAggregatesInput | UserScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"User"> | string
+    name?: StringWithAggregatesFilter<"User"> | string
+    email?: StringWithAggregatesFilter<"User"> | string
+    password?: StringWithAggregatesFilter<"User"> | string
+    role?: EnumRoleWithAggregatesFilter<"User"> | $Enums.Role
+    userCode?: StringWithAggregatesFilter<"User"> | string
+    isVerified?: BoolWithAggregatesFilter<"User"> | boolean
+    verificationCode?: StringNullableWithAggregatesFilter<"User"> | string | null
+    resetPasswordToken?: StringNullableWithAggregatesFilter<"User"> | string | null
+    resetTokenExpires?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
+    verificationExpires?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
+    updateAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
+  }
+
   export type ProjectWhereInput = {
     AND?: ProjectWhereInput | ProjectWhereInput[]
     OR?: ProjectWhereInput[]
@@ -17440,13 +20200,19 @@ export namespace Prisma {
     title?: StringFilter<"Project"> | string
     locationState?: StringFilter<"Project"> | string
     director?: StringFilter<"Project"> | string
+    budget?: DecimalNullableFilter<"Project"> | Decimal | DecimalJsLike | number | string | null
+    status?: EnumStatusFilter<"Project"> | $Enums.Status
+    startDate?: DateTimeNullableFilter<"Project"> | Date | string | null
+    endDate?: DateTimeNullableFilter<"Project"> | Date | string | null
     createdAt?: DateTimeFilter<"Project"> | Date | string
     updatedAt?: DateTimeFilter<"Project"> | Date | string
+    userId?: StringNullableFilter<"Project"> | string | null
     trainings?: TrainingListRelationFilter
     flds?: FLDListRelationFilter
     awarenessPrograms?: AwarenessProgramListRelationFilter
     infrastructureDevelopments?: InfrastructureDevelopmentListRelationFilter
     inputDistributions?: InputDistributionListRelationFilter
+    User?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
   }
 
   export type ProjectOrderByWithRelationInput = {
@@ -17455,13 +20221,19 @@ export namespace Prisma {
     title?: SortOrder
     locationState?: SortOrder
     director?: SortOrder
+    budget?: SortOrderInput | SortOrder
+    status?: SortOrder
+    startDate?: SortOrderInput | SortOrder
+    endDate?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    userId?: SortOrderInput | SortOrder
     trainings?: TrainingOrderByRelationAggregateInput
     flds?: FLDOrderByRelationAggregateInput
     awarenessPrograms?: AwarenessProgramOrderByRelationAggregateInput
     infrastructureDevelopments?: InfrastructureDevelopmentOrderByRelationAggregateInput
     inputDistributions?: InputDistributionOrderByRelationAggregateInput
+    User?: UserOrderByWithRelationInput
   }
 
   export type ProjectWhereUniqueInput = Prisma.AtLeast<{
@@ -17473,13 +20245,19 @@ export namespace Prisma {
     title?: StringFilter<"Project"> | string
     locationState?: StringFilter<"Project"> | string
     director?: StringFilter<"Project"> | string
+    budget?: DecimalNullableFilter<"Project"> | Decimal | DecimalJsLike | number | string | null
+    status?: EnumStatusFilter<"Project"> | $Enums.Status
+    startDate?: DateTimeNullableFilter<"Project"> | Date | string | null
+    endDate?: DateTimeNullableFilter<"Project"> | Date | string | null
     createdAt?: DateTimeFilter<"Project"> | Date | string
     updatedAt?: DateTimeFilter<"Project"> | Date | string
+    userId?: StringNullableFilter<"Project"> | string | null
     trainings?: TrainingListRelationFilter
     flds?: FLDListRelationFilter
     awarenessPrograms?: AwarenessProgramListRelationFilter
     infrastructureDevelopments?: InfrastructureDevelopmentListRelationFilter
     inputDistributions?: InputDistributionListRelationFilter
+    User?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
   }, "id">
 
   export type ProjectOrderByWithAggregationInput = {
@@ -17488,11 +20266,18 @@ export namespace Prisma {
     title?: SortOrder
     locationState?: SortOrder
     director?: SortOrder
+    budget?: SortOrderInput | SortOrder
+    status?: SortOrder
+    startDate?: SortOrderInput | SortOrder
+    endDate?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    userId?: SortOrderInput | SortOrder
     _count?: ProjectCountOrderByAggregateInput
+    _avg?: ProjectAvgOrderByAggregateInput
     _max?: ProjectMaxOrderByAggregateInput
     _min?: ProjectMinOrderByAggregateInput
+    _sum?: ProjectSumOrderByAggregateInput
   }
 
   export type ProjectScalarWhereWithAggregatesInput = {
@@ -17504,8 +20289,13 @@ export namespace Prisma {
     title?: StringWithAggregatesFilter<"Project"> | string
     locationState?: StringWithAggregatesFilter<"Project"> | string
     director?: StringWithAggregatesFilter<"Project"> | string
+    budget?: DecimalNullableWithAggregatesFilter<"Project"> | Decimal | DecimalJsLike | number | string | null
+    status?: EnumStatusWithAggregatesFilter<"Project"> | $Enums.Status
+    startDate?: DateTimeNullableWithAggregatesFilter<"Project"> | Date | string | null
+    endDate?: DateTimeNullableWithAggregatesFilter<"Project"> | Date | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Project"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Project"> | Date | string
+    userId?: StringNullableWithAggregatesFilter<"Project"> | string | null
   }
 
   export type QuarterWhereInput = {
@@ -17515,6 +20305,7 @@ export namespace Prisma {
     id?: StringFilter<"Quarter"> | string
     number?: IntFilter<"Quarter"> | number
     year?: IntFilter<"Quarter"> | number
+    isActive?: BoolFilter<"Quarter"> | boolean
     trainings?: TrainingListRelationFilter
     flds?: FLDListRelationFilter
     awarenessPrograms?: AwarenessProgramListRelationFilter
@@ -17526,6 +20317,7 @@ export namespace Prisma {
     id?: SortOrder
     number?: SortOrder
     year?: SortOrder
+    isActive?: SortOrder
     trainings?: TrainingOrderByRelationAggregateInput
     flds?: FLDOrderByRelationAggregateInput
     awarenessPrograms?: AwarenessProgramOrderByRelationAggregateInput
@@ -17541,6 +20333,7 @@ export namespace Prisma {
     NOT?: QuarterWhereInput | QuarterWhereInput[]
     number?: IntFilter<"Quarter"> | number
     year?: IntFilter<"Quarter"> | number
+    isActive?: BoolFilter<"Quarter"> | boolean
     trainings?: TrainingListRelationFilter
     flds?: FLDListRelationFilter
     awarenessPrograms?: AwarenessProgramListRelationFilter
@@ -17552,6 +20345,7 @@ export namespace Prisma {
     id?: SortOrder
     number?: SortOrder
     year?: SortOrder
+    isActive?: SortOrder
     _count?: QuarterCountOrderByAggregateInput
     _avg?: QuarterAvgOrderByAggregateInput
     _max?: QuarterMaxOrderByAggregateInput
@@ -17566,6 +20360,7 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"Quarter"> | string
     number?: IntWithAggregatesFilter<"Quarter"> | number
     year?: IntWithAggregatesFilter<"Quarter"> | number
+    isActive?: BoolWithAggregatesFilter<"Quarter"> | boolean
   }
 
   export type InputDistributionWhereInput = {
@@ -17575,24 +20370,28 @@ export namespace Prisma {
     id?: StringFilter<"InputDistribution"> | string
     projectId?: StringFilter<"InputDistribution"> | string
     quarterId?: StringFilter<"InputDistribution"> | string
+    userId?: StringNullableFilter<"InputDistribution"> | string | null
     createdAt?: DateTimeFilter<"InputDistribution"> | Date | string
     updatedAt?: DateTimeFilter<"InputDistribution"> | Date | string
     project?: XOR<ProjectScalarRelationFilter, ProjectWhereInput>
     quarter?: XOR<QuarterScalarRelationFilter, QuarterWhereInput>
     predefinedItems?: PredefinedInputDistributionListRelationFilter
     customItems?: CustomInputDistributionListRelationFilter
+    User?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
   }
 
   export type InputDistributionOrderByWithRelationInput = {
     id?: SortOrder
     projectId?: SortOrder
     quarterId?: SortOrder
+    userId?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     project?: ProjectOrderByWithRelationInput
     quarter?: QuarterOrderByWithRelationInput
     predefinedItems?: PredefinedInputDistributionOrderByRelationAggregateInput
     customItems?: CustomInputDistributionOrderByRelationAggregateInput
+    User?: UserOrderByWithRelationInput
   }
 
   export type InputDistributionWhereUniqueInput = Prisma.AtLeast<{
@@ -17602,18 +20401,21 @@ export namespace Prisma {
     NOT?: InputDistributionWhereInput | InputDistributionWhereInput[]
     projectId?: StringFilter<"InputDistribution"> | string
     quarterId?: StringFilter<"InputDistribution"> | string
+    userId?: StringNullableFilter<"InputDistribution"> | string | null
     createdAt?: DateTimeFilter<"InputDistribution"> | Date | string
     updatedAt?: DateTimeFilter<"InputDistribution"> | Date | string
     project?: XOR<ProjectScalarRelationFilter, ProjectWhereInput>
     quarter?: XOR<QuarterScalarRelationFilter, QuarterWhereInput>
     predefinedItems?: PredefinedInputDistributionListRelationFilter
     customItems?: CustomInputDistributionListRelationFilter
+    User?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
   }, "id">
 
   export type InputDistributionOrderByWithAggregationInput = {
     id?: SortOrder
     projectId?: SortOrder
     quarterId?: SortOrder
+    userId?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: InputDistributionCountOrderByAggregateInput
@@ -17628,6 +20430,7 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"InputDistribution"> | string
     projectId?: StringWithAggregatesFilter<"InputDistribution"> | string
     quarterId?: StringWithAggregatesFilter<"InputDistribution"> | string
+    userId?: StringNullableWithAggregatesFilter<"InputDistribution"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"InputDistribution"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"InputDistribution"> | Date | string
   }
@@ -17869,8 +20672,10 @@ export namespace Prisma {
     units?: StringNullableFilter<"Training"> | string | null
     createdAt?: DateTimeFilter<"Training"> | Date | string
     updatedAt?: DateTimeFilter<"Training"> | Date | string
+    userId?: StringNullableFilter<"Training"> | string | null
     project?: XOR<ProjectScalarRelationFilter, ProjectWhereInput>
     quarter?: XOR<QuarterScalarRelationFilter, QuarterWhereInput>
+    User?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
   }
 
   export type TrainingOrderByWithRelationInput = {
@@ -17893,8 +20698,10 @@ export namespace Prisma {
     units?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    userId?: SortOrderInput | SortOrder
     project?: ProjectOrderByWithRelationInput
     quarter?: QuarterOrderByWithRelationInput
+    User?: UserOrderByWithRelationInput
   }
 
   export type TrainingWhereUniqueInput = Prisma.AtLeast<{
@@ -17920,8 +20727,10 @@ export namespace Prisma {
     units?: StringNullableFilter<"Training"> | string | null
     createdAt?: DateTimeFilter<"Training"> | Date | string
     updatedAt?: DateTimeFilter<"Training"> | Date | string
+    userId?: StringNullableFilter<"Training"> | string | null
     project?: XOR<ProjectScalarRelationFilter, ProjectWhereInput>
     quarter?: XOR<QuarterScalarRelationFilter, QuarterWhereInput>
+    User?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
   }, "id">
 
   export type TrainingOrderByWithAggregationInput = {
@@ -17944,6 +20753,7 @@ export namespace Prisma {
     units?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    userId?: SortOrderInput | SortOrder
     _count?: TrainingCountOrderByAggregateInput
     _avg?: TrainingAvgOrderByAggregateInput
     _max?: TrainingMaxOrderByAggregateInput
@@ -17974,6 +20784,7 @@ export namespace Prisma {
     units?: StringNullableWithAggregatesFilter<"Training"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Training"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Training"> | Date | string
+    userId?: StringNullableWithAggregatesFilter<"Training"> | string | null
   }
 
   export type FLDWhereInput = {
@@ -17983,26 +20794,38 @@ export namespace Prisma {
     id?: StringFilter<"FLD"> | string
     projectId?: StringFilter<"FLD"> | string
     quarterId?: StringFilter<"FLD"> | string
+    description?: StringNullableFilter<"FLD"> | string | null
+    district?: StringFilter<"FLD"> | string
+    village?: StringFilter<"FLD"> | string
+    block?: StringFilter<"FLD"> | string
     target?: IntFilter<"FLD"> | number
     achieved?: IntFilter<"FLD"> | number
     units?: StringNullableFilter<"FLD"> | string | null
     createdAt?: DateTimeFilter<"FLD"> | Date | string
     updatedAt?: DateTimeFilter<"FLD"> | Date | string
+    userId?: StringNullableFilter<"FLD"> | string | null
     project?: XOR<ProjectScalarRelationFilter, ProjectWhereInput>
     quarter?: XOR<QuarterScalarRelationFilter, QuarterWhereInput>
+    User?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
   }
 
   export type FLDOrderByWithRelationInput = {
     id?: SortOrder
     projectId?: SortOrder
     quarterId?: SortOrder
+    description?: SortOrderInput | SortOrder
+    district?: SortOrder
+    village?: SortOrder
+    block?: SortOrder
     target?: SortOrder
     achieved?: SortOrder
     units?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    userId?: SortOrderInput | SortOrder
     project?: ProjectOrderByWithRelationInput
     quarter?: QuarterOrderByWithRelationInput
+    User?: UserOrderByWithRelationInput
   }
 
   export type FLDWhereUniqueInput = Prisma.AtLeast<{
@@ -18012,24 +20835,35 @@ export namespace Prisma {
     NOT?: FLDWhereInput | FLDWhereInput[]
     projectId?: StringFilter<"FLD"> | string
     quarterId?: StringFilter<"FLD"> | string
+    description?: StringNullableFilter<"FLD"> | string | null
+    district?: StringFilter<"FLD"> | string
+    village?: StringFilter<"FLD"> | string
+    block?: StringFilter<"FLD"> | string
     target?: IntFilter<"FLD"> | number
     achieved?: IntFilter<"FLD"> | number
     units?: StringNullableFilter<"FLD"> | string | null
     createdAt?: DateTimeFilter<"FLD"> | Date | string
     updatedAt?: DateTimeFilter<"FLD"> | Date | string
+    userId?: StringNullableFilter<"FLD"> | string | null
     project?: XOR<ProjectScalarRelationFilter, ProjectWhereInput>
     quarter?: XOR<QuarterScalarRelationFilter, QuarterWhereInput>
+    User?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
   }, "id">
 
   export type FLDOrderByWithAggregationInput = {
     id?: SortOrder
     projectId?: SortOrder
     quarterId?: SortOrder
+    description?: SortOrderInput | SortOrder
+    district?: SortOrder
+    village?: SortOrder
+    block?: SortOrder
     target?: SortOrder
     achieved?: SortOrder
     units?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    userId?: SortOrderInput | SortOrder
     _count?: FLDCountOrderByAggregateInput
     _avg?: FLDAvgOrderByAggregateInput
     _max?: FLDMaxOrderByAggregateInput
@@ -18044,11 +20878,16 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"FLD"> | string
     projectId?: StringWithAggregatesFilter<"FLD"> | string
     quarterId?: StringWithAggregatesFilter<"FLD"> | string
+    description?: StringNullableWithAggregatesFilter<"FLD"> | string | null
+    district?: StringWithAggregatesFilter<"FLD"> | string
+    village?: StringWithAggregatesFilter<"FLD"> | string
+    block?: StringWithAggregatesFilter<"FLD"> | string
     target?: IntWithAggregatesFilter<"FLD"> | number
     achieved?: IntWithAggregatesFilter<"FLD"> | number
     units?: StringNullableWithAggregatesFilter<"FLD"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"FLD"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"FLD"> | Date | string
+    userId?: StringNullableWithAggregatesFilter<"FLD"> | string | null
   }
 
   export type AwarenessProgramWhereInput = {
@@ -18071,8 +20910,10 @@ export namespace Prisma {
     units?: StringNullableFilter<"AwarenessProgram"> | string | null
     createdAt?: DateTimeFilter<"AwarenessProgram"> | Date | string
     updatedAt?: DateTimeFilter<"AwarenessProgram"> | Date | string
+    userId?: StringNullableFilter<"AwarenessProgram"> | string | null
     project?: XOR<ProjectScalarRelationFilter, ProjectWhereInput>
     quarter?: XOR<QuarterScalarRelationFilter, QuarterWhereInput>
+    User?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
   }
 
   export type AwarenessProgramOrderByWithRelationInput = {
@@ -18092,8 +20933,10 @@ export namespace Prisma {
     units?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    userId?: SortOrderInput | SortOrder
     project?: ProjectOrderByWithRelationInput
     quarter?: QuarterOrderByWithRelationInput
+    User?: UserOrderByWithRelationInput
   }
 
   export type AwarenessProgramWhereUniqueInput = Prisma.AtLeast<{
@@ -18116,8 +20959,10 @@ export namespace Prisma {
     units?: StringNullableFilter<"AwarenessProgram"> | string | null
     createdAt?: DateTimeFilter<"AwarenessProgram"> | Date | string
     updatedAt?: DateTimeFilter<"AwarenessProgram"> | Date | string
+    userId?: StringNullableFilter<"AwarenessProgram"> | string | null
     project?: XOR<ProjectScalarRelationFilter, ProjectWhereInput>
     quarter?: XOR<QuarterScalarRelationFilter, QuarterWhereInput>
+    User?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
   }, "id">
 
   export type AwarenessProgramOrderByWithAggregationInput = {
@@ -18137,6 +20982,7 @@ export namespace Prisma {
     units?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    userId?: SortOrderInput | SortOrder
     _count?: AwarenessProgramCountOrderByAggregateInput
     _avg?: AwarenessProgramAvgOrderByAggregateInput
     _max?: AwarenessProgramMaxOrderByAggregateInput
@@ -18164,6 +21010,7 @@ export namespace Prisma {
     units?: StringNullableWithAggregatesFilter<"AwarenessProgram"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"AwarenessProgram"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"AwarenessProgram"> | Date | string
+    userId?: StringNullableWithAggregatesFilter<"AwarenessProgram"> | string | null
   }
 
   export type InfrastructureDevelopmentWhereInput = {
@@ -18183,8 +21030,10 @@ export namespace Prisma {
     imageKey?: StringNullableFilter<"InfrastructureDevelopment"> | string | null
     createdAt?: DateTimeFilter<"InfrastructureDevelopment"> | Date | string
     updatedAt?: DateTimeFilter<"InfrastructureDevelopment"> | Date | string
+    userId?: StringNullableFilter<"InfrastructureDevelopment"> | string | null
     project?: XOR<ProjectScalarRelationFilter, ProjectWhereInput>
     quarter?: XOR<QuarterScalarRelationFilter, QuarterWhereInput>
+    User?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
   }
 
   export type InfrastructureDevelopmentOrderByWithRelationInput = {
@@ -18201,8 +21050,10 @@ export namespace Prisma {
     imageKey?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    userId?: SortOrderInput | SortOrder
     project?: ProjectOrderByWithRelationInput
     quarter?: QuarterOrderByWithRelationInput
+    User?: UserOrderByWithRelationInput
   }
 
   export type InfrastructureDevelopmentWhereUniqueInput = Prisma.AtLeast<{
@@ -18222,8 +21073,10 @@ export namespace Prisma {
     imageKey?: StringNullableFilter<"InfrastructureDevelopment"> | string | null
     createdAt?: DateTimeFilter<"InfrastructureDevelopment"> | Date | string
     updatedAt?: DateTimeFilter<"InfrastructureDevelopment"> | Date | string
+    userId?: StringNullableFilter<"InfrastructureDevelopment"> | string | null
     project?: XOR<ProjectScalarRelationFilter, ProjectWhereInput>
     quarter?: XOR<QuarterScalarRelationFilter, QuarterWhereInput>
+    User?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
   }, "id">
 
   export type InfrastructureDevelopmentOrderByWithAggregationInput = {
@@ -18240,6 +21093,7 @@ export namespace Prisma {
     imageKey?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    userId?: SortOrderInput | SortOrder
     _count?: InfrastructureDevelopmentCountOrderByAggregateInput
     _avg?: InfrastructureDevelopmentAvgOrderByAggregateInput
     _max?: InfrastructureDevelopmentMaxOrderByAggregateInput
@@ -18264,6 +21118,7 @@ export namespace Prisma {
     imageKey?: StringNullableWithAggregatesFilter<"InfrastructureDevelopment"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"InfrastructureDevelopment"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"InfrastructureDevelopment"> | Date | string
+    userId?: StringNullableWithAggregatesFilter<"InfrastructureDevelopment"> | string | null
   }
 
   export type UpcomingEventWhereInput = {
@@ -18275,6 +21130,10 @@ export namespace Prisma {
     date?: DateTimeFilter<"UpcomingEvent"> | Date | string
     location?: StringFilter<"UpcomingEvent"> | string
     description?: StringNullableFilter<"UpcomingEvent"> | string | null
+    createdAt?: DateTimeFilter<"UpcomingEvent"> | Date | string
+    updatedAt?: DateTimeFilter<"UpcomingEvent"> | Date | string
+    userId?: StringNullableFilter<"UpcomingEvent"> | string | null
+    User?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
   }
 
   export type UpcomingEventOrderByWithRelationInput = {
@@ -18283,6 +21142,10 @@ export namespace Prisma {
     date?: SortOrder
     location?: SortOrder
     description?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    userId?: SortOrderInput | SortOrder
+    User?: UserOrderByWithRelationInput
   }
 
   export type UpcomingEventWhereUniqueInput = Prisma.AtLeast<{
@@ -18294,6 +21157,10 @@ export namespace Prisma {
     date?: DateTimeFilter<"UpcomingEvent"> | Date | string
     location?: StringFilter<"UpcomingEvent"> | string
     description?: StringNullableFilter<"UpcomingEvent"> | string | null
+    createdAt?: DateTimeFilter<"UpcomingEvent"> | Date | string
+    updatedAt?: DateTimeFilter<"UpcomingEvent"> | Date | string
+    userId?: StringNullableFilter<"UpcomingEvent"> | string | null
+    User?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
   }, "id">
 
   export type UpcomingEventOrderByWithAggregationInput = {
@@ -18302,6 +21169,9 @@ export namespace Prisma {
     date?: SortOrder
     location?: SortOrder
     description?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    userId?: SortOrderInput | SortOrder
     _count?: UpcomingEventCountOrderByAggregateInput
     _max?: UpcomingEventMaxOrderByAggregateInput
     _min?: UpcomingEventMinOrderByAggregateInput
@@ -18316,6 +21186,9 @@ export namespace Prisma {
     date?: DateTimeWithAggregatesFilter<"UpcomingEvent"> | Date | string
     location?: StringWithAggregatesFilter<"UpcomingEvent"> | string
     description?: StringNullableWithAggregatesFilter<"UpcomingEvent"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"UpcomingEvent"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"UpcomingEvent"> | Date | string
+    userId?: StringNullableWithAggregatesFilter<"UpcomingEvent"> | string | null
   }
 
   export type PublicationWhereInput = {
@@ -18330,6 +21203,10 @@ export namespace Prisma {
     thumbnailKey?: StringNullableFilter<"Publication"> | string | null
     pdfUrl?: StringNullableFilter<"Publication"> | string | null
     pdfKey?: StringNullableFilter<"Publication"> | string | null
+    createdAt?: DateTimeFilter<"Publication"> | Date | string
+    updatedAt?: DateTimeFilter<"Publication"> | Date | string
+    userId?: StringNullableFilter<"Publication"> | string | null
+    User?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
   }
 
   export type PublicationOrderByWithRelationInput = {
@@ -18341,6 +21218,10 @@ export namespace Prisma {
     thumbnailKey?: SortOrderInput | SortOrder
     pdfUrl?: SortOrderInput | SortOrder
     pdfKey?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    userId?: SortOrderInput | SortOrder
+    User?: UserOrderByWithRelationInput
   }
 
   export type PublicationWhereUniqueInput = Prisma.AtLeast<{
@@ -18355,6 +21236,10 @@ export namespace Prisma {
     thumbnailKey?: StringNullableFilter<"Publication"> | string | null
     pdfUrl?: StringNullableFilter<"Publication"> | string | null
     pdfKey?: StringNullableFilter<"Publication"> | string | null
+    createdAt?: DateTimeFilter<"Publication"> | Date | string
+    updatedAt?: DateTimeFilter<"Publication"> | Date | string
+    userId?: StringNullableFilter<"Publication"> | string | null
+    User?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
   }, "id">
 
   export type PublicationOrderByWithAggregationInput = {
@@ -18366,6 +21251,9 @@ export namespace Prisma {
     thumbnailKey?: SortOrderInput | SortOrder
     pdfUrl?: SortOrderInput | SortOrder
     pdfKey?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    userId?: SortOrderInput | SortOrder
     _count?: PublicationCountOrderByAggregateInput
     _max?: PublicationMaxOrderByAggregateInput
     _min?: PublicationMinOrderByAggregateInput
@@ -18383,6 +21271,9 @@ export namespace Prisma {
     thumbnailKey?: StringNullableWithAggregatesFilter<"Publication"> | string | null
     pdfUrl?: StringNullableWithAggregatesFilter<"Publication"> | string | null
     pdfKey?: StringNullableWithAggregatesFilter<"Publication"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"Publication"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Publication"> | Date | string
+    userId?: StringNullableWithAggregatesFilter<"Publication"> | string | null
   }
 
   export type GalleryWhereInput = {
@@ -18393,6 +21284,10 @@ export namespace Prisma {
     title?: StringFilter<"Gallery"> | string
     imageUrl?: StringFilter<"Gallery"> | string
     imageKey?: StringFilter<"Gallery"> | string
+    createdAt?: DateTimeFilter<"Gallery"> | Date | string
+    updatedAt?: DateTimeFilter<"Gallery"> | Date | string
+    userId?: StringNullableFilter<"Gallery"> | string | null
+    User?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
   }
 
   export type GalleryOrderByWithRelationInput = {
@@ -18400,6 +21295,10 @@ export namespace Prisma {
     title?: SortOrder
     imageUrl?: SortOrder
     imageKey?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    userId?: SortOrderInput | SortOrder
+    User?: UserOrderByWithRelationInput
   }
 
   export type GalleryWhereUniqueInput = Prisma.AtLeast<{
@@ -18410,6 +21309,10 @@ export namespace Prisma {
     title?: StringFilter<"Gallery"> | string
     imageUrl?: StringFilter<"Gallery"> | string
     imageKey?: StringFilter<"Gallery"> | string
+    createdAt?: DateTimeFilter<"Gallery"> | Date | string
+    updatedAt?: DateTimeFilter<"Gallery"> | Date | string
+    userId?: StringNullableFilter<"Gallery"> | string | null
+    User?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
   }, "id">
 
   export type GalleryOrderByWithAggregationInput = {
@@ -18417,6 +21320,9 @@ export namespace Prisma {
     title?: SortOrder
     imageUrl?: SortOrder
     imageKey?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    userId?: SortOrderInput | SortOrder
     _count?: GalleryCountOrderByAggregateInput
     _max?: GalleryMaxOrderByAggregateInput
     _min?: GalleryMinOrderByAggregateInput
@@ -18430,6 +21336,9 @@ export namespace Prisma {
     title?: StringWithAggregatesFilter<"Gallery"> | string
     imageUrl?: StringWithAggregatesFilter<"Gallery"> | string
     imageKey?: StringWithAggregatesFilter<"Gallery"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Gallery"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Gallery"> | Date | string
+    userId?: StringNullableWithAggregatesFilter<"Gallery"> | string | null
   }
 
   export type ProjectDetailsWhereInput = {
@@ -18447,6 +21356,10 @@ export namespace Prisma {
     director?: StringFilter<"ProjectDetails"> | string
     coDirectors?: StringNullableListFilter<"ProjectDetails">
     achievements?: StringNullableListFilter<"ProjectDetails">
+    createdAt?: DateTimeFilter<"ProjectDetails"> | Date | string
+    updatedAt?: DateTimeFilter<"ProjectDetails"> | Date | string
+    userId?: StringNullableFilter<"ProjectDetails"> | string | null
+    User?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
   }
 
   export type ProjectDetailsOrderByWithRelationInput = {
@@ -18461,6 +21374,10 @@ export namespace Prisma {
     director?: SortOrder
     coDirectors?: SortOrder
     achievements?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    userId?: SortOrderInput | SortOrder
+    User?: UserOrderByWithRelationInput
   }
 
   export type ProjectDetailsWhereUniqueInput = Prisma.AtLeast<{
@@ -18478,6 +21395,10 @@ export namespace Prisma {
     director?: StringFilter<"ProjectDetails"> | string
     coDirectors?: StringNullableListFilter<"ProjectDetails">
     achievements?: StringNullableListFilter<"ProjectDetails">
+    createdAt?: DateTimeFilter<"ProjectDetails"> | Date | string
+    updatedAt?: DateTimeFilter<"ProjectDetails"> | Date | string
+    userId?: StringNullableFilter<"ProjectDetails"> | string | null
+    User?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
   }, "id">
 
   export type ProjectDetailsOrderByWithAggregationInput = {
@@ -18492,6 +21413,9 @@ export namespace Prisma {
     director?: SortOrder
     coDirectors?: SortOrder
     achievements?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    userId?: SortOrderInput | SortOrder
     _count?: ProjectDetailsCountOrderByAggregateInput
     _avg?: ProjectDetailsAvgOrderByAggregateInput
     _max?: ProjectDetailsMaxOrderByAggregateInput
@@ -18514,6 +21438,161 @@ export namespace Prisma {
     director?: StringWithAggregatesFilter<"ProjectDetails"> | string
     coDirectors?: StringNullableListFilter<"ProjectDetails">
     achievements?: StringNullableListFilter<"ProjectDetails">
+    createdAt?: DateTimeWithAggregatesFilter<"ProjectDetails"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"ProjectDetails"> | Date | string
+    userId?: StringNullableWithAggregatesFilter<"ProjectDetails"> | string | null
+  }
+
+  export type UserCreateInput = {
+    id?: string
+    name: string
+    email: string
+    password: string
+    role: $Enums.Role
+    userCode: string
+    isVerified?: boolean
+    verificationCode?: string | null
+    resetPasswordToken?: string | null
+    resetTokenExpires?: Date | string | null
+    verificationExpires?: Date | string | null
+    createdAt?: Date | string
+    updateAt?: Date | string
+    projects?: ProjectCreateNestedManyWithoutUserInput
+    trainings?: TrainingCreateNestedManyWithoutUserInput
+    flds?: FLDCreateNestedManyWithoutUserInput
+    awarenessPrograms?: AwarenessProgramCreateNestedManyWithoutUserInput
+    infrastructureDevelopments?: InfrastructureDevelopmentCreateNestedManyWithoutUserInput
+    inputDistributions?: InputDistributionCreateNestedManyWithoutUserInput
+    upcomingEvents?: UpcomingEventCreateNestedManyWithoutUserInput
+    publications?: PublicationCreateNestedManyWithoutUserInput
+    galleries?: GalleryCreateNestedManyWithoutUserInput
+    projectDetails?: ProjectDetailsCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateInput = {
+    id?: string
+    name: string
+    email: string
+    password: string
+    role: $Enums.Role
+    userCode: string
+    isVerified?: boolean
+    verificationCode?: string | null
+    resetPasswordToken?: string | null
+    resetTokenExpires?: Date | string | null
+    verificationExpires?: Date | string | null
+    createdAt?: Date | string
+    updateAt?: Date | string
+    projects?: ProjectUncheckedCreateNestedManyWithoutUserInput
+    trainings?: TrainingUncheckedCreateNestedManyWithoutUserInput
+    flds?: FLDUncheckedCreateNestedManyWithoutUserInput
+    awarenessPrograms?: AwarenessProgramUncheckedCreateNestedManyWithoutUserInput
+    infrastructureDevelopments?: InfrastructureDevelopmentUncheckedCreateNestedManyWithoutUserInput
+    inputDistributions?: InputDistributionUncheckedCreateNestedManyWithoutUserInput
+    upcomingEvents?: UpcomingEventUncheckedCreateNestedManyWithoutUserInput
+    publications?: PublicationUncheckedCreateNestedManyWithoutUserInput
+    galleries?: GalleryUncheckedCreateNestedManyWithoutUserInput
+    projectDetails?: ProjectDetailsUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    userCode?: StringFieldUpdateOperationsInput | string
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    verificationCode?: NullableStringFieldUpdateOperationsInput | string | null
+    resetPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verificationExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    projects?: ProjectUpdateManyWithoutUserNestedInput
+    trainings?: TrainingUpdateManyWithoutUserNestedInput
+    flds?: FLDUpdateManyWithoutUserNestedInput
+    awarenessPrograms?: AwarenessProgramUpdateManyWithoutUserNestedInput
+    infrastructureDevelopments?: InfrastructureDevelopmentUpdateManyWithoutUserNestedInput
+    inputDistributions?: InputDistributionUpdateManyWithoutUserNestedInput
+    upcomingEvents?: UpcomingEventUpdateManyWithoutUserNestedInput
+    publications?: PublicationUpdateManyWithoutUserNestedInput
+    galleries?: GalleryUpdateManyWithoutUserNestedInput
+    projectDetails?: ProjectDetailsUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    userCode?: StringFieldUpdateOperationsInput | string
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    verificationCode?: NullableStringFieldUpdateOperationsInput | string | null
+    resetPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verificationExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    projects?: ProjectUncheckedUpdateManyWithoutUserNestedInput
+    trainings?: TrainingUncheckedUpdateManyWithoutUserNestedInput
+    flds?: FLDUncheckedUpdateManyWithoutUserNestedInput
+    awarenessPrograms?: AwarenessProgramUncheckedUpdateManyWithoutUserNestedInput
+    infrastructureDevelopments?: InfrastructureDevelopmentUncheckedUpdateManyWithoutUserNestedInput
+    inputDistributions?: InputDistributionUncheckedUpdateManyWithoutUserNestedInput
+    upcomingEvents?: UpcomingEventUncheckedUpdateManyWithoutUserNestedInput
+    publications?: PublicationUncheckedUpdateManyWithoutUserNestedInput
+    galleries?: GalleryUncheckedUpdateManyWithoutUserNestedInput
+    projectDetails?: ProjectDetailsUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserCreateManyInput = {
+    id?: string
+    name: string
+    email: string
+    password: string
+    role: $Enums.Role
+    userCode: string
+    isVerified?: boolean
+    verificationCode?: string | null
+    resetPasswordToken?: string | null
+    resetTokenExpires?: Date | string | null
+    verificationExpires?: Date | string | null
+    createdAt?: Date | string
+    updateAt?: Date | string
+  }
+
+  export type UserUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    userCode?: StringFieldUpdateOperationsInput | string
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    verificationCode?: NullableStringFieldUpdateOperationsInput | string | null
+    resetPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verificationExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    userCode?: StringFieldUpdateOperationsInput | string
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    verificationCode?: NullableStringFieldUpdateOperationsInput | string | null
+    resetPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verificationExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ProjectCreateInput = {
@@ -18522,6 +21601,10 @@ export namespace Prisma {
     title: string
     locationState: string
     director: string
+    budget?: Decimal | DecimalJsLike | number | string | null
+    status?: $Enums.Status
+    startDate?: Date | string | null
+    endDate?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     trainings?: TrainingCreateNestedManyWithoutProjectInput
@@ -18529,6 +21612,7 @@ export namespace Prisma {
     awarenessPrograms?: AwarenessProgramCreateNestedManyWithoutProjectInput
     infrastructureDevelopments?: InfrastructureDevelopmentCreateNestedManyWithoutProjectInput
     inputDistributions?: InputDistributionCreateNestedManyWithoutProjectInput
+    User?: UserCreateNestedOneWithoutProjectsInput
   }
 
   export type ProjectUncheckedCreateInput = {
@@ -18537,8 +21621,13 @@ export namespace Prisma {
     title: string
     locationState: string
     director: string
+    budget?: Decimal | DecimalJsLike | number | string | null
+    status?: $Enums.Status
+    startDate?: Date | string | null
+    endDate?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    userId?: string | null
     trainings?: TrainingUncheckedCreateNestedManyWithoutProjectInput
     flds?: FLDUncheckedCreateNestedManyWithoutProjectInput
     awarenessPrograms?: AwarenessProgramUncheckedCreateNestedManyWithoutProjectInput
@@ -18552,6 +21641,10 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     locationState?: StringFieldUpdateOperationsInput | string
     director?: StringFieldUpdateOperationsInput | string
+    budget?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     trainings?: TrainingUpdateManyWithoutProjectNestedInput
@@ -18559,6 +21652,7 @@ export namespace Prisma {
     awarenessPrograms?: AwarenessProgramUpdateManyWithoutProjectNestedInput
     infrastructureDevelopments?: InfrastructureDevelopmentUpdateManyWithoutProjectNestedInput
     inputDistributions?: InputDistributionUpdateManyWithoutProjectNestedInput
+    User?: UserUpdateOneWithoutProjectsNestedInput
   }
 
   export type ProjectUncheckedUpdateInput = {
@@ -18567,8 +21661,13 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     locationState?: StringFieldUpdateOperationsInput | string
     director?: StringFieldUpdateOperationsInput | string
+    budget?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
     trainings?: TrainingUncheckedUpdateManyWithoutProjectNestedInput
     flds?: FLDUncheckedUpdateManyWithoutProjectNestedInput
     awarenessPrograms?: AwarenessProgramUncheckedUpdateManyWithoutProjectNestedInput
@@ -18582,8 +21681,13 @@ export namespace Prisma {
     title: string
     locationState: string
     director: string
+    budget?: Decimal | DecimalJsLike | number | string | null
+    status?: $Enums.Status
+    startDate?: Date | string | null
+    endDate?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    userId?: string | null
   }
 
   export type ProjectUpdateManyMutationInput = {
@@ -18592,6 +21696,10 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     locationState?: StringFieldUpdateOperationsInput | string
     director?: StringFieldUpdateOperationsInput | string
+    budget?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -18602,14 +21710,20 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     locationState?: StringFieldUpdateOperationsInput | string
     director?: StringFieldUpdateOperationsInput | string
+    budget?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type QuarterCreateInput = {
     id?: string
     number: number
     year: number
+    isActive?: boolean
     trainings?: TrainingCreateNestedManyWithoutQuarterInput
     flds?: FLDCreateNestedManyWithoutQuarterInput
     awarenessPrograms?: AwarenessProgramCreateNestedManyWithoutQuarterInput
@@ -18621,6 +21735,7 @@ export namespace Prisma {
     id?: string
     number: number
     year: number
+    isActive?: boolean
     trainings?: TrainingUncheckedCreateNestedManyWithoutQuarterInput
     flds?: FLDUncheckedCreateNestedManyWithoutQuarterInput
     awarenessPrograms?: AwarenessProgramUncheckedCreateNestedManyWithoutQuarterInput
@@ -18632,6 +21747,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     number?: IntFieldUpdateOperationsInput | number
     year?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     trainings?: TrainingUpdateManyWithoutQuarterNestedInput
     flds?: FLDUpdateManyWithoutQuarterNestedInput
     awarenessPrograms?: AwarenessProgramUpdateManyWithoutQuarterNestedInput
@@ -18643,6 +21759,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     number?: IntFieldUpdateOperationsInput | number
     year?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     trainings?: TrainingUncheckedUpdateManyWithoutQuarterNestedInput
     flds?: FLDUncheckedUpdateManyWithoutQuarterNestedInput
     awarenessPrograms?: AwarenessProgramUncheckedUpdateManyWithoutQuarterNestedInput
@@ -18654,18 +21771,21 @@ export namespace Prisma {
     id?: string
     number: number
     year: number
+    isActive?: boolean
   }
 
   export type QuarterUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     number?: IntFieldUpdateOperationsInput | number
     year?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type QuarterUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     number?: IntFieldUpdateOperationsInput | number
     year?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type InputDistributionCreateInput = {
@@ -18676,12 +21796,14 @@ export namespace Prisma {
     quarter: QuarterCreateNestedOneWithoutInputDistributionsInput
     predefinedItems?: PredefinedInputDistributionCreateNestedManyWithoutInputDistributionInput
     customItems?: CustomInputDistributionCreateNestedManyWithoutInputDistributionInput
+    User?: UserCreateNestedOneWithoutInputDistributionsInput
   }
 
   export type InputDistributionUncheckedCreateInput = {
     id?: string
     projectId: string
     quarterId: string
+    userId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     predefinedItems?: PredefinedInputDistributionUncheckedCreateNestedManyWithoutInputDistributionInput
@@ -18696,12 +21818,14 @@ export namespace Prisma {
     quarter?: QuarterUpdateOneRequiredWithoutInputDistributionsNestedInput
     predefinedItems?: PredefinedInputDistributionUpdateManyWithoutInputDistributionNestedInput
     customItems?: CustomInputDistributionUpdateManyWithoutInputDistributionNestedInput
+    User?: UserUpdateOneWithoutInputDistributionsNestedInput
   }
 
   export type InputDistributionUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     projectId?: StringFieldUpdateOperationsInput | string
     quarterId?: StringFieldUpdateOperationsInput | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     predefinedItems?: PredefinedInputDistributionUncheckedUpdateManyWithoutInputDistributionNestedInput
@@ -18712,6 +21836,7 @@ export namespace Prisma {
     id?: string
     projectId: string
     quarterId: string
+    userId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -18726,6 +21851,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     projectId?: StringFieldUpdateOperationsInput | string
     quarterId?: StringFieldUpdateOperationsInput | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -19000,6 +22126,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     project: ProjectCreateNestedOneWithoutTrainingsInput
     quarter: QuarterCreateNestedOneWithoutTrainingsInput
+    User?: UserCreateNestedOneWithoutTrainingsInput
   }
 
   export type TrainingUncheckedCreateInput = {
@@ -19022,6 +22149,7 @@ export namespace Prisma {
     units?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    userId?: string | null
   }
 
   export type TrainingUpdateInput = {
@@ -19044,6 +22172,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     project?: ProjectUpdateOneRequiredWithoutTrainingsNestedInput
     quarter?: QuarterUpdateOneRequiredWithoutTrainingsNestedInput
+    User?: UserUpdateOneWithoutTrainingsNestedInput
   }
 
   export type TrainingUncheckedUpdateInput = {
@@ -19066,6 +22195,7 @@ export namespace Prisma {
     units?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type TrainingCreateManyInput = {
@@ -19088,6 +22218,7 @@ export namespace Prisma {
     units?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    userId?: string | null
   }
 
   export type TrainingUpdateManyMutationInput = {
@@ -19130,10 +22261,15 @@ export namespace Prisma {
     units?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type FLDCreateInput = {
     id?: string
+    description?: string | null
+    district: string
+    village: string
+    block: string
     target: number
     achieved: number
     units?: string | null
@@ -19141,21 +22277,31 @@ export namespace Prisma {
     updatedAt?: Date | string
     project: ProjectCreateNestedOneWithoutFldsInput
     quarter: QuarterCreateNestedOneWithoutFldsInput
+    User?: UserCreateNestedOneWithoutFldsInput
   }
 
   export type FLDUncheckedCreateInput = {
     id?: string
     projectId: string
     quarterId: string
+    description?: string | null
+    district: string
+    village: string
+    block: string
     target: number
     achieved: number
     units?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    userId?: string | null
   }
 
   export type FLDUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    district?: StringFieldUpdateOperationsInput | string
+    village?: StringFieldUpdateOperationsInput | string
+    block?: StringFieldUpdateOperationsInput | string
     target?: IntFieldUpdateOperationsInput | number
     achieved?: IntFieldUpdateOperationsInput | number
     units?: NullableStringFieldUpdateOperationsInput | string | null
@@ -19163,32 +22309,47 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     project?: ProjectUpdateOneRequiredWithoutFldsNestedInput
     quarter?: QuarterUpdateOneRequiredWithoutFldsNestedInput
+    User?: UserUpdateOneWithoutFldsNestedInput
   }
 
   export type FLDUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     projectId?: StringFieldUpdateOperationsInput | string
     quarterId?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    district?: StringFieldUpdateOperationsInput | string
+    village?: StringFieldUpdateOperationsInput | string
+    block?: StringFieldUpdateOperationsInput | string
     target?: IntFieldUpdateOperationsInput | number
     achieved?: IntFieldUpdateOperationsInput | number
     units?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type FLDCreateManyInput = {
     id?: string
     projectId: string
     quarterId: string
+    description?: string | null
+    district: string
+    village: string
+    block: string
     target: number
     achieved: number
     units?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    userId?: string | null
   }
 
   export type FLDUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    district?: StringFieldUpdateOperationsInput | string
+    village?: StringFieldUpdateOperationsInput | string
+    block?: StringFieldUpdateOperationsInput | string
     target?: IntFieldUpdateOperationsInput | number
     achieved?: IntFieldUpdateOperationsInput | number
     units?: NullableStringFieldUpdateOperationsInput | string | null
@@ -19200,11 +22361,16 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     projectId?: StringFieldUpdateOperationsInput | string
     quarterId?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    district?: StringFieldUpdateOperationsInput | string
+    village?: StringFieldUpdateOperationsInput | string
+    block?: StringFieldUpdateOperationsInput | string
     target?: IntFieldUpdateOperationsInput | number
     achieved?: IntFieldUpdateOperationsInput | number
     units?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type AwarenessProgramCreateInput = {
@@ -19224,6 +22390,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     project: ProjectCreateNestedOneWithoutAwarenessProgramsInput
     quarter: QuarterCreateNestedOneWithoutAwarenessProgramsInput
+    User?: UserCreateNestedOneWithoutAwarenessProgramsInput
   }
 
   export type AwarenessProgramUncheckedCreateInput = {
@@ -19243,6 +22410,7 @@ export namespace Prisma {
     units?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    userId?: string | null
   }
 
   export type AwarenessProgramUpdateInput = {
@@ -19262,6 +22430,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     project?: ProjectUpdateOneRequiredWithoutAwarenessProgramsNestedInput
     quarter?: QuarterUpdateOneRequiredWithoutAwarenessProgramsNestedInput
+    User?: UserUpdateOneWithoutAwarenessProgramsNestedInput
   }
 
   export type AwarenessProgramUncheckedUpdateInput = {
@@ -19281,6 +22450,7 @@ export namespace Prisma {
     units?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type AwarenessProgramCreateManyInput = {
@@ -19300,6 +22470,7 @@ export namespace Prisma {
     units?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    userId?: string | null
   }
 
   export type AwarenessProgramUpdateManyMutationInput = {
@@ -19336,6 +22507,7 @@ export namespace Prisma {
     units?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type InfrastructureDevelopmentCreateInput = {
@@ -19352,6 +22524,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     project: ProjectCreateNestedOneWithoutInfrastructureDevelopmentsInput
     quarter: QuarterCreateNestedOneWithoutInfrastructureDevelopmentsInput
+    User?: UserCreateNestedOneWithoutInfrastructureDevelopmentsInput
   }
 
   export type InfrastructureDevelopmentUncheckedCreateInput = {
@@ -19368,6 +22541,7 @@ export namespace Prisma {
     imageKey?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    userId?: string | null
   }
 
   export type InfrastructureDevelopmentUpdateInput = {
@@ -19384,6 +22558,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     project?: ProjectUpdateOneRequiredWithoutInfrastructureDevelopmentsNestedInput
     quarter?: QuarterUpdateOneRequiredWithoutInfrastructureDevelopmentsNestedInput
+    User?: UserUpdateOneWithoutInfrastructureDevelopmentsNestedInput
   }
 
   export type InfrastructureDevelopmentUncheckedUpdateInput = {
@@ -19400,6 +22575,7 @@ export namespace Prisma {
     imageKey?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type InfrastructureDevelopmentCreateManyInput = {
@@ -19416,6 +22592,7 @@ export namespace Prisma {
     imageKey?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    userId?: string | null
   }
 
   export type InfrastructureDevelopmentUpdateManyMutationInput = {
@@ -19446,6 +22623,7 @@ export namespace Prisma {
     imageKey?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type UpcomingEventCreateInput = {
@@ -19454,6 +22632,9 @@ export namespace Prisma {
     date: Date | string
     location: string
     description?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    User?: UserCreateNestedOneWithoutUpcomingEventsInput
   }
 
   export type UpcomingEventUncheckedCreateInput = {
@@ -19462,6 +22643,9 @@ export namespace Prisma {
     date: Date | string
     location: string
     description?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userId?: string | null
   }
 
   export type UpcomingEventUpdateInput = {
@@ -19470,6 +22654,9 @@ export namespace Prisma {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     location?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    User?: UserUpdateOneWithoutUpcomingEventsNestedInput
   }
 
   export type UpcomingEventUncheckedUpdateInput = {
@@ -19478,6 +22665,9 @@ export namespace Prisma {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     location?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type UpcomingEventCreateManyInput = {
@@ -19486,6 +22676,9 @@ export namespace Prisma {
     date: Date | string
     location: string
     description?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userId?: string | null
   }
 
   export type UpcomingEventUpdateManyMutationInput = {
@@ -19494,6 +22687,8 @@ export namespace Prisma {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     location?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type UpcomingEventUncheckedUpdateManyInput = {
@@ -19502,6 +22697,9 @@ export namespace Prisma {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     location?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type PublicationCreateInput = {
@@ -19513,6 +22711,9 @@ export namespace Prisma {
     thumbnailKey?: string | null
     pdfUrl?: string | null
     pdfKey?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    User?: UserCreateNestedOneWithoutPublicationsInput
   }
 
   export type PublicationUncheckedCreateInput = {
@@ -19524,6 +22725,9 @@ export namespace Prisma {
     thumbnailKey?: string | null
     pdfUrl?: string | null
     pdfKey?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userId?: string | null
   }
 
   export type PublicationUpdateInput = {
@@ -19535,6 +22739,9 @@ export namespace Prisma {
     thumbnailKey?: NullableStringFieldUpdateOperationsInput | string | null
     pdfUrl?: NullableStringFieldUpdateOperationsInput | string | null
     pdfKey?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    User?: UserUpdateOneWithoutPublicationsNestedInput
   }
 
   export type PublicationUncheckedUpdateInput = {
@@ -19546,6 +22753,9 @@ export namespace Prisma {
     thumbnailKey?: NullableStringFieldUpdateOperationsInput | string | null
     pdfUrl?: NullableStringFieldUpdateOperationsInput | string | null
     pdfKey?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type PublicationCreateManyInput = {
@@ -19557,6 +22767,9 @@ export namespace Prisma {
     thumbnailKey?: string | null
     pdfUrl?: string | null
     pdfKey?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userId?: string | null
   }
 
   export type PublicationUpdateManyMutationInput = {
@@ -19568,6 +22781,8 @@ export namespace Prisma {
     thumbnailKey?: NullableStringFieldUpdateOperationsInput | string | null
     pdfUrl?: NullableStringFieldUpdateOperationsInput | string | null
     pdfKey?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type PublicationUncheckedUpdateManyInput = {
@@ -19579,6 +22794,9 @@ export namespace Prisma {
     thumbnailKey?: NullableStringFieldUpdateOperationsInput | string | null
     pdfUrl?: NullableStringFieldUpdateOperationsInput | string | null
     pdfKey?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type GalleryCreateInput = {
@@ -19586,6 +22804,9 @@ export namespace Prisma {
     title: string
     imageUrl: string
     imageKey: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    User?: UserCreateNestedOneWithoutGalleriesInput
   }
 
   export type GalleryUncheckedCreateInput = {
@@ -19593,6 +22814,9 @@ export namespace Prisma {
     title: string
     imageUrl: string
     imageKey: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userId?: string | null
   }
 
   export type GalleryUpdateInput = {
@@ -19600,6 +22824,9 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     imageUrl?: StringFieldUpdateOperationsInput | string
     imageKey?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    User?: UserUpdateOneWithoutGalleriesNestedInput
   }
 
   export type GalleryUncheckedUpdateInput = {
@@ -19607,6 +22834,9 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     imageUrl?: StringFieldUpdateOperationsInput | string
     imageKey?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type GalleryCreateManyInput = {
@@ -19614,6 +22844,9 @@ export namespace Prisma {
     title: string
     imageUrl: string
     imageKey: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userId?: string | null
   }
 
   export type GalleryUpdateManyMutationInput = {
@@ -19621,6 +22854,8 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     imageUrl?: StringFieldUpdateOperationsInput | string
     imageKey?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type GalleryUncheckedUpdateManyInput = {
@@ -19628,6 +22863,9 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     imageUrl?: StringFieldUpdateOperationsInput | string
     imageKey?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ProjectDetailsCreateInput = {
@@ -19642,6 +22880,9 @@ export namespace Prisma {
     director: string
     coDirectors?: ProjectDetailsCreatecoDirectorsInput | string[]
     achievements?: ProjectDetailsCreateachievementsInput | string[]
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    User?: UserCreateNestedOneWithoutProjectDetailsInput
   }
 
   export type ProjectDetailsUncheckedCreateInput = {
@@ -19656,6 +22897,9 @@ export namespace Prisma {
     director: string
     coDirectors?: ProjectDetailsCreatecoDirectorsInput | string[]
     achievements?: ProjectDetailsCreateachievementsInput | string[]
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userId?: string | null
   }
 
   export type ProjectDetailsUpdateInput = {
@@ -19670,6 +22914,9 @@ export namespace Prisma {
     director?: StringFieldUpdateOperationsInput | string
     coDirectors?: ProjectDetailsUpdatecoDirectorsInput | string[]
     achievements?: ProjectDetailsUpdateachievementsInput | string[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    User?: UserUpdateOneWithoutProjectDetailsNestedInput
   }
 
   export type ProjectDetailsUncheckedUpdateInput = {
@@ -19684,6 +22931,9 @@ export namespace Prisma {
     director?: StringFieldUpdateOperationsInput | string
     coDirectors?: ProjectDetailsUpdatecoDirectorsInput | string[]
     achievements?: ProjectDetailsUpdateachievementsInput | string[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ProjectDetailsCreateManyInput = {
@@ -19698,6 +22948,9 @@ export namespace Prisma {
     director: string
     coDirectors?: ProjectDetailsCreatecoDirectorsInput | string[]
     achievements?: ProjectDetailsCreateachievementsInput | string[]
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userId?: string | null
   }
 
   export type ProjectDetailsUpdateManyMutationInput = {
@@ -19712,6 +22965,8 @@ export namespace Prisma {
     director?: StringFieldUpdateOperationsInput | string
     coDirectors?: ProjectDetailsUpdatecoDirectorsInput | string[]
     achievements?: ProjectDetailsUpdateachievementsInput | string[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ProjectDetailsUncheckedUpdateManyInput = {
@@ -19726,6 +22981,9 @@ export namespace Prisma {
     director?: StringFieldUpdateOperationsInput | string
     coDirectors?: ProjectDetailsUpdatecoDirectorsInput | string[]
     achievements?: ProjectDetailsUpdateachievementsInput | string[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -19743,6 +23001,44 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
+  export type EnumRoleFilter<$PrismaModel = never> = {
+    equals?: $Enums.Role | EnumRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumRoleFilter<$PrismaModel> | $Enums.Role
+  }
+
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type StringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type DateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
   export type DateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -19752,6 +23048,12 @@ export namespace Prisma {
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type ProjectListRelationFilter = {
+    every?: ProjectWhereInput
+    some?: ProjectWhereInput
+    none?: ProjectWhereInput
   }
 
   export type TrainingListRelationFilter = {
@@ -19784,6 +23086,39 @@ export namespace Prisma {
     none?: InputDistributionWhereInput
   }
 
+  export type UpcomingEventListRelationFilter = {
+    every?: UpcomingEventWhereInput
+    some?: UpcomingEventWhereInput
+    none?: UpcomingEventWhereInput
+  }
+
+  export type PublicationListRelationFilter = {
+    every?: PublicationWhereInput
+    some?: PublicationWhereInput
+    none?: PublicationWhereInput
+  }
+
+  export type GalleryListRelationFilter = {
+    every?: GalleryWhereInput
+    some?: GalleryWhereInput
+    none?: GalleryWhereInput
+  }
+
+  export type ProjectDetailsListRelationFilter = {
+    every?: ProjectDetailsWhereInput
+    some?: ProjectDetailsWhereInput
+    none?: ProjectDetailsWhereInput
+  }
+
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
+  }
+
+  export type ProjectOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type TrainingOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -19804,34 +23139,68 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
-  export type ProjectCountOrderByAggregateInput = {
-    id?: SortOrder
-    implementingAgency?: SortOrder
-    title?: SortOrder
-    locationState?: SortOrder
-    director?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
+  export type UpcomingEventOrderByRelationAggregateInput = {
+    _count?: SortOrder
   }
 
-  export type ProjectMaxOrderByAggregateInput = {
-    id?: SortOrder
-    implementingAgency?: SortOrder
-    title?: SortOrder
-    locationState?: SortOrder
-    director?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
+  export type PublicationOrderByRelationAggregateInput = {
+    _count?: SortOrder
   }
 
-  export type ProjectMinOrderByAggregateInput = {
+  export type GalleryOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ProjectDetailsOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type UserCountOrderByAggregateInput = {
     id?: SortOrder
-    implementingAgency?: SortOrder
-    title?: SortOrder
-    locationState?: SortOrder
-    director?: SortOrder
+    name?: SortOrder
+    email?: SortOrder
+    password?: SortOrder
+    role?: SortOrder
+    userCode?: SortOrder
+    isVerified?: SortOrder
+    verificationCode?: SortOrder
+    resetPasswordToken?: SortOrder
+    resetTokenExpires?: SortOrder
+    verificationExpires?: SortOrder
     createdAt?: SortOrder
-    updatedAt?: SortOrder
+    updateAt?: SortOrder
+  }
+
+  export type UserMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    email?: SortOrder
+    password?: SortOrder
+    role?: SortOrder
+    userCode?: SortOrder
+    isVerified?: SortOrder
+    verificationCode?: SortOrder
+    resetPasswordToken?: SortOrder
+    resetTokenExpires?: SortOrder
+    verificationExpires?: SortOrder
+    createdAt?: SortOrder
+    updateAt?: SortOrder
+  }
+
+  export type UserMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    email?: SortOrder
+    password?: SortOrder
+    role?: SortOrder
+    userCode?: SortOrder
+    isVerified?: SortOrder
+    verificationCode?: SortOrder
+    resetPasswordToken?: SortOrder
+    resetTokenExpires?: SortOrder
+    verificationExpires?: SortOrder
+    createdAt?: SortOrder
+    updateAt?: SortOrder
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -19852,6 +23221,56 @@ export namespace Prisma {
     _max?: NestedStringFilter<$PrismaModel>
   }
 
+  export type EnumRoleWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Role | EnumRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumRoleWithAggregatesFilter<$PrismaModel> | $Enums.Role
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumRoleFilter<$PrismaModel>
+    _max?: NestedEnumRoleFilter<$PrismaModel>
+  }
+
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
+  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
   export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -19864,6 +23283,108 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type DecimalNullableFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalNullableFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
+  }
+
+  export type EnumStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.Status | EnumStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.Status[] | ListEnumStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Status[] | ListEnumStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumStatusFilter<$PrismaModel> | $Enums.Status
+  }
+
+  export type UserNullableScalarRelationFilter = {
+    is?: UserWhereInput | null
+    isNot?: UserWhereInput | null
+  }
+
+  export type ProjectCountOrderByAggregateInput = {
+    id?: SortOrder
+    implementingAgency?: SortOrder
+    title?: SortOrder
+    locationState?: SortOrder
+    director?: SortOrder
+    budget?: SortOrder
+    status?: SortOrder
+    startDate?: SortOrder
+    endDate?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    userId?: SortOrder
+  }
+
+  export type ProjectAvgOrderByAggregateInput = {
+    budget?: SortOrder
+  }
+
+  export type ProjectMaxOrderByAggregateInput = {
+    id?: SortOrder
+    implementingAgency?: SortOrder
+    title?: SortOrder
+    locationState?: SortOrder
+    director?: SortOrder
+    budget?: SortOrder
+    status?: SortOrder
+    startDate?: SortOrder
+    endDate?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    userId?: SortOrder
+  }
+
+  export type ProjectMinOrderByAggregateInput = {
+    id?: SortOrder
+    implementingAgency?: SortOrder
+    title?: SortOrder
+    locationState?: SortOrder
+    director?: SortOrder
+    budget?: SortOrder
+    status?: SortOrder
+    startDate?: SortOrder
+    endDate?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    userId?: SortOrder
+  }
+
+  export type ProjectSumOrderByAggregateInput = {
+    budget?: SortOrder
+  }
+
+  export type DecimalNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalNullableWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedDecimalNullableFilter<$PrismaModel>
+    _sum?: NestedDecimalNullableFilter<$PrismaModel>
+    _min?: NestedDecimalNullableFilter<$PrismaModel>
+    _max?: NestedDecimalNullableFilter<$PrismaModel>
+  }
+
+  export type EnumStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Status | EnumStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.Status[] | ListEnumStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Status[] | ListEnumStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumStatusWithAggregatesFilter<$PrismaModel> | $Enums.Status
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumStatusFilter<$PrismaModel>
+    _max?: NestedEnumStatusFilter<$PrismaModel>
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -19886,6 +23407,7 @@ export namespace Prisma {
     id?: SortOrder
     number?: SortOrder
     year?: SortOrder
+    isActive?: SortOrder
   }
 
   export type QuarterAvgOrderByAggregateInput = {
@@ -19897,12 +23419,14 @@ export namespace Prisma {
     id?: SortOrder
     number?: SortOrder
     year?: SortOrder
+    isActive?: SortOrder
   }
 
   export type QuarterMinOrderByAggregateInput = {
     id?: SortOrder
     number?: SortOrder
     year?: SortOrder
+    isActive?: SortOrder
   }
 
   export type QuarterSumOrderByAggregateInput = {
@@ -19960,6 +23484,7 @@ export namespace Prisma {
     id?: SortOrder
     projectId?: SortOrder
     quarterId?: SortOrder
+    userId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -19968,6 +23493,7 @@ export namespace Prisma {
     id?: SortOrder
     projectId?: SortOrder
     quarterId?: SortOrder
+    userId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -19976,33 +23502,14 @@ export namespace Prisma {
     id?: SortOrder
     projectId?: SortOrder
     quarterId?: SortOrder
+    userId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-  }
-
-  export type StringNullableFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
   export type InputDistributionScalarRelationFilter = {
     is?: InputDistributionWhereInput
     isNot?: InputDistributionWhereInput
-  }
-
-  export type SortOrderInput = {
-    sort: SortOrder
-    nulls?: NullsOrder
   }
 
   export type PredefinedInputDistributionCountOrderByAggregateInput = {
@@ -20067,24 +23574,6 @@ export namespace Prisma {
   export type PredefinedInputDistributionSumOrderByAggregateInput = {
     target?: SortOrder
     achieved?: SortOrder
-  }
-
-  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedStringNullableFilter<$PrismaModel>
-    _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
   export type CustomInputDistributionCountOrderByAggregateInput = {
@@ -20171,6 +23660,7 @@ export namespace Prisma {
     units?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    userId?: SortOrder
   }
 
   export type TrainingAvgOrderByAggregateInput = {
@@ -20200,6 +23690,7 @@ export namespace Prisma {
     units?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    userId?: SortOrder
   }
 
   export type TrainingMinOrderByAggregateInput = {
@@ -20222,6 +23713,7 @@ export namespace Prisma {
     units?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    userId?: SortOrder
   }
 
   export type TrainingSumOrderByAggregateInput = {
@@ -20235,11 +23727,16 @@ export namespace Prisma {
     id?: SortOrder
     projectId?: SortOrder
     quarterId?: SortOrder
+    description?: SortOrder
+    district?: SortOrder
+    village?: SortOrder
+    block?: SortOrder
     target?: SortOrder
     achieved?: SortOrder
     units?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    userId?: SortOrder
   }
 
   export type FLDAvgOrderByAggregateInput = {
@@ -20251,22 +23748,32 @@ export namespace Prisma {
     id?: SortOrder
     projectId?: SortOrder
     quarterId?: SortOrder
+    description?: SortOrder
+    district?: SortOrder
+    village?: SortOrder
+    block?: SortOrder
     target?: SortOrder
     achieved?: SortOrder
     units?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    userId?: SortOrder
   }
 
   export type FLDMinOrderByAggregateInput = {
     id?: SortOrder
     projectId?: SortOrder
     quarterId?: SortOrder
+    description?: SortOrder
+    district?: SortOrder
+    village?: SortOrder
+    block?: SortOrder
     target?: SortOrder
     achieved?: SortOrder
     units?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    userId?: SortOrder
   }
 
   export type FLDSumOrderByAggregateInput = {
@@ -20291,6 +23798,7 @@ export namespace Prisma {
     units?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    userId?: SortOrder
   }
 
   export type AwarenessProgramAvgOrderByAggregateInput = {
@@ -20317,6 +23825,7 @@ export namespace Prisma {
     units?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    userId?: SortOrder
   }
 
   export type AwarenessProgramMinOrderByAggregateInput = {
@@ -20336,6 +23845,7 @@ export namespace Prisma {
     units?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    userId?: SortOrder
   }
 
   export type AwarenessProgramSumOrderByAggregateInput = {
@@ -20359,6 +23869,7 @@ export namespace Prisma {
     imageKey?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    userId?: SortOrder
   }
 
   export type InfrastructureDevelopmentAvgOrderByAggregateInput = {
@@ -20380,6 +23891,7 @@ export namespace Prisma {
     imageKey?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    userId?: SortOrder
   }
 
   export type InfrastructureDevelopmentMinOrderByAggregateInput = {
@@ -20396,6 +23908,7 @@ export namespace Prisma {
     imageKey?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    userId?: SortOrder
   }
 
   export type InfrastructureDevelopmentSumOrderByAggregateInput = {
@@ -20409,6 +23922,9 @@ export namespace Prisma {
     date?: SortOrder
     location?: SortOrder
     description?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    userId?: SortOrder
   }
 
   export type UpcomingEventMaxOrderByAggregateInput = {
@@ -20417,6 +23933,9 @@ export namespace Prisma {
     date?: SortOrder
     location?: SortOrder
     description?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    userId?: SortOrder
   }
 
   export type UpcomingEventMinOrderByAggregateInput = {
@@ -20425,6 +23944,9 @@ export namespace Prisma {
     date?: SortOrder
     location?: SortOrder
     description?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    userId?: SortOrder
   }
 
   export type PublicationCountOrderByAggregateInput = {
@@ -20436,6 +23958,9 @@ export namespace Prisma {
     thumbnailKey?: SortOrder
     pdfUrl?: SortOrder
     pdfKey?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    userId?: SortOrder
   }
 
   export type PublicationMaxOrderByAggregateInput = {
@@ -20447,6 +23972,9 @@ export namespace Prisma {
     thumbnailKey?: SortOrder
     pdfUrl?: SortOrder
     pdfKey?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    userId?: SortOrder
   }
 
   export type PublicationMinOrderByAggregateInput = {
@@ -20458,6 +23986,9 @@ export namespace Prisma {
     thumbnailKey?: SortOrder
     pdfUrl?: SortOrder
     pdfKey?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    userId?: SortOrder
   }
 
   export type GalleryCountOrderByAggregateInput = {
@@ -20465,6 +23996,9 @@ export namespace Prisma {
     title?: SortOrder
     imageUrl?: SortOrder
     imageKey?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    userId?: SortOrder
   }
 
   export type GalleryMaxOrderByAggregateInput = {
@@ -20472,6 +24006,9 @@ export namespace Prisma {
     title?: SortOrder
     imageUrl?: SortOrder
     imageKey?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    userId?: SortOrder
   }
 
   export type GalleryMinOrderByAggregateInput = {
@@ -20479,6 +24016,9 @@ export namespace Prisma {
     title?: SortOrder
     imageUrl?: SortOrder
     imageKey?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    userId?: SortOrder
   }
 
   export type FloatNullableFilter<$PrismaModel = never> = {
@@ -20512,6 +24052,9 @@ export namespace Prisma {
     director?: SortOrder
     coDirectors?: SortOrder
     achievements?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    userId?: SortOrder
   }
 
   export type ProjectDetailsAvgOrderByAggregateInput = {
@@ -20528,6 +24071,9 @@ export namespace Prisma {
     center?: SortOrder
     location?: SortOrder
     director?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    userId?: SortOrder
   }
 
   export type ProjectDetailsMinOrderByAggregateInput = {
@@ -20539,6 +24085,9 @@ export namespace Prisma {
     center?: SortOrder
     location?: SortOrder
     director?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    userId?: SortOrder
   }
 
   export type ProjectDetailsSumOrderByAggregateInput = {
@@ -20560,6 +24109,450 @@ export namespace Prisma {
     _sum?: NestedFloatNullableFilter<$PrismaModel>
     _min?: NestedFloatNullableFilter<$PrismaModel>
     _max?: NestedFloatNullableFilter<$PrismaModel>
+  }
+
+  export type ProjectCreateNestedManyWithoutUserInput = {
+    create?: XOR<ProjectCreateWithoutUserInput, ProjectUncheckedCreateWithoutUserInput> | ProjectCreateWithoutUserInput[] | ProjectUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ProjectCreateOrConnectWithoutUserInput | ProjectCreateOrConnectWithoutUserInput[]
+    createMany?: ProjectCreateManyUserInputEnvelope
+    connect?: ProjectWhereUniqueInput | ProjectWhereUniqueInput[]
+  }
+
+  export type TrainingCreateNestedManyWithoutUserInput = {
+    create?: XOR<TrainingCreateWithoutUserInput, TrainingUncheckedCreateWithoutUserInput> | TrainingCreateWithoutUserInput[] | TrainingUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: TrainingCreateOrConnectWithoutUserInput | TrainingCreateOrConnectWithoutUserInput[]
+    createMany?: TrainingCreateManyUserInputEnvelope
+    connect?: TrainingWhereUniqueInput | TrainingWhereUniqueInput[]
+  }
+
+  export type FLDCreateNestedManyWithoutUserInput = {
+    create?: XOR<FLDCreateWithoutUserInput, FLDUncheckedCreateWithoutUserInput> | FLDCreateWithoutUserInput[] | FLDUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: FLDCreateOrConnectWithoutUserInput | FLDCreateOrConnectWithoutUserInput[]
+    createMany?: FLDCreateManyUserInputEnvelope
+    connect?: FLDWhereUniqueInput | FLDWhereUniqueInput[]
+  }
+
+  export type AwarenessProgramCreateNestedManyWithoutUserInput = {
+    create?: XOR<AwarenessProgramCreateWithoutUserInput, AwarenessProgramUncheckedCreateWithoutUserInput> | AwarenessProgramCreateWithoutUserInput[] | AwarenessProgramUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: AwarenessProgramCreateOrConnectWithoutUserInput | AwarenessProgramCreateOrConnectWithoutUserInput[]
+    createMany?: AwarenessProgramCreateManyUserInputEnvelope
+    connect?: AwarenessProgramWhereUniqueInput | AwarenessProgramWhereUniqueInput[]
+  }
+
+  export type InfrastructureDevelopmentCreateNestedManyWithoutUserInput = {
+    create?: XOR<InfrastructureDevelopmentCreateWithoutUserInput, InfrastructureDevelopmentUncheckedCreateWithoutUserInput> | InfrastructureDevelopmentCreateWithoutUserInput[] | InfrastructureDevelopmentUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: InfrastructureDevelopmentCreateOrConnectWithoutUserInput | InfrastructureDevelopmentCreateOrConnectWithoutUserInput[]
+    createMany?: InfrastructureDevelopmentCreateManyUserInputEnvelope
+    connect?: InfrastructureDevelopmentWhereUniqueInput | InfrastructureDevelopmentWhereUniqueInput[]
+  }
+
+  export type InputDistributionCreateNestedManyWithoutUserInput = {
+    create?: XOR<InputDistributionCreateWithoutUserInput, InputDistributionUncheckedCreateWithoutUserInput> | InputDistributionCreateWithoutUserInput[] | InputDistributionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: InputDistributionCreateOrConnectWithoutUserInput | InputDistributionCreateOrConnectWithoutUserInput[]
+    createMany?: InputDistributionCreateManyUserInputEnvelope
+    connect?: InputDistributionWhereUniqueInput | InputDistributionWhereUniqueInput[]
+  }
+
+  export type UpcomingEventCreateNestedManyWithoutUserInput = {
+    create?: XOR<UpcomingEventCreateWithoutUserInput, UpcomingEventUncheckedCreateWithoutUserInput> | UpcomingEventCreateWithoutUserInput[] | UpcomingEventUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UpcomingEventCreateOrConnectWithoutUserInput | UpcomingEventCreateOrConnectWithoutUserInput[]
+    createMany?: UpcomingEventCreateManyUserInputEnvelope
+    connect?: UpcomingEventWhereUniqueInput | UpcomingEventWhereUniqueInput[]
+  }
+
+  export type PublicationCreateNestedManyWithoutUserInput = {
+    create?: XOR<PublicationCreateWithoutUserInput, PublicationUncheckedCreateWithoutUserInput> | PublicationCreateWithoutUserInput[] | PublicationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: PublicationCreateOrConnectWithoutUserInput | PublicationCreateOrConnectWithoutUserInput[]
+    createMany?: PublicationCreateManyUserInputEnvelope
+    connect?: PublicationWhereUniqueInput | PublicationWhereUniqueInput[]
+  }
+
+  export type GalleryCreateNestedManyWithoutUserInput = {
+    create?: XOR<GalleryCreateWithoutUserInput, GalleryUncheckedCreateWithoutUserInput> | GalleryCreateWithoutUserInput[] | GalleryUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: GalleryCreateOrConnectWithoutUserInput | GalleryCreateOrConnectWithoutUserInput[]
+    createMany?: GalleryCreateManyUserInputEnvelope
+    connect?: GalleryWhereUniqueInput | GalleryWhereUniqueInput[]
+  }
+
+  export type ProjectDetailsCreateNestedManyWithoutUserInput = {
+    create?: XOR<ProjectDetailsCreateWithoutUserInput, ProjectDetailsUncheckedCreateWithoutUserInput> | ProjectDetailsCreateWithoutUserInput[] | ProjectDetailsUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ProjectDetailsCreateOrConnectWithoutUserInput | ProjectDetailsCreateOrConnectWithoutUserInput[]
+    createMany?: ProjectDetailsCreateManyUserInputEnvelope
+    connect?: ProjectDetailsWhereUniqueInput | ProjectDetailsWhereUniqueInput[]
+  }
+
+  export type ProjectUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<ProjectCreateWithoutUserInput, ProjectUncheckedCreateWithoutUserInput> | ProjectCreateWithoutUserInput[] | ProjectUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ProjectCreateOrConnectWithoutUserInput | ProjectCreateOrConnectWithoutUserInput[]
+    createMany?: ProjectCreateManyUserInputEnvelope
+    connect?: ProjectWhereUniqueInput | ProjectWhereUniqueInput[]
+  }
+
+  export type TrainingUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<TrainingCreateWithoutUserInput, TrainingUncheckedCreateWithoutUserInput> | TrainingCreateWithoutUserInput[] | TrainingUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: TrainingCreateOrConnectWithoutUserInput | TrainingCreateOrConnectWithoutUserInput[]
+    createMany?: TrainingCreateManyUserInputEnvelope
+    connect?: TrainingWhereUniqueInput | TrainingWhereUniqueInput[]
+  }
+
+  export type FLDUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<FLDCreateWithoutUserInput, FLDUncheckedCreateWithoutUserInput> | FLDCreateWithoutUserInput[] | FLDUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: FLDCreateOrConnectWithoutUserInput | FLDCreateOrConnectWithoutUserInput[]
+    createMany?: FLDCreateManyUserInputEnvelope
+    connect?: FLDWhereUniqueInput | FLDWhereUniqueInput[]
+  }
+
+  export type AwarenessProgramUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<AwarenessProgramCreateWithoutUserInput, AwarenessProgramUncheckedCreateWithoutUserInput> | AwarenessProgramCreateWithoutUserInput[] | AwarenessProgramUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: AwarenessProgramCreateOrConnectWithoutUserInput | AwarenessProgramCreateOrConnectWithoutUserInput[]
+    createMany?: AwarenessProgramCreateManyUserInputEnvelope
+    connect?: AwarenessProgramWhereUniqueInput | AwarenessProgramWhereUniqueInput[]
+  }
+
+  export type InfrastructureDevelopmentUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<InfrastructureDevelopmentCreateWithoutUserInput, InfrastructureDevelopmentUncheckedCreateWithoutUserInput> | InfrastructureDevelopmentCreateWithoutUserInput[] | InfrastructureDevelopmentUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: InfrastructureDevelopmentCreateOrConnectWithoutUserInput | InfrastructureDevelopmentCreateOrConnectWithoutUserInput[]
+    createMany?: InfrastructureDevelopmentCreateManyUserInputEnvelope
+    connect?: InfrastructureDevelopmentWhereUniqueInput | InfrastructureDevelopmentWhereUniqueInput[]
+  }
+
+  export type InputDistributionUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<InputDistributionCreateWithoutUserInput, InputDistributionUncheckedCreateWithoutUserInput> | InputDistributionCreateWithoutUserInput[] | InputDistributionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: InputDistributionCreateOrConnectWithoutUserInput | InputDistributionCreateOrConnectWithoutUserInput[]
+    createMany?: InputDistributionCreateManyUserInputEnvelope
+    connect?: InputDistributionWhereUniqueInput | InputDistributionWhereUniqueInput[]
+  }
+
+  export type UpcomingEventUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<UpcomingEventCreateWithoutUserInput, UpcomingEventUncheckedCreateWithoutUserInput> | UpcomingEventCreateWithoutUserInput[] | UpcomingEventUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UpcomingEventCreateOrConnectWithoutUserInput | UpcomingEventCreateOrConnectWithoutUserInput[]
+    createMany?: UpcomingEventCreateManyUserInputEnvelope
+    connect?: UpcomingEventWhereUniqueInput | UpcomingEventWhereUniqueInput[]
+  }
+
+  export type PublicationUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<PublicationCreateWithoutUserInput, PublicationUncheckedCreateWithoutUserInput> | PublicationCreateWithoutUserInput[] | PublicationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: PublicationCreateOrConnectWithoutUserInput | PublicationCreateOrConnectWithoutUserInput[]
+    createMany?: PublicationCreateManyUserInputEnvelope
+    connect?: PublicationWhereUniqueInput | PublicationWhereUniqueInput[]
+  }
+
+  export type GalleryUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<GalleryCreateWithoutUserInput, GalleryUncheckedCreateWithoutUserInput> | GalleryCreateWithoutUserInput[] | GalleryUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: GalleryCreateOrConnectWithoutUserInput | GalleryCreateOrConnectWithoutUserInput[]
+    createMany?: GalleryCreateManyUserInputEnvelope
+    connect?: GalleryWhereUniqueInput | GalleryWhereUniqueInput[]
+  }
+
+  export type ProjectDetailsUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<ProjectDetailsCreateWithoutUserInput, ProjectDetailsUncheckedCreateWithoutUserInput> | ProjectDetailsCreateWithoutUserInput[] | ProjectDetailsUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ProjectDetailsCreateOrConnectWithoutUserInput | ProjectDetailsCreateOrConnectWithoutUserInput[]
+    createMany?: ProjectDetailsCreateManyUserInputEnvelope
+    connect?: ProjectDetailsWhereUniqueInput | ProjectDetailsWhereUniqueInput[]
+  }
+
+  export type StringFieldUpdateOperationsInput = {
+    set?: string
+  }
+
+  export type EnumRoleFieldUpdateOperationsInput = {
+    set?: $Enums.Role
+  }
+
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
+  }
+
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
+  }
+
+  export type NullableDateTimeFieldUpdateOperationsInput = {
+    set?: Date | string | null
+  }
+
+  export type DateTimeFieldUpdateOperationsInput = {
+    set?: Date | string
+  }
+
+  export type ProjectUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ProjectCreateWithoutUserInput, ProjectUncheckedCreateWithoutUserInput> | ProjectCreateWithoutUserInput[] | ProjectUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ProjectCreateOrConnectWithoutUserInput | ProjectCreateOrConnectWithoutUserInput[]
+    upsert?: ProjectUpsertWithWhereUniqueWithoutUserInput | ProjectUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ProjectCreateManyUserInputEnvelope
+    set?: ProjectWhereUniqueInput | ProjectWhereUniqueInput[]
+    disconnect?: ProjectWhereUniqueInput | ProjectWhereUniqueInput[]
+    delete?: ProjectWhereUniqueInput | ProjectWhereUniqueInput[]
+    connect?: ProjectWhereUniqueInput | ProjectWhereUniqueInput[]
+    update?: ProjectUpdateWithWhereUniqueWithoutUserInput | ProjectUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ProjectUpdateManyWithWhereWithoutUserInput | ProjectUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ProjectScalarWhereInput | ProjectScalarWhereInput[]
+  }
+
+  export type TrainingUpdateManyWithoutUserNestedInput = {
+    create?: XOR<TrainingCreateWithoutUserInput, TrainingUncheckedCreateWithoutUserInput> | TrainingCreateWithoutUserInput[] | TrainingUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: TrainingCreateOrConnectWithoutUserInput | TrainingCreateOrConnectWithoutUserInput[]
+    upsert?: TrainingUpsertWithWhereUniqueWithoutUserInput | TrainingUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: TrainingCreateManyUserInputEnvelope
+    set?: TrainingWhereUniqueInput | TrainingWhereUniqueInput[]
+    disconnect?: TrainingWhereUniqueInput | TrainingWhereUniqueInput[]
+    delete?: TrainingWhereUniqueInput | TrainingWhereUniqueInput[]
+    connect?: TrainingWhereUniqueInput | TrainingWhereUniqueInput[]
+    update?: TrainingUpdateWithWhereUniqueWithoutUserInput | TrainingUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: TrainingUpdateManyWithWhereWithoutUserInput | TrainingUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: TrainingScalarWhereInput | TrainingScalarWhereInput[]
+  }
+
+  export type FLDUpdateManyWithoutUserNestedInput = {
+    create?: XOR<FLDCreateWithoutUserInput, FLDUncheckedCreateWithoutUserInput> | FLDCreateWithoutUserInput[] | FLDUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: FLDCreateOrConnectWithoutUserInput | FLDCreateOrConnectWithoutUserInput[]
+    upsert?: FLDUpsertWithWhereUniqueWithoutUserInput | FLDUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: FLDCreateManyUserInputEnvelope
+    set?: FLDWhereUniqueInput | FLDWhereUniqueInput[]
+    disconnect?: FLDWhereUniqueInput | FLDWhereUniqueInput[]
+    delete?: FLDWhereUniqueInput | FLDWhereUniqueInput[]
+    connect?: FLDWhereUniqueInput | FLDWhereUniqueInput[]
+    update?: FLDUpdateWithWhereUniqueWithoutUserInput | FLDUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: FLDUpdateManyWithWhereWithoutUserInput | FLDUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: FLDScalarWhereInput | FLDScalarWhereInput[]
+  }
+
+  export type AwarenessProgramUpdateManyWithoutUserNestedInput = {
+    create?: XOR<AwarenessProgramCreateWithoutUserInput, AwarenessProgramUncheckedCreateWithoutUserInput> | AwarenessProgramCreateWithoutUserInput[] | AwarenessProgramUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: AwarenessProgramCreateOrConnectWithoutUserInput | AwarenessProgramCreateOrConnectWithoutUserInput[]
+    upsert?: AwarenessProgramUpsertWithWhereUniqueWithoutUserInput | AwarenessProgramUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: AwarenessProgramCreateManyUserInputEnvelope
+    set?: AwarenessProgramWhereUniqueInput | AwarenessProgramWhereUniqueInput[]
+    disconnect?: AwarenessProgramWhereUniqueInput | AwarenessProgramWhereUniqueInput[]
+    delete?: AwarenessProgramWhereUniqueInput | AwarenessProgramWhereUniqueInput[]
+    connect?: AwarenessProgramWhereUniqueInput | AwarenessProgramWhereUniqueInput[]
+    update?: AwarenessProgramUpdateWithWhereUniqueWithoutUserInput | AwarenessProgramUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: AwarenessProgramUpdateManyWithWhereWithoutUserInput | AwarenessProgramUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: AwarenessProgramScalarWhereInput | AwarenessProgramScalarWhereInput[]
+  }
+
+  export type InfrastructureDevelopmentUpdateManyWithoutUserNestedInput = {
+    create?: XOR<InfrastructureDevelopmentCreateWithoutUserInput, InfrastructureDevelopmentUncheckedCreateWithoutUserInput> | InfrastructureDevelopmentCreateWithoutUserInput[] | InfrastructureDevelopmentUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: InfrastructureDevelopmentCreateOrConnectWithoutUserInput | InfrastructureDevelopmentCreateOrConnectWithoutUserInput[]
+    upsert?: InfrastructureDevelopmentUpsertWithWhereUniqueWithoutUserInput | InfrastructureDevelopmentUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: InfrastructureDevelopmentCreateManyUserInputEnvelope
+    set?: InfrastructureDevelopmentWhereUniqueInput | InfrastructureDevelopmentWhereUniqueInput[]
+    disconnect?: InfrastructureDevelopmentWhereUniqueInput | InfrastructureDevelopmentWhereUniqueInput[]
+    delete?: InfrastructureDevelopmentWhereUniqueInput | InfrastructureDevelopmentWhereUniqueInput[]
+    connect?: InfrastructureDevelopmentWhereUniqueInput | InfrastructureDevelopmentWhereUniqueInput[]
+    update?: InfrastructureDevelopmentUpdateWithWhereUniqueWithoutUserInput | InfrastructureDevelopmentUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: InfrastructureDevelopmentUpdateManyWithWhereWithoutUserInput | InfrastructureDevelopmentUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: InfrastructureDevelopmentScalarWhereInput | InfrastructureDevelopmentScalarWhereInput[]
+  }
+
+  export type InputDistributionUpdateManyWithoutUserNestedInput = {
+    create?: XOR<InputDistributionCreateWithoutUserInput, InputDistributionUncheckedCreateWithoutUserInput> | InputDistributionCreateWithoutUserInput[] | InputDistributionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: InputDistributionCreateOrConnectWithoutUserInput | InputDistributionCreateOrConnectWithoutUserInput[]
+    upsert?: InputDistributionUpsertWithWhereUniqueWithoutUserInput | InputDistributionUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: InputDistributionCreateManyUserInputEnvelope
+    set?: InputDistributionWhereUniqueInput | InputDistributionWhereUniqueInput[]
+    disconnect?: InputDistributionWhereUniqueInput | InputDistributionWhereUniqueInput[]
+    delete?: InputDistributionWhereUniqueInput | InputDistributionWhereUniqueInput[]
+    connect?: InputDistributionWhereUniqueInput | InputDistributionWhereUniqueInput[]
+    update?: InputDistributionUpdateWithWhereUniqueWithoutUserInput | InputDistributionUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: InputDistributionUpdateManyWithWhereWithoutUserInput | InputDistributionUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: InputDistributionScalarWhereInput | InputDistributionScalarWhereInput[]
+  }
+
+  export type UpcomingEventUpdateManyWithoutUserNestedInput = {
+    create?: XOR<UpcomingEventCreateWithoutUserInput, UpcomingEventUncheckedCreateWithoutUserInput> | UpcomingEventCreateWithoutUserInput[] | UpcomingEventUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UpcomingEventCreateOrConnectWithoutUserInput | UpcomingEventCreateOrConnectWithoutUserInput[]
+    upsert?: UpcomingEventUpsertWithWhereUniqueWithoutUserInput | UpcomingEventUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: UpcomingEventCreateManyUserInputEnvelope
+    set?: UpcomingEventWhereUniqueInput | UpcomingEventWhereUniqueInput[]
+    disconnect?: UpcomingEventWhereUniqueInput | UpcomingEventWhereUniqueInput[]
+    delete?: UpcomingEventWhereUniqueInput | UpcomingEventWhereUniqueInput[]
+    connect?: UpcomingEventWhereUniqueInput | UpcomingEventWhereUniqueInput[]
+    update?: UpcomingEventUpdateWithWhereUniqueWithoutUserInput | UpcomingEventUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: UpcomingEventUpdateManyWithWhereWithoutUserInput | UpcomingEventUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: UpcomingEventScalarWhereInput | UpcomingEventScalarWhereInput[]
+  }
+
+  export type PublicationUpdateManyWithoutUserNestedInput = {
+    create?: XOR<PublicationCreateWithoutUserInput, PublicationUncheckedCreateWithoutUserInput> | PublicationCreateWithoutUserInput[] | PublicationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: PublicationCreateOrConnectWithoutUserInput | PublicationCreateOrConnectWithoutUserInput[]
+    upsert?: PublicationUpsertWithWhereUniqueWithoutUserInput | PublicationUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: PublicationCreateManyUserInputEnvelope
+    set?: PublicationWhereUniqueInput | PublicationWhereUniqueInput[]
+    disconnect?: PublicationWhereUniqueInput | PublicationWhereUniqueInput[]
+    delete?: PublicationWhereUniqueInput | PublicationWhereUniqueInput[]
+    connect?: PublicationWhereUniqueInput | PublicationWhereUniqueInput[]
+    update?: PublicationUpdateWithWhereUniqueWithoutUserInput | PublicationUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: PublicationUpdateManyWithWhereWithoutUserInput | PublicationUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: PublicationScalarWhereInput | PublicationScalarWhereInput[]
+  }
+
+  export type GalleryUpdateManyWithoutUserNestedInput = {
+    create?: XOR<GalleryCreateWithoutUserInput, GalleryUncheckedCreateWithoutUserInput> | GalleryCreateWithoutUserInput[] | GalleryUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: GalleryCreateOrConnectWithoutUserInput | GalleryCreateOrConnectWithoutUserInput[]
+    upsert?: GalleryUpsertWithWhereUniqueWithoutUserInput | GalleryUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: GalleryCreateManyUserInputEnvelope
+    set?: GalleryWhereUniqueInput | GalleryWhereUniqueInput[]
+    disconnect?: GalleryWhereUniqueInput | GalleryWhereUniqueInput[]
+    delete?: GalleryWhereUniqueInput | GalleryWhereUniqueInput[]
+    connect?: GalleryWhereUniqueInput | GalleryWhereUniqueInput[]
+    update?: GalleryUpdateWithWhereUniqueWithoutUserInput | GalleryUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: GalleryUpdateManyWithWhereWithoutUserInput | GalleryUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: GalleryScalarWhereInput | GalleryScalarWhereInput[]
+  }
+
+  export type ProjectDetailsUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ProjectDetailsCreateWithoutUserInput, ProjectDetailsUncheckedCreateWithoutUserInput> | ProjectDetailsCreateWithoutUserInput[] | ProjectDetailsUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ProjectDetailsCreateOrConnectWithoutUserInput | ProjectDetailsCreateOrConnectWithoutUserInput[]
+    upsert?: ProjectDetailsUpsertWithWhereUniqueWithoutUserInput | ProjectDetailsUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ProjectDetailsCreateManyUserInputEnvelope
+    set?: ProjectDetailsWhereUniqueInput | ProjectDetailsWhereUniqueInput[]
+    disconnect?: ProjectDetailsWhereUniqueInput | ProjectDetailsWhereUniqueInput[]
+    delete?: ProjectDetailsWhereUniqueInput | ProjectDetailsWhereUniqueInput[]
+    connect?: ProjectDetailsWhereUniqueInput | ProjectDetailsWhereUniqueInput[]
+    update?: ProjectDetailsUpdateWithWhereUniqueWithoutUserInput | ProjectDetailsUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ProjectDetailsUpdateManyWithWhereWithoutUserInput | ProjectDetailsUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ProjectDetailsScalarWhereInput | ProjectDetailsScalarWhereInput[]
+  }
+
+  export type ProjectUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ProjectCreateWithoutUserInput, ProjectUncheckedCreateWithoutUserInput> | ProjectCreateWithoutUserInput[] | ProjectUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ProjectCreateOrConnectWithoutUserInput | ProjectCreateOrConnectWithoutUserInput[]
+    upsert?: ProjectUpsertWithWhereUniqueWithoutUserInput | ProjectUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ProjectCreateManyUserInputEnvelope
+    set?: ProjectWhereUniqueInput | ProjectWhereUniqueInput[]
+    disconnect?: ProjectWhereUniqueInput | ProjectWhereUniqueInput[]
+    delete?: ProjectWhereUniqueInput | ProjectWhereUniqueInput[]
+    connect?: ProjectWhereUniqueInput | ProjectWhereUniqueInput[]
+    update?: ProjectUpdateWithWhereUniqueWithoutUserInput | ProjectUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ProjectUpdateManyWithWhereWithoutUserInput | ProjectUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ProjectScalarWhereInput | ProjectScalarWhereInput[]
+  }
+
+  export type TrainingUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<TrainingCreateWithoutUserInput, TrainingUncheckedCreateWithoutUserInput> | TrainingCreateWithoutUserInput[] | TrainingUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: TrainingCreateOrConnectWithoutUserInput | TrainingCreateOrConnectWithoutUserInput[]
+    upsert?: TrainingUpsertWithWhereUniqueWithoutUserInput | TrainingUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: TrainingCreateManyUserInputEnvelope
+    set?: TrainingWhereUniqueInput | TrainingWhereUniqueInput[]
+    disconnect?: TrainingWhereUniqueInput | TrainingWhereUniqueInput[]
+    delete?: TrainingWhereUniqueInput | TrainingWhereUniqueInput[]
+    connect?: TrainingWhereUniqueInput | TrainingWhereUniqueInput[]
+    update?: TrainingUpdateWithWhereUniqueWithoutUserInput | TrainingUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: TrainingUpdateManyWithWhereWithoutUserInput | TrainingUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: TrainingScalarWhereInput | TrainingScalarWhereInput[]
+  }
+
+  export type FLDUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<FLDCreateWithoutUserInput, FLDUncheckedCreateWithoutUserInput> | FLDCreateWithoutUserInput[] | FLDUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: FLDCreateOrConnectWithoutUserInput | FLDCreateOrConnectWithoutUserInput[]
+    upsert?: FLDUpsertWithWhereUniqueWithoutUserInput | FLDUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: FLDCreateManyUserInputEnvelope
+    set?: FLDWhereUniqueInput | FLDWhereUniqueInput[]
+    disconnect?: FLDWhereUniqueInput | FLDWhereUniqueInput[]
+    delete?: FLDWhereUniqueInput | FLDWhereUniqueInput[]
+    connect?: FLDWhereUniqueInput | FLDWhereUniqueInput[]
+    update?: FLDUpdateWithWhereUniqueWithoutUserInput | FLDUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: FLDUpdateManyWithWhereWithoutUserInput | FLDUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: FLDScalarWhereInput | FLDScalarWhereInput[]
+  }
+
+  export type AwarenessProgramUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<AwarenessProgramCreateWithoutUserInput, AwarenessProgramUncheckedCreateWithoutUserInput> | AwarenessProgramCreateWithoutUserInput[] | AwarenessProgramUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: AwarenessProgramCreateOrConnectWithoutUserInput | AwarenessProgramCreateOrConnectWithoutUserInput[]
+    upsert?: AwarenessProgramUpsertWithWhereUniqueWithoutUserInput | AwarenessProgramUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: AwarenessProgramCreateManyUserInputEnvelope
+    set?: AwarenessProgramWhereUniqueInput | AwarenessProgramWhereUniqueInput[]
+    disconnect?: AwarenessProgramWhereUniqueInput | AwarenessProgramWhereUniqueInput[]
+    delete?: AwarenessProgramWhereUniqueInput | AwarenessProgramWhereUniqueInput[]
+    connect?: AwarenessProgramWhereUniqueInput | AwarenessProgramWhereUniqueInput[]
+    update?: AwarenessProgramUpdateWithWhereUniqueWithoutUserInput | AwarenessProgramUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: AwarenessProgramUpdateManyWithWhereWithoutUserInput | AwarenessProgramUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: AwarenessProgramScalarWhereInput | AwarenessProgramScalarWhereInput[]
+  }
+
+  export type InfrastructureDevelopmentUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<InfrastructureDevelopmentCreateWithoutUserInput, InfrastructureDevelopmentUncheckedCreateWithoutUserInput> | InfrastructureDevelopmentCreateWithoutUserInput[] | InfrastructureDevelopmentUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: InfrastructureDevelopmentCreateOrConnectWithoutUserInput | InfrastructureDevelopmentCreateOrConnectWithoutUserInput[]
+    upsert?: InfrastructureDevelopmentUpsertWithWhereUniqueWithoutUserInput | InfrastructureDevelopmentUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: InfrastructureDevelopmentCreateManyUserInputEnvelope
+    set?: InfrastructureDevelopmentWhereUniqueInput | InfrastructureDevelopmentWhereUniqueInput[]
+    disconnect?: InfrastructureDevelopmentWhereUniqueInput | InfrastructureDevelopmentWhereUniqueInput[]
+    delete?: InfrastructureDevelopmentWhereUniqueInput | InfrastructureDevelopmentWhereUniqueInput[]
+    connect?: InfrastructureDevelopmentWhereUniqueInput | InfrastructureDevelopmentWhereUniqueInput[]
+    update?: InfrastructureDevelopmentUpdateWithWhereUniqueWithoutUserInput | InfrastructureDevelopmentUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: InfrastructureDevelopmentUpdateManyWithWhereWithoutUserInput | InfrastructureDevelopmentUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: InfrastructureDevelopmentScalarWhereInput | InfrastructureDevelopmentScalarWhereInput[]
+  }
+
+  export type InputDistributionUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<InputDistributionCreateWithoutUserInput, InputDistributionUncheckedCreateWithoutUserInput> | InputDistributionCreateWithoutUserInput[] | InputDistributionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: InputDistributionCreateOrConnectWithoutUserInput | InputDistributionCreateOrConnectWithoutUserInput[]
+    upsert?: InputDistributionUpsertWithWhereUniqueWithoutUserInput | InputDistributionUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: InputDistributionCreateManyUserInputEnvelope
+    set?: InputDistributionWhereUniqueInput | InputDistributionWhereUniqueInput[]
+    disconnect?: InputDistributionWhereUniqueInput | InputDistributionWhereUniqueInput[]
+    delete?: InputDistributionWhereUniqueInput | InputDistributionWhereUniqueInput[]
+    connect?: InputDistributionWhereUniqueInput | InputDistributionWhereUniqueInput[]
+    update?: InputDistributionUpdateWithWhereUniqueWithoutUserInput | InputDistributionUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: InputDistributionUpdateManyWithWhereWithoutUserInput | InputDistributionUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: InputDistributionScalarWhereInput | InputDistributionScalarWhereInput[]
+  }
+
+  export type UpcomingEventUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<UpcomingEventCreateWithoutUserInput, UpcomingEventUncheckedCreateWithoutUserInput> | UpcomingEventCreateWithoutUserInput[] | UpcomingEventUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UpcomingEventCreateOrConnectWithoutUserInput | UpcomingEventCreateOrConnectWithoutUserInput[]
+    upsert?: UpcomingEventUpsertWithWhereUniqueWithoutUserInput | UpcomingEventUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: UpcomingEventCreateManyUserInputEnvelope
+    set?: UpcomingEventWhereUniqueInput | UpcomingEventWhereUniqueInput[]
+    disconnect?: UpcomingEventWhereUniqueInput | UpcomingEventWhereUniqueInput[]
+    delete?: UpcomingEventWhereUniqueInput | UpcomingEventWhereUniqueInput[]
+    connect?: UpcomingEventWhereUniqueInput | UpcomingEventWhereUniqueInput[]
+    update?: UpcomingEventUpdateWithWhereUniqueWithoutUserInput | UpcomingEventUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: UpcomingEventUpdateManyWithWhereWithoutUserInput | UpcomingEventUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: UpcomingEventScalarWhereInput | UpcomingEventScalarWhereInput[]
+  }
+
+  export type PublicationUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<PublicationCreateWithoutUserInput, PublicationUncheckedCreateWithoutUserInput> | PublicationCreateWithoutUserInput[] | PublicationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: PublicationCreateOrConnectWithoutUserInput | PublicationCreateOrConnectWithoutUserInput[]
+    upsert?: PublicationUpsertWithWhereUniqueWithoutUserInput | PublicationUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: PublicationCreateManyUserInputEnvelope
+    set?: PublicationWhereUniqueInput | PublicationWhereUniqueInput[]
+    disconnect?: PublicationWhereUniqueInput | PublicationWhereUniqueInput[]
+    delete?: PublicationWhereUniqueInput | PublicationWhereUniqueInput[]
+    connect?: PublicationWhereUniqueInput | PublicationWhereUniqueInput[]
+    update?: PublicationUpdateWithWhereUniqueWithoutUserInput | PublicationUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: PublicationUpdateManyWithWhereWithoutUserInput | PublicationUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: PublicationScalarWhereInput | PublicationScalarWhereInput[]
+  }
+
+  export type GalleryUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<GalleryCreateWithoutUserInput, GalleryUncheckedCreateWithoutUserInput> | GalleryCreateWithoutUserInput[] | GalleryUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: GalleryCreateOrConnectWithoutUserInput | GalleryCreateOrConnectWithoutUserInput[]
+    upsert?: GalleryUpsertWithWhereUniqueWithoutUserInput | GalleryUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: GalleryCreateManyUserInputEnvelope
+    set?: GalleryWhereUniqueInput | GalleryWhereUniqueInput[]
+    disconnect?: GalleryWhereUniqueInput | GalleryWhereUniqueInput[]
+    delete?: GalleryWhereUniqueInput | GalleryWhereUniqueInput[]
+    connect?: GalleryWhereUniqueInput | GalleryWhereUniqueInput[]
+    update?: GalleryUpdateWithWhereUniqueWithoutUserInput | GalleryUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: GalleryUpdateManyWithWhereWithoutUserInput | GalleryUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: GalleryScalarWhereInput | GalleryScalarWhereInput[]
+  }
+
+  export type ProjectDetailsUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ProjectDetailsCreateWithoutUserInput, ProjectDetailsUncheckedCreateWithoutUserInput> | ProjectDetailsCreateWithoutUserInput[] | ProjectDetailsUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ProjectDetailsCreateOrConnectWithoutUserInput | ProjectDetailsCreateOrConnectWithoutUserInput[]
+    upsert?: ProjectDetailsUpsertWithWhereUniqueWithoutUserInput | ProjectDetailsUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ProjectDetailsCreateManyUserInputEnvelope
+    set?: ProjectDetailsWhereUniqueInput | ProjectDetailsWhereUniqueInput[]
+    disconnect?: ProjectDetailsWhereUniqueInput | ProjectDetailsWhereUniqueInput[]
+    delete?: ProjectDetailsWhereUniqueInput | ProjectDetailsWhereUniqueInput[]
+    connect?: ProjectDetailsWhereUniqueInput | ProjectDetailsWhereUniqueInput[]
+    update?: ProjectDetailsUpdateWithWhereUniqueWithoutUserInput | ProjectDetailsUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ProjectDetailsUpdateManyWithWhereWithoutUserInput | ProjectDetailsUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ProjectDetailsScalarWhereInput | ProjectDetailsScalarWhereInput[]
   }
 
   export type TrainingCreateNestedManyWithoutProjectInput = {
@@ -20597,6 +24590,12 @@ export namespace Prisma {
     connect?: InputDistributionWhereUniqueInput | InputDistributionWhereUniqueInput[]
   }
 
+  export type UserCreateNestedOneWithoutProjectsInput = {
+    create?: XOR<UserCreateWithoutProjectsInput, UserUncheckedCreateWithoutProjectsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutProjectsInput
+    connect?: UserWhereUniqueInput
+  }
+
   export type TrainingUncheckedCreateNestedManyWithoutProjectInput = {
     create?: XOR<TrainingCreateWithoutProjectInput, TrainingUncheckedCreateWithoutProjectInput> | TrainingCreateWithoutProjectInput[] | TrainingUncheckedCreateWithoutProjectInput[]
     connectOrCreate?: TrainingCreateOrConnectWithoutProjectInput | TrainingCreateOrConnectWithoutProjectInput[]
@@ -20632,12 +24631,16 @@ export namespace Prisma {
     connect?: InputDistributionWhereUniqueInput | InputDistributionWhereUniqueInput[]
   }
 
-  export type StringFieldUpdateOperationsInput = {
-    set?: string
+  export type NullableDecimalFieldUpdateOperationsInput = {
+    set?: Decimal | DecimalJsLike | number | string | null
+    increment?: Decimal | DecimalJsLike | number | string
+    decrement?: Decimal | DecimalJsLike | number | string
+    multiply?: Decimal | DecimalJsLike | number | string
+    divide?: Decimal | DecimalJsLike | number | string
   }
 
-  export type DateTimeFieldUpdateOperationsInput = {
-    set?: Date | string
+  export type EnumStatusFieldUpdateOperationsInput = {
+    set?: $Enums.Status
   }
 
   export type TrainingUpdateManyWithoutProjectNestedInput = {
@@ -20708,6 +24711,16 @@ export namespace Prisma {
     update?: InputDistributionUpdateWithWhereUniqueWithoutProjectInput | InputDistributionUpdateWithWhereUniqueWithoutProjectInput[]
     updateMany?: InputDistributionUpdateManyWithWhereWithoutProjectInput | InputDistributionUpdateManyWithWhereWithoutProjectInput[]
     deleteMany?: InputDistributionScalarWhereInput | InputDistributionScalarWhereInput[]
+  }
+
+  export type UserUpdateOneWithoutProjectsNestedInput = {
+    create?: XOR<UserCreateWithoutProjectsInput, UserUncheckedCreateWithoutProjectsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutProjectsInput
+    upsert?: UserUpsertWithoutProjectsInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutProjectsInput, UserUpdateWithoutProjectsInput>, UserUncheckedUpdateWithoutProjectsInput>
   }
 
   export type TrainingUncheckedUpdateManyWithoutProjectNestedInput = {
@@ -21024,6 +25037,12 @@ export namespace Prisma {
     connect?: CustomInputDistributionWhereUniqueInput | CustomInputDistributionWhereUniqueInput[]
   }
 
+  export type UserCreateNestedOneWithoutInputDistributionsInput = {
+    create?: XOR<UserCreateWithoutInputDistributionsInput, UserUncheckedCreateWithoutInputDistributionsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutInputDistributionsInput
+    connect?: UserWhereUniqueInput
+  }
+
   export type PredefinedInputDistributionUncheckedCreateNestedManyWithoutInputDistributionInput = {
     create?: XOR<PredefinedInputDistributionCreateWithoutInputDistributionInput, PredefinedInputDistributionUncheckedCreateWithoutInputDistributionInput> | PredefinedInputDistributionCreateWithoutInputDistributionInput[] | PredefinedInputDistributionUncheckedCreateWithoutInputDistributionInput[]
     connectOrCreate?: PredefinedInputDistributionCreateOrConnectWithoutInputDistributionInput | PredefinedInputDistributionCreateOrConnectWithoutInputDistributionInput[]
@@ -21082,6 +25101,16 @@ export namespace Prisma {
     deleteMany?: CustomInputDistributionScalarWhereInput | CustomInputDistributionScalarWhereInput[]
   }
 
+  export type UserUpdateOneWithoutInputDistributionsNestedInput = {
+    create?: XOR<UserCreateWithoutInputDistributionsInput, UserUncheckedCreateWithoutInputDistributionsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutInputDistributionsInput
+    upsert?: UserUpsertWithoutInputDistributionsInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutInputDistributionsInput, UserUpdateWithoutInputDistributionsInput>, UserUncheckedUpdateWithoutInputDistributionsInput>
+  }
+
   export type PredefinedInputDistributionUncheckedUpdateManyWithoutInputDistributionNestedInput = {
     create?: XOR<PredefinedInputDistributionCreateWithoutInputDistributionInput, PredefinedInputDistributionUncheckedCreateWithoutInputDistributionInput> | PredefinedInputDistributionCreateWithoutInputDistributionInput[] | PredefinedInputDistributionUncheckedCreateWithoutInputDistributionInput[]
     connectOrCreate?: PredefinedInputDistributionCreateOrConnectWithoutInputDistributionInput | PredefinedInputDistributionCreateOrConnectWithoutInputDistributionInput[]
@@ -21114,10 +25143,6 @@ export namespace Prisma {
     create?: XOR<InputDistributionCreateWithoutPredefinedItemsInput, InputDistributionUncheckedCreateWithoutPredefinedItemsInput>
     connectOrCreate?: InputDistributionCreateOrConnectWithoutPredefinedItemsInput
     connect?: InputDistributionWhereUniqueInput
-  }
-
-  export type NullableStringFieldUpdateOperationsInput = {
-    set?: string | null
   }
 
   export type InputDistributionUpdateOneRequiredWithoutPredefinedItemsNestedInput = {
@@ -21154,6 +25179,12 @@ export namespace Prisma {
     connect?: QuarterWhereUniqueInput
   }
 
+  export type UserCreateNestedOneWithoutTrainingsInput = {
+    create?: XOR<UserCreateWithoutTrainingsInput, UserUncheckedCreateWithoutTrainingsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutTrainingsInput
+    connect?: UserWhereUniqueInput
+  }
+
   export type ProjectUpdateOneRequiredWithoutTrainingsNestedInput = {
     create?: XOR<ProjectCreateWithoutTrainingsInput, ProjectUncheckedCreateWithoutTrainingsInput>
     connectOrCreate?: ProjectCreateOrConnectWithoutTrainingsInput
@@ -21170,6 +25201,16 @@ export namespace Prisma {
     update?: XOR<XOR<QuarterUpdateToOneWithWhereWithoutTrainingsInput, QuarterUpdateWithoutTrainingsInput>, QuarterUncheckedUpdateWithoutTrainingsInput>
   }
 
+  export type UserUpdateOneWithoutTrainingsNestedInput = {
+    create?: XOR<UserCreateWithoutTrainingsInput, UserUncheckedCreateWithoutTrainingsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutTrainingsInput
+    upsert?: UserUpsertWithoutTrainingsInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutTrainingsInput, UserUpdateWithoutTrainingsInput>, UserUncheckedUpdateWithoutTrainingsInput>
+  }
+
   export type ProjectCreateNestedOneWithoutFldsInput = {
     create?: XOR<ProjectCreateWithoutFldsInput, ProjectUncheckedCreateWithoutFldsInput>
     connectOrCreate?: ProjectCreateOrConnectWithoutFldsInput
@@ -21180,6 +25221,12 @@ export namespace Prisma {
     create?: XOR<QuarterCreateWithoutFldsInput, QuarterUncheckedCreateWithoutFldsInput>
     connectOrCreate?: QuarterCreateOrConnectWithoutFldsInput
     connect?: QuarterWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutFldsInput = {
+    create?: XOR<UserCreateWithoutFldsInput, UserUncheckedCreateWithoutFldsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutFldsInput
+    connect?: UserWhereUniqueInput
   }
 
   export type ProjectUpdateOneRequiredWithoutFldsNestedInput = {
@@ -21198,6 +25245,16 @@ export namespace Prisma {
     update?: XOR<XOR<QuarterUpdateToOneWithWhereWithoutFldsInput, QuarterUpdateWithoutFldsInput>, QuarterUncheckedUpdateWithoutFldsInput>
   }
 
+  export type UserUpdateOneWithoutFldsNestedInput = {
+    create?: XOR<UserCreateWithoutFldsInput, UserUncheckedCreateWithoutFldsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutFldsInput
+    upsert?: UserUpsertWithoutFldsInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutFldsInput, UserUpdateWithoutFldsInput>, UserUncheckedUpdateWithoutFldsInput>
+  }
+
   export type ProjectCreateNestedOneWithoutAwarenessProgramsInput = {
     create?: XOR<ProjectCreateWithoutAwarenessProgramsInput, ProjectUncheckedCreateWithoutAwarenessProgramsInput>
     connectOrCreate?: ProjectCreateOrConnectWithoutAwarenessProgramsInput
@@ -21208,6 +25265,12 @@ export namespace Prisma {
     create?: XOR<QuarterCreateWithoutAwarenessProgramsInput, QuarterUncheckedCreateWithoutAwarenessProgramsInput>
     connectOrCreate?: QuarterCreateOrConnectWithoutAwarenessProgramsInput
     connect?: QuarterWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutAwarenessProgramsInput = {
+    create?: XOR<UserCreateWithoutAwarenessProgramsInput, UserUncheckedCreateWithoutAwarenessProgramsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutAwarenessProgramsInput
+    connect?: UserWhereUniqueInput
   }
 
   export type ProjectUpdateOneRequiredWithoutAwarenessProgramsNestedInput = {
@@ -21226,6 +25289,16 @@ export namespace Prisma {
     update?: XOR<XOR<QuarterUpdateToOneWithWhereWithoutAwarenessProgramsInput, QuarterUpdateWithoutAwarenessProgramsInput>, QuarterUncheckedUpdateWithoutAwarenessProgramsInput>
   }
 
+  export type UserUpdateOneWithoutAwarenessProgramsNestedInput = {
+    create?: XOR<UserCreateWithoutAwarenessProgramsInput, UserUncheckedCreateWithoutAwarenessProgramsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutAwarenessProgramsInput
+    upsert?: UserUpsertWithoutAwarenessProgramsInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutAwarenessProgramsInput, UserUpdateWithoutAwarenessProgramsInput>, UserUncheckedUpdateWithoutAwarenessProgramsInput>
+  }
+
   export type ProjectCreateNestedOneWithoutInfrastructureDevelopmentsInput = {
     create?: XOR<ProjectCreateWithoutInfrastructureDevelopmentsInput, ProjectUncheckedCreateWithoutInfrastructureDevelopmentsInput>
     connectOrCreate?: ProjectCreateOrConnectWithoutInfrastructureDevelopmentsInput
@@ -21236,6 +25309,12 @@ export namespace Prisma {
     create?: XOR<QuarterCreateWithoutInfrastructureDevelopmentsInput, QuarterUncheckedCreateWithoutInfrastructureDevelopmentsInput>
     connectOrCreate?: QuarterCreateOrConnectWithoutInfrastructureDevelopmentsInput
     connect?: QuarterWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutInfrastructureDevelopmentsInput = {
+    create?: XOR<UserCreateWithoutInfrastructureDevelopmentsInput, UserUncheckedCreateWithoutInfrastructureDevelopmentsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutInfrastructureDevelopmentsInput
+    connect?: UserWhereUniqueInput
   }
 
   export type ProjectUpdateOneRequiredWithoutInfrastructureDevelopmentsNestedInput = {
@@ -21254,6 +25333,64 @@ export namespace Prisma {
     update?: XOR<XOR<QuarterUpdateToOneWithWhereWithoutInfrastructureDevelopmentsInput, QuarterUpdateWithoutInfrastructureDevelopmentsInput>, QuarterUncheckedUpdateWithoutInfrastructureDevelopmentsInput>
   }
 
+  export type UserUpdateOneWithoutInfrastructureDevelopmentsNestedInput = {
+    create?: XOR<UserCreateWithoutInfrastructureDevelopmentsInput, UserUncheckedCreateWithoutInfrastructureDevelopmentsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutInfrastructureDevelopmentsInput
+    upsert?: UserUpsertWithoutInfrastructureDevelopmentsInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutInfrastructureDevelopmentsInput, UserUpdateWithoutInfrastructureDevelopmentsInput>, UserUncheckedUpdateWithoutInfrastructureDevelopmentsInput>
+  }
+
+  export type UserCreateNestedOneWithoutUpcomingEventsInput = {
+    create?: XOR<UserCreateWithoutUpcomingEventsInput, UserUncheckedCreateWithoutUpcomingEventsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutUpcomingEventsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneWithoutUpcomingEventsNestedInput = {
+    create?: XOR<UserCreateWithoutUpcomingEventsInput, UserUncheckedCreateWithoutUpcomingEventsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutUpcomingEventsInput
+    upsert?: UserUpsertWithoutUpcomingEventsInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutUpcomingEventsInput, UserUpdateWithoutUpcomingEventsInput>, UserUncheckedUpdateWithoutUpcomingEventsInput>
+  }
+
+  export type UserCreateNestedOneWithoutPublicationsInput = {
+    create?: XOR<UserCreateWithoutPublicationsInput, UserUncheckedCreateWithoutPublicationsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutPublicationsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneWithoutPublicationsNestedInput = {
+    create?: XOR<UserCreateWithoutPublicationsInput, UserUncheckedCreateWithoutPublicationsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutPublicationsInput
+    upsert?: UserUpsertWithoutPublicationsInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutPublicationsInput, UserUpdateWithoutPublicationsInput>, UserUncheckedUpdateWithoutPublicationsInput>
+  }
+
+  export type UserCreateNestedOneWithoutGalleriesInput = {
+    create?: XOR<UserCreateWithoutGalleriesInput, UserUncheckedCreateWithoutGalleriesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutGalleriesInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneWithoutGalleriesNestedInput = {
+    create?: XOR<UserCreateWithoutGalleriesInput, UserUncheckedCreateWithoutGalleriesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutGalleriesInput
+    upsert?: UserUpsertWithoutGalleriesInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutGalleriesInput, UserUpdateWithoutGalleriesInput>, UserUncheckedUpdateWithoutGalleriesInput>
+  }
+
   export type ProjectDetailsCreateobjectivesInput = {
     set: string[]
   }
@@ -21264,6 +25401,12 @@ export namespace Prisma {
 
   export type ProjectDetailsCreateachievementsInput = {
     set: string[]
+  }
+
+  export type UserCreateNestedOneWithoutProjectDetailsInput = {
+    create?: XOR<UserCreateWithoutProjectDetailsInput, UserUncheckedCreateWithoutProjectDetailsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutProjectDetailsInput
+    connect?: UserWhereUniqueInput
   }
 
   export type NullableFloatFieldUpdateOperationsInput = {
@@ -21289,6 +25432,16 @@ export namespace Prisma {
     push?: string | string[]
   }
 
+  export type UserUpdateOneWithoutProjectDetailsNestedInput = {
+    create?: XOR<UserCreateWithoutProjectDetailsInput, UserUncheckedCreateWithoutProjectDetailsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutProjectDetailsInput
+    upsert?: UserUpsertWithoutProjectDetailsInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutProjectDetailsInput, UserUpdateWithoutProjectDetailsInput>, UserUncheckedUpdateWithoutProjectDetailsInput>
+  }
+
   export type NestedStringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -21301,6 +25454,43 @@ export namespace Prisma {
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     not?: NestedStringFilter<$PrismaModel> | string
+  }
+
+  export type NestedEnumRoleFilter<$PrismaModel = never> = {
+    equals?: $Enums.Role | EnumRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumRoleFilter<$PrismaModel> | $Enums.Role
+  }
+
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type NestedStringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
   export type NestedDateTimeFilter<$PrismaModel = never> = {
@@ -21342,59 +25532,22 @@ export namespace Prisma {
     not?: NestedIntFilter<$PrismaModel> | number
   }
 
-  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+  export type NestedEnumRoleWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Role | EnumRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumRoleWithAggregatesFilter<$PrismaModel> | $Enums.Role
     _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
+    _min?: NestedEnumRoleFilter<$PrismaModel>
+    _max?: NestedEnumRoleFilter<$PrismaModel>
   }
 
-  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
     _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
-  }
-
-  export type NestedFloatFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatFilter<$PrismaModel> | number
-  }
-
-  export type NestedStringNullableFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -21425,6 +25578,105 @@ export namespace Prisma {
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
+  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type NestedDecimalNullableFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalNullableFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
+  }
+
+  export type NestedEnumStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.Status | EnumStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.Status[] | ListEnumStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Status[] | ListEnumStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumStatusFilter<$PrismaModel> | $Enums.Status
+  }
+
+  export type NestedDecimalNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalNullableWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedDecimalNullableFilter<$PrismaModel>
+    _sum?: NestedDecimalNullableFilter<$PrismaModel>
+    _min?: NestedDecimalNullableFilter<$PrismaModel>
+    _max?: NestedDecimalNullableFilter<$PrismaModel>
+  }
+
+  export type NestedEnumStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Status | EnumStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.Status[] | ListEnumStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Status[] | ListEnumStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumStatusWithAggregatesFilter<$PrismaModel> | $Enums.Status
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumStatusFilter<$PrismaModel>
+    _max?: NestedEnumStatusFilter<$PrismaModel>
+  }
+
+  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type NestedFloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
   export type NestedFloatNullableFilter<$PrismaModel = never> = {
     equals?: number | FloatFieldRefInput<$PrismaModel> | null
     in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
@@ -21452,6 +25704,746 @@ export namespace Prisma {
     _max?: NestedFloatNullableFilter<$PrismaModel>
   }
 
+  export type ProjectCreateWithoutUserInput = {
+    id?: string
+    implementingAgency: string
+    title: string
+    locationState: string
+    director: string
+    budget?: Decimal | DecimalJsLike | number | string | null
+    status?: $Enums.Status
+    startDate?: Date | string | null
+    endDate?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    trainings?: TrainingCreateNestedManyWithoutProjectInput
+    flds?: FLDCreateNestedManyWithoutProjectInput
+    awarenessPrograms?: AwarenessProgramCreateNestedManyWithoutProjectInput
+    infrastructureDevelopments?: InfrastructureDevelopmentCreateNestedManyWithoutProjectInput
+    inputDistributions?: InputDistributionCreateNestedManyWithoutProjectInput
+  }
+
+  export type ProjectUncheckedCreateWithoutUserInput = {
+    id?: string
+    implementingAgency: string
+    title: string
+    locationState: string
+    director: string
+    budget?: Decimal | DecimalJsLike | number | string | null
+    status?: $Enums.Status
+    startDate?: Date | string | null
+    endDate?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    trainings?: TrainingUncheckedCreateNestedManyWithoutProjectInput
+    flds?: FLDUncheckedCreateNestedManyWithoutProjectInput
+    awarenessPrograms?: AwarenessProgramUncheckedCreateNestedManyWithoutProjectInput
+    infrastructureDevelopments?: InfrastructureDevelopmentUncheckedCreateNestedManyWithoutProjectInput
+    inputDistributions?: InputDistributionUncheckedCreateNestedManyWithoutProjectInput
+  }
+
+  export type ProjectCreateOrConnectWithoutUserInput = {
+    where: ProjectWhereUniqueInput
+    create: XOR<ProjectCreateWithoutUserInput, ProjectUncheckedCreateWithoutUserInput>
+  }
+
+  export type ProjectCreateManyUserInputEnvelope = {
+    data: ProjectCreateManyUserInput | ProjectCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type TrainingCreateWithoutUserInput = {
+    id?: string
+    title: string
+    target: number
+    achieved: number
+    district: string
+    village: string
+    block: string
+    beneficiaryMale?: number
+    beneficiaryFemale?: number
+    remarks?: string | null
+    imageUrl?: string | null
+    imageKey?: string | null
+    pdfUrl?: string | null
+    pdfKey?: string | null
+    units?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    project: ProjectCreateNestedOneWithoutTrainingsInput
+    quarter: QuarterCreateNestedOneWithoutTrainingsInput
+  }
+
+  export type TrainingUncheckedCreateWithoutUserInput = {
+    id?: string
+    projectId: string
+    quarterId: string
+    title: string
+    target: number
+    achieved: number
+    district: string
+    village: string
+    block: string
+    beneficiaryMale?: number
+    beneficiaryFemale?: number
+    remarks?: string | null
+    imageUrl?: string | null
+    imageKey?: string | null
+    pdfUrl?: string | null
+    pdfKey?: string | null
+    units?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TrainingCreateOrConnectWithoutUserInput = {
+    where: TrainingWhereUniqueInput
+    create: XOR<TrainingCreateWithoutUserInput, TrainingUncheckedCreateWithoutUserInput>
+  }
+
+  export type TrainingCreateManyUserInputEnvelope = {
+    data: TrainingCreateManyUserInput | TrainingCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type FLDCreateWithoutUserInput = {
+    id?: string
+    description?: string | null
+    district: string
+    village: string
+    block: string
+    target: number
+    achieved: number
+    units?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    project: ProjectCreateNestedOneWithoutFldsInput
+    quarter: QuarterCreateNestedOneWithoutFldsInput
+  }
+
+  export type FLDUncheckedCreateWithoutUserInput = {
+    id?: string
+    projectId: string
+    quarterId: string
+    description?: string | null
+    district: string
+    village: string
+    block: string
+    target: number
+    achieved: number
+    units?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type FLDCreateOrConnectWithoutUserInput = {
+    where: FLDWhereUniqueInput
+    create: XOR<FLDCreateWithoutUserInput, FLDUncheckedCreateWithoutUserInput>
+  }
+
+  export type FLDCreateManyUserInputEnvelope = {
+    data: FLDCreateManyUserInput | FLDCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type AwarenessProgramCreateWithoutUserInput = {
+    id?: string
+    title: string
+    target: number
+    achieved: number
+    district: string
+    village: string
+    block: string
+    beneficiaryMale?: number
+    beneficiaryFemale?: number
+    imageUrl?: string | null
+    imageKey?: string | null
+    units?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    project: ProjectCreateNestedOneWithoutAwarenessProgramsInput
+    quarter: QuarterCreateNestedOneWithoutAwarenessProgramsInput
+  }
+
+  export type AwarenessProgramUncheckedCreateWithoutUserInput = {
+    id?: string
+    projectId: string
+    quarterId: string
+    title: string
+    target: number
+    achieved: number
+    district: string
+    village: string
+    block: string
+    beneficiaryMale?: number
+    beneficiaryFemale?: number
+    imageUrl?: string | null
+    imageKey?: string | null
+    units?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AwarenessProgramCreateOrConnectWithoutUserInput = {
+    where: AwarenessProgramWhereUniqueInput
+    create: XOR<AwarenessProgramCreateWithoutUserInput, AwarenessProgramUncheckedCreateWithoutUserInput>
+  }
+
+  export type AwarenessProgramCreateManyUserInputEnvelope = {
+    data: AwarenessProgramCreateManyUserInput | AwarenessProgramCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type InfrastructureDevelopmentCreateWithoutUserInput = {
+    id?: string
+    target: number
+    achieved: number
+    district: string
+    village: string
+    block: string
+    remarks?: string | null
+    imageUrl?: string | null
+    imageKey?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    project: ProjectCreateNestedOneWithoutInfrastructureDevelopmentsInput
+    quarter: QuarterCreateNestedOneWithoutInfrastructureDevelopmentsInput
+  }
+
+  export type InfrastructureDevelopmentUncheckedCreateWithoutUserInput = {
+    id?: string
+    projectId: string
+    quarterId: string
+    target: number
+    achieved: number
+    district: string
+    village: string
+    block: string
+    remarks?: string | null
+    imageUrl?: string | null
+    imageKey?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type InfrastructureDevelopmentCreateOrConnectWithoutUserInput = {
+    where: InfrastructureDevelopmentWhereUniqueInput
+    create: XOR<InfrastructureDevelopmentCreateWithoutUserInput, InfrastructureDevelopmentUncheckedCreateWithoutUserInput>
+  }
+
+  export type InfrastructureDevelopmentCreateManyUserInputEnvelope = {
+    data: InfrastructureDevelopmentCreateManyUserInput | InfrastructureDevelopmentCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type InputDistributionCreateWithoutUserInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    project: ProjectCreateNestedOneWithoutInputDistributionsInput
+    quarter: QuarterCreateNestedOneWithoutInputDistributionsInput
+    predefinedItems?: PredefinedInputDistributionCreateNestedManyWithoutInputDistributionInput
+    customItems?: CustomInputDistributionCreateNestedManyWithoutInputDistributionInput
+  }
+
+  export type InputDistributionUncheckedCreateWithoutUserInput = {
+    id?: string
+    projectId: string
+    quarterId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    predefinedItems?: PredefinedInputDistributionUncheckedCreateNestedManyWithoutInputDistributionInput
+    customItems?: CustomInputDistributionUncheckedCreateNestedManyWithoutInputDistributionInput
+  }
+
+  export type InputDistributionCreateOrConnectWithoutUserInput = {
+    where: InputDistributionWhereUniqueInput
+    create: XOR<InputDistributionCreateWithoutUserInput, InputDistributionUncheckedCreateWithoutUserInput>
+  }
+
+  export type InputDistributionCreateManyUserInputEnvelope = {
+    data: InputDistributionCreateManyUserInput | InputDistributionCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type UpcomingEventCreateWithoutUserInput = {
+    id?: string
+    title: string
+    date: Date | string
+    location: string
+    description?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type UpcomingEventUncheckedCreateWithoutUserInput = {
+    id?: string
+    title: string
+    date: Date | string
+    location: string
+    description?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type UpcomingEventCreateOrConnectWithoutUserInput = {
+    where: UpcomingEventWhereUniqueInput
+    create: XOR<UpcomingEventCreateWithoutUserInput, UpcomingEventUncheckedCreateWithoutUserInput>
+  }
+
+  export type UpcomingEventCreateManyUserInputEnvelope = {
+    data: UpcomingEventCreateManyUserInput | UpcomingEventCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type PublicationCreateWithoutUserInput = {
+    id?: string
+    title: string
+    type: string
+    category?: string | null
+    thumbnailUrl?: string | null
+    thumbnailKey?: string | null
+    pdfUrl?: string | null
+    pdfKey?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PublicationUncheckedCreateWithoutUserInput = {
+    id?: string
+    title: string
+    type: string
+    category?: string | null
+    thumbnailUrl?: string | null
+    thumbnailKey?: string | null
+    pdfUrl?: string | null
+    pdfKey?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PublicationCreateOrConnectWithoutUserInput = {
+    where: PublicationWhereUniqueInput
+    create: XOR<PublicationCreateWithoutUserInput, PublicationUncheckedCreateWithoutUserInput>
+  }
+
+  export type PublicationCreateManyUserInputEnvelope = {
+    data: PublicationCreateManyUserInput | PublicationCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type GalleryCreateWithoutUserInput = {
+    id?: string
+    title: string
+    imageUrl: string
+    imageKey: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type GalleryUncheckedCreateWithoutUserInput = {
+    id?: string
+    title: string
+    imageUrl: string
+    imageKey: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type GalleryCreateOrConnectWithoutUserInput = {
+    where: GalleryWhereUniqueInput
+    create: XOR<GalleryCreateWithoutUserInput, GalleryUncheckedCreateWithoutUserInput>
+  }
+
+  export type GalleryCreateManyUserInputEnvelope = {
+    data: GalleryCreateManyUserInput | GalleryCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ProjectDetailsCreateWithoutUserInput = {
+    id?: string
+    title: string
+    region: string
+    year: number
+    budget?: number | null
+    center?: string | null
+    location?: string | null
+    objectives?: ProjectDetailsCreateobjectivesInput | string[]
+    director: string
+    coDirectors?: ProjectDetailsCreatecoDirectorsInput | string[]
+    achievements?: ProjectDetailsCreateachievementsInput | string[]
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ProjectDetailsUncheckedCreateWithoutUserInput = {
+    id?: string
+    title: string
+    region: string
+    year: number
+    budget?: number | null
+    center?: string | null
+    location?: string | null
+    objectives?: ProjectDetailsCreateobjectivesInput | string[]
+    director: string
+    coDirectors?: ProjectDetailsCreatecoDirectorsInput | string[]
+    achievements?: ProjectDetailsCreateachievementsInput | string[]
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ProjectDetailsCreateOrConnectWithoutUserInput = {
+    where: ProjectDetailsWhereUniqueInput
+    create: XOR<ProjectDetailsCreateWithoutUserInput, ProjectDetailsUncheckedCreateWithoutUserInput>
+  }
+
+  export type ProjectDetailsCreateManyUserInputEnvelope = {
+    data: ProjectDetailsCreateManyUserInput | ProjectDetailsCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ProjectUpsertWithWhereUniqueWithoutUserInput = {
+    where: ProjectWhereUniqueInput
+    update: XOR<ProjectUpdateWithoutUserInput, ProjectUncheckedUpdateWithoutUserInput>
+    create: XOR<ProjectCreateWithoutUserInput, ProjectUncheckedCreateWithoutUserInput>
+  }
+
+  export type ProjectUpdateWithWhereUniqueWithoutUserInput = {
+    where: ProjectWhereUniqueInput
+    data: XOR<ProjectUpdateWithoutUserInput, ProjectUncheckedUpdateWithoutUserInput>
+  }
+
+  export type ProjectUpdateManyWithWhereWithoutUserInput = {
+    where: ProjectScalarWhereInput
+    data: XOR<ProjectUpdateManyMutationInput, ProjectUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type ProjectScalarWhereInput = {
+    AND?: ProjectScalarWhereInput | ProjectScalarWhereInput[]
+    OR?: ProjectScalarWhereInput[]
+    NOT?: ProjectScalarWhereInput | ProjectScalarWhereInput[]
+    id?: StringFilter<"Project"> | string
+    implementingAgency?: StringFilter<"Project"> | string
+    title?: StringFilter<"Project"> | string
+    locationState?: StringFilter<"Project"> | string
+    director?: StringFilter<"Project"> | string
+    budget?: DecimalNullableFilter<"Project"> | Decimal | DecimalJsLike | number | string | null
+    status?: EnumStatusFilter<"Project"> | $Enums.Status
+    startDate?: DateTimeNullableFilter<"Project"> | Date | string | null
+    endDate?: DateTimeNullableFilter<"Project"> | Date | string | null
+    createdAt?: DateTimeFilter<"Project"> | Date | string
+    updatedAt?: DateTimeFilter<"Project"> | Date | string
+    userId?: StringNullableFilter<"Project"> | string | null
+  }
+
+  export type TrainingUpsertWithWhereUniqueWithoutUserInput = {
+    where: TrainingWhereUniqueInput
+    update: XOR<TrainingUpdateWithoutUserInput, TrainingUncheckedUpdateWithoutUserInput>
+    create: XOR<TrainingCreateWithoutUserInput, TrainingUncheckedCreateWithoutUserInput>
+  }
+
+  export type TrainingUpdateWithWhereUniqueWithoutUserInput = {
+    where: TrainingWhereUniqueInput
+    data: XOR<TrainingUpdateWithoutUserInput, TrainingUncheckedUpdateWithoutUserInput>
+  }
+
+  export type TrainingUpdateManyWithWhereWithoutUserInput = {
+    where: TrainingScalarWhereInput
+    data: XOR<TrainingUpdateManyMutationInput, TrainingUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type TrainingScalarWhereInput = {
+    AND?: TrainingScalarWhereInput | TrainingScalarWhereInput[]
+    OR?: TrainingScalarWhereInput[]
+    NOT?: TrainingScalarWhereInput | TrainingScalarWhereInput[]
+    id?: StringFilter<"Training"> | string
+    projectId?: StringFilter<"Training"> | string
+    quarterId?: StringFilter<"Training"> | string
+    title?: StringFilter<"Training"> | string
+    target?: IntFilter<"Training"> | number
+    achieved?: IntFilter<"Training"> | number
+    district?: StringFilter<"Training"> | string
+    village?: StringFilter<"Training"> | string
+    block?: StringFilter<"Training"> | string
+    beneficiaryMale?: IntFilter<"Training"> | number
+    beneficiaryFemale?: IntFilter<"Training"> | number
+    remarks?: StringNullableFilter<"Training"> | string | null
+    imageUrl?: StringNullableFilter<"Training"> | string | null
+    imageKey?: StringNullableFilter<"Training"> | string | null
+    pdfUrl?: StringNullableFilter<"Training"> | string | null
+    pdfKey?: StringNullableFilter<"Training"> | string | null
+    units?: StringNullableFilter<"Training"> | string | null
+    createdAt?: DateTimeFilter<"Training"> | Date | string
+    updatedAt?: DateTimeFilter<"Training"> | Date | string
+    userId?: StringNullableFilter<"Training"> | string | null
+  }
+
+  export type FLDUpsertWithWhereUniqueWithoutUserInput = {
+    where: FLDWhereUniqueInput
+    update: XOR<FLDUpdateWithoutUserInput, FLDUncheckedUpdateWithoutUserInput>
+    create: XOR<FLDCreateWithoutUserInput, FLDUncheckedCreateWithoutUserInput>
+  }
+
+  export type FLDUpdateWithWhereUniqueWithoutUserInput = {
+    where: FLDWhereUniqueInput
+    data: XOR<FLDUpdateWithoutUserInput, FLDUncheckedUpdateWithoutUserInput>
+  }
+
+  export type FLDUpdateManyWithWhereWithoutUserInput = {
+    where: FLDScalarWhereInput
+    data: XOR<FLDUpdateManyMutationInput, FLDUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type FLDScalarWhereInput = {
+    AND?: FLDScalarWhereInput | FLDScalarWhereInput[]
+    OR?: FLDScalarWhereInput[]
+    NOT?: FLDScalarWhereInput | FLDScalarWhereInput[]
+    id?: StringFilter<"FLD"> | string
+    projectId?: StringFilter<"FLD"> | string
+    quarterId?: StringFilter<"FLD"> | string
+    description?: StringNullableFilter<"FLD"> | string | null
+    district?: StringFilter<"FLD"> | string
+    village?: StringFilter<"FLD"> | string
+    block?: StringFilter<"FLD"> | string
+    target?: IntFilter<"FLD"> | number
+    achieved?: IntFilter<"FLD"> | number
+    units?: StringNullableFilter<"FLD"> | string | null
+    createdAt?: DateTimeFilter<"FLD"> | Date | string
+    updatedAt?: DateTimeFilter<"FLD"> | Date | string
+    userId?: StringNullableFilter<"FLD"> | string | null
+  }
+
+  export type AwarenessProgramUpsertWithWhereUniqueWithoutUserInput = {
+    where: AwarenessProgramWhereUniqueInput
+    update: XOR<AwarenessProgramUpdateWithoutUserInput, AwarenessProgramUncheckedUpdateWithoutUserInput>
+    create: XOR<AwarenessProgramCreateWithoutUserInput, AwarenessProgramUncheckedCreateWithoutUserInput>
+  }
+
+  export type AwarenessProgramUpdateWithWhereUniqueWithoutUserInput = {
+    where: AwarenessProgramWhereUniqueInput
+    data: XOR<AwarenessProgramUpdateWithoutUserInput, AwarenessProgramUncheckedUpdateWithoutUserInput>
+  }
+
+  export type AwarenessProgramUpdateManyWithWhereWithoutUserInput = {
+    where: AwarenessProgramScalarWhereInput
+    data: XOR<AwarenessProgramUpdateManyMutationInput, AwarenessProgramUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type AwarenessProgramScalarWhereInput = {
+    AND?: AwarenessProgramScalarWhereInput | AwarenessProgramScalarWhereInput[]
+    OR?: AwarenessProgramScalarWhereInput[]
+    NOT?: AwarenessProgramScalarWhereInput | AwarenessProgramScalarWhereInput[]
+    id?: StringFilter<"AwarenessProgram"> | string
+    projectId?: StringFilter<"AwarenessProgram"> | string
+    quarterId?: StringFilter<"AwarenessProgram"> | string
+    title?: StringFilter<"AwarenessProgram"> | string
+    target?: IntFilter<"AwarenessProgram"> | number
+    achieved?: IntFilter<"AwarenessProgram"> | number
+    district?: StringFilter<"AwarenessProgram"> | string
+    village?: StringFilter<"AwarenessProgram"> | string
+    block?: StringFilter<"AwarenessProgram"> | string
+    beneficiaryMale?: IntFilter<"AwarenessProgram"> | number
+    beneficiaryFemale?: IntFilter<"AwarenessProgram"> | number
+    imageUrl?: StringNullableFilter<"AwarenessProgram"> | string | null
+    imageKey?: StringNullableFilter<"AwarenessProgram"> | string | null
+    units?: StringNullableFilter<"AwarenessProgram"> | string | null
+    createdAt?: DateTimeFilter<"AwarenessProgram"> | Date | string
+    updatedAt?: DateTimeFilter<"AwarenessProgram"> | Date | string
+    userId?: StringNullableFilter<"AwarenessProgram"> | string | null
+  }
+
+  export type InfrastructureDevelopmentUpsertWithWhereUniqueWithoutUserInput = {
+    where: InfrastructureDevelopmentWhereUniqueInput
+    update: XOR<InfrastructureDevelopmentUpdateWithoutUserInput, InfrastructureDevelopmentUncheckedUpdateWithoutUserInput>
+    create: XOR<InfrastructureDevelopmentCreateWithoutUserInput, InfrastructureDevelopmentUncheckedCreateWithoutUserInput>
+  }
+
+  export type InfrastructureDevelopmentUpdateWithWhereUniqueWithoutUserInput = {
+    where: InfrastructureDevelopmentWhereUniqueInput
+    data: XOR<InfrastructureDevelopmentUpdateWithoutUserInput, InfrastructureDevelopmentUncheckedUpdateWithoutUserInput>
+  }
+
+  export type InfrastructureDevelopmentUpdateManyWithWhereWithoutUserInput = {
+    where: InfrastructureDevelopmentScalarWhereInput
+    data: XOR<InfrastructureDevelopmentUpdateManyMutationInput, InfrastructureDevelopmentUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type InfrastructureDevelopmentScalarWhereInput = {
+    AND?: InfrastructureDevelopmentScalarWhereInput | InfrastructureDevelopmentScalarWhereInput[]
+    OR?: InfrastructureDevelopmentScalarWhereInput[]
+    NOT?: InfrastructureDevelopmentScalarWhereInput | InfrastructureDevelopmentScalarWhereInput[]
+    id?: StringFilter<"InfrastructureDevelopment"> | string
+    projectId?: StringFilter<"InfrastructureDevelopment"> | string
+    quarterId?: StringFilter<"InfrastructureDevelopment"> | string
+    target?: IntFilter<"InfrastructureDevelopment"> | number
+    achieved?: IntFilter<"InfrastructureDevelopment"> | number
+    district?: StringFilter<"InfrastructureDevelopment"> | string
+    village?: StringFilter<"InfrastructureDevelopment"> | string
+    block?: StringFilter<"InfrastructureDevelopment"> | string
+    remarks?: StringNullableFilter<"InfrastructureDevelopment"> | string | null
+    imageUrl?: StringNullableFilter<"InfrastructureDevelopment"> | string | null
+    imageKey?: StringNullableFilter<"InfrastructureDevelopment"> | string | null
+    createdAt?: DateTimeFilter<"InfrastructureDevelopment"> | Date | string
+    updatedAt?: DateTimeFilter<"InfrastructureDevelopment"> | Date | string
+    userId?: StringNullableFilter<"InfrastructureDevelopment"> | string | null
+  }
+
+  export type InputDistributionUpsertWithWhereUniqueWithoutUserInput = {
+    where: InputDistributionWhereUniqueInput
+    update: XOR<InputDistributionUpdateWithoutUserInput, InputDistributionUncheckedUpdateWithoutUserInput>
+    create: XOR<InputDistributionCreateWithoutUserInput, InputDistributionUncheckedCreateWithoutUserInput>
+  }
+
+  export type InputDistributionUpdateWithWhereUniqueWithoutUserInput = {
+    where: InputDistributionWhereUniqueInput
+    data: XOR<InputDistributionUpdateWithoutUserInput, InputDistributionUncheckedUpdateWithoutUserInput>
+  }
+
+  export type InputDistributionUpdateManyWithWhereWithoutUserInput = {
+    where: InputDistributionScalarWhereInput
+    data: XOR<InputDistributionUpdateManyMutationInput, InputDistributionUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type InputDistributionScalarWhereInput = {
+    AND?: InputDistributionScalarWhereInput | InputDistributionScalarWhereInput[]
+    OR?: InputDistributionScalarWhereInput[]
+    NOT?: InputDistributionScalarWhereInput | InputDistributionScalarWhereInput[]
+    id?: StringFilter<"InputDistribution"> | string
+    projectId?: StringFilter<"InputDistribution"> | string
+    quarterId?: StringFilter<"InputDistribution"> | string
+    userId?: StringNullableFilter<"InputDistribution"> | string | null
+    createdAt?: DateTimeFilter<"InputDistribution"> | Date | string
+    updatedAt?: DateTimeFilter<"InputDistribution"> | Date | string
+  }
+
+  export type UpcomingEventUpsertWithWhereUniqueWithoutUserInput = {
+    where: UpcomingEventWhereUniqueInput
+    update: XOR<UpcomingEventUpdateWithoutUserInput, UpcomingEventUncheckedUpdateWithoutUserInput>
+    create: XOR<UpcomingEventCreateWithoutUserInput, UpcomingEventUncheckedCreateWithoutUserInput>
+  }
+
+  export type UpcomingEventUpdateWithWhereUniqueWithoutUserInput = {
+    where: UpcomingEventWhereUniqueInput
+    data: XOR<UpcomingEventUpdateWithoutUserInput, UpcomingEventUncheckedUpdateWithoutUserInput>
+  }
+
+  export type UpcomingEventUpdateManyWithWhereWithoutUserInput = {
+    where: UpcomingEventScalarWhereInput
+    data: XOR<UpcomingEventUpdateManyMutationInput, UpcomingEventUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type UpcomingEventScalarWhereInput = {
+    AND?: UpcomingEventScalarWhereInput | UpcomingEventScalarWhereInput[]
+    OR?: UpcomingEventScalarWhereInput[]
+    NOT?: UpcomingEventScalarWhereInput | UpcomingEventScalarWhereInput[]
+    id?: StringFilter<"UpcomingEvent"> | string
+    title?: StringFilter<"UpcomingEvent"> | string
+    date?: DateTimeFilter<"UpcomingEvent"> | Date | string
+    location?: StringFilter<"UpcomingEvent"> | string
+    description?: StringNullableFilter<"UpcomingEvent"> | string | null
+    createdAt?: DateTimeFilter<"UpcomingEvent"> | Date | string
+    updatedAt?: DateTimeFilter<"UpcomingEvent"> | Date | string
+    userId?: StringNullableFilter<"UpcomingEvent"> | string | null
+  }
+
+  export type PublicationUpsertWithWhereUniqueWithoutUserInput = {
+    where: PublicationWhereUniqueInput
+    update: XOR<PublicationUpdateWithoutUserInput, PublicationUncheckedUpdateWithoutUserInput>
+    create: XOR<PublicationCreateWithoutUserInput, PublicationUncheckedCreateWithoutUserInput>
+  }
+
+  export type PublicationUpdateWithWhereUniqueWithoutUserInput = {
+    where: PublicationWhereUniqueInput
+    data: XOR<PublicationUpdateWithoutUserInput, PublicationUncheckedUpdateWithoutUserInput>
+  }
+
+  export type PublicationUpdateManyWithWhereWithoutUserInput = {
+    where: PublicationScalarWhereInput
+    data: XOR<PublicationUpdateManyMutationInput, PublicationUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type PublicationScalarWhereInput = {
+    AND?: PublicationScalarWhereInput | PublicationScalarWhereInput[]
+    OR?: PublicationScalarWhereInput[]
+    NOT?: PublicationScalarWhereInput | PublicationScalarWhereInput[]
+    id?: StringFilter<"Publication"> | string
+    title?: StringFilter<"Publication"> | string
+    type?: StringFilter<"Publication"> | string
+    category?: StringNullableFilter<"Publication"> | string | null
+    thumbnailUrl?: StringNullableFilter<"Publication"> | string | null
+    thumbnailKey?: StringNullableFilter<"Publication"> | string | null
+    pdfUrl?: StringNullableFilter<"Publication"> | string | null
+    pdfKey?: StringNullableFilter<"Publication"> | string | null
+    createdAt?: DateTimeFilter<"Publication"> | Date | string
+    updatedAt?: DateTimeFilter<"Publication"> | Date | string
+    userId?: StringNullableFilter<"Publication"> | string | null
+  }
+
+  export type GalleryUpsertWithWhereUniqueWithoutUserInput = {
+    where: GalleryWhereUniqueInput
+    update: XOR<GalleryUpdateWithoutUserInput, GalleryUncheckedUpdateWithoutUserInput>
+    create: XOR<GalleryCreateWithoutUserInput, GalleryUncheckedCreateWithoutUserInput>
+  }
+
+  export type GalleryUpdateWithWhereUniqueWithoutUserInput = {
+    where: GalleryWhereUniqueInput
+    data: XOR<GalleryUpdateWithoutUserInput, GalleryUncheckedUpdateWithoutUserInput>
+  }
+
+  export type GalleryUpdateManyWithWhereWithoutUserInput = {
+    where: GalleryScalarWhereInput
+    data: XOR<GalleryUpdateManyMutationInput, GalleryUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type GalleryScalarWhereInput = {
+    AND?: GalleryScalarWhereInput | GalleryScalarWhereInput[]
+    OR?: GalleryScalarWhereInput[]
+    NOT?: GalleryScalarWhereInput | GalleryScalarWhereInput[]
+    id?: StringFilter<"Gallery"> | string
+    title?: StringFilter<"Gallery"> | string
+    imageUrl?: StringFilter<"Gallery"> | string
+    imageKey?: StringFilter<"Gallery"> | string
+    createdAt?: DateTimeFilter<"Gallery"> | Date | string
+    updatedAt?: DateTimeFilter<"Gallery"> | Date | string
+    userId?: StringNullableFilter<"Gallery"> | string | null
+  }
+
+  export type ProjectDetailsUpsertWithWhereUniqueWithoutUserInput = {
+    where: ProjectDetailsWhereUniqueInput
+    update: XOR<ProjectDetailsUpdateWithoutUserInput, ProjectDetailsUncheckedUpdateWithoutUserInput>
+    create: XOR<ProjectDetailsCreateWithoutUserInput, ProjectDetailsUncheckedCreateWithoutUserInput>
+  }
+
+  export type ProjectDetailsUpdateWithWhereUniqueWithoutUserInput = {
+    where: ProjectDetailsWhereUniqueInput
+    data: XOR<ProjectDetailsUpdateWithoutUserInput, ProjectDetailsUncheckedUpdateWithoutUserInput>
+  }
+
+  export type ProjectDetailsUpdateManyWithWhereWithoutUserInput = {
+    where: ProjectDetailsScalarWhereInput
+    data: XOR<ProjectDetailsUpdateManyMutationInput, ProjectDetailsUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type ProjectDetailsScalarWhereInput = {
+    AND?: ProjectDetailsScalarWhereInput | ProjectDetailsScalarWhereInput[]
+    OR?: ProjectDetailsScalarWhereInput[]
+    NOT?: ProjectDetailsScalarWhereInput | ProjectDetailsScalarWhereInput[]
+    id?: StringFilter<"ProjectDetails"> | string
+    title?: StringFilter<"ProjectDetails"> | string
+    region?: StringFilter<"ProjectDetails"> | string
+    year?: IntFilter<"ProjectDetails"> | number
+    budget?: FloatNullableFilter<"ProjectDetails"> | number | null
+    center?: StringNullableFilter<"ProjectDetails"> | string | null
+    location?: StringNullableFilter<"ProjectDetails"> | string | null
+    objectives?: StringNullableListFilter<"ProjectDetails">
+    director?: StringFilter<"ProjectDetails"> | string
+    coDirectors?: StringNullableListFilter<"ProjectDetails">
+    achievements?: StringNullableListFilter<"ProjectDetails">
+    createdAt?: DateTimeFilter<"ProjectDetails"> | Date | string
+    updatedAt?: DateTimeFilter<"ProjectDetails"> | Date | string
+    userId?: StringNullableFilter<"ProjectDetails"> | string | null
+  }
+
   export type TrainingCreateWithoutProjectInput = {
     id?: string
     title: string
@@ -21471,6 +26463,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     quarter: QuarterCreateNestedOneWithoutTrainingsInput
+    User?: UserCreateNestedOneWithoutTrainingsInput
   }
 
   export type TrainingUncheckedCreateWithoutProjectInput = {
@@ -21492,6 +26485,7 @@ export namespace Prisma {
     units?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    userId?: string | null
   }
 
   export type TrainingCreateOrConnectWithoutProjectInput = {
@@ -21506,22 +26500,32 @@ export namespace Prisma {
 
   export type FLDCreateWithoutProjectInput = {
     id?: string
+    description?: string | null
+    district: string
+    village: string
+    block: string
     target: number
     achieved: number
     units?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     quarter: QuarterCreateNestedOneWithoutFldsInput
+    User?: UserCreateNestedOneWithoutFldsInput
   }
 
   export type FLDUncheckedCreateWithoutProjectInput = {
     id?: string
     quarterId: string
+    description?: string | null
+    district: string
+    village: string
+    block: string
     target: number
     achieved: number
     units?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    userId?: string | null
   }
 
   export type FLDCreateOrConnectWithoutProjectInput = {
@@ -21550,6 +26554,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     quarter: QuarterCreateNestedOneWithoutAwarenessProgramsInput
+    User?: UserCreateNestedOneWithoutAwarenessProgramsInput
   }
 
   export type AwarenessProgramUncheckedCreateWithoutProjectInput = {
@@ -21568,6 +26573,7 @@ export namespace Prisma {
     units?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    userId?: string | null
   }
 
   export type AwarenessProgramCreateOrConnectWithoutProjectInput = {
@@ -21593,6 +26599,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     quarter: QuarterCreateNestedOneWithoutInfrastructureDevelopmentsInput
+    User?: UserCreateNestedOneWithoutInfrastructureDevelopmentsInput
   }
 
   export type InfrastructureDevelopmentUncheckedCreateWithoutProjectInput = {
@@ -21608,6 +26615,7 @@ export namespace Prisma {
     imageKey?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    userId?: string | null
   }
 
   export type InfrastructureDevelopmentCreateOrConnectWithoutProjectInput = {
@@ -21627,11 +26635,13 @@ export namespace Prisma {
     quarter: QuarterCreateNestedOneWithoutInputDistributionsInput
     predefinedItems?: PredefinedInputDistributionCreateNestedManyWithoutInputDistributionInput
     customItems?: CustomInputDistributionCreateNestedManyWithoutInputDistributionInput
+    User?: UserCreateNestedOneWithoutInputDistributionsInput
   }
 
   export type InputDistributionUncheckedCreateWithoutProjectInput = {
     id?: string
     quarterId: string
+    userId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     predefinedItems?: PredefinedInputDistributionUncheckedCreateNestedManyWithoutInputDistributionInput
@@ -21646,6 +26656,61 @@ export namespace Prisma {
   export type InputDistributionCreateManyProjectInputEnvelope = {
     data: InputDistributionCreateManyProjectInput | InputDistributionCreateManyProjectInput[]
     skipDuplicates?: boolean
+  }
+
+  export type UserCreateWithoutProjectsInput = {
+    id?: string
+    name: string
+    email: string
+    password: string
+    role: $Enums.Role
+    userCode: string
+    isVerified?: boolean
+    verificationCode?: string | null
+    resetPasswordToken?: string | null
+    resetTokenExpires?: Date | string | null
+    verificationExpires?: Date | string | null
+    createdAt?: Date | string
+    updateAt?: Date | string
+    trainings?: TrainingCreateNestedManyWithoutUserInput
+    flds?: FLDCreateNestedManyWithoutUserInput
+    awarenessPrograms?: AwarenessProgramCreateNestedManyWithoutUserInput
+    infrastructureDevelopments?: InfrastructureDevelopmentCreateNestedManyWithoutUserInput
+    inputDistributions?: InputDistributionCreateNestedManyWithoutUserInput
+    upcomingEvents?: UpcomingEventCreateNestedManyWithoutUserInput
+    publications?: PublicationCreateNestedManyWithoutUserInput
+    galleries?: GalleryCreateNestedManyWithoutUserInput
+    projectDetails?: ProjectDetailsCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutProjectsInput = {
+    id?: string
+    name: string
+    email: string
+    password: string
+    role: $Enums.Role
+    userCode: string
+    isVerified?: boolean
+    verificationCode?: string | null
+    resetPasswordToken?: string | null
+    resetTokenExpires?: Date | string | null
+    verificationExpires?: Date | string | null
+    createdAt?: Date | string
+    updateAt?: Date | string
+    trainings?: TrainingUncheckedCreateNestedManyWithoutUserInput
+    flds?: FLDUncheckedCreateNestedManyWithoutUserInput
+    awarenessPrograms?: AwarenessProgramUncheckedCreateNestedManyWithoutUserInput
+    infrastructureDevelopments?: InfrastructureDevelopmentUncheckedCreateNestedManyWithoutUserInput
+    inputDistributions?: InputDistributionUncheckedCreateNestedManyWithoutUserInput
+    upcomingEvents?: UpcomingEventUncheckedCreateNestedManyWithoutUserInput
+    publications?: PublicationUncheckedCreateNestedManyWithoutUserInput
+    galleries?: GalleryUncheckedCreateNestedManyWithoutUserInput
+    projectDetails?: ProjectDetailsUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutProjectsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutProjectsInput, UserUncheckedCreateWithoutProjectsInput>
   }
 
   export type TrainingUpsertWithWhereUniqueWithoutProjectInput = {
@@ -21664,31 +26729,6 @@ export namespace Prisma {
     data: XOR<TrainingUpdateManyMutationInput, TrainingUncheckedUpdateManyWithoutProjectInput>
   }
 
-  export type TrainingScalarWhereInput = {
-    AND?: TrainingScalarWhereInput | TrainingScalarWhereInput[]
-    OR?: TrainingScalarWhereInput[]
-    NOT?: TrainingScalarWhereInput | TrainingScalarWhereInput[]
-    id?: StringFilter<"Training"> | string
-    projectId?: StringFilter<"Training"> | string
-    quarterId?: StringFilter<"Training"> | string
-    title?: StringFilter<"Training"> | string
-    target?: IntFilter<"Training"> | number
-    achieved?: IntFilter<"Training"> | number
-    district?: StringFilter<"Training"> | string
-    village?: StringFilter<"Training"> | string
-    block?: StringFilter<"Training"> | string
-    beneficiaryMale?: IntFilter<"Training"> | number
-    beneficiaryFemale?: IntFilter<"Training"> | number
-    remarks?: StringNullableFilter<"Training"> | string | null
-    imageUrl?: StringNullableFilter<"Training"> | string | null
-    imageKey?: StringNullableFilter<"Training"> | string | null
-    pdfUrl?: StringNullableFilter<"Training"> | string | null
-    pdfKey?: StringNullableFilter<"Training"> | string | null
-    units?: StringNullableFilter<"Training"> | string | null
-    createdAt?: DateTimeFilter<"Training"> | Date | string
-    updatedAt?: DateTimeFilter<"Training"> | Date | string
-  }
-
   export type FLDUpsertWithWhereUniqueWithoutProjectInput = {
     where: FLDWhereUniqueInput
     update: XOR<FLDUpdateWithoutProjectInput, FLDUncheckedUpdateWithoutProjectInput>
@@ -21703,20 +26743,6 @@ export namespace Prisma {
   export type FLDUpdateManyWithWhereWithoutProjectInput = {
     where: FLDScalarWhereInput
     data: XOR<FLDUpdateManyMutationInput, FLDUncheckedUpdateManyWithoutProjectInput>
-  }
-
-  export type FLDScalarWhereInput = {
-    AND?: FLDScalarWhereInput | FLDScalarWhereInput[]
-    OR?: FLDScalarWhereInput[]
-    NOT?: FLDScalarWhereInput | FLDScalarWhereInput[]
-    id?: StringFilter<"FLD"> | string
-    projectId?: StringFilter<"FLD"> | string
-    quarterId?: StringFilter<"FLD"> | string
-    target?: IntFilter<"FLD"> | number
-    achieved?: IntFilter<"FLD"> | number
-    units?: StringNullableFilter<"FLD"> | string | null
-    createdAt?: DateTimeFilter<"FLD"> | Date | string
-    updatedAt?: DateTimeFilter<"FLD"> | Date | string
   }
 
   export type AwarenessProgramUpsertWithWhereUniqueWithoutProjectInput = {
@@ -21735,28 +26761,6 @@ export namespace Prisma {
     data: XOR<AwarenessProgramUpdateManyMutationInput, AwarenessProgramUncheckedUpdateManyWithoutProjectInput>
   }
 
-  export type AwarenessProgramScalarWhereInput = {
-    AND?: AwarenessProgramScalarWhereInput | AwarenessProgramScalarWhereInput[]
-    OR?: AwarenessProgramScalarWhereInput[]
-    NOT?: AwarenessProgramScalarWhereInput | AwarenessProgramScalarWhereInput[]
-    id?: StringFilter<"AwarenessProgram"> | string
-    projectId?: StringFilter<"AwarenessProgram"> | string
-    quarterId?: StringFilter<"AwarenessProgram"> | string
-    title?: StringFilter<"AwarenessProgram"> | string
-    target?: IntFilter<"AwarenessProgram"> | number
-    achieved?: IntFilter<"AwarenessProgram"> | number
-    district?: StringFilter<"AwarenessProgram"> | string
-    village?: StringFilter<"AwarenessProgram"> | string
-    block?: StringFilter<"AwarenessProgram"> | string
-    beneficiaryMale?: IntFilter<"AwarenessProgram"> | number
-    beneficiaryFemale?: IntFilter<"AwarenessProgram"> | number
-    imageUrl?: StringNullableFilter<"AwarenessProgram"> | string | null
-    imageKey?: StringNullableFilter<"AwarenessProgram"> | string | null
-    units?: StringNullableFilter<"AwarenessProgram"> | string | null
-    createdAt?: DateTimeFilter<"AwarenessProgram"> | Date | string
-    updatedAt?: DateTimeFilter<"AwarenessProgram"> | Date | string
-  }
-
   export type InfrastructureDevelopmentUpsertWithWhereUniqueWithoutProjectInput = {
     where: InfrastructureDevelopmentWhereUniqueInput
     update: XOR<InfrastructureDevelopmentUpdateWithoutProjectInput, InfrastructureDevelopmentUncheckedUpdateWithoutProjectInput>
@@ -21771,25 +26775,6 @@ export namespace Prisma {
   export type InfrastructureDevelopmentUpdateManyWithWhereWithoutProjectInput = {
     where: InfrastructureDevelopmentScalarWhereInput
     data: XOR<InfrastructureDevelopmentUpdateManyMutationInput, InfrastructureDevelopmentUncheckedUpdateManyWithoutProjectInput>
-  }
-
-  export type InfrastructureDevelopmentScalarWhereInput = {
-    AND?: InfrastructureDevelopmentScalarWhereInput | InfrastructureDevelopmentScalarWhereInput[]
-    OR?: InfrastructureDevelopmentScalarWhereInput[]
-    NOT?: InfrastructureDevelopmentScalarWhereInput | InfrastructureDevelopmentScalarWhereInput[]
-    id?: StringFilter<"InfrastructureDevelopment"> | string
-    projectId?: StringFilter<"InfrastructureDevelopment"> | string
-    quarterId?: StringFilter<"InfrastructureDevelopment"> | string
-    target?: IntFilter<"InfrastructureDevelopment"> | number
-    achieved?: IntFilter<"InfrastructureDevelopment"> | number
-    district?: StringFilter<"InfrastructureDevelopment"> | string
-    village?: StringFilter<"InfrastructureDevelopment"> | string
-    block?: StringFilter<"InfrastructureDevelopment"> | string
-    remarks?: StringNullableFilter<"InfrastructureDevelopment"> | string | null
-    imageUrl?: StringNullableFilter<"InfrastructureDevelopment"> | string | null
-    imageKey?: StringNullableFilter<"InfrastructureDevelopment"> | string | null
-    createdAt?: DateTimeFilter<"InfrastructureDevelopment"> | Date | string
-    updatedAt?: DateTimeFilter<"InfrastructureDevelopment"> | Date | string
   }
 
   export type InputDistributionUpsertWithWhereUniqueWithoutProjectInput = {
@@ -21808,15 +26793,65 @@ export namespace Prisma {
     data: XOR<InputDistributionUpdateManyMutationInput, InputDistributionUncheckedUpdateManyWithoutProjectInput>
   }
 
-  export type InputDistributionScalarWhereInput = {
-    AND?: InputDistributionScalarWhereInput | InputDistributionScalarWhereInput[]
-    OR?: InputDistributionScalarWhereInput[]
-    NOT?: InputDistributionScalarWhereInput | InputDistributionScalarWhereInput[]
-    id?: StringFilter<"InputDistribution"> | string
-    projectId?: StringFilter<"InputDistribution"> | string
-    quarterId?: StringFilter<"InputDistribution"> | string
-    createdAt?: DateTimeFilter<"InputDistribution"> | Date | string
-    updatedAt?: DateTimeFilter<"InputDistribution"> | Date | string
+  export type UserUpsertWithoutProjectsInput = {
+    update: XOR<UserUpdateWithoutProjectsInput, UserUncheckedUpdateWithoutProjectsInput>
+    create: XOR<UserCreateWithoutProjectsInput, UserUncheckedCreateWithoutProjectsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutProjectsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutProjectsInput, UserUncheckedUpdateWithoutProjectsInput>
+  }
+
+  export type UserUpdateWithoutProjectsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    userCode?: StringFieldUpdateOperationsInput | string
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    verificationCode?: NullableStringFieldUpdateOperationsInput | string | null
+    resetPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verificationExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    trainings?: TrainingUpdateManyWithoutUserNestedInput
+    flds?: FLDUpdateManyWithoutUserNestedInput
+    awarenessPrograms?: AwarenessProgramUpdateManyWithoutUserNestedInput
+    infrastructureDevelopments?: InfrastructureDevelopmentUpdateManyWithoutUserNestedInput
+    inputDistributions?: InputDistributionUpdateManyWithoutUserNestedInput
+    upcomingEvents?: UpcomingEventUpdateManyWithoutUserNestedInput
+    publications?: PublicationUpdateManyWithoutUserNestedInput
+    galleries?: GalleryUpdateManyWithoutUserNestedInput
+    projectDetails?: ProjectDetailsUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutProjectsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    userCode?: StringFieldUpdateOperationsInput | string
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    verificationCode?: NullableStringFieldUpdateOperationsInput | string | null
+    resetPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verificationExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    trainings?: TrainingUncheckedUpdateManyWithoutUserNestedInput
+    flds?: FLDUncheckedUpdateManyWithoutUserNestedInput
+    awarenessPrograms?: AwarenessProgramUncheckedUpdateManyWithoutUserNestedInput
+    infrastructureDevelopments?: InfrastructureDevelopmentUncheckedUpdateManyWithoutUserNestedInput
+    inputDistributions?: InputDistributionUncheckedUpdateManyWithoutUserNestedInput
+    upcomingEvents?: UpcomingEventUncheckedUpdateManyWithoutUserNestedInput
+    publications?: PublicationUncheckedUpdateManyWithoutUserNestedInput
+    galleries?: GalleryUncheckedUpdateManyWithoutUserNestedInput
+    projectDetails?: ProjectDetailsUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type TrainingCreateWithoutQuarterInput = {
@@ -21838,6 +26873,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     project: ProjectCreateNestedOneWithoutTrainingsInput
+    User?: UserCreateNestedOneWithoutTrainingsInput
   }
 
   export type TrainingUncheckedCreateWithoutQuarterInput = {
@@ -21859,6 +26895,7 @@ export namespace Prisma {
     units?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    userId?: string | null
   }
 
   export type TrainingCreateOrConnectWithoutQuarterInput = {
@@ -21873,22 +26910,32 @@ export namespace Prisma {
 
   export type FLDCreateWithoutQuarterInput = {
     id?: string
+    description?: string | null
+    district: string
+    village: string
+    block: string
     target: number
     achieved: number
     units?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     project: ProjectCreateNestedOneWithoutFldsInput
+    User?: UserCreateNestedOneWithoutFldsInput
   }
 
   export type FLDUncheckedCreateWithoutQuarterInput = {
     id?: string
     projectId: string
+    description?: string | null
+    district: string
+    village: string
+    block: string
     target: number
     achieved: number
     units?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    userId?: string | null
   }
 
   export type FLDCreateOrConnectWithoutQuarterInput = {
@@ -21917,6 +26964,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     project: ProjectCreateNestedOneWithoutAwarenessProgramsInput
+    User?: UserCreateNestedOneWithoutAwarenessProgramsInput
   }
 
   export type AwarenessProgramUncheckedCreateWithoutQuarterInput = {
@@ -21935,6 +26983,7 @@ export namespace Prisma {
     units?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    userId?: string | null
   }
 
   export type AwarenessProgramCreateOrConnectWithoutQuarterInput = {
@@ -21954,11 +27003,13 @@ export namespace Prisma {
     project: ProjectCreateNestedOneWithoutInputDistributionsInput
     predefinedItems?: PredefinedInputDistributionCreateNestedManyWithoutInputDistributionInput
     customItems?: CustomInputDistributionCreateNestedManyWithoutInputDistributionInput
+    User?: UserCreateNestedOneWithoutInputDistributionsInput
   }
 
   export type InputDistributionUncheckedCreateWithoutQuarterInput = {
     id?: string
     projectId: string
+    userId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     predefinedItems?: PredefinedInputDistributionUncheckedCreateNestedManyWithoutInputDistributionInput
@@ -21988,6 +27039,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     project: ProjectCreateNestedOneWithoutInfrastructureDevelopmentsInput
+    User?: UserCreateNestedOneWithoutInfrastructureDevelopmentsInput
   }
 
   export type InfrastructureDevelopmentUncheckedCreateWithoutQuarterInput = {
@@ -22003,6 +27055,7 @@ export namespace Prisma {
     imageKey?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    userId?: string | null
   }
 
   export type InfrastructureDevelopmentCreateOrConnectWithoutQuarterInput = {
@@ -22101,12 +27154,17 @@ export namespace Prisma {
     title: string
     locationState: string
     director: string
+    budget?: Decimal | DecimalJsLike | number | string | null
+    status?: $Enums.Status
+    startDate?: Date | string | null
+    endDate?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     trainings?: TrainingCreateNestedManyWithoutProjectInput
     flds?: FLDCreateNestedManyWithoutProjectInput
     awarenessPrograms?: AwarenessProgramCreateNestedManyWithoutProjectInput
     infrastructureDevelopments?: InfrastructureDevelopmentCreateNestedManyWithoutProjectInput
+    User?: UserCreateNestedOneWithoutProjectsInput
   }
 
   export type ProjectUncheckedCreateWithoutInputDistributionsInput = {
@@ -22115,8 +27173,13 @@ export namespace Prisma {
     title: string
     locationState: string
     director: string
+    budget?: Decimal | DecimalJsLike | number | string | null
+    status?: $Enums.Status
+    startDate?: Date | string | null
+    endDate?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    userId?: string | null
     trainings?: TrainingUncheckedCreateNestedManyWithoutProjectInput
     flds?: FLDUncheckedCreateNestedManyWithoutProjectInput
     awarenessPrograms?: AwarenessProgramUncheckedCreateNestedManyWithoutProjectInput
@@ -22132,6 +27195,7 @@ export namespace Prisma {
     id?: string
     number: number
     year: number
+    isActive?: boolean
     trainings?: TrainingCreateNestedManyWithoutQuarterInput
     flds?: FLDCreateNestedManyWithoutQuarterInput
     awarenessPrograms?: AwarenessProgramCreateNestedManyWithoutQuarterInput
@@ -22142,6 +27206,7 @@ export namespace Prisma {
     id?: string
     number: number
     year: number
+    isActive?: boolean
     trainings?: TrainingUncheckedCreateNestedManyWithoutQuarterInput
     flds?: FLDUncheckedCreateNestedManyWithoutQuarterInput
     awarenessPrograms?: AwarenessProgramUncheckedCreateNestedManyWithoutQuarterInput
@@ -22241,6 +27306,61 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type UserCreateWithoutInputDistributionsInput = {
+    id?: string
+    name: string
+    email: string
+    password: string
+    role: $Enums.Role
+    userCode: string
+    isVerified?: boolean
+    verificationCode?: string | null
+    resetPasswordToken?: string | null
+    resetTokenExpires?: Date | string | null
+    verificationExpires?: Date | string | null
+    createdAt?: Date | string
+    updateAt?: Date | string
+    projects?: ProjectCreateNestedManyWithoutUserInput
+    trainings?: TrainingCreateNestedManyWithoutUserInput
+    flds?: FLDCreateNestedManyWithoutUserInput
+    awarenessPrograms?: AwarenessProgramCreateNestedManyWithoutUserInput
+    infrastructureDevelopments?: InfrastructureDevelopmentCreateNestedManyWithoutUserInput
+    upcomingEvents?: UpcomingEventCreateNestedManyWithoutUserInput
+    publications?: PublicationCreateNestedManyWithoutUserInput
+    galleries?: GalleryCreateNestedManyWithoutUserInput
+    projectDetails?: ProjectDetailsCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutInputDistributionsInput = {
+    id?: string
+    name: string
+    email: string
+    password: string
+    role: $Enums.Role
+    userCode: string
+    isVerified?: boolean
+    verificationCode?: string | null
+    resetPasswordToken?: string | null
+    resetTokenExpires?: Date | string | null
+    verificationExpires?: Date | string | null
+    createdAt?: Date | string
+    updateAt?: Date | string
+    projects?: ProjectUncheckedCreateNestedManyWithoutUserInput
+    trainings?: TrainingUncheckedCreateNestedManyWithoutUserInput
+    flds?: FLDUncheckedCreateNestedManyWithoutUserInput
+    awarenessPrograms?: AwarenessProgramUncheckedCreateNestedManyWithoutUserInput
+    infrastructureDevelopments?: InfrastructureDevelopmentUncheckedCreateNestedManyWithoutUserInput
+    upcomingEvents?: UpcomingEventUncheckedCreateNestedManyWithoutUserInput
+    publications?: PublicationUncheckedCreateNestedManyWithoutUserInput
+    galleries?: GalleryUncheckedCreateNestedManyWithoutUserInput
+    projectDetails?: ProjectDetailsUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutInputDistributionsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutInputDistributionsInput, UserUncheckedCreateWithoutInputDistributionsInput>
+  }
+
   export type ProjectUpsertWithoutInputDistributionsInput = {
     update: XOR<ProjectUpdateWithoutInputDistributionsInput, ProjectUncheckedUpdateWithoutInputDistributionsInput>
     create: XOR<ProjectCreateWithoutInputDistributionsInput, ProjectUncheckedCreateWithoutInputDistributionsInput>
@@ -22258,12 +27378,17 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     locationState?: StringFieldUpdateOperationsInput | string
     director?: StringFieldUpdateOperationsInput | string
+    budget?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     trainings?: TrainingUpdateManyWithoutProjectNestedInput
     flds?: FLDUpdateManyWithoutProjectNestedInput
     awarenessPrograms?: AwarenessProgramUpdateManyWithoutProjectNestedInput
     infrastructureDevelopments?: InfrastructureDevelopmentUpdateManyWithoutProjectNestedInput
+    User?: UserUpdateOneWithoutProjectsNestedInput
   }
 
   export type ProjectUncheckedUpdateWithoutInputDistributionsInput = {
@@ -22272,8 +27397,13 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     locationState?: StringFieldUpdateOperationsInput | string
     director?: StringFieldUpdateOperationsInput | string
+    budget?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
     trainings?: TrainingUncheckedUpdateManyWithoutProjectNestedInput
     flds?: FLDUncheckedUpdateManyWithoutProjectNestedInput
     awarenessPrograms?: AwarenessProgramUncheckedUpdateManyWithoutProjectNestedInput
@@ -22295,6 +27425,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     number?: IntFieldUpdateOperationsInput | number
     year?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     trainings?: TrainingUpdateManyWithoutQuarterNestedInput
     flds?: FLDUpdateManyWithoutQuarterNestedInput
     awarenessPrograms?: AwarenessProgramUpdateManyWithoutQuarterNestedInput
@@ -22305,6 +27436,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     number?: IntFieldUpdateOperationsInput | number
     year?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     trainings?: TrainingUncheckedUpdateManyWithoutQuarterNestedInput
     flds?: FLDUncheckedUpdateManyWithoutQuarterNestedInput
     awarenessPrograms?: AwarenessProgramUncheckedUpdateManyWithoutQuarterNestedInput
@@ -22385,6 +27517,67 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"CustomInputDistribution"> | Date | string
   }
 
+  export type UserUpsertWithoutInputDistributionsInput = {
+    update: XOR<UserUpdateWithoutInputDistributionsInput, UserUncheckedUpdateWithoutInputDistributionsInput>
+    create: XOR<UserCreateWithoutInputDistributionsInput, UserUncheckedCreateWithoutInputDistributionsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutInputDistributionsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutInputDistributionsInput, UserUncheckedUpdateWithoutInputDistributionsInput>
+  }
+
+  export type UserUpdateWithoutInputDistributionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    userCode?: StringFieldUpdateOperationsInput | string
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    verificationCode?: NullableStringFieldUpdateOperationsInput | string | null
+    resetPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verificationExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    projects?: ProjectUpdateManyWithoutUserNestedInput
+    trainings?: TrainingUpdateManyWithoutUserNestedInput
+    flds?: FLDUpdateManyWithoutUserNestedInput
+    awarenessPrograms?: AwarenessProgramUpdateManyWithoutUserNestedInput
+    infrastructureDevelopments?: InfrastructureDevelopmentUpdateManyWithoutUserNestedInput
+    upcomingEvents?: UpcomingEventUpdateManyWithoutUserNestedInput
+    publications?: PublicationUpdateManyWithoutUserNestedInput
+    galleries?: GalleryUpdateManyWithoutUserNestedInput
+    projectDetails?: ProjectDetailsUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutInputDistributionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    userCode?: StringFieldUpdateOperationsInput | string
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    verificationCode?: NullableStringFieldUpdateOperationsInput | string | null
+    resetPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verificationExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    projects?: ProjectUncheckedUpdateManyWithoutUserNestedInput
+    trainings?: TrainingUncheckedUpdateManyWithoutUserNestedInput
+    flds?: FLDUncheckedUpdateManyWithoutUserNestedInput
+    awarenessPrograms?: AwarenessProgramUncheckedUpdateManyWithoutUserNestedInput
+    infrastructureDevelopments?: InfrastructureDevelopmentUncheckedUpdateManyWithoutUserNestedInput
+    upcomingEvents?: UpcomingEventUncheckedUpdateManyWithoutUserNestedInput
+    publications?: PublicationUncheckedUpdateManyWithoutUserNestedInput
+    galleries?: GalleryUncheckedUpdateManyWithoutUserNestedInput
+    projectDetails?: ProjectDetailsUncheckedUpdateManyWithoutUserNestedInput
+  }
+
   export type InputDistributionCreateWithoutPredefinedItemsInput = {
     id?: string
     createdAt?: Date | string
@@ -22392,12 +27585,14 @@ export namespace Prisma {
     project: ProjectCreateNestedOneWithoutInputDistributionsInput
     quarter: QuarterCreateNestedOneWithoutInputDistributionsInput
     customItems?: CustomInputDistributionCreateNestedManyWithoutInputDistributionInput
+    User?: UserCreateNestedOneWithoutInputDistributionsInput
   }
 
   export type InputDistributionUncheckedCreateWithoutPredefinedItemsInput = {
     id?: string
     projectId: string
     quarterId: string
+    userId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     customItems?: CustomInputDistributionUncheckedCreateNestedManyWithoutInputDistributionInput
@@ -22426,12 +27621,14 @@ export namespace Prisma {
     project?: ProjectUpdateOneRequiredWithoutInputDistributionsNestedInput
     quarter?: QuarterUpdateOneRequiredWithoutInputDistributionsNestedInput
     customItems?: CustomInputDistributionUpdateManyWithoutInputDistributionNestedInput
+    User?: UserUpdateOneWithoutInputDistributionsNestedInput
   }
 
   export type InputDistributionUncheckedUpdateWithoutPredefinedItemsInput = {
     id?: StringFieldUpdateOperationsInput | string
     projectId?: StringFieldUpdateOperationsInput | string
     quarterId?: StringFieldUpdateOperationsInput | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     customItems?: CustomInputDistributionUncheckedUpdateManyWithoutInputDistributionNestedInput
@@ -22444,12 +27641,14 @@ export namespace Prisma {
     project: ProjectCreateNestedOneWithoutInputDistributionsInput
     quarter: QuarterCreateNestedOneWithoutInputDistributionsInput
     predefinedItems?: PredefinedInputDistributionCreateNestedManyWithoutInputDistributionInput
+    User?: UserCreateNestedOneWithoutInputDistributionsInput
   }
 
   export type InputDistributionUncheckedCreateWithoutCustomItemsInput = {
     id?: string
     projectId: string
     quarterId: string
+    userId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     predefinedItems?: PredefinedInputDistributionUncheckedCreateNestedManyWithoutInputDistributionInput
@@ -22478,12 +27677,14 @@ export namespace Prisma {
     project?: ProjectUpdateOneRequiredWithoutInputDistributionsNestedInput
     quarter?: QuarterUpdateOneRequiredWithoutInputDistributionsNestedInput
     predefinedItems?: PredefinedInputDistributionUpdateManyWithoutInputDistributionNestedInput
+    User?: UserUpdateOneWithoutInputDistributionsNestedInput
   }
 
   export type InputDistributionUncheckedUpdateWithoutCustomItemsInput = {
     id?: StringFieldUpdateOperationsInput | string
     projectId?: StringFieldUpdateOperationsInput | string
     quarterId?: StringFieldUpdateOperationsInput | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     predefinedItems?: PredefinedInputDistributionUncheckedUpdateManyWithoutInputDistributionNestedInput
@@ -22495,12 +27696,17 @@ export namespace Prisma {
     title: string
     locationState: string
     director: string
+    budget?: Decimal | DecimalJsLike | number | string | null
+    status?: $Enums.Status
+    startDate?: Date | string | null
+    endDate?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     flds?: FLDCreateNestedManyWithoutProjectInput
     awarenessPrograms?: AwarenessProgramCreateNestedManyWithoutProjectInput
     infrastructureDevelopments?: InfrastructureDevelopmentCreateNestedManyWithoutProjectInput
     inputDistributions?: InputDistributionCreateNestedManyWithoutProjectInput
+    User?: UserCreateNestedOneWithoutProjectsInput
   }
 
   export type ProjectUncheckedCreateWithoutTrainingsInput = {
@@ -22509,8 +27715,13 @@ export namespace Prisma {
     title: string
     locationState: string
     director: string
+    budget?: Decimal | DecimalJsLike | number | string | null
+    status?: $Enums.Status
+    startDate?: Date | string | null
+    endDate?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    userId?: string | null
     flds?: FLDUncheckedCreateNestedManyWithoutProjectInput
     awarenessPrograms?: AwarenessProgramUncheckedCreateNestedManyWithoutProjectInput
     infrastructureDevelopments?: InfrastructureDevelopmentUncheckedCreateNestedManyWithoutProjectInput
@@ -22526,6 +27737,7 @@ export namespace Prisma {
     id?: string
     number: number
     year: number
+    isActive?: boolean
     flds?: FLDCreateNestedManyWithoutQuarterInput
     awarenessPrograms?: AwarenessProgramCreateNestedManyWithoutQuarterInput
     inputDistributions?: InputDistributionCreateNestedManyWithoutQuarterInput
@@ -22536,6 +27748,7 @@ export namespace Prisma {
     id?: string
     number: number
     year: number
+    isActive?: boolean
     flds?: FLDUncheckedCreateNestedManyWithoutQuarterInput
     awarenessPrograms?: AwarenessProgramUncheckedCreateNestedManyWithoutQuarterInput
     inputDistributions?: InputDistributionUncheckedCreateNestedManyWithoutQuarterInput
@@ -22545,6 +27758,61 @@ export namespace Prisma {
   export type QuarterCreateOrConnectWithoutTrainingsInput = {
     where: QuarterWhereUniqueInput
     create: XOR<QuarterCreateWithoutTrainingsInput, QuarterUncheckedCreateWithoutTrainingsInput>
+  }
+
+  export type UserCreateWithoutTrainingsInput = {
+    id?: string
+    name: string
+    email: string
+    password: string
+    role: $Enums.Role
+    userCode: string
+    isVerified?: boolean
+    verificationCode?: string | null
+    resetPasswordToken?: string | null
+    resetTokenExpires?: Date | string | null
+    verificationExpires?: Date | string | null
+    createdAt?: Date | string
+    updateAt?: Date | string
+    projects?: ProjectCreateNestedManyWithoutUserInput
+    flds?: FLDCreateNestedManyWithoutUserInput
+    awarenessPrograms?: AwarenessProgramCreateNestedManyWithoutUserInput
+    infrastructureDevelopments?: InfrastructureDevelopmentCreateNestedManyWithoutUserInput
+    inputDistributions?: InputDistributionCreateNestedManyWithoutUserInput
+    upcomingEvents?: UpcomingEventCreateNestedManyWithoutUserInput
+    publications?: PublicationCreateNestedManyWithoutUserInput
+    galleries?: GalleryCreateNestedManyWithoutUserInput
+    projectDetails?: ProjectDetailsCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutTrainingsInput = {
+    id?: string
+    name: string
+    email: string
+    password: string
+    role: $Enums.Role
+    userCode: string
+    isVerified?: boolean
+    verificationCode?: string | null
+    resetPasswordToken?: string | null
+    resetTokenExpires?: Date | string | null
+    verificationExpires?: Date | string | null
+    createdAt?: Date | string
+    updateAt?: Date | string
+    projects?: ProjectUncheckedCreateNestedManyWithoutUserInput
+    flds?: FLDUncheckedCreateNestedManyWithoutUserInput
+    awarenessPrograms?: AwarenessProgramUncheckedCreateNestedManyWithoutUserInput
+    infrastructureDevelopments?: InfrastructureDevelopmentUncheckedCreateNestedManyWithoutUserInput
+    inputDistributions?: InputDistributionUncheckedCreateNestedManyWithoutUserInput
+    upcomingEvents?: UpcomingEventUncheckedCreateNestedManyWithoutUserInput
+    publications?: PublicationUncheckedCreateNestedManyWithoutUserInput
+    galleries?: GalleryUncheckedCreateNestedManyWithoutUserInput
+    projectDetails?: ProjectDetailsUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutTrainingsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutTrainingsInput, UserUncheckedCreateWithoutTrainingsInput>
   }
 
   export type ProjectUpsertWithoutTrainingsInput = {
@@ -22564,12 +27832,17 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     locationState?: StringFieldUpdateOperationsInput | string
     director?: StringFieldUpdateOperationsInput | string
+    budget?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     flds?: FLDUpdateManyWithoutProjectNestedInput
     awarenessPrograms?: AwarenessProgramUpdateManyWithoutProjectNestedInput
     infrastructureDevelopments?: InfrastructureDevelopmentUpdateManyWithoutProjectNestedInput
     inputDistributions?: InputDistributionUpdateManyWithoutProjectNestedInput
+    User?: UserUpdateOneWithoutProjectsNestedInput
   }
 
   export type ProjectUncheckedUpdateWithoutTrainingsInput = {
@@ -22578,8 +27851,13 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     locationState?: StringFieldUpdateOperationsInput | string
     director?: StringFieldUpdateOperationsInput | string
+    budget?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
     flds?: FLDUncheckedUpdateManyWithoutProjectNestedInput
     awarenessPrograms?: AwarenessProgramUncheckedUpdateManyWithoutProjectNestedInput
     infrastructureDevelopments?: InfrastructureDevelopmentUncheckedUpdateManyWithoutProjectNestedInput
@@ -22601,6 +27879,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     number?: IntFieldUpdateOperationsInput | number
     year?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     flds?: FLDUpdateManyWithoutQuarterNestedInput
     awarenessPrograms?: AwarenessProgramUpdateManyWithoutQuarterNestedInput
     inputDistributions?: InputDistributionUpdateManyWithoutQuarterNestedInput
@@ -22611,10 +27890,72 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     number?: IntFieldUpdateOperationsInput | number
     year?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     flds?: FLDUncheckedUpdateManyWithoutQuarterNestedInput
     awarenessPrograms?: AwarenessProgramUncheckedUpdateManyWithoutQuarterNestedInput
     inputDistributions?: InputDistributionUncheckedUpdateManyWithoutQuarterNestedInput
     infrastructureDevelopments?: InfrastructureDevelopmentUncheckedUpdateManyWithoutQuarterNestedInput
+  }
+
+  export type UserUpsertWithoutTrainingsInput = {
+    update: XOR<UserUpdateWithoutTrainingsInput, UserUncheckedUpdateWithoutTrainingsInput>
+    create: XOR<UserCreateWithoutTrainingsInput, UserUncheckedCreateWithoutTrainingsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutTrainingsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutTrainingsInput, UserUncheckedUpdateWithoutTrainingsInput>
+  }
+
+  export type UserUpdateWithoutTrainingsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    userCode?: StringFieldUpdateOperationsInput | string
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    verificationCode?: NullableStringFieldUpdateOperationsInput | string | null
+    resetPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verificationExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    projects?: ProjectUpdateManyWithoutUserNestedInput
+    flds?: FLDUpdateManyWithoutUserNestedInput
+    awarenessPrograms?: AwarenessProgramUpdateManyWithoutUserNestedInput
+    infrastructureDevelopments?: InfrastructureDevelopmentUpdateManyWithoutUserNestedInput
+    inputDistributions?: InputDistributionUpdateManyWithoutUserNestedInput
+    upcomingEvents?: UpcomingEventUpdateManyWithoutUserNestedInput
+    publications?: PublicationUpdateManyWithoutUserNestedInput
+    galleries?: GalleryUpdateManyWithoutUserNestedInput
+    projectDetails?: ProjectDetailsUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutTrainingsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    userCode?: StringFieldUpdateOperationsInput | string
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    verificationCode?: NullableStringFieldUpdateOperationsInput | string | null
+    resetPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verificationExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    projects?: ProjectUncheckedUpdateManyWithoutUserNestedInput
+    flds?: FLDUncheckedUpdateManyWithoutUserNestedInput
+    awarenessPrograms?: AwarenessProgramUncheckedUpdateManyWithoutUserNestedInput
+    infrastructureDevelopments?: InfrastructureDevelopmentUncheckedUpdateManyWithoutUserNestedInput
+    inputDistributions?: InputDistributionUncheckedUpdateManyWithoutUserNestedInput
+    upcomingEvents?: UpcomingEventUncheckedUpdateManyWithoutUserNestedInput
+    publications?: PublicationUncheckedUpdateManyWithoutUserNestedInput
+    galleries?: GalleryUncheckedUpdateManyWithoutUserNestedInput
+    projectDetails?: ProjectDetailsUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ProjectCreateWithoutFldsInput = {
@@ -22623,12 +27964,17 @@ export namespace Prisma {
     title: string
     locationState: string
     director: string
+    budget?: Decimal | DecimalJsLike | number | string | null
+    status?: $Enums.Status
+    startDate?: Date | string | null
+    endDate?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     trainings?: TrainingCreateNestedManyWithoutProjectInput
     awarenessPrograms?: AwarenessProgramCreateNestedManyWithoutProjectInput
     infrastructureDevelopments?: InfrastructureDevelopmentCreateNestedManyWithoutProjectInput
     inputDistributions?: InputDistributionCreateNestedManyWithoutProjectInput
+    User?: UserCreateNestedOneWithoutProjectsInput
   }
 
   export type ProjectUncheckedCreateWithoutFldsInput = {
@@ -22637,8 +27983,13 @@ export namespace Prisma {
     title: string
     locationState: string
     director: string
+    budget?: Decimal | DecimalJsLike | number | string | null
+    status?: $Enums.Status
+    startDate?: Date | string | null
+    endDate?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    userId?: string | null
     trainings?: TrainingUncheckedCreateNestedManyWithoutProjectInput
     awarenessPrograms?: AwarenessProgramUncheckedCreateNestedManyWithoutProjectInput
     infrastructureDevelopments?: InfrastructureDevelopmentUncheckedCreateNestedManyWithoutProjectInput
@@ -22654,6 +28005,7 @@ export namespace Prisma {
     id?: string
     number: number
     year: number
+    isActive?: boolean
     trainings?: TrainingCreateNestedManyWithoutQuarterInput
     awarenessPrograms?: AwarenessProgramCreateNestedManyWithoutQuarterInput
     inputDistributions?: InputDistributionCreateNestedManyWithoutQuarterInput
@@ -22664,6 +28016,7 @@ export namespace Prisma {
     id?: string
     number: number
     year: number
+    isActive?: boolean
     trainings?: TrainingUncheckedCreateNestedManyWithoutQuarterInput
     awarenessPrograms?: AwarenessProgramUncheckedCreateNestedManyWithoutQuarterInput
     inputDistributions?: InputDistributionUncheckedCreateNestedManyWithoutQuarterInput
@@ -22673,6 +28026,61 @@ export namespace Prisma {
   export type QuarterCreateOrConnectWithoutFldsInput = {
     where: QuarterWhereUniqueInput
     create: XOR<QuarterCreateWithoutFldsInput, QuarterUncheckedCreateWithoutFldsInput>
+  }
+
+  export type UserCreateWithoutFldsInput = {
+    id?: string
+    name: string
+    email: string
+    password: string
+    role: $Enums.Role
+    userCode: string
+    isVerified?: boolean
+    verificationCode?: string | null
+    resetPasswordToken?: string | null
+    resetTokenExpires?: Date | string | null
+    verificationExpires?: Date | string | null
+    createdAt?: Date | string
+    updateAt?: Date | string
+    projects?: ProjectCreateNestedManyWithoutUserInput
+    trainings?: TrainingCreateNestedManyWithoutUserInput
+    awarenessPrograms?: AwarenessProgramCreateNestedManyWithoutUserInput
+    infrastructureDevelopments?: InfrastructureDevelopmentCreateNestedManyWithoutUserInput
+    inputDistributions?: InputDistributionCreateNestedManyWithoutUserInput
+    upcomingEvents?: UpcomingEventCreateNestedManyWithoutUserInput
+    publications?: PublicationCreateNestedManyWithoutUserInput
+    galleries?: GalleryCreateNestedManyWithoutUserInput
+    projectDetails?: ProjectDetailsCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutFldsInput = {
+    id?: string
+    name: string
+    email: string
+    password: string
+    role: $Enums.Role
+    userCode: string
+    isVerified?: boolean
+    verificationCode?: string | null
+    resetPasswordToken?: string | null
+    resetTokenExpires?: Date | string | null
+    verificationExpires?: Date | string | null
+    createdAt?: Date | string
+    updateAt?: Date | string
+    projects?: ProjectUncheckedCreateNestedManyWithoutUserInput
+    trainings?: TrainingUncheckedCreateNestedManyWithoutUserInput
+    awarenessPrograms?: AwarenessProgramUncheckedCreateNestedManyWithoutUserInput
+    infrastructureDevelopments?: InfrastructureDevelopmentUncheckedCreateNestedManyWithoutUserInput
+    inputDistributions?: InputDistributionUncheckedCreateNestedManyWithoutUserInput
+    upcomingEvents?: UpcomingEventUncheckedCreateNestedManyWithoutUserInput
+    publications?: PublicationUncheckedCreateNestedManyWithoutUserInput
+    galleries?: GalleryUncheckedCreateNestedManyWithoutUserInput
+    projectDetails?: ProjectDetailsUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutFldsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutFldsInput, UserUncheckedCreateWithoutFldsInput>
   }
 
   export type ProjectUpsertWithoutFldsInput = {
@@ -22692,12 +28100,17 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     locationState?: StringFieldUpdateOperationsInput | string
     director?: StringFieldUpdateOperationsInput | string
+    budget?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     trainings?: TrainingUpdateManyWithoutProjectNestedInput
     awarenessPrograms?: AwarenessProgramUpdateManyWithoutProjectNestedInput
     infrastructureDevelopments?: InfrastructureDevelopmentUpdateManyWithoutProjectNestedInput
     inputDistributions?: InputDistributionUpdateManyWithoutProjectNestedInput
+    User?: UserUpdateOneWithoutProjectsNestedInput
   }
 
   export type ProjectUncheckedUpdateWithoutFldsInput = {
@@ -22706,8 +28119,13 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     locationState?: StringFieldUpdateOperationsInput | string
     director?: StringFieldUpdateOperationsInput | string
+    budget?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
     trainings?: TrainingUncheckedUpdateManyWithoutProjectNestedInput
     awarenessPrograms?: AwarenessProgramUncheckedUpdateManyWithoutProjectNestedInput
     infrastructureDevelopments?: InfrastructureDevelopmentUncheckedUpdateManyWithoutProjectNestedInput
@@ -22729,6 +28147,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     number?: IntFieldUpdateOperationsInput | number
     year?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     trainings?: TrainingUpdateManyWithoutQuarterNestedInput
     awarenessPrograms?: AwarenessProgramUpdateManyWithoutQuarterNestedInput
     inputDistributions?: InputDistributionUpdateManyWithoutQuarterNestedInput
@@ -22739,10 +28158,72 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     number?: IntFieldUpdateOperationsInput | number
     year?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     trainings?: TrainingUncheckedUpdateManyWithoutQuarterNestedInput
     awarenessPrograms?: AwarenessProgramUncheckedUpdateManyWithoutQuarterNestedInput
     inputDistributions?: InputDistributionUncheckedUpdateManyWithoutQuarterNestedInput
     infrastructureDevelopments?: InfrastructureDevelopmentUncheckedUpdateManyWithoutQuarterNestedInput
+  }
+
+  export type UserUpsertWithoutFldsInput = {
+    update: XOR<UserUpdateWithoutFldsInput, UserUncheckedUpdateWithoutFldsInput>
+    create: XOR<UserCreateWithoutFldsInput, UserUncheckedCreateWithoutFldsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutFldsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutFldsInput, UserUncheckedUpdateWithoutFldsInput>
+  }
+
+  export type UserUpdateWithoutFldsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    userCode?: StringFieldUpdateOperationsInput | string
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    verificationCode?: NullableStringFieldUpdateOperationsInput | string | null
+    resetPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verificationExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    projects?: ProjectUpdateManyWithoutUserNestedInput
+    trainings?: TrainingUpdateManyWithoutUserNestedInput
+    awarenessPrograms?: AwarenessProgramUpdateManyWithoutUserNestedInput
+    infrastructureDevelopments?: InfrastructureDevelopmentUpdateManyWithoutUserNestedInput
+    inputDistributions?: InputDistributionUpdateManyWithoutUserNestedInput
+    upcomingEvents?: UpcomingEventUpdateManyWithoutUserNestedInput
+    publications?: PublicationUpdateManyWithoutUserNestedInput
+    galleries?: GalleryUpdateManyWithoutUserNestedInput
+    projectDetails?: ProjectDetailsUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutFldsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    userCode?: StringFieldUpdateOperationsInput | string
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    verificationCode?: NullableStringFieldUpdateOperationsInput | string | null
+    resetPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verificationExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    projects?: ProjectUncheckedUpdateManyWithoutUserNestedInput
+    trainings?: TrainingUncheckedUpdateManyWithoutUserNestedInput
+    awarenessPrograms?: AwarenessProgramUncheckedUpdateManyWithoutUserNestedInput
+    infrastructureDevelopments?: InfrastructureDevelopmentUncheckedUpdateManyWithoutUserNestedInput
+    inputDistributions?: InputDistributionUncheckedUpdateManyWithoutUserNestedInput
+    upcomingEvents?: UpcomingEventUncheckedUpdateManyWithoutUserNestedInput
+    publications?: PublicationUncheckedUpdateManyWithoutUserNestedInput
+    galleries?: GalleryUncheckedUpdateManyWithoutUserNestedInput
+    projectDetails?: ProjectDetailsUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ProjectCreateWithoutAwarenessProgramsInput = {
@@ -22751,12 +28232,17 @@ export namespace Prisma {
     title: string
     locationState: string
     director: string
+    budget?: Decimal | DecimalJsLike | number | string | null
+    status?: $Enums.Status
+    startDate?: Date | string | null
+    endDate?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     trainings?: TrainingCreateNestedManyWithoutProjectInput
     flds?: FLDCreateNestedManyWithoutProjectInput
     infrastructureDevelopments?: InfrastructureDevelopmentCreateNestedManyWithoutProjectInput
     inputDistributions?: InputDistributionCreateNestedManyWithoutProjectInput
+    User?: UserCreateNestedOneWithoutProjectsInput
   }
 
   export type ProjectUncheckedCreateWithoutAwarenessProgramsInput = {
@@ -22765,8 +28251,13 @@ export namespace Prisma {
     title: string
     locationState: string
     director: string
+    budget?: Decimal | DecimalJsLike | number | string | null
+    status?: $Enums.Status
+    startDate?: Date | string | null
+    endDate?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    userId?: string | null
     trainings?: TrainingUncheckedCreateNestedManyWithoutProjectInput
     flds?: FLDUncheckedCreateNestedManyWithoutProjectInput
     infrastructureDevelopments?: InfrastructureDevelopmentUncheckedCreateNestedManyWithoutProjectInput
@@ -22782,6 +28273,7 @@ export namespace Prisma {
     id?: string
     number: number
     year: number
+    isActive?: boolean
     trainings?: TrainingCreateNestedManyWithoutQuarterInput
     flds?: FLDCreateNestedManyWithoutQuarterInput
     inputDistributions?: InputDistributionCreateNestedManyWithoutQuarterInput
@@ -22792,6 +28284,7 @@ export namespace Prisma {
     id?: string
     number: number
     year: number
+    isActive?: boolean
     trainings?: TrainingUncheckedCreateNestedManyWithoutQuarterInput
     flds?: FLDUncheckedCreateNestedManyWithoutQuarterInput
     inputDistributions?: InputDistributionUncheckedCreateNestedManyWithoutQuarterInput
@@ -22801,6 +28294,61 @@ export namespace Prisma {
   export type QuarterCreateOrConnectWithoutAwarenessProgramsInput = {
     where: QuarterWhereUniqueInput
     create: XOR<QuarterCreateWithoutAwarenessProgramsInput, QuarterUncheckedCreateWithoutAwarenessProgramsInput>
+  }
+
+  export type UserCreateWithoutAwarenessProgramsInput = {
+    id?: string
+    name: string
+    email: string
+    password: string
+    role: $Enums.Role
+    userCode: string
+    isVerified?: boolean
+    verificationCode?: string | null
+    resetPasswordToken?: string | null
+    resetTokenExpires?: Date | string | null
+    verificationExpires?: Date | string | null
+    createdAt?: Date | string
+    updateAt?: Date | string
+    projects?: ProjectCreateNestedManyWithoutUserInput
+    trainings?: TrainingCreateNestedManyWithoutUserInput
+    flds?: FLDCreateNestedManyWithoutUserInput
+    infrastructureDevelopments?: InfrastructureDevelopmentCreateNestedManyWithoutUserInput
+    inputDistributions?: InputDistributionCreateNestedManyWithoutUserInput
+    upcomingEvents?: UpcomingEventCreateNestedManyWithoutUserInput
+    publications?: PublicationCreateNestedManyWithoutUserInput
+    galleries?: GalleryCreateNestedManyWithoutUserInput
+    projectDetails?: ProjectDetailsCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutAwarenessProgramsInput = {
+    id?: string
+    name: string
+    email: string
+    password: string
+    role: $Enums.Role
+    userCode: string
+    isVerified?: boolean
+    verificationCode?: string | null
+    resetPasswordToken?: string | null
+    resetTokenExpires?: Date | string | null
+    verificationExpires?: Date | string | null
+    createdAt?: Date | string
+    updateAt?: Date | string
+    projects?: ProjectUncheckedCreateNestedManyWithoutUserInput
+    trainings?: TrainingUncheckedCreateNestedManyWithoutUserInput
+    flds?: FLDUncheckedCreateNestedManyWithoutUserInput
+    infrastructureDevelopments?: InfrastructureDevelopmentUncheckedCreateNestedManyWithoutUserInput
+    inputDistributions?: InputDistributionUncheckedCreateNestedManyWithoutUserInput
+    upcomingEvents?: UpcomingEventUncheckedCreateNestedManyWithoutUserInput
+    publications?: PublicationUncheckedCreateNestedManyWithoutUserInput
+    galleries?: GalleryUncheckedCreateNestedManyWithoutUserInput
+    projectDetails?: ProjectDetailsUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutAwarenessProgramsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutAwarenessProgramsInput, UserUncheckedCreateWithoutAwarenessProgramsInput>
   }
 
   export type ProjectUpsertWithoutAwarenessProgramsInput = {
@@ -22820,12 +28368,17 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     locationState?: StringFieldUpdateOperationsInput | string
     director?: StringFieldUpdateOperationsInput | string
+    budget?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     trainings?: TrainingUpdateManyWithoutProjectNestedInput
     flds?: FLDUpdateManyWithoutProjectNestedInput
     infrastructureDevelopments?: InfrastructureDevelopmentUpdateManyWithoutProjectNestedInput
     inputDistributions?: InputDistributionUpdateManyWithoutProjectNestedInput
+    User?: UserUpdateOneWithoutProjectsNestedInput
   }
 
   export type ProjectUncheckedUpdateWithoutAwarenessProgramsInput = {
@@ -22834,8 +28387,13 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     locationState?: StringFieldUpdateOperationsInput | string
     director?: StringFieldUpdateOperationsInput | string
+    budget?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
     trainings?: TrainingUncheckedUpdateManyWithoutProjectNestedInput
     flds?: FLDUncheckedUpdateManyWithoutProjectNestedInput
     infrastructureDevelopments?: InfrastructureDevelopmentUncheckedUpdateManyWithoutProjectNestedInput
@@ -22857,6 +28415,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     number?: IntFieldUpdateOperationsInput | number
     year?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     trainings?: TrainingUpdateManyWithoutQuarterNestedInput
     flds?: FLDUpdateManyWithoutQuarterNestedInput
     inputDistributions?: InputDistributionUpdateManyWithoutQuarterNestedInput
@@ -22867,10 +28426,72 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     number?: IntFieldUpdateOperationsInput | number
     year?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     trainings?: TrainingUncheckedUpdateManyWithoutQuarterNestedInput
     flds?: FLDUncheckedUpdateManyWithoutQuarterNestedInput
     inputDistributions?: InputDistributionUncheckedUpdateManyWithoutQuarterNestedInput
     infrastructureDevelopments?: InfrastructureDevelopmentUncheckedUpdateManyWithoutQuarterNestedInput
+  }
+
+  export type UserUpsertWithoutAwarenessProgramsInput = {
+    update: XOR<UserUpdateWithoutAwarenessProgramsInput, UserUncheckedUpdateWithoutAwarenessProgramsInput>
+    create: XOR<UserCreateWithoutAwarenessProgramsInput, UserUncheckedCreateWithoutAwarenessProgramsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutAwarenessProgramsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutAwarenessProgramsInput, UserUncheckedUpdateWithoutAwarenessProgramsInput>
+  }
+
+  export type UserUpdateWithoutAwarenessProgramsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    userCode?: StringFieldUpdateOperationsInput | string
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    verificationCode?: NullableStringFieldUpdateOperationsInput | string | null
+    resetPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verificationExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    projects?: ProjectUpdateManyWithoutUserNestedInput
+    trainings?: TrainingUpdateManyWithoutUserNestedInput
+    flds?: FLDUpdateManyWithoutUserNestedInput
+    infrastructureDevelopments?: InfrastructureDevelopmentUpdateManyWithoutUserNestedInput
+    inputDistributions?: InputDistributionUpdateManyWithoutUserNestedInput
+    upcomingEvents?: UpcomingEventUpdateManyWithoutUserNestedInput
+    publications?: PublicationUpdateManyWithoutUserNestedInput
+    galleries?: GalleryUpdateManyWithoutUserNestedInput
+    projectDetails?: ProjectDetailsUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutAwarenessProgramsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    userCode?: StringFieldUpdateOperationsInput | string
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    verificationCode?: NullableStringFieldUpdateOperationsInput | string | null
+    resetPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verificationExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    projects?: ProjectUncheckedUpdateManyWithoutUserNestedInput
+    trainings?: TrainingUncheckedUpdateManyWithoutUserNestedInput
+    flds?: FLDUncheckedUpdateManyWithoutUserNestedInput
+    infrastructureDevelopments?: InfrastructureDevelopmentUncheckedUpdateManyWithoutUserNestedInput
+    inputDistributions?: InputDistributionUncheckedUpdateManyWithoutUserNestedInput
+    upcomingEvents?: UpcomingEventUncheckedUpdateManyWithoutUserNestedInput
+    publications?: PublicationUncheckedUpdateManyWithoutUserNestedInput
+    galleries?: GalleryUncheckedUpdateManyWithoutUserNestedInput
+    projectDetails?: ProjectDetailsUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ProjectCreateWithoutInfrastructureDevelopmentsInput = {
@@ -22879,12 +28500,17 @@ export namespace Prisma {
     title: string
     locationState: string
     director: string
+    budget?: Decimal | DecimalJsLike | number | string | null
+    status?: $Enums.Status
+    startDate?: Date | string | null
+    endDate?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     trainings?: TrainingCreateNestedManyWithoutProjectInput
     flds?: FLDCreateNestedManyWithoutProjectInput
     awarenessPrograms?: AwarenessProgramCreateNestedManyWithoutProjectInput
     inputDistributions?: InputDistributionCreateNestedManyWithoutProjectInput
+    User?: UserCreateNestedOneWithoutProjectsInput
   }
 
   export type ProjectUncheckedCreateWithoutInfrastructureDevelopmentsInput = {
@@ -22893,8 +28519,13 @@ export namespace Prisma {
     title: string
     locationState: string
     director: string
+    budget?: Decimal | DecimalJsLike | number | string | null
+    status?: $Enums.Status
+    startDate?: Date | string | null
+    endDate?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    userId?: string | null
     trainings?: TrainingUncheckedCreateNestedManyWithoutProjectInput
     flds?: FLDUncheckedCreateNestedManyWithoutProjectInput
     awarenessPrograms?: AwarenessProgramUncheckedCreateNestedManyWithoutProjectInput
@@ -22910,6 +28541,7 @@ export namespace Prisma {
     id?: string
     number: number
     year: number
+    isActive?: boolean
     trainings?: TrainingCreateNestedManyWithoutQuarterInput
     flds?: FLDCreateNestedManyWithoutQuarterInput
     awarenessPrograms?: AwarenessProgramCreateNestedManyWithoutQuarterInput
@@ -22920,6 +28552,7 @@ export namespace Prisma {
     id?: string
     number: number
     year: number
+    isActive?: boolean
     trainings?: TrainingUncheckedCreateNestedManyWithoutQuarterInput
     flds?: FLDUncheckedCreateNestedManyWithoutQuarterInput
     awarenessPrograms?: AwarenessProgramUncheckedCreateNestedManyWithoutQuarterInput
@@ -22929,6 +28562,61 @@ export namespace Prisma {
   export type QuarterCreateOrConnectWithoutInfrastructureDevelopmentsInput = {
     where: QuarterWhereUniqueInput
     create: XOR<QuarterCreateWithoutInfrastructureDevelopmentsInput, QuarterUncheckedCreateWithoutInfrastructureDevelopmentsInput>
+  }
+
+  export type UserCreateWithoutInfrastructureDevelopmentsInput = {
+    id?: string
+    name: string
+    email: string
+    password: string
+    role: $Enums.Role
+    userCode: string
+    isVerified?: boolean
+    verificationCode?: string | null
+    resetPasswordToken?: string | null
+    resetTokenExpires?: Date | string | null
+    verificationExpires?: Date | string | null
+    createdAt?: Date | string
+    updateAt?: Date | string
+    projects?: ProjectCreateNestedManyWithoutUserInput
+    trainings?: TrainingCreateNestedManyWithoutUserInput
+    flds?: FLDCreateNestedManyWithoutUserInput
+    awarenessPrograms?: AwarenessProgramCreateNestedManyWithoutUserInput
+    inputDistributions?: InputDistributionCreateNestedManyWithoutUserInput
+    upcomingEvents?: UpcomingEventCreateNestedManyWithoutUserInput
+    publications?: PublicationCreateNestedManyWithoutUserInput
+    galleries?: GalleryCreateNestedManyWithoutUserInput
+    projectDetails?: ProjectDetailsCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutInfrastructureDevelopmentsInput = {
+    id?: string
+    name: string
+    email: string
+    password: string
+    role: $Enums.Role
+    userCode: string
+    isVerified?: boolean
+    verificationCode?: string | null
+    resetPasswordToken?: string | null
+    resetTokenExpires?: Date | string | null
+    verificationExpires?: Date | string | null
+    createdAt?: Date | string
+    updateAt?: Date | string
+    projects?: ProjectUncheckedCreateNestedManyWithoutUserInput
+    trainings?: TrainingUncheckedCreateNestedManyWithoutUserInput
+    flds?: FLDUncheckedCreateNestedManyWithoutUserInput
+    awarenessPrograms?: AwarenessProgramUncheckedCreateNestedManyWithoutUserInput
+    inputDistributions?: InputDistributionUncheckedCreateNestedManyWithoutUserInput
+    upcomingEvents?: UpcomingEventUncheckedCreateNestedManyWithoutUserInput
+    publications?: PublicationUncheckedCreateNestedManyWithoutUserInput
+    galleries?: GalleryUncheckedCreateNestedManyWithoutUserInput
+    projectDetails?: ProjectDetailsUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutInfrastructureDevelopmentsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutInfrastructureDevelopmentsInput, UserUncheckedCreateWithoutInfrastructureDevelopmentsInput>
   }
 
   export type ProjectUpsertWithoutInfrastructureDevelopmentsInput = {
@@ -22948,12 +28636,17 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     locationState?: StringFieldUpdateOperationsInput | string
     director?: StringFieldUpdateOperationsInput | string
+    budget?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     trainings?: TrainingUpdateManyWithoutProjectNestedInput
     flds?: FLDUpdateManyWithoutProjectNestedInput
     awarenessPrograms?: AwarenessProgramUpdateManyWithoutProjectNestedInput
     inputDistributions?: InputDistributionUpdateManyWithoutProjectNestedInput
+    User?: UserUpdateOneWithoutProjectsNestedInput
   }
 
   export type ProjectUncheckedUpdateWithoutInfrastructureDevelopmentsInput = {
@@ -22962,8 +28655,13 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     locationState?: StringFieldUpdateOperationsInput | string
     director?: StringFieldUpdateOperationsInput | string
+    budget?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
     trainings?: TrainingUncheckedUpdateManyWithoutProjectNestedInput
     flds?: FLDUncheckedUpdateManyWithoutProjectNestedInput
     awarenessPrograms?: AwarenessProgramUncheckedUpdateManyWithoutProjectNestedInput
@@ -22985,6 +28683,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     number?: IntFieldUpdateOperationsInput | number
     year?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     trainings?: TrainingUpdateManyWithoutQuarterNestedInput
     flds?: FLDUpdateManyWithoutQuarterNestedInput
     awarenessPrograms?: AwarenessProgramUpdateManyWithoutQuarterNestedInput
@@ -22995,10 +28694,1118 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     number?: IntFieldUpdateOperationsInput | number
     year?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     trainings?: TrainingUncheckedUpdateManyWithoutQuarterNestedInput
     flds?: FLDUncheckedUpdateManyWithoutQuarterNestedInput
     awarenessPrograms?: AwarenessProgramUncheckedUpdateManyWithoutQuarterNestedInput
     inputDistributions?: InputDistributionUncheckedUpdateManyWithoutQuarterNestedInput
+  }
+
+  export type UserUpsertWithoutInfrastructureDevelopmentsInput = {
+    update: XOR<UserUpdateWithoutInfrastructureDevelopmentsInput, UserUncheckedUpdateWithoutInfrastructureDevelopmentsInput>
+    create: XOR<UserCreateWithoutInfrastructureDevelopmentsInput, UserUncheckedCreateWithoutInfrastructureDevelopmentsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutInfrastructureDevelopmentsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutInfrastructureDevelopmentsInput, UserUncheckedUpdateWithoutInfrastructureDevelopmentsInput>
+  }
+
+  export type UserUpdateWithoutInfrastructureDevelopmentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    userCode?: StringFieldUpdateOperationsInput | string
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    verificationCode?: NullableStringFieldUpdateOperationsInput | string | null
+    resetPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verificationExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    projects?: ProjectUpdateManyWithoutUserNestedInput
+    trainings?: TrainingUpdateManyWithoutUserNestedInput
+    flds?: FLDUpdateManyWithoutUserNestedInput
+    awarenessPrograms?: AwarenessProgramUpdateManyWithoutUserNestedInput
+    inputDistributions?: InputDistributionUpdateManyWithoutUserNestedInput
+    upcomingEvents?: UpcomingEventUpdateManyWithoutUserNestedInput
+    publications?: PublicationUpdateManyWithoutUserNestedInput
+    galleries?: GalleryUpdateManyWithoutUserNestedInput
+    projectDetails?: ProjectDetailsUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutInfrastructureDevelopmentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    userCode?: StringFieldUpdateOperationsInput | string
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    verificationCode?: NullableStringFieldUpdateOperationsInput | string | null
+    resetPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verificationExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    projects?: ProjectUncheckedUpdateManyWithoutUserNestedInput
+    trainings?: TrainingUncheckedUpdateManyWithoutUserNestedInput
+    flds?: FLDUncheckedUpdateManyWithoutUserNestedInput
+    awarenessPrograms?: AwarenessProgramUncheckedUpdateManyWithoutUserNestedInput
+    inputDistributions?: InputDistributionUncheckedUpdateManyWithoutUserNestedInput
+    upcomingEvents?: UpcomingEventUncheckedUpdateManyWithoutUserNestedInput
+    publications?: PublicationUncheckedUpdateManyWithoutUserNestedInput
+    galleries?: GalleryUncheckedUpdateManyWithoutUserNestedInput
+    projectDetails?: ProjectDetailsUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutUpcomingEventsInput = {
+    id?: string
+    name: string
+    email: string
+    password: string
+    role: $Enums.Role
+    userCode: string
+    isVerified?: boolean
+    verificationCode?: string | null
+    resetPasswordToken?: string | null
+    resetTokenExpires?: Date | string | null
+    verificationExpires?: Date | string | null
+    createdAt?: Date | string
+    updateAt?: Date | string
+    projects?: ProjectCreateNestedManyWithoutUserInput
+    trainings?: TrainingCreateNestedManyWithoutUserInput
+    flds?: FLDCreateNestedManyWithoutUserInput
+    awarenessPrograms?: AwarenessProgramCreateNestedManyWithoutUserInput
+    infrastructureDevelopments?: InfrastructureDevelopmentCreateNestedManyWithoutUserInput
+    inputDistributions?: InputDistributionCreateNestedManyWithoutUserInput
+    publications?: PublicationCreateNestedManyWithoutUserInput
+    galleries?: GalleryCreateNestedManyWithoutUserInput
+    projectDetails?: ProjectDetailsCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutUpcomingEventsInput = {
+    id?: string
+    name: string
+    email: string
+    password: string
+    role: $Enums.Role
+    userCode: string
+    isVerified?: boolean
+    verificationCode?: string | null
+    resetPasswordToken?: string | null
+    resetTokenExpires?: Date | string | null
+    verificationExpires?: Date | string | null
+    createdAt?: Date | string
+    updateAt?: Date | string
+    projects?: ProjectUncheckedCreateNestedManyWithoutUserInput
+    trainings?: TrainingUncheckedCreateNestedManyWithoutUserInput
+    flds?: FLDUncheckedCreateNestedManyWithoutUserInput
+    awarenessPrograms?: AwarenessProgramUncheckedCreateNestedManyWithoutUserInput
+    infrastructureDevelopments?: InfrastructureDevelopmentUncheckedCreateNestedManyWithoutUserInput
+    inputDistributions?: InputDistributionUncheckedCreateNestedManyWithoutUserInput
+    publications?: PublicationUncheckedCreateNestedManyWithoutUserInput
+    galleries?: GalleryUncheckedCreateNestedManyWithoutUserInput
+    projectDetails?: ProjectDetailsUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutUpcomingEventsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutUpcomingEventsInput, UserUncheckedCreateWithoutUpcomingEventsInput>
+  }
+
+  export type UserUpsertWithoutUpcomingEventsInput = {
+    update: XOR<UserUpdateWithoutUpcomingEventsInput, UserUncheckedUpdateWithoutUpcomingEventsInput>
+    create: XOR<UserCreateWithoutUpcomingEventsInput, UserUncheckedCreateWithoutUpcomingEventsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutUpcomingEventsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutUpcomingEventsInput, UserUncheckedUpdateWithoutUpcomingEventsInput>
+  }
+
+  export type UserUpdateWithoutUpcomingEventsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    userCode?: StringFieldUpdateOperationsInput | string
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    verificationCode?: NullableStringFieldUpdateOperationsInput | string | null
+    resetPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verificationExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    projects?: ProjectUpdateManyWithoutUserNestedInput
+    trainings?: TrainingUpdateManyWithoutUserNestedInput
+    flds?: FLDUpdateManyWithoutUserNestedInput
+    awarenessPrograms?: AwarenessProgramUpdateManyWithoutUserNestedInput
+    infrastructureDevelopments?: InfrastructureDevelopmentUpdateManyWithoutUserNestedInput
+    inputDistributions?: InputDistributionUpdateManyWithoutUserNestedInput
+    publications?: PublicationUpdateManyWithoutUserNestedInput
+    galleries?: GalleryUpdateManyWithoutUserNestedInput
+    projectDetails?: ProjectDetailsUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutUpcomingEventsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    userCode?: StringFieldUpdateOperationsInput | string
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    verificationCode?: NullableStringFieldUpdateOperationsInput | string | null
+    resetPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verificationExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    projects?: ProjectUncheckedUpdateManyWithoutUserNestedInput
+    trainings?: TrainingUncheckedUpdateManyWithoutUserNestedInput
+    flds?: FLDUncheckedUpdateManyWithoutUserNestedInput
+    awarenessPrograms?: AwarenessProgramUncheckedUpdateManyWithoutUserNestedInput
+    infrastructureDevelopments?: InfrastructureDevelopmentUncheckedUpdateManyWithoutUserNestedInput
+    inputDistributions?: InputDistributionUncheckedUpdateManyWithoutUserNestedInput
+    publications?: PublicationUncheckedUpdateManyWithoutUserNestedInput
+    galleries?: GalleryUncheckedUpdateManyWithoutUserNestedInput
+    projectDetails?: ProjectDetailsUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutPublicationsInput = {
+    id?: string
+    name: string
+    email: string
+    password: string
+    role: $Enums.Role
+    userCode: string
+    isVerified?: boolean
+    verificationCode?: string | null
+    resetPasswordToken?: string | null
+    resetTokenExpires?: Date | string | null
+    verificationExpires?: Date | string | null
+    createdAt?: Date | string
+    updateAt?: Date | string
+    projects?: ProjectCreateNestedManyWithoutUserInput
+    trainings?: TrainingCreateNestedManyWithoutUserInput
+    flds?: FLDCreateNestedManyWithoutUserInput
+    awarenessPrograms?: AwarenessProgramCreateNestedManyWithoutUserInput
+    infrastructureDevelopments?: InfrastructureDevelopmentCreateNestedManyWithoutUserInput
+    inputDistributions?: InputDistributionCreateNestedManyWithoutUserInput
+    upcomingEvents?: UpcomingEventCreateNestedManyWithoutUserInput
+    galleries?: GalleryCreateNestedManyWithoutUserInput
+    projectDetails?: ProjectDetailsCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutPublicationsInput = {
+    id?: string
+    name: string
+    email: string
+    password: string
+    role: $Enums.Role
+    userCode: string
+    isVerified?: boolean
+    verificationCode?: string | null
+    resetPasswordToken?: string | null
+    resetTokenExpires?: Date | string | null
+    verificationExpires?: Date | string | null
+    createdAt?: Date | string
+    updateAt?: Date | string
+    projects?: ProjectUncheckedCreateNestedManyWithoutUserInput
+    trainings?: TrainingUncheckedCreateNestedManyWithoutUserInput
+    flds?: FLDUncheckedCreateNestedManyWithoutUserInput
+    awarenessPrograms?: AwarenessProgramUncheckedCreateNestedManyWithoutUserInput
+    infrastructureDevelopments?: InfrastructureDevelopmentUncheckedCreateNestedManyWithoutUserInput
+    inputDistributions?: InputDistributionUncheckedCreateNestedManyWithoutUserInput
+    upcomingEvents?: UpcomingEventUncheckedCreateNestedManyWithoutUserInput
+    galleries?: GalleryUncheckedCreateNestedManyWithoutUserInput
+    projectDetails?: ProjectDetailsUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutPublicationsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutPublicationsInput, UserUncheckedCreateWithoutPublicationsInput>
+  }
+
+  export type UserUpsertWithoutPublicationsInput = {
+    update: XOR<UserUpdateWithoutPublicationsInput, UserUncheckedUpdateWithoutPublicationsInput>
+    create: XOR<UserCreateWithoutPublicationsInput, UserUncheckedCreateWithoutPublicationsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutPublicationsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutPublicationsInput, UserUncheckedUpdateWithoutPublicationsInput>
+  }
+
+  export type UserUpdateWithoutPublicationsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    userCode?: StringFieldUpdateOperationsInput | string
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    verificationCode?: NullableStringFieldUpdateOperationsInput | string | null
+    resetPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verificationExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    projects?: ProjectUpdateManyWithoutUserNestedInput
+    trainings?: TrainingUpdateManyWithoutUserNestedInput
+    flds?: FLDUpdateManyWithoutUserNestedInput
+    awarenessPrograms?: AwarenessProgramUpdateManyWithoutUserNestedInput
+    infrastructureDevelopments?: InfrastructureDevelopmentUpdateManyWithoutUserNestedInput
+    inputDistributions?: InputDistributionUpdateManyWithoutUserNestedInput
+    upcomingEvents?: UpcomingEventUpdateManyWithoutUserNestedInput
+    galleries?: GalleryUpdateManyWithoutUserNestedInput
+    projectDetails?: ProjectDetailsUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutPublicationsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    userCode?: StringFieldUpdateOperationsInput | string
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    verificationCode?: NullableStringFieldUpdateOperationsInput | string | null
+    resetPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verificationExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    projects?: ProjectUncheckedUpdateManyWithoutUserNestedInput
+    trainings?: TrainingUncheckedUpdateManyWithoutUserNestedInput
+    flds?: FLDUncheckedUpdateManyWithoutUserNestedInput
+    awarenessPrograms?: AwarenessProgramUncheckedUpdateManyWithoutUserNestedInput
+    infrastructureDevelopments?: InfrastructureDevelopmentUncheckedUpdateManyWithoutUserNestedInput
+    inputDistributions?: InputDistributionUncheckedUpdateManyWithoutUserNestedInput
+    upcomingEvents?: UpcomingEventUncheckedUpdateManyWithoutUserNestedInput
+    galleries?: GalleryUncheckedUpdateManyWithoutUserNestedInput
+    projectDetails?: ProjectDetailsUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutGalleriesInput = {
+    id?: string
+    name: string
+    email: string
+    password: string
+    role: $Enums.Role
+    userCode: string
+    isVerified?: boolean
+    verificationCode?: string | null
+    resetPasswordToken?: string | null
+    resetTokenExpires?: Date | string | null
+    verificationExpires?: Date | string | null
+    createdAt?: Date | string
+    updateAt?: Date | string
+    projects?: ProjectCreateNestedManyWithoutUserInput
+    trainings?: TrainingCreateNestedManyWithoutUserInput
+    flds?: FLDCreateNestedManyWithoutUserInput
+    awarenessPrograms?: AwarenessProgramCreateNestedManyWithoutUserInput
+    infrastructureDevelopments?: InfrastructureDevelopmentCreateNestedManyWithoutUserInput
+    inputDistributions?: InputDistributionCreateNestedManyWithoutUserInput
+    upcomingEvents?: UpcomingEventCreateNestedManyWithoutUserInput
+    publications?: PublicationCreateNestedManyWithoutUserInput
+    projectDetails?: ProjectDetailsCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutGalleriesInput = {
+    id?: string
+    name: string
+    email: string
+    password: string
+    role: $Enums.Role
+    userCode: string
+    isVerified?: boolean
+    verificationCode?: string | null
+    resetPasswordToken?: string | null
+    resetTokenExpires?: Date | string | null
+    verificationExpires?: Date | string | null
+    createdAt?: Date | string
+    updateAt?: Date | string
+    projects?: ProjectUncheckedCreateNestedManyWithoutUserInput
+    trainings?: TrainingUncheckedCreateNestedManyWithoutUserInput
+    flds?: FLDUncheckedCreateNestedManyWithoutUserInput
+    awarenessPrograms?: AwarenessProgramUncheckedCreateNestedManyWithoutUserInput
+    infrastructureDevelopments?: InfrastructureDevelopmentUncheckedCreateNestedManyWithoutUserInput
+    inputDistributions?: InputDistributionUncheckedCreateNestedManyWithoutUserInput
+    upcomingEvents?: UpcomingEventUncheckedCreateNestedManyWithoutUserInput
+    publications?: PublicationUncheckedCreateNestedManyWithoutUserInput
+    projectDetails?: ProjectDetailsUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutGalleriesInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutGalleriesInput, UserUncheckedCreateWithoutGalleriesInput>
+  }
+
+  export type UserUpsertWithoutGalleriesInput = {
+    update: XOR<UserUpdateWithoutGalleriesInput, UserUncheckedUpdateWithoutGalleriesInput>
+    create: XOR<UserCreateWithoutGalleriesInput, UserUncheckedCreateWithoutGalleriesInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutGalleriesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutGalleriesInput, UserUncheckedUpdateWithoutGalleriesInput>
+  }
+
+  export type UserUpdateWithoutGalleriesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    userCode?: StringFieldUpdateOperationsInput | string
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    verificationCode?: NullableStringFieldUpdateOperationsInput | string | null
+    resetPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verificationExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    projects?: ProjectUpdateManyWithoutUserNestedInput
+    trainings?: TrainingUpdateManyWithoutUserNestedInput
+    flds?: FLDUpdateManyWithoutUserNestedInput
+    awarenessPrograms?: AwarenessProgramUpdateManyWithoutUserNestedInput
+    infrastructureDevelopments?: InfrastructureDevelopmentUpdateManyWithoutUserNestedInput
+    inputDistributions?: InputDistributionUpdateManyWithoutUserNestedInput
+    upcomingEvents?: UpcomingEventUpdateManyWithoutUserNestedInput
+    publications?: PublicationUpdateManyWithoutUserNestedInput
+    projectDetails?: ProjectDetailsUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutGalleriesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    userCode?: StringFieldUpdateOperationsInput | string
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    verificationCode?: NullableStringFieldUpdateOperationsInput | string | null
+    resetPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verificationExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    projects?: ProjectUncheckedUpdateManyWithoutUserNestedInput
+    trainings?: TrainingUncheckedUpdateManyWithoutUserNestedInput
+    flds?: FLDUncheckedUpdateManyWithoutUserNestedInput
+    awarenessPrograms?: AwarenessProgramUncheckedUpdateManyWithoutUserNestedInput
+    infrastructureDevelopments?: InfrastructureDevelopmentUncheckedUpdateManyWithoutUserNestedInput
+    inputDistributions?: InputDistributionUncheckedUpdateManyWithoutUserNestedInput
+    upcomingEvents?: UpcomingEventUncheckedUpdateManyWithoutUserNestedInput
+    publications?: PublicationUncheckedUpdateManyWithoutUserNestedInput
+    projectDetails?: ProjectDetailsUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutProjectDetailsInput = {
+    id?: string
+    name: string
+    email: string
+    password: string
+    role: $Enums.Role
+    userCode: string
+    isVerified?: boolean
+    verificationCode?: string | null
+    resetPasswordToken?: string | null
+    resetTokenExpires?: Date | string | null
+    verificationExpires?: Date | string | null
+    createdAt?: Date | string
+    updateAt?: Date | string
+    projects?: ProjectCreateNestedManyWithoutUserInput
+    trainings?: TrainingCreateNestedManyWithoutUserInput
+    flds?: FLDCreateNestedManyWithoutUserInput
+    awarenessPrograms?: AwarenessProgramCreateNestedManyWithoutUserInput
+    infrastructureDevelopments?: InfrastructureDevelopmentCreateNestedManyWithoutUserInput
+    inputDistributions?: InputDistributionCreateNestedManyWithoutUserInput
+    upcomingEvents?: UpcomingEventCreateNestedManyWithoutUserInput
+    publications?: PublicationCreateNestedManyWithoutUserInput
+    galleries?: GalleryCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutProjectDetailsInput = {
+    id?: string
+    name: string
+    email: string
+    password: string
+    role: $Enums.Role
+    userCode: string
+    isVerified?: boolean
+    verificationCode?: string | null
+    resetPasswordToken?: string | null
+    resetTokenExpires?: Date | string | null
+    verificationExpires?: Date | string | null
+    createdAt?: Date | string
+    updateAt?: Date | string
+    projects?: ProjectUncheckedCreateNestedManyWithoutUserInput
+    trainings?: TrainingUncheckedCreateNestedManyWithoutUserInput
+    flds?: FLDUncheckedCreateNestedManyWithoutUserInput
+    awarenessPrograms?: AwarenessProgramUncheckedCreateNestedManyWithoutUserInput
+    infrastructureDevelopments?: InfrastructureDevelopmentUncheckedCreateNestedManyWithoutUserInput
+    inputDistributions?: InputDistributionUncheckedCreateNestedManyWithoutUserInput
+    upcomingEvents?: UpcomingEventUncheckedCreateNestedManyWithoutUserInput
+    publications?: PublicationUncheckedCreateNestedManyWithoutUserInput
+    galleries?: GalleryUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutProjectDetailsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutProjectDetailsInput, UserUncheckedCreateWithoutProjectDetailsInput>
+  }
+
+  export type UserUpsertWithoutProjectDetailsInput = {
+    update: XOR<UserUpdateWithoutProjectDetailsInput, UserUncheckedUpdateWithoutProjectDetailsInput>
+    create: XOR<UserCreateWithoutProjectDetailsInput, UserUncheckedCreateWithoutProjectDetailsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutProjectDetailsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutProjectDetailsInput, UserUncheckedUpdateWithoutProjectDetailsInput>
+  }
+
+  export type UserUpdateWithoutProjectDetailsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    userCode?: StringFieldUpdateOperationsInput | string
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    verificationCode?: NullableStringFieldUpdateOperationsInput | string | null
+    resetPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verificationExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    projects?: ProjectUpdateManyWithoutUserNestedInput
+    trainings?: TrainingUpdateManyWithoutUserNestedInput
+    flds?: FLDUpdateManyWithoutUserNestedInput
+    awarenessPrograms?: AwarenessProgramUpdateManyWithoutUserNestedInput
+    infrastructureDevelopments?: InfrastructureDevelopmentUpdateManyWithoutUserNestedInput
+    inputDistributions?: InputDistributionUpdateManyWithoutUserNestedInput
+    upcomingEvents?: UpcomingEventUpdateManyWithoutUserNestedInput
+    publications?: PublicationUpdateManyWithoutUserNestedInput
+    galleries?: GalleryUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutProjectDetailsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    userCode?: StringFieldUpdateOperationsInput | string
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    verificationCode?: NullableStringFieldUpdateOperationsInput | string | null
+    resetPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verificationExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    projects?: ProjectUncheckedUpdateManyWithoutUserNestedInput
+    trainings?: TrainingUncheckedUpdateManyWithoutUserNestedInput
+    flds?: FLDUncheckedUpdateManyWithoutUserNestedInput
+    awarenessPrograms?: AwarenessProgramUncheckedUpdateManyWithoutUserNestedInput
+    infrastructureDevelopments?: InfrastructureDevelopmentUncheckedUpdateManyWithoutUserNestedInput
+    inputDistributions?: InputDistributionUncheckedUpdateManyWithoutUserNestedInput
+    upcomingEvents?: UpcomingEventUncheckedUpdateManyWithoutUserNestedInput
+    publications?: PublicationUncheckedUpdateManyWithoutUserNestedInput
+    galleries?: GalleryUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type ProjectCreateManyUserInput = {
+    id?: string
+    implementingAgency: string
+    title: string
+    locationState: string
+    director: string
+    budget?: Decimal | DecimalJsLike | number | string | null
+    status?: $Enums.Status
+    startDate?: Date | string | null
+    endDate?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TrainingCreateManyUserInput = {
+    id?: string
+    projectId: string
+    quarterId: string
+    title: string
+    target: number
+    achieved: number
+    district: string
+    village: string
+    block: string
+    beneficiaryMale?: number
+    beneficiaryFemale?: number
+    remarks?: string | null
+    imageUrl?: string | null
+    imageKey?: string | null
+    pdfUrl?: string | null
+    pdfKey?: string | null
+    units?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type FLDCreateManyUserInput = {
+    id?: string
+    projectId: string
+    quarterId: string
+    description?: string | null
+    district: string
+    village: string
+    block: string
+    target: number
+    achieved: number
+    units?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AwarenessProgramCreateManyUserInput = {
+    id?: string
+    projectId: string
+    quarterId: string
+    title: string
+    target: number
+    achieved: number
+    district: string
+    village: string
+    block: string
+    beneficiaryMale?: number
+    beneficiaryFemale?: number
+    imageUrl?: string | null
+    imageKey?: string | null
+    units?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type InfrastructureDevelopmentCreateManyUserInput = {
+    id?: string
+    projectId: string
+    quarterId: string
+    target: number
+    achieved: number
+    district: string
+    village: string
+    block: string
+    remarks?: string | null
+    imageUrl?: string | null
+    imageKey?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type InputDistributionCreateManyUserInput = {
+    id?: string
+    projectId: string
+    quarterId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type UpcomingEventCreateManyUserInput = {
+    id?: string
+    title: string
+    date: Date | string
+    location: string
+    description?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PublicationCreateManyUserInput = {
+    id?: string
+    title: string
+    type: string
+    category?: string | null
+    thumbnailUrl?: string | null
+    thumbnailKey?: string | null
+    pdfUrl?: string | null
+    pdfKey?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type GalleryCreateManyUserInput = {
+    id?: string
+    title: string
+    imageUrl: string
+    imageKey: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ProjectDetailsCreateManyUserInput = {
+    id?: string
+    title: string
+    region: string
+    year: number
+    budget?: number | null
+    center?: string | null
+    location?: string | null
+    objectives?: ProjectDetailsCreateobjectivesInput | string[]
+    director: string
+    coDirectors?: ProjectDetailsCreatecoDirectorsInput | string[]
+    achievements?: ProjectDetailsCreateachievementsInput | string[]
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ProjectUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    implementingAgency?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    locationState?: StringFieldUpdateOperationsInput | string
+    director?: StringFieldUpdateOperationsInput | string
+    budget?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    trainings?: TrainingUpdateManyWithoutProjectNestedInput
+    flds?: FLDUpdateManyWithoutProjectNestedInput
+    awarenessPrograms?: AwarenessProgramUpdateManyWithoutProjectNestedInput
+    infrastructureDevelopments?: InfrastructureDevelopmentUpdateManyWithoutProjectNestedInput
+    inputDistributions?: InputDistributionUpdateManyWithoutProjectNestedInput
+  }
+
+  export type ProjectUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    implementingAgency?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    locationState?: StringFieldUpdateOperationsInput | string
+    director?: StringFieldUpdateOperationsInput | string
+    budget?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    trainings?: TrainingUncheckedUpdateManyWithoutProjectNestedInput
+    flds?: FLDUncheckedUpdateManyWithoutProjectNestedInput
+    awarenessPrograms?: AwarenessProgramUncheckedUpdateManyWithoutProjectNestedInput
+    infrastructureDevelopments?: InfrastructureDevelopmentUncheckedUpdateManyWithoutProjectNestedInput
+    inputDistributions?: InputDistributionUncheckedUpdateManyWithoutProjectNestedInput
+  }
+
+  export type ProjectUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    implementingAgency?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    locationState?: StringFieldUpdateOperationsInput | string
+    director?: StringFieldUpdateOperationsInput | string
+    budget?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TrainingUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    target?: IntFieldUpdateOperationsInput | number
+    achieved?: IntFieldUpdateOperationsInput | number
+    district?: StringFieldUpdateOperationsInput | string
+    village?: StringFieldUpdateOperationsInput | string
+    block?: StringFieldUpdateOperationsInput | string
+    beneficiaryMale?: IntFieldUpdateOperationsInput | number
+    beneficiaryFemale?: IntFieldUpdateOperationsInput | number
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    imageKey?: NullableStringFieldUpdateOperationsInput | string | null
+    pdfUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    pdfKey?: NullableStringFieldUpdateOperationsInput | string | null
+    units?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    project?: ProjectUpdateOneRequiredWithoutTrainingsNestedInput
+    quarter?: QuarterUpdateOneRequiredWithoutTrainingsNestedInput
+  }
+
+  export type TrainingUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    projectId?: StringFieldUpdateOperationsInput | string
+    quarterId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    target?: IntFieldUpdateOperationsInput | number
+    achieved?: IntFieldUpdateOperationsInput | number
+    district?: StringFieldUpdateOperationsInput | string
+    village?: StringFieldUpdateOperationsInput | string
+    block?: StringFieldUpdateOperationsInput | string
+    beneficiaryMale?: IntFieldUpdateOperationsInput | number
+    beneficiaryFemale?: IntFieldUpdateOperationsInput | number
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    imageKey?: NullableStringFieldUpdateOperationsInput | string | null
+    pdfUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    pdfKey?: NullableStringFieldUpdateOperationsInput | string | null
+    units?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TrainingUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    projectId?: StringFieldUpdateOperationsInput | string
+    quarterId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    target?: IntFieldUpdateOperationsInput | number
+    achieved?: IntFieldUpdateOperationsInput | number
+    district?: StringFieldUpdateOperationsInput | string
+    village?: StringFieldUpdateOperationsInput | string
+    block?: StringFieldUpdateOperationsInput | string
+    beneficiaryMale?: IntFieldUpdateOperationsInput | number
+    beneficiaryFemale?: IntFieldUpdateOperationsInput | number
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    imageKey?: NullableStringFieldUpdateOperationsInput | string | null
+    pdfUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    pdfKey?: NullableStringFieldUpdateOperationsInput | string | null
+    units?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FLDUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    district?: StringFieldUpdateOperationsInput | string
+    village?: StringFieldUpdateOperationsInput | string
+    block?: StringFieldUpdateOperationsInput | string
+    target?: IntFieldUpdateOperationsInput | number
+    achieved?: IntFieldUpdateOperationsInput | number
+    units?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    project?: ProjectUpdateOneRequiredWithoutFldsNestedInput
+    quarter?: QuarterUpdateOneRequiredWithoutFldsNestedInput
+  }
+
+  export type FLDUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    projectId?: StringFieldUpdateOperationsInput | string
+    quarterId?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    district?: StringFieldUpdateOperationsInput | string
+    village?: StringFieldUpdateOperationsInput | string
+    block?: StringFieldUpdateOperationsInput | string
+    target?: IntFieldUpdateOperationsInput | number
+    achieved?: IntFieldUpdateOperationsInput | number
+    units?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FLDUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    projectId?: StringFieldUpdateOperationsInput | string
+    quarterId?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    district?: StringFieldUpdateOperationsInput | string
+    village?: StringFieldUpdateOperationsInput | string
+    block?: StringFieldUpdateOperationsInput | string
+    target?: IntFieldUpdateOperationsInput | number
+    achieved?: IntFieldUpdateOperationsInput | number
+    units?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AwarenessProgramUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    target?: IntFieldUpdateOperationsInput | number
+    achieved?: IntFieldUpdateOperationsInput | number
+    district?: StringFieldUpdateOperationsInput | string
+    village?: StringFieldUpdateOperationsInput | string
+    block?: StringFieldUpdateOperationsInput | string
+    beneficiaryMale?: IntFieldUpdateOperationsInput | number
+    beneficiaryFemale?: IntFieldUpdateOperationsInput | number
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    imageKey?: NullableStringFieldUpdateOperationsInput | string | null
+    units?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    project?: ProjectUpdateOneRequiredWithoutAwarenessProgramsNestedInput
+    quarter?: QuarterUpdateOneRequiredWithoutAwarenessProgramsNestedInput
+  }
+
+  export type AwarenessProgramUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    projectId?: StringFieldUpdateOperationsInput | string
+    quarterId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    target?: IntFieldUpdateOperationsInput | number
+    achieved?: IntFieldUpdateOperationsInput | number
+    district?: StringFieldUpdateOperationsInput | string
+    village?: StringFieldUpdateOperationsInput | string
+    block?: StringFieldUpdateOperationsInput | string
+    beneficiaryMale?: IntFieldUpdateOperationsInput | number
+    beneficiaryFemale?: IntFieldUpdateOperationsInput | number
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    imageKey?: NullableStringFieldUpdateOperationsInput | string | null
+    units?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AwarenessProgramUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    projectId?: StringFieldUpdateOperationsInput | string
+    quarterId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    target?: IntFieldUpdateOperationsInput | number
+    achieved?: IntFieldUpdateOperationsInput | number
+    district?: StringFieldUpdateOperationsInput | string
+    village?: StringFieldUpdateOperationsInput | string
+    block?: StringFieldUpdateOperationsInput | string
+    beneficiaryMale?: IntFieldUpdateOperationsInput | number
+    beneficiaryFemale?: IntFieldUpdateOperationsInput | number
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    imageKey?: NullableStringFieldUpdateOperationsInput | string | null
+    units?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InfrastructureDevelopmentUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    target?: IntFieldUpdateOperationsInput | number
+    achieved?: IntFieldUpdateOperationsInput | number
+    district?: StringFieldUpdateOperationsInput | string
+    village?: StringFieldUpdateOperationsInput | string
+    block?: StringFieldUpdateOperationsInput | string
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    imageKey?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    project?: ProjectUpdateOneRequiredWithoutInfrastructureDevelopmentsNestedInput
+    quarter?: QuarterUpdateOneRequiredWithoutInfrastructureDevelopmentsNestedInput
+  }
+
+  export type InfrastructureDevelopmentUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    projectId?: StringFieldUpdateOperationsInput | string
+    quarterId?: StringFieldUpdateOperationsInput | string
+    target?: IntFieldUpdateOperationsInput | number
+    achieved?: IntFieldUpdateOperationsInput | number
+    district?: StringFieldUpdateOperationsInput | string
+    village?: StringFieldUpdateOperationsInput | string
+    block?: StringFieldUpdateOperationsInput | string
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    imageKey?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InfrastructureDevelopmentUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    projectId?: StringFieldUpdateOperationsInput | string
+    quarterId?: StringFieldUpdateOperationsInput | string
+    target?: IntFieldUpdateOperationsInput | number
+    achieved?: IntFieldUpdateOperationsInput | number
+    district?: StringFieldUpdateOperationsInput | string
+    village?: StringFieldUpdateOperationsInput | string
+    block?: StringFieldUpdateOperationsInput | string
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    imageKey?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InputDistributionUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    project?: ProjectUpdateOneRequiredWithoutInputDistributionsNestedInput
+    quarter?: QuarterUpdateOneRequiredWithoutInputDistributionsNestedInput
+    predefinedItems?: PredefinedInputDistributionUpdateManyWithoutInputDistributionNestedInput
+    customItems?: CustomInputDistributionUpdateManyWithoutInputDistributionNestedInput
+  }
+
+  export type InputDistributionUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    projectId?: StringFieldUpdateOperationsInput | string
+    quarterId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    predefinedItems?: PredefinedInputDistributionUncheckedUpdateManyWithoutInputDistributionNestedInput
+    customItems?: CustomInputDistributionUncheckedUpdateManyWithoutInputDistributionNestedInput
+  }
+
+  export type InputDistributionUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    projectId?: StringFieldUpdateOperationsInput | string
+    quarterId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UpcomingEventUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    location?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UpcomingEventUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    location?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UpcomingEventUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    location?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PublicationUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    thumbnailUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    thumbnailKey?: NullableStringFieldUpdateOperationsInput | string | null
+    pdfUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    pdfKey?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PublicationUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    thumbnailUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    thumbnailKey?: NullableStringFieldUpdateOperationsInput | string | null
+    pdfUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    pdfKey?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PublicationUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    thumbnailUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    thumbnailKey?: NullableStringFieldUpdateOperationsInput | string | null
+    pdfUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    pdfKey?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GalleryUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    imageUrl?: StringFieldUpdateOperationsInput | string
+    imageKey?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GalleryUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    imageUrl?: StringFieldUpdateOperationsInput | string
+    imageKey?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GalleryUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    imageUrl?: StringFieldUpdateOperationsInput | string
+    imageKey?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProjectDetailsUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    region?: StringFieldUpdateOperationsInput | string
+    year?: IntFieldUpdateOperationsInput | number
+    budget?: NullableFloatFieldUpdateOperationsInput | number | null
+    center?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    objectives?: ProjectDetailsUpdateobjectivesInput | string[]
+    director?: StringFieldUpdateOperationsInput | string
+    coDirectors?: ProjectDetailsUpdatecoDirectorsInput | string[]
+    achievements?: ProjectDetailsUpdateachievementsInput | string[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProjectDetailsUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    region?: StringFieldUpdateOperationsInput | string
+    year?: IntFieldUpdateOperationsInput | number
+    budget?: NullableFloatFieldUpdateOperationsInput | number | null
+    center?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    objectives?: ProjectDetailsUpdateobjectivesInput | string[]
+    director?: StringFieldUpdateOperationsInput | string
+    coDirectors?: ProjectDetailsUpdatecoDirectorsInput | string[]
+    achievements?: ProjectDetailsUpdateachievementsInput | string[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProjectDetailsUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    region?: StringFieldUpdateOperationsInput | string
+    year?: IntFieldUpdateOperationsInput | number
+    budget?: NullableFloatFieldUpdateOperationsInput | number | null
+    center?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    objectives?: ProjectDetailsUpdateobjectivesInput | string[]
+    director?: StringFieldUpdateOperationsInput | string
+    coDirectors?: ProjectDetailsUpdatecoDirectorsInput | string[]
+    achievements?: ProjectDetailsUpdateachievementsInput | string[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type TrainingCreateManyProjectInput = {
@@ -23020,16 +29827,22 @@ export namespace Prisma {
     units?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    userId?: string | null
   }
 
   export type FLDCreateManyProjectInput = {
     id?: string
     quarterId: string
+    description?: string | null
+    district: string
+    village: string
+    block: string
     target: number
     achieved: number
     units?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    userId?: string | null
   }
 
   export type AwarenessProgramCreateManyProjectInput = {
@@ -23048,6 +29861,7 @@ export namespace Prisma {
     units?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    userId?: string | null
   }
 
   export type InfrastructureDevelopmentCreateManyProjectInput = {
@@ -23063,11 +29877,13 @@ export namespace Prisma {
     imageKey?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    userId?: string | null
   }
 
   export type InputDistributionCreateManyProjectInput = {
     id?: string
     quarterId: string
+    userId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -23091,6 +29907,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     quarter?: QuarterUpdateOneRequiredWithoutTrainingsNestedInput
+    User?: UserUpdateOneWithoutTrainingsNestedInput
   }
 
   export type TrainingUncheckedUpdateWithoutProjectInput = {
@@ -23112,6 +29929,7 @@ export namespace Prisma {
     units?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type TrainingUncheckedUpdateManyWithoutProjectInput = {
@@ -23133,36 +29951,52 @@ export namespace Prisma {
     units?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type FLDUpdateWithoutProjectInput = {
     id?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    district?: StringFieldUpdateOperationsInput | string
+    village?: StringFieldUpdateOperationsInput | string
+    block?: StringFieldUpdateOperationsInput | string
     target?: IntFieldUpdateOperationsInput | number
     achieved?: IntFieldUpdateOperationsInput | number
     units?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     quarter?: QuarterUpdateOneRequiredWithoutFldsNestedInput
+    User?: UserUpdateOneWithoutFldsNestedInput
   }
 
   export type FLDUncheckedUpdateWithoutProjectInput = {
     id?: StringFieldUpdateOperationsInput | string
     quarterId?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    district?: StringFieldUpdateOperationsInput | string
+    village?: StringFieldUpdateOperationsInput | string
+    block?: StringFieldUpdateOperationsInput | string
     target?: IntFieldUpdateOperationsInput | number
     achieved?: IntFieldUpdateOperationsInput | number
     units?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type FLDUncheckedUpdateManyWithoutProjectInput = {
     id?: StringFieldUpdateOperationsInput | string
     quarterId?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    district?: StringFieldUpdateOperationsInput | string
+    village?: StringFieldUpdateOperationsInput | string
+    block?: StringFieldUpdateOperationsInput | string
     target?: IntFieldUpdateOperationsInput | number
     achieved?: IntFieldUpdateOperationsInput | number
     units?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type AwarenessProgramUpdateWithoutProjectInput = {
@@ -23181,6 +30015,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     quarter?: QuarterUpdateOneRequiredWithoutAwarenessProgramsNestedInput
+    User?: UserUpdateOneWithoutAwarenessProgramsNestedInput
   }
 
   export type AwarenessProgramUncheckedUpdateWithoutProjectInput = {
@@ -23199,6 +30034,7 @@ export namespace Prisma {
     units?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type AwarenessProgramUncheckedUpdateManyWithoutProjectInput = {
@@ -23217,6 +30053,7 @@ export namespace Prisma {
     units?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type InfrastructureDevelopmentUpdateWithoutProjectInput = {
@@ -23232,6 +30069,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     quarter?: QuarterUpdateOneRequiredWithoutInfrastructureDevelopmentsNestedInput
+    User?: UserUpdateOneWithoutInfrastructureDevelopmentsNestedInput
   }
 
   export type InfrastructureDevelopmentUncheckedUpdateWithoutProjectInput = {
@@ -23247,6 +30085,7 @@ export namespace Prisma {
     imageKey?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type InfrastructureDevelopmentUncheckedUpdateManyWithoutProjectInput = {
@@ -23262,6 +30101,7 @@ export namespace Prisma {
     imageKey?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type InputDistributionUpdateWithoutProjectInput = {
@@ -23271,11 +30111,13 @@ export namespace Prisma {
     quarter?: QuarterUpdateOneRequiredWithoutInputDistributionsNestedInput
     predefinedItems?: PredefinedInputDistributionUpdateManyWithoutInputDistributionNestedInput
     customItems?: CustomInputDistributionUpdateManyWithoutInputDistributionNestedInput
+    User?: UserUpdateOneWithoutInputDistributionsNestedInput
   }
 
   export type InputDistributionUncheckedUpdateWithoutProjectInput = {
     id?: StringFieldUpdateOperationsInput | string
     quarterId?: StringFieldUpdateOperationsInput | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     predefinedItems?: PredefinedInputDistributionUncheckedUpdateManyWithoutInputDistributionNestedInput
@@ -23285,6 +30127,7 @@ export namespace Prisma {
   export type InputDistributionUncheckedUpdateManyWithoutProjectInput = {
     id?: StringFieldUpdateOperationsInput | string
     quarterId?: StringFieldUpdateOperationsInput | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -23308,16 +30151,22 @@ export namespace Prisma {
     units?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    userId?: string | null
   }
 
   export type FLDCreateManyQuarterInput = {
     id?: string
     projectId: string
+    description?: string | null
+    district: string
+    village: string
+    block: string
     target: number
     achieved: number
     units?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    userId?: string | null
   }
 
   export type AwarenessProgramCreateManyQuarterInput = {
@@ -23336,11 +30185,13 @@ export namespace Prisma {
     units?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    userId?: string | null
   }
 
   export type InputDistributionCreateManyQuarterInput = {
     id?: string
     projectId: string
+    userId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -23358,6 +30209,7 @@ export namespace Prisma {
     imageKey?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    userId?: string | null
   }
 
   export type TrainingUpdateWithoutQuarterInput = {
@@ -23379,6 +30231,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     project?: ProjectUpdateOneRequiredWithoutTrainingsNestedInput
+    User?: UserUpdateOneWithoutTrainingsNestedInput
   }
 
   export type TrainingUncheckedUpdateWithoutQuarterInput = {
@@ -23400,6 +30253,7 @@ export namespace Prisma {
     units?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type TrainingUncheckedUpdateManyWithoutQuarterInput = {
@@ -23421,36 +30275,52 @@ export namespace Prisma {
     units?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type FLDUpdateWithoutQuarterInput = {
     id?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    district?: StringFieldUpdateOperationsInput | string
+    village?: StringFieldUpdateOperationsInput | string
+    block?: StringFieldUpdateOperationsInput | string
     target?: IntFieldUpdateOperationsInput | number
     achieved?: IntFieldUpdateOperationsInput | number
     units?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     project?: ProjectUpdateOneRequiredWithoutFldsNestedInput
+    User?: UserUpdateOneWithoutFldsNestedInput
   }
 
   export type FLDUncheckedUpdateWithoutQuarterInput = {
     id?: StringFieldUpdateOperationsInput | string
     projectId?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    district?: StringFieldUpdateOperationsInput | string
+    village?: StringFieldUpdateOperationsInput | string
+    block?: StringFieldUpdateOperationsInput | string
     target?: IntFieldUpdateOperationsInput | number
     achieved?: IntFieldUpdateOperationsInput | number
     units?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type FLDUncheckedUpdateManyWithoutQuarterInput = {
     id?: StringFieldUpdateOperationsInput | string
     projectId?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    district?: StringFieldUpdateOperationsInput | string
+    village?: StringFieldUpdateOperationsInput | string
+    block?: StringFieldUpdateOperationsInput | string
     target?: IntFieldUpdateOperationsInput | number
     achieved?: IntFieldUpdateOperationsInput | number
     units?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type AwarenessProgramUpdateWithoutQuarterInput = {
@@ -23469,6 +30339,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     project?: ProjectUpdateOneRequiredWithoutAwarenessProgramsNestedInput
+    User?: UserUpdateOneWithoutAwarenessProgramsNestedInput
   }
 
   export type AwarenessProgramUncheckedUpdateWithoutQuarterInput = {
@@ -23487,6 +30358,7 @@ export namespace Prisma {
     units?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type AwarenessProgramUncheckedUpdateManyWithoutQuarterInput = {
@@ -23505,6 +30377,7 @@ export namespace Prisma {
     units?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type InputDistributionUpdateWithoutQuarterInput = {
@@ -23514,11 +30387,13 @@ export namespace Prisma {
     project?: ProjectUpdateOneRequiredWithoutInputDistributionsNestedInput
     predefinedItems?: PredefinedInputDistributionUpdateManyWithoutInputDistributionNestedInput
     customItems?: CustomInputDistributionUpdateManyWithoutInputDistributionNestedInput
+    User?: UserUpdateOneWithoutInputDistributionsNestedInput
   }
 
   export type InputDistributionUncheckedUpdateWithoutQuarterInput = {
     id?: StringFieldUpdateOperationsInput | string
     projectId?: StringFieldUpdateOperationsInput | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     predefinedItems?: PredefinedInputDistributionUncheckedUpdateManyWithoutInputDistributionNestedInput
@@ -23528,6 +30403,7 @@ export namespace Prisma {
   export type InputDistributionUncheckedUpdateManyWithoutQuarterInput = {
     id?: StringFieldUpdateOperationsInput | string
     projectId?: StringFieldUpdateOperationsInput | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -23545,6 +30421,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     project?: ProjectUpdateOneRequiredWithoutInfrastructureDevelopmentsNestedInput
+    User?: UserUpdateOneWithoutInfrastructureDevelopmentsNestedInput
   }
 
   export type InfrastructureDevelopmentUncheckedUpdateWithoutQuarterInput = {
@@ -23560,6 +30437,7 @@ export namespace Prisma {
     imageKey?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type InfrastructureDevelopmentUncheckedUpdateManyWithoutQuarterInput = {
@@ -23575,6 +30453,7 @@ export namespace Prisma {
     imageKey?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type PredefinedInputDistributionCreateManyInputDistributionInput = {
