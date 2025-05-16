@@ -120,9 +120,204 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   Serializable: 'Serializable'
 });
 
+exports.Prisma.ProjectScalarFieldEnum = {
+  id: 'id',
+  implementingAgency: 'implementingAgency',
+  title: 'title',
+  locationState: 'locationState',
+  director: 'director',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.QuarterScalarFieldEnum = {
+  id: 'id',
+  number: 'number',
+  year: 'year'
+};
+
+exports.Prisma.InputDistributionScalarFieldEnum = {
+  id: 'id',
+  projectId: 'projectId',
+  quarterId: 'quarterId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.PredefinedInputDistributionScalarFieldEnum = {
+  id: 'id',
+  inputDistributionId: 'inputDistributionId',
+  activityType: 'activityType',
+  name: 'name',
+  target: 'target',
+  achieved: 'achieved',
+  district: 'district',
+  village: 'village',
+  block: 'block',
+  remarks: 'remarks',
+  units: 'units',
+  imageUrl: 'imageUrl',
+  imageKey: 'imageKey',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.CustomInputDistributionScalarFieldEnum = {
+  id: 'id',
+  inputDistributionId: 'inputDistributionId',
+  activityType: 'activityType',
+  name: 'name',
+  target: 'target',
+  achieved: 'achieved',
+  district: 'district',
+  village: 'village',
+  block: 'block',
+  remarks: 'remarks',
+  units: 'units',
+  imageUrl: 'imageUrl',
+  imageKey: 'imageKey',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.TrainingScalarFieldEnum = {
+  id: 'id',
+  projectId: 'projectId',
+  quarterId: 'quarterId',
+  title: 'title',
+  target: 'target',
+  achieved: 'achieved',
+  district: 'district',
+  village: 'village',
+  block: 'block',
+  beneficiaryMale: 'beneficiaryMale',
+  beneficiaryFemale: 'beneficiaryFemale',
+  remarks: 'remarks',
+  imageUrl: 'imageUrl',
+  imageKey: 'imageKey',
+  pdfUrl: 'pdfUrl',
+  pdfKey: 'pdfKey',
+  units: 'units',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.FLDScalarFieldEnum = {
+  id: 'id',
+  projectId: 'projectId',
+  quarterId: 'quarterId',
+  target: 'target',
+  achieved: 'achieved',
+  units: 'units',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.AwarenessProgramScalarFieldEnum = {
+  id: 'id',
+  projectId: 'projectId',
+  quarterId: 'quarterId',
+  title: 'title',
+  target: 'target',
+  achieved: 'achieved',
+  district: 'district',
+  village: 'village',
+  block: 'block',
+  beneficiaryMale: 'beneficiaryMale',
+  beneficiaryFemale: 'beneficiaryFemale',
+  imageUrl: 'imageUrl',
+  imageKey: 'imageKey',
+  units: 'units',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.InfrastructureDevelopmentScalarFieldEnum = {
+  id: 'id',
+  projectId: 'projectId',
+  quarterId: 'quarterId',
+  target: 'target',
+  achieved: 'achieved',
+  district: 'district',
+  village: 'village',
+  block: 'block',
+  remarks: 'remarks',
+  imageUrl: 'imageUrl',
+  imageKey: 'imageKey',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.UpcomingEventScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  date: 'date',
+  location: 'location',
+  description: 'description'
+};
+
+exports.Prisma.PublicationScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  type: 'type',
+  category: 'category',
+  thumbnailUrl: 'thumbnailUrl',
+  thumbnailKey: 'thumbnailKey',
+  pdfUrl: 'pdfUrl',
+  pdfKey: 'pdfKey'
+};
+
+exports.Prisma.GalleryScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  imageUrl: 'imageUrl',
+  imageKey: 'imageKey'
+};
+
+exports.Prisma.ProjectDetailsScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  region: 'region',
+  year: 'year',
+  budget: 'budget',
+  center: 'center',
+  location: 'location',
+  objectives: 'objectives',
+  director: 'director',
+  coDirectors: 'coDirectors',
+  achievements: 'achievements'
+};
+
+exports.Prisma.SortOrder = {
+  asc: 'asc',
+  desc: 'desc'
+};
+
+exports.Prisma.QueryMode = {
+  default: 'default',
+  insensitive: 'insensitive'
+};
+
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last'
+};
+
 
 exports.Prisma.ModelName = {
-
+  Project: 'Project',
+  Quarter: 'Quarter',
+  InputDistribution: 'InputDistribution',
+  PredefinedInputDistribution: 'PredefinedInputDistribution',
+  CustomInputDistribution: 'CustomInputDistribution',
+  Training: 'Training',
+  FLD: 'FLD',
+  AwarenessProgram: 'AwarenessProgram',
+  InfrastructureDevelopment: 'InfrastructureDevelopment',
+  UpcomingEvent: 'UpcomingEvent',
+  Publication: 'Publication',
+  Gallery: 'Gallery',
+  ProjectDetails: 'ProjectDetails'
 };
 
 /**

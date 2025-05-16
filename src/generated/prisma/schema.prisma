@@ -13,3 +13,263 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Project {
+  id                         String                      @id @default(uuid())
+  implementingAgency         String
+  title                      String                      @db.VarChar(255)
+  locationState              String
+  director                   String
+  createdAt                  DateTime                    @default(now())
+  updatedAt                  DateTime                    @updatedAt
+  trainings                  Training[]
+  flds                       FLD[]
+  awarenessPrograms          AwarenessProgram[]
+  infrastructureDevelopments InfrastructureDevelopment[]
+  inputDistributions         InputDistribution[]
+
+  // Indexes for frequently queried fields
+  @@index([title])
+  @@index([implementingAgency])
+  @@index([locationState])
+  @@index([createdAt])
+}
+
+model Quarter {
+  id                         String                      @id @default(uuid())
+  number                     Int // Should be between 1 and 4
+  year                       Int
+  trainings                  Training[]
+  flds                       FLD[]
+  awarenessPrograms          AwarenessProgram[]
+  inputDistributions         InputDistribution[]
+  infrastructureDevelopments InfrastructureDevelopment[]
+
+  // Validator for number - implement in application code instead of @range
+  // as Prisma doesn't support @range validator
+
+  @@unique([number, year])
+  @@index([year]) // Often filtered by year
+}
+
+model InputDistribution {
+  id              String                        @id @default(uuid())
+  project         Project                       @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  projectId       String
+  quarter         Quarter                       @relation(fields: [quarterId], references: [id], onDelete: Cascade)
+  quarterId       String
+  predefinedItems PredefinedInputDistribution[]
+  customItems     CustomInputDistribution[]
+  createdAt       DateTime                      @default(now())
+  updatedAt       DateTime                      @updatedAt
+
+  // Indexes for foreign keys and timestamps - improve join performance
+  @@index([projectId])
+  @@index([quarterId])
+  @@index([createdAt])
+}
+
+model PredefinedInputDistribution {
+  id                  String            @id @default(uuid())
+  inputDistribution   InputDistribution @relation(fields: [inputDistributionId], references: [id], onDelete: Cascade)
+  inputDistributionId String
+  activityType        String // Seed Distribution/Planting materials/Fertilizers/etc.
+  name                String
+  target              Int
+  achieved            Int
+  district            String
+  village             String
+  block               String
+  remarks             String?           @db.VarChar(300)
+  units               String?
+  imageUrl            String?
+  imageKey            String?
+  createdAt           DateTime          @default(now())
+  updatedAt           DateTime          @updatedAt
+
+  // Indexes for foreign keys and filtering fields
+  @@index([inputDistributionId])
+  @@index([activityType])
+  @@index([district, village, block]) // Compound index for location filtering
+}
+
+model CustomInputDistribution {
+  id                  String            @id @default(uuid())
+  inputDistribution   InputDistribution @relation(fields: [inputDistributionId], references: [id], onDelete: Cascade)
+  inputDistributionId String
+  activityType        String // Manually added
+  name                String
+  target              Int
+  achieved            Int
+  district            String
+  village             String
+  block               String
+  remarks             String?           @db.VarChar(300)
+  units               String?
+  imageUrl            String?
+  imageKey            String?
+  createdAt           DateTime          @default(now())
+  updatedAt           DateTime          @updatedAt
+
+  // Indexes for foreign keys and filtering fields
+  @@index([inputDistributionId])
+  @@index([activityType])
+  @@index([district, village, block]) // Compound index for location filtering
+}
+
+model Training {
+  id                String   @id @default(uuid())
+  project           Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  projectId         String
+  quarter           Quarter  @relation(fields: [quarterId], references: [id], onDelete: Cascade)
+  quarterId         String
+  title             String
+  target            Int
+  achieved          Int
+  district          String
+  village           String
+  block             String
+  beneficiaryMale   Int      @default(0)
+  beneficiaryFemale Int      @default(0)
+  remarks           String?  @db.VarChar(300)
+  imageUrl          String?
+  imageKey          String?
+  pdfUrl            String?
+  pdfKey            String?
+  units             String?
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  // Indexes for better query performance
+  @@index([projectId])
+  @@index([quarterId])
+  @@index([title])
+  @@index([district, village, block])
+  @@index([createdAt])
+}
+
+model FLD {
+  id        String   @id @default(uuid())
+  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  projectId String
+  quarter   Quarter  @relation(fields: [quarterId], references: [id], onDelete: Cascade)
+  quarterId String
+  target    Int
+  achieved  Int
+  units     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Indexes for foreign keys
+  @@index([projectId])
+  @@index([quarterId])
+}
+
+model AwarenessProgram {
+  id                String   @id @default(uuid())
+  project           Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  projectId         String
+  quarter           Quarter  @relation(fields: [quarterId], references: [id], onDelete: Cascade)
+  quarterId         String
+  title             String
+  target            Int
+  achieved          Int
+  district          String
+  village           String
+  block             String
+  beneficiaryMale   Int      @default(0)
+  beneficiaryFemale Int      @default(0)
+  imageUrl          String?
+  imageKey          String?
+  units             String?
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  // Indexes for better query performance
+  @@index([projectId])
+  @@index([quarterId])
+  @@index([title])
+  @@index([district, village, block])
+  @@index([createdAt])
+}
+
+model InfrastructureDevelopment {
+  id        String   @id @default(uuid())
+  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  projectId String
+  quarter   Quarter  @relation(fields: [quarterId], references: [id], onDelete: Cascade)
+  quarterId String
+  target    Int
+  achieved  Int
+  district  String
+  village   String
+  block     String
+  remarks   String?  @db.VarChar(300)
+  imageUrl  String?
+  imageKey  String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Indexes for better query performance
+  @@index([projectId])
+  @@index([quarterId])
+  @@index([district, village, block])
+  @@index([createdAt])
+}
+
+model UpcomingEvent {
+  id          String   @id @default(uuid())
+  title       String
+  date        DateTime
+  location    String
+  description String?
+
+  @@index([date]) // For sorting/filtering by date
+  @@index([location]) // For location-based queries
+}
+
+model Publication {
+  id           String  @id @default(uuid())
+  title        String
+  type         String // nutrition guide, cultivation guide, health guide
+  category     String?
+  thumbnailUrl String?
+  thumbnailKey String?
+  pdfUrl       String?
+  pdfKey       String?
+
+  @@index([title]) // For search by title
+  @@index([type]) // For filtering by publication type
+  @@index([category]) // For category-based filtering
+}
+
+model Gallery {
+  id       String @id @default(uuid())
+  title    String
+  imageUrl String
+  imageKey String
+
+  @@index([title]) // For search functionality
+}
+
+model ProjectDetails {
+  id           String   @id @default(uuid())
+  title        String
+  region       String // NEH or AICRP
+  year         Int
+  budget       Float?
+  center       String?
+  location     String?
+  objectives   String[] // Array of objectives
+  director     String
+  coDirectors  String[] // Array of co-directors
+  achievements String[] // Array of achievements
+
+  // Comprehensive indexing for all filterable fields
+  @@index([title])
+  @@index([region])
+  @@index([year])
+  @@index([center])
+  @@index([location])
+  @@index([director])
+}
