@@ -154,8 +154,7 @@ exports.Prisma.ProjectScalarFieldEnum = {
 exports.Prisma.QuarterScalarFieldEnum = {
   id: 'id',
   number: 'number',
-  year: 'year',
-  isActive: 'isActive'
+  year: 'year'
 };
 
 exports.Prisma.InputDistributionScalarFieldEnum = {

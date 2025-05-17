@@ -91,7 +91,6 @@ model Quarter {
   id                         String                      @id @default(uuid())
   number                     Int // Should be between 1 and 4
   year                       Int
-  isActive                   Boolean                     @default(true)
   trainings                  Training[]
   flds                       FLD[]
   awarenessPrograms          AwarenessProgram[]
@@ -103,7 +102,6 @@ model Quarter {
 
   @@unique([number, year])
   @@index([year])
-  @@index([isActive]) // Often filtered by year
   @@map("quarters")
 }
 

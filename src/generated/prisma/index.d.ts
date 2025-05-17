@@ -5162,21 +5162,18 @@ export namespace Prisma {
     id: string | null
     number: number | null
     year: number | null
-    isActive: boolean | null
   }
 
   export type QuarterMaxAggregateOutputType = {
     id: string | null
     number: number | null
     year: number | null
-    isActive: boolean | null
   }
 
   export type QuarterCountAggregateOutputType = {
     id: number
     number: number
     year: number
-    isActive: number
     _all: number
   }
 
@@ -5195,21 +5192,18 @@ export namespace Prisma {
     id?: true
     number?: true
     year?: true
-    isActive?: true
   }
 
   export type QuarterMaxAggregateInputType = {
     id?: true
     number?: true
     year?: true
-    isActive?: true
   }
 
   export type QuarterCountAggregateInputType = {
     id?: true
     number?: true
     year?: true
-    isActive?: true
     _all?: true
   }
 
@@ -5303,7 +5297,6 @@ export namespace Prisma {
     id: string
     number: number
     year: number
-    isActive: boolean
     _count: QuarterCountAggregateOutputType | null
     _avg: QuarterAvgAggregateOutputType | null
     _sum: QuarterSumAggregateOutputType | null
@@ -5329,7 +5322,6 @@ export namespace Prisma {
     id?: boolean
     number?: boolean
     year?: boolean
-    isActive?: boolean
     trainings?: boolean | Quarter$trainingsArgs<ExtArgs>
     flds?: boolean | Quarter$fldsArgs<ExtArgs>
     awarenessPrograms?: boolean | Quarter$awarenessProgramsArgs<ExtArgs>
@@ -5342,24 +5334,21 @@ export namespace Prisma {
     id?: boolean
     number?: boolean
     year?: boolean
-    isActive?: boolean
   }, ExtArgs["result"]["quarter"]>
 
   export type QuarterSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     number?: boolean
     year?: boolean
-    isActive?: boolean
   }, ExtArgs["result"]["quarter"]>
 
   export type QuarterSelectScalar = {
     id?: boolean
     number?: boolean
     year?: boolean
-    isActive?: boolean
   }
 
-  export type QuarterOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "number" | "year" | "isActive", ExtArgs["result"]["quarter"]>
+  export type QuarterOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "number" | "year", ExtArgs["result"]["quarter"]>
   export type QuarterInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     trainings?: boolean | Quarter$trainingsArgs<ExtArgs>
     flds?: boolean | Quarter$fldsArgs<ExtArgs>
@@ -5384,7 +5373,6 @@ export namespace Prisma {
       id: string
       number: number
       year: number
-      isActive: boolean
     }, ExtArgs["result"]["quarter"]>
     composites: {}
   }
@@ -5816,7 +5804,6 @@ export namespace Prisma {
     readonly id: FieldRef<"Quarter", 'String'>
     readonly number: FieldRef<"Quarter", 'Int'>
     readonly year: FieldRef<"Quarter", 'Int'>
-    readonly isActive: FieldRef<"Quarter", 'Boolean'>
   }
     
 
@@ -19719,8 +19706,7 @@ export namespace Prisma {
   export const QuarterScalarFieldEnum: {
     id: 'id',
     number: 'number',
-    year: 'year',
-    isActive: 'isActive'
+    year: 'year'
   };
 
   export type QuarterScalarFieldEnum = (typeof QuarterScalarFieldEnum)[keyof typeof QuarterScalarFieldEnum]
@@ -20305,7 +20291,6 @@ export namespace Prisma {
     id?: StringFilter<"Quarter"> | string
     number?: IntFilter<"Quarter"> | number
     year?: IntFilter<"Quarter"> | number
-    isActive?: BoolFilter<"Quarter"> | boolean
     trainings?: TrainingListRelationFilter
     flds?: FLDListRelationFilter
     awarenessPrograms?: AwarenessProgramListRelationFilter
@@ -20317,7 +20302,6 @@ export namespace Prisma {
     id?: SortOrder
     number?: SortOrder
     year?: SortOrder
-    isActive?: SortOrder
     trainings?: TrainingOrderByRelationAggregateInput
     flds?: FLDOrderByRelationAggregateInput
     awarenessPrograms?: AwarenessProgramOrderByRelationAggregateInput
@@ -20333,7 +20317,6 @@ export namespace Prisma {
     NOT?: QuarterWhereInput | QuarterWhereInput[]
     number?: IntFilter<"Quarter"> | number
     year?: IntFilter<"Quarter"> | number
-    isActive?: BoolFilter<"Quarter"> | boolean
     trainings?: TrainingListRelationFilter
     flds?: FLDListRelationFilter
     awarenessPrograms?: AwarenessProgramListRelationFilter
@@ -20345,7 +20328,6 @@ export namespace Prisma {
     id?: SortOrder
     number?: SortOrder
     year?: SortOrder
-    isActive?: SortOrder
     _count?: QuarterCountOrderByAggregateInput
     _avg?: QuarterAvgOrderByAggregateInput
     _max?: QuarterMaxOrderByAggregateInput
@@ -20360,7 +20342,6 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"Quarter"> | string
     number?: IntWithAggregatesFilter<"Quarter"> | number
     year?: IntWithAggregatesFilter<"Quarter"> | number
-    isActive?: BoolWithAggregatesFilter<"Quarter"> | boolean
   }
 
   export type InputDistributionWhereInput = {
@@ -21723,7 +21704,6 @@ export namespace Prisma {
     id?: string
     number: number
     year: number
-    isActive?: boolean
     trainings?: TrainingCreateNestedManyWithoutQuarterInput
     flds?: FLDCreateNestedManyWithoutQuarterInput
     awarenessPrograms?: AwarenessProgramCreateNestedManyWithoutQuarterInput
@@ -21735,7 +21715,6 @@ export namespace Prisma {
     id?: string
     number: number
     year: number
-    isActive?: boolean
     trainings?: TrainingUncheckedCreateNestedManyWithoutQuarterInput
     flds?: FLDUncheckedCreateNestedManyWithoutQuarterInput
     awarenessPrograms?: AwarenessProgramUncheckedCreateNestedManyWithoutQuarterInput
@@ -21747,7 +21726,6 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     number?: IntFieldUpdateOperationsInput | number
     year?: IntFieldUpdateOperationsInput | number
-    isActive?: BoolFieldUpdateOperationsInput | boolean
     trainings?: TrainingUpdateManyWithoutQuarterNestedInput
     flds?: FLDUpdateManyWithoutQuarterNestedInput
     awarenessPrograms?: AwarenessProgramUpdateManyWithoutQuarterNestedInput
@@ -21759,7 +21737,6 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     number?: IntFieldUpdateOperationsInput | number
     year?: IntFieldUpdateOperationsInput | number
-    isActive?: BoolFieldUpdateOperationsInput | boolean
     trainings?: TrainingUncheckedUpdateManyWithoutQuarterNestedInput
     flds?: FLDUncheckedUpdateManyWithoutQuarterNestedInput
     awarenessPrograms?: AwarenessProgramUncheckedUpdateManyWithoutQuarterNestedInput
@@ -21771,21 +21748,18 @@ export namespace Prisma {
     id?: string
     number: number
     year: number
-    isActive?: boolean
   }
 
   export type QuarterUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     number?: IntFieldUpdateOperationsInput | number
     year?: IntFieldUpdateOperationsInput | number
-    isActive?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type QuarterUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     number?: IntFieldUpdateOperationsInput | number
     year?: IntFieldUpdateOperationsInput | number
-    isActive?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type InputDistributionCreateInput = {
@@ -23407,7 +23381,6 @@ export namespace Prisma {
     id?: SortOrder
     number?: SortOrder
     year?: SortOrder
-    isActive?: SortOrder
   }
 
   export type QuarterAvgOrderByAggregateInput = {
@@ -23419,14 +23392,12 @@ export namespace Prisma {
     id?: SortOrder
     number?: SortOrder
     year?: SortOrder
-    isActive?: SortOrder
   }
 
   export type QuarterMinOrderByAggregateInput = {
     id?: SortOrder
     number?: SortOrder
     year?: SortOrder
-    isActive?: SortOrder
   }
 
   export type QuarterSumOrderByAggregateInput = {
@@ -27195,7 +27166,6 @@ export namespace Prisma {
     id?: string
     number: number
     year: number
-    isActive?: boolean
     trainings?: TrainingCreateNestedManyWithoutQuarterInput
     flds?: FLDCreateNestedManyWithoutQuarterInput
     awarenessPrograms?: AwarenessProgramCreateNestedManyWithoutQuarterInput
@@ -27206,7 +27176,6 @@ export namespace Prisma {
     id?: string
     number: number
     year: number
-    isActive?: boolean
     trainings?: TrainingUncheckedCreateNestedManyWithoutQuarterInput
     flds?: FLDUncheckedCreateNestedManyWithoutQuarterInput
     awarenessPrograms?: AwarenessProgramUncheckedCreateNestedManyWithoutQuarterInput
@@ -27425,7 +27394,6 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     number?: IntFieldUpdateOperationsInput | number
     year?: IntFieldUpdateOperationsInput | number
-    isActive?: BoolFieldUpdateOperationsInput | boolean
     trainings?: TrainingUpdateManyWithoutQuarterNestedInput
     flds?: FLDUpdateManyWithoutQuarterNestedInput
     awarenessPrograms?: AwarenessProgramUpdateManyWithoutQuarterNestedInput
@@ -27436,7 +27404,6 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     number?: IntFieldUpdateOperationsInput | number
     year?: IntFieldUpdateOperationsInput | number
-    isActive?: BoolFieldUpdateOperationsInput | boolean
     trainings?: TrainingUncheckedUpdateManyWithoutQuarterNestedInput
     flds?: FLDUncheckedUpdateManyWithoutQuarterNestedInput
     awarenessPrograms?: AwarenessProgramUncheckedUpdateManyWithoutQuarterNestedInput
@@ -27737,7 +27704,6 @@ export namespace Prisma {
     id?: string
     number: number
     year: number
-    isActive?: boolean
     flds?: FLDCreateNestedManyWithoutQuarterInput
     awarenessPrograms?: AwarenessProgramCreateNestedManyWithoutQuarterInput
     inputDistributions?: InputDistributionCreateNestedManyWithoutQuarterInput
@@ -27748,7 +27714,6 @@ export namespace Prisma {
     id?: string
     number: number
     year: number
-    isActive?: boolean
     flds?: FLDUncheckedCreateNestedManyWithoutQuarterInput
     awarenessPrograms?: AwarenessProgramUncheckedCreateNestedManyWithoutQuarterInput
     inputDistributions?: InputDistributionUncheckedCreateNestedManyWithoutQuarterInput
@@ -27879,7 +27844,6 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     number?: IntFieldUpdateOperationsInput | number
     year?: IntFieldUpdateOperationsInput | number
-    isActive?: BoolFieldUpdateOperationsInput | boolean
     flds?: FLDUpdateManyWithoutQuarterNestedInput
     awarenessPrograms?: AwarenessProgramUpdateManyWithoutQuarterNestedInput
     inputDistributions?: InputDistributionUpdateManyWithoutQuarterNestedInput
@@ -27890,7 +27854,6 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     number?: IntFieldUpdateOperationsInput | number
     year?: IntFieldUpdateOperationsInput | number
-    isActive?: BoolFieldUpdateOperationsInput | boolean
     flds?: FLDUncheckedUpdateManyWithoutQuarterNestedInput
     awarenessPrograms?: AwarenessProgramUncheckedUpdateManyWithoutQuarterNestedInput
     inputDistributions?: InputDistributionUncheckedUpdateManyWithoutQuarterNestedInput
@@ -28005,7 +27968,6 @@ export namespace Prisma {
     id?: string
     number: number
     year: number
-    isActive?: boolean
     trainings?: TrainingCreateNestedManyWithoutQuarterInput
     awarenessPrograms?: AwarenessProgramCreateNestedManyWithoutQuarterInput
     inputDistributions?: InputDistributionCreateNestedManyWithoutQuarterInput
@@ -28016,7 +27978,6 @@ export namespace Prisma {
     id?: string
     number: number
     year: number
-    isActive?: boolean
     trainings?: TrainingUncheckedCreateNestedManyWithoutQuarterInput
     awarenessPrograms?: AwarenessProgramUncheckedCreateNestedManyWithoutQuarterInput
     inputDistributions?: InputDistributionUncheckedCreateNestedManyWithoutQuarterInput
@@ -28147,7 +28108,6 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     number?: IntFieldUpdateOperationsInput | number
     year?: IntFieldUpdateOperationsInput | number
-    isActive?: BoolFieldUpdateOperationsInput | boolean
     trainings?: TrainingUpdateManyWithoutQuarterNestedInput
     awarenessPrograms?: AwarenessProgramUpdateManyWithoutQuarterNestedInput
     inputDistributions?: InputDistributionUpdateManyWithoutQuarterNestedInput
@@ -28158,7 +28118,6 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     number?: IntFieldUpdateOperationsInput | number
     year?: IntFieldUpdateOperationsInput | number
-    isActive?: BoolFieldUpdateOperationsInput | boolean
     trainings?: TrainingUncheckedUpdateManyWithoutQuarterNestedInput
     awarenessPrograms?: AwarenessProgramUncheckedUpdateManyWithoutQuarterNestedInput
     inputDistributions?: InputDistributionUncheckedUpdateManyWithoutQuarterNestedInput
@@ -28273,7 +28232,6 @@ export namespace Prisma {
     id?: string
     number: number
     year: number
-    isActive?: boolean
     trainings?: TrainingCreateNestedManyWithoutQuarterInput
     flds?: FLDCreateNestedManyWithoutQuarterInput
     inputDistributions?: InputDistributionCreateNestedManyWithoutQuarterInput
@@ -28284,7 +28242,6 @@ export namespace Prisma {
     id?: string
     number: number
     year: number
-    isActive?: boolean
     trainings?: TrainingUncheckedCreateNestedManyWithoutQuarterInput
     flds?: FLDUncheckedCreateNestedManyWithoutQuarterInput
     inputDistributions?: InputDistributionUncheckedCreateNestedManyWithoutQuarterInput
@@ -28415,7 +28372,6 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     number?: IntFieldUpdateOperationsInput | number
     year?: IntFieldUpdateOperationsInput | number
-    isActive?: BoolFieldUpdateOperationsInput | boolean
     trainings?: TrainingUpdateManyWithoutQuarterNestedInput
     flds?: FLDUpdateManyWithoutQuarterNestedInput
     inputDistributions?: InputDistributionUpdateManyWithoutQuarterNestedInput
@@ -28426,7 +28382,6 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     number?: IntFieldUpdateOperationsInput | number
     year?: IntFieldUpdateOperationsInput | number
-    isActive?: BoolFieldUpdateOperationsInput | boolean
     trainings?: TrainingUncheckedUpdateManyWithoutQuarterNestedInput
     flds?: FLDUncheckedUpdateManyWithoutQuarterNestedInput
     inputDistributions?: InputDistributionUncheckedUpdateManyWithoutQuarterNestedInput
@@ -28541,7 +28496,6 @@ export namespace Prisma {
     id?: string
     number: number
     year: number
-    isActive?: boolean
     trainings?: TrainingCreateNestedManyWithoutQuarterInput
     flds?: FLDCreateNestedManyWithoutQuarterInput
     awarenessPrograms?: AwarenessProgramCreateNestedManyWithoutQuarterInput
@@ -28552,7 +28506,6 @@ export namespace Prisma {
     id?: string
     number: number
     year: number
-    isActive?: boolean
     trainings?: TrainingUncheckedCreateNestedManyWithoutQuarterInput
     flds?: FLDUncheckedCreateNestedManyWithoutQuarterInput
     awarenessPrograms?: AwarenessProgramUncheckedCreateNestedManyWithoutQuarterInput
@@ -28683,7 +28636,6 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     number?: IntFieldUpdateOperationsInput | number
     year?: IntFieldUpdateOperationsInput | number
-    isActive?: BoolFieldUpdateOperationsInput | boolean
     trainings?: TrainingUpdateManyWithoutQuarterNestedInput
     flds?: FLDUpdateManyWithoutQuarterNestedInput
     awarenessPrograms?: AwarenessProgramUpdateManyWithoutQuarterNestedInput
@@ -28694,7 +28646,6 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     number?: IntFieldUpdateOperationsInput | number
     year?: IntFieldUpdateOperationsInput | number
-    isActive?: BoolFieldUpdateOperationsInput | boolean
     trainings?: TrainingUncheckedUpdateManyWithoutQuarterNestedInput
     flds?: FLDUncheckedUpdateManyWithoutQuarterNestedInput
     awarenessPrograms?: AwarenessProgramUncheckedUpdateManyWithoutQuarterNestedInput
