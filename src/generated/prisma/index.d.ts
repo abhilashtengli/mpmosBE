@@ -2372,8 +2372,18 @@ export namespace Prisma {
 
   export type AggregateUser = {
     _count: UserCountAggregateOutputType | null
+    _avg: UserAvgAggregateOutputType | null
+    _sum: UserSumAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
     _max: UserMaxAggregateOutputType | null
+  }
+
+  export type UserAvgAggregateOutputType = {
+    verificationAttempts: number | null
+  }
+
+  export type UserSumAggregateOutputType = {
+    verificationAttempts: number | null
   }
 
   export type UserMinAggregateOutputType = {
@@ -2389,6 +2399,7 @@ export namespace Prisma {
     verificationExpires: Date | null
     createdAt: Date | null
     updateAt: Date | null
+    verificationAttempts: number | null
   }
 
   export type UserMaxAggregateOutputType = {
@@ -2404,6 +2415,7 @@ export namespace Prisma {
     verificationExpires: Date | null
     createdAt: Date | null
     updateAt: Date | null
+    verificationAttempts: number | null
   }
 
   export type UserCountAggregateOutputType = {
@@ -2419,9 +2431,18 @@ export namespace Prisma {
     verificationExpires: number
     createdAt: number
     updateAt: number
+    verificationAttempts: number
     _all: number
   }
 
+
+  export type UserAvgAggregateInputType = {
+    verificationAttempts?: true
+  }
+
+  export type UserSumAggregateInputType = {
+    verificationAttempts?: true
+  }
 
   export type UserMinAggregateInputType = {
     id?: true
@@ -2436,6 +2457,7 @@ export namespace Prisma {
     verificationExpires?: true
     createdAt?: true
     updateAt?: true
+    verificationAttempts?: true
   }
 
   export type UserMaxAggregateInputType = {
@@ -2451,6 +2473,7 @@ export namespace Prisma {
     verificationExpires?: true
     createdAt?: true
     updateAt?: true
+    verificationAttempts?: true
   }
 
   export type UserCountAggregateInputType = {
@@ -2466,6 +2489,7 @@ export namespace Prisma {
     verificationExpires?: true
     createdAt?: true
     updateAt?: true
+    verificationAttempts?: true
     _all?: true
   }
 
@@ -2507,6 +2531,18 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
+     * Select which fields to average
+    **/
+    _avg?: UserAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: UserSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: UserMinAggregateInputType
@@ -2537,6 +2573,8 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: UserCountAggregateInputType | true
+    _avg?: UserAvgAggregateInputType
+    _sum?: UserSumAggregateInputType
     _min?: UserMinAggregateInputType
     _max?: UserMaxAggregateInputType
   }
@@ -2554,7 +2592,10 @@ export namespace Prisma {
     verificationExpires: Date | null
     createdAt: Date
     updateAt: Date
+    verificationAttempts: number | null
     _count: UserCountAggregateOutputType | null
+    _avg: UserAvgAggregateOutputType | null
+    _sum: UserSumAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
     _max: UserMaxAggregateOutputType | null
   }
@@ -2586,6 +2627,7 @@ export namespace Prisma {
     verificationExpires?: boolean
     createdAt?: boolean
     updateAt?: boolean
+    verificationAttempts?: boolean
     projects?: boolean | User$projectsArgs<ExtArgs>
     trainings?: boolean | User$trainingsArgs<ExtArgs>
     flds?: boolean | User$fldsArgs<ExtArgs>
@@ -2612,6 +2654,7 @@ export namespace Prisma {
     verificationExpires?: boolean
     createdAt?: boolean
     updateAt?: boolean
+    verificationAttempts?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -2627,6 +2670,7 @@ export namespace Prisma {
     verificationExpires?: boolean
     createdAt?: boolean
     updateAt?: boolean
+    verificationAttempts?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectScalar = {
@@ -2642,9 +2686,10 @@ export namespace Prisma {
     verificationExpires?: boolean
     createdAt?: boolean
     updateAt?: boolean
+    verificationAttempts?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "password" | "role" | "isVerified" | "verificationCode" | "resetPasswordToken" | "resetTokenExpires" | "verificationExpires" | "createdAt" | "updateAt", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "password" | "role" | "isVerified" | "verificationCode" | "resetPasswordToken" | "resetTokenExpires" | "verificationExpires" | "createdAt" | "updateAt" | "verificationAttempts", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     projects?: boolean | User$projectsArgs<ExtArgs>
     trainings?: boolean | User$trainingsArgs<ExtArgs>
@@ -2688,6 +2733,7 @@ export namespace Prisma {
       verificationExpires: Date | null
       createdAt: Date
       updateAt: Date
+      verificationAttempts: number | null
     }, ExtArgs["result"]["user"]>
     composites: {}
   }
@@ -3133,6 +3179,7 @@ export namespace Prisma {
     readonly verificationExpires: FieldRef<"User", 'DateTime'>
     readonly createdAt: FieldRef<"User", 'DateTime'>
     readonly updateAt: FieldRef<"User", 'DateTime'>
+    readonly verificationAttempts: FieldRef<"User", 'Int'>
   }
     
 
@@ -19665,7 +19712,8 @@ export namespace Prisma {
     resetTokenExpires: 'resetTokenExpires',
     verificationExpires: 'verificationExpires',
     createdAt: 'createdAt',
-    updateAt: 'updateAt'
+    updateAt: 'updateAt',
+    verificationAttempts: 'verificationAttempts'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -19983,6 +20031,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Int'
+   */
+  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
+    
+
+
+  /**
+   * Reference to a field of type 'Int[]'
+   */
+  export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Decimal'
    */
   export type DecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal'>
@@ -20007,20 +20069,6 @@ export namespace Prisma {
    * Reference to a field of type 'Status[]'
    */
   export type ListEnumStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Status[]'>
-    
-
-
-  /**
-   * Reference to a field of type 'Int'
-   */
-  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
-    
-
-
-  /**
-   * Reference to a field of type 'Int[]'
-   */
-  export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
     
 
 
@@ -20057,6 +20105,7 @@ export namespace Prisma {
     verificationExpires?: DateTimeNullableFilter<"User"> | Date | string | null
     createdAt?: DateTimeFilter<"User"> | Date | string
     updateAt?: DateTimeFilter<"User"> | Date | string
+    verificationAttempts?: IntNullableFilter<"User"> | number | null
     projects?: ProjectListRelationFilter
     trainings?: TrainingListRelationFilter
     flds?: FLDListRelationFilter
@@ -20082,6 +20131,7 @@ export namespace Prisma {
     verificationExpires?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updateAt?: SortOrder
+    verificationAttempts?: SortOrderInput | SortOrder
     projects?: ProjectOrderByRelationAggregateInput
     trainings?: TrainingOrderByRelationAggregateInput
     flds?: FLDOrderByRelationAggregateInput
@@ -20110,6 +20160,7 @@ export namespace Prisma {
     verificationExpires?: DateTimeNullableFilter<"User"> | Date | string | null
     createdAt?: DateTimeFilter<"User"> | Date | string
     updateAt?: DateTimeFilter<"User"> | Date | string
+    verificationAttempts?: IntNullableFilter<"User"> | number | null
     projects?: ProjectListRelationFilter
     trainings?: TrainingListRelationFilter
     flds?: FLDListRelationFilter
@@ -20135,9 +20186,12 @@ export namespace Prisma {
     verificationExpires?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updateAt?: SortOrder
+    verificationAttempts?: SortOrderInput | SortOrder
     _count?: UserCountOrderByAggregateInput
+    _avg?: UserAvgOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
     _min?: UserMinOrderByAggregateInput
+    _sum?: UserSumOrderByAggregateInput
   }
 
   export type UserScalarWhereWithAggregatesInput = {
@@ -20156,6 +20210,7 @@ export namespace Prisma {
     verificationExpires?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     updateAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
+    verificationAttempts?: IntNullableWithAggregatesFilter<"User"> | number | null
   }
 
   export type ProjectWhereInput = {
@@ -21418,6 +21473,7 @@ export namespace Prisma {
     verificationExpires?: Date | string | null
     createdAt?: Date | string
     updateAt?: Date | string
+    verificationAttempts?: number | null
     projects?: ProjectCreateNestedManyWithoutUserInput
     trainings?: TrainingCreateNestedManyWithoutUserInput
     flds?: FLDCreateNestedManyWithoutUserInput
@@ -21443,6 +21499,7 @@ export namespace Prisma {
     verificationExpires?: Date | string | null
     createdAt?: Date | string
     updateAt?: Date | string
+    verificationAttempts?: number | null
     projects?: ProjectUncheckedCreateNestedManyWithoutUserInput
     trainings?: TrainingUncheckedCreateNestedManyWithoutUserInput
     flds?: FLDUncheckedCreateNestedManyWithoutUserInput
@@ -21468,6 +21525,7 @@ export namespace Prisma {
     verificationExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    verificationAttempts?: NullableIntFieldUpdateOperationsInput | number | null
     projects?: ProjectUpdateManyWithoutUserNestedInput
     trainings?: TrainingUpdateManyWithoutUserNestedInput
     flds?: FLDUpdateManyWithoutUserNestedInput
@@ -21493,6 +21551,7 @@ export namespace Prisma {
     verificationExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    verificationAttempts?: NullableIntFieldUpdateOperationsInput | number | null
     projects?: ProjectUncheckedUpdateManyWithoutUserNestedInput
     trainings?: TrainingUncheckedUpdateManyWithoutUserNestedInput
     flds?: FLDUncheckedUpdateManyWithoutUserNestedInput
@@ -21518,6 +21577,7 @@ export namespace Prisma {
     verificationExpires?: Date | string | null
     createdAt?: Date | string
     updateAt?: Date | string
+    verificationAttempts?: number | null
   }
 
   export type UserUpdateManyMutationInput = {
@@ -21533,6 +21593,7 @@ export namespace Prisma {
     verificationExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    verificationAttempts?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type UserUncheckedUpdateManyInput = {
@@ -21548,6 +21609,7 @@ export namespace Prisma {
     verificationExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    verificationAttempts?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type ProjectCreateInput = {
@@ -22998,6 +23060,17 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
+  export type IntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
   export type ProjectListRelationFilter = {
     every?: ProjectWhereInput
     some?: ProjectWhereInput
@@ -23116,6 +23189,11 @@ export namespace Prisma {
     verificationExpires?: SortOrder
     createdAt?: SortOrder
     updateAt?: SortOrder
+    verificationAttempts?: SortOrder
+  }
+
+  export type UserAvgOrderByAggregateInput = {
+    verificationAttempts?: SortOrder
   }
 
   export type UserMaxOrderByAggregateInput = {
@@ -23131,6 +23209,7 @@ export namespace Prisma {
     verificationExpires?: SortOrder
     createdAt?: SortOrder
     updateAt?: SortOrder
+    verificationAttempts?: SortOrder
   }
 
   export type UserMinOrderByAggregateInput = {
@@ -23146,6 +23225,11 @@ export namespace Prisma {
     verificationExpires?: SortOrder
     createdAt?: SortOrder
     updateAt?: SortOrder
+    verificationAttempts?: SortOrder
+  }
+
+  export type UserSumOrderByAggregateInput = {
+    verificationAttempts?: SortOrder
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -23228,6 +23312,22 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
   export type DecimalNullableFilter<$PrismaModel = never> = {
@@ -24215,6 +24315,14 @@ export namespace Prisma {
 
   export type DateTimeFieldUpdateOperationsInput = {
     set?: Date | string
+  }
+
+  export type NullableIntFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
   }
 
   export type ProjectUpdateManyWithoutUserNestedInput = {
@@ -25446,6 +25554,17 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
   export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -25509,17 +25628,6 @@ export namespace Prisma {
     _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
-  export type NestedIntNullableFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
-  }
-
   export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
@@ -25546,6 +25654,33 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type NestedFloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
   }
 
   export type NestedDecimalNullableFilter<$PrismaModel = never> = {
@@ -25617,17 +25752,6 @@ export namespace Prisma {
     gt?: number | FloatFieldRefInput<$PrismaModel>
     gte?: number | FloatFieldRefInput<$PrismaModel>
     not?: NestedFloatFilter<$PrismaModel> | number
-  }
-
-  export type NestedFloatNullableFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
   }
 
   export type NestedFloatNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -26613,6 +26737,7 @@ export namespace Prisma {
     verificationExpires?: Date | string | null
     createdAt?: Date | string
     updateAt?: Date | string
+    verificationAttempts?: number | null
     trainings?: TrainingCreateNestedManyWithoutUserInput
     flds?: FLDCreateNestedManyWithoutUserInput
     awarenessPrograms?: AwarenessProgramCreateNestedManyWithoutUserInput
@@ -26637,6 +26762,7 @@ export namespace Prisma {
     verificationExpires?: Date | string | null
     createdAt?: Date | string
     updateAt?: Date | string
+    verificationAttempts?: number | null
     trainings?: TrainingUncheckedCreateNestedManyWithoutUserInput
     flds?: FLDUncheckedCreateNestedManyWithoutUserInput
     awarenessPrograms?: AwarenessProgramUncheckedCreateNestedManyWithoutUserInput
@@ -26757,6 +26883,7 @@ export namespace Prisma {
     verificationExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    verificationAttempts?: NullableIntFieldUpdateOperationsInput | number | null
     trainings?: TrainingUpdateManyWithoutUserNestedInput
     flds?: FLDUpdateManyWithoutUserNestedInput
     awarenessPrograms?: AwarenessProgramUpdateManyWithoutUserNestedInput
@@ -26781,6 +26908,7 @@ export namespace Prisma {
     verificationExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    verificationAttempts?: NullableIntFieldUpdateOperationsInput | number | null
     trainings?: TrainingUncheckedUpdateManyWithoutUserNestedInput
     flds?: FLDUncheckedUpdateManyWithoutUserNestedInput
     awarenessPrograms?: AwarenessProgramUncheckedUpdateManyWithoutUserNestedInput
@@ -27255,6 +27383,7 @@ export namespace Prisma {
     verificationExpires?: Date | string | null
     createdAt?: Date | string
     updateAt?: Date | string
+    verificationAttempts?: number | null
     projects?: ProjectCreateNestedManyWithoutUserInput
     trainings?: TrainingCreateNestedManyWithoutUserInput
     flds?: FLDCreateNestedManyWithoutUserInput
@@ -27279,6 +27408,7 @@ export namespace Prisma {
     verificationExpires?: Date | string | null
     createdAt?: Date | string
     updateAt?: Date | string
+    verificationAttempts?: number | null
     projects?: ProjectUncheckedCreateNestedManyWithoutUserInput
     trainings?: TrainingUncheckedCreateNestedManyWithoutUserInput
     flds?: FLDUncheckedCreateNestedManyWithoutUserInput
@@ -27473,6 +27603,7 @@ export namespace Prisma {
     verificationExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    verificationAttempts?: NullableIntFieldUpdateOperationsInput | number | null
     projects?: ProjectUpdateManyWithoutUserNestedInput
     trainings?: TrainingUpdateManyWithoutUserNestedInput
     flds?: FLDUpdateManyWithoutUserNestedInput
@@ -27497,6 +27628,7 @@ export namespace Prisma {
     verificationExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    verificationAttempts?: NullableIntFieldUpdateOperationsInput | number | null
     projects?: ProjectUncheckedUpdateManyWithoutUserNestedInput
     trainings?: TrainingUncheckedUpdateManyWithoutUserNestedInput
     flds?: FLDUncheckedUpdateManyWithoutUserNestedInput
@@ -27701,6 +27833,7 @@ export namespace Prisma {
     verificationExpires?: Date | string | null
     createdAt?: Date | string
     updateAt?: Date | string
+    verificationAttempts?: number | null
     projects?: ProjectCreateNestedManyWithoutUserInput
     flds?: FLDCreateNestedManyWithoutUserInput
     awarenessPrograms?: AwarenessProgramCreateNestedManyWithoutUserInput
@@ -27725,6 +27858,7 @@ export namespace Prisma {
     verificationExpires?: Date | string | null
     createdAt?: Date | string
     updateAt?: Date | string
+    verificationAttempts?: number | null
     projects?: ProjectUncheckedCreateNestedManyWithoutUserInput
     flds?: FLDUncheckedCreateNestedManyWithoutUserInput
     awarenessPrograms?: AwarenessProgramUncheckedCreateNestedManyWithoutUserInput
@@ -27845,6 +27979,7 @@ export namespace Prisma {
     verificationExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    verificationAttempts?: NullableIntFieldUpdateOperationsInput | number | null
     projects?: ProjectUpdateManyWithoutUserNestedInput
     flds?: FLDUpdateManyWithoutUserNestedInput
     awarenessPrograms?: AwarenessProgramUpdateManyWithoutUserNestedInput
@@ -27869,6 +28004,7 @@ export namespace Prisma {
     verificationExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    verificationAttempts?: NullableIntFieldUpdateOperationsInput | number | null
     projects?: ProjectUncheckedUpdateManyWithoutUserNestedInput
     flds?: FLDUncheckedUpdateManyWithoutUserNestedInput
     awarenessPrograms?: AwarenessProgramUncheckedUpdateManyWithoutUserNestedInput
@@ -27961,6 +28097,7 @@ export namespace Prisma {
     verificationExpires?: Date | string | null
     createdAt?: Date | string
     updateAt?: Date | string
+    verificationAttempts?: number | null
     projects?: ProjectCreateNestedManyWithoutUserInput
     trainings?: TrainingCreateNestedManyWithoutUserInput
     awarenessPrograms?: AwarenessProgramCreateNestedManyWithoutUserInput
@@ -27985,6 +28122,7 @@ export namespace Prisma {
     verificationExpires?: Date | string | null
     createdAt?: Date | string
     updateAt?: Date | string
+    verificationAttempts?: number | null
     projects?: ProjectUncheckedCreateNestedManyWithoutUserInput
     trainings?: TrainingUncheckedCreateNestedManyWithoutUserInput
     awarenessPrograms?: AwarenessProgramUncheckedCreateNestedManyWithoutUserInput
@@ -28105,6 +28243,7 @@ export namespace Prisma {
     verificationExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    verificationAttempts?: NullableIntFieldUpdateOperationsInput | number | null
     projects?: ProjectUpdateManyWithoutUserNestedInput
     trainings?: TrainingUpdateManyWithoutUserNestedInput
     awarenessPrograms?: AwarenessProgramUpdateManyWithoutUserNestedInput
@@ -28129,6 +28268,7 @@ export namespace Prisma {
     verificationExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    verificationAttempts?: NullableIntFieldUpdateOperationsInput | number | null
     projects?: ProjectUncheckedUpdateManyWithoutUserNestedInput
     trainings?: TrainingUncheckedUpdateManyWithoutUserNestedInput
     awarenessPrograms?: AwarenessProgramUncheckedUpdateManyWithoutUserNestedInput
@@ -28221,6 +28361,7 @@ export namespace Prisma {
     verificationExpires?: Date | string | null
     createdAt?: Date | string
     updateAt?: Date | string
+    verificationAttempts?: number | null
     projects?: ProjectCreateNestedManyWithoutUserInput
     trainings?: TrainingCreateNestedManyWithoutUserInput
     flds?: FLDCreateNestedManyWithoutUserInput
@@ -28245,6 +28386,7 @@ export namespace Prisma {
     verificationExpires?: Date | string | null
     createdAt?: Date | string
     updateAt?: Date | string
+    verificationAttempts?: number | null
     projects?: ProjectUncheckedCreateNestedManyWithoutUserInput
     trainings?: TrainingUncheckedCreateNestedManyWithoutUserInput
     flds?: FLDUncheckedCreateNestedManyWithoutUserInput
@@ -28365,6 +28507,7 @@ export namespace Prisma {
     verificationExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    verificationAttempts?: NullableIntFieldUpdateOperationsInput | number | null
     projects?: ProjectUpdateManyWithoutUserNestedInput
     trainings?: TrainingUpdateManyWithoutUserNestedInput
     flds?: FLDUpdateManyWithoutUserNestedInput
@@ -28389,6 +28532,7 @@ export namespace Prisma {
     verificationExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    verificationAttempts?: NullableIntFieldUpdateOperationsInput | number | null
     projects?: ProjectUncheckedUpdateManyWithoutUserNestedInput
     trainings?: TrainingUncheckedUpdateManyWithoutUserNestedInput
     flds?: FLDUncheckedUpdateManyWithoutUserNestedInput
@@ -28481,6 +28625,7 @@ export namespace Prisma {
     verificationExpires?: Date | string | null
     createdAt?: Date | string
     updateAt?: Date | string
+    verificationAttempts?: number | null
     projects?: ProjectCreateNestedManyWithoutUserInput
     trainings?: TrainingCreateNestedManyWithoutUserInput
     flds?: FLDCreateNestedManyWithoutUserInput
@@ -28505,6 +28650,7 @@ export namespace Prisma {
     verificationExpires?: Date | string | null
     createdAt?: Date | string
     updateAt?: Date | string
+    verificationAttempts?: number | null
     projects?: ProjectUncheckedCreateNestedManyWithoutUserInput
     trainings?: TrainingUncheckedCreateNestedManyWithoutUserInput
     flds?: FLDUncheckedCreateNestedManyWithoutUserInput
@@ -28625,6 +28771,7 @@ export namespace Prisma {
     verificationExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    verificationAttempts?: NullableIntFieldUpdateOperationsInput | number | null
     projects?: ProjectUpdateManyWithoutUserNestedInput
     trainings?: TrainingUpdateManyWithoutUserNestedInput
     flds?: FLDUpdateManyWithoutUserNestedInput
@@ -28649,6 +28796,7 @@ export namespace Prisma {
     verificationExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    verificationAttempts?: NullableIntFieldUpdateOperationsInput | number | null
     projects?: ProjectUncheckedUpdateManyWithoutUserNestedInput
     trainings?: TrainingUncheckedUpdateManyWithoutUserNestedInput
     flds?: FLDUncheckedUpdateManyWithoutUserNestedInput
@@ -28673,6 +28821,7 @@ export namespace Prisma {
     verificationExpires?: Date | string | null
     createdAt?: Date | string
     updateAt?: Date | string
+    verificationAttempts?: number | null
     projects?: ProjectCreateNestedManyWithoutUserInput
     trainings?: TrainingCreateNestedManyWithoutUserInput
     flds?: FLDCreateNestedManyWithoutUserInput
@@ -28697,6 +28846,7 @@ export namespace Prisma {
     verificationExpires?: Date | string | null
     createdAt?: Date | string
     updateAt?: Date | string
+    verificationAttempts?: number | null
     projects?: ProjectUncheckedCreateNestedManyWithoutUserInput
     trainings?: TrainingUncheckedCreateNestedManyWithoutUserInput
     flds?: FLDUncheckedCreateNestedManyWithoutUserInput
@@ -28737,6 +28887,7 @@ export namespace Prisma {
     verificationExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    verificationAttempts?: NullableIntFieldUpdateOperationsInput | number | null
     projects?: ProjectUpdateManyWithoutUserNestedInput
     trainings?: TrainingUpdateManyWithoutUserNestedInput
     flds?: FLDUpdateManyWithoutUserNestedInput
@@ -28761,6 +28912,7 @@ export namespace Prisma {
     verificationExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    verificationAttempts?: NullableIntFieldUpdateOperationsInput | number | null
     projects?: ProjectUncheckedUpdateManyWithoutUserNestedInput
     trainings?: TrainingUncheckedUpdateManyWithoutUserNestedInput
     flds?: FLDUncheckedUpdateManyWithoutUserNestedInput
@@ -28785,6 +28937,7 @@ export namespace Prisma {
     verificationExpires?: Date | string | null
     createdAt?: Date | string
     updateAt?: Date | string
+    verificationAttempts?: number | null
     projects?: ProjectCreateNestedManyWithoutUserInput
     trainings?: TrainingCreateNestedManyWithoutUserInput
     flds?: FLDCreateNestedManyWithoutUserInput
@@ -28809,6 +28962,7 @@ export namespace Prisma {
     verificationExpires?: Date | string | null
     createdAt?: Date | string
     updateAt?: Date | string
+    verificationAttempts?: number | null
     projects?: ProjectUncheckedCreateNestedManyWithoutUserInput
     trainings?: TrainingUncheckedCreateNestedManyWithoutUserInput
     flds?: FLDUncheckedCreateNestedManyWithoutUserInput
@@ -28849,6 +29003,7 @@ export namespace Prisma {
     verificationExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    verificationAttempts?: NullableIntFieldUpdateOperationsInput | number | null
     projects?: ProjectUpdateManyWithoutUserNestedInput
     trainings?: TrainingUpdateManyWithoutUserNestedInput
     flds?: FLDUpdateManyWithoutUserNestedInput
@@ -28873,6 +29028,7 @@ export namespace Prisma {
     verificationExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    verificationAttempts?: NullableIntFieldUpdateOperationsInput | number | null
     projects?: ProjectUncheckedUpdateManyWithoutUserNestedInput
     trainings?: TrainingUncheckedUpdateManyWithoutUserNestedInput
     flds?: FLDUncheckedUpdateManyWithoutUserNestedInput
@@ -28897,6 +29053,7 @@ export namespace Prisma {
     verificationExpires?: Date | string | null
     createdAt?: Date | string
     updateAt?: Date | string
+    verificationAttempts?: number | null
     projects?: ProjectCreateNestedManyWithoutUserInput
     trainings?: TrainingCreateNestedManyWithoutUserInput
     flds?: FLDCreateNestedManyWithoutUserInput
@@ -28921,6 +29078,7 @@ export namespace Prisma {
     verificationExpires?: Date | string | null
     createdAt?: Date | string
     updateAt?: Date | string
+    verificationAttempts?: number | null
     projects?: ProjectUncheckedCreateNestedManyWithoutUserInput
     trainings?: TrainingUncheckedCreateNestedManyWithoutUserInput
     flds?: FLDUncheckedCreateNestedManyWithoutUserInput
@@ -28961,6 +29119,7 @@ export namespace Prisma {
     verificationExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    verificationAttempts?: NullableIntFieldUpdateOperationsInput | number | null
     projects?: ProjectUpdateManyWithoutUserNestedInput
     trainings?: TrainingUpdateManyWithoutUserNestedInput
     flds?: FLDUpdateManyWithoutUserNestedInput
@@ -28985,6 +29144,7 @@ export namespace Prisma {
     verificationExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    verificationAttempts?: NullableIntFieldUpdateOperationsInput | number | null
     projects?: ProjectUncheckedUpdateManyWithoutUserNestedInput
     trainings?: TrainingUncheckedUpdateManyWithoutUserNestedInput
     flds?: FLDUncheckedUpdateManyWithoutUserNestedInput
@@ -29009,6 +29169,7 @@ export namespace Prisma {
     verificationExpires?: Date | string | null
     createdAt?: Date | string
     updateAt?: Date | string
+    verificationAttempts?: number | null
     projects?: ProjectCreateNestedManyWithoutUserInput
     trainings?: TrainingCreateNestedManyWithoutUserInput
     flds?: FLDCreateNestedManyWithoutUserInput
@@ -29033,6 +29194,7 @@ export namespace Prisma {
     verificationExpires?: Date | string | null
     createdAt?: Date | string
     updateAt?: Date | string
+    verificationAttempts?: number | null
     projects?: ProjectUncheckedCreateNestedManyWithoutUserInput
     trainings?: TrainingUncheckedCreateNestedManyWithoutUserInput
     flds?: FLDUncheckedCreateNestedManyWithoutUserInput
@@ -29073,6 +29235,7 @@ export namespace Prisma {
     verificationExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    verificationAttempts?: NullableIntFieldUpdateOperationsInput | number | null
     projects?: ProjectUpdateManyWithoutUserNestedInput
     trainings?: TrainingUpdateManyWithoutUserNestedInput
     flds?: FLDUpdateManyWithoutUserNestedInput
@@ -29097,6 +29260,7 @@ export namespace Prisma {
     verificationExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    verificationAttempts?: NullableIntFieldUpdateOperationsInput | number | null
     projects?: ProjectUncheckedUpdateManyWithoutUserNestedInput
     trainings?: TrainingUncheckedUpdateManyWithoutUserNestedInput
     flds?: FLDUncheckedUpdateManyWithoutUserNestedInput

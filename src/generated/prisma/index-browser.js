@@ -132,7 +132,8 @@ exports.Prisma.UserScalarFieldEnum = {
   resetTokenExpires: 'resetTokenExpires',
   verificationExpires: 'verificationExpires',
   createdAt: 'createdAt',
-  updateAt: 'updateAt'
+  updateAt: 'updateAt',
+  verificationAttempts: 'verificationAttempts'
 };
 
 exports.Prisma.ProjectScalarFieldEnum = {

@@ -470,3 +470,120 @@ authRouter.post("/forgot-password", async (req: Request, res: Response) => {
     });
   }
 });
+
+//Implement rate limiting here.   PENDING
+authRouter.post(
+  "/forget-password-verify-code",
+  async (req: Request, res: Response) => {
+    const { email, code, newPassword } = req.body;
+
+    try {
+      if (!email) {
+        res.status(400).json({
+          message: "Email is required",
+          success: false,
+          code: "EMAIL_REQUIRED"
+        });
+        return;
+      } else if (!code) {
+        res.status(400).json({
+          message: "Code is required",
+          success: false,
+          code: "CODE_REQUIRED"
+        });
+        return;
+      } else if (!newPassword) {
+        res.status(400).json({
+          message: "New password is missing",
+          success: false,
+          code: "NEW_PASSWORD_REQUIRED"
+        });
+      }
+
+      if (!validator.isEmail(email)) {
+        res.status(400).json({
+          message: "Invalid Credentials",
+          success: false,
+          code: "INVALID_CREDENTIALS"
+        });
+        return;
+      }
+      const user = await prisma.user.findUnique({
+        where: { email },
+        select: { verificationCode: true, verificationExpires: true }
+      });
+
+      if (!user) {
+        res.status(400).json({
+          success: false,
+          message:
+            "If your email exists in our system, a verification code has been sent.",
+          code: "VERIFICATION_CODE_REQUESTED"
+        });
+        return;
+      }
+      
+      if (!user.verificationCode) {
+        res.status(400).json({
+          message: "Verification code is missing",
+          code: "VERIFICATION_CODE_MISSING"
+        });
+        return;
+      }
+
+      if (!user.verificationExpires) {
+        res.status(400).json({
+          message: "Verification expiry time is missing",
+          code: "VERIFICATION_EXPIRY_MISSING"
+        });
+        return;
+      }
+
+      if (user.verificationExpires < new Date()) {
+        res.status(400).json({
+          message: "Verification code has expired",
+          code: "VERIFICATION_CODE_EXPIRED"
+        });
+        return;
+      }
+
+      if (user.verificationCode !== code) {
+        res.status(400).json({
+          message: "Invalid verification code",
+          code: "INVALID_VERIFICATION_CODE"
+        });
+        return;
+      }
+
+      if (!validator.isStrongPassword(newPassword)) {
+        res.json({
+          message: "Enter a strong password",
+          success: false,
+          code: "WEAK_REQUIRED"
+        });
+        return;
+      }
+      const passwordHash = await bcrypt.hash(newPassword, 10);
+      await prisma.user.update({
+        where: { email },
+        data: {
+          password: passwordHash,
+          verificationCode: null,
+          verificationExpires: null
+        }
+      });
+      res.status(200).json({
+        success: true,
+        message: "Password updated successfully, you can sign in now.",
+        code: "PASSWORD_UPDATED"
+      });
+      return;
+    } catch (err) {
+      res.status(500).json({
+        message: "Internal server error, please try again later",
+        success: false,
+        code: "INTERNAL_SERVER_ERROR"
+      });
+    }
+  }
+);
