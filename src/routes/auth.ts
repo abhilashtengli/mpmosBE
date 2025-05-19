@@ -430,22 +430,22 @@ authRouter.post("/forgot-password", async (req: Request, res: Response) => {
 
     try {
       const serviceFor = "passwordService";
-    //   const emailResult = await SendVerification(
-    //     email,
-    //     user.name,
-    //     verificationCode,
-    //     serviceFor
-    //   );
+      //   const emailResult = await SendVerification(
+      //     email,
+      //     user.name,
+      //     verificationCode,
+      //     serviceFor
+      //   );
 
-    //   if (!emailResult.success) {
-    //     res.status(500).json({
-    //       message:
-    //         "Failed to send forgot password code to your email, Please try again later",
-    //       code: "EMAIL_SEND_FAILED",
-    //       success: false
-    //     });
-    //     return;
-    //   }
+      //   if (!emailResult.success) {
+      //     res.status(500).json({
+      //       message:
+      //         "Failed to send forgot password code to your email, Please try again later",
+      //       code: "EMAIL_SEND_FAILED",
+      //       success: false
+      //     });
+      //     return;
+      //   }
 
       res.status(200).json({
         message: "A password reset code has been sent to your email",
