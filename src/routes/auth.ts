@@ -168,3 +168,305 @@ authRouter.post("/signin", authRouter, async (req: Request, res: Response) => {
     });
   }
 });
+
+authRouter.post("/verify-email", async (req: Request, res: Response) => {
+  const { email, code } = req.body;
+
+  if (!email || !code) {
+    res.status(400).json({
+      message: "Email and code are required",
+      code: "EMAIL&CODE_REQUIRED"
+    });
+    return;
+  }
+
+  try {
+    const user = await prisma.user.findUnique({
+      where: { email },
+      select: {
+        id: true,
+        isVerified: true,
+        verificationCode: true,
+        verificationExpires: true,
+        name: true
+      }
+    });
+
+    if (!user) {
+      res.status(404).json({
+        message: "User not found",
+        code: "USER_NOT_FOUND"
+      });
+      return;
+    }
+    if (user.isVerified) {
+      res.status(200).json({
+        message: "Email is already verified",
+        code: "EMAIL_ALREADY_VERIFIED"
+      });
+      return;
+    }
+    if (!user.verificationCode) {
+      res.status(400).json({
+        message: "Verification code is missing",
+        code: "VERIFICATION_CODE_MISSING"
+      });
+      return;
+    }
+
+    if (!user.verificationExpires) {
+      res.status(400).json({
+        message: "Verification expiry time is missing",
+        code: "VERIFICATION_EXPIRY_MISSING"
+      });
+      return;
+    }
+
+    if (user.verificationExpires < new Date()) {
+      res.status(400).json({
+        message: "Verification code has expired",
+        code: "VERIFICATION_CODE_EXPIRED"
+      });
+      return;
+    }
+
+    if (user.verificationCode !== code) {
+      res.status(400).json({
+        message: "Invalid verification code",
+        code: "INVALID_VERIFICATION_CODE"
+      });
+      return;
+    }
+    await prisma.user.update({
+      where: { email },
+      data: {
+        isVerified: true,
+        verificationCode: null,
+        verificationExpires: null
+      }
+    });
+    res
+      .status(200)
+      .json({ message: "Email verified successfully", code: "EMAIL_VERIFIED" });
+    return;
+  } catch (err) {
+    // console.log("Verification err : ", err);
+    res.status(500).json({
+      message: "Email Verification Failed due to internal server error",
+      success: false,
+      code: "EMAIL_VERIFICATION_FAILED"
+    });
+  }
+});
+
+authRouter.post("/resend-code", async (req: Request, res: Response) => {
+  try {
+    const { email } = req.body;
+    if (!email || typeof email !== "string") {
+      res.status(400).json({
+        message: "Email is required",
+        code: "EMAIL_MISSING_FIELD"
+      });
+      return;
+    }
+    if (!validator.isEmail(email)) {
+      res.status(400).json({
+        success: false,
+        message: "Please enter a valid email address",
+        code: "INVALID_EMAIL"
+      });
+      return;
+    }
+
+    // Find the user
+    const user = await prisma.user.findUnique({
+      where: { email },
+      select: {
+        id: true,
+        name: true,
+        email: true,
+        isVerified: true
+      }
+    });
+
+    if (!user) {
+      res.status(200).json({
+        success: true,
+        message:
+          "If your email exists in our system, a verification code has been sent.",
+        code: "VERIFICATION_CODE_REQUESTED"
+      });
+      return;
+    }
+
+    if (user.isVerified) {
+      res.status(400).json({
+        success: false,
+        message: "Email is already verified",
+        code: "EMAIL_ALREADY_VERIFIED"
+      });
+      return;
+    }
+
+    // Generate a new verification code
+    const verificationCode = Math.floor(
+      100000 + Math.random() * 900000
+    ).toString();
+
+    // Update the user with new verification code
+    await prisma.user.update({
+      where: { email },
+      data: {
+        verificationCode,
+        verificationExpires: new Date(Date.now() + 10 * 60 * 1000) // 10 minutes
+      }
+    });
+
+    try {
+      // Send the email
+      const serviceFor = "emailService";
+      // SendVerification function need to be implemented
+      //   const emailResult = await SendVerification(
+      //     email,
+      //     user.name,
+      //     verificationCode,
+      //     serviceFor
+      //   );
+      //   if (!emailResult.success) {
+      //     console.error(
+      //       "Failed to send verification email:",
+      //       emailResult.message
+      //     );
+      //     res.status(500).json({
+      //       success: false,
+      //       message: "Failed to send verification email. Please try again later.",
+      //       code: "EMAIL_SEND_FAILED"
+      //     });
+      //     return;
+      //   }
+      res.status(200).json({
+        message: "Verification code has been sent to your email",
+        success: true,
+        code: "VERIFICATION_CODE_SENT"
+      });
+      return;
+    } catch (emailError) {
+      console.error("Email service error:", emailError);
+      res.status(500).json({
+        success: false,
+        message: "Failed to send verification email. Please try again later.",
+        code: "EMAIL_SEND_FAILED"
+      });
+      return;
+    }
+  } catch (err) {
+    const errorId = Math.random().toString(36).substring(2, 9);
+    res.status(500).json({
+      message: "Internal server error",
+      success: false,
+      code: "INTERNAL_SERVER_ERROR",
+      errorId,
+      ...(process.env.NODE_ENV !== "production" && {
+        details: err instanceof Error ? err.message : "Unknown error"
+      })
+    });
+    return;
+  }
+});
+
+authRouter.post("/forgot-password", async (req: Request, res: Response) => {
+  const { email } = req.body;
+  try {
+    if (!email || typeof email !== "string") {
+      res.status(400).json({
+        message: "Email is required",
+        code: "EMAIL_MISSING_FIELD",
+        success: false
+      });
+      return;
+    }
+    if (!validator.isEmail(email)) {
+      res.status(400).json({
+        message: "Invalid email address",
+        code: "INVALID_EMAIL",
+        success: false
+      });
+      return;
+    }
+
+    const user = await prisma.user.findUnique({
+      where: { email },
+      select: { isVerified: true, name: true }
+    });
+    if (!user) {
+      res.status(200).json({
+        success: true,
+        message:
+          "If your email exists in our system, a verification code has been sent.",
+        code: "VERIFICATION_CODE_REQUESTED"
+      });
+      return;
+    }
+    if (!user.isVerified) {
+      res.json({
+        message:
+          "Please verify your email address before resetting your password",
+        code: "EMAIL_NOT_VERIFIED",
+        success: false
+      });
+      return;
+    }
+    const verificationCode = Math.floor(
+      100000 + Math.random() * 900000
+    ).toString();
+
+    await prisma.user.update({
+      where: { email },
+      data: {
+        verificationCode: verificationCode,
+        verificationExpires: new Date(Date.now() + 10 * 60 * 1000)
+      }
+    });
+
+    try {
+      const serviceFor = "passwordService";
+    //   const emailResult = await SendVerification(
+    //     email,
+    //     user.name,
+    //     verificationCode,
+    //     serviceFor
+    //   );
+
+    //   if (!emailResult.success) {
+    //     res.status(500).json({
+    //       message:
+    //         "Failed to send forgot password code to your email, Please try again later",
+    //       code: "EMAIL_SEND_FAILED",
+    //       success: false
+    //     });
+    //     return;
+    //   }
+
+      res.status(200).json({
+        message: "A password reset code has been sent to your email",
+        success: true,
+        code: "RESET_CODE_SENT"
+      });
+      return;
+    } catch (emailError) {
+      console.error("Email service error:", emailError);
+      res.status(500).json({
+        success: false,
+        message: "Failed to send password reset email. Please try again later.",
+        code: "EMAIL_SEND_FAILED"
+      });
+      return;
+    }
+  } catch (err) {
+    res.status(500).json({
+      message: "Internal server error, please try again later",
+      success: false,
+      code: "INTERNAL_SERVER_ERROR"
+    });
+  }
+});
