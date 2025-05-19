@@ -30,7 +30,6 @@ model User {
   email               String    @unique
   password            String
   role                Role
-  userCode            String
   isVerified          Boolean   @default(false) @map("is_verified")
   verificationCode    String?   @map("verification_code")
   resetPasswordToken  String?   @map("reset_password_token")
@@ -51,7 +50,6 @@ model User {
   projectDetails             ProjectDetails[]
 
   @@index([email])
-  @@index([userCode])
   @@index([role])
   @@map("user")
 }
