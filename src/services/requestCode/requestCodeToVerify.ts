@@ -1,7 +1,7 @@
 import { VerificationEmail } from "../../emails/verificationEmail";
 import { resend } from "@lib/resend";
 
-export const SendVerification = async (
+export const RequestVerification = async (
   email: string,
   name: string,
   verifyCode: string,

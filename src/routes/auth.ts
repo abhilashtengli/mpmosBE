@@ -13,6 +13,7 @@ import {
   signupLimiter,
   verifyEmailLimiter
 } from "../services/ratelimiter";
+import { RequestVerification } from "../services/requestCode/requestCodeToVerify";
 
 const authRouter = express.Router();
 
@@ -57,12 +58,12 @@ authRouter.post(
       });
       try {
         const serviceFor = "emailService";
-        //   const emailResult = await SendVerification(
-        //     email,
-        //     name,
-        //     verificationCode,
-        //     serviceFor
-        //   );
+        const emailResult = await RequestVerification(
+          email,
+          name,
+          verificationCode,
+          serviceFor
+        );
 
         res.status(201).json({
           message:
@@ -347,24 +348,25 @@ authRouter.post(
         // Send the email
         const serviceFor = "emailService";
         // SendVerification function need to be implemented
-        //   const emailResult = await SendVerification(
-        //     email,
-        //     user.name,
-        //     verificationCode,
-        //     serviceFor
-        //   );
-        //   if (!emailResult.success) {
-        //     console.error(
-        //       "Failed to send verification email:",
-        //       emailResult.message
-        //     );
-        //     res.status(500).json({
-        //       success: false,
-        //       message: "Failed to send verification email. Please try again later.",
-        //       code: "EMAIL_SEND_FAILED"
-        //     });
-        //     return;
-        //   }
+        const emailResult = await RequestVerification(
+          email,
+          user.name,
+          verificationCode,
+          serviceFor
+        );
+        if (!emailResult.success) {
+          console.error(
+            "Failed to send verification email:",
+            emailResult.message
+          );
+          res.status(500).json({
+            success: false,
+            message:
+              "Failed to send verification email. Please try again later.",
+            code: "EMAIL_SEND_FAILED"
+          });
+          return;
+        }
         res.status(200).json({
           message: "Verification code has been sent to your email",
           success: true,
@@ -455,22 +457,22 @@ authRouter.post(
 
       try {
         const serviceFor = "passwordService";
-        //   const emailResult = await SendVerification(
-        //     email,
-        //     user.name,
-        //     verificationCode,
-        //     serviceFor
-        //   );
+        const emailResult = await RequestVerification(
+          email,
+          user.name,
+          verificationCode,
+          serviceFor
+        );
 
-        //   if (!emailResult.success) {
-        //     res.status(500).json({
-        //       message:
-        //         "Failed to send forgot password code to your email, Please try again later",
-        //       code: "EMAIL_SEND_FAILED",
-        //       success: false
-        //     });
-        //     return;
-        //   }
+        if (!emailResult.success) {
+          res.status(500).json({
+            message:
+              "Failed to send forgot password code to your email, Please try again later",
+            code: "EMAIL_SEND_FAILED",
+            success: false
+          });
+          return;
+        }
 
         res.status(200).json({
           message: "A password reset code has been sent to your email",
