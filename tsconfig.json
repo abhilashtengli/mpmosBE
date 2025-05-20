@@ -4,6 +4,10 @@
     "baseUrl": "src", // This points to the root of your project
     "paths": {
       "@lib/*": ["lib/*"],
+      "@services/*": ["services/*"],
+      "@utils/*": ["utils/*"],
+      "@emails/*": ["emails/*"],
+      "@middleware/*" : ["middleware/*"],
       "*": ["node_modules/*", "src/types/*"]
     },
     /* Language and Environment */

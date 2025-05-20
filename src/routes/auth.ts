@@ -1,10 +1,10 @@
 import express, { Request, Response } from "express";
 import bcrypt from "bcrypt";
-import { userAuth } from "../middleware/auth";
+import { userAuth } from "@middleware/auth";
 import { prisma } from "@lib/prisma";
-import { signupValidation } from "../utils/validation";
+import { signupValidation } from "@utils/validation";
 import validator from "validator";
-import TokenService from "../services/tokenservice";
+import TokenService from "@services/tokenservice";
 import {
   forgetPasswordLimiter,
   loginLimiter,
@@ -12,8 +12,8 @@ import {
   resendCodeLimiter,
   signupLimiter,
   verifyEmailLimiter
-} from "../services/ratelimiter";
-import { RequestVerification } from "../services/requestCode/requestCodeToVerify";
+} from "@services/ratelimiter";
+import { RequestVerification } from "@services/requestCode/requestCodeToVerify";
 
 const authRouter = express.Router();
 
