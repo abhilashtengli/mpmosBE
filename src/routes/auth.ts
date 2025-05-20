@@ -222,7 +222,8 @@ authRouter.post(
       }
       if (!user.verificationCode) {
         res.status(400).json({
-          message: "Verification code is missing",
+          message:
+            "Verification code is missing, Try again requesting code to verify email",
           code: "VERIFICATION_CODE_MISSING"
         });
         return;
@@ -230,7 +231,8 @@ authRouter.post(
 
       if (!user.verificationExpires) {
         res.status(400).json({
-          message: "Verification expiry time is missing",
+          message:
+            "Verification expiry time is missing, please go to verify email page to request code again",
           code: "VERIFICATION_EXPIRY_MISSING"
         });
         return;
