@@ -46,11 +46,19 @@ export const userAuth = async (req: Request, res: Response, next: any) => {
     });
 
     if (!user) {
-      res.status(404).json({ message: "User not found" });
+      res.status(404).json({ message: "User not found", code: "UNAUTHORIZED" });
+      return;
+    }
+    if (!user?.isVerified) {
+      res.status(401).json({
+        message: "Please verify you account to perform this action",
+        code: "UNAUTHORIZED"
+      });
+      return;
     }
     (req as RequestWithUser).user = user || null;
     next();
   } catch (err) {
-    res.status(400).send("Error : " + err);
+    res.status(400).json({ message: "Invalid token or request", error: err });
   }
 };
