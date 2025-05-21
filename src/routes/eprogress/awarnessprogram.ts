@@ -350,6 +350,77 @@ awarenessProgramRouter.put(
   }
 );
 
+// Delete Awarness program
+awarenessProgramRouter.delete(
+  "delete-awarness-program/:id",
+  userAuth,
+  async (req: Request, res: Response) => {
+    try {
+      const { id } = req.params;
+      // Validate project ID
+      if (!id || typeof id !== "string") {
+        res.status(400).json({
+          success: false,
+          message: "Valid Awarness program ID is required",
+          code: "INVALID_INPUT"
+        });
+        return;
+      }
+
+      const user = (req as RequestWithUser).user;
+      if (!user) {
+        res.status(401).json({
+          success: false,
+          message: "Please sign in to delete the Awarness program",
+          code: "UNAUTHORIZED"
+        });
+        return;
+      }
+
+      // Check if awarness program exists
+      const existingAwarnessProgram = await prisma.awarenessProgram.findUnique({
+        where: { id }
+      });
+
+      if (!existingAwarnessProgram) {
+        res.status(404).json({
+          success: false,
+          message: "Awarness program not found",
+          code: "RESOURCE_NOT_FOUND"
+        });
+        return;
+      }
+
+      if (existingAwarnessProgram.userId !== user.id) {
+        res.status(403).json({
+          success: false,
+          message: "You don't have permission to delete this Awarness program",
+          code: "FORBIDDEN"
+        });
+        return;
+      }
+
+      // Delete the Awarness program
+      await prisma.awarenessProgram.delete({
+        where: { id }
+      });
+
+      res.status(200).json({
+        success: true,
+        message: "Awarness program deleted successfully",
+        code: "RESOURCE_DELETED"
+      });
+    } catch (err) {
+      console.error(`Error deleting awarness program:`, err);
+      res.status(500).json({
+        success: false,
+        message: "Something went wrong, Please try again later",
+        code: "INTERNAL_SERVER_ERROR"
+      });
+    }
+  }
+);
+
 // For user
 awarenessProgramRouter.get(
   "/get-user-awarness-programs",
@@ -485,77 +556,6 @@ awarenessProgramRouter.get(
         code: "INTERNAL_SERVER_ERROR"
       });
       return;
-    }
-  }
-);
-
-// Delete Awarness program
-awarenessProgramRouter.delete(
-  "delete-awarness-program/:id",
-  userAuth,
-  async (req: Request, res: Response) => {
-    try {
-      const { id } = req.params;
-      // Validate project ID
-      if (!id || typeof id !== "string") {
-        res.status(400).json({
-          success: false,
-          message: "Valid Awarness program ID is required",
-          code: "INVALID_INPUT"
-        });
-        return;
-      }
-
-      const user = (req as RequestWithUser).user;
-      if (!user) {
-        res.status(401).json({
-          success: false,
-          message: "Please sign in to delete the Awarness program",
-          code: "UNAUTHORIZED"
-        });
-        return;
-      }
-
-      // Check if awarness program exists
-      const existingAwarnessProgram = await prisma.awarenessProgram.findUnique({
-        where: { id }
-      });
-
-      if (!existingAwarnessProgram) {
-        res.status(404).json({
-          success: false,
-          message: "Awarness program not found",
-          code: "RESOURCE_NOT_FOUND"
-        });
-        return;
-      }
-
-      if (existingAwarnessProgram.userId !== user.id) {
-        res.status(403).json({
-          success: false,
-          message: "You don't have permission to delete this Awarness program",
-          code: "FORBIDDEN"
-        });
-        return;
-      }
-
-      // Delete the Awarness program
-      await prisma.awarenessProgram.delete({
-        where: { id }
-      });
-
-      res.status(200).json({
-        success: true,
-        message: "Awarness program deleted successfully",
-        code: "RESOURCE_DELETED"
-      });
-    } catch (err) {
-      console.error(`Error deleting awarness program:`, err);
-      res.status(500).json({
-        success: false,
-        message: "Something went wrong, Please try again later",
-        code: "INTERNAL_SERVER_ERROR"
-      });
     }
   }
 );
