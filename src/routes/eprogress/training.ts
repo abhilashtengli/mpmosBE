@@ -23,6 +23,16 @@ trainingRouter.post(
   userAuth,
   async (req: Request, res: Response) => {
     try {
+      const user = (req as RequestWithUser).user;
+      if (!user) {
+        res.status(401).json({
+          success: false,
+          message: "Please Sign in to create a New Project",
+          code: "UNAUTHORIZED"
+        });
+        return;
+      }
+
       const body = req.body;
       const result = await createTrainingValidation.safeParse(body);
 
@@ -70,15 +80,6 @@ trainingRouter.post(
           success: false,
           message: "A Training with this Id already existis",
           code: "DUPLICATE_RESOURCE"
-        });
-        return;
-      }
-      const user = (req as RequestWithUser).user;
-      if (!user) {
-        res.status(401).json({
-          success: false,
-          message: "Please Sign in to create a New Project",
-          code: "UNAUTHORIZED"
         });
         return;
       }
@@ -144,149 +145,6 @@ trainingRouter.post(
       res.status(500).json({
         success: false,
         message: "Something went wrong, Please try again later",
-        code: "INTERNAL_SERVER_ERROR"
-      });
-      return;
-    }
-  }
-);
-
-// Get training for user
-trainingRouter.get(
-  "/get-user-trainings",
-  userAuth,
-  async (req: Request, res: Response) => {
-    try {
-      const user = (req as RequestWithUser).user;
-
-      if (!user) {
-        res.status(401).json({
-          success: false,
-          message: "Please Sign in to view your Projects",
-          code: "UNAUTHORIZED"
-        });
-        return;
-      }
-
-      const trainingData = await prisma.training.findMany({
-        where: {
-          userId: user.id
-        },
-        orderBy: {
-          createdAt: "desc" // Default ordering by most recent
-        },
-        select: {
-          id: true,
-          trainingId: true,
-          project: true,
-          quarter: true,
-          title: true,
-          target: true,
-          achieved: true,
-          district: true,
-          village: true,
-          block: true,
-          beneficiaryMale: true,
-          beneficiaryFemale: true,
-          remarks: true,
-          imageUrl: true,
-          pdfKey: true,
-          units: true,
-          createdAt: true,
-          updatedAt: true
-        }
-      });
-
-      if (trainingData.length === 0) {
-        res.status(200).json({
-          success: true,
-          message: "No trainings found",
-          data: [],
-          code: "NO_TRAININGS_FOUND"
-        });
-        return;
-      }
-      res.status(200).json({
-        success: true,
-        data: trainingData,
-        code: "GET_TRAININGS_SUCCESSFULL"
-      });
-      return;
-    } catch (err) {
-      console.error("Error getting the training info", err);
-      res.status(500).json({
-        success: false,
-        message: "Could not fetch Training info, please try again later",
-        code: "INTERNAL_SERVER_ERROR"
-      });
-      return;
-    }
-  }
-);
-
-// Get trainings for admin
-trainingRouter.get(
-  "/get-admin-trainings",
-  userAuth,
-  async (req: Request, res: Response) => {
-    try {
-      const user = (req as RequestWithUser).user;
-
-      if (!user) {
-        res.status(401).json({
-          success: false,
-          message: "Please Sign in to view your Projects",
-          code: "UNAUTHORIZED"
-        });
-        return;
-      }
-
-      const trainingData = await prisma.training.findMany({
-        orderBy: {
-          createdAt: "desc" // Default ordering by most recent
-        },
-        select: {
-          id: true,
-          trainingId: true,
-          project: true,
-          quarter: true,
-          title: true,
-          target: true,
-          achieved: true,
-          district: true,
-          village: true,
-          block: true,
-          beneficiaryMale: true,
-          beneficiaryFemale: true,
-          remarks: true,
-          imageUrl: true,
-          pdfKey: true,
-          units: true,
-          createdAt: true,
-          updatedAt: true
-        }
-      });
-
-      if (trainingData.length === 0) {
-        res.status(200).json({
-          success: true,
-          message: "No trainings found",
-          data: [],
-          code: "NO_TRAININGS_FOUND"
-        });
-        return;
-      }
-      res.status(200).json({
-        success: true,
-        data: trainingData,
-        code: "GET_TRAININGS_SUCCESSFULL"
-      });
-      return;
-    } catch (err) {
-      console.error("Error getting the training info", err);
-      res.status(500).json({
-        success: false,
-        message: "Could not fetch Training info, please try again later",
         code: "INTERNAL_SERVER_ERROR"
       });
       return;
@@ -502,6 +360,149 @@ trainingRouter.put(
   }
 );
 
+// Get training for user
+trainingRouter.get(
+  "/get-user-trainings",
+  userAuth,
+  async (req: Request, res: Response) => {
+    try {
+      const user = (req as RequestWithUser).user;
+
+      if (!user) {
+        res.status(401).json({
+          success: false,
+          message: "Please Sign in to view your Projects",
+          code: "UNAUTHORIZED"
+        });
+        return;
+      }
+
+      const trainingData = await prisma.training.findMany({
+        where: {
+          userId: user.id
+        },
+        orderBy: {
+          createdAt: "desc" // Default ordering by most recent
+        },
+        select: {
+          id: true,
+          trainingId: true,
+          project: true,
+          quarter: true,
+          title: true,
+          target: true,
+          achieved: true,
+          district: true,
+          village: true,
+          block: true,
+          beneficiaryMale: true,
+          beneficiaryFemale: true,
+          remarks: true,
+          imageUrl: true,
+          pdfKey: true,
+          units: true,
+          createdAt: true,
+          updatedAt: true
+        }
+      });
+
+      if (trainingData.length === 0) {
+        res.status(200).json({
+          success: true,
+          message: "No trainings found",
+          data: [],
+          code: "NO_TRAININGS_FOUND"
+        });
+        return;
+      }
+      res.status(200).json({
+        success: true,
+          data: trainingData,
+        code: "GET_TRAININGS_SUCCESSFULL"
+      });
+      return;
+    } catch (err) {
+      console.error("Error getting the training info", err);
+      res.status(500).json({
+        success: false,
+        message: "Could not fetch Training info, please try again later",
+        code: "INTERNAL_SERVER_ERROR"
+      });
+      return;
+    }
+  }
+);
+
+// Get trainings for admin
+trainingRouter.get(
+  "/get-admin-trainings",
+  userAuth,
+  async (req: Request, res: Response) => {
+    try {
+      const user = (req as RequestWithUser).user;
+
+      if (!user) {
+        res.status(401).json({
+          success: false,
+          message: "Please Sign in to view your Projects",
+          code: "UNAUTHORIZED"
+        });
+        return;
+      }
+
+      const trainingData = await prisma.training.findMany({
+        orderBy: {
+          createdAt: "desc" // Default ordering by most recent
+        },
+        select: {
+          id: true,
+          trainingId: true,
+          project: true,
+          quarter: true,
+          title: true,
+          target: true,
+          achieved: true,
+          district: true,
+          village: true,
+          block: true,
+          beneficiaryMale: true,
+          beneficiaryFemale: true,
+          remarks: true,
+          imageUrl: true,
+          pdfKey: true,
+          units: true,
+          createdAt: true,
+          updatedAt: true
+        }
+      });
+
+      if (trainingData.length === 0) {
+        res.status(200).json({
+          success: true,
+          message: "No trainings found",
+          data: [],
+          code: "NO_TRAININGS_FOUND"
+        });
+        return;
+      }
+      res.status(200).json({
+        success: true,
+        data: trainingData,
+        code: "GET_TRAININGS_SUCCESSFULL"
+      });
+      return;
+    } catch (err) {
+      console.error("Error getting the training info", err);
+      res.status(500).json({
+        success: false,
+        message: "Could not fetch Training info, please try again later",
+        code: "INTERNAL_SERVER_ERROR"
+      });
+      return;
+    }
+  }
+);
+
 // Delete training
 trainingRouter.delete(
   "delete-training/:id",
@@ -513,7 +514,7 @@ trainingRouter.delete(
       if (!id || typeof id !== "string") {
         res.status(400).json({
           success: false,
-          message: "Valid project ID is required",
+          message: "Valid training ID is required",
           code: "INVALID_INPUT"
         });
         return;
@@ -563,7 +564,7 @@ trainingRouter.delete(
         code: "RESOURCE_DELETED"
       });
     } catch (err) {
-      console.error(`Error deleting training:`, err);
+      console.error(`Error deleting training :`, err);
       res.status(500).json({
         success: false,
         message: "Something went wrong, Please try again later",
