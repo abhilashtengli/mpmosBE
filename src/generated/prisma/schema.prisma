@@ -105,6 +105,7 @@ model Quarter {
 
 model InputDistribution {
   id              String                        @id @default(uuid())
+  inputDistId     String
   project         Project                       @relation(fields: [projectId], references: [id], onDelete: Cascade)
   projectId       String                        @map("project_id")
   quarter         Quarter                       @relation(fields: [quarterId], references: [id], onDelete: Cascade)
@@ -176,6 +177,7 @@ model CustomInputDistribution {
 
 model Training {
   id                String   @id @default(uuid())
+  trainingId        String
   project           Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
   projectId         String   @map("project_id")
   quarter           Quarter  @relation(fields: [quarterId], references: [id], onDelete: Cascade)
@@ -211,6 +213,7 @@ model Training {
 
 model FLD {
   id          String   @id @default(uuid())
+  fldId       String
   project     Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
   projectId   String   @map("project_id")
   quarter     Quarter  @relation(fields: [quarterId], references: [id], onDelete: Cascade)
@@ -236,6 +239,7 @@ model FLD {
 
 model AwarenessProgram {
   id                String   @id @default(uuid())
+  awarnessprogramId String
   project           Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
   projectId         String   @map("project_id")
   quarter           Quarter  @relation(fields: [quarterId], references: [id], onDelete: Cascade)
@@ -265,23 +269,24 @@ model AwarenessProgram {
 }
 
 model InfrastructureDevelopment {
-  id        String   @id @default(uuid())
-  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
-  projectId String   @map("project_id")
-  quarter   Quarter  @relation(fields: [quarterId], references: [id], onDelete: Cascade)
-  quarterId String   @map("quarter_id")
-  target    Int
-  achieved  Int
-  district  String   @db.VarChar(100)
-  village   String   @db.VarChar(100)
-  block     String   @db.VarChar(100)
-  remarks   String?  @db.VarChar(300)
-  imageUrl  String?
-  imageKey  String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  User      User?    @relation(fields: [userId], references: [id])
-  userId    String?  @map("user_id")
+  id         String   @id @default(uuid())
+  InfraDevId String
+  project    Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  projectId  String   @map("project_id")
+  quarter    Quarter  @relation(fields: [quarterId], references: [id], onDelete: Cascade)
+  quarterId  String   @map("quarter_id")
+  target     Int
+  achieved   Int
+  district   String   @db.VarChar(100)
+  village    String   @db.VarChar(100)
+  block      String   @db.VarChar(100)
+  remarks    String?  @db.VarChar(300)
+  imageUrl   String?
+  imageKey   String?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  User       User?    @relation(fields: [userId], references: [id])
+  userId     String?  @map("user_id")
 
   // Indexes for better query performance
   @@index([projectId])

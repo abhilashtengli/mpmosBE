@@ -159,6 +159,7 @@ exports.Prisma.QuarterScalarFieldEnum = {
 
 exports.Prisma.InputDistributionScalarFieldEnum = {
   id: 'id',
+  inputDistId: 'inputDistId',
   projectId: 'projectId',
   quarterId: 'quarterId',
   userId: 'userId',
@@ -204,6 +205,7 @@ exports.Prisma.CustomInputDistributionScalarFieldEnum = {
 
 exports.Prisma.TrainingScalarFieldEnum = {
   id: 'id',
+  trainingId: 'trainingId',
   projectId: 'projectId',
   quarterId: 'quarterId',
   title: 'title',
@@ -227,6 +229,7 @@ exports.Prisma.TrainingScalarFieldEnum = {
 
 exports.Prisma.FLDScalarFieldEnum = {
   id: 'id',
+  fldId: 'fldId',
   projectId: 'projectId',
   quarterId: 'quarterId',
   description: 'description',
@@ -243,6 +246,7 @@ exports.Prisma.FLDScalarFieldEnum = {
 
 exports.Prisma.AwarenessProgramScalarFieldEnum = {
   id: 'id',
+  awarnessprogramId: 'awarnessprogramId',
   projectId: 'projectId',
   quarterId: 'quarterId',
   title: 'title',
@@ -263,6 +267,7 @@ exports.Prisma.AwarenessProgramScalarFieldEnum = {
 
 exports.Prisma.InfrastructureDevelopmentScalarFieldEnum = {
   id: 'id',
+  InfraDevId: 'InfraDevId',
   projectId: 'projectId',
   quarterId: 'quarterId',
   target: 'target',

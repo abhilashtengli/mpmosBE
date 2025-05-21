@@ -6376,6 +6376,7 @@ export namespace Prisma {
 
   export type InputDistributionMinAggregateOutputType = {
     id: string | null
+    inputDistId: string | null
     projectId: string | null
     quarterId: string | null
     userId: string | null
@@ -6385,6 +6386,7 @@ export namespace Prisma {
 
   export type InputDistributionMaxAggregateOutputType = {
     id: string | null
+    inputDistId: string | null
     projectId: string | null
     quarterId: string | null
     userId: string | null
@@ -6394,6 +6396,7 @@ export namespace Prisma {
 
   export type InputDistributionCountAggregateOutputType = {
     id: number
+    inputDistId: number
     projectId: number
     quarterId: number
     userId: number
@@ -6405,6 +6408,7 @@ export namespace Prisma {
 
   export type InputDistributionMinAggregateInputType = {
     id?: true
+    inputDistId?: true
     projectId?: true
     quarterId?: true
     userId?: true
@@ -6414,6 +6418,7 @@ export namespace Prisma {
 
   export type InputDistributionMaxAggregateInputType = {
     id?: true
+    inputDistId?: true
     projectId?: true
     quarterId?: true
     userId?: true
@@ -6423,6 +6428,7 @@ export namespace Prisma {
 
   export type InputDistributionCountAggregateInputType = {
     id?: true
+    inputDistId?: true
     projectId?: true
     quarterId?: true
     userId?: true
@@ -6505,6 +6511,7 @@ export namespace Prisma {
 
   export type InputDistributionGroupByOutputType = {
     id: string
+    inputDistId: string
     projectId: string
     quarterId: string
     userId: string | null
@@ -6531,6 +6538,7 @@ export namespace Prisma {
 
   export type InputDistributionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    inputDistId?: boolean
     projectId?: boolean
     quarterId?: boolean
     userId?: boolean
@@ -6546,6 +6554,7 @@ export namespace Prisma {
 
   export type InputDistributionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    inputDistId?: boolean
     projectId?: boolean
     quarterId?: boolean
     userId?: boolean
@@ -6558,6 +6567,7 @@ export namespace Prisma {
 
   export type InputDistributionSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    inputDistId?: boolean
     projectId?: boolean
     quarterId?: boolean
     userId?: boolean
@@ -6570,6 +6580,7 @@ export namespace Prisma {
 
   export type InputDistributionSelectScalar = {
     id?: boolean
+    inputDistId?: boolean
     projectId?: boolean
     quarterId?: boolean
     userId?: boolean
@@ -6577,7 +6588,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type InputDistributionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "projectId" | "quarterId" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["inputDistribution"]>
+  export type InputDistributionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "inputDistId" | "projectId" | "quarterId" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["inputDistribution"]>
   export type InputDistributionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     project?: boolean | ProjectDefaultArgs<ExtArgs>
     quarter?: boolean | QuarterDefaultArgs<ExtArgs>
@@ -6608,6 +6619,7 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
+      inputDistId: string
       projectId: string
       quarterId: string
       userId: string | null
@@ -7042,6 +7054,7 @@ export namespace Prisma {
    */
   interface InputDistributionFieldRefs {
     readonly id: FieldRef<"InputDistribution", 'String'>
+    readonly inputDistId: FieldRef<"InputDistribution", 'String'>
     readonly projectId: FieldRef<"InputDistribution", 'String'>
     readonly quarterId: FieldRef<"InputDistribution", 'String'>
     readonly userId: FieldRef<"InputDistribution", 'String'>
@@ -10008,6 +10021,7 @@ export namespace Prisma {
 
   export type TrainingMinAggregateOutputType = {
     id: string | null
+    trainingId: string | null
     projectId: string | null
     quarterId: string | null
     title: string | null
@@ -10031,6 +10045,7 @@ export namespace Prisma {
 
   export type TrainingMaxAggregateOutputType = {
     id: string | null
+    trainingId: string | null
     projectId: string | null
     quarterId: string | null
     title: string | null
@@ -10054,6 +10069,7 @@ export namespace Prisma {
 
   export type TrainingCountAggregateOutputType = {
     id: number
+    trainingId: number
     projectId: number
     quarterId: number
     title: number
@@ -10093,6 +10109,7 @@ export namespace Prisma {
 
   export type TrainingMinAggregateInputType = {
     id?: true
+    trainingId?: true
     projectId?: true
     quarterId?: true
     title?: true
@@ -10116,6 +10133,7 @@ export namespace Prisma {
 
   export type TrainingMaxAggregateInputType = {
     id?: true
+    trainingId?: true
     projectId?: true
     quarterId?: true
     title?: true
@@ -10139,6 +10157,7 @@ export namespace Prisma {
 
   export type TrainingCountAggregateInputType = {
     id?: true
+    trainingId?: true
     projectId?: true
     quarterId?: true
     title?: true
@@ -10249,6 +10268,7 @@ export namespace Prisma {
 
   export type TrainingGroupByOutputType = {
     id: string
+    trainingId: string
     projectId: string
     quarterId: string
     title: string
@@ -10291,6 +10311,7 @@ export namespace Prisma {
 
   export type TrainingSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    trainingId?: boolean
     projectId?: boolean
     quarterId?: boolean
     title?: boolean
@@ -10317,6 +10338,7 @@ export namespace Prisma {
 
   export type TrainingSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    trainingId?: boolean
     projectId?: boolean
     quarterId?: boolean
     title?: boolean
@@ -10343,6 +10365,7 @@ export namespace Prisma {
 
   export type TrainingSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    trainingId?: boolean
     projectId?: boolean
     quarterId?: boolean
     title?: boolean
@@ -10369,6 +10392,7 @@ export namespace Prisma {
 
   export type TrainingSelectScalar = {
     id?: boolean
+    trainingId?: boolean
     projectId?: boolean
     quarterId?: boolean
     title?: boolean
@@ -10390,7 +10414,7 @@ export namespace Prisma {
     userId?: boolean
   }
 
-  export type TrainingOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "projectId" | "quarterId" | "title" | "target" | "achieved" | "district" | "village" | "block" | "beneficiaryMale" | "beneficiaryFemale" | "remarks" | "imageUrl" | "imageKey" | "pdfUrl" | "pdfKey" | "units" | "createdAt" | "updatedAt" | "userId", ExtArgs["result"]["training"]>
+  export type TrainingOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "trainingId" | "projectId" | "quarterId" | "title" | "target" | "achieved" | "district" | "village" | "block" | "beneficiaryMale" | "beneficiaryFemale" | "remarks" | "imageUrl" | "imageKey" | "pdfUrl" | "pdfKey" | "units" | "createdAt" | "updatedAt" | "userId", ExtArgs["result"]["training"]>
   export type TrainingInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     project?: boolean | ProjectDefaultArgs<ExtArgs>
     quarter?: boolean | QuarterDefaultArgs<ExtArgs>
@@ -10416,6 +10440,7 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
+      trainingId: string
       projectId: string
       quarterId: string
       title: string
@@ -10862,6 +10887,7 @@ export namespace Prisma {
    */
   interface TrainingFieldRefs {
     readonly id: FieldRef<"Training", 'String'>
+    readonly trainingId: FieldRef<"Training", 'String'>
     readonly projectId: FieldRef<"Training", 'String'>
     readonly quarterId: FieldRef<"Training", 'String'>
     readonly title: FieldRef<"Training", 'String'>
@@ -11338,6 +11364,7 @@ export namespace Prisma {
 
   export type FLDMinAggregateOutputType = {
     id: string | null
+    fldId: string | null
     projectId: string | null
     quarterId: string | null
     description: string | null
@@ -11354,6 +11381,7 @@ export namespace Prisma {
 
   export type FLDMaxAggregateOutputType = {
     id: string | null
+    fldId: string | null
     projectId: string | null
     quarterId: string | null
     description: string | null
@@ -11370,6 +11398,7 @@ export namespace Prisma {
 
   export type FLDCountAggregateOutputType = {
     id: number
+    fldId: number
     projectId: number
     quarterId: number
     description: number
@@ -11398,6 +11427,7 @@ export namespace Prisma {
 
   export type FLDMinAggregateInputType = {
     id?: true
+    fldId?: true
     projectId?: true
     quarterId?: true
     description?: true
@@ -11414,6 +11444,7 @@ export namespace Prisma {
 
   export type FLDMaxAggregateInputType = {
     id?: true
+    fldId?: true
     projectId?: true
     quarterId?: true
     description?: true
@@ -11430,6 +11461,7 @@ export namespace Prisma {
 
   export type FLDCountAggregateInputType = {
     id?: true
+    fldId?: true
     projectId?: true
     quarterId?: true
     description?: true
@@ -11533,6 +11565,7 @@ export namespace Prisma {
 
   export type FLDGroupByOutputType = {
     id: string
+    fldId: string
     projectId: string
     quarterId: string
     description: string | null
@@ -11568,6 +11601,7 @@ export namespace Prisma {
 
   export type FLDSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    fldId?: boolean
     projectId?: boolean
     quarterId?: boolean
     description?: boolean
@@ -11587,6 +11621,7 @@ export namespace Prisma {
 
   export type FLDSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    fldId?: boolean
     projectId?: boolean
     quarterId?: boolean
     description?: boolean
@@ -11606,6 +11641,7 @@ export namespace Prisma {
 
   export type FLDSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    fldId?: boolean
     projectId?: boolean
     quarterId?: boolean
     description?: boolean
@@ -11625,6 +11661,7 @@ export namespace Prisma {
 
   export type FLDSelectScalar = {
     id?: boolean
+    fldId?: boolean
     projectId?: boolean
     quarterId?: boolean
     description?: boolean
@@ -11639,7 +11676,7 @@ export namespace Prisma {
     userId?: boolean
   }
 
-  export type FLDOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "projectId" | "quarterId" | "description" | "district" | "village" | "block" | "target" | "achieved" | "units" | "createdAt" | "updatedAt" | "userId", ExtArgs["result"]["fLD"]>
+  export type FLDOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "fldId" | "projectId" | "quarterId" | "description" | "district" | "village" | "block" | "target" | "achieved" | "units" | "createdAt" | "updatedAt" | "userId", ExtArgs["result"]["fLD"]>
   export type FLDInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     project?: boolean | ProjectDefaultArgs<ExtArgs>
     quarter?: boolean | QuarterDefaultArgs<ExtArgs>
@@ -11665,6 +11702,7 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
+      fldId: string
       projectId: string
       quarterId: string
       description: string | null
@@ -12104,6 +12142,7 @@ export namespace Prisma {
    */
   interface FLDFieldRefs {
     readonly id: FieldRef<"FLD", 'String'>
+    readonly fldId: FieldRef<"FLD", 'String'>
     readonly projectId: FieldRef<"FLD", 'String'>
     readonly quarterId: FieldRef<"FLD", 'String'>
     readonly description: FieldRef<"FLD", 'String'>
@@ -12577,6 +12616,7 @@ export namespace Prisma {
 
   export type AwarenessProgramMinAggregateOutputType = {
     id: string | null
+    awarnessprogramId: string | null
     projectId: string | null
     quarterId: string | null
     title: string | null
@@ -12597,6 +12637,7 @@ export namespace Prisma {
 
   export type AwarenessProgramMaxAggregateOutputType = {
     id: string | null
+    awarnessprogramId: string | null
     projectId: string | null
     quarterId: string | null
     title: string | null
@@ -12617,6 +12658,7 @@ export namespace Prisma {
 
   export type AwarenessProgramCountAggregateOutputType = {
     id: number
+    awarnessprogramId: number
     projectId: number
     quarterId: number
     title: number
@@ -12653,6 +12695,7 @@ export namespace Prisma {
 
   export type AwarenessProgramMinAggregateInputType = {
     id?: true
+    awarnessprogramId?: true
     projectId?: true
     quarterId?: true
     title?: true
@@ -12673,6 +12716,7 @@ export namespace Prisma {
 
   export type AwarenessProgramMaxAggregateInputType = {
     id?: true
+    awarnessprogramId?: true
     projectId?: true
     quarterId?: true
     title?: true
@@ -12693,6 +12737,7 @@ export namespace Prisma {
 
   export type AwarenessProgramCountAggregateInputType = {
     id?: true
+    awarnessprogramId?: true
     projectId?: true
     quarterId?: true
     title?: true
@@ -12800,6 +12845,7 @@ export namespace Prisma {
 
   export type AwarenessProgramGroupByOutputType = {
     id: string
+    awarnessprogramId: string
     projectId: string
     quarterId: string
     title: string
@@ -12839,6 +12885,7 @@ export namespace Prisma {
 
   export type AwarenessProgramSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    awarnessprogramId?: boolean
     projectId?: boolean
     quarterId?: boolean
     title?: boolean
@@ -12862,6 +12909,7 @@ export namespace Prisma {
 
   export type AwarenessProgramSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    awarnessprogramId?: boolean
     projectId?: boolean
     quarterId?: boolean
     title?: boolean
@@ -12885,6 +12933,7 @@ export namespace Prisma {
 
   export type AwarenessProgramSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    awarnessprogramId?: boolean
     projectId?: boolean
     quarterId?: boolean
     title?: boolean
@@ -12908,6 +12957,7 @@ export namespace Prisma {
 
   export type AwarenessProgramSelectScalar = {
     id?: boolean
+    awarnessprogramId?: boolean
     projectId?: boolean
     quarterId?: boolean
     title?: boolean
@@ -12926,7 +12976,7 @@ export namespace Prisma {
     userId?: boolean
   }
 
-  export type AwarenessProgramOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "projectId" | "quarterId" | "title" | "target" | "achieved" | "district" | "village" | "block" | "beneficiaryMale" | "beneficiaryFemale" | "imageUrl" | "imageKey" | "units" | "createdAt" | "updatedAt" | "userId", ExtArgs["result"]["awarenessProgram"]>
+  export type AwarenessProgramOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "awarnessprogramId" | "projectId" | "quarterId" | "title" | "target" | "achieved" | "district" | "village" | "block" | "beneficiaryMale" | "beneficiaryFemale" | "imageUrl" | "imageKey" | "units" | "createdAt" | "updatedAt" | "userId", ExtArgs["result"]["awarenessProgram"]>
   export type AwarenessProgramInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     project?: boolean | ProjectDefaultArgs<ExtArgs>
     quarter?: boolean | QuarterDefaultArgs<ExtArgs>
@@ -12952,6 +13002,7 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
+      awarnessprogramId: string
       projectId: string
       quarterId: string
       title: string
@@ -13395,6 +13446,7 @@ export namespace Prisma {
    */
   interface AwarenessProgramFieldRefs {
     readonly id: FieldRef<"AwarenessProgram", 'String'>
+    readonly awarnessprogramId: FieldRef<"AwarenessProgram", 'String'>
     readonly projectId: FieldRef<"AwarenessProgram", 'String'>
     readonly quarterId: FieldRef<"AwarenessProgram", 'String'>
     readonly title: FieldRef<"AwarenessProgram", 'String'>
@@ -13868,6 +13920,7 @@ export namespace Prisma {
 
   export type InfrastructureDevelopmentMinAggregateOutputType = {
     id: string | null
+    InfraDevId: string | null
     projectId: string | null
     quarterId: string | null
     target: number | null
@@ -13885,6 +13938,7 @@ export namespace Prisma {
 
   export type InfrastructureDevelopmentMaxAggregateOutputType = {
     id: string | null
+    InfraDevId: string | null
     projectId: string | null
     quarterId: string | null
     target: number | null
@@ -13902,6 +13956,7 @@ export namespace Prisma {
 
   export type InfrastructureDevelopmentCountAggregateOutputType = {
     id: number
+    InfraDevId: number
     projectId: number
     quarterId: number
     target: number
@@ -13931,6 +13986,7 @@ export namespace Prisma {
 
   export type InfrastructureDevelopmentMinAggregateInputType = {
     id?: true
+    InfraDevId?: true
     projectId?: true
     quarterId?: true
     target?: true
@@ -13948,6 +14004,7 @@ export namespace Prisma {
 
   export type InfrastructureDevelopmentMaxAggregateInputType = {
     id?: true
+    InfraDevId?: true
     projectId?: true
     quarterId?: true
     target?: true
@@ -13965,6 +14022,7 @@ export namespace Prisma {
 
   export type InfrastructureDevelopmentCountAggregateInputType = {
     id?: true
+    InfraDevId?: true
     projectId?: true
     quarterId?: true
     target?: true
@@ -14069,6 +14127,7 @@ export namespace Prisma {
 
   export type InfrastructureDevelopmentGroupByOutputType = {
     id: string
+    InfraDevId: string
     projectId: string
     quarterId: string
     target: number
@@ -14105,6 +14164,7 @@ export namespace Prisma {
 
   export type InfrastructureDevelopmentSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    InfraDevId?: boolean
     projectId?: boolean
     quarterId?: boolean
     target?: boolean
@@ -14125,6 +14185,7 @@ export namespace Prisma {
 
   export type InfrastructureDevelopmentSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    InfraDevId?: boolean
     projectId?: boolean
     quarterId?: boolean
     target?: boolean
@@ -14145,6 +14206,7 @@ export namespace Prisma {
 
   export type InfrastructureDevelopmentSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    InfraDevId?: boolean
     projectId?: boolean
     quarterId?: boolean
     target?: boolean
@@ -14165,6 +14227,7 @@ export namespace Prisma {
 
   export type InfrastructureDevelopmentSelectScalar = {
     id?: boolean
+    InfraDevId?: boolean
     projectId?: boolean
     quarterId?: boolean
     target?: boolean
@@ -14180,7 +14243,7 @@ export namespace Prisma {
     userId?: boolean
   }
 
-  export type InfrastructureDevelopmentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "projectId" | "quarterId" | "target" | "achieved" | "district" | "village" | "block" | "remarks" | "imageUrl" | "imageKey" | "createdAt" | "updatedAt" | "userId", ExtArgs["result"]["infrastructureDevelopment"]>
+  export type InfrastructureDevelopmentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "InfraDevId" | "projectId" | "quarterId" | "target" | "achieved" | "district" | "village" | "block" | "remarks" | "imageUrl" | "imageKey" | "createdAt" | "updatedAt" | "userId", ExtArgs["result"]["infrastructureDevelopment"]>
   export type InfrastructureDevelopmentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     project?: boolean | ProjectDefaultArgs<ExtArgs>
     quarter?: boolean | QuarterDefaultArgs<ExtArgs>
@@ -14206,6 +14269,7 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
+      InfraDevId: string
       projectId: string
       quarterId: string
       target: number
@@ -14646,6 +14710,7 @@ export namespace Prisma {
    */
   interface InfrastructureDevelopmentFieldRefs {
     readonly id: FieldRef<"InfrastructureDevelopment", 'String'>
+    readonly InfraDevId: FieldRef<"InfrastructureDevelopment", 'String'>
     readonly projectId: FieldRef<"InfrastructureDevelopment", 'String'>
     readonly quarterId: FieldRef<"InfrastructureDevelopment", 'String'>
     readonly target: FieldRef<"InfrastructureDevelopment", 'Int'>
@@ -19748,6 +19813,7 @@ export namespace Prisma {
 
   export const InputDistributionScalarFieldEnum: {
     id: 'id',
+    inputDistId: 'inputDistId',
     projectId: 'projectId',
     quarterId: 'quarterId',
     userId: 'userId',
@@ -19802,6 +19868,7 @@ export namespace Prisma {
 
   export const TrainingScalarFieldEnum: {
     id: 'id',
+    trainingId: 'trainingId',
     projectId: 'projectId',
     quarterId: 'quarterId',
     title: 'title',
@@ -19828,6 +19895,7 @@ export namespace Prisma {
 
   export const FLDScalarFieldEnum: {
     id: 'id',
+    fldId: 'fldId',
     projectId: 'projectId',
     quarterId: 'quarterId',
     description: 'description',
@@ -19847,6 +19915,7 @@ export namespace Prisma {
 
   export const AwarenessProgramScalarFieldEnum: {
     id: 'id',
+    awarnessprogramId: 'awarnessprogramId',
     projectId: 'projectId',
     quarterId: 'quarterId',
     title: 'title',
@@ -19870,6 +19939,7 @@ export namespace Prisma {
 
   export const InfrastructureDevelopmentScalarFieldEnum: {
     id: 'id',
+    InfraDevId: 'InfraDevId',
     projectId: 'projectId',
     quarterId: 'quarterId',
     target: 'target',
@@ -20385,6 +20455,7 @@ export namespace Prisma {
     OR?: InputDistributionWhereInput[]
     NOT?: InputDistributionWhereInput | InputDistributionWhereInput[]
     id?: StringFilter<"InputDistribution"> | string
+    inputDistId?: StringFilter<"InputDistribution"> | string
     projectId?: StringFilter<"InputDistribution"> | string
     quarterId?: StringFilter<"InputDistribution"> | string
     userId?: StringNullableFilter<"InputDistribution"> | string | null
@@ -20399,6 +20470,7 @@ export namespace Prisma {
 
   export type InputDistributionOrderByWithRelationInput = {
     id?: SortOrder
+    inputDistId?: SortOrder
     projectId?: SortOrder
     quarterId?: SortOrder
     userId?: SortOrderInput | SortOrder
@@ -20416,6 +20488,7 @@ export namespace Prisma {
     AND?: InputDistributionWhereInput | InputDistributionWhereInput[]
     OR?: InputDistributionWhereInput[]
     NOT?: InputDistributionWhereInput | InputDistributionWhereInput[]
+    inputDistId?: StringFilter<"InputDistribution"> | string
     projectId?: StringFilter<"InputDistribution"> | string
     quarterId?: StringFilter<"InputDistribution"> | string
     userId?: StringNullableFilter<"InputDistribution"> | string | null
@@ -20430,6 +20503,7 @@ export namespace Prisma {
 
   export type InputDistributionOrderByWithAggregationInput = {
     id?: SortOrder
+    inputDistId?: SortOrder
     projectId?: SortOrder
     quarterId?: SortOrder
     userId?: SortOrderInput | SortOrder
@@ -20445,6 +20519,7 @@ export namespace Prisma {
     OR?: InputDistributionScalarWhereWithAggregatesInput[]
     NOT?: InputDistributionScalarWhereWithAggregatesInput | InputDistributionScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"InputDistribution"> | string
+    inputDistId?: StringWithAggregatesFilter<"InputDistribution"> | string
     projectId?: StringWithAggregatesFilter<"InputDistribution"> | string
     quarterId?: StringWithAggregatesFilter<"InputDistribution"> | string
     userId?: StringNullableWithAggregatesFilter<"InputDistribution"> | string | null
@@ -20671,6 +20746,7 @@ export namespace Prisma {
     OR?: TrainingWhereInput[]
     NOT?: TrainingWhereInput | TrainingWhereInput[]
     id?: StringFilter<"Training"> | string
+    trainingId?: StringFilter<"Training"> | string
     projectId?: StringFilter<"Training"> | string
     quarterId?: StringFilter<"Training"> | string
     title?: StringFilter<"Training"> | string
@@ -20697,6 +20773,7 @@ export namespace Prisma {
 
   export type TrainingOrderByWithRelationInput = {
     id?: SortOrder
+    trainingId?: SortOrder
     projectId?: SortOrder
     quarterId?: SortOrder
     title?: SortOrder
@@ -20726,6 +20803,7 @@ export namespace Prisma {
     AND?: TrainingWhereInput | TrainingWhereInput[]
     OR?: TrainingWhereInput[]
     NOT?: TrainingWhereInput | TrainingWhereInput[]
+    trainingId?: StringFilter<"Training"> | string
     projectId?: StringFilter<"Training"> | string
     quarterId?: StringFilter<"Training"> | string
     title?: StringFilter<"Training"> | string
@@ -20752,6 +20830,7 @@ export namespace Prisma {
 
   export type TrainingOrderByWithAggregationInput = {
     id?: SortOrder
+    trainingId?: SortOrder
     projectId?: SortOrder
     quarterId?: SortOrder
     title?: SortOrder
@@ -20783,6 +20862,7 @@ export namespace Prisma {
     OR?: TrainingScalarWhereWithAggregatesInput[]
     NOT?: TrainingScalarWhereWithAggregatesInput | TrainingScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Training"> | string
+    trainingId?: StringWithAggregatesFilter<"Training"> | string
     projectId?: StringWithAggregatesFilter<"Training"> | string
     quarterId?: StringWithAggregatesFilter<"Training"> | string
     title?: StringWithAggregatesFilter<"Training"> | string
@@ -20809,6 +20889,7 @@ export namespace Prisma {
     OR?: FLDWhereInput[]
     NOT?: FLDWhereInput | FLDWhereInput[]
     id?: StringFilter<"FLD"> | string
+    fldId?: StringFilter<"FLD"> | string
     projectId?: StringFilter<"FLD"> | string
     quarterId?: StringFilter<"FLD"> | string
     description?: StringNullableFilter<"FLD"> | string | null
@@ -20828,6 +20909,7 @@ export namespace Prisma {
 
   export type FLDOrderByWithRelationInput = {
     id?: SortOrder
+    fldId?: SortOrder
     projectId?: SortOrder
     quarterId?: SortOrder
     description?: SortOrderInput | SortOrder
@@ -20850,6 +20932,7 @@ export namespace Prisma {
     AND?: FLDWhereInput | FLDWhereInput[]
     OR?: FLDWhereInput[]
     NOT?: FLDWhereInput | FLDWhereInput[]
+    fldId?: StringFilter<"FLD"> | string
     projectId?: StringFilter<"FLD"> | string
     quarterId?: StringFilter<"FLD"> | string
     description?: StringNullableFilter<"FLD"> | string | null
@@ -20869,6 +20952,7 @@ export namespace Prisma {
 
   export type FLDOrderByWithAggregationInput = {
     id?: SortOrder
+    fldId?: SortOrder
     projectId?: SortOrder
     quarterId?: SortOrder
     description?: SortOrderInput | SortOrder
@@ -20893,6 +20977,7 @@ export namespace Prisma {
     OR?: FLDScalarWhereWithAggregatesInput[]
     NOT?: FLDScalarWhereWithAggregatesInput | FLDScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"FLD"> | string
+    fldId?: StringWithAggregatesFilter<"FLD"> | string
     projectId?: StringWithAggregatesFilter<"FLD"> | string
     quarterId?: StringWithAggregatesFilter<"FLD"> | string
     description?: StringNullableWithAggregatesFilter<"FLD"> | string | null
@@ -20912,6 +20997,7 @@ export namespace Prisma {
     OR?: AwarenessProgramWhereInput[]
     NOT?: AwarenessProgramWhereInput | AwarenessProgramWhereInput[]
     id?: StringFilter<"AwarenessProgram"> | string
+    awarnessprogramId?: StringFilter<"AwarenessProgram"> | string
     projectId?: StringFilter<"AwarenessProgram"> | string
     quarterId?: StringFilter<"AwarenessProgram"> | string
     title?: StringFilter<"AwarenessProgram"> | string
@@ -20935,6 +21021,7 @@ export namespace Prisma {
 
   export type AwarenessProgramOrderByWithRelationInput = {
     id?: SortOrder
+    awarnessprogramId?: SortOrder
     projectId?: SortOrder
     quarterId?: SortOrder
     title?: SortOrder
@@ -20961,6 +21048,7 @@ export namespace Prisma {
     AND?: AwarenessProgramWhereInput | AwarenessProgramWhereInput[]
     OR?: AwarenessProgramWhereInput[]
     NOT?: AwarenessProgramWhereInput | AwarenessProgramWhereInput[]
+    awarnessprogramId?: StringFilter<"AwarenessProgram"> | string
     projectId?: StringFilter<"AwarenessProgram"> | string
     quarterId?: StringFilter<"AwarenessProgram"> | string
     title?: StringFilter<"AwarenessProgram"> | string
@@ -20984,6 +21072,7 @@ export namespace Prisma {
 
   export type AwarenessProgramOrderByWithAggregationInput = {
     id?: SortOrder
+    awarnessprogramId?: SortOrder
     projectId?: SortOrder
     quarterId?: SortOrder
     title?: SortOrder
@@ -21012,6 +21101,7 @@ export namespace Prisma {
     OR?: AwarenessProgramScalarWhereWithAggregatesInput[]
     NOT?: AwarenessProgramScalarWhereWithAggregatesInput | AwarenessProgramScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"AwarenessProgram"> | string
+    awarnessprogramId?: StringWithAggregatesFilter<"AwarenessProgram"> | string
     projectId?: StringWithAggregatesFilter<"AwarenessProgram"> | string
     quarterId?: StringWithAggregatesFilter<"AwarenessProgram"> | string
     title?: StringWithAggregatesFilter<"AwarenessProgram"> | string
@@ -21035,6 +21125,7 @@ export namespace Prisma {
     OR?: InfrastructureDevelopmentWhereInput[]
     NOT?: InfrastructureDevelopmentWhereInput | InfrastructureDevelopmentWhereInput[]
     id?: StringFilter<"InfrastructureDevelopment"> | string
+    InfraDevId?: StringFilter<"InfrastructureDevelopment"> | string
     projectId?: StringFilter<"InfrastructureDevelopment"> | string
     quarterId?: StringFilter<"InfrastructureDevelopment"> | string
     target?: IntFilter<"InfrastructureDevelopment"> | number
@@ -21055,6 +21146,7 @@ export namespace Prisma {
 
   export type InfrastructureDevelopmentOrderByWithRelationInput = {
     id?: SortOrder
+    InfraDevId?: SortOrder
     projectId?: SortOrder
     quarterId?: SortOrder
     target?: SortOrder
@@ -21078,6 +21170,7 @@ export namespace Prisma {
     AND?: InfrastructureDevelopmentWhereInput | InfrastructureDevelopmentWhereInput[]
     OR?: InfrastructureDevelopmentWhereInput[]
     NOT?: InfrastructureDevelopmentWhereInput | InfrastructureDevelopmentWhereInput[]
+    InfraDevId?: StringFilter<"InfrastructureDevelopment"> | string
     projectId?: StringFilter<"InfrastructureDevelopment"> | string
     quarterId?: StringFilter<"InfrastructureDevelopment"> | string
     target?: IntFilter<"InfrastructureDevelopment"> | number
@@ -21098,6 +21191,7 @@ export namespace Prisma {
 
   export type InfrastructureDevelopmentOrderByWithAggregationInput = {
     id?: SortOrder
+    InfraDevId?: SortOrder
     projectId?: SortOrder
     quarterId?: SortOrder
     target?: SortOrder
@@ -21123,6 +21217,7 @@ export namespace Prisma {
     OR?: InfrastructureDevelopmentScalarWhereWithAggregatesInput[]
     NOT?: InfrastructureDevelopmentScalarWhereWithAggregatesInput | InfrastructureDevelopmentScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"InfrastructureDevelopment"> | string
+    InfraDevId?: StringWithAggregatesFilter<"InfrastructureDevelopment"> | string
     projectId?: StringWithAggregatesFilter<"InfrastructureDevelopment"> | string
     quarterId?: StringWithAggregatesFilter<"InfrastructureDevelopment"> | string
     target?: IntWithAggregatesFilter<"InfrastructureDevelopment"> | number
@@ -21800,6 +21895,7 @@ export namespace Prisma {
 
   export type InputDistributionCreateInput = {
     id?: string
+    inputDistId: string
     createdAt?: Date | string
     updatedAt?: Date | string
     project: ProjectCreateNestedOneWithoutInputDistributionsInput
@@ -21811,6 +21907,7 @@ export namespace Prisma {
 
   export type InputDistributionUncheckedCreateInput = {
     id?: string
+    inputDistId: string
     projectId: string
     quarterId: string
     userId?: string | null
@@ -21822,6 +21919,7 @@ export namespace Prisma {
 
   export type InputDistributionUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    inputDistId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     project?: ProjectUpdateOneRequiredWithoutInputDistributionsNestedInput
@@ -21833,6 +21931,7 @@ export namespace Prisma {
 
   export type InputDistributionUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    inputDistId?: StringFieldUpdateOperationsInput | string
     projectId?: StringFieldUpdateOperationsInput | string
     quarterId?: StringFieldUpdateOperationsInput | string
     userId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -21844,6 +21943,7 @@ export namespace Prisma {
 
   export type InputDistributionCreateManyInput = {
     id?: string
+    inputDistId: string
     projectId: string
     quarterId: string
     userId?: string | null
@@ -21853,12 +21953,14 @@ export namespace Prisma {
 
   export type InputDistributionUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
+    inputDistId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type InputDistributionUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
+    inputDistId?: StringFieldUpdateOperationsInput | string
     projectId?: StringFieldUpdateOperationsInput | string
     quarterId?: StringFieldUpdateOperationsInput | string
     userId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -22118,6 +22220,7 @@ export namespace Prisma {
 
   export type TrainingCreateInput = {
     id?: string
+    trainingId: string
     title: string
     target: number
     achieved: number
@@ -22141,6 +22244,7 @@ export namespace Prisma {
 
   export type TrainingUncheckedCreateInput = {
     id?: string
+    trainingId: string
     projectId: string
     quarterId: string
     title: string
@@ -22164,6 +22268,7 @@ export namespace Prisma {
 
   export type TrainingUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    trainingId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     target?: IntFieldUpdateOperationsInput | number
     achieved?: IntFieldUpdateOperationsInput | number
@@ -22187,6 +22292,7 @@ export namespace Prisma {
 
   export type TrainingUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    trainingId?: StringFieldUpdateOperationsInput | string
     projectId?: StringFieldUpdateOperationsInput | string
     quarterId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
@@ -22210,6 +22316,7 @@ export namespace Prisma {
 
   export type TrainingCreateManyInput = {
     id?: string
+    trainingId: string
     projectId: string
     quarterId: string
     title: string
@@ -22233,6 +22340,7 @@ export namespace Prisma {
 
   export type TrainingUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
+    trainingId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     target?: IntFieldUpdateOperationsInput | number
     achieved?: IntFieldUpdateOperationsInput | number
@@ -22253,6 +22361,7 @@ export namespace Prisma {
 
   export type TrainingUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
+    trainingId?: StringFieldUpdateOperationsInput | string
     projectId?: StringFieldUpdateOperationsInput | string
     quarterId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
@@ -22276,6 +22385,7 @@ export namespace Prisma {
 
   export type FLDCreateInput = {
     id?: string
+    fldId: string
     description?: string | null
     district: string
     village: string
@@ -22292,6 +22402,7 @@ export namespace Prisma {
 
   export type FLDUncheckedCreateInput = {
     id?: string
+    fldId: string
     projectId: string
     quarterId: string
     description?: string | null
@@ -22308,6 +22419,7 @@ export namespace Prisma {
 
   export type FLDUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    fldId?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
@@ -22324,6 +22436,7 @@ export namespace Prisma {
 
   export type FLDUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    fldId?: StringFieldUpdateOperationsInput | string
     projectId?: StringFieldUpdateOperationsInput | string
     quarterId?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
@@ -22340,6 +22453,7 @@ export namespace Prisma {
 
   export type FLDCreateManyInput = {
     id?: string
+    fldId: string
     projectId: string
     quarterId: string
     description?: string | null
@@ -22356,6 +22470,7 @@ export namespace Prisma {
 
   export type FLDUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
+    fldId?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
@@ -22369,6 +22484,7 @@ export namespace Prisma {
 
   export type FLDUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
+    fldId?: StringFieldUpdateOperationsInput | string
     projectId?: StringFieldUpdateOperationsInput | string
     quarterId?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
@@ -22385,6 +22501,7 @@ export namespace Prisma {
 
   export type AwarenessProgramCreateInput = {
     id?: string
+    awarnessprogramId: string
     title: string
     target: number
     achieved: number
@@ -22405,6 +22522,7 @@ export namespace Prisma {
 
   export type AwarenessProgramUncheckedCreateInput = {
     id?: string
+    awarnessprogramId: string
     projectId: string
     quarterId: string
     title: string
@@ -22425,6 +22543,7 @@ export namespace Prisma {
 
   export type AwarenessProgramUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    awarnessprogramId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     target?: IntFieldUpdateOperationsInput | number
     achieved?: IntFieldUpdateOperationsInput | number
@@ -22445,6 +22564,7 @@ export namespace Prisma {
 
   export type AwarenessProgramUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    awarnessprogramId?: StringFieldUpdateOperationsInput | string
     projectId?: StringFieldUpdateOperationsInput | string
     quarterId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
@@ -22465,6 +22585,7 @@ export namespace Prisma {
 
   export type AwarenessProgramCreateManyInput = {
     id?: string
+    awarnessprogramId: string
     projectId: string
     quarterId: string
     title: string
@@ -22485,6 +22606,7 @@ export namespace Prisma {
 
   export type AwarenessProgramUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
+    awarnessprogramId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     target?: IntFieldUpdateOperationsInput | number
     achieved?: IntFieldUpdateOperationsInput | number
@@ -22502,6 +22624,7 @@ export namespace Prisma {
 
   export type AwarenessProgramUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
+    awarnessprogramId?: StringFieldUpdateOperationsInput | string
     projectId?: StringFieldUpdateOperationsInput | string
     quarterId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
@@ -22522,6 +22645,7 @@ export namespace Prisma {
 
   export type InfrastructureDevelopmentCreateInput = {
     id?: string
+    InfraDevId: string
     target: number
     achieved: number
     district: string
@@ -22539,6 +22663,7 @@ export namespace Prisma {
 
   export type InfrastructureDevelopmentUncheckedCreateInput = {
     id?: string
+    InfraDevId: string
     projectId: string
     quarterId: string
     target: number
@@ -22556,6 +22681,7 @@ export namespace Prisma {
 
   export type InfrastructureDevelopmentUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    InfraDevId?: StringFieldUpdateOperationsInput | string
     target?: IntFieldUpdateOperationsInput | number
     achieved?: IntFieldUpdateOperationsInput | number
     district?: StringFieldUpdateOperationsInput | string
@@ -22573,6 +22699,7 @@ export namespace Prisma {
 
   export type InfrastructureDevelopmentUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    InfraDevId?: StringFieldUpdateOperationsInput | string
     projectId?: StringFieldUpdateOperationsInput | string
     quarterId?: StringFieldUpdateOperationsInput | string
     target?: IntFieldUpdateOperationsInput | number
@@ -22590,6 +22717,7 @@ export namespace Prisma {
 
   export type InfrastructureDevelopmentCreateManyInput = {
     id?: string
+    InfraDevId: string
     projectId: string
     quarterId: string
     target: number
@@ -22607,6 +22735,7 @@ export namespace Prisma {
 
   export type InfrastructureDevelopmentUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
+    InfraDevId?: StringFieldUpdateOperationsInput | string
     target?: IntFieldUpdateOperationsInput | number
     achieved?: IntFieldUpdateOperationsInput | number
     district?: StringFieldUpdateOperationsInput | string
@@ -22621,6 +22750,7 @@ export namespace Prisma {
 
   export type InfrastructureDevelopmentUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
+    InfraDevId?: StringFieldUpdateOperationsInput | string
     projectId?: StringFieldUpdateOperationsInput | string
     quarterId?: StringFieldUpdateOperationsInput | string
     target?: IntFieldUpdateOperationsInput | number
@@ -23524,6 +23654,7 @@ export namespace Prisma {
 
   export type InputDistributionCountOrderByAggregateInput = {
     id?: SortOrder
+    inputDistId?: SortOrder
     projectId?: SortOrder
     quarterId?: SortOrder
     userId?: SortOrder
@@ -23533,6 +23664,7 @@ export namespace Prisma {
 
   export type InputDistributionMaxOrderByAggregateInput = {
     id?: SortOrder
+    inputDistId?: SortOrder
     projectId?: SortOrder
     quarterId?: SortOrder
     userId?: SortOrder
@@ -23542,6 +23674,7 @@ export namespace Prisma {
 
   export type InputDistributionMinOrderByAggregateInput = {
     id?: SortOrder
+    inputDistId?: SortOrder
     projectId?: SortOrder
     quarterId?: SortOrder
     userId?: SortOrder
@@ -23684,6 +23817,7 @@ export namespace Prisma {
 
   export type TrainingCountOrderByAggregateInput = {
     id?: SortOrder
+    trainingId?: SortOrder
     projectId?: SortOrder
     quarterId?: SortOrder
     title?: SortOrder
@@ -23714,6 +23848,7 @@ export namespace Prisma {
 
   export type TrainingMaxOrderByAggregateInput = {
     id?: SortOrder
+    trainingId?: SortOrder
     projectId?: SortOrder
     quarterId?: SortOrder
     title?: SortOrder
@@ -23737,6 +23872,7 @@ export namespace Prisma {
 
   export type TrainingMinOrderByAggregateInput = {
     id?: SortOrder
+    trainingId?: SortOrder
     projectId?: SortOrder
     quarterId?: SortOrder
     title?: SortOrder
@@ -23767,6 +23903,7 @@ export namespace Prisma {
 
   export type FLDCountOrderByAggregateInput = {
     id?: SortOrder
+    fldId?: SortOrder
     projectId?: SortOrder
     quarterId?: SortOrder
     description?: SortOrder
@@ -23788,6 +23925,7 @@ export namespace Prisma {
 
   export type FLDMaxOrderByAggregateInput = {
     id?: SortOrder
+    fldId?: SortOrder
     projectId?: SortOrder
     quarterId?: SortOrder
     description?: SortOrder
@@ -23804,6 +23942,7 @@ export namespace Prisma {
 
   export type FLDMinOrderByAggregateInput = {
     id?: SortOrder
+    fldId?: SortOrder
     projectId?: SortOrder
     quarterId?: SortOrder
     description?: SortOrder
@@ -23825,6 +23964,7 @@ export namespace Prisma {
 
   export type AwarenessProgramCountOrderByAggregateInput = {
     id?: SortOrder
+    awarnessprogramId?: SortOrder
     projectId?: SortOrder
     quarterId?: SortOrder
     title?: SortOrder
@@ -23852,6 +23992,7 @@ export namespace Prisma {
 
   export type AwarenessProgramMaxOrderByAggregateInput = {
     id?: SortOrder
+    awarnessprogramId?: SortOrder
     projectId?: SortOrder
     quarterId?: SortOrder
     title?: SortOrder
@@ -23872,6 +24013,7 @@ export namespace Prisma {
 
   export type AwarenessProgramMinOrderByAggregateInput = {
     id?: SortOrder
+    awarnessprogramId?: SortOrder
     projectId?: SortOrder
     quarterId?: SortOrder
     title?: SortOrder
@@ -23899,6 +24041,7 @@ export namespace Prisma {
 
   export type InfrastructureDevelopmentCountOrderByAggregateInput = {
     id?: SortOrder
+    InfraDevId?: SortOrder
     projectId?: SortOrder
     quarterId?: SortOrder
     target?: SortOrder
@@ -23921,6 +24064,7 @@ export namespace Prisma {
 
   export type InfrastructureDevelopmentMaxOrderByAggregateInput = {
     id?: SortOrder
+    InfraDevId?: SortOrder
     projectId?: SortOrder
     quarterId?: SortOrder
     target?: SortOrder
@@ -23938,6 +24082,7 @@ export namespace Prisma {
 
   export type InfrastructureDevelopmentMinOrderByAggregateInput = {
     id?: SortOrder
+    InfraDevId?: SortOrder
     projectId?: SortOrder
     quarterId?: SortOrder
     target?: SortOrder
@@ -25820,6 +25965,7 @@ export namespace Prisma {
 
   export type TrainingCreateWithoutUserInput = {
     id?: string
+    trainingId: string
     title: string
     target: number
     achieved: number
@@ -25842,6 +25988,7 @@ export namespace Prisma {
 
   export type TrainingUncheckedCreateWithoutUserInput = {
     id?: string
+    trainingId: string
     projectId: string
     quarterId: string
     title: string
@@ -25874,6 +26021,7 @@ export namespace Prisma {
 
   export type FLDCreateWithoutUserInput = {
     id?: string
+    fldId: string
     description?: string | null
     district: string
     village: string
@@ -25889,6 +26037,7 @@ export namespace Prisma {
 
   export type FLDUncheckedCreateWithoutUserInput = {
     id?: string
+    fldId: string
     projectId: string
     quarterId: string
     description?: string | null
@@ -25914,6 +26063,7 @@ export namespace Prisma {
 
   export type AwarenessProgramCreateWithoutUserInput = {
     id?: string
+    awarnessprogramId: string
     title: string
     target: number
     achieved: number
@@ -25933,6 +26083,7 @@ export namespace Prisma {
 
   export type AwarenessProgramUncheckedCreateWithoutUserInput = {
     id?: string
+    awarnessprogramId: string
     projectId: string
     quarterId: string
     title: string
@@ -25962,6 +26113,7 @@ export namespace Prisma {
 
   export type InfrastructureDevelopmentCreateWithoutUserInput = {
     id?: string
+    InfraDevId: string
     target: number
     achieved: number
     district: string
@@ -25978,6 +26130,7 @@ export namespace Prisma {
 
   export type InfrastructureDevelopmentUncheckedCreateWithoutUserInput = {
     id?: string
+    InfraDevId: string
     projectId: string
     quarterId: string
     target: number
@@ -26004,6 +26157,7 @@ export namespace Prisma {
 
   export type InputDistributionCreateWithoutUserInput = {
     id?: string
+    inputDistId: string
     createdAt?: Date | string
     updatedAt?: Date | string
     project: ProjectCreateNestedOneWithoutInputDistributionsInput
@@ -26014,6 +26168,7 @@ export namespace Prisma {
 
   export type InputDistributionUncheckedCreateWithoutUserInput = {
     id?: string
+    inputDistId: string
     projectId: string
     quarterId: string
     createdAt?: Date | string
@@ -26223,6 +26378,7 @@ export namespace Prisma {
     OR?: TrainingScalarWhereInput[]
     NOT?: TrainingScalarWhereInput | TrainingScalarWhereInput[]
     id?: StringFilter<"Training"> | string
+    trainingId?: StringFilter<"Training"> | string
     projectId?: StringFilter<"Training"> | string
     quarterId?: StringFilter<"Training"> | string
     title?: StringFilter<"Training"> | string
@@ -26265,6 +26421,7 @@ export namespace Prisma {
     OR?: FLDScalarWhereInput[]
     NOT?: FLDScalarWhereInput | FLDScalarWhereInput[]
     id?: StringFilter<"FLD"> | string
+    fldId?: StringFilter<"FLD"> | string
     projectId?: StringFilter<"FLD"> | string
     quarterId?: StringFilter<"FLD"> | string
     description?: StringNullableFilter<"FLD"> | string | null
@@ -26300,6 +26457,7 @@ export namespace Prisma {
     OR?: AwarenessProgramScalarWhereInput[]
     NOT?: AwarenessProgramScalarWhereInput | AwarenessProgramScalarWhereInput[]
     id?: StringFilter<"AwarenessProgram"> | string
+    awarnessprogramId?: StringFilter<"AwarenessProgram"> | string
     projectId?: StringFilter<"AwarenessProgram"> | string
     quarterId?: StringFilter<"AwarenessProgram"> | string
     title?: StringFilter<"AwarenessProgram"> | string
@@ -26339,6 +26497,7 @@ export namespace Prisma {
     OR?: InfrastructureDevelopmentScalarWhereInput[]
     NOT?: InfrastructureDevelopmentScalarWhereInput | InfrastructureDevelopmentScalarWhereInput[]
     id?: StringFilter<"InfrastructureDevelopment"> | string
+    InfraDevId?: StringFilter<"InfrastructureDevelopment"> | string
     projectId?: StringFilter<"InfrastructureDevelopment"> | string
     quarterId?: StringFilter<"InfrastructureDevelopment"> | string
     target?: IntFilter<"InfrastructureDevelopment"> | number
@@ -26375,6 +26534,7 @@ export namespace Prisma {
     OR?: InputDistributionScalarWhereInput[]
     NOT?: InputDistributionScalarWhereInput | InputDistributionScalarWhereInput[]
     id?: StringFilter<"InputDistribution"> | string
+    inputDistId?: StringFilter<"InputDistribution"> | string
     projectId?: StringFilter<"InputDistribution"> | string
     quarterId?: StringFilter<"InputDistribution"> | string
     userId?: StringNullableFilter<"InputDistribution"> | string | null
@@ -26512,6 +26672,7 @@ export namespace Prisma {
 
   export type TrainingCreateWithoutProjectInput = {
     id?: string
+    trainingId: string
     title: string
     target: number
     achieved: number
@@ -26534,6 +26695,7 @@ export namespace Prisma {
 
   export type TrainingUncheckedCreateWithoutProjectInput = {
     id?: string
+    trainingId: string
     quarterId: string
     title: string
     target: number
@@ -26566,6 +26728,7 @@ export namespace Prisma {
 
   export type FLDCreateWithoutProjectInput = {
     id?: string
+    fldId: string
     description?: string | null
     district: string
     village: string
@@ -26581,6 +26744,7 @@ export namespace Prisma {
 
   export type FLDUncheckedCreateWithoutProjectInput = {
     id?: string
+    fldId: string
     quarterId: string
     description?: string | null
     district: string
@@ -26606,6 +26770,7 @@ export namespace Prisma {
 
   export type AwarenessProgramCreateWithoutProjectInput = {
     id?: string
+    awarnessprogramId: string
     title: string
     target: number
     achieved: number
@@ -26625,6 +26790,7 @@ export namespace Prisma {
 
   export type AwarenessProgramUncheckedCreateWithoutProjectInput = {
     id?: string
+    awarnessprogramId: string
     quarterId: string
     title: string
     target: number
@@ -26654,6 +26820,7 @@ export namespace Prisma {
 
   export type InfrastructureDevelopmentCreateWithoutProjectInput = {
     id?: string
+    InfraDevId: string
     target: number
     achieved: number
     district: string
@@ -26670,6 +26837,7 @@ export namespace Prisma {
 
   export type InfrastructureDevelopmentUncheckedCreateWithoutProjectInput = {
     id?: string
+    InfraDevId: string
     quarterId: string
     target: number
     achieved: number
@@ -26696,6 +26864,7 @@ export namespace Prisma {
 
   export type InputDistributionCreateWithoutProjectInput = {
     id?: string
+    inputDistId: string
     createdAt?: Date | string
     updatedAt?: Date | string
     quarter: QuarterCreateNestedOneWithoutInputDistributionsInput
@@ -26706,6 +26875,7 @@ export namespace Prisma {
 
   export type InputDistributionUncheckedCreateWithoutProjectInput = {
     id?: string
+    inputDistId: string
     quarterId: string
     userId?: string | null
     createdAt?: Date | string
@@ -26922,6 +27092,7 @@ export namespace Prisma {
 
   export type TrainingCreateWithoutQuarterInput = {
     id?: string
+    trainingId: string
     title: string
     target: number
     achieved: number
@@ -26944,6 +27115,7 @@ export namespace Prisma {
 
   export type TrainingUncheckedCreateWithoutQuarterInput = {
     id?: string
+    trainingId: string
     projectId: string
     title: string
     target: number
@@ -26976,6 +27148,7 @@ export namespace Prisma {
 
   export type FLDCreateWithoutQuarterInput = {
     id?: string
+    fldId: string
     description?: string | null
     district: string
     village: string
@@ -26991,6 +27164,7 @@ export namespace Prisma {
 
   export type FLDUncheckedCreateWithoutQuarterInput = {
     id?: string
+    fldId: string
     projectId: string
     description?: string | null
     district: string
@@ -27016,6 +27190,7 @@ export namespace Prisma {
 
   export type AwarenessProgramCreateWithoutQuarterInput = {
     id?: string
+    awarnessprogramId: string
     title: string
     target: number
     achieved: number
@@ -27035,6 +27210,7 @@ export namespace Prisma {
 
   export type AwarenessProgramUncheckedCreateWithoutQuarterInput = {
     id?: string
+    awarnessprogramId: string
     projectId: string
     title: string
     target: number
@@ -27064,6 +27240,7 @@ export namespace Prisma {
 
   export type InputDistributionCreateWithoutQuarterInput = {
     id?: string
+    inputDistId: string
     createdAt?: Date | string
     updatedAt?: Date | string
     project: ProjectCreateNestedOneWithoutInputDistributionsInput
@@ -27074,6 +27251,7 @@ export namespace Prisma {
 
   export type InputDistributionUncheckedCreateWithoutQuarterInput = {
     id?: string
+    inputDistId: string
     projectId: string
     userId?: string | null
     createdAt?: Date | string
@@ -27094,6 +27272,7 @@ export namespace Prisma {
 
   export type InfrastructureDevelopmentCreateWithoutQuarterInput = {
     id?: string
+    InfraDevId: string
     target: number
     achieved: number
     district: string
@@ -27110,6 +27289,7 @@ export namespace Prisma {
 
   export type InfrastructureDevelopmentUncheckedCreateWithoutQuarterInput = {
     id?: string
+    InfraDevId: string
     projectId: string
     target: number
     achieved: number
@@ -27642,6 +27822,7 @@ export namespace Prisma {
 
   export type InputDistributionCreateWithoutPredefinedItemsInput = {
     id?: string
+    inputDistId: string
     createdAt?: Date | string
     updatedAt?: Date | string
     project: ProjectCreateNestedOneWithoutInputDistributionsInput
@@ -27652,6 +27833,7 @@ export namespace Prisma {
 
   export type InputDistributionUncheckedCreateWithoutPredefinedItemsInput = {
     id?: string
+    inputDistId: string
     projectId: string
     quarterId: string
     userId?: string | null
@@ -27678,6 +27860,7 @@ export namespace Prisma {
 
   export type InputDistributionUpdateWithoutPredefinedItemsInput = {
     id?: StringFieldUpdateOperationsInput | string
+    inputDistId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     project?: ProjectUpdateOneRequiredWithoutInputDistributionsNestedInput
@@ -27688,6 +27871,7 @@ export namespace Prisma {
 
   export type InputDistributionUncheckedUpdateWithoutPredefinedItemsInput = {
     id?: StringFieldUpdateOperationsInput | string
+    inputDistId?: StringFieldUpdateOperationsInput | string
     projectId?: StringFieldUpdateOperationsInput | string
     quarterId?: StringFieldUpdateOperationsInput | string
     userId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -27698,6 +27882,7 @@ export namespace Prisma {
 
   export type InputDistributionCreateWithoutCustomItemsInput = {
     id?: string
+    inputDistId: string
     createdAt?: Date | string
     updatedAt?: Date | string
     project: ProjectCreateNestedOneWithoutInputDistributionsInput
@@ -27708,6 +27893,7 @@ export namespace Prisma {
 
   export type InputDistributionUncheckedCreateWithoutCustomItemsInput = {
     id?: string
+    inputDistId: string
     projectId: string
     quarterId: string
     userId?: string | null
@@ -27734,6 +27920,7 @@ export namespace Prisma {
 
   export type InputDistributionUpdateWithoutCustomItemsInput = {
     id?: StringFieldUpdateOperationsInput | string
+    inputDistId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     project?: ProjectUpdateOneRequiredWithoutInputDistributionsNestedInput
@@ -27744,6 +27931,7 @@ export namespace Prisma {
 
   export type InputDistributionUncheckedUpdateWithoutCustomItemsInput = {
     id?: StringFieldUpdateOperationsInput | string
+    inputDistId?: StringFieldUpdateOperationsInput | string
     projectId?: StringFieldUpdateOperationsInput | string
     quarterId?: StringFieldUpdateOperationsInput | string
     userId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -29288,6 +29476,7 @@ export namespace Prisma {
 
   export type TrainingCreateManyUserInput = {
     id?: string
+    trainingId: string
     projectId: string
     quarterId: string
     title: string
@@ -29310,6 +29499,7 @@ export namespace Prisma {
 
   export type FLDCreateManyUserInput = {
     id?: string
+    fldId: string
     projectId: string
     quarterId: string
     description?: string | null
@@ -29325,6 +29515,7 @@ export namespace Prisma {
 
   export type AwarenessProgramCreateManyUserInput = {
     id?: string
+    awarnessprogramId: string
     projectId: string
     quarterId: string
     title: string
@@ -29344,6 +29535,7 @@ export namespace Prisma {
 
   export type InfrastructureDevelopmentCreateManyUserInput = {
     id?: string
+    InfraDevId: string
     projectId: string
     quarterId: string
     target: number
@@ -29360,6 +29552,7 @@ export namespace Prisma {
 
   export type InputDistributionCreateManyUserInput = {
     id?: string
+    inputDistId: string
     projectId: string
     quarterId: string
     createdAt?: Date | string
@@ -29468,6 +29661,7 @@ export namespace Prisma {
 
   export type TrainingUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
+    trainingId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     target?: IntFieldUpdateOperationsInput | number
     achieved?: IntFieldUpdateOperationsInput | number
@@ -29490,6 +29684,7 @@ export namespace Prisma {
 
   export type TrainingUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
+    trainingId?: StringFieldUpdateOperationsInput | string
     projectId?: StringFieldUpdateOperationsInput | string
     quarterId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
@@ -29512,6 +29707,7 @@ export namespace Prisma {
 
   export type TrainingUncheckedUpdateManyWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
+    trainingId?: StringFieldUpdateOperationsInput | string
     projectId?: StringFieldUpdateOperationsInput | string
     quarterId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
@@ -29534,6 +29730,7 @@ export namespace Prisma {
 
   export type FLDUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
+    fldId?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
@@ -29549,6 +29746,7 @@ export namespace Prisma {
 
   export type FLDUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
+    fldId?: StringFieldUpdateOperationsInput | string
     projectId?: StringFieldUpdateOperationsInput | string
     quarterId?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
@@ -29564,6 +29762,7 @@ export namespace Prisma {
 
   export type FLDUncheckedUpdateManyWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
+    fldId?: StringFieldUpdateOperationsInput | string
     projectId?: StringFieldUpdateOperationsInput | string
     quarterId?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
@@ -29579,6 +29778,7 @@ export namespace Prisma {
 
   export type AwarenessProgramUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
+    awarnessprogramId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     target?: IntFieldUpdateOperationsInput | number
     achieved?: IntFieldUpdateOperationsInput | number
@@ -29598,6 +29798,7 @@ export namespace Prisma {
 
   export type AwarenessProgramUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
+    awarnessprogramId?: StringFieldUpdateOperationsInput | string
     projectId?: StringFieldUpdateOperationsInput | string
     quarterId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
@@ -29617,6 +29818,7 @@ export namespace Prisma {
 
   export type AwarenessProgramUncheckedUpdateManyWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
+    awarnessprogramId?: StringFieldUpdateOperationsInput | string
     projectId?: StringFieldUpdateOperationsInput | string
     quarterId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
@@ -29636,6 +29838,7 @@ export namespace Prisma {
 
   export type InfrastructureDevelopmentUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
+    InfraDevId?: StringFieldUpdateOperationsInput | string
     target?: IntFieldUpdateOperationsInput | number
     achieved?: IntFieldUpdateOperationsInput | number
     district?: StringFieldUpdateOperationsInput | string
@@ -29652,6 +29855,7 @@ export namespace Prisma {
 
   export type InfrastructureDevelopmentUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
+    InfraDevId?: StringFieldUpdateOperationsInput | string
     projectId?: StringFieldUpdateOperationsInput | string
     quarterId?: StringFieldUpdateOperationsInput | string
     target?: IntFieldUpdateOperationsInput | number
@@ -29668,6 +29872,7 @@ export namespace Prisma {
 
   export type InfrastructureDevelopmentUncheckedUpdateManyWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
+    InfraDevId?: StringFieldUpdateOperationsInput | string
     projectId?: StringFieldUpdateOperationsInput | string
     quarterId?: StringFieldUpdateOperationsInput | string
     target?: IntFieldUpdateOperationsInput | number
@@ -29684,6 +29889,7 @@ export namespace Prisma {
 
   export type InputDistributionUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
+    inputDistId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     project?: ProjectUpdateOneRequiredWithoutInputDistributionsNestedInput
@@ -29694,6 +29900,7 @@ export namespace Prisma {
 
   export type InputDistributionUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
+    inputDistId?: StringFieldUpdateOperationsInput | string
     projectId?: StringFieldUpdateOperationsInput | string
     quarterId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -29704,6 +29911,7 @@ export namespace Prisma {
 
   export type InputDistributionUncheckedUpdateManyWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
+    inputDistId?: StringFieldUpdateOperationsInput | string
     projectId?: StringFieldUpdateOperationsInput | string
     quarterId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -29856,6 +30064,7 @@ export namespace Prisma {
 
   export type TrainingCreateManyProjectInput = {
     id?: string
+    trainingId: string
     quarterId: string
     title: string
     target: number
@@ -29878,6 +30087,7 @@ export namespace Prisma {
 
   export type FLDCreateManyProjectInput = {
     id?: string
+    fldId: string
     quarterId: string
     description?: string | null
     district: string
@@ -29893,6 +30103,7 @@ export namespace Prisma {
 
   export type AwarenessProgramCreateManyProjectInput = {
     id?: string
+    awarnessprogramId: string
     quarterId: string
     title: string
     target: number
@@ -29912,6 +30123,7 @@ export namespace Prisma {
 
   export type InfrastructureDevelopmentCreateManyProjectInput = {
     id?: string
+    InfraDevId: string
     quarterId: string
     target: number
     achieved: number
@@ -29928,6 +30140,7 @@ export namespace Prisma {
 
   export type InputDistributionCreateManyProjectInput = {
     id?: string
+    inputDistId: string
     quarterId: string
     userId?: string | null
     createdAt?: Date | string
@@ -29936,6 +30149,7 @@ export namespace Prisma {
 
   export type TrainingUpdateWithoutProjectInput = {
     id?: StringFieldUpdateOperationsInput | string
+    trainingId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     target?: IntFieldUpdateOperationsInput | number
     achieved?: IntFieldUpdateOperationsInput | number
@@ -29958,6 +30172,7 @@ export namespace Prisma {
 
   export type TrainingUncheckedUpdateWithoutProjectInput = {
     id?: StringFieldUpdateOperationsInput | string
+    trainingId?: StringFieldUpdateOperationsInput | string
     quarterId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     target?: IntFieldUpdateOperationsInput | number
@@ -29980,6 +30195,7 @@ export namespace Prisma {
 
   export type TrainingUncheckedUpdateManyWithoutProjectInput = {
     id?: StringFieldUpdateOperationsInput | string
+    trainingId?: StringFieldUpdateOperationsInput | string
     quarterId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     target?: IntFieldUpdateOperationsInput | number
@@ -30002,6 +30218,7 @@ export namespace Prisma {
 
   export type FLDUpdateWithoutProjectInput = {
     id?: StringFieldUpdateOperationsInput | string
+    fldId?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
@@ -30017,6 +30234,7 @@ export namespace Prisma {
 
   export type FLDUncheckedUpdateWithoutProjectInput = {
     id?: StringFieldUpdateOperationsInput | string
+    fldId?: StringFieldUpdateOperationsInput | string
     quarterId?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     district?: StringFieldUpdateOperationsInput | string
@@ -30032,6 +30250,7 @@ export namespace Prisma {
 
   export type FLDUncheckedUpdateManyWithoutProjectInput = {
     id?: StringFieldUpdateOperationsInput | string
+    fldId?: StringFieldUpdateOperationsInput | string
     quarterId?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     district?: StringFieldUpdateOperationsInput | string
@@ -30047,6 +30266,7 @@ export namespace Prisma {
 
   export type AwarenessProgramUpdateWithoutProjectInput = {
     id?: StringFieldUpdateOperationsInput | string
+    awarnessprogramId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     target?: IntFieldUpdateOperationsInput | number
     achieved?: IntFieldUpdateOperationsInput | number
@@ -30066,6 +30286,7 @@ export namespace Prisma {
 
   export type AwarenessProgramUncheckedUpdateWithoutProjectInput = {
     id?: StringFieldUpdateOperationsInput | string
+    awarnessprogramId?: StringFieldUpdateOperationsInput | string
     quarterId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     target?: IntFieldUpdateOperationsInput | number
@@ -30085,6 +30306,7 @@ export namespace Prisma {
 
   export type AwarenessProgramUncheckedUpdateManyWithoutProjectInput = {
     id?: StringFieldUpdateOperationsInput | string
+    awarnessprogramId?: StringFieldUpdateOperationsInput | string
     quarterId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     target?: IntFieldUpdateOperationsInput | number
@@ -30104,6 +30326,7 @@ export namespace Prisma {
 
   export type InfrastructureDevelopmentUpdateWithoutProjectInput = {
     id?: StringFieldUpdateOperationsInput | string
+    InfraDevId?: StringFieldUpdateOperationsInput | string
     target?: IntFieldUpdateOperationsInput | number
     achieved?: IntFieldUpdateOperationsInput | number
     district?: StringFieldUpdateOperationsInput | string
@@ -30120,6 +30343,7 @@ export namespace Prisma {
 
   export type InfrastructureDevelopmentUncheckedUpdateWithoutProjectInput = {
     id?: StringFieldUpdateOperationsInput | string
+    InfraDevId?: StringFieldUpdateOperationsInput | string
     quarterId?: StringFieldUpdateOperationsInput | string
     target?: IntFieldUpdateOperationsInput | number
     achieved?: IntFieldUpdateOperationsInput | number
@@ -30136,6 +30360,7 @@ export namespace Prisma {
 
   export type InfrastructureDevelopmentUncheckedUpdateManyWithoutProjectInput = {
     id?: StringFieldUpdateOperationsInput | string
+    InfraDevId?: StringFieldUpdateOperationsInput | string
     quarterId?: StringFieldUpdateOperationsInput | string
     target?: IntFieldUpdateOperationsInput | number
     achieved?: IntFieldUpdateOperationsInput | number
@@ -30152,6 +30377,7 @@ export namespace Prisma {
 
   export type InputDistributionUpdateWithoutProjectInput = {
     id?: StringFieldUpdateOperationsInput | string
+    inputDistId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     quarter?: QuarterUpdateOneRequiredWithoutInputDistributionsNestedInput
@@ -30162,6 +30388,7 @@ export namespace Prisma {
 
   export type InputDistributionUncheckedUpdateWithoutProjectInput = {
     id?: StringFieldUpdateOperationsInput | string
+    inputDistId?: StringFieldUpdateOperationsInput | string
     quarterId?: StringFieldUpdateOperationsInput | string
     userId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -30172,6 +30399,7 @@ export namespace Prisma {
 
   export type InputDistributionUncheckedUpdateManyWithoutProjectInput = {
     id?: StringFieldUpdateOperationsInput | string
+    inputDistId?: StringFieldUpdateOperationsInput | string
     quarterId?: StringFieldUpdateOperationsInput | string
     userId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -30180,6 +30408,7 @@ export namespace Prisma {
 
   export type TrainingCreateManyQuarterInput = {
     id?: string
+    trainingId: string
     projectId: string
     title: string
     target: number
@@ -30202,6 +30431,7 @@ export namespace Prisma {
 
   export type FLDCreateManyQuarterInput = {
     id?: string
+    fldId: string
     projectId: string
     description?: string | null
     district: string
@@ -30217,6 +30447,7 @@ export namespace Prisma {
 
   export type AwarenessProgramCreateManyQuarterInput = {
     id?: string
+    awarnessprogramId: string
     projectId: string
     title: string
     target: number
@@ -30236,6 +30467,7 @@ export namespace Prisma {
 
   export type InputDistributionCreateManyQuarterInput = {
     id?: string
+    inputDistId: string
     projectId: string
     userId?: string | null
     createdAt?: Date | string
@@ -30244,6 +30476,7 @@ export namespace Prisma {
 
   export type InfrastructureDevelopmentCreateManyQuarterInput = {
     id?: string
+    InfraDevId: string
     projectId: string
     target: number
     achieved: number
@@ -30260,6 +30493,7 @@ export namespace Prisma {
 
   export type TrainingUpdateWithoutQuarterInput = {
     id?: StringFieldUpdateOperationsInput | string
+    trainingId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     target?: IntFieldUpdateOperationsInput | number
     achieved?: IntFieldUpdateOperationsInput | number
@@ -30282,6 +30516,7 @@ export namespace Prisma {
 
   export type TrainingUncheckedUpdateWithoutQuarterInput = {
     id?: StringFieldUpdateOperationsInput | string
+    trainingId?: StringFieldUpdateOperationsInput | string
     projectId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     target?: IntFieldUpdateOperationsInput | number
@@ -30304,6 +30539,7 @@ export namespace Prisma {
 
   export type TrainingUncheckedUpdateManyWithoutQuarterInput = {
     id?: StringFieldUpdateOperationsInput | string
+    trainingId?: StringFieldUpdateOperationsInput | string
     projectId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     target?: IntFieldUpdateOperationsInput | number
@@ -30326,6 +30562,7 @@ export namespace Prisma {
 
   export type FLDUpdateWithoutQuarterInput = {
     id?: StringFieldUpdateOperationsInput | string
+    fldId?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
@@ -30341,6 +30578,7 @@ export namespace Prisma {
 
   export type FLDUncheckedUpdateWithoutQuarterInput = {
     id?: StringFieldUpdateOperationsInput | string
+    fldId?: StringFieldUpdateOperationsInput | string
     projectId?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     district?: StringFieldUpdateOperationsInput | string
@@ -30356,6 +30594,7 @@ export namespace Prisma {
 
   export type FLDUncheckedUpdateManyWithoutQuarterInput = {
     id?: StringFieldUpdateOperationsInput | string
+    fldId?: StringFieldUpdateOperationsInput | string
     projectId?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     district?: StringFieldUpdateOperationsInput | string
@@ -30371,6 +30610,7 @@ export namespace Prisma {
 
   export type AwarenessProgramUpdateWithoutQuarterInput = {
     id?: StringFieldUpdateOperationsInput | string
+    awarnessprogramId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     target?: IntFieldUpdateOperationsInput | number
     achieved?: IntFieldUpdateOperationsInput | number
@@ -30390,6 +30630,7 @@ export namespace Prisma {
 
   export type AwarenessProgramUncheckedUpdateWithoutQuarterInput = {
     id?: StringFieldUpdateOperationsInput | string
+    awarnessprogramId?: StringFieldUpdateOperationsInput | string
     projectId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     target?: IntFieldUpdateOperationsInput | number
@@ -30409,6 +30650,7 @@ export namespace Prisma {
 
   export type AwarenessProgramUncheckedUpdateManyWithoutQuarterInput = {
     id?: StringFieldUpdateOperationsInput | string
+    awarnessprogramId?: StringFieldUpdateOperationsInput | string
     projectId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     target?: IntFieldUpdateOperationsInput | number
@@ -30428,6 +30670,7 @@ export namespace Prisma {
 
   export type InputDistributionUpdateWithoutQuarterInput = {
     id?: StringFieldUpdateOperationsInput | string
+    inputDistId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     project?: ProjectUpdateOneRequiredWithoutInputDistributionsNestedInput
@@ -30438,6 +30681,7 @@ export namespace Prisma {
 
   export type InputDistributionUncheckedUpdateWithoutQuarterInput = {
     id?: StringFieldUpdateOperationsInput | string
+    inputDistId?: StringFieldUpdateOperationsInput | string
     projectId?: StringFieldUpdateOperationsInput | string
     userId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -30448,6 +30692,7 @@ export namespace Prisma {
 
   export type InputDistributionUncheckedUpdateManyWithoutQuarterInput = {
     id?: StringFieldUpdateOperationsInput | string
+    inputDistId?: StringFieldUpdateOperationsInput | string
     projectId?: StringFieldUpdateOperationsInput | string
     userId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -30456,6 +30701,7 @@ export namespace Prisma {
 
   export type InfrastructureDevelopmentUpdateWithoutQuarterInput = {
     id?: StringFieldUpdateOperationsInput | string
+    InfraDevId?: StringFieldUpdateOperationsInput | string
     target?: IntFieldUpdateOperationsInput | number
     achieved?: IntFieldUpdateOperationsInput | number
     district?: StringFieldUpdateOperationsInput | string
@@ -30472,6 +30718,7 @@ export namespace Prisma {
 
   export type InfrastructureDevelopmentUncheckedUpdateWithoutQuarterInput = {
     id?: StringFieldUpdateOperationsInput | string
+    InfraDevId?: StringFieldUpdateOperationsInput | string
     projectId?: StringFieldUpdateOperationsInput | string
     target?: IntFieldUpdateOperationsInput | number
     achieved?: IntFieldUpdateOperationsInput | number
@@ -30488,6 +30735,7 @@ export namespace Prisma {
 
   export type InfrastructureDevelopmentUncheckedUpdateManyWithoutQuarterInput = {
     id?: StringFieldUpdateOperationsInput | string
+    InfraDevId?: StringFieldUpdateOperationsInput | string
     projectId?: StringFieldUpdateOperationsInput | string
     target?: IntFieldUpdateOperationsInput | number
     achieved?: IntFieldUpdateOperationsInput | number

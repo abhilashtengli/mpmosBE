@@ -112,7 +112,7 @@ projectRouter.post(
       });
       return;
     } catch (err) {
-      console.error(`Error creating project:`, err);
+      console.error(`Error creating project :`, err);
       res.status(500).json({
         success: false,
         message: "Something went wrong, Please try again later",
