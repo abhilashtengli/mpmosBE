@@ -630,3 +630,100 @@ export const updateAwarenessProgramValidation = z
       path: ["imageKey"]
     }
   );
+
+// Create Fld validation schemas--------------------------------------------
+export const createFldValidation = z
+  .object({
+    projectId: z.string().uuid({ message: "Valid project ID is required" }),
+    quarterId: z.string().uuid({ message: "Valid quarter ID is required" }),
+    fldId: z
+      .string()
+      .trim()
+      .min(5, { message: "FLD ID must be 5 characters, Ex: FLD01" })
+      .max(10, { message: "FLD ID cannot exceed 10 characters" }),
+    description: z.string().max(200).optional(),
+    district: z
+      .string()
+      .max(100, { message: "District must be 100 characters or less" }),
+    village: z
+      .string()
+      .max(100, { message: "Village must be 100 characters or less" }),
+    block: z
+      .string()
+      .max(100, { message: "Block must be 100 characters or less" }),
+    target: z
+      .number()
+      .int()
+      .positive({ message: "Target must be a positive integer" }),
+    achieved: z
+      .number()
+      .int()
+      .nonnegative({ message: "Achieved must be a non-negative integer" }),
+    units: z.string().optional()
+  })
+  .refine(
+    (data) => {
+      // Ensure achieved doesn't exceed target
+      return data.achieved <= data.target;
+    },
+    {
+      message: "Achieved count cannot exceed target count",
+      path: ["achieved"]
+    }
+  );
+
+export const updateFldValidation = z
+  .object({
+    projectId: z
+      .string()
+      .uuid({ message: "Valid project ID is required" })
+      .optional(),
+    quarterId: z
+      .string()
+      .uuid({ message: "Valid quarter ID is required" })
+      .optional(),
+    fldId: z
+      .string()
+      .trim()
+      .min(5, { message: "FLD ID must be 5 characters, Ex: FLD01" })
+      .max(10, { message: "FLD ID cannot exceed 10 characters" })
+      .optional(),
+    description: z.string().max(200).optional(),
+    district: z
+      .string()
+      .max(100, { message: "District must be 100 characters or less" })
+      .optional(),
+    village: z
+      .string()
+      .max(100, { message: "Village must be 100 characters or less" })
+      .optional(),
+    block: z
+      .string()
+      .max(100, { message: "Block must be 100 characters or less" })
+      .optional(),
+    target: z
+      .number()
+      .int()
+      .positive({ message: "Target must be a positive integer" })
+      .optional(),
+    achieved: z
+      .number()
+      .int()
+      .nonnegative({ message: "Achieved must be a non-negative integer" })
+      .optional(),
+    units: z.string().optional()
+  })
+  .refine(
+    (data) => {
+      // Skip refinement if we don't have both target and achieved
+      if (data.target === undefined || data.achieved === undefined) {
+        return true;
+      }
+      // For update validation, we need to compare the values only if both are provided
+      return data.achieved <= data.target;
+    },
+    {
+      message: "Achieved count cannot exceed target count",
+      path: ["achieved"]
+    }
+  );
