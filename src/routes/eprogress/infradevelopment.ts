@@ -378,7 +378,9 @@ infrastructureRouter.get(
             village: true,
             block: true,
             remarks: true,
-            imageUrl: true
+            imageUrl: true,
+            createdAt: true,
+            updatedAt: true
           }
         });
 
@@ -441,7 +443,10 @@ infrastructureRouter.get(
             village: true,
             block: true,
             remarks: true,
-            imageUrl: true
+            imageUrl: true,
+            createdAt: true,
+            updatedAt: true,
+            User: true
           }
         });
 
