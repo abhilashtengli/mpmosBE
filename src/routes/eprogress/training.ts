@@ -472,7 +472,8 @@ trainingRouter.get(
           pdfKey: true,
           units: true,
           createdAt: true,
-          updatedAt: true
+          updatedAt: true,
+          User : true
         }
       });
 
