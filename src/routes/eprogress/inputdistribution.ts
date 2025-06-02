@@ -6,7 +6,7 @@ import {
 } from "@utils/validation";
 import express, { Request, Response } from "express";
 
-const inputDistribution = express.Router();
+const inputDistributionRouter = express.Router();
 
 interface RequestWithUser extends Request {
   user?: {
@@ -19,7 +19,7 @@ interface RequestWithUser extends Request {
 }
 
 // Create Input Distribution
-inputDistribution.post(
+inputDistributionRouter.post(
   "/create-input-distribution",
   userAuth,
   async (req: Request, res: Response) => {
@@ -153,7 +153,7 @@ inputDistribution.post(
 );
 
 // Update Input Distribution
-inputDistribution.put(
+inputDistributionRouter.put(
   "/update-input-distribution/:id",
   userAuth,
   async (req: Request, res: Response) => {
@@ -349,7 +349,7 @@ inputDistribution.put(
 );
 
 //get user input dist
-inputDistribution.get(
+inputDistributionRouter.get(
   "/get-user-inputdist",
   userAuth,
   async (req: Request, res: Response) => {
@@ -385,7 +385,9 @@ inputDistribution.get(
           block: true,
           remarks: true,
           units: true,
-          imageUrl: true
+          imageUrl: true,
+          createdAt: true,
+          updatedAt: true
         }
       });
       if (inputDistributiondata.length === 0) {
@@ -417,7 +419,7 @@ inputDistribution.get(
 );
 
 //get admin input dist
-inputDistribution.get(
+inputDistributionRouter.get(
   "/get-user-inputdist",
   userAuth,
   async (req: Request, res: Response) => {
@@ -451,6 +453,8 @@ inputDistribution.get(
           remarks: true,
           units: true,
           imageUrl: true,
+          createdAt: true,
+          updatedAt: true,
           User: true
         }
       });
@@ -482,4 +486,70 @@ inputDistribution.get(
   }
 );
 
-export default inputDistribution;
+inputDistributionRouter.delete(
+  "/delete-input-dist/:id",
+  userAuth,
+  async (req: Request, res: Response) => {
+    try {
+      const { id } = req.params;
+      // Validate project ID
+      if (!id || typeof id !== "string") {
+        res.status(400).json({
+          success: false,
+          message: "Valid Infra developement ID is required",
+          code: "INVALID_INPUT"
+        });
+        return;
+      }
+
+      const user = (req as RequestWithUser).user;
+      if (!user) {
+        res.status(401).json({
+          success: false,
+          message: "Please sign in to delete the field",
+          code: "UNAUTHORIZED"
+        });
+        return;
+      }
+      const existingInputDistribution =
+        await prisma.infrastructureDevelopment.findUnique({
+          where: { id }
+        });
+      if (!existingInputDistribution) {
+        res.status(404).json({
+          success: false,
+          message: "Input distribution field not found",
+          code: "RESOURCE_NOT_FOUND"
+        });
+        return;
+      }
+      if (existingInputDistribution.userId !== user.id) {
+        res.status(403).json({
+          success: false,
+          message: "You don't have permission to delete this field",
+          code: "FORBIDDEN"
+        });
+        return;
+      }
+
+      await prisma.inputDistribution.delete({
+        where: { id }
+      });
+      res.status(200).json({
+        success: true,
+        message: "Input distribution field deleted successfully",
+        code: "RESOURCE_DELETED"
+      });
+      return;
+    } catch (err) {
+      console.error(`Error deleting Input distribution :`, err);
+      res.status(500).json({
+        success: false,
+        message: "Something went wrong, Please try again later",
+        code: "INTERNAL_SERVER_ERROR"
+      });
+    }
+  }
+);
+
+export default inputDistributionRouter;

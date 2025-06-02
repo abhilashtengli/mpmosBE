@@ -473,7 +473,7 @@ trainingRouter.get(
           units: true,
           createdAt: true,
           updatedAt: true,
-          User : true
+          User: true
         }
       });
 
