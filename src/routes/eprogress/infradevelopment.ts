@@ -342,3 +342,198 @@ infrastructureRouter.put(
     }
   }
 );
+
+//get infra-Dev for user
+infrastructureRouter.get(
+  "/get-user-infra",
+  userAuth,
+  async (req: Request, res: Response) => {
+    try {
+      const user = (req as RequestWithUser).user;
+
+      if (!user) {
+        res.status(401).json({
+          success: false,
+          message: "Please Sign in to view your Projects",
+          code: "UNAUTHORIZED"
+        });
+      }
+
+      const infraDevelopmentData =
+        await prisma.infrastructureDevelopment.findMany({
+          where: {
+            userId: user?.id
+          },
+          orderBy: {
+            createdAt: "desc"
+          },
+          select: {
+            id: true,
+            InfraDevId: true,
+            project: true,
+            quarter: true,
+            target: true,
+            achieved: true,
+            district: true,
+            village: true,
+            block: true,
+            remarks: true,
+            imageUrl: true
+          }
+        });
+
+      if (infraDevelopmentData.length === 0) {
+        res.status(200).json({
+          success: true,
+          message: "No Infra development data found",
+          data: [],
+          code: "NO_INFRA_DEV_FOUND"
+        });
+        return;
+      }
+      res.status(200).json({
+        success: true,
+        data: infraDevelopmentData,
+        code: "GET_INFRADEV_SUCCESSFULL"
+      });
+      return;
+    } catch (err) {
+      console.error("Error getting the Infra development info", err);
+      res.status(500).json({
+        success: false,
+        message: "Could not Infra development info, please try again later",
+        code: "INTERNAL_SERVER_ERROR"
+      });
+      return;
+    }
+  }
+);
+
+//get infra-Deev for admin
+infrastructureRouter.get(
+  "/get-admin-infra",
+  userAuth,
+  async (req: Request, res: Response) => {
+    try {
+      const user = (req as RequestWithUser).user;
+
+      if (!user) {
+        res.status(401).json({
+          success: false,
+          message: "Please Sign in to view your Projects",
+          code: "UNAUTHORIZED"
+        });
+      }
+
+      const infraDevelopmentData =
+        await prisma.infrastructureDevelopment.findMany({
+          orderBy: {
+            createdAt: "desc"
+          },
+          select: {
+            id: true,
+            InfraDevId: true,
+            project: true,
+            quarter: true,
+            target: true,
+            achieved: true,
+            district: true,
+            village: true,
+            block: true,
+            remarks: true,
+            imageUrl: true
+          }
+        });
+
+      if (infraDevelopmentData.length === 0) {
+        res.status(200).json({
+          success: true,
+          message: "No Infra development data found",
+          data: [],
+          code: "NO_INFRA_DEV_FOUND"
+        });
+        return;
+      }
+      res.status(200).json({
+        success: true,
+        data: infraDevelopmentData,
+        code: "GET_INFRADEV_SUCCESSFULL"
+      });
+      return;
+    } catch (err) {
+      console.error("Error getting the Infra development info", err);
+      res.status(500).json({
+        success: false,
+        message: "Could not Infra development info, please try again later",
+        code: "INTERNAL_SERVER_ERROR"
+      });
+      return;
+    }
+  }
+);
+
+infrastructureRouter.delete(
+  "delete-infraDev/:id",
+  userAuth,
+  async (req: Request, res: Response) => {
+    try {
+      const { id } = req.params;
+      // Validate project ID
+      if (!id || typeof id !== "string") {
+        res.status(400).json({
+          success: false,
+          message: "Valid Infra developement ID is required",
+          code: "INVALID_INPUT"
+        });
+        return;
+      }
+
+      const user = (req as RequestWithUser).user;
+      if (!user) {
+        res.status(401).json({
+          success: false,
+          message: "Please sign in to delete the field",
+          code: "UNAUTHORIZED"
+        });
+        return;
+      }
+
+      const existingInfra = await prisma.infrastructureDevelopment.findUnique({
+        where: { id }
+      });
+      if (!existingInfra) {
+        res.status(404).json({
+          success: false,
+          message: "Infra development field not found",
+          code: "RESOURCE_NOT_FOUND"
+        });
+        return;
+      }
+      if (existingInfra.userId !== user.id) {
+        res.status(403).json({
+          success: false,
+          message: "You don't have permission to delete this field",
+          code: "FORBIDDEN"
+        });
+        return;
+      }
+      //Delete
+      await prisma.infrastructureDevelopment.delete({
+        where: { id }
+      });
+      res.status(200).json({
+        success: true,
+        message: "Infra development field deleted successfully",
+        code: "RESOURCE_DELETED"
+      });
+      return;
+    } catch (err) {
+      console.error(`Error deleting Infra development :`, err);
+      res.status(500).json({
+        success: false,
+        message: "Something went wrong, Please try again later",
+        code: "INTERNAL_SERVER_ERROR"
+      });
+    }
+  }
+);

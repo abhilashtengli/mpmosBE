@@ -417,7 +417,7 @@ trainingRouter.get(
       }
       res.status(200).json({
         success: true,
-          data: trainingData,
+        data: trainingData,
         code: "GET_TRAININGS_SUCCESSFULL"
       });
       return;
@@ -563,6 +563,7 @@ trainingRouter.delete(
         message: "Training deleted successfully",
         code: "RESOURCE_DELETED"
       });
+      return;
     } catch (err) {
       console.error(`Error deleting training :`, err);
       res.status(500).json({
