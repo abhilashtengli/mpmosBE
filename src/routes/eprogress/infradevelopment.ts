@@ -472,6 +472,7 @@ infrastructureRouter.get(
   }
 );
 
+//delete infra-Dev
 infrastructureRouter.delete(
   "delete-infraDev/:id",
   userAuth,
