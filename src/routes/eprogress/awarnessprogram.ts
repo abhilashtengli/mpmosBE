@@ -529,7 +529,8 @@ awarenessProgramRouter.get(
           imageKey: true,
           units: true,
           createdAt: true,
-          updatedAt: true
+          updatedAt: true,
+          User : true
         }
       });
       if (awarnessProgramsData.length === 0) {
