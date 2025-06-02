@@ -559,3 +559,5 @@ awarenessProgramRouter.get(
     }
   }
 );
+
+export default awarenessProgramRouter;

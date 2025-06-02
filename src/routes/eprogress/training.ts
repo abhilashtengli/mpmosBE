@@ -574,3 +574,5 @@ trainingRouter.delete(
     }
   }
 );
+
+export default trainingRouter;

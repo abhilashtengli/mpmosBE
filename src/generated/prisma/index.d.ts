@@ -34,16 +34,6 @@ export type Quarter = $Result.DefaultSelection<Prisma.$QuarterPayload>
  */
 export type InputDistribution = $Result.DefaultSelection<Prisma.$InputDistributionPayload>
 /**
- * Model PredefinedInputDistribution
- * 
- */
-export type PredefinedInputDistribution = $Result.DefaultSelection<Prisma.$PredefinedInputDistributionPayload>
-/**
- * Model CustomInputDistribution
- * 
- */
-export type CustomInputDistribution = $Result.DefaultSelection<Prisma.$CustomInputDistributionPayload>
-/**
  * Model Training
  * 
  */
@@ -277,26 +267,6 @@ export class PrismaClient<
     * ```
     */
   get inputDistribution(): Prisma.InputDistributionDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.predefinedInputDistribution`: Exposes CRUD operations for the **PredefinedInputDistribution** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more PredefinedInputDistributions
-    * const predefinedInputDistributions = await prisma.predefinedInputDistribution.findMany()
-    * ```
-    */
-  get predefinedInputDistribution(): Prisma.PredefinedInputDistributionDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.customInputDistribution`: Exposes CRUD operations for the **CustomInputDistribution** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more CustomInputDistributions
-    * const customInputDistributions = await prisma.customInputDistribution.findMany()
-    * ```
-    */
-  get customInputDistribution(): Prisma.CustomInputDistributionDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.training`: Exposes CRUD operations for the **Training** model.
@@ -821,8 +791,6 @@ export namespace Prisma {
     Project: 'Project',
     Quarter: 'Quarter',
     InputDistribution: 'InputDistribution',
-    PredefinedInputDistribution: 'PredefinedInputDistribution',
-    CustomInputDistribution: 'CustomInputDistribution',
     Training: 'Training',
     FLD: 'FLD',
     AwarenessProgram: 'AwarenessProgram',
@@ -849,7 +817,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "project" | "quarter" | "inputDistribution" | "predefinedInputDistribution" | "customInputDistribution" | "training" | "fLD" | "awarenessProgram" | "infrastructureDevelopment" | "upcomingEvent" | "publication" | "gallery" | "projectDetails"
+      modelProps: "user" | "project" | "quarter" | "inputDistribution" | "training" | "fLD" | "awarenessProgram" | "infrastructureDevelopment" | "upcomingEvent" | "publication" | "gallery" | "projectDetails"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1146,154 +1114,6 @@ export namespace Prisma {
           count: {
             args: Prisma.InputDistributionCountArgs<ExtArgs>
             result: $Utils.Optional<InputDistributionCountAggregateOutputType> | number
-          }
-        }
-      }
-      PredefinedInputDistribution: {
-        payload: Prisma.$PredefinedInputDistributionPayload<ExtArgs>
-        fields: Prisma.PredefinedInputDistributionFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.PredefinedInputDistributionFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PredefinedInputDistributionPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.PredefinedInputDistributionFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PredefinedInputDistributionPayload>
-          }
-          findFirst: {
-            args: Prisma.PredefinedInputDistributionFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PredefinedInputDistributionPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.PredefinedInputDistributionFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PredefinedInputDistributionPayload>
-          }
-          findMany: {
-            args: Prisma.PredefinedInputDistributionFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PredefinedInputDistributionPayload>[]
-          }
-          create: {
-            args: Prisma.PredefinedInputDistributionCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PredefinedInputDistributionPayload>
-          }
-          createMany: {
-            args: Prisma.PredefinedInputDistributionCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.PredefinedInputDistributionCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PredefinedInputDistributionPayload>[]
-          }
-          delete: {
-            args: Prisma.PredefinedInputDistributionDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PredefinedInputDistributionPayload>
-          }
-          update: {
-            args: Prisma.PredefinedInputDistributionUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PredefinedInputDistributionPayload>
-          }
-          deleteMany: {
-            args: Prisma.PredefinedInputDistributionDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.PredefinedInputDistributionUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.PredefinedInputDistributionUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PredefinedInputDistributionPayload>[]
-          }
-          upsert: {
-            args: Prisma.PredefinedInputDistributionUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PredefinedInputDistributionPayload>
-          }
-          aggregate: {
-            args: Prisma.PredefinedInputDistributionAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregatePredefinedInputDistribution>
-          }
-          groupBy: {
-            args: Prisma.PredefinedInputDistributionGroupByArgs<ExtArgs>
-            result: $Utils.Optional<PredefinedInputDistributionGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.PredefinedInputDistributionCountArgs<ExtArgs>
-            result: $Utils.Optional<PredefinedInputDistributionCountAggregateOutputType> | number
-          }
-        }
-      }
-      CustomInputDistribution: {
-        payload: Prisma.$CustomInputDistributionPayload<ExtArgs>
-        fields: Prisma.CustomInputDistributionFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.CustomInputDistributionFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CustomInputDistributionPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.CustomInputDistributionFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CustomInputDistributionPayload>
-          }
-          findFirst: {
-            args: Prisma.CustomInputDistributionFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CustomInputDistributionPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.CustomInputDistributionFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CustomInputDistributionPayload>
-          }
-          findMany: {
-            args: Prisma.CustomInputDistributionFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CustomInputDistributionPayload>[]
-          }
-          create: {
-            args: Prisma.CustomInputDistributionCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CustomInputDistributionPayload>
-          }
-          createMany: {
-            args: Prisma.CustomInputDistributionCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.CustomInputDistributionCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CustomInputDistributionPayload>[]
-          }
-          delete: {
-            args: Prisma.CustomInputDistributionDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CustomInputDistributionPayload>
-          }
-          update: {
-            args: Prisma.CustomInputDistributionUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CustomInputDistributionPayload>
-          }
-          deleteMany: {
-            args: Prisma.CustomInputDistributionDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.CustomInputDistributionUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.CustomInputDistributionUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CustomInputDistributionPayload>[]
-          }
-          upsert: {
-            args: Prisma.CustomInputDistributionUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CustomInputDistributionPayload>
-          }
-          aggregate: {
-            args: Prisma.CustomInputDistributionAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateCustomInputDistribution>
-          }
-          groupBy: {
-            args: Prisma.CustomInputDistributionGroupByArgs<ExtArgs>
-            result: $Utils.Optional<CustomInputDistributionGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.CustomInputDistributionCountArgs<ExtArgs>
-            result: $Utils.Optional<CustomInputDistributionCountAggregateOutputType> | number
           }
         }
       }
@@ -1977,8 +1797,6 @@ export namespace Prisma {
     project?: ProjectOmit
     quarter?: QuarterOmit
     inputDistribution?: InputDistributionOmit
-    predefinedInputDistribution?: PredefinedInputDistributionOmit
-    customInputDistribution?: CustomInputDistributionOmit
     training?: TrainingOmit
     fLD?: FLDOmit
     awarenessProgram?: AwarenessProgramOmit
@@ -2319,46 +2137,6 @@ export namespace Prisma {
    */
   export type QuarterCountOutputTypeCountInfrastructureDevelopmentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: InfrastructureDevelopmentWhereInput
-  }
-
-
-  /**
-   * Count Type InputDistributionCountOutputType
-   */
-
-  export type InputDistributionCountOutputType = {
-    predefinedItems: number
-    customItems: number
-  }
-
-  export type InputDistributionCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    predefinedItems?: boolean | InputDistributionCountOutputTypeCountPredefinedItemsArgs
-    customItems?: boolean | InputDistributionCountOutputTypeCountCustomItemsArgs
-  }
-
-  // Custom InputTypes
-  /**
-   * InputDistributionCountOutputType without action
-   */
-  export type InputDistributionCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the InputDistributionCountOutputType
-     */
-    select?: InputDistributionCountOutputTypeSelect<ExtArgs> | null
-  }
-
-  /**
-   * InputDistributionCountOutputType without action
-   */
-  export type InputDistributionCountOutputTypeCountPredefinedItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: PredefinedInputDistributionWhereInput
-  }
-
-  /**
-   * InputDistributionCountOutputType without action
-   */
-  export type InputDistributionCountOutputTypeCountCustomItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: CustomInputDistributionWhereInput
   }
 
 
@@ -6370,8 +6148,20 @@ export namespace Prisma {
 
   export type AggregateInputDistribution = {
     _count: InputDistributionCountAggregateOutputType | null
+    _avg: InputDistributionAvgAggregateOutputType | null
+    _sum: InputDistributionSumAggregateOutputType | null
     _min: InputDistributionMinAggregateOutputType | null
     _max: InputDistributionMaxAggregateOutputType | null
+  }
+
+  export type InputDistributionAvgAggregateOutputType = {
+    target: number | null
+    achieved: number | null
+  }
+
+  export type InputDistributionSumAggregateOutputType = {
+    target: number | null
+    achieved: number | null
   }
 
   export type InputDistributionMinAggregateOutputType = {
@@ -6379,6 +6169,17 @@ export namespace Prisma {
     inputDistId: string | null
     projectId: string | null
     quarterId: string | null
+    activityType: string | null
+    name: string | null
+    target: number | null
+    achieved: number | null
+    district: string | null
+    village: string | null
+    block: string | null
+    remarks: string | null
+    units: string | null
+    imageUrl: string | null
+    imageKey: string | null
     userId: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -6389,6 +6190,17 @@ export namespace Prisma {
     inputDistId: string | null
     projectId: string | null
     quarterId: string | null
+    activityType: string | null
+    name: string | null
+    target: number | null
+    achieved: number | null
+    district: string | null
+    village: string | null
+    block: string | null
+    remarks: string | null
+    units: string | null
+    imageUrl: string | null
+    imageKey: string | null
     userId: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -6399,6 +6211,17 @@ export namespace Prisma {
     inputDistId: number
     projectId: number
     quarterId: number
+    activityType: number
+    name: number
+    target: number
+    achieved: number
+    district: number
+    village: number
+    block: number
+    remarks: number
+    units: number
+    imageUrl: number
+    imageKey: number
     userId: number
     createdAt: number
     updatedAt: number
@@ -6406,11 +6229,32 @@ export namespace Prisma {
   }
 
 
+  export type InputDistributionAvgAggregateInputType = {
+    target?: true
+    achieved?: true
+  }
+
+  export type InputDistributionSumAggregateInputType = {
+    target?: true
+    achieved?: true
+  }
+
   export type InputDistributionMinAggregateInputType = {
     id?: true
     inputDistId?: true
     projectId?: true
     quarterId?: true
+    activityType?: true
+    name?: true
+    target?: true
+    achieved?: true
+    district?: true
+    village?: true
+    block?: true
+    remarks?: true
+    units?: true
+    imageUrl?: true
+    imageKey?: true
     userId?: true
     createdAt?: true
     updatedAt?: true
@@ -6421,6 +6265,17 @@ export namespace Prisma {
     inputDistId?: true
     projectId?: true
     quarterId?: true
+    activityType?: true
+    name?: true
+    target?: true
+    achieved?: true
+    district?: true
+    village?: true
+    block?: true
+    remarks?: true
+    units?: true
+    imageUrl?: true
+    imageKey?: true
     userId?: true
     createdAt?: true
     updatedAt?: true
@@ -6431,6 +6286,17 @@ export namespace Prisma {
     inputDistId?: true
     projectId?: true
     quarterId?: true
+    activityType?: true
+    name?: true
+    target?: true
+    achieved?: true
+    district?: true
+    village?: true
+    block?: true
+    remarks?: true
+    units?: true
+    imageUrl?: true
+    imageKey?: true
     userId?: true
     createdAt?: true
     updatedAt?: true
@@ -6475,6 +6341,18 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
+     * Select which fields to average
+    **/
+    _avg?: InputDistributionAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: InputDistributionSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: InputDistributionMinAggregateInputType
@@ -6505,6 +6383,8 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: InputDistributionCountAggregateInputType | true
+    _avg?: InputDistributionAvgAggregateInputType
+    _sum?: InputDistributionSumAggregateInputType
     _min?: InputDistributionMinAggregateInputType
     _max?: InputDistributionMaxAggregateInputType
   }
@@ -6514,10 +6394,23 @@ export namespace Prisma {
     inputDistId: string
     projectId: string
     quarterId: string
+    activityType: string
+    name: string
+    target: number
+    achieved: number
+    district: string
+    village: string
+    block: string
+    remarks: string | null
+    units: string | null
+    imageUrl: string | null
+    imageKey: string | null
     userId: string | null
     createdAt: Date
     updatedAt: Date
     _count: InputDistributionCountAggregateOutputType | null
+    _avg: InputDistributionAvgAggregateOutputType | null
+    _sum: InputDistributionSumAggregateOutputType | null
     _min: InputDistributionMinAggregateOutputType | null
     _max: InputDistributionMaxAggregateOutputType | null
   }
@@ -6541,15 +6434,23 @@ export namespace Prisma {
     inputDistId?: boolean
     projectId?: boolean
     quarterId?: boolean
+    activityType?: boolean
+    name?: boolean
+    target?: boolean
+    achieved?: boolean
+    district?: boolean
+    village?: boolean
+    block?: boolean
+    remarks?: boolean
+    units?: boolean
+    imageUrl?: boolean
+    imageKey?: boolean
     userId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     project?: boolean | ProjectDefaultArgs<ExtArgs>
     quarter?: boolean | QuarterDefaultArgs<ExtArgs>
-    predefinedItems?: boolean | InputDistribution$predefinedItemsArgs<ExtArgs>
-    customItems?: boolean | InputDistribution$customItemsArgs<ExtArgs>
     User?: boolean | InputDistribution$UserArgs<ExtArgs>
-    _count?: boolean | InputDistributionCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["inputDistribution"]>
 
   export type InputDistributionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -6557,6 +6458,17 @@ export namespace Prisma {
     inputDistId?: boolean
     projectId?: boolean
     quarterId?: boolean
+    activityType?: boolean
+    name?: boolean
+    target?: boolean
+    achieved?: boolean
+    district?: boolean
+    village?: boolean
+    block?: boolean
+    remarks?: boolean
+    units?: boolean
+    imageUrl?: boolean
+    imageKey?: boolean
     userId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -6570,6 +6482,17 @@ export namespace Prisma {
     inputDistId?: boolean
     projectId?: boolean
     quarterId?: boolean
+    activityType?: boolean
+    name?: boolean
+    target?: boolean
+    achieved?: boolean
+    district?: boolean
+    village?: boolean
+    block?: boolean
+    remarks?: boolean
+    units?: boolean
+    imageUrl?: boolean
+    imageKey?: boolean
     userId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -6583,19 +6506,27 @@ export namespace Prisma {
     inputDistId?: boolean
     projectId?: boolean
     quarterId?: boolean
+    activityType?: boolean
+    name?: boolean
+    target?: boolean
+    achieved?: boolean
+    district?: boolean
+    village?: boolean
+    block?: boolean
+    remarks?: boolean
+    units?: boolean
+    imageUrl?: boolean
+    imageKey?: boolean
     userId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type InputDistributionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "inputDistId" | "projectId" | "quarterId" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["inputDistribution"]>
+  export type InputDistributionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "inputDistId" | "projectId" | "quarterId" | "activityType" | "name" | "target" | "achieved" | "district" | "village" | "block" | "remarks" | "units" | "imageUrl" | "imageKey" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["inputDistribution"]>
   export type InputDistributionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     project?: boolean | ProjectDefaultArgs<ExtArgs>
     quarter?: boolean | QuarterDefaultArgs<ExtArgs>
-    predefinedItems?: boolean | InputDistribution$predefinedItemsArgs<ExtArgs>
-    customItems?: boolean | InputDistribution$customItemsArgs<ExtArgs>
     User?: boolean | InputDistribution$UserArgs<ExtArgs>
-    _count?: boolean | InputDistributionCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type InputDistributionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     project?: boolean | ProjectDefaultArgs<ExtArgs>
@@ -6613,8 +6544,6 @@ export namespace Prisma {
     objects: {
       project: Prisma.$ProjectPayload<ExtArgs>
       quarter: Prisma.$QuarterPayload<ExtArgs>
-      predefinedItems: Prisma.$PredefinedInputDistributionPayload<ExtArgs>[]
-      customItems: Prisma.$CustomInputDistributionPayload<ExtArgs>[]
       User: Prisma.$UserPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -6622,6 +6551,17 @@ export namespace Prisma {
       inputDistId: string
       projectId: string
       quarterId: string
+      activityType: string
+      name: string
+      target: number
+      achieved: number
+      district: string
+      village: string
+      block: string
+      remarks: string | null
+      units: string | null
+      imageUrl: string | null
+      imageKey: string | null
       userId: string | null
       createdAt: Date
       updatedAt: Date
@@ -7021,8 +6961,6 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     project<T extends ProjectDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ProjectDefaultArgs<ExtArgs>>): Prisma__ProjectClient<$Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     quarter<T extends QuarterDefaultArgs<ExtArgs> = {}>(args?: Subset<T, QuarterDefaultArgs<ExtArgs>>): Prisma__QuarterClient<$Result.GetResult<Prisma.$QuarterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    predefinedItems<T extends InputDistribution$predefinedItemsArgs<ExtArgs> = {}>(args?: Subset<T, InputDistribution$predefinedItemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PredefinedInputDistributionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    customItems<T extends InputDistribution$customItemsArgs<ExtArgs> = {}>(args?: Subset<T, InputDistribution$customItemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CustomInputDistributionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     User<T extends InputDistribution$UserArgs<ExtArgs> = {}>(args?: Subset<T, InputDistribution$UserArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -7057,6 +6995,17 @@ export namespace Prisma {
     readonly inputDistId: FieldRef<"InputDistribution", 'String'>
     readonly projectId: FieldRef<"InputDistribution", 'String'>
     readonly quarterId: FieldRef<"InputDistribution", 'String'>
+    readonly activityType: FieldRef<"InputDistribution", 'String'>
+    readonly name: FieldRef<"InputDistribution", 'String'>
+    readonly target: FieldRef<"InputDistribution", 'Int'>
+    readonly achieved: FieldRef<"InputDistribution", 'Int'>
+    readonly district: FieldRef<"InputDistribution", 'String'>
+    readonly village: FieldRef<"InputDistribution", 'String'>
+    readonly block: FieldRef<"InputDistribution", 'String'>
+    readonly remarks: FieldRef<"InputDistribution", 'String'>
+    readonly units: FieldRef<"InputDistribution", 'String'>
+    readonly imageUrl: FieldRef<"InputDistribution", 'String'>
+    readonly imageKey: FieldRef<"InputDistribution", 'String'>
     readonly userId: FieldRef<"InputDistribution", 'String'>
     readonly createdAt: FieldRef<"InputDistribution", 'DateTime'>
     readonly updatedAt: FieldRef<"InputDistribution", 'DateTime'>
@@ -7456,54 +7405,6 @@ export namespace Prisma {
   }
 
   /**
-   * InputDistribution.predefinedItems
-   */
-  export type InputDistribution$predefinedItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PredefinedInputDistribution
-     */
-    select?: PredefinedInputDistributionSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the PredefinedInputDistribution
-     */
-    omit?: PredefinedInputDistributionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PredefinedInputDistributionInclude<ExtArgs> | null
-    where?: PredefinedInputDistributionWhereInput
-    orderBy?: PredefinedInputDistributionOrderByWithRelationInput | PredefinedInputDistributionOrderByWithRelationInput[]
-    cursor?: PredefinedInputDistributionWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: PredefinedInputDistributionScalarFieldEnum | PredefinedInputDistributionScalarFieldEnum[]
-  }
-
-  /**
-   * InputDistribution.customItems
-   */
-  export type InputDistribution$customItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the CustomInputDistribution
-     */
-    select?: CustomInputDistributionSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the CustomInputDistribution
-     */
-    omit?: CustomInputDistributionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: CustomInputDistributionInclude<ExtArgs> | null
-    where?: CustomInputDistributionWhereInput
-    orderBy?: CustomInputDistributionOrderByWithRelationInput | CustomInputDistributionOrderByWithRelationInput[]
-    cursor?: CustomInputDistributionWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: CustomInputDistributionScalarFieldEnum | CustomInputDistributionScalarFieldEnum[]
-  }
-
-  /**
    * InputDistribution.User
    */
   export type InputDistribution$UserArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -7538,2458 +7439,6 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: InputDistributionInclude<ExtArgs> | null
-  }
-
-
-  /**
-   * Model PredefinedInputDistribution
-   */
-
-  export type AggregatePredefinedInputDistribution = {
-    _count: PredefinedInputDistributionCountAggregateOutputType | null
-    _avg: PredefinedInputDistributionAvgAggregateOutputType | null
-    _sum: PredefinedInputDistributionSumAggregateOutputType | null
-    _min: PredefinedInputDistributionMinAggregateOutputType | null
-    _max: PredefinedInputDistributionMaxAggregateOutputType | null
-  }
-
-  export type PredefinedInputDistributionAvgAggregateOutputType = {
-    target: number | null
-    achieved: number | null
-  }
-
-  export type PredefinedInputDistributionSumAggregateOutputType = {
-    target: number | null
-    achieved: number | null
-  }
-
-  export type PredefinedInputDistributionMinAggregateOutputType = {
-    id: string | null
-    inputDistributionId: string | null
-    activityType: string | null
-    name: string | null
-    target: number | null
-    achieved: number | null
-    district: string | null
-    village: string | null
-    block: string | null
-    remarks: string | null
-    units: string | null
-    imageUrl: string | null
-    imageKey: string | null
-    createdAt: Date | null
-    updatedAt: Date | null
-  }
-
-  export type PredefinedInputDistributionMaxAggregateOutputType = {
-    id: string | null
-    inputDistributionId: string | null
-    activityType: string | null
-    name: string | null
-    target: number | null
-    achieved: number | null
-    district: string | null
-    village: string | null
-    block: string | null
-    remarks: string | null
-    units: string | null
-    imageUrl: string | null
-    imageKey: string | null
-    createdAt: Date | null
-    updatedAt: Date | null
-  }
-
-  export type PredefinedInputDistributionCountAggregateOutputType = {
-    id: number
-    inputDistributionId: number
-    activityType: number
-    name: number
-    target: number
-    achieved: number
-    district: number
-    village: number
-    block: number
-    remarks: number
-    units: number
-    imageUrl: number
-    imageKey: number
-    createdAt: number
-    updatedAt: number
-    _all: number
-  }
-
-
-  export type PredefinedInputDistributionAvgAggregateInputType = {
-    target?: true
-    achieved?: true
-  }
-
-  export type PredefinedInputDistributionSumAggregateInputType = {
-    target?: true
-    achieved?: true
-  }
-
-  export type PredefinedInputDistributionMinAggregateInputType = {
-    id?: true
-    inputDistributionId?: true
-    activityType?: true
-    name?: true
-    target?: true
-    achieved?: true
-    district?: true
-    village?: true
-    block?: true
-    remarks?: true
-    units?: true
-    imageUrl?: true
-    imageKey?: true
-    createdAt?: true
-    updatedAt?: true
-  }
-
-  export type PredefinedInputDistributionMaxAggregateInputType = {
-    id?: true
-    inputDistributionId?: true
-    activityType?: true
-    name?: true
-    target?: true
-    achieved?: true
-    district?: true
-    village?: true
-    block?: true
-    remarks?: true
-    units?: true
-    imageUrl?: true
-    imageKey?: true
-    createdAt?: true
-    updatedAt?: true
-  }
-
-  export type PredefinedInputDistributionCountAggregateInputType = {
-    id?: true
-    inputDistributionId?: true
-    activityType?: true
-    name?: true
-    target?: true
-    achieved?: true
-    district?: true
-    village?: true
-    block?: true
-    remarks?: true
-    units?: true
-    imageUrl?: true
-    imageKey?: true
-    createdAt?: true
-    updatedAt?: true
-    _all?: true
-  }
-
-  export type PredefinedInputDistributionAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which PredefinedInputDistribution to aggregate.
-     */
-    where?: PredefinedInputDistributionWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of PredefinedInputDistributions to fetch.
-     */
-    orderBy?: PredefinedInputDistributionOrderByWithRelationInput | PredefinedInputDistributionOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: PredefinedInputDistributionWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` PredefinedInputDistributions from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` PredefinedInputDistributions.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned PredefinedInputDistributions
-    **/
-    _count?: true | PredefinedInputDistributionCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to average
-    **/
-    _avg?: PredefinedInputDistributionAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: PredefinedInputDistributionSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: PredefinedInputDistributionMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: PredefinedInputDistributionMaxAggregateInputType
-  }
-
-  export type GetPredefinedInputDistributionAggregateType<T extends PredefinedInputDistributionAggregateArgs> = {
-        [P in keyof T & keyof AggregatePredefinedInputDistribution]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregatePredefinedInputDistribution[P]>
-      : GetScalarType<T[P], AggregatePredefinedInputDistribution[P]>
-  }
-
-
-
-
-  export type PredefinedInputDistributionGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: PredefinedInputDistributionWhereInput
-    orderBy?: PredefinedInputDistributionOrderByWithAggregationInput | PredefinedInputDistributionOrderByWithAggregationInput[]
-    by: PredefinedInputDistributionScalarFieldEnum[] | PredefinedInputDistributionScalarFieldEnum
-    having?: PredefinedInputDistributionScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: PredefinedInputDistributionCountAggregateInputType | true
-    _avg?: PredefinedInputDistributionAvgAggregateInputType
-    _sum?: PredefinedInputDistributionSumAggregateInputType
-    _min?: PredefinedInputDistributionMinAggregateInputType
-    _max?: PredefinedInputDistributionMaxAggregateInputType
-  }
-
-  export type PredefinedInputDistributionGroupByOutputType = {
-    id: string
-    inputDistributionId: string
-    activityType: string
-    name: string
-    target: number
-    achieved: number
-    district: string
-    village: string
-    block: string
-    remarks: string | null
-    units: string | null
-    imageUrl: string | null
-    imageKey: string | null
-    createdAt: Date
-    updatedAt: Date
-    _count: PredefinedInputDistributionCountAggregateOutputType | null
-    _avg: PredefinedInputDistributionAvgAggregateOutputType | null
-    _sum: PredefinedInputDistributionSumAggregateOutputType | null
-    _min: PredefinedInputDistributionMinAggregateOutputType | null
-    _max: PredefinedInputDistributionMaxAggregateOutputType | null
-  }
-
-  type GetPredefinedInputDistributionGroupByPayload<T extends PredefinedInputDistributionGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<PredefinedInputDistributionGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof PredefinedInputDistributionGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], PredefinedInputDistributionGroupByOutputType[P]>
-            : GetScalarType<T[P], PredefinedInputDistributionGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type PredefinedInputDistributionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    inputDistributionId?: boolean
-    activityType?: boolean
-    name?: boolean
-    target?: boolean
-    achieved?: boolean
-    district?: boolean
-    village?: boolean
-    block?: boolean
-    remarks?: boolean
-    units?: boolean
-    imageUrl?: boolean
-    imageKey?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    inputDistribution?: boolean | InputDistributionDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["predefinedInputDistribution"]>
-
-  export type PredefinedInputDistributionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    inputDistributionId?: boolean
-    activityType?: boolean
-    name?: boolean
-    target?: boolean
-    achieved?: boolean
-    district?: boolean
-    village?: boolean
-    block?: boolean
-    remarks?: boolean
-    units?: boolean
-    imageUrl?: boolean
-    imageKey?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    inputDistribution?: boolean | InputDistributionDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["predefinedInputDistribution"]>
-
-  export type PredefinedInputDistributionSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    inputDistributionId?: boolean
-    activityType?: boolean
-    name?: boolean
-    target?: boolean
-    achieved?: boolean
-    district?: boolean
-    village?: boolean
-    block?: boolean
-    remarks?: boolean
-    units?: boolean
-    imageUrl?: boolean
-    imageKey?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    inputDistribution?: boolean | InputDistributionDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["predefinedInputDistribution"]>
-
-  export type PredefinedInputDistributionSelectScalar = {
-    id?: boolean
-    inputDistributionId?: boolean
-    activityType?: boolean
-    name?: boolean
-    target?: boolean
-    achieved?: boolean
-    district?: boolean
-    village?: boolean
-    block?: boolean
-    remarks?: boolean
-    units?: boolean
-    imageUrl?: boolean
-    imageKey?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-  }
-
-  export type PredefinedInputDistributionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "inputDistributionId" | "activityType" | "name" | "target" | "achieved" | "district" | "village" | "block" | "remarks" | "units" | "imageUrl" | "imageKey" | "createdAt" | "updatedAt", ExtArgs["result"]["predefinedInputDistribution"]>
-  export type PredefinedInputDistributionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    inputDistribution?: boolean | InputDistributionDefaultArgs<ExtArgs>
-  }
-  export type PredefinedInputDistributionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    inputDistribution?: boolean | InputDistributionDefaultArgs<ExtArgs>
-  }
-  export type PredefinedInputDistributionIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    inputDistribution?: boolean | InputDistributionDefaultArgs<ExtArgs>
-  }
-
-  export type $PredefinedInputDistributionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "PredefinedInputDistribution"
-    objects: {
-      inputDistribution: Prisma.$InputDistributionPayload<ExtArgs>
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      inputDistributionId: string
-      activityType: string
-      name: string
-      target: number
-      achieved: number
-      district: string
-      village: string
-      block: string
-      remarks: string | null
-      units: string | null
-      imageUrl: string | null
-      imageKey: string | null
-      createdAt: Date
-      updatedAt: Date
-    }, ExtArgs["result"]["predefinedInputDistribution"]>
-    composites: {}
-  }
-
-  type PredefinedInputDistributionGetPayload<S extends boolean | null | undefined | PredefinedInputDistributionDefaultArgs> = $Result.GetResult<Prisma.$PredefinedInputDistributionPayload, S>
-
-  type PredefinedInputDistributionCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<PredefinedInputDistributionFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: PredefinedInputDistributionCountAggregateInputType | true
-    }
-
-  export interface PredefinedInputDistributionDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['PredefinedInputDistribution'], meta: { name: 'PredefinedInputDistribution' } }
-    /**
-     * Find zero or one PredefinedInputDistribution that matches the filter.
-     * @param {PredefinedInputDistributionFindUniqueArgs} args - Arguments to find a PredefinedInputDistribution
-     * @example
-     * // Get one PredefinedInputDistribution
-     * const predefinedInputDistribution = await prisma.predefinedInputDistribution.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends PredefinedInputDistributionFindUniqueArgs>(args: SelectSubset<T, PredefinedInputDistributionFindUniqueArgs<ExtArgs>>): Prisma__PredefinedInputDistributionClient<$Result.GetResult<Prisma.$PredefinedInputDistributionPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one PredefinedInputDistribution that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {PredefinedInputDistributionFindUniqueOrThrowArgs} args - Arguments to find a PredefinedInputDistribution
-     * @example
-     * // Get one PredefinedInputDistribution
-     * const predefinedInputDistribution = await prisma.predefinedInputDistribution.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends PredefinedInputDistributionFindUniqueOrThrowArgs>(args: SelectSubset<T, PredefinedInputDistributionFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PredefinedInputDistributionClient<$Result.GetResult<Prisma.$PredefinedInputDistributionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first PredefinedInputDistribution that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {PredefinedInputDistributionFindFirstArgs} args - Arguments to find a PredefinedInputDistribution
-     * @example
-     * // Get one PredefinedInputDistribution
-     * const predefinedInputDistribution = await prisma.predefinedInputDistribution.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends PredefinedInputDistributionFindFirstArgs>(args?: SelectSubset<T, PredefinedInputDistributionFindFirstArgs<ExtArgs>>): Prisma__PredefinedInputDistributionClient<$Result.GetResult<Prisma.$PredefinedInputDistributionPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first PredefinedInputDistribution that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {PredefinedInputDistributionFindFirstOrThrowArgs} args - Arguments to find a PredefinedInputDistribution
-     * @example
-     * // Get one PredefinedInputDistribution
-     * const predefinedInputDistribution = await prisma.predefinedInputDistribution.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends PredefinedInputDistributionFindFirstOrThrowArgs>(args?: SelectSubset<T, PredefinedInputDistributionFindFirstOrThrowArgs<ExtArgs>>): Prisma__PredefinedInputDistributionClient<$Result.GetResult<Prisma.$PredefinedInputDistributionPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more PredefinedInputDistributions that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {PredefinedInputDistributionFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all PredefinedInputDistributions
-     * const predefinedInputDistributions = await prisma.predefinedInputDistribution.findMany()
-     * 
-     * // Get first 10 PredefinedInputDistributions
-     * const predefinedInputDistributions = await prisma.predefinedInputDistribution.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const predefinedInputDistributionWithIdOnly = await prisma.predefinedInputDistribution.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends PredefinedInputDistributionFindManyArgs>(args?: SelectSubset<T, PredefinedInputDistributionFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PredefinedInputDistributionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a PredefinedInputDistribution.
-     * @param {PredefinedInputDistributionCreateArgs} args - Arguments to create a PredefinedInputDistribution.
-     * @example
-     * // Create one PredefinedInputDistribution
-     * const PredefinedInputDistribution = await prisma.predefinedInputDistribution.create({
-     *   data: {
-     *     // ... data to create a PredefinedInputDistribution
-     *   }
-     * })
-     * 
-     */
-    create<T extends PredefinedInputDistributionCreateArgs>(args: SelectSubset<T, PredefinedInputDistributionCreateArgs<ExtArgs>>): Prisma__PredefinedInputDistributionClient<$Result.GetResult<Prisma.$PredefinedInputDistributionPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many PredefinedInputDistributions.
-     * @param {PredefinedInputDistributionCreateManyArgs} args - Arguments to create many PredefinedInputDistributions.
-     * @example
-     * // Create many PredefinedInputDistributions
-     * const predefinedInputDistribution = await prisma.predefinedInputDistribution.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends PredefinedInputDistributionCreateManyArgs>(args?: SelectSubset<T, PredefinedInputDistributionCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many PredefinedInputDistributions and returns the data saved in the database.
-     * @param {PredefinedInputDistributionCreateManyAndReturnArgs} args - Arguments to create many PredefinedInputDistributions.
-     * @example
-     * // Create many PredefinedInputDistributions
-     * const predefinedInputDistribution = await prisma.predefinedInputDistribution.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many PredefinedInputDistributions and only return the `id`
-     * const predefinedInputDistributionWithIdOnly = await prisma.predefinedInputDistribution.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends PredefinedInputDistributionCreateManyAndReturnArgs>(args?: SelectSubset<T, PredefinedInputDistributionCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PredefinedInputDistributionPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a PredefinedInputDistribution.
-     * @param {PredefinedInputDistributionDeleteArgs} args - Arguments to delete one PredefinedInputDistribution.
-     * @example
-     * // Delete one PredefinedInputDistribution
-     * const PredefinedInputDistribution = await prisma.predefinedInputDistribution.delete({
-     *   where: {
-     *     // ... filter to delete one PredefinedInputDistribution
-     *   }
-     * })
-     * 
-     */
-    delete<T extends PredefinedInputDistributionDeleteArgs>(args: SelectSubset<T, PredefinedInputDistributionDeleteArgs<ExtArgs>>): Prisma__PredefinedInputDistributionClient<$Result.GetResult<Prisma.$PredefinedInputDistributionPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one PredefinedInputDistribution.
-     * @param {PredefinedInputDistributionUpdateArgs} args - Arguments to update one PredefinedInputDistribution.
-     * @example
-     * // Update one PredefinedInputDistribution
-     * const predefinedInputDistribution = await prisma.predefinedInputDistribution.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends PredefinedInputDistributionUpdateArgs>(args: SelectSubset<T, PredefinedInputDistributionUpdateArgs<ExtArgs>>): Prisma__PredefinedInputDistributionClient<$Result.GetResult<Prisma.$PredefinedInputDistributionPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more PredefinedInputDistributions.
-     * @param {PredefinedInputDistributionDeleteManyArgs} args - Arguments to filter PredefinedInputDistributions to delete.
-     * @example
-     * // Delete a few PredefinedInputDistributions
-     * const { count } = await prisma.predefinedInputDistribution.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends PredefinedInputDistributionDeleteManyArgs>(args?: SelectSubset<T, PredefinedInputDistributionDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more PredefinedInputDistributions.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {PredefinedInputDistributionUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many PredefinedInputDistributions
-     * const predefinedInputDistribution = await prisma.predefinedInputDistribution.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends PredefinedInputDistributionUpdateManyArgs>(args: SelectSubset<T, PredefinedInputDistributionUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more PredefinedInputDistributions and returns the data updated in the database.
-     * @param {PredefinedInputDistributionUpdateManyAndReturnArgs} args - Arguments to update many PredefinedInputDistributions.
-     * @example
-     * // Update many PredefinedInputDistributions
-     * const predefinedInputDistribution = await prisma.predefinedInputDistribution.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more PredefinedInputDistributions and only return the `id`
-     * const predefinedInputDistributionWithIdOnly = await prisma.predefinedInputDistribution.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends PredefinedInputDistributionUpdateManyAndReturnArgs>(args: SelectSubset<T, PredefinedInputDistributionUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PredefinedInputDistributionPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one PredefinedInputDistribution.
-     * @param {PredefinedInputDistributionUpsertArgs} args - Arguments to update or create a PredefinedInputDistribution.
-     * @example
-     * // Update or create a PredefinedInputDistribution
-     * const predefinedInputDistribution = await prisma.predefinedInputDistribution.upsert({
-     *   create: {
-     *     // ... data to create a PredefinedInputDistribution
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the PredefinedInputDistribution we want to update
-     *   }
-     * })
-     */
-    upsert<T extends PredefinedInputDistributionUpsertArgs>(args: SelectSubset<T, PredefinedInputDistributionUpsertArgs<ExtArgs>>): Prisma__PredefinedInputDistributionClient<$Result.GetResult<Prisma.$PredefinedInputDistributionPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of PredefinedInputDistributions.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {PredefinedInputDistributionCountArgs} args - Arguments to filter PredefinedInputDistributions to count.
-     * @example
-     * // Count the number of PredefinedInputDistributions
-     * const count = await prisma.predefinedInputDistribution.count({
-     *   where: {
-     *     // ... the filter for the PredefinedInputDistributions we want to count
-     *   }
-     * })
-    **/
-    count<T extends PredefinedInputDistributionCountArgs>(
-      args?: Subset<T, PredefinedInputDistributionCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], PredefinedInputDistributionCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a PredefinedInputDistribution.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {PredefinedInputDistributionAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends PredefinedInputDistributionAggregateArgs>(args: Subset<T, PredefinedInputDistributionAggregateArgs>): Prisma.PrismaPromise<GetPredefinedInputDistributionAggregateType<T>>
-
-    /**
-     * Group by PredefinedInputDistribution.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {PredefinedInputDistributionGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends PredefinedInputDistributionGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: PredefinedInputDistributionGroupByArgs['orderBy'] }
-        : { orderBy?: PredefinedInputDistributionGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, PredefinedInputDistributionGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPredefinedInputDistributionGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the PredefinedInputDistribution model
-   */
-  readonly fields: PredefinedInputDistributionFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for PredefinedInputDistribution.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__PredefinedInputDistributionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    inputDistribution<T extends InputDistributionDefaultArgs<ExtArgs> = {}>(args?: Subset<T, InputDistributionDefaultArgs<ExtArgs>>): Prisma__InputDistributionClient<$Result.GetResult<Prisma.$InputDistributionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the PredefinedInputDistribution model
-   */
-  interface PredefinedInputDistributionFieldRefs {
-    readonly id: FieldRef<"PredefinedInputDistribution", 'String'>
-    readonly inputDistributionId: FieldRef<"PredefinedInputDistribution", 'String'>
-    readonly activityType: FieldRef<"PredefinedInputDistribution", 'String'>
-    readonly name: FieldRef<"PredefinedInputDistribution", 'String'>
-    readonly target: FieldRef<"PredefinedInputDistribution", 'Int'>
-    readonly achieved: FieldRef<"PredefinedInputDistribution", 'Int'>
-    readonly district: FieldRef<"PredefinedInputDistribution", 'String'>
-    readonly village: FieldRef<"PredefinedInputDistribution", 'String'>
-    readonly block: FieldRef<"PredefinedInputDistribution", 'String'>
-    readonly remarks: FieldRef<"PredefinedInputDistribution", 'String'>
-    readonly units: FieldRef<"PredefinedInputDistribution", 'String'>
-    readonly imageUrl: FieldRef<"PredefinedInputDistribution", 'String'>
-    readonly imageKey: FieldRef<"PredefinedInputDistribution", 'String'>
-    readonly createdAt: FieldRef<"PredefinedInputDistribution", 'DateTime'>
-    readonly updatedAt: FieldRef<"PredefinedInputDistribution", 'DateTime'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * PredefinedInputDistribution findUnique
-   */
-  export type PredefinedInputDistributionFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PredefinedInputDistribution
-     */
-    select?: PredefinedInputDistributionSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the PredefinedInputDistribution
-     */
-    omit?: PredefinedInputDistributionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PredefinedInputDistributionInclude<ExtArgs> | null
-    /**
-     * Filter, which PredefinedInputDistribution to fetch.
-     */
-    where: PredefinedInputDistributionWhereUniqueInput
-  }
-
-  /**
-   * PredefinedInputDistribution findUniqueOrThrow
-   */
-  export type PredefinedInputDistributionFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PredefinedInputDistribution
-     */
-    select?: PredefinedInputDistributionSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the PredefinedInputDistribution
-     */
-    omit?: PredefinedInputDistributionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PredefinedInputDistributionInclude<ExtArgs> | null
-    /**
-     * Filter, which PredefinedInputDistribution to fetch.
-     */
-    where: PredefinedInputDistributionWhereUniqueInput
-  }
-
-  /**
-   * PredefinedInputDistribution findFirst
-   */
-  export type PredefinedInputDistributionFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PredefinedInputDistribution
-     */
-    select?: PredefinedInputDistributionSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the PredefinedInputDistribution
-     */
-    omit?: PredefinedInputDistributionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PredefinedInputDistributionInclude<ExtArgs> | null
-    /**
-     * Filter, which PredefinedInputDistribution to fetch.
-     */
-    where?: PredefinedInputDistributionWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of PredefinedInputDistributions to fetch.
-     */
-    orderBy?: PredefinedInputDistributionOrderByWithRelationInput | PredefinedInputDistributionOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for PredefinedInputDistributions.
-     */
-    cursor?: PredefinedInputDistributionWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` PredefinedInputDistributions from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` PredefinedInputDistributions.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of PredefinedInputDistributions.
-     */
-    distinct?: PredefinedInputDistributionScalarFieldEnum | PredefinedInputDistributionScalarFieldEnum[]
-  }
-
-  /**
-   * PredefinedInputDistribution findFirstOrThrow
-   */
-  export type PredefinedInputDistributionFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PredefinedInputDistribution
-     */
-    select?: PredefinedInputDistributionSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the PredefinedInputDistribution
-     */
-    omit?: PredefinedInputDistributionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PredefinedInputDistributionInclude<ExtArgs> | null
-    /**
-     * Filter, which PredefinedInputDistribution to fetch.
-     */
-    where?: PredefinedInputDistributionWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of PredefinedInputDistributions to fetch.
-     */
-    orderBy?: PredefinedInputDistributionOrderByWithRelationInput | PredefinedInputDistributionOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for PredefinedInputDistributions.
-     */
-    cursor?: PredefinedInputDistributionWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` PredefinedInputDistributions from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` PredefinedInputDistributions.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of PredefinedInputDistributions.
-     */
-    distinct?: PredefinedInputDistributionScalarFieldEnum | PredefinedInputDistributionScalarFieldEnum[]
-  }
-
-  /**
-   * PredefinedInputDistribution findMany
-   */
-  export type PredefinedInputDistributionFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PredefinedInputDistribution
-     */
-    select?: PredefinedInputDistributionSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the PredefinedInputDistribution
-     */
-    omit?: PredefinedInputDistributionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PredefinedInputDistributionInclude<ExtArgs> | null
-    /**
-     * Filter, which PredefinedInputDistributions to fetch.
-     */
-    where?: PredefinedInputDistributionWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of PredefinedInputDistributions to fetch.
-     */
-    orderBy?: PredefinedInputDistributionOrderByWithRelationInput | PredefinedInputDistributionOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing PredefinedInputDistributions.
-     */
-    cursor?: PredefinedInputDistributionWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` PredefinedInputDistributions from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` PredefinedInputDistributions.
-     */
-    skip?: number
-    distinct?: PredefinedInputDistributionScalarFieldEnum | PredefinedInputDistributionScalarFieldEnum[]
-  }
-
-  /**
-   * PredefinedInputDistribution create
-   */
-  export type PredefinedInputDistributionCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PredefinedInputDistribution
-     */
-    select?: PredefinedInputDistributionSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the PredefinedInputDistribution
-     */
-    omit?: PredefinedInputDistributionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PredefinedInputDistributionInclude<ExtArgs> | null
-    /**
-     * The data needed to create a PredefinedInputDistribution.
-     */
-    data: XOR<PredefinedInputDistributionCreateInput, PredefinedInputDistributionUncheckedCreateInput>
-  }
-
-  /**
-   * PredefinedInputDistribution createMany
-   */
-  export type PredefinedInputDistributionCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many PredefinedInputDistributions.
-     */
-    data: PredefinedInputDistributionCreateManyInput | PredefinedInputDistributionCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * PredefinedInputDistribution createManyAndReturn
-   */
-  export type PredefinedInputDistributionCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PredefinedInputDistribution
-     */
-    select?: PredefinedInputDistributionSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the PredefinedInputDistribution
-     */
-    omit?: PredefinedInputDistributionOmit<ExtArgs> | null
-    /**
-     * The data used to create many PredefinedInputDistributions.
-     */
-    data: PredefinedInputDistributionCreateManyInput | PredefinedInputDistributionCreateManyInput[]
-    skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PredefinedInputDistributionIncludeCreateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * PredefinedInputDistribution update
-   */
-  export type PredefinedInputDistributionUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PredefinedInputDistribution
-     */
-    select?: PredefinedInputDistributionSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the PredefinedInputDistribution
-     */
-    omit?: PredefinedInputDistributionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PredefinedInputDistributionInclude<ExtArgs> | null
-    /**
-     * The data needed to update a PredefinedInputDistribution.
-     */
-    data: XOR<PredefinedInputDistributionUpdateInput, PredefinedInputDistributionUncheckedUpdateInput>
-    /**
-     * Choose, which PredefinedInputDistribution to update.
-     */
-    where: PredefinedInputDistributionWhereUniqueInput
-  }
-
-  /**
-   * PredefinedInputDistribution updateMany
-   */
-  export type PredefinedInputDistributionUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update PredefinedInputDistributions.
-     */
-    data: XOR<PredefinedInputDistributionUpdateManyMutationInput, PredefinedInputDistributionUncheckedUpdateManyInput>
-    /**
-     * Filter which PredefinedInputDistributions to update
-     */
-    where?: PredefinedInputDistributionWhereInput
-    /**
-     * Limit how many PredefinedInputDistributions to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * PredefinedInputDistribution updateManyAndReturn
-   */
-  export type PredefinedInputDistributionUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PredefinedInputDistribution
-     */
-    select?: PredefinedInputDistributionSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the PredefinedInputDistribution
-     */
-    omit?: PredefinedInputDistributionOmit<ExtArgs> | null
-    /**
-     * The data used to update PredefinedInputDistributions.
-     */
-    data: XOR<PredefinedInputDistributionUpdateManyMutationInput, PredefinedInputDistributionUncheckedUpdateManyInput>
-    /**
-     * Filter which PredefinedInputDistributions to update
-     */
-    where?: PredefinedInputDistributionWhereInput
-    /**
-     * Limit how many PredefinedInputDistributions to update.
-     */
-    limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PredefinedInputDistributionIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * PredefinedInputDistribution upsert
-   */
-  export type PredefinedInputDistributionUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PredefinedInputDistribution
-     */
-    select?: PredefinedInputDistributionSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the PredefinedInputDistribution
-     */
-    omit?: PredefinedInputDistributionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PredefinedInputDistributionInclude<ExtArgs> | null
-    /**
-     * The filter to search for the PredefinedInputDistribution to update in case it exists.
-     */
-    where: PredefinedInputDistributionWhereUniqueInput
-    /**
-     * In case the PredefinedInputDistribution found by the `where` argument doesn't exist, create a new PredefinedInputDistribution with this data.
-     */
-    create: XOR<PredefinedInputDistributionCreateInput, PredefinedInputDistributionUncheckedCreateInput>
-    /**
-     * In case the PredefinedInputDistribution was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<PredefinedInputDistributionUpdateInput, PredefinedInputDistributionUncheckedUpdateInput>
-  }
-
-  /**
-   * PredefinedInputDistribution delete
-   */
-  export type PredefinedInputDistributionDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PredefinedInputDistribution
-     */
-    select?: PredefinedInputDistributionSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the PredefinedInputDistribution
-     */
-    omit?: PredefinedInputDistributionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PredefinedInputDistributionInclude<ExtArgs> | null
-    /**
-     * Filter which PredefinedInputDistribution to delete.
-     */
-    where: PredefinedInputDistributionWhereUniqueInput
-  }
-
-  /**
-   * PredefinedInputDistribution deleteMany
-   */
-  export type PredefinedInputDistributionDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which PredefinedInputDistributions to delete
-     */
-    where?: PredefinedInputDistributionWhereInput
-    /**
-     * Limit how many PredefinedInputDistributions to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * PredefinedInputDistribution without action
-   */
-  export type PredefinedInputDistributionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PredefinedInputDistribution
-     */
-    select?: PredefinedInputDistributionSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the PredefinedInputDistribution
-     */
-    omit?: PredefinedInputDistributionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PredefinedInputDistributionInclude<ExtArgs> | null
-  }
-
-
-  /**
-   * Model CustomInputDistribution
-   */
-
-  export type AggregateCustomInputDistribution = {
-    _count: CustomInputDistributionCountAggregateOutputType | null
-    _avg: CustomInputDistributionAvgAggregateOutputType | null
-    _sum: CustomInputDistributionSumAggregateOutputType | null
-    _min: CustomInputDistributionMinAggregateOutputType | null
-    _max: CustomInputDistributionMaxAggregateOutputType | null
-  }
-
-  export type CustomInputDistributionAvgAggregateOutputType = {
-    target: number | null
-    achieved: number | null
-  }
-
-  export type CustomInputDistributionSumAggregateOutputType = {
-    target: number | null
-    achieved: number | null
-  }
-
-  export type CustomInputDistributionMinAggregateOutputType = {
-    id: string | null
-    inputDistributionId: string | null
-    activityType: string | null
-    name: string | null
-    target: number | null
-    achieved: number | null
-    district: string | null
-    village: string | null
-    block: string | null
-    remarks: string | null
-    units: string | null
-    imageUrl: string | null
-    imageKey: string | null
-    createdAt: Date | null
-    updatedAt: Date | null
-  }
-
-  export type CustomInputDistributionMaxAggregateOutputType = {
-    id: string | null
-    inputDistributionId: string | null
-    activityType: string | null
-    name: string | null
-    target: number | null
-    achieved: number | null
-    district: string | null
-    village: string | null
-    block: string | null
-    remarks: string | null
-    units: string | null
-    imageUrl: string | null
-    imageKey: string | null
-    createdAt: Date | null
-    updatedAt: Date | null
-  }
-
-  export type CustomInputDistributionCountAggregateOutputType = {
-    id: number
-    inputDistributionId: number
-    activityType: number
-    name: number
-    target: number
-    achieved: number
-    district: number
-    village: number
-    block: number
-    remarks: number
-    units: number
-    imageUrl: number
-    imageKey: number
-    createdAt: number
-    updatedAt: number
-    _all: number
-  }
-
-
-  export type CustomInputDistributionAvgAggregateInputType = {
-    target?: true
-    achieved?: true
-  }
-
-  export type CustomInputDistributionSumAggregateInputType = {
-    target?: true
-    achieved?: true
-  }
-
-  export type CustomInputDistributionMinAggregateInputType = {
-    id?: true
-    inputDistributionId?: true
-    activityType?: true
-    name?: true
-    target?: true
-    achieved?: true
-    district?: true
-    village?: true
-    block?: true
-    remarks?: true
-    units?: true
-    imageUrl?: true
-    imageKey?: true
-    createdAt?: true
-    updatedAt?: true
-  }
-
-  export type CustomInputDistributionMaxAggregateInputType = {
-    id?: true
-    inputDistributionId?: true
-    activityType?: true
-    name?: true
-    target?: true
-    achieved?: true
-    district?: true
-    village?: true
-    block?: true
-    remarks?: true
-    units?: true
-    imageUrl?: true
-    imageKey?: true
-    createdAt?: true
-    updatedAt?: true
-  }
-
-  export type CustomInputDistributionCountAggregateInputType = {
-    id?: true
-    inputDistributionId?: true
-    activityType?: true
-    name?: true
-    target?: true
-    achieved?: true
-    district?: true
-    village?: true
-    block?: true
-    remarks?: true
-    units?: true
-    imageUrl?: true
-    imageKey?: true
-    createdAt?: true
-    updatedAt?: true
-    _all?: true
-  }
-
-  export type CustomInputDistributionAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which CustomInputDistribution to aggregate.
-     */
-    where?: CustomInputDistributionWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of CustomInputDistributions to fetch.
-     */
-    orderBy?: CustomInputDistributionOrderByWithRelationInput | CustomInputDistributionOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: CustomInputDistributionWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` CustomInputDistributions from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` CustomInputDistributions.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned CustomInputDistributions
-    **/
-    _count?: true | CustomInputDistributionCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to average
-    **/
-    _avg?: CustomInputDistributionAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: CustomInputDistributionSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: CustomInputDistributionMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: CustomInputDistributionMaxAggregateInputType
-  }
-
-  export type GetCustomInputDistributionAggregateType<T extends CustomInputDistributionAggregateArgs> = {
-        [P in keyof T & keyof AggregateCustomInputDistribution]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateCustomInputDistribution[P]>
-      : GetScalarType<T[P], AggregateCustomInputDistribution[P]>
-  }
-
-
-
-
-  export type CustomInputDistributionGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: CustomInputDistributionWhereInput
-    orderBy?: CustomInputDistributionOrderByWithAggregationInput | CustomInputDistributionOrderByWithAggregationInput[]
-    by: CustomInputDistributionScalarFieldEnum[] | CustomInputDistributionScalarFieldEnum
-    having?: CustomInputDistributionScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: CustomInputDistributionCountAggregateInputType | true
-    _avg?: CustomInputDistributionAvgAggregateInputType
-    _sum?: CustomInputDistributionSumAggregateInputType
-    _min?: CustomInputDistributionMinAggregateInputType
-    _max?: CustomInputDistributionMaxAggregateInputType
-  }
-
-  export type CustomInputDistributionGroupByOutputType = {
-    id: string
-    inputDistributionId: string
-    activityType: string
-    name: string
-    target: number
-    achieved: number
-    district: string
-    village: string
-    block: string
-    remarks: string | null
-    units: string | null
-    imageUrl: string | null
-    imageKey: string | null
-    createdAt: Date
-    updatedAt: Date
-    _count: CustomInputDistributionCountAggregateOutputType | null
-    _avg: CustomInputDistributionAvgAggregateOutputType | null
-    _sum: CustomInputDistributionSumAggregateOutputType | null
-    _min: CustomInputDistributionMinAggregateOutputType | null
-    _max: CustomInputDistributionMaxAggregateOutputType | null
-  }
-
-  type GetCustomInputDistributionGroupByPayload<T extends CustomInputDistributionGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<CustomInputDistributionGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof CustomInputDistributionGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], CustomInputDistributionGroupByOutputType[P]>
-            : GetScalarType<T[P], CustomInputDistributionGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type CustomInputDistributionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    inputDistributionId?: boolean
-    activityType?: boolean
-    name?: boolean
-    target?: boolean
-    achieved?: boolean
-    district?: boolean
-    village?: boolean
-    block?: boolean
-    remarks?: boolean
-    units?: boolean
-    imageUrl?: boolean
-    imageKey?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    inputDistribution?: boolean | InputDistributionDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["customInputDistribution"]>
-
-  export type CustomInputDistributionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    inputDistributionId?: boolean
-    activityType?: boolean
-    name?: boolean
-    target?: boolean
-    achieved?: boolean
-    district?: boolean
-    village?: boolean
-    block?: boolean
-    remarks?: boolean
-    units?: boolean
-    imageUrl?: boolean
-    imageKey?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    inputDistribution?: boolean | InputDistributionDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["customInputDistribution"]>
-
-  export type CustomInputDistributionSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    inputDistributionId?: boolean
-    activityType?: boolean
-    name?: boolean
-    target?: boolean
-    achieved?: boolean
-    district?: boolean
-    village?: boolean
-    block?: boolean
-    remarks?: boolean
-    units?: boolean
-    imageUrl?: boolean
-    imageKey?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    inputDistribution?: boolean | InputDistributionDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["customInputDistribution"]>
-
-  export type CustomInputDistributionSelectScalar = {
-    id?: boolean
-    inputDistributionId?: boolean
-    activityType?: boolean
-    name?: boolean
-    target?: boolean
-    achieved?: boolean
-    district?: boolean
-    village?: boolean
-    block?: boolean
-    remarks?: boolean
-    units?: boolean
-    imageUrl?: boolean
-    imageKey?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-  }
-
-  export type CustomInputDistributionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "inputDistributionId" | "activityType" | "name" | "target" | "achieved" | "district" | "village" | "block" | "remarks" | "units" | "imageUrl" | "imageKey" | "createdAt" | "updatedAt", ExtArgs["result"]["customInputDistribution"]>
-  export type CustomInputDistributionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    inputDistribution?: boolean | InputDistributionDefaultArgs<ExtArgs>
-  }
-  export type CustomInputDistributionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    inputDistribution?: boolean | InputDistributionDefaultArgs<ExtArgs>
-  }
-  export type CustomInputDistributionIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    inputDistribution?: boolean | InputDistributionDefaultArgs<ExtArgs>
-  }
-
-  export type $CustomInputDistributionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "CustomInputDistribution"
-    objects: {
-      inputDistribution: Prisma.$InputDistributionPayload<ExtArgs>
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      inputDistributionId: string
-      activityType: string
-      name: string
-      target: number
-      achieved: number
-      district: string
-      village: string
-      block: string
-      remarks: string | null
-      units: string | null
-      imageUrl: string | null
-      imageKey: string | null
-      createdAt: Date
-      updatedAt: Date
-    }, ExtArgs["result"]["customInputDistribution"]>
-    composites: {}
-  }
-
-  type CustomInputDistributionGetPayload<S extends boolean | null | undefined | CustomInputDistributionDefaultArgs> = $Result.GetResult<Prisma.$CustomInputDistributionPayload, S>
-
-  type CustomInputDistributionCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<CustomInputDistributionFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: CustomInputDistributionCountAggregateInputType | true
-    }
-
-  export interface CustomInputDistributionDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['CustomInputDistribution'], meta: { name: 'CustomInputDistribution' } }
-    /**
-     * Find zero or one CustomInputDistribution that matches the filter.
-     * @param {CustomInputDistributionFindUniqueArgs} args - Arguments to find a CustomInputDistribution
-     * @example
-     * // Get one CustomInputDistribution
-     * const customInputDistribution = await prisma.customInputDistribution.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends CustomInputDistributionFindUniqueArgs>(args: SelectSubset<T, CustomInputDistributionFindUniqueArgs<ExtArgs>>): Prisma__CustomInputDistributionClient<$Result.GetResult<Prisma.$CustomInputDistributionPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one CustomInputDistribution that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {CustomInputDistributionFindUniqueOrThrowArgs} args - Arguments to find a CustomInputDistribution
-     * @example
-     * // Get one CustomInputDistribution
-     * const customInputDistribution = await prisma.customInputDistribution.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends CustomInputDistributionFindUniqueOrThrowArgs>(args: SelectSubset<T, CustomInputDistributionFindUniqueOrThrowArgs<ExtArgs>>): Prisma__CustomInputDistributionClient<$Result.GetResult<Prisma.$CustomInputDistributionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first CustomInputDistribution that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {CustomInputDistributionFindFirstArgs} args - Arguments to find a CustomInputDistribution
-     * @example
-     * // Get one CustomInputDistribution
-     * const customInputDistribution = await prisma.customInputDistribution.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends CustomInputDistributionFindFirstArgs>(args?: SelectSubset<T, CustomInputDistributionFindFirstArgs<ExtArgs>>): Prisma__CustomInputDistributionClient<$Result.GetResult<Prisma.$CustomInputDistributionPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first CustomInputDistribution that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {CustomInputDistributionFindFirstOrThrowArgs} args - Arguments to find a CustomInputDistribution
-     * @example
-     * // Get one CustomInputDistribution
-     * const customInputDistribution = await prisma.customInputDistribution.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends CustomInputDistributionFindFirstOrThrowArgs>(args?: SelectSubset<T, CustomInputDistributionFindFirstOrThrowArgs<ExtArgs>>): Prisma__CustomInputDistributionClient<$Result.GetResult<Prisma.$CustomInputDistributionPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more CustomInputDistributions that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {CustomInputDistributionFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all CustomInputDistributions
-     * const customInputDistributions = await prisma.customInputDistribution.findMany()
-     * 
-     * // Get first 10 CustomInputDistributions
-     * const customInputDistributions = await prisma.customInputDistribution.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const customInputDistributionWithIdOnly = await prisma.customInputDistribution.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends CustomInputDistributionFindManyArgs>(args?: SelectSubset<T, CustomInputDistributionFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CustomInputDistributionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a CustomInputDistribution.
-     * @param {CustomInputDistributionCreateArgs} args - Arguments to create a CustomInputDistribution.
-     * @example
-     * // Create one CustomInputDistribution
-     * const CustomInputDistribution = await prisma.customInputDistribution.create({
-     *   data: {
-     *     // ... data to create a CustomInputDistribution
-     *   }
-     * })
-     * 
-     */
-    create<T extends CustomInputDistributionCreateArgs>(args: SelectSubset<T, CustomInputDistributionCreateArgs<ExtArgs>>): Prisma__CustomInputDistributionClient<$Result.GetResult<Prisma.$CustomInputDistributionPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many CustomInputDistributions.
-     * @param {CustomInputDistributionCreateManyArgs} args - Arguments to create many CustomInputDistributions.
-     * @example
-     * // Create many CustomInputDistributions
-     * const customInputDistribution = await prisma.customInputDistribution.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends CustomInputDistributionCreateManyArgs>(args?: SelectSubset<T, CustomInputDistributionCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many CustomInputDistributions and returns the data saved in the database.
-     * @param {CustomInputDistributionCreateManyAndReturnArgs} args - Arguments to create many CustomInputDistributions.
-     * @example
-     * // Create many CustomInputDistributions
-     * const customInputDistribution = await prisma.customInputDistribution.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many CustomInputDistributions and only return the `id`
-     * const customInputDistributionWithIdOnly = await prisma.customInputDistribution.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends CustomInputDistributionCreateManyAndReturnArgs>(args?: SelectSubset<T, CustomInputDistributionCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CustomInputDistributionPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a CustomInputDistribution.
-     * @param {CustomInputDistributionDeleteArgs} args - Arguments to delete one CustomInputDistribution.
-     * @example
-     * // Delete one CustomInputDistribution
-     * const CustomInputDistribution = await prisma.customInputDistribution.delete({
-     *   where: {
-     *     // ... filter to delete one CustomInputDistribution
-     *   }
-     * })
-     * 
-     */
-    delete<T extends CustomInputDistributionDeleteArgs>(args: SelectSubset<T, CustomInputDistributionDeleteArgs<ExtArgs>>): Prisma__CustomInputDistributionClient<$Result.GetResult<Prisma.$CustomInputDistributionPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one CustomInputDistribution.
-     * @param {CustomInputDistributionUpdateArgs} args - Arguments to update one CustomInputDistribution.
-     * @example
-     * // Update one CustomInputDistribution
-     * const customInputDistribution = await prisma.customInputDistribution.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends CustomInputDistributionUpdateArgs>(args: SelectSubset<T, CustomInputDistributionUpdateArgs<ExtArgs>>): Prisma__CustomInputDistributionClient<$Result.GetResult<Prisma.$CustomInputDistributionPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more CustomInputDistributions.
-     * @param {CustomInputDistributionDeleteManyArgs} args - Arguments to filter CustomInputDistributions to delete.
-     * @example
-     * // Delete a few CustomInputDistributions
-     * const { count } = await prisma.customInputDistribution.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends CustomInputDistributionDeleteManyArgs>(args?: SelectSubset<T, CustomInputDistributionDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more CustomInputDistributions.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {CustomInputDistributionUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many CustomInputDistributions
-     * const customInputDistribution = await prisma.customInputDistribution.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends CustomInputDistributionUpdateManyArgs>(args: SelectSubset<T, CustomInputDistributionUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more CustomInputDistributions and returns the data updated in the database.
-     * @param {CustomInputDistributionUpdateManyAndReturnArgs} args - Arguments to update many CustomInputDistributions.
-     * @example
-     * // Update many CustomInputDistributions
-     * const customInputDistribution = await prisma.customInputDistribution.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more CustomInputDistributions and only return the `id`
-     * const customInputDistributionWithIdOnly = await prisma.customInputDistribution.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends CustomInputDistributionUpdateManyAndReturnArgs>(args: SelectSubset<T, CustomInputDistributionUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CustomInputDistributionPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one CustomInputDistribution.
-     * @param {CustomInputDistributionUpsertArgs} args - Arguments to update or create a CustomInputDistribution.
-     * @example
-     * // Update or create a CustomInputDistribution
-     * const customInputDistribution = await prisma.customInputDistribution.upsert({
-     *   create: {
-     *     // ... data to create a CustomInputDistribution
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the CustomInputDistribution we want to update
-     *   }
-     * })
-     */
-    upsert<T extends CustomInputDistributionUpsertArgs>(args: SelectSubset<T, CustomInputDistributionUpsertArgs<ExtArgs>>): Prisma__CustomInputDistributionClient<$Result.GetResult<Prisma.$CustomInputDistributionPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of CustomInputDistributions.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {CustomInputDistributionCountArgs} args - Arguments to filter CustomInputDistributions to count.
-     * @example
-     * // Count the number of CustomInputDistributions
-     * const count = await prisma.customInputDistribution.count({
-     *   where: {
-     *     // ... the filter for the CustomInputDistributions we want to count
-     *   }
-     * })
-    **/
-    count<T extends CustomInputDistributionCountArgs>(
-      args?: Subset<T, CustomInputDistributionCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], CustomInputDistributionCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a CustomInputDistribution.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {CustomInputDistributionAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends CustomInputDistributionAggregateArgs>(args: Subset<T, CustomInputDistributionAggregateArgs>): Prisma.PrismaPromise<GetCustomInputDistributionAggregateType<T>>
-
-    /**
-     * Group by CustomInputDistribution.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {CustomInputDistributionGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends CustomInputDistributionGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: CustomInputDistributionGroupByArgs['orderBy'] }
-        : { orderBy?: CustomInputDistributionGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, CustomInputDistributionGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCustomInputDistributionGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the CustomInputDistribution model
-   */
-  readonly fields: CustomInputDistributionFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for CustomInputDistribution.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__CustomInputDistributionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    inputDistribution<T extends InputDistributionDefaultArgs<ExtArgs> = {}>(args?: Subset<T, InputDistributionDefaultArgs<ExtArgs>>): Prisma__InputDistributionClient<$Result.GetResult<Prisma.$InputDistributionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the CustomInputDistribution model
-   */
-  interface CustomInputDistributionFieldRefs {
-    readonly id: FieldRef<"CustomInputDistribution", 'String'>
-    readonly inputDistributionId: FieldRef<"CustomInputDistribution", 'String'>
-    readonly activityType: FieldRef<"CustomInputDistribution", 'String'>
-    readonly name: FieldRef<"CustomInputDistribution", 'String'>
-    readonly target: FieldRef<"CustomInputDistribution", 'Int'>
-    readonly achieved: FieldRef<"CustomInputDistribution", 'Int'>
-    readonly district: FieldRef<"CustomInputDistribution", 'String'>
-    readonly village: FieldRef<"CustomInputDistribution", 'String'>
-    readonly block: FieldRef<"CustomInputDistribution", 'String'>
-    readonly remarks: FieldRef<"CustomInputDistribution", 'String'>
-    readonly units: FieldRef<"CustomInputDistribution", 'String'>
-    readonly imageUrl: FieldRef<"CustomInputDistribution", 'String'>
-    readonly imageKey: FieldRef<"CustomInputDistribution", 'String'>
-    readonly createdAt: FieldRef<"CustomInputDistribution", 'DateTime'>
-    readonly updatedAt: FieldRef<"CustomInputDistribution", 'DateTime'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * CustomInputDistribution findUnique
-   */
-  export type CustomInputDistributionFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the CustomInputDistribution
-     */
-    select?: CustomInputDistributionSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the CustomInputDistribution
-     */
-    omit?: CustomInputDistributionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: CustomInputDistributionInclude<ExtArgs> | null
-    /**
-     * Filter, which CustomInputDistribution to fetch.
-     */
-    where: CustomInputDistributionWhereUniqueInput
-  }
-
-  /**
-   * CustomInputDistribution findUniqueOrThrow
-   */
-  export type CustomInputDistributionFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the CustomInputDistribution
-     */
-    select?: CustomInputDistributionSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the CustomInputDistribution
-     */
-    omit?: CustomInputDistributionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: CustomInputDistributionInclude<ExtArgs> | null
-    /**
-     * Filter, which CustomInputDistribution to fetch.
-     */
-    where: CustomInputDistributionWhereUniqueInput
-  }
-
-  /**
-   * CustomInputDistribution findFirst
-   */
-  export type CustomInputDistributionFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the CustomInputDistribution
-     */
-    select?: CustomInputDistributionSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the CustomInputDistribution
-     */
-    omit?: CustomInputDistributionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: CustomInputDistributionInclude<ExtArgs> | null
-    /**
-     * Filter, which CustomInputDistribution to fetch.
-     */
-    where?: CustomInputDistributionWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of CustomInputDistributions to fetch.
-     */
-    orderBy?: CustomInputDistributionOrderByWithRelationInput | CustomInputDistributionOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for CustomInputDistributions.
-     */
-    cursor?: CustomInputDistributionWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` CustomInputDistributions from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` CustomInputDistributions.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of CustomInputDistributions.
-     */
-    distinct?: CustomInputDistributionScalarFieldEnum | CustomInputDistributionScalarFieldEnum[]
-  }
-
-  /**
-   * CustomInputDistribution findFirstOrThrow
-   */
-  export type CustomInputDistributionFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the CustomInputDistribution
-     */
-    select?: CustomInputDistributionSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the CustomInputDistribution
-     */
-    omit?: CustomInputDistributionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: CustomInputDistributionInclude<ExtArgs> | null
-    /**
-     * Filter, which CustomInputDistribution to fetch.
-     */
-    where?: CustomInputDistributionWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of CustomInputDistributions to fetch.
-     */
-    orderBy?: CustomInputDistributionOrderByWithRelationInput | CustomInputDistributionOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for CustomInputDistributions.
-     */
-    cursor?: CustomInputDistributionWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` CustomInputDistributions from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` CustomInputDistributions.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of CustomInputDistributions.
-     */
-    distinct?: CustomInputDistributionScalarFieldEnum | CustomInputDistributionScalarFieldEnum[]
-  }
-
-  /**
-   * CustomInputDistribution findMany
-   */
-  export type CustomInputDistributionFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the CustomInputDistribution
-     */
-    select?: CustomInputDistributionSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the CustomInputDistribution
-     */
-    omit?: CustomInputDistributionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: CustomInputDistributionInclude<ExtArgs> | null
-    /**
-     * Filter, which CustomInputDistributions to fetch.
-     */
-    where?: CustomInputDistributionWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of CustomInputDistributions to fetch.
-     */
-    orderBy?: CustomInputDistributionOrderByWithRelationInput | CustomInputDistributionOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing CustomInputDistributions.
-     */
-    cursor?: CustomInputDistributionWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` CustomInputDistributions from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` CustomInputDistributions.
-     */
-    skip?: number
-    distinct?: CustomInputDistributionScalarFieldEnum | CustomInputDistributionScalarFieldEnum[]
-  }
-
-  /**
-   * CustomInputDistribution create
-   */
-  export type CustomInputDistributionCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the CustomInputDistribution
-     */
-    select?: CustomInputDistributionSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the CustomInputDistribution
-     */
-    omit?: CustomInputDistributionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: CustomInputDistributionInclude<ExtArgs> | null
-    /**
-     * The data needed to create a CustomInputDistribution.
-     */
-    data: XOR<CustomInputDistributionCreateInput, CustomInputDistributionUncheckedCreateInput>
-  }
-
-  /**
-   * CustomInputDistribution createMany
-   */
-  export type CustomInputDistributionCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many CustomInputDistributions.
-     */
-    data: CustomInputDistributionCreateManyInput | CustomInputDistributionCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * CustomInputDistribution createManyAndReturn
-   */
-  export type CustomInputDistributionCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the CustomInputDistribution
-     */
-    select?: CustomInputDistributionSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the CustomInputDistribution
-     */
-    omit?: CustomInputDistributionOmit<ExtArgs> | null
-    /**
-     * The data used to create many CustomInputDistributions.
-     */
-    data: CustomInputDistributionCreateManyInput | CustomInputDistributionCreateManyInput[]
-    skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: CustomInputDistributionIncludeCreateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * CustomInputDistribution update
-   */
-  export type CustomInputDistributionUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the CustomInputDistribution
-     */
-    select?: CustomInputDistributionSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the CustomInputDistribution
-     */
-    omit?: CustomInputDistributionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: CustomInputDistributionInclude<ExtArgs> | null
-    /**
-     * The data needed to update a CustomInputDistribution.
-     */
-    data: XOR<CustomInputDistributionUpdateInput, CustomInputDistributionUncheckedUpdateInput>
-    /**
-     * Choose, which CustomInputDistribution to update.
-     */
-    where: CustomInputDistributionWhereUniqueInput
-  }
-
-  /**
-   * CustomInputDistribution updateMany
-   */
-  export type CustomInputDistributionUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update CustomInputDistributions.
-     */
-    data: XOR<CustomInputDistributionUpdateManyMutationInput, CustomInputDistributionUncheckedUpdateManyInput>
-    /**
-     * Filter which CustomInputDistributions to update
-     */
-    where?: CustomInputDistributionWhereInput
-    /**
-     * Limit how many CustomInputDistributions to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * CustomInputDistribution updateManyAndReturn
-   */
-  export type CustomInputDistributionUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the CustomInputDistribution
-     */
-    select?: CustomInputDistributionSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the CustomInputDistribution
-     */
-    omit?: CustomInputDistributionOmit<ExtArgs> | null
-    /**
-     * The data used to update CustomInputDistributions.
-     */
-    data: XOR<CustomInputDistributionUpdateManyMutationInput, CustomInputDistributionUncheckedUpdateManyInput>
-    /**
-     * Filter which CustomInputDistributions to update
-     */
-    where?: CustomInputDistributionWhereInput
-    /**
-     * Limit how many CustomInputDistributions to update.
-     */
-    limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: CustomInputDistributionIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * CustomInputDistribution upsert
-   */
-  export type CustomInputDistributionUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the CustomInputDistribution
-     */
-    select?: CustomInputDistributionSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the CustomInputDistribution
-     */
-    omit?: CustomInputDistributionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: CustomInputDistributionInclude<ExtArgs> | null
-    /**
-     * The filter to search for the CustomInputDistribution to update in case it exists.
-     */
-    where: CustomInputDistributionWhereUniqueInput
-    /**
-     * In case the CustomInputDistribution found by the `where` argument doesn't exist, create a new CustomInputDistribution with this data.
-     */
-    create: XOR<CustomInputDistributionCreateInput, CustomInputDistributionUncheckedCreateInput>
-    /**
-     * In case the CustomInputDistribution was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<CustomInputDistributionUpdateInput, CustomInputDistributionUncheckedUpdateInput>
-  }
-
-  /**
-   * CustomInputDistribution delete
-   */
-  export type CustomInputDistributionDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the CustomInputDistribution
-     */
-    select?: CustomInputDistributionSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the CustomInputDistribution
-     */
-    omit?: CustomInputDistributionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: CustomInputDistributionInclude<ExtArgs> | null
-    /**
-     * Filter which CustomInputDistribution to delete.
-     */
-    where: CustomInputDistributionWhereUniqueInput
-  }
-
-  /**
-   * CustomInputDistribution deleteMany
-   */
-  export type CustomInputDistributionDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which CustomInputDistributions to delete
-     */
-    where?: CustomInputDistributionWhereInput
-    /**
-     * Limit how many CustomInputDistributions to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * CustomInputDistribution without action
-   */
-  export type CustomInputDistributionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the CustomInputDistribution
-     */
-    select?: CustomInputDistributionSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the CustomInputDistribution
-     */
-    omit?: CustomInputDistributionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: CustomInputDistributionInclude<ExtArgs> | null
   }
 
 
@@ -19816,54 +17265,23 @@ export namespace Prisma {
     inputDistId: 'inputDistId',
     projectId: 'projectId',
     quarterId: 'quarterId',
+    activityType: 'activityType',
+    name: 'name',
+    target: 'target',
+    achieved: 'achieved',
+    district: 'district',
+    village: 'village',
+    block: 'block',
+    remarks: 'remarks',
+    units: 'units',
+    imageUrl: 'imageUrl',
+    imageKey: 'imageKey',
     userId: 'userId',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
 
   export type InputDistributionScalarFieldEnum = (typeof InputDistributionScalarFieldEnum)[keyof typeof InputDistributionScalarFieldEnum]
-
-
-  export const PredefinedInputDistributionScalarFieldEnum: {
-    id: 'id',
-    inputDistributionId: 'inputDistributionId',
-    activityType: 'activityType',
-    name: 'name',
-    target: 'target',
-    achieved: 'achieved',
-    district: 'district',
-    village: 'village',
-    block: 'block',
-    remarks: 'remarks',
-    units: 'units',
-    imageUrl: 'imageUrl',
-    imageKey: 'imageKey',
-    createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
-  };
-
-  export type PredefinedInputDistributionScalarFieldEnum = (typeof PredefinedInputDistributionScalarFieldEnum)[keyof typeof PredefinedInputDistributionScalarFieldEnum]
-
-
-  export const CustomInputDistributionScalarFieldEnum: {
-    id: 'id',
-    inputDistributionId: 'inputDistributionId',
-    activityType: 'activityType',
-    name: 'name',
-    target: 'target',
-    achieved: 'achieved',
-    district: 'district',
-    village: 'village',
-    block: 'block',
-    remarks: 'remarks',
-    units: 'units',
-    imageUrl: 'imageUrl',
-    imageKey: 'imageKey',
-    createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
-  };
-
-  export type CustomInputDistributionScalarFieldEnum = (typeof CustomInputDistributionScalarFieldEnum)[keyof typeof CustomInputDistributionScalarFieldEnum]
 
 
   export const TrainingScalarFieldEnum: {
@@ -20458,13 +17876,22 @@ export namespace Prisma {
     inputDistId?: StringFilter<"InputDistribution"> | string
     projectId?: StringFilter<"InputDistribution"> | string
     quarterId?: StringFilter<"InputDistribution"> | string
+    activityType?: StringFilter<"InputDistribution"> | string
+    name?: StringFilter<"InputDistribution"> | string
+    target?: IntFilter<"InputDistribution"> | number
+    achieved?: IntFilter<"InputDistribution"> | number
+    district?: StringFilter<"InputDistribution"> | string
+    village?: StringFilter<"InputDistribution"> | string
+    block?: StringFilter<"InputDistribution"> | string
+    remarks?: StringNullableFilter<"InputDistribution"> | string | null
+    units?: StringNullableFilter<"InputDistribution"> | string | null
+    imageUrl?: StringNullableFilter<"InputDistribution"> | string | null
+    imageKey?: StringNullableFilter<"InputDistribution"> | string | null
     userId?: StringNullableFilter<"InputDistribution"> | string | null
     createdAt?: DateTimeFilter<"InputDistribution"> | Date | string
     updatedAt?: DateTimeFilter<"InputDistribution"> | Date | string
     project?: XOR<ProjectScalarRelationFilter, ProjectWhereInput>
     quarter?: XOR<QuarterScalarRelationFilter, QuarterWhereInput>
-    predefinedItems?: PredefinedInputDistributionListRelationFilter
-    customItems?: CustomInputDistributionListRelationFilter
     User?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
   }
 
@@ -20473,13 +17900,22 @@ export namespace Prisma {
     inputDistId?: SortOrder
     projectId?: SortOrder
     quarterId?: SortOrder
+    activityType?: SortOrder
+    name?: SortOrder
+    target?: SortOrder
+    achieved?: SortOrder
+    district?: SortOrder
+    village?: SortOrder
+    block?: SortOrder
+    remarks?: SortOrderInput | SortOrder
+    units?: SortOrderInput | SortOrder
+    imageUrl?: SortOrderInput | SortOrder
+    imageKey?: SortOrderInput | SortOrder
     userId?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     project?: ProjectOrderByWithRelationInput
     quarter?: QuarterOrderByWithRelationInput
-    predefinedItems?: PredefinedInputDistributionOrderByRelationAggregateInput
-    customItems?: CustomInputDistributionOrderByRelationAggregateInput
     User?: UserOrderByWithRelationInput
   }
 
@@ -20491,13 +17927,22 @@ export namespace Prisma {
     inputDistId?: StringFilter<"InputDistribution"> | string
     projectId?: StringFilter<"InputDistribution"> | string
     quarterId?: StringFilter<"InputDistribution"> | string
+    activityType?: StringFilter<"InputDistribution"> | string
+    name?: StringFilter<"InputDistribution"> | string
+    target?: IntFilter<"InputDistribution"> | number
+    achieved?: IntFilter<"InputDistribution"> | number
+    district?: StringFilter<"InputDistribution"> | string
+    village?: StringFilter<"InputDistribution"> | string
+    block?: StringFilter<"InputDistribution"> | string
+    remarks?: StringNullableFilter<"InputDistribution"> | string | null
+    units?: StringNullableFilter<"InputDistribution"> | string | null
+    imageUrl?: StringNullableFilter<"InputDistribution"> | string | null
+    imageKey?: StringNullableFilter<"InputDistribution"> | string | null
     userId?: StringNullableFilter<"InputDistribution"> | string | null
     createdAt?: DateTimeFilter<"InputDistribution"> | Date | string
     updatedAt?: DateTimeFilter<"InputDistribution"> | Date | string
     project?: XOR<ProjectScalarRelationFilter, ProjectWhereInput>
     quarter?: XOR<QuarterScalarRelationFilter, QuarterWhereInput>
-    predefinedItems?: PredefinedInputDistributionListRelationFilter
-    customItems?: CustomInputDistributionListRelationFilter
     User?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
   }, "id">
 
@@ -20506,12 +17951,25 @@ export namespace Prisma {
     inputDistId?: SortOrder
     projectId?: SortOrder
     quarterId?: SortOrder
+    activityType?: SortOrder
+    name?: SortOrder
+    target?: SortOrder
+    achieved?: SortOrder
+    district?: SortOrder
+    village?: SortOrder
+    block?: SortOrder
+    remarks?: SortOrderInput | SortOrder
+    units?: SortOrderInput | SortOrder
+    imageUrl?: SortOrderInput | SortOrder
+    imageKey?: SortOrderInput | SortOrder
     userId?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: InputDistributionCountOrderByAggregateInput
+    _avg?: InputDistributionAvgOrderByAggregateInput
     _max?: InputDistributionMaxOrderByAggregateInput
     _min?: InputDistributionMinOrderByAggregateInput
+    _sum?: InputDistributionSumOrderByAggregateInput
   }
 
   export type InputDistributionScalarWhereWithAggregatesInput = {
@@ -20522,223 +17980,20 @@ export namespace Prisma {
     inputDistId?: StringWithAggregatesFilter<"InputDistribution"> | string
     projectId?: StringWithAggregatesFilter<"InputDistribution"> | string
     quarterId?: StringWithAggregatesFilter<"InputDistribution"> | string
+    activityType?: StringWithAggregatesFilter<"InputDistribution"> | string
+    name?: StringWithAggregatesFilter<"InputDistribution"> | string
+    target?: IntWithAggregatesFilter<"InputDistribution"> | number
+    achieved?: IntWithAggregatesFilter<"InputDistribution"> | number
+    district?: StringWithAggregatesFilter<"InputDistribution"> | string
+    village?: StringWithAggregatesFilter<"InputDistribution"> | string
+    block?: StringWithAggregatesFilter<"InputDistribution"> | string
+    remarks?: StringNullableWithAggregatesFilter<"InputDistribution"> | string | null
+    units?: StringNullableWithAggregatesFilter<"InputDistribution"> | string | null
+    imageUrl?: StringNullableWithAggregatesFilter<"InputDistribution"> | string | null
+    imageKey?: StringNullableWithAggregatesFilter<"InputDistribution"> | string | null
     userId?: StringNullableWithAggregatesFilter<"InputDistribution"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"InputDistribution"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"InputDistribution"> | Date | string
-  }
-
-  export type PredefinedInputDistributionWhereInput = {
-    AND?: PredefinedInputDistributionWhereInput | PredefinedInputDistributionWhereInput[]
-    OR?: PredefinedInputDistributionWhereInput[]
-    NOT?: PredefinedInputDistributionWhereInput | PredefinedInputDistributionWhereInput[]
-    id?: StringFilter<"PredefinedInputDistribution"> | string
-    inputDistributionId?: StringFilter<"PredefinedInputDistribution"> | string
-    activityType?: StringFilter<"PredefinedInputDistribution"> | string
-    name?: StringFilter<"PredefinedInputDistribution"> | string
-    target?: IntFilter<"PredefinedInputDistribution"> | number
-    achieved?: IntFilter<"PredefinedInputDistribution"> | number
-    district?: StringFilter<"PredefinedInputDistribution"> | string
-    village?: StringFilter<"PredefinedInputDistribution"> | string
-    block?: StringFilter<"PredefinedInputDistribution"> | string
-    remarks?: StringNullableFilter<"PredefinedInputDistribution"> | string | null
-    units?: StringNullableFilter<"PredefinedInputDistribution"> | string | null
-    imageUrl?: StringNullableFilter<"PredefinedInputDistribution"> | string | null
-    imageKey?: StringNullableFilter<"PredefinedInputDistribution"> | string | null
-    createdAt?: DateTimeFilter<"PredefinedInputDistribution"> | Date | string
-    updatedAt?: DateTimeFilter<"PredefinedInputDistribution"> | Date | string
-    inputDistribution?: XOR<InputDistributionScalarRelationFilter, InputDistributionWhereInput>
-  }
-
-  export type PredefinedInputDistributionOrderByWithRelationInput = {
-    id?: SortOrder
-    inputDistributionId?: SortOrder
-    activityType?: SortOrder
-    name?: SortOrder
-    target?: SortOrder
-    achieved?: SortOrder
-    district?: SortOrder
-    village?: SortOrder
-    block?: SortOrder
-    remarks?: SortOrderInput | SortOrder
-    units?: SortOrderInput | SortOrder
-    imageUrl?: SortOrderInput | SortOrder
-    imageKey?: SortOrderInput | SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    inputDistribution?: InputDistributionOrderByWithRelationInput
-  }
-
-  export type PredefinedInputDistributionWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    AND?: PredefinedInputDistributionWhereInput | PredefinedInputDistributionWhereInput[]
-    OR?: PredefinedInputDistributionWhereInput[]
-    NOT?: PredefinedInputDistributionWhereInput | PredefinedInputDistributionWhereInput[]
-    inputDistributionId?: StringFilter<"PredefinedInputDistribution"> | string
-    activityType?: StringFilter<"PredefinedInputDistribution"> | string
-    name?: StringFilter<"PredefinedInputDistribution"> | string
-    target?: IntFilter<"PredefinedInputDistribution"> | number
-    achieved?: IntFilter<"PredefinedInputDistribution"> | number
-    district?: StringFilter<"PredefinedInputDistribution"> | string
-    village?: StringFilter<"PredefinedInputDistribution"> | string
-    block?: StringFilter<"PredefinedInputDistribution"> | string
-    remarks?: StringNullableFilter<"PredefinedInputDistribution"> | string | null
-    units?: StringNullableFilter<"PredefinedInputDistribution"> | string | null
-    imageUrl?: StringNullableFilter<"PredefinedInputDistribution"> | string | null
-    imageKey?: StringNullableFilter<"PredefinedInputDistribution"> | string | null
-    createdAt?: DateTimeFilter<"PredefinedInputDistribution"> | Date | string
-    updatedAt?: DateTimeFilter<"PredefinedInputDistribution"> | Date | string
-    inputDistribution?: XOR<InputDistributionScalarRelationFilter, InputDistributionWhereInput>
-  }, "id">
-
-  export type PredefinedInputDistributionOrderByWithAggregationInput = {
-    id?: SortOrder
-    inputDistributionId?: SortOrder
-    activityType?: SortOrder
-    name?: SortOrder
-    target?: SortOrder
-    achieved?: SortOrder
-    district?: SortOrder
-    village?: SortOrder
-    block?: SortOrder
-    remarks?: SortOrderInput | SortOrder
-    units?: SortOrderInput | SortOrder
-    imageUrl?: SortOrderInput | SortOrder
-    imageKey?: SortOrderInput | SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    _count?: PredefinedInputDistributionCountOrderByAggregateInput
-    _avg?: PredefinedInputDistributionAvgOrderByAggregateInput
-    _max?: PredefinedInputDistributionMaxOrderByAggregateInput
-    _min?: PredefinedInputDistributionMinOrderByAggregateInput
-    _sum?: PredefinedInputDistributionSumOrderByAggregateInput
-  }
-
-  export type PredefinedInputDistributionScalarWhereWithAggregatesInput = {
-    AND?: PredefinedInputDistributionScalarWhereWithAggregatesInput | PredefinedInputDistributionScalarWhereWithAggregatesInput[]
-    OR?: PredefinedInputDistributionScalarWhereWithAggregatesInput[]
-    NOT?: PredefinedInputDistributionScalarWhereWithAggregatesInput | PredefinedInputDistributionScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"PredefinedInputDistribution"> | string
-    inputDistributionId?: StringWithAggregatesFilter<"PredefinedInputDistribution"> | string
-    activityType?: StringWithAggregatesFilter<"PredefinedInputDistribution"> | string
-    name?: StringWithAggregatesFilter<"PredefinedInputDistribution"> | string
-    target?: IntWithAggregatesFilter<"PredefinedInputDistribution"> | number
-    achieved?: IntWithAggregatesFilter<"PredefinedInputDistribution"> | number
-    district?: StringWithAggregatesFilter<"PredefinedInputDistribution"> | string
-    village?: StringWithAggregatesFilter<"PredefinedInputDistribution"> | string
-    block?: StringWithAggregatesFilter<"PredefinedInputDistribution"> | string
-    remarks?: StringNullableWithAggregatesFilter<"PredefinedInputDistribution"> | string | null
-    units?: StringNullableWithAggregatesFilter<"PredefinedInputDistribution"> | string | null
-    imageUrl?: StringNullableWithAggregatesFilter<"PredefinedInputDistribution"> | string | null
-    imageKey?: StringNullableWithAggregatesFilter<"PredefinedInputDistribution"> | string | null
-    createdAt?: DateTimeWithAggregatesFilter<"PredefinedInputDistribution"> | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter<"PredefinedInputDistribution"> | Date | string
-  }
-
-  export type CustomInputDistributionWhereInput = {
-    AND?: CustomInputDistributionWhereInput | CustomInputDistributionWhereInput[]
-    OR?: CustomInputDistributionWhereInput[]
-    NOT?: CustomInputDistributionWhereInput | CustomInputDistributionWhereInput[]
-    id?: StringFilter<"CustomInputDistribution"> | string
-    inputDistributionId?: StringFilter<"CustomInputDistribution"> | string
-    activityType?: StringFilter<"CustomInputDistribution"> | string
-    name?: StringFilter<"CustomInputDistribution"> | string
-    target?: IntFilter<"CustomInputDistribution"> | number
-    achieved?: IntFilter<"CustomInputDistribution"> | number
-    district?: StringFilter<"CustomInputDistribution"> | string
-    village?: StringFilter<"CustomInputDistribution"> | string
-    block?: StringFilter<"CustomInputDistribution"> | string
-    remarks?: StringNullableFilter<"CustomInputDistribution"> | string | null
-    units?: StringNullableFilter<"CustomInputDistribution"> | string | null
-    imageUrl?: StringNullableFilter<"CustomInputDistribution"> | string | null
-    imageKey?: StringNullableFilter<"CustomInputDistribution"> | string | null
-    createdAt?: DateTimeFilter<"CustomInputDistribution"> | Date | string
-    updatedAt?: DateTimeFilter<"CustomInputDistribution"> | Date | string
-    inputDistribution?: XOR<InputDistributionScalarRelationFilter, InputDistributionWhereInput>
-  }
-
-  export type CustomInputDistributionOrderByWithRelationInput = {
-    id?: SortOrder
-    inputDistributionId?: SortOrder
-    activityType?: SortOrder
-    name?: SortOrder
-    target?: SortOrder
-    achieved?: SortOrder
-    district?: SortOrder
-    village?: SortOrder
-    block?: SortOrder
-    remarks?: SortOrderInput | SortOrder
-    units?: SortOrderInput | SortOrder
-    imageUrl?: SortOrderInput | SortOrder
-    imageKey?: SortOrderInput | SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    inputDistribution?: InputDistributionOrderByWithRelationInput
-  }
-
-  export type CustomInputDistributionWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    AND?: CustomInputDistributionWhereInput | CustomInputDistributionWhereInput[]
-    OR?: CustomInputDistributionWhereInput[]
-    NOT?: CustomInputDistributionWhereInput | CustomInputDistributionWhereInput[]
-    inputDistributionId?: StringFilter<"CustomInputDistribution"> | string
-    activityType?: StringFilter<"CustomInputDistribution"> | string
-    name?: StringFilter<"CustomInputDistribution"> | string
-    target?: IntFilter<"CustomInputDistribution"> | number
-    achieved?: IntFilter<"CustomInputDistribution"> | number
-    district?: StringFilter<"CustomInputDistribution"> | string
-    village?: StringFilter<"CustomInputDistribution"> | string
-    block?: StringFilter<"CustomInputDistribution"> | string
-    remarks?: StringNullableFilter<"CustomInputDistribution"> | string | null
-    units?: StringNullableFilter<"CustomInputDistribution"> | string | null
-    imageUrl?: StringNullableFilter<"CustomInputDistribution"> | string | null
-    imageKey?: StringNullableFilter<"CustomInputDistribution"> | string | null
-    createdAt?: DateTimeFilter<"CustomInputDistribution"> | Date | string
-    updatedAt?: DateTimeFilter<"CustomInputDistribution"> | Date | string
-    inputDistribution?: XOR<InputDistributionScalarRelationFilter, InputDistributionWhereInput>
-  }, "id">
-
-  export type CustomInputDistributionOrderByWithAggregationInput = {
-    id?: SortOrder
-    inputDistributionId?: SortOrder
-    activityType?: SortOrder
-    name?: SortOrder
-    target?: SortOrder
-    achieved?: SortOrder
-    district?: SortOrder
-    village?: SortOrder
-    block?: SortOrder
-    remarks?: SortOrderInput | SortOrder
-    units?: SortOrderInput | SortOrder
-    imageUrl?: SortOrderInput | SortOrder
-    imageKey?: SortOrderInput | SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    _count?: CustomInputDistributionCountOrderByAggregateInput
-    _avg?: CustomInputDistributionAvgOrderByAggregateInput
-    _max?: CustomInputDistributionMaxOrderByAggregateInput
-    _min?: CustomInputDistributionMinOrderByAggregateInput
-    _sum?: CustomInputDistributionSumOrderByAggregateInput
-  }
-
-  export type CustomInputDistributionScalarWhereWithAggregatesInput = {
-    AND?: CustomInputDistributionScalarWhereWithAggregatesInput | CustomInputDistributionScalarWhereWithAggregatesInput[]
-    OR?: CustomInputDistributionScalarWhereWithAggregatesInput[]
-    NOT?: CustomInputDistributionScalarWhereWithAggregatesInput | CustomInputDistributionScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"CustomInputDistribution"> | string
-    inputDistributionId?: StringWithAggregatesFilter<"CustomInputDistribution"> | string
-    activityType?: StringWithAggregatesFilter<"CustomInputDistribution"> | string
-    name?: StringWithAggregatesFilter<"CustomInputDistribution"> | string
-    target?: IntWithAggregatesFilter<"CustomInputDistribution"> | number
-    achieved?: IntWithAggregatesFilter<"CustomInputDistribution"> | number
-    district?: StringWithAggregatesFilter<"CustomInputDistribution"> | string
-    village?: StringWithAggregatesFilter<"CustomInputDistribution"> | string
-    block?: StringWithAggregatesFilter<"CustomInputDistribution"> | string
-    remarks?: StringNullableWithAggregatesFilter<"CustomInputDistribution"> | string | null
-    units?: StringNullableWithAggregatesFilter<"CustomInputDistribution"> | string | null
-    imageUrl?: StringNullableWithAggregatesFilter<"CustomInputDistribution"> | string | null
-    imageKey?: StringNullableWithAggregatesFilter<"CustomInputDistribution"> | string | null
-    createdAt?: DateTimeWithAggregatesFilter<"CustomInputDistribution"> | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter<"CustomInputDistribution"> | Date | string
   }
 
   export type TrainingWhereInput = {
@@ -21896,12 +19151,21 @@ export namespace Prisma {
   export type InputDistributionCreateInput = {
     id?: string
     inputDistId: string
+    activityType: string
+    name: string
+    target: number
+    achieved: number
+    district: string
+    village: string
+    block: string
+    remarks?: string | null
+    units?: string | null
+    imageUrl?: string | null
+    imageKey?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     project: ProjectCreateNestedOneWithoutInputDistributionsInput
     quarter: QuarterCreateNestedOneWithoutInputDistributionsInput
-    predefinedItems?: PredefinedInputDistributionCreateNestedManyWithoutInputDistributionInput
-    customItems?: CustomInputDistributionCreateNestedManyWithoutInputDistributionInput
     User?: UserCreateNestedOneWithoutInputDistributionsInput
   }
 
@@ -21910,22 +19174,40 @@ export namespace Prisma {
     inputDistId: string
     projectId: string
     quarterId: string
+    activityType: string
+    name: string
+    target: number
+    achieved: number
+    district: string
+    village: string
+    block: string
+    remarks?: string | null
+    units?: string | null
+    imageUrl?: string | null
+    imageKey?: string | null
     userId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    predefinedItems?: PredefinedInputDistributionUncheckedCreateNestedManyWithoutInputDistributionInput
-    customItems?: CustomInputDistributionUncheckedCreateNestedManyWithoutInputDistributionInput
   }
 
   export type InputDistributionUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     inputDistId?: StringFieldUpdateOperationsInput | string
+    activityType?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    target?: IntFieldUpdateOperationsInput | number
+    achieved?: IntFieldUpdateOperationsInput | number
+    district?: StringFieldUpdateOperationsInput | string
+    village?: StringFieldUpdateOperationsInput | string
+    block?: StringFieldUpdateOperationsInput | string
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    units?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    imageKey?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     project?: ProjectUpdateOneRequiredWithoutInputDistributionsNestedInput
     quarter?: QuarterUpdateOneRequiredWithoutInputDistributionsNestedInput
-    predefinedItems?: PredefinedInputDistributionUpdateManyWithoutInputDistributionNestedInput
-    customItems?: CustomInputDistributionUpdateManyWithoutInputDistributionNestedInput
     User?: UserUpdateOneWithoutInputDistributionsNestedInput
   }
 
@@ -21934,11 +19216,20 @@ export namespace Prisma {
     inputDistId?: StringFieldUpdateOperationsInput | string
     projectId?: StringFieldUpdateOperationsInput | string
     quarterId?: StringFieldUpdateOperationsInput | string
+    activityType?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    target?: IntFieldUpdateOperationsInput | number
+    achieved?: IntFieldUpdateOperationsInput | number
+    district?: StringFieldUpdateOperationsInput | string
+    village?: StringFieldUpdateOperationsInput | string
+    block?: StringFieldUpdateOperationsInput | string
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    units?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    imageKey?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    predefinedItems?: PredefinedInputDistributionUncheckedUpdateManyWithoutInputDistributionNestedInput
-    customItems?: CustomInputDistributionUncheckedUpdateManyWithoutInputDistributionNestedInput
   }
 
   export type InputDistributionCreateManyInput = {
@@ -21946,6 +19237,17 @@ export namespace Prisma {
     inputDistId: string
     projectId: string
     quarterId: string
+    activityType: string
+    name: string
+    target: number
+    achieved: number
+    district: string
+    village: string
+    block: string
+    remarks?: string | null
+    units?: string | null
+    imageUrl?: string | null
+    imageKey?: string | null
     userId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -21954,6 +19256,17 @@ export namespace Prisma {
   export type InputDistributionUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     inputDistId?: StringFieldUpdateOperationsInput | string
+    activityType?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    target?: IntFieldUpdateOperationsInput | number
+    achieved?: IntFieldUpdateOperationsInput | number
+    district?: StringFieldUpdateOperationsInput | string
+    village?: StringFieldUpdateOperationsInput | string
+    block?: StringFieldUpdateOperationsInput | string
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    units?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    imageKey?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -21963,257 +19276,18 @@ export namespace Prisma {
     inputDistId?: StringFieldUpdateOperationsInput | string
     projectId?: StringFieldUpdateOperationsInput | string
     quarterId?: StringFieldUpdateOperationsInput | string
+    activityType?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    target?: IntFieldUpdateOperationsInput | number
+    achieved?: IntFieldUpdateOperationsInput | number
+    district?: StringFieldUpdateOperationsInput | string
+    village?: StringFieldUpdateOperationsInput | string
+    block?: StringFieldUpdateOperationsInput | string
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    units?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    imageKey?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type PredefinedInputDistributionCreateInput = {
-    id?: string
-    activityType: string
-    name: string
-    target: number
-    achieved: number
-    district: string
-    village: string
-    block: string
-    remarks?: string | null
-    units?: string | null
-    imageUrl?: string | null
-    imageKey?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    inputDistribution: InputDistributionCreateNestedOneWithoutPredefinedItemsInput
-  }
-
-  export type PredefinedInputDistributionUncheckedCreateInput = {
-    id?: string
-    inputDistributionId: string
-    activityType: string
-    name: string
-    target: number
-    achieved: number
-    district: string
-    village: string
-    block: string
-    remarks?: string | null
-    units?: string | null
-    imageUrl?: string | null
-    imageKey?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type PredefinedInputDistributionUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    activityType?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    target?: IntFieldUpdateOperationsInput | number
-    achieved?: IntFieldUpdateOperationsInput | number
-    district?: StringFieldUpdateOperationsInput | string
-    village?: StringFieldUpdateOperationsInput | string
-    block?: StringFieldUpdateOperationsInput | string
-    remarks?: NullableStringFieldUpdateOperationsInput | string | null
-    units?: NullableStringFieldUpdateOperationsInput | string | null
-    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    imageKey?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    inputDistribution?: InputDistributionUpdateOneRequiredWithoutPredefinedItemsNestedInput
-  }
-
-  export type PredefinedInputDistributionUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    inputDistributionId?: StringFieldUpdateOperationsInput | string
-    activityType?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    target?: IntFieldUpdateOperationsInput | number
-    achieved?: IntFieldUpdateOperationsInput | number
-    district?: StringFieldUpdateOperationsInput | string
-    village?: StringFieldUpdateOperationsInput | string
-    block?: StringFieldUpdateOperationsInput | string
-    remarks?: NullableStringFieldUpdateOperationsInput | string | null
-    units?: NullableStringFieldUpdateOperationsInput | string | null
-    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    imageKey?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type PredefinedInputDistributionCreateManyInput = {
-    id?: string
-    inputDistributionId: string
-    activityType: string
-    name: string
-    target: number
-    achieved: number
-    district: string
-    village: string
-    block: string
-    remarks?: string | null
-    units?: string | null
-    imageUrl?: string | null
-    imageKey?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type PredefinedInputDistributionUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    activityType?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    target?: IntFieldUpdateOperationsInput | number
-    achieved?: IntFieldUpdateOperationsInput | number
-    district?: StringFieldUpdateOperationsInput | string
-    village?: StringFieldUpdateOperationsInput | string
-    block?: StringFieldUpdateOperationsInput | string
-    remarks?: NullableStringFieldUpdateOperationsInput | string | null
-    units?: NullableStringFieldUpdateOperationsInput | string | null
-    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    imageKey?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type PredefinedInputDistributionUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    inputDistributionId?: StringFieldUpdateOperationsInput | string
-    activityType?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    target?: IntFieldUpdateOperationsInput | number
-    achieved?: IntFieldUpdateOperationsInput | number
-    district?: StringFieldUpdateOperationsInput | string
-    village?: StringFieldUpdateOperationsInput | string
-    block?: StringFieldUpdateOperationsInput | string
-    remarks?: NullableStringFieldUpdateOperationsInput | string | null
-    units?: NullableStringFieldUpdateOperationsInput | string | null
-    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    imageKey?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type CustomInputDistributionCreateInput = {
-    id?: string
-    activityType: string
-    name: string
-    target: number
-    achieved: number
-    district: string
-    village: string
-    block: string
-    remarks?: string | null
-    units?: string | null
-    imageUrl?: string | null
-    imageKey?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    inputDistribution: InputDistributionCreateNestedOneWithoutCustomItemsInput
-  }
-
-  export type CustomInputDistributionUncheckedCreateInput = {
-    id?: string
-    inputDistributionId: string
-    activityType: string
-    name: string
-    target: number
-    achieved: number
-    district: string
-    village: string
-    block: string
-    remarks?: string | null
-    units?: string | null
-    imageUrl?: string | null
-    imageKey?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type CustomInputDistributionUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    activityType?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    target?: IntFieldUpdateOperationsInput | number
-    achieved?: IntFieldUpdateOperationsInput | number
-    district?: StringFieldUpdateOperationsInput | string
-    village?: StringFieldUpdateOperationsInput | string
-    block?: StringFieldUpdateOperationsInput | string
-    remarks?: NullableStringFieldUpdateOperationsInput | string | null
-    units?: NullableStringFieldUpdateOperationsInput | string | null
-    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    imageKey?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    inputDistribution?: InputDistributionUpdateOneRequiredWithoutCustomItemsNestedInput
-  }
-
-  export type CustomInputDistributionUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    inputDistributionId?: StringFieldUpdateOperationsInput | string
-    activityType?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    target?: IntFieldUpdateOperationsInput | number
-    achieved?: IntFieldUpdateOperationsInput | number
-    district?: StringFieldUpdateOperationsInput | string
-    village?: StringFieldUpdateOperationsInput | string
-    block?: StringFieldUpdateOperationsInput | string
-    remarks?: NullableStringFieldUpdateOperationsInput | string | null
-    units?: NullableStringFieldUpdateOperationsInput | string | null
-    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    imageKey?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type CustomInputDistributionCreateManyInput = {
-    id?: string
-    inputDistributionId: string
-    activityType: string
-    name: string
-    target: number
-    achieved: number
-    district: string
-    village: string
-    block: string
-    remarks?: string | null
-    units?: string | null
-    imageUrl?: string | null
-    imageKey?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type CustomInputDistributionUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    activityType?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    target?: IntFieldUpdateOperationsInput | number
-    achieved?: IntFieldUpdateOperationsInput | number
-    district?: StringFieldUpdateOperationsInput | string
-    village?: StringFieldUpdateOperationsInput | string
-    block?: StringFieldUpdateOperationsInput | string
-    remarks?: NullableStringFieldUpdateOperationsInput | string | null
-    units?: NullableStringFieldUpdateOperationsInput | string | null
-    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    imageKey?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type CustomInputDistributionUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    inputDistributionId?: StringFieldUpdateOperationsInput | string
-    activityType?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    target?: IntFieldUpdateOperationsInput | number
-    achieved?: IntFieldUpdateOperationsInput | number
-    district?: StringFieldUpdateOperationsInput | string
-    village?: StringFieldUpdateOperationsInput | string
-    block?: StringFieldUpdateOperationsInput | string
-    remarks?: NullableStringFieldUpdateOperationsInput | string | null
-    units?: NullableStringFieldUpdateOperationsInput | string | null
-    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    imageKey?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -23632,34 +20706,30 @@ export namespace Prisma {
     isNot?: QuarterWhereInput
   }
 
-  export type PredefinedInputDistributionListRelationFilter = {
-    every?: PredefinedInputDistributionWhereInput
-    some?: PredefinedInputDistributionWhereInput
-    none?: PredefinedInputDistributionWhereInput
-  }
-
-  export type CustomInputDistributionListRelationFilter = {
-    every?: CustomInputDistributionWhereInput
-    some?: CustomInputDistributionWhereInput
-    none?: CustomInputDistributionWhereInput
-  }
-
-  export type PredefinedInputDistributionOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type CustomInputDistributionOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
   export type InputDistributionCountOrderByAggregateInput = {
     id?: SortOrder
     inputDistId?: SortOrder
     projectId?: SortOrder
     quarterId?: SortOrder
+    activityType?: SortOrder
+    name?: SortOrder
+    target?: SortOrder
+    achieved?: SortOrder
+    district?: SortOrder
+    village?: SortOrder
+    block?: SortOrder
+    remarks?: SortOrder
+    units?: SortOrder
+    imageUrl?: SortOrder
+    imageKey?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+  }
+
+  export type InputDistributionAvgOrderByAggregateInput = {
+    target?: SortOrder
+    achieved?: SortOrder
   }
 
   export type InputDistributionMaxOrderByAggregateInput = {
@@ -23667,6 +20737,17 @@ export namespace Prisma {
     inputDistId?: SortOrder
     projectId?: SortOrder
     quarterId?: SortOrder
+    activityType?: SortOrder
+    name?: SortOrder
+    target?: SortOrder
+    achieved?: SortOrder
+    district?: SortOrder
+    village?: SortOrder
+    block?: SortOrder
+    remarks?: SortOrder
+    units?: SortOrder
+    imageUrl?: SortOrder
+    imageKey?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -23677,140 +20758,23 @@ export namespace Prisma {
     inputDistId?: SortOrder
     projectId?: SortOrder
     quarterId?: SortOrder
+    activityType?: SortOrder
+    name?: SortOrder
+    target?: SortOrder
+    achieved?: SortOrder
+    district?: SortOrder
+    village?: SortOrder
+    block?: SortOrder
+    remarks?: SortOrder
+    units?: SortOrder
+    imageUrl?: SortOrder
+    imageKey?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
 
-  export type InputDistributionScalarRelationFilter = {
-    is?: InputDistributionWhereInput
-    isNot?: InputDistributionWhereInput
-  }
-
-  export type PredefinedInputDistributionCountOrderByAggregateInput = {
-    id?: SortOrder
-    inputDistributionId?: SortOrder
-    activityType?: SortOrder
-    name?: SortOrder
-    target?: SortOrder
-    achieved?: SortOrder
-    district?: SortOrder
-    village?: SortOrder
-    block?: SortOrder
-    remarks?: SortOrder
-    units?: SortOrder
-    imageUrl?: SortOrder
-    imageKey?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type PredefinedInputDistributionAvgOrderByAggregateInput = {
-    target?: SortOrder
-    achieved?: SortOrder
-  }
-
-  export type PredefinedInputDistributionMaxOrderByAggregateInput = {
-    id?: SortOrder
-    inputDistributionId?: SortOrder
-    activityType?: SortOrder
-    name?: SortOrder
-    target?: SortOrder
-    achieved?: SortOrder
-    district?: SortOrder
-    village?: SortOrder
-    block?: SortOrder
-    remarks?: SortOrder
-    units?: SortOrder
-    imageUrl?: SortOrder
-    imageKey?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type PredefinedInputDistributionMinOrderByAggregateInput = {
-    id?: SortOrder
-    inputDistributionId?: SortOrder
-    activityType?: SortOrder
-    name?: SortOrder
-    target?: SortOrder
-    achieved?: SortOrder
-    district?: SortOrder
-    village?: SortOrder
-    block?: SortOrder
-    remarks?: SortOrder
-    units?: SortOrder
-    imageUrl?: SortOrder
-    imageKey?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type PredefinedInputDistributionSumOrderByAggregateInput = {
-    target?: SortOrder
-    achieved?: SortOrder
-  }
-
-  export type CustomInputDistributionCountOrderByAggregateInput = {
-    id?: SortOrder
-    inputDistributionId?: SortOrder
-    activityType?: SortOrder
-    name?: SortOrder
-    target?: SortOrder
-    achieved?: SortOrder
-    district?: SortOrder
-    village?: SortOrder
-    block?: SortOrder
-    remarks?: SortOrder
-    units?: SortOrder
-    imageUrl?: SortOrder
-    imageKey?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type CustomInputDistributionAvgOrderByAggregateInput = {
-    target?: SortOrder
-    achieved?: SortOrder
-  }
-
-  export type CustomInputDistributionMaxOrderByAggregateInput = {
-    id?: SortOrder
-    inputDistributionId?: SortOrder
-    activityType?: SortOrder
-    name?: SortOrder
-    target?: SortOrder
-    achieved?: SortOrder
-    district?: SortOrder
-    village?: SortOrder
-    block?: SortOrder
-    remarks?: SortOrder
-    units?: SortOrder
-    imageUrl?: SortOrder
-    imageKey?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type CustomInputDistributionMinOrderByAggregateInput = {
-    id?: SortOrder
-    inputDistributionId?: SortOrder
-    activityType?: SortOrder
-    name?: SortOrder
-    target?: SortOrder
-    achieved?: SortOrder
-    district?: SortOrder
-    village?: SortOrder
-    block?: SortOrder
-    remarks?: SortOrder
-    units?: SortOrder
-    imageUrl?: SortOrder
-    imageKey?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type CustomInputDistributionSumOrderByAggregateInput = {
+  export type InputDistributionSumOrderByAggregateInput = {
     target?: SortOrder
     achieved?: SortOrder
   }
@@ -25218,38 +22182,10 @@ export namespace Prisma {
     connect?: QuarterWhereUniqueInput
   }
 
-  export type PredefinedInputDistributionCreateNestedManyWithoutInputDistributionInput = {
-    create?: XOR<PredefinedInputDistributionCreateWithoutInputDistributionInput, PredefinedInputDistributionUncheckedCreateWithoutInputDistributionInput> | PredefinedInputDistributionCreateWithoutInputDistributionInput[] | PredefinedInputDistributionUncheckedCreateWithoutInputDistributionInput[]
-    connectOrCreate?: PredefinedInputDistributionCreateOrConnectWithoutInputDistributionInput | PredefinedInputDistributionCreateOrConnectWithoutInputDistributionInput[]
-    createMany?: PredefinedInputDistributionCreateManyInputDistributionInputEnvelope
-    connect?: PredefinedInputDistributionWhereUniqueInput | PredefinedInputDistributionWhereUniqueInput[]
-  }
-
-  export type CustomInputDistributionCreateNestedManyWithoutInputDistributionInput = {
-    create?: XOR<CustomInputDistributionCreateWithoutInputDistributionInput, CustomInputDistributionUncheckedCreateWithoutInputDistributionInput> | CustomInputDistributionCreateWithoutInputDistributionInput[] | CustomInputDistributionUncheckedCreateWithoutInputDistributionInput[]
-    connectOrCreate?: CustomInputDistributionCreateOrConnectWithoutInputDistributionInput | CustomInputDistributionCreateOrConnectWithoutInputDistributionInput[]
-    createMany?: CustomInputDistributionCreateManyInputDistributionInputEnvelope
-    connect?: CustomInputDistributionWhereUniqueInput | CustomInputDistributionWhereUniqueInput[]
-  }
-
   export type UserCreateNestedOneWithoutInputDistributionsInput = {
     create?: XOR<UserCreateWithoutInputDistributionsInput, UserUncheckedCreateWithoutInputDistributionsInput>
     connectOrCreate?: UserCreateOrConnectWithoutInputDistributionsInput
     connect?: UserWhereUniqueInput
-  }
-
-  export type PredefinedInputDistributionUncheckedCreateNestedManyWithoutInputDistributionInput = {
-    create?: XOR<PredefinedInputDistributionCreateWithoutInputDistributionInput, PredefinedInputDistributionUncheckedCreateWithoutInputDistributionInput> | PredefinedInputDistributionCreateWithoutInputDistributionInput[] | PredefinedInputDistributionUncheckedCreateWithoutInputDistributionInput[]
-    connectOrCreate?: PredefinedInputDistributionCreateOrConnectWithoutInputDistributionInput | PredefinedInputDistributionCreateOrConnectWithoutInputDistributionInput[]
-    createMany?: PredefinedInputDistributionCreateManyInputDistributionInputEnvelope
-    connect?: PredefinedInputDistributionWhereUniqueInput | PredefinedInputDistributionWhereUniqueInput[]
-  }
-
-  export type CustomInputDistributionUncheckedCreateNestedManyWithoutInputDistributionInput = {
-    create?: XOR<CustomInputDistributionCreateWithoutInputDistributionInput, CustomInputDistributionUncheckedCreateWithoutInputDistributionInput> | CustomInputDistributionCreateWithoutInputDistributionInput[] | CustomInputDistributionUncheckedCreateWithoutInputDistributionInput[]
-    connectOrCreate?: CustomInputDistributionCreateOrConnectWithoutInputDistributionInput | CustomInputDistributionCreateOrConnectWithoutInputDistributionInput[]
-    createMany?: CustomInputDistributionCreateManyInputDistributionInputEnvelope
-    connect?: CustomInputDistributionWhereUniqueInput | CustomInputDistributionWhereUniqueInput[]
   }
 
   export type ProjectUpdateOneRequiredWithoutInputDistributionsNestedInput = {
@@ -25268,34 +22204,6 @@ export namespace Prisma {
     update?: XOR<XOR<QuarterUpdateToOneWithWhereWithoutInputDistributionsInput, QuarterUpdateWithoutInputDistributionsInput>, QuarterUncheckedUpdateWithoutInputDistributionsInput>
   }
 
-  export type PredefinedInputDistributionUpdateManyWithoutInputDistributionNestedInput = {
-    create?: XOR<PredefinedInputDistributionCreateWithoutInputDistributionInput, PredefinedInputDistributionUncheckedCreateWithoutInputDistributionInput> | PredefinedInputDistributionCreateWithoutInputDistributionInput[] | PredefinedInputDistributionUncheckedCreateWithoutInputDistributionInput[]
-    connectOrCreate?: PredefinedInputDistributionCreateOrConnectWithoutInputDistributionInput | PredefinedInputDistributionCreateOrConnectWithoutInputDistributionInput[]
-    upsert?: PredefinedInputDistributionUpsertWithWhereUniqueWithoutInputDistributionInput | PredefinedInputDistributionUpsertWithWhereUniqueWithoutInputDistributionInput[]
-    createMany?: PredefinedInputDistributionCreateManyInputDistributionInputEnvelope
-    set?: PredefinedInputDistributionWhereUniqueInput | PredefinedInputDistributionWhereUniqueInput[]
-    disconnect?: PredefinedInputDistributionWhereUniqueInput | PredefinedInputDistributionWhereUniqueInput[]
-    delete?: PredefinedInputDistributionWhereUniqueInput | PredefinedInputDistributionWhereUniqueInput[]
-    connect?: PredefinedInputDistributionWhereUniqueInput | PredefinedInputDistributionWhereUniqueInput[]
-    update?: PredefinedInputDistributionUpdateWithWhereUniqueWithoutInputDistributionInput | PredefinedInputDistributionUpdateWithWhereUniqueWithoutInputDistributionInput[]
-    updateMany?: PredefinedInputDistributionUpdateManyWithWhereWithoutInputDistributionInput | PredefinedInputDistributionUpdateManyWithWhereWithoutInputDistributionInput[]
-    deleteMany?: PredefinedInputDistributionScalarWhereInput | PredefinedInputDistributionScalarWhereInput[]
-  }
-
-  export type CustomInputDistributionUpdateManyWithoutInputDistributionNestedInput = {
-    create?: XOR<CustomInputDistributionCreateWithoutInputDistributionInput, CustomInputDistributionUncheckedCreateWithoutInputDistributionInput> | CustomInputDistributionCreateWithoutInputDistributionInput[] | CustomInputDistributionUncheckedCreateWithoutInputDistributionInput[]
-    connectOrCreate?: CustomInputDistributionCreateOrConnectWithoutInputDistributionInput | CustomInputDistributionCreateOrConnectWithoutInputDistributionInput[]
-    upsert?: CustomInputDistributionUpsertWithWhereUniqueWithoutInputDistributionInput | CustomInputDistributionUpsertWithWhereUniqueWithoutInputDistributionInput[]
-    createMany?: CustomInputDistributionCreateManyInputDistributionInputEnvelope
-    set?: CustomInputDistributionWhereUniqueInput | CustomInputDistributionWhereUniqueInput[]
-    disconnect?: CustomInputDistributionWhereUniqueInput | CustomInputDistributionWhereUniqueInput[]
-    delete?: CustomInputDistributionWhereUniqueInput | CustomInputDistributionWhereUniqueInput[]
-    connect?: CustomInputDistributionWhereUniqueInput | CustomInputDistributionWhereUniqueInput[]
-    update?: CustomInputDistributionUpdateWithWhereUniqueWithoutInputDistributionInput | CustomInputDistributionUpdateWithWhereUniqueWithoutInputDistributionInput[]
-    updateMany?: CustomInputDistributionUpdateManyWithWhereWithoutInputDistributionInput | CustomInputDistributionUpdateManyWithWhereWithoutInputDistributionInput[]
-    deleteMany?: CustomInputDistributionScalarWhereInput | CustomInputDistributionScalarWhereInput[]
-  }
-
   export type UserUpdateOneWithoutInputDistributionsNestedInput = {
     create?: XOR<UserCreateWithoutInputDistributionsInput, UserUncheckedCreateWithoutInputDistributionsInput>
     connectOrCreate?: UserCreateOrConnectWithoutInputDistributionsInput
@@ -25304,62 +22212,6 @@ export namespace Prisma {
     delete?: UserWhereInput | boolean
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutInputDistributionsInput, UserUpdateWithoutInputDistributionsInput>, UserUncheckedUpdateWithoutInputDistributionsInput>
-  }
-
-  export type PredefinedInputDistributionUncheckedUpdateManyWithoutInputDistributionNestedInput = {
-    create?: XOR<PredefinedInputDistributionCreateWithoutInputDistributionInput, PredefinedInputDistributionUncheckedCreateWithoutInputDistributionInput> | PredefinedInputDistributionCreateWithoutInputDistributionInput[] | PredefinedInputDistributionUncheckedCreateWithoutInputDistributionInput[]
-    connectOrCreate?: PredefinedInputDistributionCreateOrConnectWithoutInputDistributionInput | PredefinedInputDistributionCreateOrConnectWithoutInputDistributionInput[]
-    upsert?: PredefinedInputDistributionUpsertWithWhereUniqueWithoutInputDistributionInput | PredefinedInputDistributionUpsertWithWhereUniqueWithoutInputDistributionInput[]
-    createMany?: PredefinedInputDistributionCreateManyInputDistributionInputEnvelope
-    set?: PredefinedInputDistributionWhereUniqueInput | PredefinedInputDistributionWhereUniqueInput[]
-    disconnect?: PredefinedInputDistributionWhereUniqueInput | PredefinedInputDistributionWhereUniqueInput[]
-    delete?: PredefinedInputDistributionWhereUniqueInput | PredefinedInputDistributionWhereUniqueInput[]
-    connect?: PredefinedInputDistributionWhereUniqueInput | PredefinedInputDistributionWhereUniqueInput[]
-    update?: PredefinedInputDistributionUpdateWithWhereUniqueWithoutInputDistributionInput | PredefinedInputDistributionUpdateWithWhereUniqueWithoutInputDistributionInput[]
-    updateMany?: PredefinedInputDistributionUpdateManyWithWhereWithoutInputDistributionInput | PredefinedInputDistributionUpdateManyWithWhereWithoutInputDistributionInput[]
-    deleteMany?: PredefinedInputDistributionScalarWhereInput | PredefinedInputDistributionScalarWhereInput[]
-  }
-
-  export type CustomInputDistributionUncheckedUpdateManyWithoutInputDistributionNestedInput = {
-    create?: XOR<CustomInputDistributionCreateWithoutInputDistributionInput, CustomInputDistributionUncheckedCreateWithoutInputDistributionInput> | CustomInputDistributionCreateWithoutInputDistributionInput[] | CustomInputDistributionUncheckedCreateWithoutInputDistributionInput[]
-    connectOrCreate?: CustomInputDistributionCreateOrConnectWithoutInputDistributionInput | CustomInputDistributionCreateOrConnectWithoutInputDistributionInput[]
-    upsert?: CustomInputDistributionUpsertWithWhereUniqueWithoutInputDistributionInput | CustomInputDistributionUpsertWithWhereUniqueWithoutInputDistributionInput[]
-    createMany?: CustomInputDistributionCreateManyInputDistributionInputEnvelope
-    set?: CustomInputDistributionWhereUniqueInput | CustomInputDistributionWhereUniqueInput[]
-    disconnect?: CustomInputDistributionWhereUniqueInput | CustomInputDistributionWhereUniqueInput[]
-    delete?: CustomInputDistributionWhereUniqueInput | CustomInputDistributionWhereUniqueInput[]
-    connect?: CustomInputDistributionWhereUniqueInput | CustomInputDistributionWhereUniqueInput[]
-    update?: CustomInputDistributionUpdateWithWhereUniqueWithoutInputDistributionInput | CustomInputDistributionUpdateWithWhereUniqueWithoutInputDistributionInput[]
-    updateMany?: CustomInputDistributionUpdateManyWithWhereWithoutInputDistributionInput | CustomInputDistributionUpdateManyWithWhereWithoutInputDistributionInput[]
-    deleteMany?: CustomInputDistributionScalarWhereInput | CustomInputDistributionScalarWhereInput[]
-  }
-
-  export type InputDistributionCreateNestedOneWithoutPredefinedItemsInput = {
-    create?: XOR<InputDistributionCreateWithoutPredefinedItemsInput, InputDistributionUncheckedCreateWithoutPredefinedItemsInput>
-    connectOrCreate?: InputDistributionCreateOrConnectWithoutPredefinedItemsInput
-    connect?: InputDistributionWhereUniqueInput
-  }
-
-  export type InputDistributionUpdateOneRequiredWithoutPredefinedItemsNestedInput = {
-    create?: XOR<InputDistributionCreateWithoutPredefinedItemsInput, InputDistributionUncheckedCreateWithoutPredefinedItemsInput>
-    connectOrCreate?: InputDistributionCreateOrConnectWithoutPredefinedItemsInput
-    upsert?: InputDistributionUpsertWithoutPredefinedItemsInput
-    connect?: InputDistributionWhereUniqueInput
-    update?: XOR<XOR<InputDistributionUpdateToOneWithWhereWithoutPredefinedItemsInput, InputDistributionUpdateWithoutPredefinedItemsInput>, InputDistributionUncheckedUpdateWithoutPredefinedItemsInput>
-  }
-
-  export type InputDistributionCreateNestedOneWithoutCustomItemsInput = {
-    create?: XOR<InputDistributionCreateWithoutCustomItemsInput, InputDistributionUncheckedCreateWithoutCustomItemsInput>
-    connectOrCreate?: InputDistributionCreateOrConnectWithoutCustomItemsInput
-    connect?: InputDistributionWhereUniqueInput
-  }
-
-  export type InputDistributionUpdateOneRequiredWithoutCustomItemsNestedInput = {
-    create?: XOR<InputDistributionCreateWithoutCustomItemsInput, InputDistributionUncheckedCreateWithoutCustomItemsInput>
-    connectOrCreate?: InputDistributionCreateOrConnectWithoutCustomItemsInput
-    upsert?: InputDistributionUpsertWithoutCustomItemsInput
-    connect?: InputDistributionWhereUniqueInput
-    update?: XOR<XOR<InputDistributionUpdateToOneWithWhereWithoutCustomItemsInput, InputDistributionUpdateWithoutCustomItemsInput>, InputDistributionUncheckedUpdateWithoutCustomItemsInput>
   }
 
   export type ProjectCreateNestedOneWithoutTrainingsInput = {
@@ -26158,12 +23010,21 @@ export namespace Prisma {
   export type InputDistributionCreateWithoutUserInput = {
     id?: string
     inputDistId: string
+    activityType: string
+    name: string
+    target: number
+    achieved: number
+    district: string
+    village: string
+    block: string
+    remarks?: string | null
+    units?: string | null
+    imageUrl?: string | null
+    imageKey?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     project: ProjectCreateNestedOneWithoutInputDistributionsInput
     quarter: QuarterCreateNestedOneWithoutInputDistributionsInput
-    predefinedItems?: PredefinedInputDistributionCreateNestedManyWithoutInputDistributionInput
-    customItems?: CustomInputDistributionCreateNestedManyWithoutInputDistributionInput
   }
 
   export type InputDistributionUncheckedCreateWithoutUserInput = {
@@ -26171,10 +23032,19 @@ export namespace Prisma {
     inputDistId: string
     projectId: string
     quarterId: string
+    activityType: string
+    name: string
+    target: number
+    achieved: number
+    district: string
+    village: string
+    block: string
+    remarks?: string | null
+    units?: string | null
+    imageUrl?: string | null
+    imageKey?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    predefinedItems?: PredefinedInputDistributionUncheckedCreateNestedManyWithoutInputDistributionInput
-    customItems?: CustomInputDistributionUncheckedCreateNestedManyWithoutInputDistributionInput
   }
 
   export type InputDistributionCreateOrConnectWithoutUserInput = {
@@ -26537,6 +23407,17 @@ export namespace Prisma {
     inputDistId?: StringFilter<"InputDistribution"> | string
     projectId?: StringFilter<"InputDistribution"> | string
     quarterId?: StringFilter<"InputDistribution"> | string
+    activityType?: StringFilter<"InputDistribution"> | string
+    name?: StringFilter<"InputDistribution"> | string
+    target?: IntFilter<"InputDistribution"> | number
+    achieved?: IntFilter<"InputDistribution"> | number
+    district?: StringFilter<"InputDistribution"> | string
+    village?: StringFilter<"InputDistribution"> | string
+    block?: StringFilter<"InputDistribution"> | string
+    remarks?: StringNullableFilter<"InputDistribution"> | string | null
+    units?: StringNullableFilter<"InputDistribution"> | string | null
+    imageUrl?: StringNullableFilter<"InputDistribution"> | string | null
+    imageKey?: StringNullableFilter<"InputDistribution"> | string | null
     userId?: StringNullableFilter<"InputDistribution"> | string | null
     createdAt?: DateTimeFilter<"InputDistribution"> | Date | string
     updatedAt?: DateTimeFilter<"InputDistribution"> | Date | string
@@ -26865,11 +23746,20 @@ export namespace Prisma {
   export type InputDistributionCreateWithoutProjectInput = {
     id?: string
     inputDistId: string
+    activityType: string
+    name: string
+    target: number
+    achieved: number
+    district: string
+    village: string
+    block: string
+    remarks?: string | null
+    units?: string | null
+    imageUrl?: string | null
+    imageKey?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     quarter: QuarterCreateNestedOneWithoutInputDistributionsInput
-    predefinedItems?: PredefinedInputDistributionCreateNestedManyWithoutInputDistributionInput
-    customItems?: CustomInputDistributionCreateNestedManyWithoutInputDistributionInput
     User?: UserCreateNestedOneWithoutInputDistributionsInput
   }
 
@@ -26877,11 +23767,20 @@ export namespace Prisma {
     id?: string
     inputDistId: string
     quarterId: string
+    activityType: string
+    name: string
+    target: number
+    achieved: number
+    district: string
+    village: string
+    block: string
+    remarks?: string | null
+    units?: string | null
+    imageUrl?: string | null
+    imageKey?: string | null
     userId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    predefinedItems?: PredefinedInputDistributionUncheckedCreateNestedManyWithoutInputDistributionInput
-    customItems?: CustomInputDistributionUncheckedCreateNestedManyWithoutInputDistributionInput
   }
 
   export type InputDistributionCreateOrConnectWithoutProjectInput = {
@@ -27241,11 +24140,20 @@ export namespace Prisma {
   export type InputDistributionCreateWithoutQuarterInput = {
     id?: string
     inputDistId: string
+    activityType: string
+    name: string
+    target: number
+    achieved: number
+    district: string
+    village: string
+    block: string
+    remarks?: string | null
+    units?: string | null
+    imageUrl?: string | null
+    imageKey?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     project: ProjectCreateNestedOneWithoutInputDistributionsInput
-    predefinedItems?: PredefinedInputDistributionCreateNestedManyWithoutInputDistributionInput
-    customItems?: CustomInputDistributionCreateNestedManyWithoutInputDistributionInput
     User?: UserCreateNestedOneWithoutInputDistributionsInput
   }
 
@@ -27253,11 +24161,20 @@ export namespace Prisma {
     id?: string
     inputDistId: string
     projectId: string
+    activityType: string
+    name: string
+    target: number
+    achieved: number
+    district: string
+    village: string
+    block: string
+    remarks?: string | null
+    units?: string | null
+    imageUrl?: string | null
+    imageKey?: string | null
     userId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    predefinedItems?: PredefinedInputDistributionUncheckedCreateNestedManyWithoutInputDistributionInput
-    customItems?: CustomInputDistributionUncheckedCreateNestedManyWithoutInputDistributionInput
   }
 
   export type InputDistributionCreateOrConnectWithoutQuarterInput = {
@@ -27462,94 +24379,6 @@ export namespace Prisma {
     create: XOR<QuarterCreateWithoutInputDistributionsInput, QuarterUncheckedCreateWithoutInputDistributionsInput>
   }
 
-  export type PredefinedInputDistributionCreateWithoutInputDistributionInput = {
-    id?: string
-    activityType: string
-    name: string
-    target: number
-    achieved: number
-    district: string
-    village: string
-    block: string
-    remarks?: string | null
-    units?: string | null
-    imageUrl?: string | null
-    imageKey?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type PredefinedInputDistributionUncheckedCreateWithoutInputDistributionInput = {
-    id?: string
-    activityType: string
-    name: string
-    target: number
-    achieved: number
-    district: string
-    village: string
-    block: string
-    remarks?: string | null
-    units?: string | null
-    imageUrl?: string | null
-    imageKey?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type PredefinedInputDistributionCreateOrConnectWithoutInputDistributionInput = {
-    where: PredefinedInputDistributionWhereUniqueInput
-    create: XOR<PredefinedInputDistributionCreateWithoutInputDistributionInput, PredefinedInputDistributionUncheckedCreateWithoutInputDistributionInput>
-  }
-
-  export type PredefinedInputDistributionCreateManyInputDistributionInputEnvelope = {
-    data: PredefinedInputDistributionCreateManyInputDistributionInput | PredefinedInputDistributionCreateManyInputDistributionInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type CustomInputDistributionCreateWithoutInputDistributionInput = {
-    id?: string
-    activityType: string
-    name: string
-    target: number
-    achieved: number
-    district: string
-    village: string
-    block: string
-    remarks?: string | null
-    units?: string | null
-    imageUrl?: string | null
-    imageKey?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type CustomInputDistributionUncheckedCreateWithoutInputDistributionInput = {
-    id?: string
-    activityType: string
-    name: string
-    target: number
-    achieved: number
-    district: string
-    village: string
-    block: string
-    remarks?: string | null
-    units?: string | null
-    imageUrl?: string | null
-    imageKey?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type CustomInputDistributionCreateOrConnectWithoutInputDistributionInput = {
-    where: CustomInputDistributionWhereUniqueInput
-    create: XOR<CustomInputDistributionCreateWithoutInputDistributionInput, CustomInputDistributionUncheckedCreateWithoutInputDistributionInput>
-  }
-
-  export type CustomInputDistributionCreateManyInputDistributionInputEnvelope = {
-    data: CustomInputDistributionCreateManyInputDistributionInput | CustomInputDistributionCreateManyInputDistributionInput[]
-    skipDuplicates?: boolean
-  }
-
   export type UserCreateWithoutInputDistributionsInput = {
     id?: string
     name: string
@@ -27685,80 +24514,6 @@ export namespace Prisma {
     infrastructureDevelopments?: InfrastructureDevelopmentUncheckedUpdateManyWithoutQuarterNestedInput
   }
 
-  export type PredefinedInputDistributionUpsertWithWhereUniqueWithoutInputDistributionInput = {
-    where: PredefinedInputDistributionWhereUniqueInput
-    update: XOR<PredefinedInputDistributionUpdateWithoutInputDistributionInput, PredefinedInputDistributionUncheckedUpdateWithoutInputDistributionInput>
-    create: XOR<PredefinedInputDistributionCreateWithoutInputDistributionInput, PredefinedInputDistributionUncheckedCreateWithoutInputDistributionInput>
-  }
-
-  export type PredefinedInputDistributionUpdateWithWhereUniqueWithoutInputDistributionInput = {
-    where: PredefinedInputDistributionWhereUniqueInput
-    data: XOR<PredefinedInputDistributionUpdateWithoutInputDistributionInput, PredefinedInputDistributionUncheckedUpdateWithoutInputDistributionInput>
-  }
-
-  export type PredefinedInputDistributionUpdateManyWithWhereWithoutInputDistributionInput = {
-    where: PredefinedInputDistributionScalarWhereInput
-    data: XOR<PredefinedInputDistributionUpdateManyMutationInput, PredefinedInputDistributionUncheckedUpdateManyWithoutInputDistributionInput>
-  }
-
-  export type PredefinedInputDistributionScalarWhereInput = {
-    AND?: PredefinedInputDistributionScalarWhereInput | PredefinedInputDistributionScalarWhereInput[]
-    OR?: PredefinedInputDistributionScalarWhereInput[]
-    NOT?: PredefinedInputDistributionScalarWhereInput | PredefinedInputDistributionScalarWhereInput[]
-    id?: StringFilter<"PredefinedInputDistribution"> | string
-    inputDistributionId?: StringFilter<"PredefinedInputDistribution"> | string
-    activityType?: StringFilter<"PredefinedInputDistribution"> | string
-    name?: StringFilter<"PredefinedInputDistribution"> | string
-    target?: IntFilter<"PredefinedInputDistribution"> | number
-    achieved?: IntFilter<"PredefinedInputDistribution"> | number
-    district?: StringFilter<"PredefinedInputDistribution"> | string
-    village?: StringFilter<"PredefinedInputDistribution"> | string
-    block?: StringFilter<"PredefinedInputDistribution"> | string
-    remarks?: StringNullableFilter<"PredefinedInputDistribution"> | string | null
-    units?: StringNullableFilter<"PredefinedInputDistribution"> | string | null
-    imageUrl?: StringNullableFilter<"PredefinedInputDistribution"> | string | null
-    imageKey?: StringNullableFilter<"PredefinedInputDistribution"> | string | null
-    createdAt?: DateTimeFilter<"PredefinedInputDistribution"> | Date | string
-    updatedAt?: DateTimeFilter<"PredefinedInputDistribution"> | Date | string
-  }
-
-  export type CustomInputDistributionUpsertWithWhereUniqueWithoutInputDistributionInput = {
-    where: CustomInputDistributionWhereUniqueInput
-    update: XOR<CustomInputDistributionUpdateWithoutInputDistributionInput, CustomInputDistributionUncheckedUpdateWithoutInputDistributionInput>
-    create: XOR<CustomInputDistributionCreateWithoutInputDistributionInput, CustomInputDistributionUncheckedCreateWithoutInputDistributionInput>
-  }
-
-  export type CustomInputDistributionUpdateWithWhereUniqueWithoutInputDistributionInput = {
-    where: CustomInputDistributionWhereUniqueInput
-    data: XOR<CustomInputDistributionUpdateWithoutInputDistributionInput, CustomInputDistributionUncheckedUpdateWithoutInputDistributionInput>
-  }
-
-  export type CustomInputDistributionUpdateManyWithWhereWithoutInputDistributionInput = {
-    where: CustomInputDistributionScalarWhereInput
-    data: XOR<CustomInputDistributionUpdateManyMutationInput, CustomInputDistributionUncheckedUpdateManyWithoutInputDistributionInput>
-  }
-
-  export type CustomInputDistributionScalarWhereInput = {
-    AND?: CustomInputDistributionScalarWhereInput | CustomInputDistributionScalarWhereInput[]
-    OR?: CustomInputDistributionScalarWhereInput[]
-    NOT?: CustomInputDistributionScalarWhereInput | CustomInputDistributionScalarWhereInput[]
-    id?: StringFilter<"CustomInputDistribution"> | string
-    inputDistributionId?: StringFilter<"CustomInputDistribution"> | string
-    activityType?: StringFilter<"CustomInputDistribution"> | string
-    name?: StringFilter<"CustomInputDistribution"> | string
-    target?: IntFilter<"CustomInputDistribution"> | number
-    achieved?: IntFilter<"CustomInputDistribution"> | number
-    district?: StringFilter<"CustomInputDistribution"> | string
-    village?: StringFilter<"CustomInputDistribution"> | string
-    block?: StringFilter<"CustomInputDistribution"> | string
-    remarks?: StringNullableFilter<"CustomInputDistribution"> | string | null
-    units?: StringNullableFilter<"CustomInputDistribution"> | string | null
-    imageUrl?: StringNullableFilter<"CustomInputDistribution"> | string | null
-    imageKey?: StringNullableFilter<"CustomInputDistribution"> | string | null
-    createdAt?: DateTimeFilter<"CustomInputDistribution"> | Date | string
-    updatedAt?: DateTimeFilter<"CustomInputDistribution"> | Date | string
-  }
-
   export type UserUpsertWithoutInputDistributionsInput = {
     update: XOR<UserUpdateWithoutInputDistributionsInput, UserUncheckedUpdateWithoutInputDistributionsInput>
     create: XOR<UserCreateWithoutInputDistributionsInput, UserUncheckedCreateWithoutInputDistributionsInput>
@@ -27818,126 +24573,6 @@ export namespace Prisma {
     publications?: PublicationUncheckedUpdateManyWithoutUserNestedInput
     galleries?: GalleryUncheckedUpdateManyWithoutUserNestedInput
     projectDetails?: ProjectDetailsUncheckedUpdateManyWithoutUserNestedInput
-  }
-
-  export type InputDistributionCreateWithoutPredefinedItemsInput = {
-    id?: string
-    inputDistId: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    project: ProjectCreateNestedOneWithoutInputDistributionsInput
-    quarter: QuarterCreateNestedOneWithoutInputDistributionsInput
-    customItems?: CustomInputDistributionCreateNestedManyWithoutInputDistributionInput
-    User?: UserCreateNestedOneWithoutInputDistributionsInput
-  }
-
-  export type InputDistributionUncheckedCreateWithoutPredefinedItemsInput = {
-    id?: string
-    inputDistId: string
-    projectId: string
-    quarterId: string
-    userId?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    customItems?: CustomInputDistributionUncheckedCreateNestedManyWithoutInputDistributionInput
-  }
-
-  export type InputDistributionCreateOrConnectWithoutPredefinedItemsInput = {
-    where: InputDistributionWhereUniqueInput
-    create: XOR<InputDistributionCreateWithoutPredefinedItemsInput, InputDistributionUncheckedCreateWithoutPredefinedItemsInput>
-  }
-
-  export type InputDistributionUpsertWithoutPredefinedItemsInput = {
-    update: XOR<InputDistributionUpdateWithoutPredefinedItemsInput, InputDistributionUncheckedUpdateWithoutPredefinedItemsInput>
-    create: XOR<InputDistributionCreateWithoutPredefinedItemsInput, InputDistributionUncheckedCreateWithoutPredefinedItemsInput>
-    where?: InputDistributionWhereInput
-  }
-
-  export type InputDistributionUpdateToOneWithWhereWithoutPredefinedItemsInput = {
-    where?: InputDistributionWhereInput
-    data: XOR<InputDistributionUpdateWithoutPredefinedItemsInput, InputDistributionUncheckedUpdateWithoutPredefinedItemsInput>
-  }
-
-  export type InputDistributionUpdateWithoutPredefinedItemsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    inputDistId?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    project?: ProjectUpdateOneRequiredWithoutInputDistributionsNestedInput
-    quarter?: QuarterUpdateOneRequiredWithoutInputDistributionsNestedInput
-    customItems?: CustomInputDistributionUpdateManyWithoutInputDistributionNestedInput
-    User?: UserUpdateOneWithoutInputDistributionsNestedInput
-  }
-
-  export type InputDistributionUncheckedUpdateWithoutPredefinedItemsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    inputDistId?: StringFieldUpdateOperationsInput | string
-    projectId?: StringFieldUpdateOperationsInput | string
-    quarterId?: StringFieldUpdateOperationsInput | string
-    userId?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    customItems?: CustomInputDistributionUncheckedUpdateManyWithoutInputDistributionNestedInput
-  }
-
-  export type InputDistributionCreateWithoutCustomItemsInput = {
-    id?: string
-    inputDistId: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    project: ProjectCreateNestedOneWithoutInputDistributionsInput
-    quarter: QuarterCreateNestedOneWithoutInputDistributionsInput
-    predefinedItems?: PredefinedInputDistributionCreateNestedManyWithoutInputDistributionInput
-    User?: UserCreateNestedOneWithoutInputDistributionsInput
-  }
-
-  export type InputDistributionUncheckedCreateWithoutCustomItemsInput = {
-    id?: string
-    inputDistId: string
-    projectId: string
-    quarterId: string
-    userId?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    predefinedItems?: PredefinedInputDistributionUncheckedCreateNestedManyWithoutInputDistributionInput
-  }
-
-  export type InputDistributionCreateOrConnectWithoutCustomItemsInput = {
-    where: InputDistributionWhereUniqueInput
-    create: XOR<InputDistributionCreateWithoutCustomItemsInput, InputDistributionUncheckedCreateWithoutCustomItemsInput>
-  }
-
-  export type InputDistributionUpsertWithoutCustomItemsInput = {
-    update: XOR<InputDistributionUpdateWithoutCustomItemsInput, InputDistributionUncheckedUpdateWithoutCustomItemsInput>
-    create: XOR<InputDistributionCreateWithoutCustomItemsInput, InputDistributionUncheckedCreateWithoutCustomItemsInput>
-    where?: InputDistributionWhereInput
-  }
-
-  export type InputDistributionUpdateToOneWithWhereWithoutCustomItemsInput = {
-    where?: InputDistributionWhereInput
-    data: XOR<InputDistributionUpdateWithoutCustomItemsInput, InputDistributionUncheckedUpdateWithoutCustomItemsInput>
-  }
-
-  export type InputDistributionUpdateWithoutCustomItemsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    inputDistId?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    project?: ProjectUpdateOneRequiredWithoutInputDistributionsNestedInput
-    quarter?: QuarterUpdateOneRequiredWithoutInputDistributionsNestedInput
-    predefinedItems?: PredefinedInputDistributionUpdateManyWithoutInputDistributionNestedInput
-    User?: UserUpdateOneWithoutInputDistributionsNestedInput
-  }
-
-  export type InputDistributionUncheckedUpdateWithoutCustomItemsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    inputDistId?: StringFieldUpdateOperationsInput | string
-    projectId?: StringFieldUpdateOperationsInput | string
-    quarterId?: StringFieldUpdateOperationsInput | string
-    userId?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    predefinedItems?: PredefinedInputDistributionUncheckedUpdateManyWithoutInputDistributionNestedInput
   }
 
   export type ProjectCreateWithoutTrainingsInput = {
@@ -29555,6 +26190,17 @@ export namespace Prisma {
     inputDistId: string
     projectId: string
     quarterId: string
+    activityType: string
+    name: string
+    target: number
+    achieved: number
+    district: string
+    village: string
+    block: string
+    remarks?: string | null
+    units?: string | null
+    imageUrl?: string | null
+    imageKey?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -29890,12 +26536,21 @@ export namespace Prisma {
   export type InputDistributionUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     inputDistId?: StringFieldUpdateOperationsInput | string
+    activityType?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    target?: IntFieldUpdateOperationsInput | number
+    achieved?: IntFieldUpdateOperationsInput | number
+    district?: StringFieldUpdateOperationsInput | string
+    village?: StringFieldUpdateOperationsInput | string
+    block?: StringFieldUpdateOperationsInput | string
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    units?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    imageKey?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     project?: ProjectUpdateOneRequiredWithoutInputDistributionsNestedInput
     quarter?: QuarterUpdateOneRequiredWithoutInputDistributionsNestedInput
-    predefinedItems?: PredefinedInputDistributionUpdateManyWithoutInputDistributionNestedInput
-    customItems?: CustomInputDistributionUpdateManyWithoutInputDistributionNestedInput
   }
 
   export type InputDistributionUncheckedUpdateWithoutUserInput = {
@@ -29903,10 +26558,19 @@ export namespace Prisma {
     inputDistId?: StringFieldUpdateOperationsInput | string
     projectId?: StringFieldUpdateOperationsInput | string
     quarterId?: StringFieldUpdateOperationsInput | string
+    activityType?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    target?: IntFieldUpdateOperationsInput | number
+    achieved?: IntFieldUpdateOperationsInput | number
+    district?: StringFieldUpdateOperationsInput | string
+    village?: StringFieldUpdateOperationsInput | string
+    block?: StringFieldUpdateOperationsInput | string
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    units?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    imageKey?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    predefinedItems?: PredefinedInputDistributionUncheckedUpdateManyWithoutInputDistributionNestedInput
-    customItems?: CustomInputDistributionUncheckedUpdateManyWithoutInputDistributionNestedInput
   }
 
   export type InputDistributionUncheckedUpdateManyWithoutUserInput = {
@@ -29914,6 +26578,17 @@ export namespace Prisma {
     inputDistId?: StringFieldUpdateOperationsInput | string
     projectId?: StringFieldUpdateOperationsInput | string
     quarterId?: StringFieldUpdateOperationsInput | string
+    activityType?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    target?: IntFieldUpdateOperationsInput | number
+    achieved?: IntFieldUpdateOperationsInput | number
+    district?: StringFieldUpdateOperationsInput | string
+    village?: StringFieldUpdateOperationsInput | string
+    block?: StringFieldUpdateOperationsInput | string
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    units?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    imageKey?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -30142,6 +26817,17 @@ export namespace Prisma {
     id?: string
     inputDistId: string
     quarterId: string
+    activityType: string
+    name: string
+    target: number
+    achieved: number
+    district: string
+    village: string
+    block: string
+    remarks?: string | null
+    units?: string | null
+    imageUrl?: string | null
+    imageKey?: string | null
     userId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -30378,11 +27064,20 @@ export namespace Prisma {
   export type InputDistributionUpdateWithoutProjectInput = {
     id?: StringFieldUpdateOperationsInput | string
     inputDistId?: StringFieldUpdateOperationsInput | string
+    activityType?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    target?: IntFieldUpdateOperationsInput | number
+    achieved?: IntFieldUpdateOperationsInput | number
+    district?: StringFieldUpdateOperationsInput | string
+    village?: StringFieldUpdateOperationsInput | string
+    block?: StringFieldUpdateOperationsInput | string
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    units?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    imageKey?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     quarter?: QuarterUpdateOneRequiredWithoutInputDistributionsNestedInput
-    predefinedItems?: PredefinedInputDistributionUpdateManyWithoutInputDistributionNestedInput
-    customItems?: CustomInputDistributionUpdateManyWithoutInputDistributionNestedInput
     User?: UserUpdateOneWithoutInputDistributionsNestedInput
   }
 
@@ -30390,17 +27085,37 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     inputDistId?: StringFieldUpdateOperationsInput | string
     quarterId?: StringFieldUpdateOperationsInput | string
+    activityType?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    target?: IntFieldUpdateOperationsInput | number
+    achieved?: IntFieldUpdateOperationsInput | number
+    district?: StringFieldUpdateOperationsInput | string
+    village?: StringFieldUpdateOperationsInput | string
+    block?: StringFieldUpdateOperationsInput | string
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    units?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    imageKey?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    predefinedItems?: PredefinedInputDistributionUncheckedUpdateManyWithoutInputDistributionNestedInput
-    customItems?: CustomInputDistributionUncheckedUpdateManyWithoutInputDistributionNestedInput
   }
 
   export type InputDistributionUncheckedUpdateManyWithoutProjectInput = {
     id?: StringFieldUpdateOperationsInput | string
     inputDistId?: StringFieldUpdateOperationsInput | string
     quarterId?: StringFieldUpdateOperationsInput | string
+    activityType?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    target?: IntFieldUpdateOperationsInput | number
+    achieved?: IntFieldUpdateOperationsInput | number
+    district?: StringFieldUpdateOperationsInput | string
+    village?: StringFieldUpdateOperationsInput | string
+    block?: StringFieldUpdateOperationsInput | string
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    units?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    imageKey?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -30469,6 +27184,17 @@ export namespace Prisma {
     id?: string
     inputDistId: string
     projectId: string
+    activityType: string
+    name: string
+    target: number
+    achieved: number
+    district: string
+    village: string
+    block: string
+    remarks?: string | null
+    units?: string | null
+    imageUrl?: string | null
+    imageKey?: string | null
     userId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -30671,11 +27397,20 @@ export namespace Prisma {
   export type InputDistributionUpdateWithoutQuarterInput = {
     id?: StringFieldUpdateOperationsInput | string
     inputDistId?: StringFieldUpdateOperationsInput | string
+    activityType?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    target?: IntFieldUpdateOperationsInput | number
+    achieved?: IntFieldUpdateOperationsInput | number
+    district?: StringFieldUpdateOperationsInput | string
+    village?: StringFieldUpdateOperationsInput | string
+    block?: StringFieldUpdateOperationsInput | string
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    units?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    imageKey?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     project?: ProjectUpdateOneRequiredWithoutInputDistributionsNestedInput
-    predefinedItems?: PredefinedInputDistributionUpdateManyWithoutInputDistributionNestedInput
-    customItems?: CustomInputDistributionUpdateManyWithoutInputDistributionNestedInput
     User?: UserUpdateOneWithoutInputDistributionsNestedInput
   }
 
@@ -30683,17 +27418,37 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     inputDistId?: StringFieldUpdateOperationsInput | string
     projectId?: StringFieldUpdateOperationsInput | string
+    activityType?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    target?: IntFieldUpdateOperationsInput | number
+    achieved?: IntFieldUpdateOperationsInput | number
+    district?: StringFieldUpdateOperationsInput | string
+    village?: StringFieldUpdateOperationsInput | string
+    block?: StringFieldUpdateOperationsInput | string
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    units?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    imageKey?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    predefinedItems?: PredefinedInputDistributionUncheckedUpdateManyWithoutInputDistributionNestedInput
-    customItems?: CustomInputDistributionUncheckedUpdateManyWithoutInputDistributionNestedInput
   }
 
   export type InputDistributionUncheckedUpdateManyWithoutQuarterInput = {
     id?: StringFieldUpdateOperationsInput | string
     inputDistId?: StringFieldUpdateOperationsInput | string
     projectId?: StringFieldUpdateOperationsInput | string
+    activityType?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    target?: IntFieldUpdateOperationsInput | number
+    achieved?: IntFieldUpdateOperationsInput | number
+    district?: StringFieldUpdateOperationsInput | string
+    village?: StringFieldUpdateOperationsInput | string
+    block?: StringFieldUpdateOperationsInput | string
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    units?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    imageKey?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -30748,142 +27503,6 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type PredefinedInputDistributionCreateManyInputDistributionInput = {
-    id?: string
-    activityType: string
-    name: string
-    target: number
-    achieved: number
-    district: string
-    village: string
-    block: string
-    remarks?: string | null
-    units?: string | null
-    imageUrl?: string | null
-    imageKey?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type CustomInputDistributionCreateManyInputDistributionInput = {
-    id?: string
-    activityType: string
-    name: string
-    target: number
-    achieved: number
-    district: string
-    village: string
-    block: string
-    remarks?: string | null
-    units?: string | null
-    imageUrl?: string | null
-    imageKey?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type PredefinedInputDistributionUpdateWithoutInputDistributionInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    activityType?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    target?: IntFieldUpdateOperationsInput | number
-    achieved?: IntFieldUpdateOperationsInput | number
-    district?: StringFieldUpdateOperationsInput | string
-    village?: StringFieldUpdateOperationsInput | string
-    block?: StringFieldUpdateOperationsInput | string
-    remarks?: NullableStringFieldUpdateOperationsInput | string | null
-    units?: NullableStringFieldUpdateOperationsInput | string | null
-    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    imageKey?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type PredefinedInputDistributionUncheckedUpdateWithoutInputDistributionInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    activityType?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    target?: IntFieldUpdateOperationsInput | number
-    achieved?: IntFieldUpdateOperationsInput | number
-    district?: StringFieldUpdateOperationsInput | string
-    village?: StringFieldUpdateOperationsInput | string
-    block?: StringFieldUpdateOperationsInput | string
-    remarks?: NullableStringFieldUpdateOperationsInput | string | null
-    units?: NullableStringFieldUpdateOperationsInput | string | null
-    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    imageKey?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type PredefinedInputDistributionUncheckedUpdateManyWithoutInputDistributionInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    activityType?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    target?: IntFieldUpdateOperationsInput | number
-    achieved?: IntFieldUpdateOperationsInput | number
-    district?: StringFieldUpdateOperationsInput | string
-    village?: StringFieldUpdateOperationsInput | string
-    block?: StringFieldUpdateOperationsInput | string
-    remarks?: NullableStringFieldUpdateOperationsInput | string | null
-    units?: NullableStringFieldUpdateOperationsInput | string | null
-    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    imageKey?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type CustomInputDistributionUpdateWithoutInputDistributionInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    activityType?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    target?: IntFieldUpdateOperationsInput | number
-    achieved?: IntFieldUpdateOperationsInput | number
-    district?: StringFieldUpdateOperationsInput | string
-    village?: StringFieldUpdateOperationsInput | string
-    block?: StringFieldUpdateOperationsInput | string
-    remarks?: NullableStringFieldUpdateOperationsInput | string | null
-    units?: NullableStringFieldUpdateOperationsInput | string | null
-    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    imageKey?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type CustomInputDistributionUncheckedUpdateWithoutInputDistributionInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    activityType?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    target?: IntFieldUpdateOperationsInput | number
-    achieved?: IntFieldUpdateOperationsInput | number
-    district?: StringFieldUpdateOperationsInput | string
-    village?: StringFieldUpdateOperationsInput | string
-    block?: StringFieldUpdateOperationsInput | string
-    remarks?: NullableStringFieldUpdateOperationsInput | string | null
-    units?: NullableStringFieldUpdateOperationsInput | string | null
-    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    imageKey?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type CustomInputDistributionUncheckedUpdateManyWithoutInputDistributionInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    activityType?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    target?: IntFieldUpdateOperationsInput | number
-    achieved?: IntFieldUpdateOperationsInput | number
-    district?: StringFieldUpdateOperationsInput | string
-    village?: StringFieldUpdateOperationsInput | string
-    block?: StringFieldUpdateOperationsInput | string
-    remarks?: NullableStringFieldUpdateOperationsInput | string | null
-    units?: NullableStringFieldUpdateOperationsInput | string | null
-    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    imageKey?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 

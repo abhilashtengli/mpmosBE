@@ -524,3 +524,5 @@ fldRouter.get(
     }
   }
 );
+
+export default fldRouter;

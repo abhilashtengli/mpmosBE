@@ -162,43 +162,18 @@ exports.Prisma.InputDistributionScalarFieldEnum = {
   inputDistId: 'inputDistId',
   projectId: 'projectId',
   quarterId: 'quarterId',
+  activityType: 'activityType',
+  name: 'name',
+  target: 'target',
+  achieved: 'achieved',
+  district: 'district',
+  village: 'village',
+  block: 'block',
+  remarks: 'remarks',
+  units: 'units',
+  imageUrl: 'imageUrl',
+  imageKey: 'imageKey',
   userId: 'userId',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
-exports.Prisma.PredefinedInputDistributionScalarFieldEnum = {
-  id: 'id',
-  inputDistributionId: 'inputDistributionId',
-  activityType: 'activityType',
-  name: 'name',
-  target: 'target',
-  achieved: 'achieved',
-  district: 'district',
-  village: 'village',
-  block: 'block',
-  remarks: 'remarks',
-  units: 'units',
-  imageUrl: 'imageUrl',
-  imageKey: 'imageKey',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
-exports.Prisma.CustomInputDistributionScalarFieldEnum = {
-  id: 'id',
-  inputDistributionId: 'inputDistributionId',
-  activityType: 'activityType',
-  name: 'name',
-  target: 'target',
-  achieved: 'achieved',
-  district: 'district',
-  village: 'village',
-  block: 'block',
-  remarks: 'remarks',
-  units: 'units',
-  imageUrl: 'imageUrl',
-  imageKey: 'imageKey',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -364,8 +339,6 @@ exports.Prisma.ModelName = {
   Project: 'Project',
   Quarter: 'Quarter',
   InputDistribution: 'InputDistribution',
-  PredefinedInputDistribution: 'PredefinedInputDistribution',
-  CustomInputDistribution: 'CustomInputDistribution',
   Training: 'Training',
   FLD: 'FLD',
   AwarenessProgram: 'AwarenessProgram',

@@ -104,75 +104,35 @@ model Quarter {
 }
 
 model InputDistribution {
-  id              String                        @id @default(uuid())
-  inputDistId     String
-  project         Project                       @relation(fields: [projectId], references: [id], onDelete: Cascade)
-  projectId       String                        @map("project_id")
-  quarter         Quarter                       @relation(fields: [quarterId], references: [id], onDelete: Cascade)
-  quarterId       String                        @map("quarter_id")
-  predefinedItems PredefinedInputDistribution[]
-  customItems     CustomInputDistribution[]
-  User            User?                         @relation(fields: [userId], references: [id])
-  userId          String?                       @map("user_id")
-  createdAt       DateTime                      @default(now())
-  updatedAt       DateTime                      @updatedAt
+  id           String   @id @default(uuid())
+  inputDistId  String
+  project      Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  projectId    String   @map("project_id")
+  quarter      Quarter  @relation(fields: [quarterId], references: [id], onDelete: Cascade)
+  quarterId    String   @map("quarter_id")
+  activityType String   @db.VarChar(100) // Seed Distribution/Planting materials/Fertilizers/etc.
+  name         String   @db.VarChar(200)
+  target       Int
+  achieved     Int
+  district     String   @db.VarChar(100)
+  village      String   @db.VarChar(100)
+  block        String   @db.VarChar(100)
+  remarks      String?  @db.VarChar(300)
+  units        String?  @db.VarChar(20)
+  imageUrl     String?
+  imageKey     String?
+  User         User?    @relation(fields: [userId], references: [id])
+  userId       String?  @map("user_id")
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 
-  // Indexes for foreign keys and timestamps - improve join performance
   @@index([projectId])
   @@index([quarterId])
   @@index([userId])
+  @@index([activityType])
+  @@index([district, village, block])
   @@index([createdAt])
   @@map("input_distributions")
-}
-
-model PredefinedInputDistribution {
-  id                  String            @id @default(uuid())
-  inputDistribution   InputDistribution @relation(fields: [inputDistributionId], references: [id], onDelete: Cascade)
-  inputDistributionId String            @map("input_distribution_id")
-  activityType        String // Seed Distribution/Planting materials/Fertilizers/etc.
-  name                String            @db.VarChar(200)
-  target              Int
-  achieved            Int
-  district            String            @db.VarChar(100)
-  village             String            @db.VarChar(100)
-  block               String            @db.VarChar(100)
-  remarks             String?           @db.VarChar(300)
-  units               String?           @db.VarChar(20)
-  imageUrl            String?
-  imageKey            String?
-  createdAt           DateTime          @default(now())
-  updatedAt           DateTime          @updatedAt
-
-  // Indexes for foreign keys and filtering fields
-  @@index([inputDistributionId])
-  @@index([activityType])
-  @@index([district, village, block]) // Compound index for location filtering
-  @@map("predefined_input_distributions")
-}
-
-model CustomInputDistribution {
-  id                  String            @id @default(uuid())
-  inputDistribution   InputDistribution @relation(fields: [inputDistributionId], references: [id], onDelete: Cascade)
-  inputDistributionId String            @map("input_distribution_id")
-  activityType        String            @db.VarChar(100) // Manually added
-  name                String            @db.VarChar(200)
-  target              Int
-  achieved            Int
-  district            String            @db.VarChar(100)
-  village             String            @db.VarChar(100)
-  block               String            @db.VarChar(100)
-  remarks             String?           @db.VarChar(300)
-  units               String?           @db.VarChar(20)
-  imageUrl            String?
-  imageKey            String?
-  createdAt           DateTime          @default(now())
-  updatedAt           DateTime          @updatedAt
-
-  // Indexes for foreign keys and filtering fields
-  @@index([inputDistributionId])
-  @@index([activityType])
-  @@index([district, village, block]) // Compound index for location filtering
-  @@map("custom_input_distributions")
 }
 
 model Training {

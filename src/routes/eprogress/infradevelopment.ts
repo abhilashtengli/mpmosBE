@@ -538,3 +538,5 @@ infrastructureRouter.delete(
     }
   }
 );
+
+export default infrastructureRouter;
