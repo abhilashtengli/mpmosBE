@@ -221,7 +221,8 @@ projectRouter.get(
           startDate: true,
           endDate: true,
           createdAt: true,
-          updatedAt: true
+          updatedAt: true,
+          User : true
         }
       });
 
