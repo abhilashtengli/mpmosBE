@@ -1348,3 +1348,70 @@ export const updatePublicationValidation = z
     }
   );
 
+// Create Gallery Validation
+export const createGalleryValidation = z
+  .object({
+    title: z
+      .string()
+      .trim()
+      .min(5, { message: "Title must be at least 5 characters" })
+      .max(100, { message: "Title cannot exceed 100 characters" }),
+    imageUrl: z
+      .string()
+      .trim()
+      .url({ message: "Invalid image URL format" }),
+    imageKey: z
+      .string()
+      .trim()
+      .min(1, { message: "Image key is required" })
+  })
+  .refine(
+    (data) => {
+      // Ensure imageKey is present if imageUrl is provided
+      if (data.imageUrl && !data.imageKey) {
+        return false;
+      }
+      return true;
+    },
+    {
+      message: "Image key is required when image URL is provided",
+      path: ["imageKey"]
+    }
+  );
+
+// Update Gallery Validation
+export const updateGalleryValidation = z
+  .object({
+    title: z
+      .string()
+      .trim()
+      .min(5, { message: "Title must be at least 5 characters" })
+      .max(100, { message: "Title cannot exceed 100 characters" })
+      .optional(),
+    imageUrl: z
+      .string()
+      .trim()
+      .url({ message: "Invalid image URL format" })
+      .optional(),
+    imageKey: z
+      .string()
+      .trim()
+      .optional()
+  })
+  .refine(
+    (data) => {
+      // Skip if imageUrl is not being updated
+      if (data.imageUrl === undefined) {
+        return true;
+      }
+      // If setting a new imageUrl, ensure imageKey is also set
+      if (data.imageUrl && !data.imageKey) {
+        return false;
+      }
+      return true;
+    },
+    {
+      message: "Image key is required when image URL is provided",
+      path: ["imageKey"]
+    }
+  );
