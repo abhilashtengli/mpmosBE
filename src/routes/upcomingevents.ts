@@ -221,3 +221,172 @@ upcomingEventsRouter.put(
   }
 );
 
+//get events for the user
+upcomingEventsRouter.get(
+  "/get-user-events",
+  userAuth,
+  async (req: Request, res: Response) => {
+    try {
+      const user = (req as RequestWithUser).user;
+
+      if (!user) {
+        res.status(401).json({
+          success: false,
+          message: "Please Sign in to view your Events",
+          code: "UNAUTHORIZED"
+        });
+      }
+
+      const events = await prisma.upcomingEvent.findMany({
+        where: {
+          userId: user?.id
+        },
+        orderBy: {
+          createdAt: "desc"
+        },
+        select: {
+          id: true,
+          title: true,
+          location: true,
+          description: true,
+          date: true,
+          createdAt: true
+        }
+      });
+      if (events.length === 0) {
+        res.status(200).json({
+          success: true,
+          message: "No Events data found",
+          data: [],
+          code: "RESOURCE_NOT_FOUND"
+        });
+        return;
+      }
+      res.status(200).json({
+        success: true,
+        data: events,
+        code: "GET_EVENTS_SUCCESSFULL"
+      });
+    } catch (err) {
+      console.error("Error getting the Events info", err);
+      res.status(500).json({
+        success: false,
+        message:
+          "Something went wrong, Could not Events info, please try again later",
+        code: "INTERNAL_SERVER_ERROR"
+      });
+      return;
+    }
+  }
+);
+
+//get all events
+upcomingEventsRouter.get(
+  "/get-all-events",
+  async (req: Request, res: Response) => {
+    try {
+      const events = await prisma.upcomingEvent.findMany({
+        orderBy: {
+          createdAt: "desc"
+        },
+        select: {
+          id: true,
+          title: true,
+          location: true,
+          description: true,
+          date: true,
+          createdAt: true,
+          User: true
+        }
+      });
+      if (events.length === 0) {
+        res.status(200).json({
+          success: true,
+          message: "No Events data found",
+          data: [],
+          code: "RESOURCE_NOT_FOUND"
+        });
+        return;
+      }
+      res.status(200).json({
+        success: true,
+        data: events,
+        code: "GET_EVENTS_SUCCESSFULL"
+      });
+    } catch (err) {
+      console.error("Error getting the Events info", err);
+      res.status(500).json({
+        success: false,
+        message:
+          "Something went wrong, Could not Events info, please try again later",
+        code: "INTERNAL_SERVER_ERROR"
+      });
+      return;
+    }
+  }
+);
+
+//delete events
+upcomingEventsRouter.delete(
+  "/delete-event/:id",
+  userAuth,
+  async (req: Request, res: Response) => {
+    try {
+      const { id } = req.params;
+      // Validate project ID
+      if (!id || typeof id !== "string") {
+        res.status(400).json({
+          success: false,
+          message: "Valid Event ID is required",
+          code: "INVALID_INPUT"
+        });
+        return;
+      }
+
+      const user = (req as RequestWithUser).user;
+      if (!user) {
+        res.status(401).json({
+          success: false,
+          message: "Please sign in to delete the Event",
+          code: "UNAUTHORIZED"
+        });
+        return;
+      }
+      const isEventExists = await prisma.upcomingEvent.findUnique({
+        where: { id }
+      });
+      if (!isEventExists) {
+        res.status(404).json({
+          success: false,
+          message: "Event not found",
+          code: "RESOURCE_NOT_FOUND"
+        });
+        return;
+      }
+      if (isEventExists.userId !== user.id) {
+        res.status(403).json({
+          success: false,
+          message: "You don't have permission to delete this Event",
+          code: "FORBIDDEN"
+        });
+        return;
+      }
+      await prisma.upcomingEvent.delete({
+        where: { id }
+      });
+      res.status(200).json({
+        success: true,
+        message: "Event deleted successfully",
+        code: "RESOURCE_DELETED"
+      });
+      return;
+    } catch (err) {
+      console.error(`Error deleting Event :`, err);
+      res.status(500).json({
+        success: false,
+        message: "Something went wrong, Please try again later",
+        code: "INTERNAL_SERVER_ERROR"
+      });
+    }
+  }
+);
