@@ -908,7 +908,6 @@ export const updateInfrastructureValidation = z
     }
   );
 
-
 // Zod validation schemas
 export const createInputDistributionValidation = z
   .object({
@@ -1128,3 +1127,66 @@ export const updateInputDistributionValidation = z
       path: ["imageKey"]
     }
   );
+
+export const upcomingEventValidation = z.object({
+  title: z
+    .string()
+    .trim()
+    .min(5, { message: "Title must be at least 5 characters" })
+    .max(100, { message: "Title cannot exceed 100 characters" }),
+  date: z // Fixed: was "data"
+    .string()
+    .refine((date) => !isNaN(Date.parse(date)), "Invalid date format")
+    .refine((date) => new Date(date) > new Date(), "Date must be in the future") // Added future date validation
+    .transform((date) => new Date(date)),
+  location: z
+    .string()
+    .trim()
+    .min(2, { message: "Location must be at least 2 characters" })
+    .max(100, { message: "Location cannot exceed 100 characters" }),
+  description: z
+    .string()
+    .trim()
+    .min(10, { message: "Description must be at least 10 characters" })
+    .max(300, { message: "Description cannot exceed 300 characters" })
+    .optional() // Made optional to match Prisma model
+});
+
+export const upcomingEventUpdateValidation = z.object({
+  title: z
+    .string()
+    .transform((val) => (val?.trim() === "" ? undefined : val.trim()))
+    .refine((val) => val === undefined || val.length >= 5, {
+      message: "Title must be at least 5 characters"
+    })
+    .refine((val) => val === undefined || val.length <= 100, {
+      message: "Title cannot exceed 100 characters" // Fixed: was "Bio can be max of 100 characters"
+    })
+    .optional(),
+  date: z // Fixed: was "data"
+    .string()
+    .refine((date) => !isNaN(Date.parse(date)), "Invalid date format")
+    .refine((date) => new Date(date) > new Date(), "Date must be in the future") // Added future date validation
+    .transform((date) => new Date(date))
+    .optional(),
+  location: z
+    .string()
+    .transform((val) => (val?.trim() === "" ? undefined : val.trim()))
+    .refine((val) => val === undefined || val.length >= 2, {
+      message: "Location must be at least 2 characters"
+    })
+    .refine((val) => val === undefined || val.length <= 100, {
+      message: "Location cannot exceed 100 characters" // Fixed: was "Location can be max of 100 characters"
+    })
+    .optional(),
+  description: z
+    .string()
+    .transform((val) => (val?.trim() === "" ? undefined : val.trim()))
+    .refine((val) => val === undefined || val.length >= 10, {
+      message: "Description must be at least 10 characters" // Fixed: was "Title must be at least 10 characters"
+    })
+    .refine((val) => val === undefined || val.length <= 300, {
+      message: "Description cannot exceed 300 characters" // Fixed: was "Bio can be max of 300 characters"
+    })
+    .optional()
+});

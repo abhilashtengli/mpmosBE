@@ -317,17 +317,14 @@ infrastructureRouter.put(
         data: updateData
       });
 
-      console.info(
-        `Infrastructure Development updated: ${updatedInfra.id} by user ${user.id}`
-      );
+      // console.info(
+      //   `Infrastructure Development updated: ${updatedInfra.id} by user ${user.id}`
+      // );
 
       res.status(200).json({
         message: "Infrastructure Development updated successfully",
         success: true,
-        data: {
-          id: updatedInfra.id,
-          InfraDevId: updatedInfra.InfraDevId
-        },
+        data: updatedInfra,
         code: "RESOURCE_UPDATED"
       });
       return;
