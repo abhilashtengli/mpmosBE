@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import jwt, { JwtPayload } from "jsonwebtoken";
 import dotenv from "dotenv";
 import { prisma } from "@lib/prisma";
+import { CustomJwtPayload } from "../types/jwt";
 
 dotenv.config();
 
@@ -21,17 +22,20 @@ export const userAuth = async (req: Request, res: Response, next: any) => {
 
     if (!token) {
       res.status(401).json({
-        message: "Invalid token or missiong authentication"
+        message: "Missing authentication token",
+        code: "UNAUTHORIZED"
       });
       return;
     }
     const secret = process.env.JWT_SECRET;
     if (!secret) {
-      res.send(500).json({ message: "Internal server error" });
+      res
+        .status(500)
+        .json({ message: "Internal server error", code: "SERVER_ERROR" });
       return;
     }
 
-    const decodeObject = (await jwt.verify(token, secret)) as JwtPayload;
+    const decodeObject = (await jwt.verify(token, secret)) as CustomJwtPayload;
     const { id } = decodeObject;
 
     const user = await prisma.user.findUnique({
@@ -58,7 +62,9 @@ export const userAuth = async (req: Request, res: Response, next: any) => {
     }
     (req as RequestWithUser).user = user || null;
     next();
-  } catch (err) {
-    res.status(400).json({ message: "Invalid token or request", error: err });
+  } catch {
+    res
+      .status(400)
+      .json({ message: "Invalid token or request", code: "BAD_TOKEN" });
   }
 };
