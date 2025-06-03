@@ -1356,14 +1356,8 @@ export const createGalleryValidation = z
       .trim()
       .min(5, { message: "Title must be at least 5 characters" })
       .max(100, { message: "Title cannot exceed 100 characters" }),
-    imageUrl: z
-      .string()
-      .trim()
-      .url({ message: "Invalid image URL format" }),
-    imageKey: z
-      .string()
-      .trim()
-      .min(1, { message: "Image key is required" })
+    imageUrl: z.string().trim().url({ message: "Invalid image URL format" }),
+    imageKey: z.string().trim().min(1, { message: "Image key is required" })
   })
   .refine(
     (data) => {
@@ -1393,10 +1387,7 @@ export const updateGalleryValidation = z
       .trim()
       .url({ message: "Invalid image URL format" })
       .optional(),
-    imageKey: z
-      .string()
-      .trim()
-      .optional()
+    imageKey: z.string().trim().optional()
   })
   .refine(
     (data) => {
@@ -1415,3 +1406,124 @@ export const updateGalleryValidation = z
       path: ["imageKey"]
     }
   );
+
+// Create Project Details Validation
+export const createProjectDetailsValidation = z.object({
+  title: z
+    .string()
+    .trim()
+    .min(5, { message: "Title must be at least 5 characters" })
+    .max(100, { message: "Title cannot exceed 100 characters" }),
+  region: z
+    .string()
+    .trim()
+    .refine((val) => val === "NEH" || val === "AICRP", {
+      message: "Region must be either 'NEH' or 'AICRP'"
+    }),
+  year: z
+    .number()
+    .int({ message: "Year must be a valid integer" })
+    .min(1950, { message: "Year must be at least 1950" })
+    .max(2100, { message: "Year cannot exceed 2100" }),
+  budget: z
+    .number()
+    .positive({ message: "Budget must be a positive number" })
+    .optional()
+    .nullable(),
+  center: z
+    .string()
+    .trim()
+    .min(2, { message: "Center must be at least 2 characters" })
+    .max(100, { message: "Center cannot exceed 100 characters" })
+    .optional()
+    .nullable(),
+  location: z
+    .string()
+    .trim()
+    .min(2, { message: "Location must be at least 2 characters" })
+    .max(100, { message: "Location cannot exceed 100 characters" })
+    .optional()
+    .nullable(),
+  objectives: z
+    .array(z.string().trim().min(1, { message: "Objective cannot be empty" }))
+    .min(1, { message: "At least one objective is required" })
+    .max(20, { message: "Cannot have more than 20 objectives" }),
+  director: z
+    .string()
+    .trim()
+    .min(2, { message: "Director name must be at least 2 characters" })
+    .max(100, { message: "Director name cannot exceed 100 characters" }),
+  coDirectors: z
+    .array(
+      z.string().trim().min(1, { message: "Co-director name cannot be empty" })
+    )
+    .max(10, { message: "Cannot have more than 10 co-directors" })
+    .default([]),
+  achievements: z
+    .array(z.string().trim().min(1, { message: "Achievement cannot be empty" }))
+    .max(50, { message: "Cannot have more than 50 achievements" })
+    .default([])
+});
+
+// Update Project Details Validation
+export const updateProjectDetailsValidation = z.object({
+  title: z
+    .string()
+    .trim()
+    .min(5, { message: "Title must be at least 5 characters" })
+    .max(100, { message: "Title cannot exceed 100 characters" })
+    .optional(),
+  region: z
+    .string()
+    .trim()
+    .refine((val) => val === "NEH" || val === "AICRP", {
+      message: "Region must be either 'NEH' or 'AICRP'"
+    })
+    .optional(),
+  year: z
+    .number()
+    .int({ message: "Year must be a valid integer" })
+    .min(1950, { message: "Year must be at least 1950" })
+    .max(2100, { message: "Year cannot exceed 2100" })
+    .optional(),
+  budget: z
+    .number()
+    .positive({ message: "Budget must be a positive number" })
+    .optional()
+    .nullable(),
+  center: z
+    .string()
+    .trim()
+    .min(2, { message: "Center must be at least 2 characters" })
+    .max(100, { message: "Center cannot exceed 100 characters" })
+    .optional()
+    .nullable(),
+  location: z
+    .string()
+    .trim()
+    .min(2, { message: "Location must be at least 2 characters" })
+    .max(100, { message: "Location cannot exceed 100 characters" })
+    .optional()
+    .nullable(),
+  objectives: z
+    .array(z.string().trim().min(1, { message: "Objective cannot be empty" }))
+    .min(1, { message: "At least one objective is required" })
+    .max(20, { message: "Cannot have more than 20 objectives" })
+    .optional(),
+  director: z
+    .string()
+    .trim()
+    .min(2, { message: "Director name must be at least 2 characters" })
+    .max(100, { message: "Director name cannot exceed 100 characters" })
+    .optional(),
+  coDirectors: z
+    .array(
+      z.string().trim().min(1, { message: "Co-director name cannot be empty" })
+    )
+    .max(10, { message: "Cannot have more than 10 co-directors" })
+    .optional(),
+  achievements: z
+    .array(z.string().trim().min(1, { message: "Achievement cannot be empty" }))
+    .max(50, { message: "Cannot have more than 50 achievements" })
+    .optional()
+});
