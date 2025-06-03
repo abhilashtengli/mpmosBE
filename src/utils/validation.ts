@@ -1128,6 +1128,7 @@ export const updateInputDistributionValidation = z
     }
   );
 
+//Events
 export const upcomingEventValidation = z.object({
   title: z
     .string()
@@ -1190,3 +1191,160 @@ export const upcomingEventUpdateValidation = z.object({
     })
     .optional()
 });
+
+// Publications
+// Create Publication Validation
+export const createPublicationValidation = z
+  .object({
+    title: z
+      .string()
+      .trim()
+      .min(5, { message: "Title must be at least 5 characters" })
+      .max(100, { message: "Title cannot exceed 100 characters" }),
+    type: z
+      .string()
+      .trim()
+      .min(2, { message: "Type must be at least 2 characters" })
+      .max(100, { message: "Type cannot exceed 100 characters" }),
+    category: z
+      .string()
+      .trim()
+      .min(2, { message: "Category must be at least 2 characters" })
+      .max(100, { message: "Category cannot exceed 100 characters" })
+      .optional()
+      .nullable(),
+    thumbnailUrl: z
+      .string()
+      .trim()
+      .url({ message: "Invalid thumbnail URL format" })
+      .optional()
+      .nullable(),
+    thumbnailKey: z.string().trim().optional().nullable(),
+    pdfUrl: z
+      .string()
+      .trim()
+      .url({ message: "Invalid PDF URL format" })
+      .optional()
+      .nullable(),
+    pdfKey: z.string().trim().optional().nullable()
+  })
+  .refine(
+    (data) => {
+      // Ensure thumbnailKey is present if thumbnailUrl is provided
+      if (data.thumbnailUrl && !data.thumbnailKey) {
+        return false;
+      }
+      return true;
+    },
+    {
+      message: "Thumbnail key is required when thumbnail URL is provided",
+      path: ["thumbnailKey"]
+    }
+  )
+  .refine(
+    (data) => {
+      // Ensure pdfKey is present if pdfUrl is provided
+      if (data.pdfUrl && !data.pdfKey) {
+        return false;
+      }
+      return true;
+    },
+    {
+      message: "PDF key is required when PDF URL is provided",
+      path: ["pdfKey"]
+    }
+  )
+  .refine(
+    (data) => {
+      // Ensure at least one content type is provided (thumbnail or PDF)
+      if (!data.thumbnailUrl && !data.pdfUrl) {
+        return false;
+      }
+      return true;
+    },
+    {
+      message: "At least one content type (thumbnail or PDF) must be provided",
+      path: ["pdfUrl"]
+    }
+  );
+
+// Update Publication Validation
+export const updatePublicationValidation = z
+  .object({
+    title: z
+      .string()
+      .trim()
+      .min(5, { message: "Title must be at least 5 characters" })
+      .max(100, { message: "Title cannot exceed 100 characters" })
+      .optional(),
+    type: z
+      .string()
+      .trim()
+      .min(2, { message: "Type must be at least 2 characters" })
+      .max(100, { message: "Type cannot exceed 100 characters" })
+      .optional(),
+    category: z
+      .string()
+      .trim()
+      .min(2, { message: "Category must be at least 2 characters" })
+      .max(100, { message: "Category cannot exceed 100 characters" })
+      .optional()
+      .nullable(),
+    thumbnailUrl: z
+      .string()
+      .trim()
+      .url({ message: "Invalid thumbnail URL format" })
+      .optional()
+      .nullable(),
+    thumbnailKey: z.string().trim().optional().nullable(),
+    pdfUrl: z
+      .string()
+      .trim()
+      .url({ message: "Invalid PDF URL format" })
+      .optional()
+      .nullable(),
+    pdfKey: z.string().trim().optional().nullable()
+  })
+  .refine(
+    (data) => {
+      // Skip if thumbnailUrl is not being updated
+      if (data.thumbnailUrl === undefined) {
+        return true;
+      }
+      // If thumbnailUrl is null, we don't need to check for thumbnailKey
+      if (data.thumbnailUrl === null) {
+        return true;
+      }
+      // If setting a new thumbnailUrl, ensure thumbnailKey is also set
+      if (data.thumbnailUrl && !data.thumbnailKey) {
+        return false;
+      }
+      return true;
+    },
+    {
+      message: "Thumbnail key is required when thumbnail URL is provided",
+      path: ["thumbnailKey"]
+    }
+  )
+  .refine(
+    (data) => {
+      // Skip if pdfUrl is not being updated
+      if (data.pdfUrl === undefined) {
+        return true;
+      }
+      // If pdfUrl is null, we don't need to check for pdfKey
+      if (data.pdfUrl === null) {
+        return true;
+      }
+      // If setting a new pdfUrl, ensure pdfKey is also set
+      if (data.pdfUrl && !data.pdfKey) {
+        return false;
+      }
+      return true;
+    },
+    {
+      message: "PDF key is required when PDF URL is provided",
+      path: ["pdfKey"]
+    }
+  );
+

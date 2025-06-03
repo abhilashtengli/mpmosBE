@@ -296,7 +296,12 @@ upcomingEventsRouter.get(
           description: true,
           date: true,
           createdAt: true,
-          User: true
+          User: {
+            select: {
+              id: true,
+              name: true
+            }
+          }
         }
       });
       if (events.length === 0) {
@@ -390,3 +395,5 @@ upcomingEventsRouter.delete(
     }
   }
 );
+
+export default upcomingEventsRouter;
