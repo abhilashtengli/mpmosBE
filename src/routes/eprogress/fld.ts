@@ -495,7 +495,12 @@ fldRouter.get(
           units: true,
           createdAt: true,
           updatedAt: true,
-          User: true
+          User: {
+            select: {
+              id: true,
+              name: true
+            }
+          }
         }
       });
 
