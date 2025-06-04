@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import jwt, { JwtPayload } from "jsonwebtoken";
 import dotenv from "dotenv";
 import { prisma } from "@lib/prisma";
@@ -16,7 +16,11 @@ interface RequestWithUser extends Request {
   } | null;
 }
 
-export const userAuth = async (req: Request, res: Response, next: any) => {
+export const userAuth = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
   try {
     const token = req.cookies.token || req.headers.authorization?.split(" ")[1];
 
@@ -36,7 +40,84 @@ export const userAuth = async (req: Request, res: Response, next: any) => {
     }
 
     const decodeObject = (await jwt.verify(token, secret)) as CustomJwtPayload;
-    const { id } = decodeObject;
+    const { id, sessionId } = decodeObject;
+
+    const session = await prisma.session.findUnique({
+      where: {
+        id: sessionId
+      },
+      include: {
+        user: {
+          select: {
+            id: true,
+            name: true,
+            email: true,
+            role: true,
+            isVerified: true
+          }
+        }
+      }
+    });
+
+    if (!session?.user) {
+      res.status(404).json({
+        success: false,
+        message: "User not found",
+        code: "USER_NOT_FOUND"
+      });
+      return;
+    }
+    if (!session || session.userId !== id) {
+      res.status(401).json({
+        success: false,
+        error: "Session not found or expired",
+        code: "SESSION_NOT_FOUND"
+      });
+      return;
+    }
+    if (new Date() > session.expiresAt) {
+      await prisma.session.delete({ where: { id: sessionId } }); // Cleanup expired session
+      res.status(401).json({
+        success: false,
+        error: "Session expired",
+        code: "SESSION_EXPIRED"
+      });
+      return;
+    }
+
+    // Enhanced security checks
+    const currentIP = req.ip || "unknown";
+    const currentUserAgent = req.headers["user-agent"] || "unknown";
+
+    // IP address check (with some flexibility for internal networks)
+    if (session.ipAddress && session.ipAddress !== currentIP) {
+      // For internal apps, you might want to be less strict
+      // Only log as warning instead of blocking
+      // console.warn(
+      //   `IP change detected for user ${session.userId}: ${session.ipAddress} → ${currentIP}`
+      // );
+
+      // Uncomment the lines below if you want strict IP enforcement
+      res.status(401).json({
+        success: false,
+        message: "IP address mismatch",
+        code: "IP_MISMATCH"
+      });
+      return;
+    }
+
+    // User-Agent check (optional for internal apps)
+    if (session.userAgent && session.userAgent !== currentUserAgent) {
+      // console.warn(`User-Agent change detected for user ${session.userId}`);
+
+      // Uncomment if you want strict User-Agent enforcement
+      res.status(401).json({
+        success: false,
+        message: "Device mismatch",
+        code: "DEVICE_MISMATCH"
+      });
+      return;
+    }
 
     const user = await prisma.user.findUnique({
       where: { id },

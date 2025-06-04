@@ -5,14 +5,18 @@ dotenv.config();
 class TokenService {
   private static readonly token_expiry = "12h";
 
-  static generateToken(payload: { id: string }) {
+  static generateToken(payload: { id: string; sessionId: string }) {
     const secret = process.env.JWT_SECRET;
 
     if (!secret) {
       throw new Error("JWT_SECRET is not configured in environment variables");
     }
     const token = jwt.sign(
-      { id: payload.id, iat: Math.floor(Date.now() / 1000) },
+      {
+        id: payload.id,
+        sessionId: payload.sessionId,
+        iat: Math.floor(Date.now() / 1000)
+      },
       secret,
       { expiresIn: this.token_expiry }
     );

@@ -14,6 +14,7 @@ import {
   verifyEmailLimiter
 } from "@services/ratelimiter";
 import { RequestVerification } from "@services/requestCode/requestCodeToVerify";
+import { createSessionId } from "@utils/session";
 
 const authRouter = express.Router();
 
@@ -97,7 +98,6 @@ authRouter.post(
 
 authRouter.post(
   "/signin",
-  authRouter,
   loginLimiter,
   async (req: Request, res: Response) => {
     try {
@@ -128,6 +128,7 @@ authRouter.post(
         });
         return;
       }
+
       if (!user.isVerified) {
         res.status(403).json({
           success: false,
@@ -136,10 +137,7 @@ authRouter.post(
         });
         return;
       }
-      const isValidPassword = await bcrypt.compare(
-        password,
-        user?.password || ""
-      );
+      const isValidPassword = await bcrypt.compare(password, user?.password);
       if (!isValidPassword) {
         res.status(401).json({
           success: false,
@@ -148,29 +146,61 @@ authRouter.post(
         });
         return;
       }
-      if (isValidPassword) {
-        const token = TokenService.generateToken({ id: user.id });
-        // console.log("Token : ", token);
-        res.cookie("token", token, {
-          maxAge: 12 * 60 * 60 * 1000,
-          httpOnly: true,
-          secure: true,
-          sameSite: "lax"
-        });
 
-        res.status(200).json({
-          success: true,
-          data: {
-            id: user.id,
-            name: user.name,
-            email: user.email
-          },
-          message: "Signin successful",
-          code: "SIGNIN_SUCCESSFULL"
-        });
+      const existingSessions = await prisma.session.findMany({
+        where: {
+          userId: user.id,
+          expiresAt: { gt: new Date() } // Only active sessions
+        }
+      });
 
-        return;
+      if (existingSessions.length > 0) {
+        console.log(
+          `User ${user.email} logging in from new device. Terminating ${existingSessions.length} existing session(s).`
+        );
+        // Delete all existing sessions
+        await prisma.session.deleteMany({
+          where: { userId: user.id }
+        });
       }
+
+      // await prisma.session.deleteMany({ where: { userId: user.id } });
+      const sessionId = createSessionId();
+      const expiresAt = new Date(Date.now() + 1000 * 60 * 60 * 12);
+
+      await prisma.session.create({
+        data: {
+          id: sessionId,
+          userId: user.id,
+          userAgent: req.headers["user-agent"] || "Unknown",
+          ipAddress: req.ip || "Unknown",
+          expiresAt
+        }
+      });
+      const token = TokenService.generateToken({
+        id: user.id,
+        sessionId: sessionId
+      });
+      // console.log("Token : ", token);
+      res.cookie("token", token, {
+        maxAge: 12 * 60 * 60 * 1000,
+        httpOnly: true,
+        secure: true,
+        sameSite: "strict"
+      });
+
+      res.status(200).json({
+        success: true,
+        data: {
+          id: user.id,
+          name: user.name,
+          email: user.email
+        },
+        message: "Signin successful",
+        code: "SIGNIN_SUCCESSFULL"
+      });
+
+      return;
     } catch (err) {
       res.status(500).json({
         success: false,

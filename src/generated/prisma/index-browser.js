@@ -136,6 +136,15 @@ exports.Prisma.UserScalarFieldEnum = {
   verificationAttempts: 'verificationAttempts'
 };
 
+exports.Prisma.SessionScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  userAgent: 'userAgent',
+  ipAddress: 'ipAddress',
+  createdAt: 'createdAt',
+  expiresAt: 'expiresAt'
+};
+
 exports.Prisma.ProjectScalarFieldEnum = {
   id: 'id',
   implementingAgency: 'implementingAgency',
@@ -336,6 +345,7 @@ exports.Status = exports.$Enums.Status = {
 
 exports.Prisma.ModelName = {
   User: 'User',
+  Session: 'Session',
   Project: 'Project',
   Quarter: 'Quarter',
   InputDistribution: 'InputDistribution',
