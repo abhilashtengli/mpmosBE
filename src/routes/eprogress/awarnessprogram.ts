@@ -18,22 +18,22 @@ interface RequestWithUser extends Request {
     isVerified: boolean;
   } | null;
 }
-
+//create
 awarenessProgramRouter.post(
   "/create-awareness-program",
-  // userAuth,
+  userAuth,
   async (req: Request, res: Response) => {
     try {
-      // const user = (req as RequestWithUser).user;
-
-      // if (!user) {
-      //   res.status(401).json({
-      //     success: false,
-      //     message: "Please Sign in to create a New Awareness Program",
-      //     code: "UNAUTHORIZED"
-      //   });
-      //   return;
-      // }
+      const user = (req as RequestWithUser).user;
+      console.log("User : ", user);
+      if (!user) {
+        res.status(401).json({
+          success: false,
+          message: "Please Sign in to create a New Awareness Program",
+          code: "UNAUTHORIZED"
+        });
+        return;
+      }
 
       const body = req.body;
       const result = await createAwarenessProgramValidation.safeParse(body);
@@ -125,8 +125,7 @@ awarenessProgramRouter.post(
           imageUrl,
           imageKey,
           units,
-          // userId: user.id
-          userId: "dummy01"
+          userId: user.id
         }
       });
 
@@ -149,9 +148,10 @@ awarenessProgramRouter.post(
   }
 );
 
+//update
 awarenessProgramRouter.put(
   "/update-awareness-program/:id",
-  // userAuth,
+  userAuth,
   async (req: Request, res: Response) => {
     try {
       const { id } = req.params;
@@ -353,7 +353,7 @@ awarenessProgramRouter.put(
 
 // Delete Awarness program
 awarenessProgramRouter.delete(
-  "delete-awarness-program/:id",
+  "/delete-awarness-program/:id",
   userAuth,
   async (req: Request, res: Response) => {
     try {
@@ -448,8 +448,20 @@ awarenessProgramRouter.get(
         select: {
           id: true,
           awarnessprogramId: true,
-          project: true,
-          quarter: true,
+          project: {
+            select: {
+              implementingAgency: true,
+              director: true,
+              locationState: true,
+              status: true
+            }
+          },
+          quarter: {
+            select: {
+              number: true,
+              year: true
+            }
+          },
           title: true,
           target: true,
           achieved: true,
