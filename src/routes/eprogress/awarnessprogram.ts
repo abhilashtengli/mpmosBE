@@ -21,19 +21,19 @@ interface RequestWithUser extends Request {
 
 awarenessProgramRouter.post(
   "/create-awareness-program",
-  userAuth,
+  // userAuth,
   async (req: Request, res: Response) => {
     try {
-      const user = (req as RequestWithUser).user;
+      // const user = (req as RequestWithUser).user;
 
-      if (!user) {
-        res.status(401).json({
-          success: false,
-          message: "Please Sign in to create a New Awareness Program",
-          code: "UNAUTHORIZED"
-        });
-        return;
-      }
+      // if (!user) {
+      //   res.status(401).json({
+      //     success: false,
+      //     message: "Please Sign in to create a New Awareness Program",
+      //     code: "UNAUTHORIZED"
+      //   });
+      //   return;
+      // }
 
       const body = req.body;
       const result = await createAwarenessProgramValidation.safeParse(body);
@@ -125,7 +125,8 @@ awarenessProgramRouter.post(
           imageUrl,
           imageKey,
           units,
-          userId: user.id
+          // userId: user.id
+          userId: "dummy01"
         }
       });
 
@@ -150,7 +151,7 @@ awarenessProgramRouter.post(
 
 awarenessProgramRouter.put(
   "/update-awareness-program/:id",
-  userAuth,
+  // userAuth,
   async (req: Request, res: Response) => {
     try {
       const { id } = req.params;

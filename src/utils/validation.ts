@@ -431,7 +431,7 @@ export const updateTrainingValidation = z
     }
   );
 
-// Create validation schema-------------------------------------------------------
+// Create validation schema awarness-------------------------------------------------------
 export const createAwarenessProgramValidation = z
   .object({
     projectId: z.string().trim().uuid({ message: "Invalid project ID format" }),
@@ -517,7 +517,7 @@ export const createAwarenessProgramValidation = z
     }
   );
 
-// Update validation schema
+// Update validation schema of awarness
 export const updateAwarenessProgramValidation = z
   .object({
     projectId: z
@@ -728,7 +728,7 @@ export const updateFldValidation = z
     }
   );
 
-// Zod validation schemas
+// Zod validation schemas--------------------------------------------
 export const createInfrastructureValidation = z
   .object({
     InfraDevId: z
@@ -908,7 +908,7 @@ export const updateInfrastructureValidation = z
     }
   );
 
-// Zod validation schemas
+// Zod validation schemas inputDistribution-----------------------------------------------------
 export const createInputDistributionValidation = z
   .object({
     inputDistId: z
@@ -1128,7 +1128,7 @@ export const updateInputDistributionValidation = z
     }
   );
 
-//Events
+//Events-----------------------------------------------------------------------
 export const upcomingEventValidation = z.object({
   title: z
     .string()
@@ -1193,7 +1193,7 @@ export const upcomingEventUpdateValidation = z.object({
 });
 
 // Publications
-// Create Publication Validation
+// Create Publication Validation------------------------------------------------------------------
 export const createPublicationValidation = z
   .object({
     title: z
@@ -1348,7 +1348,7 @@ export const updatePublicationValidation = z
     }
   );
 
-// Create Gallery Validation
+// Create Gallery Validation-----------------------------------------------
 export const createGalleryValidation = z
   .object({
     title: z
@@ -1407,7 +1407,7 @@ export const updateGalleryValidation = z
     }
   );
 
-// Create Project Details Validation
+// Create Project Details Validation--------------------------------------------------------
 export const createProjectDetailsValidation = z.object({
   title: z
     .string()

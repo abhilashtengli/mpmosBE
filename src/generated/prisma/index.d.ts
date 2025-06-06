@@ -19195,10 +19195,10 @@ export namespace Prisma {
 
   export type InputDistributionWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    inputDistId?: string
     AND?: InputDistributionWhereInput | InputDistributionWhereInput[]
     OR?: InputDistributionWhereInput[]
     NOT?: InputDistributionWhereInput | InputDistributionWhereInput[]
-    inputDistId?: StringFilter<"InputDistribution"> | string
     projectId?: StringFilter<"InputDistribution"> | string
     quarterId?: StringFilter<"InputDistribution"> | string
     activityType?: StringFilter<"InputDistribution"> | string
@@ -19218,7 +19218,7 @@ export namespace Prisma {
     project?: XOR<ProjectScalarRelationFilter, ProjectWhereInput>
     quarter?: XOR<QuarterScalarRelationFilter, QuarterWhereInput>
     User?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
-  }, "id">
+  }, "id" | "inputDistId">
 
   export type InputDistributionOrderByWithAggregationInput = {
     id?: SortOrder
@@ -19329,10 +19329,10 @@ export namespace Prisma {
 
   export type TrainingWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    trainingId?: string
     AND?: TrainingWhereInput | TrainingWhereInput[]
     OR?: TrainingWhereInput[]
     NOT?: TrainingWhereInput | TrainingWhereInput[]
-    trainingId?: StringFilter<"Training"> | string
     projectId?: StringFilter<"Training"> | string
     quarterId?: StringFilter<"Training"> | string
     title?: StringFilter<"Training"> | string
@@ -19355,7 +19355,7 @@ export namespace Prisma {
     project?: XOR<ProjectScalarRelationFilter, ProjectWhereInput>
     quarter?: XOR<QuarterScalarRelationFilter, QuarterWhereInput>
     User?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
-  }, "id">
+  }, "id" | "trainingId">
 
   export type TrainingOrderByWithAggregationInput = {
     id?: SortOrder
@@ -19458,10 +19458,10 @@ export namespace Prisma {
 
   export type FLDWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    fldId?: string
     AND?: FLDWhereInput | FLDWhereInput[]
     OR?: FLDWhereInput[]
     NOT?: FLDWhereInput | FLDWhereInput[]
-    fldId?: StringFilter<"FLD"> | string
     projectId?: StringFilter<"FLD"> | string
     quarterId?: StringFilter<"FLD"> | string
     description?: StringNullableFilter<"FLD"> | string | null
@@ -19477,7 +19477,7 @@ export namespace Prisma {
     project?: XOR<ProjectScalarRelationFilter, ProjectWhereInput>
     quarter?: XOR<QuarterScalarRelationFilter, QuarterWhereInput>
     User?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
-  }, "id">
+  }, "id" | "fldId">
 
   export type FLDOrderByWithAggregationInput = {
     id?: SortOrder
@@ -19574,10 +19574,10 @@ export namespace Prisma {
 
   export type AwarenessProgramWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    awarnessprogramId?: string
     AND?: AwarenessProgramWhereInput | AwarenessProgramWhereInput[]
     OR?: AwarenessProgramWhereInput[]
     NOT?: AwarenessProgramWhereInput | AwarenessProgramWhereInput[]
-    awarnessprogramId?: StringFilter<"AwarenessProgram"> | string
     projectId?: StringFilter<"AwarenessProgram"> | string
     quarterId?: StringFilter<"AwarenessProgram"> | string
     title?: StringFilter<"AwarenessProgram"> | string
@@ -19597,7 +19597,7 @@ export namespace Prisma {
     project?: XOR<ProjectScalarRelationFilter, ProjectWhereInput>
     quarter?: XOR<QuarterScalarRelationFilter, QuarterWhereInput>
     User?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
-  }, "id">
+  }, "id" | "awarnessprogramId">
 
   export type AwarenessProgramOrderByWithAggregationInput = {
     id?: SortOrder
@@ -19696,10 +19696,10 @@ export namespace Prisma {
 
   export type InfrastructureDevelopmentWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    InfraDevId?: string
     AND?: InfrastructureDevelopmentWhereInput | InfrastructureDevelopmentWhereInput[]
     OR?: InfrastructureDevelopmentWhereInput[]
     NOT?: InfrastructureDevelopmentWhereInput | InfrastructureDevelopmentWhereInput[]
-    InfraDevId?: StringFilter<"InfrastructureDevelopment"> | string
     projectId?: StringFilter<"InfrastructureDevelopment"> | string
     quarterId?: StringFilter<"InfrastructureDevelopment"> | string
     target?: IntFilter<"InfrastructureDevelopment"> | number
@@ -19716,7 +19716,7 @@ export namespace Prisma {
     project?: XOR<ProjectScalarRelationFilter, ProjectWhereInput>
     quarter?: XOR<QuarterScalarRelationFilter, QuarterWhereInput>
     User?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
-  }, "id">
+  }, "id" | "InfraDevId">
 
   export type InfrastructureDevelopmentOrderByWithAggregationInput = {
     id?: SortOrder

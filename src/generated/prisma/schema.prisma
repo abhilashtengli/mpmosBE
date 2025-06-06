@@ -117,9 +117,9 @@ model Quarter {
 model InputDistribution {
   id           String   @id @default(uuid())
   inputDistId  String
-  project      Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  project      Project  @relation(fields: [projectId], references: [id])
   projectId    String   @map("project_id")
-  quarter      Quarter  @relation(fields: [quarterId], references: [id], onDelete: Cascade)
+  quarter      Quarter  @relation(fields: [quarterId], references: [id])
   quarterId    String   @map("quarter_id")
   activityType String   @db.VarChar(100) // Seed Distribution/Planting materials/Fertilizers/etc.
   name         String   @db.VarChar(200)
@@ -137,6 +137,7 @@ model InputDistribution {
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 
+  @@unique([inputDistId])
   @@index([projectId])
   @@index([quarterId])
   @@index([userId])
@@ -149,9 +150,9 @@ model InputDistribution {
 model Training {
   id                String   @id @default(uuid())
   trainingId        String
-  project           Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  project           Project  @relation(fields: [projectId], references: [id])
   projectId         String   @map("project_id")
-  quarter           Quarter  @relation(fields: [quarterId], references: [id], onDelete: Cascade)
+  quarter           Quarter  @relation(fields: [quarterId], references: [id])
   quarterId         String   @map("quarter_id")
   title             String   @db.VarChar(255)
   target            Int
@@ -173,6 +174,7 @@ model Training {
   userId            String?  @map("user_id")
 
   // Indexes for better query performance
+  @@unique([trainingId])
   @@index([projectId])
   @@index([quarterId])
   @@index([userId])
@@ -185,9 +187,9 @@ model Training {
 model FLD {
   id          String   @id @default(uuid())
   fldId       String
-  project     Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  project     Project  @relation(fields: [projectId], references: [id])
   projectId   String   @map("project_id")
-  quarter     Quarter  @relation(fields: [quarterId], references: [id], onDelete: Cascade)
+  quarter     Quarter  @relation(fields: [quarterId], references: [id])
   quarterId   String   @map("quarter_id")
   description String?  @db.VarChar(200)
   district    String   @db.VarChar(100)
@@ -202,6 +204,7 @@ model FLD {
   userId      String?  @map("user_id")
 
   // Indexes for foreign keys
+  @@unique([fldId])
   @@index([projectId])
   @@index([quarterId])
   @@index([userId])
@@ -211,9 +214,9 @@ model FLD {
 model AwarenessProgram {
   id                String   @id @default(uuid())
   awarnessprogramId String
-  project           Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  project           Project  @relation(fields: [projectId], references: [id])
   projectId         String   @map("project_id")
-  quarter           Quarter  @relation(fields: [quarterId], references: [id], onDelete: Cascade)
+  quarter           Quarter  @relation(fields: [quarterId], references: [id])
   quarterId         String   @map("quarter_id")
   title             String   @db.VarChar(100)
   target            Int
@@ -232,6 +235,7 @@ model AwarenessProgram {
   userId            String?  @map("user_id")
 
   // Indexes for better query performance
+  @@unique([awarnessprogramId])
   @@index([projectId])
   @@index([quarterId])
   @@index([title])
@@ -242,9 +246,9 @@ model AwarenessProgram {
 model InfrastructureDevelopment {
   id         String   @id @default(uuid())
   InfraDevId String
-  project    Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  project    Project  @relation(fields: [projectId], references: [id])
   projectId  String   @map("project_id")
-  quarter    Quarter  @relation(fields: [quarterId], references: [id], onDelete: Cascade)
+  quarter    Quarter  @relation(fields: [quarterId], references: [id])
   quarterId  String   @map("quarter_id")
   target     Int
   achieved   Int
@@ -260,6 +264,7 @@ model InfrastructureDevelopment {
   userId     String?  @map("user_id")
 
   // Indexes for better query performance
+  @@unique([InfraDevId])
   @@index([projectId])
   @@index([quarterId])
   @@index([userId])
