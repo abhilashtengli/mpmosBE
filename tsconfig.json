@@ -7,7 +7,7 @@
       "@services/*": ["services/*"],
       "@utils/*": ["utils/*"],
       "@emails/*": ["emails/*"],
-      "@middleware/*" : ["middleware/*"],
+      "@middleware/*": ["middleware/*"],
       "*": ["node_modules/*", "src/types/*"]
     },
     /* Language and Environment */

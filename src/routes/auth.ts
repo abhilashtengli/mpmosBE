@@ -1,8 +1,6 @@
 import express, { Request, Response } from "express";
 import bcrypt from "bcrypt";
-import { userAuth } from "@middleware/auth";
 import { prisma } from "@lib/prisma";
-import { signupValidation } from "@utils/validation";
 import validator from "validator";
 import TokenService from "@services/tokenservice";
 import {
@@ -15,16 +13,28 @@ import {
 } from "@services/ratelimiter";
 import { RequestVerification } from "@services/requestCode/requestCodeToVerify";
 import { createSessionId } from "@utils/session";
+import { userAuth } from "@middleware/auth";
+import { signupValidation } from "@utils/validation";
 
 const authRouter = express.Router();
 
 authRouter.post(
   "/signup",
-  userAuth,
+  // userAuth,
   signupLimiter,
   async (req: Request, res: Response) => {
     try {
-      await signupValidation(req);
+      // await signupValidation(req);
+      const result = await signupValidation.safeParse(req.body);
+      if (!result.success) {
+        res.status(400).json({
+          message: "Invalid Input",
+          errors: result.error.format(),
+          code: "VALIDATION_ERROR",
+          success: false
+        });
+        return;
+      }
       const { name, email, password, role } = req.body;
       const existingUser = await prisma.user.findUnique({
         where: { email },

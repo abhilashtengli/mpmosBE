@@ -7,18 +7,25 @@ interface User {
   role: string;
 }
 
-export const signupValidation = (req: { body: User }) => {
-  const { name, email, password, role } = req.body;
-  if (!name) {
-    throw new Error("Invalid first name or last name");
-  } else if (!validator.isEmail(email)) {
-    throw new Error("Invalid email address");
-  } else if (!validator.isStrongPassword(password)) {
-    throw new Error("Enter a strong password");
-  } else if (!role) {
-    throw new Error("Please select a role");
-  }
-};
+export const signupValidation = z.object({
+  name: z.string().min(1, { message: "Invalid first name or last name" }),
+  email: z.string().email({ message: "Invalid email address" }),
+  password: z
+    .string()
+    .min(1)
+    .refine(
+      (val) =>
+        z
+          .string()
+          .refine(() => true)
+          .safeParse(val).success && require("validator").isStrongPassword(val),
+      {
+        message: "Enter a strong password"
+      }
+    ),
+  role: z.string().min(1, { message: "Please select a role" })
+});
+
 // create project validation
 export const createProjectValidation = z
   .object({
