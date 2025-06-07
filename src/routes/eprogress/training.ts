@@ -17,6 +17,7 @@ interface RequestWithUser extends Request {
     isVerified: boolean;
   } | null;
 }
+
 // For create training
 trainingRouter.post(
   "/create-training",
