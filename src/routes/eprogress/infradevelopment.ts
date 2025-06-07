@@ -481,7 +481,7 @@ infrastructureRouter.get(
 
 //delete infra-Dev
 infrastructureRouter.delete(
-  "delete-infraDev/:id",
+  "/delete-infraDev/:id",
   userAuth,
   async (req: Request, res: Response) => {
     try {

@@ -419,8 +419,20 @@ fldRouter.get(
         select: {
           id: true,
           fldId: true,
-          project: true,
-          quarter: true,
+          project: {
+            select: {
+              implementingAgency: true,
+              director: true,
+              locationState: true,
+              status: true
+            }
+          },
+          quarter: {
+            select: {
+              number: true,
+              year: true
+            }
+          },
           description: true,
           target: true,
           achieved: true,
