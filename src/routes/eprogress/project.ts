@@ -1,4 +1,5 @@
 import { prisma } from "@lib/prisma";
+import { userAuth } from "@middleware/auth";
 import {
   createProjectValidation,
   updateProjectValidation
@@ -20,7 +21,7 @@ interface RequestWithUser extends Request {
 
 projectRouter.post(
   "/create-project",
-  // userAuth,
+  userAuth,
   async (req: Request, res: Response) => {
     try {
       const body = req.body;
@@ -64,34 +65,16 @@ projectRouter.post(
         });
         return;
       }
-      //---------UNCOMMENT IN PRODUCTION--------------
-      // const user = (req as RequestWithUser).user;
-      // if (!user) {
-      //   res.status(401).json({
-      //     success: false,
-      //     message: "Please Sign in to create a New Project",
-      //     code: "UNAUTHORIZED"
-      //   });
-      //   return;
-      // }
-      //----------------------------------------------
-
-      //------------------------REMOVE IN PRODUCTION--------------------------------
-
-      const user = await prisma.user.findUnique({
-        where: { id: "1edf5b60-f916-47cf-ba4e-d66d5d1ae4aa" }
-      });
-
+      const user = (req as RequestWithUser).user;
       if (!user) {
-        res.status(400).json({
+        res.status(401).json({
           success: false,
-          message: "Invalid userId: no such user exists",
-          code: "INVALID_USER"
+          message: "Please Sign in to create a New Project",
+          code: "UNAUTHORIZED"
         });
         return;
       }
 
-      //----------------------------------------------------------------------------
       const projectData: any = {
         title,
         implementingAgency,
@@ -143,8 +126,8 @@ projectRouter.post(
 );
 // For the user
 projectRouter.get(
-  "get-user-projects",
-  // userAuth,
+  "/get-user-projects",
+  userAuth,
   async (req: Request, res: Response) => {
     try {
       const user = (req as RequestWithUser).user;
@@ -211,7 +194,7 @@ projectRouter.get(
 // For the admin getall
 projectRouter.get(
   "/get-admin-projects",
-  // userAuth,
+  userAuth,
   async (req: Request, res: Response) => {
     try {
       const user = (req as RequestWithUser).user;
@@ -281,7 +264,7 @@ projectRouter.get(
 // update project
 projectRouter.put(
   "/update-project/:id",
-  // userAuth,
+  userAuth,
   async (req: Request, res: Response) => {
     try {
       const { id } = req.params;
@@ -452,7 +435,7 @@ projectRouter.put(
 // delete project
 projectRouter.delete(
   "/delete-project/:id",
-  // userAuth,
+  userAuth,
   async (req: Request, res: Response) => {
     try {
       const { id } = req.params;

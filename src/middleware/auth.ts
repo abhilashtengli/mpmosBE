@@ -143,9 +143,27 @@ export const userAuth = async (
     }
     (req as RequestWithUser).user = user || null;
     next();
-  } catch {
-    res
-      .status(400)
-      .json({ message: "Invalid token or request", code: "BAD_TOKEN" });
+  } catch (err: any) {
+    if (err.name === "TokenExpiredError") {
+      res.status(401).json({
+        message: "Token has expired",
+        code: "TOKEN_EXPIRED"
+      });
+      return;
+    }
+
+    if (err.name === "JsonWebTokenError") {
+      res.status(400).json({
+        message: "Invalid token",
+        code: "INVALID_TOKEN"
+      });
+      return;
+    }
+
+    res.status(500).json({
+      message: "Authentication failed",
+      code: "AUTH_ERROR"
+    });
+    return;
   }
 };
