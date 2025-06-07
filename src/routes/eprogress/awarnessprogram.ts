@@ -1,5 +1,6 @@
 import { prisma } from "@lib/prisma";
 import { userAuth } from "@middleware/auth";
+import { generateFormattedId } from "@services/general";
 import {
   createAwarenessProgramValidation,
   updateAwarenessProgramValidation
@@ -18,6 +19,7 @@ interface RequestWithUser extends Request {
     isVerified: boolean;
   } | null;
 }
+
 //create
 awarenessProgramRouter.post(
   "/create-awareness-program",
@@ -25,7 +27,6 @@ awarenessProgramRouter.post(
   async (req: Request, res: Response) => {
     try {
       const user = (req as RequestWithUser).user;
-      console.log("User : ", user);
       if (!user) {
         res.status(401).json({
           success: false,
@@ -52,7 +53,6 @@ awarenessProgramRouter.post(
         projectId,
         quarterId,
         title,
-        awarnessprogramId,
         target,
         achieved,
         district,
@@ -64,24 +64,6 @@ awarenessProgramRouter.post(
         imageKey,
         units
       } = result.data;
-
-      const existingProgram = await prisma.awarenessProgram.findFirst({
-        where: {
-          awarnessprogramId: {
-            equals: awarnessprogramId,
-            mode: "insensitive"
-          }
-        }
-      });
-
-      if (existingProgram) {
-        res.status(409).json({
-          success: false,
-          message: "An Awareness Program with this Id already exists",
-          code: "DUPLICATE_RESOURCE"
-        });
-        return;
-      }
 
       const project = await prisma.project.findUnique({
         where: { id: projectId }
@@ -108,10 +90,23 @@ awarenessProgramRouter.post(
         });
         return;
       }
+      const latestProgram = await prisma.awarenessProgram.findFirst({
+        orderBy: { createdAt: "desc" },
+        select: { awarnessprogramId: true }
+      });
+
+      let nextId = 1;
+      if (latestProgram?.awarnessprogramId) {
+        const match = latestProgram.awarnessprogramId.match(/\d+$/);
+        if (match) {
+          nextId = parseInt(match[0]) + 1;
+        }
+      }
+      const newAwarenessProgramId = generateFormattedId("AWP", nextId);
 
       const newProgram = await prisma.awarenessProgram.create({
         data: {
-          awarnessprogramId,
+          awarnessprogramId: newAwarenessProgramId,
           projectId,
           quarterId,
           title,
@@ -204,33 +199,6 @@ awarenessProgramRouter.put(
         return;
       }
 
-      // Check for program ID uniqueness if being updated
-      if (
-        result.data.awarnessprogramId &&
-        result.data.awarnessprogramId !== existingProgram.awarnessprogramId
-      ) {
-        const duplicateId = await prisma.awarenessProgram.findFirst({
-          where: {
-            awarnessprogramId: {
-              equals: result.data.awarnessprogramId,
-              mode: "insensitive"
-            },
-            id: {
-              not: id
-            }
-          }
-        });
-
-        if (duplicateId) {
-          res.status(409).json({
-            success: false,
-            message: "An Awareness Program with this ID already exists",
-            code: "DUPLICATE_RESOURCE"
-          });
-          return;
-        }
-      }
-
       // Verify project exists if it's being updated
       if (
         result.data.projectId &&
@@ -277,7 +245,6 @@ awarenessProgramRouter.put(
         projectId,
         quarterId,
         title,
-        awarnessprogramId,
         target,
         achieved,
         district,
@@ -293,8 +260,6 @@ awarenessProgramRouter.put(
       if (projectId !== undefined) updateData.projectId = projectId;
       if (quarterId !== undefined) updateData.quarterId = quarterId;
       if (title !== undefined) updateData.title = title;
-      if (awarnessprogramId !== undefined)
-        updateData.awarnessprogramId = awarnessprogramId;
       if (target !== undefined) updateData.target = target;
       if (achieved && !target) {
         if (achieved > existingProgram.target) {

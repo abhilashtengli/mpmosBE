@@ -1,5 +1,6 @@
 import { prisma } from "@lib/prisma";
 import { userAuth } from "@middleware/auth";
+import { generateFormattedId } from "@services/general";
 import { createFldValidation, updateFldValidation } from "@utils/validation";
 
 import express, { Request, Response } from "express";
@@ -46,7 +47,6 @@ fldRouter.post("/create-fld", userAuth, async (req: Request, res: Response) => {
     const {
       projectId,
       quarterId,
-      fldId,
       description,
       district,
       village,
@@ -55,24 +55,6 @@ fldRouter.post("/create-fld", userAuth, async (req: Request, res: Response) => {
       achieved,
       units
     } = result.data;
-
-    const existingFld = await prisma.fLD.findFirst({
-      where: {
-        fldId: {
-          equals: fldId,
-          mode: "insensitive"
-        }
-      }
-    });
-
-    if (existingFld) {
-      res.status(409).json({
-        success: false,
-        message: "An FLD with this Id already exists",
-        code: "DUPLICATE_RESOURCE"
-      });
-      return;
-    }
 
     const project = await prisma.project.findUnique({
       where: { id: projectId }
@@ -99,10 +81,23 @@ fldRouter.post("/create-fld", userAuth, async (req: Request, res: Response) => {
       });
       return;
     }
+    const latestProgram = await prisma.fLD.findFirst({
+      orderBy: { createdAt: "desc" },
+      select: { fldId: true }
+    });
+
+    let nextId = 1;
+    if (latestProgram?.fldId) {
+      const match = latestProgram.fldId.match(/\d+$/);
+      if (match) {
+        nextId = parseInt(match[0]) + 1;
+      }
+    }
+    const newFLDId = generateFormattedId("FLD", nextId);
 
     const newFld = await prisma.fLD.create({
       data: {
-        fldId,
+        fldId: newFLDId,
         projectId,
         quarterId,
         description,
@@ -190,30 +185,6 @@ fldRouter.put(
         return;
       }
 
-      // Check for FLD ID uniqueness if being updated
-      if (result.data.fldId && result.data.fldId !== existingFld.fldId) {
-        const duplicateId = await prisma.fLD.findFirst({
-          where: {
-            fldId: {
-              equals: result.data.fldId,
-              mode: "insensitive"
-            },
-            id: {
-              not: id
-            }
-          }
-        });
-
-        if (duplicateId) {
-          res.status(409).json({
-            success: false,
-            message: "An FLD with this ID already exists",
-            code: "DUPLICATE_RESOURCE"
-          });
-          return;
-        }
-      }
-
       // Verify project exists if it's being updated
       if (
         result.data.projectId &&
@@ -259,7 +230,6 @@ fldRouter.put(
       const {
         projectId,
         quarterId,
-        fldId,
         description,
         district,
         village,
@@ -271,7 +241,6 @@ fldRouter.put(
 
       if (projectId !== undefined) updateData.projectId = projectId;
       if (quarterId !== undefined) updateData.quarterId = quarterId;
-      if (fldId !== undefined) updateData.fldId = fldId;
       if (description !== undefined) updateData.description = description;
       if (district !== undefined) updateData.district = district;
       if (village !== undefined) updateData.village = village;

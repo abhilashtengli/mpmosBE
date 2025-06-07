@@ -1,5 +1,6 @@
 import { prisma } from "@lib/prisma";
 import { userAuth } from "@middleware/auth";
+import { generateFormattedId } from "@services/general";
 import {
   createTrainingValidation,
   updateTrainingValidation
@@ -51,7 +52,6 @@ trainingRouter.post(
         projectId,
         quarterId,
         title,
-        trainingId,
         target,
         achieved,
         district,
@@ -66,24 +66,6 @@ trainingRouter.post(
         pdfKey,
         units
       } = result.data;
-
-      const existingTraining = await prisma.training.findFirst({
-        where: {
-          trainingId: {
-            equals: trainingId,
-            mode: "insensitive"
-          }
-        }
-      });
-
-      if (existingTraining) {
-        res.status(409).json({
-          success: false,
-          message: "A Training with this Id already existis",
-          code: "DUPLICATE_RESOURCE"
-        });
-        return;
-      }
 
       const project = await prisma.project.findUnique({
         where: { id: projectId }
@@ -111,9 +93,23 @@ trainingRouter.post(
         return;
       }
 
+      const latestProgram = await prisma.training.findFirst({
+        orderBy: { createdAt: "desc" },
+        select: { trainingId: true }
+      });
+
+      let nextId = 1;
+      if (latestProgram?.trainingId) {
+        const match = latestProgram.trainingId.match(/\d+$/);
+        if (match) {
+          nextId = parseInt(match[0]) + 1;
+        }
+      }
+      const newTRNId = generateFormattedId("TRN", nextId);
+
       const newTraining = await prisma.training.create({
         data: {
-          trainingId,
+          trainingId: newTRNId,
           projectId,
           quarterId,
           title,
@@ -209,33 +205,6 @@ trainingRouter.put(
         return;
       }
 
-      // Check for trainingId uniqueness if being updated
-      if (
-        result.data.trainingId &&
-        result.data.trainingId !== existingTraining.trainingId
-      ) {
-        const duplicateId = await prisma.training.findFirst({
-          where: {
-            trainingId: {
-              equals: result.data.trainingId,
-              mode: "insensitive"
-            },
-            id: {
-              not: id
-            }
-          }
-        });
-
-        if (duplicateId) {
-          res.status(409).json({
-            success: false,
-            message: "A training with this ID already exists",
-            code: "DUPLICATE_RESOURCE"
-          });
-          return;
-        }
-      }
-
       // Verify project exists if it's being updated
       if (
         result.data.projectId &&
@@ -282,7 +251,6 @@ trainingRouter.put(
         projectId,
         quarterId,
         title,
-        trainingId,
         target,
         achieved,
         district,
@@ -301,7 +269,6 @@ trainingRouter.put(
       if (projectId !== undefined) updateData.projectId = projectId;
       if (quarterId !== undefined) updateData.quarterId = quarterId;
       if (title !== undefined) updateData.title = title;
-      if (trainingId !== undefined) updateData.trainingId = trainingId;
       if (target !== undefined) updateData.target = target;
       if (achieved && !target) {
         if (achieved > existingTraining.target) {

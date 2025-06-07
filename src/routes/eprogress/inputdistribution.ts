@@ -1,5 +1,6 @@
 import { prisma } from "@lib/prisma";
 import { userAuth } from "@middleware/auth";
+import { generateFormattedId } from "@services/general";
 import {
   createInputDistributionValidation,
   updateInputDistributionValidation
@@ -49,7 +50,6 @@ inputDistributionRouter.post(
       }
 
       const {
-        inputDistId,
         projectId,
         quarterId,
         activityType,
@@ -64,25 +64,6 @@ inputDistributionRouter.post(
         imageUrl,
         imageKey
       } = result.data;
-
-      // Check if input distribution with this ID already exists
-      const existingInputDist = await prisma.inputDistribution.findFirst({
-        where: {
-          inputDistId: {
-            equals: inputDistId,
-            mode: "insensitive"
-          }
-        }
-      });
-
-      if (existingInputDist) {
-        res.status(409).json({
-          success: false,
-          message: "An Input Distribution with this Id already exists",
-          code: "DUPLICATE_RESOURCE"
-        });
-        return;
-      }
 
       // Verify project exists
       const project = await prisma.project.findUnique({
@@ -112,10 +93,24 @@ inputDistributionRouter.post(
         return;
       }
 
+      const latestProgram = await prisma.inputDistribution.findFirst({
+        orderBy: { createdAt: "desc" },
+        select: { inputDistId: true }
+      });
+
+      let nextId = 1;
+      if (latestProgram?.inputDistId) {
+        const match = latestProgram.inputDistId.match(/\d+$/);
+        if (match) {
+          nextId = parseInt(match[0]) + 1;
+        }
+      }
+      const newINDId = generateFormattedId("IND", nextId);
+
       // Create new input distribution
       const newInputDistribution = await prisma.inputDistribution.create({
         data: {
-          inputDistId,
+          inputDistId: newINDId,
           projectId,
           quarterId,
           activityType,
@@ -208,33 +203,6 @@ inputDistributionRouter.put(
         return;
       }
 
-      // Check for inputDistId uniqueness if being updated
-      if (
-        result.data.inputDistId &&
-        result.data.inputDistId !== existingInputDist.inputDistId
-      ) {
-        const duplicateId = await prisma.inputDistribution.findFirst({
-          where: {
-            inputDistId: {
-              equals: result.data.inputDistId,
-              mode: "insensitive"
-            },
-            id: {
-              not: id
-            }
-          }
-        });
-
-        if (duplicateId) {
-          res.status(409).json({
-            success: false,
-            message: "An Input Distribution with this ID already exists",
-            code: "DUPLICATE_RESOURCE"
-          });
-          return;
-        }
-      }
-
       // Verify project exists if it's being updated
       if (
         result.data.projectId &&
@@ -278,7 +246,6 @@ inputDistributionRouter.put(
 
       // Only include fields that were provided in the request
       const {
-        inputDistId,
         projectId,
         quarterId,
         activityType,
@@ -294,7 +261,6 @@ inputDistributionRouter.put(
         imageKey
       } = result.data;
 
-      if (inputDistId !== undefined) updateData.inputDistId = inputDistId;
       if (projectId !== undefined) updateData.projectId = projectId;
       if (quarterId !== undefined) updateData.quarterId = quarterId;
       if (activityType !== undefined) updateData.activityType = activityType;

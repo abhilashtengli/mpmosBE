@@ -187,11 +187,6 @@ export const createTrainingValidation = z
       .trim()
       .min(2, { message: "Title must be at least 2 characters" })
       .max(255, { message: "Title cannot exceed 255 characters" }),
-    trainingId: z
-      .string()
-      .trim()
-      .min(5, { message: "ID must be 6 characters, Ex: TRN001" })
-      .max(5, { message: "Id cannot exceed 6 characters" }),
     target: z
       .number({ invalid_type_error: "Target must be a number" })
       .int({ message: "Target must be an integer" })
@@ -308,12 +303,6 @@ export const updateTrainingValidation = z
       .trim()
       .min(2, { message: "Title must be at least 2 characters" })
       .max(255, { message: "Title cannot exceed 255 characters" })
-      .optional(),
-    trainingId: z
-      .string()
-      .trim()
-      .min(5, { message: "ID must be 6 characters, Ex: TRN001" })
-      .max(5, { message: "Id cannot exceed 6 characters" })
       .optional(),
     target: z
       .number({ invalid_type_error: "Target must be a number" })
@@ -448,11 +437,6 @@ export const createAwarenessProgramValidation = z
       .trim()
       .min(2, { message: "Title must be at least 2 characters" })
       .max(100, { message: "Title cannot exceed 100 characters" }),
-    awarnessprogramId: z
-      .string()
-      .trim()
-      .min(5, { message: "ID must be 5 characters, Ex: AWP01" })
-      .max(10, { message: "ID cannot exceed 10 characters" }),
     target: z
       .number({ invalid_type_error: "Target must be a number" })
       .int({ message: "Target must be an integer" })
@@ -542,12 +526,6 @@ export const updateAwarenessProgramValidation = z
       .trim()
       .min(2, { message: "Title must be at least 2 characters" })
       .max(100, { message: "Title cannot exceed 100 characters" })
-      .optional(),
-    awarnessprogramId: z
-      .string()
-      .trim()
-      .min(5, { message: "ID must be 5 characters, Ex: AWP01" })
-      .max(10, { message: "ID cannot exceed 10 characters" })
       .optional(),
     target: z
       .number({ invalid_type_error: "Target must be a number" })
@@ -643,11 +621,6 @@ export const createFldValidation = z
   .object({
     projectId: z.string().uuid({ message: "Valid project ID is required" }),
     quarterId: z.string().uuid({ message: "Valid quarter ID is required" }),
-    fldId: z
-      .string()
-      .trim()
-      .min(5, { message: "FLD ID must be 5 characters, Ex: FLD01" })
-      .max(10, { message: "FLD ID cannot exceed 10 characters" }),
     description: z.string().max(200).optional(),
     district: z
       .string()
@@ -688,12 +661,6 @@ export const updateFldValidation = z
     quarterId: z
       .string()
       .uuid({ message: "Valid quarter ID is required" })
-      .optional(),
-    fldId: z
-      .string()
-      .trim()
-      .min(5, { message: "FLD ID must be 5 characters, Ex: FLD01" })
-      .max(10, { message: "FLD ID cannot exceed 10 characters" })
       .optional(),
     description: z.string().max(200).optional(),
     district: z
@@ -738,11 +705,6 @@ export const updateFldValidation = z
 // Zod validation schemas--------------------------------------------
 export const createInfrastructureValidation = z
   .object({
-    InfraDevId: z
-      .string()
-      .trim()
-      .min(1, { message: "Infrastructure Development ID is required" }),
-
     projectId: z.string().uuid({ message: "Valid project ID is required" }),
 
     quarterId: z.string().uuid({ message: "Valid quarter ID is required" }),
@@ -815,12 +777,6 @@ export const createInfrastructureValidation = z
 
 export const updateInfrastructureValidation = z
   .object({
-    InfraDevId: z
-      .string()
-      .trim()
-      .min(1, { message: "Infrastructure Development ID is required" })
-      .optional(),
-
     projectId: z
       .string()
       .uuid({ message: "Valid project ID is required" })
@@ -918,11 +874,6 @@ export const updateInfrastructureValidation = z
 // Zod validation schemas inputDistribution-----------------------------------------------------
 export const createInputDistributionValidation = z
   .object({
-    inputDistId: z
-      .string()
-      .trim()
-      .min(1, { message: "Input Distribution ID is required" }),
-
     projectId: z.string().uuid({ message: "Valid project ID is required" }),
 
     quarterId: z.string().uuid({ message: "Valid quarter ID is required" }),
@@ -1014,12 +965,6 @@ export const createInputDistributionValidation = z
 
 export const updateInputDistributionValidation = z
   .object({
-    inputDistId: z
-      .string()
-      .trim()
-      .min(1, { message: "Input Distribution ID is required" })
-      .optional(),
-
     projectId: z
       .string()
       .uuid({ message: "Valid project ID is required" })

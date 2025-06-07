@@ -1,5 +1,6 @@
 import { prisma } from "@lib/prisma";
 import { userAuth } from "@middleware/auth";
+import { generateFormattedId } from "@services/general";
 import {
   createInfrastructureValidation,
   updateInfrastructureValidation
@@ -18,8 +19,6 @@ interface RequestWithUser extends Request {
     isVerified: boolean;
   } | null;
 }
-
-//PENDING -----------------------------------
 
 // Create Infrastructure Development
 infrastructureRouter.post(
@@ -52,7 +51,6 @@ infrastructureRouter.post(
       }
 
       const {
-        InfraDevId,
         projectId,
         quarterId,
         target,
@@ -64,25 +62,6 @@ infrastructureRouter.post(
         imageUrl,
         imageKey
       } = result.data;
-
-      // Check if infrastructure development with this ID already exists
-      const existingInfra = await prisma.infrastructureDevelopment.findFirst({
-        where: {
-          InfraDevId: {
-            equals: InfraDevId,
-            mode: "insensitive"
-          }
-        }
-      });
-
-      if (existingInfra) {
-        res.status(409).json({
-          success: false,
-          message: "An Infrastructure Development with this Id already exists",
-          code: "DUPLICATE_RESOURCE"
-        });
-        return;
-      }
 
       // Verify project exists
       const project = await prisma.project.findUnique({
@@ -111,11 +90,24 @@ infrastructureRouter.post(
         });
         return;
       }
+      const latestProgram = await prisma.infrastructureDevelopment.findFirst({
+        orderBy: { createdAt: "desc" },
+        select: { InfraDevId: true }
+      });
+
+      let nextId = 1;
+      if (latestProgram?.InfraDevId) {
+        const match = latestProgram.InfraDevId.match(/\d+$/);
+        if (match) {
+          nextId = parseInt(match[0]) + 1;
+        }
+      }
+      const newIFDId = generateFormattedId("IFD", nextId);
 
       // Create new infrastructure development
       const newInfrastructure = await prisma.infrastructureDevelopment.create({
         data: {
-          InfraDevId,
+          InfraDevId: newIFDId,
           projectId,
           quarterId,
           target,
@@ -205,34 +197,6 @@ infrastructureRouter.put(
         return;
       }
 
-      // Check for InfraDevId uniqueness if being updated
-      if (
-        result.data.InfraDevId &&
-        result.data.InfraDevId !== existingInfra.InfraDevId
-      ) {
-        const duplicateId = await prisma.infrastructureDevelopment.findFirst({
-          where: {
-            InfraDevId: {
-              equals: result.data.InfraDevId,
-              mode: "insensitive"
-            },
-            id: {
-              not: id
-            }
-          }
-        });
-
-        if (duplicateId) {
-          res.status(409).json({
-            success: false,
-            message:
-              "An Infrastructure Development with this ID already exists",
-            code: "DUPLICATE_RESOURCE"
-          });
-          return;
-        }
-      }
-
       // Verify project exists if it's being updated
       if (
         result.data.projectId &&
@@ -276,7 +240,6 @@ infrastructureRouter.put(
 
       // Only include fields that were provided in the request
       const {
-        InfraDevId,
         projectId,
         quarterId,
         target,
@@ -289,7 +252,6 @@ infrastructureRouter.put(
         imageKey
       } = result.data;
 
-      if (InfraDevId !== undefined) updateData.InfraDevId = InfraDevId;
       if (projectId !== undefined) updateData.projectId = projectId;
       if (quarterId !== undefined) updateData.quarterId = quarterId;
       if (target !== undefined) updateData.target = target;
