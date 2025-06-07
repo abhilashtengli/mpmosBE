@@ -277,7 +277,20 @@ fldRouter.put(
       if (village !== undefined) updateData.village = village;
       if (block !== undefined) updateData.block = block;
       if (target !== undefined) updateData.target = target;
-      if (achieved !== undefined) updateData.achieved = achieved;
+      if (achieved) {
+        if (achieved > existingFld.target) {
+          res.status(400).json({
+            success: false,
+            message:
+              "Achieved count cannot exceed target count, the target is : " +
+              existingFld.target,
+            code: "INVALID_INPUT"
+          });
+          return;
+        } else {
+          if (achieved !== undefined) updateData.achieved = achieved;
+        }
+      }
       if (units !== undefined) updateData.units = units;
 
       // Ensure we have something to update
