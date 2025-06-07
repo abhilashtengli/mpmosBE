@@ -300,7 +300,20 @@ inputDistributionRouter.put(
       if (activityType !== undefined) updateData.activityType = activityType;
       if (name !== undefined) updateData.name = name;
       if (target !== undefined) updateData.target = target;
-      if (achieved !== undefined) updateData.achieved = achieved;
+      if (achieved) {
+        if (achieved > existingInputDist.target) {
+          res.status(400).json({
+            success: false,
+            message:
+              "Achieved count cannot exceed target count, the target is : " +
+              existingInputDist.target,
+            code: "INVALID_INPUT"
+          });
+          return;
+        } else {
+          if (achieved !== undefined) updateData.achieved = achieved;
+        }
+      }
       if (district !== undefined) updateData.district = district;
       if (village !== undefined) updateData.village = village;
       if (block !== undefined) updateData.block = block;
