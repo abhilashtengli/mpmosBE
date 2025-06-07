@@ -302,7 +302,22 @@ trainingRouter.put(
       if (title !== undefined) updateData.title = title;
       if (trainingId !== undefined) updateData.trainingId = trainingId;
       if (target !== undefined) updateData.target = target;
-      if (achieved !== undefined) updateData.achieved = achieved;
+      if (achieved && !target) {
+        if (achieved > existingTraining.target) {
+          res.status(400).json({
+            success: false,
+            message:
+              "Achieved count cannot exceed target count, the target is : " +
+              existingTraining.target,
+            code: "INVALID_INPUT"
+          });
+          return;
+        } else {
+          if (achieved !== undefined) updateData.achieved = achieved;
+        }
+      } else {
+        if (achieved !== undefined) updateData.achieved = achieved;
+      }
       if (district !== undefined) updateData.district = district;
       if (village !== undefined) updateData.village = village;
       if (block !== undefined) updateData.block = block;
@@ -387,8 +402,20 @@ trainingRouter.get(
         select: {
           id: true,
           trainingId: true,
-          project: true,
-          quarter: true,
+          project: {
+            select: {
+              implementingAgency: true,
+              director: true,
+              locationState: true,
+              status: true
+            }
+          },
+          quarter: {
+            select: {
+              number: true,
+              year: true
+            }
+          },
           title: true,
           target: true,
           achieved: true,
@@ -511,7 +538,7 @@ trainingRouter.get(
 
 // Delete training
 trainingRouter.delete(
-  "delete-training/:id",
+  "/delete-training/:id",
   userAuth,
   async (req: Request, res: Response) => {
     try {

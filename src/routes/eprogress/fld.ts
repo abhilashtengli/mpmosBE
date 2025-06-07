@@ -277,7 +277,7 @@ fldRouter.put(
       if (village !== undefined) updateData.village = village;
       if (block !== undefined) updateData.block = block;
       if (target !== undefined) updateData.target = target;
-      if (achieved) {
+      if (achieved && !target) {
         if (achieved > existingFld.target) {
           res.status(400).json({
             success: false,
@@ -290,6 +290,8 @@ fldRouter.put(
         } else {
           if (achieved !== undefined) updateData.achieved = achieved;
         }
+      } else {
+        if (achieved !== undefined) updateData.achieved = achieved;
       }
       if (units !== undefined) updateData.units = units;
 

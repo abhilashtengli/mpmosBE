@@ -296,7 +296,7 @@ awarenessProgramRouter.put(
       if (awarnessprogramId !== undefined)
         updateData.awarnessprogramId = awarnessprogramId;
       if (target !== undefined) updateData.target = target;
-      if (achieved) {
+      if (achieved && !target) {
         if (achieved > existingProgram.target) {
           res.status(400).json({
             success: false,
@@ -309,6 +309,8 @@ awarenessProgramRouter.put(
         } else {
           if (achieved !== undefined) updateData.achieved = achieved;
         }
+      } else {
+        if (achieved !== undefined) updateData.achieved = achieved;
       }
       if (achieved !== undefined) updateData.achieved = achieved;
       if (district !== undefined) updateData.district = district;

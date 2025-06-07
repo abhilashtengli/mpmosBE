@@ -300,7 +300,7 @@ inputDistributionRouter.put(
       if (activityType !== undefined) updateData.activityType = activityType;
       if (name !== undefined) updateData.name = name;
       if (target !== undefined) updateData.target = target;
-      if (achieved) {
+      if (achieved && !target) {
         if (achieved > existingInputDist.target) {
           res.status(400).json({
             success: false,
@@ -313,6 +313,8 @@ inputDistributionRouter.put(
         } else {
           if (achieved !== undefined) updateData.achieved = achieved;
         }
+      } else {
+        if (achieved !== undefined) updateData.achieved = achieved;
       }
       if (district !== undefined) updateData.district = district;
       if (village !== undefined) updateData.village = village;
@@ -387,8 +389,20 @@ inputDistributionRouter.get(
         select: {
           id: true,
           inputDistId: true,
-          project: true,
-          quarter: true,
+          project: {
+            select: {
+              implementingAgency: true,
+              director: true,
+              locationState: true,
+              status: true
+            }
+          },
+          quarter: {
+            select: {
+              number: true,
+              year: true
+            }
+          },
           activityType: true,
           name: true,
           target: true,

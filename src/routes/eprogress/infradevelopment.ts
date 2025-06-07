@@ -293,7 +293,7 @@ infrastructureRouter.put(
       if (projectId !== undefined) updateData.projectId = projectId;
       if (quarterId !== undefined) updateData.quarterId = quarterId;
       if (target !== undefined) updateData.target = target;
-      if (achieved) {
+      if (achieved && !target) {
         if (achieved > existingInfra.target) {
           res.status(400).json({
             success: false,
@@ -306,6 +306,8 @@ infrastructureRouter.put(
         } else {
           if (achieved !== undefined) updateData.achieved = achieved;
         }
+      } else {
+        if (achieved !== undefined) updateData.achieved = achieved;
       }
       if (district !== undefined) updateData.district = district;
       if (village !== undefined) updateData.village = village;
@@ -380,8 +382,20 @@ infrastructureRouter.get(
           select: {
             id: true,
             InfraDevId: true,
-            project: true,
-            quarter: true,
+            project: {
+              select: {
+                implementingAgency: true,
+                director: true,
+                locationState: true,
+                status: true
+              }
+            },
+            quarter: {
+              select: {
+                number: true,
+                year: true
+              }
+            },
             target: true,
             achieved: true,
             district: true,
