@@ -530,7 +530,7 @@ inputDistributionRouter.delete(
         return;
       }
       const existingInputDistribution =
-        await prisma.infrastructureDevelopment.findUnique({
+        await prisma.inputDistribution.findUnique({
           where: { id }
         });
       if (!existingInputDistribution) {
