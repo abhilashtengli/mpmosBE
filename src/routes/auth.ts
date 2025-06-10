@@ -18,6 +18,16 @@ import { signupValidation } from "@utils/validation";
 
 const authRouter = express.Router();
 
+interface RequestWithUser extends Request {
+  user?: {
+    id: string;
+    email: string;
+    name: string;
+    role: string;
+    isVerified: boolean;
+  } | null;
+}
+
 authRouter.post(
   "/signup",
   // userAuth,
@@ -127,7 +137,8 @@ authRouter.post(
           email: true,
           password: true,
           id: true,
-          isVerified: true
+          isVerified: true,
+          role: true
         }
       });
       if (!user) {
@@ -204,7 +215,9 @@ authRouter.post(
         data: {
           id: user.id,
           name: user.name,
-          email: user.email
+          email: user.email,
+          isVerified: user.isVerified,
+          role: user.role
         },
         message: "Signin successful",
         code: "SIGNIN_SUCCESSFULL"
@@ -656,5 +669,62 @@ authRouter.post(
     }
   }
 );
+
+authRouter.get("/get-me", userAuth, async (req: Request, res: Response) => {
+  try {
+    // The userAuth middleware should have attached the user info to req
+    // Assuming it adds req.user with at least the user ID
+    const user = (req as RequestWithUser).user;
+
+    if (!user) {
+      res.status(401).json({
+        success: false,
+        message: "Unauthorized",
+        code: "UNAUTHORIZED"
+      });
+      return;
+    }
+
+    const loggedInuser = await prisma.user.findUnique({
+      where: { id: user.id },
+      select: {
+        id: true,
+        name: true,
+        email: true,
+        isVerified: true,
+        role: true
+      }
+    });
+
+    if (!loggedInuser) {
+      res.status(404).json({
+        success: false,
+        message: "User not found",
+        code: "USER_NOT_FOUND"
+      });
+      return;
+    }
+
+    res.status(200).json({
+      success: true,
+      data: {
+        id: loggedInuser.id,
+        name: loggedInuser.name,
+        email: loggedInuser.email,
+        isVerified: loggedInuser.isVerified,
+        role: loggedInuser.role
+      },
+      message: "User retrieved successfully",
+      code: "USER_RETRIEVED"
+    });
+  } catch (err) {
+    console.error("Get user error:", err);
+    res.status(500).json({
+      success: false,
+      message: "Failed to retrieve user, Internal server error",
+      code: "GET_USER_FAILED"
+    });
+  }
+});
 
 export default authRouter;
