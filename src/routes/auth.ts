@@ -15,6 +15,7 @@ import { RequestVerification } from "@services/requestCode/requestCodeToVerify";
 import { createSessionId } from "@utils/session";
 import { userAuth } from "@middleware/auth";
 import { signupValidation } from "@utils/validation";
+import { sseService } from "@services/sseService";
 
 const authRouter = express.Router();
 
@@ -179,6 +180,24 @@ authRouter.post(
         console.log(
           `User ${user.email} logging in from new device. Terminating ${existingSessions.length} existing session(s).`
         );
+        // IMPORTANT: Send logout message to other devices BEFORE deleting sessions
+        const logoutMessage = {
+          type: "force-logout" as const,
+          reason: "new-device-login",
+          timestamp: new Date().toISOString()
+        };
+
+        // Send logout message to all existing sessions
+        existingSessions.forEach((session) => {
+          sseService.sendToUserExceptSession(
+            user.id,
+            session.id,
+            logoutMessage
+          );
+        });
+
+        // Small delay to ensure message is sent before deleting sessions
+        await new Promise((resolve) => setTimeout(resolve, 100));
         // Delete all existing sessions
         await prisma.session.deleteMany({
           where: { userId: user.id }
@@ -217,7 +236,8 @@ authRouter.post(
           name: user.name,
           email: user.email,
           isVerified: user.isVerified,
-          role: user.role
+          role: user.role,
+          sessionId
         },
         message: "Signin successful",
         code: "SIGNIN_SUCCESSFULL"

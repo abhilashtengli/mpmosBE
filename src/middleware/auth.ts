@@ -23,7 +23,7 @@ export const userAuth = async (
 ): Promise<void> => {
   try {
     const token = req.cookies.token || req.headers.authorization?.split(" ")[1];
-
+    console.log("Token : ", token);
     if (!token) {
       res.status(401).json({
         message: "Missing authentication token",
@@ -107,17 +107,14 @@ export const userAuth = async (
     }
 
     // User-Agent check (optional for internal apps)
-    if (session.userAgent && session.userAgent !== currentUserAgent) {
-      // console.warn(`User-Agent change detected for user ${session.userId}`);
-
-      // Uncomment if you want strict User-Agent enforcement
-      res.status(401).json({
-        success: false,
-        message: "Device mismatch",
-        code: "DEVICE_MISMATCH"
-      });
-      return;
-    }
+    // if (session.userAgent && session.userAgent !== currentUserAgent) {
+    //   res.status(401).json({
+    //     success: false,
+    //     message: "Device mismatch",
+    //     code: "DEVICE_MISMATCH"
+    //   });
+    //   return;
+    // }
 
     const user = await prisma.user.findUnique({
       where: { id },

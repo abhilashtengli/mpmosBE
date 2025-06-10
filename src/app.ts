@@ -12,6 +12,7 @@ import infrastructureRouter from "./routes/eprogress/infradevelopment";
 import inputDistributionRouter from "./routes/eprogress/inputdistribution";
 import projectRouter from "./routes/eprogress/project";
 import trainingRouter from "./routes/eprogress/training";
+import sseRouter from "./routes/sseRoute";
 const app = express();
 app.use(cookieParser());
 
@@ -26,6 +27,7 @@ app.use(
   })
 );
 app.use("/", authRouter);
+app.use("/", sseRouter);
 //content
 app.use("/", galleryRouter);
 app.use("/", projectDetailsRouter);
