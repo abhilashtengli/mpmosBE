@@ -127,6 +127,32 @@ trainingRouter.post(
           pdfKey,
           units,
           userId: user.id
+        },
+        select: {
+          id: true,
+          trainingId: true,
+          project: true,
+          quarter: true,
+          title: true,
+          target: true,
+          achieved: true,
+          district: true,
+          village: true,
+          block: true,
+          beneficiaryMale: true,
+          beneficiaryFemale: true,
+          remarks: true,
+          imageUrl: true,
+          pdfKey: true,
+          units: true,
+          createdAt: true,
+          updatedAt: true,
+          User: {
+            select: {
+              id: true,
+              name: true
+            }
+          }
         }
       });
 
@@ -313,21 +339,41 @@ trainingRouter.put(
       // Perform the update
       const updatedTraining = await prisma.training.update({
         where: { id },
-        data: updateData
+        data: updateData,
+        select: {
+          id: true,
+          trainingId: true,
+          project: true,
+          quarter: true,
+          title: true,
+          target: true,
+          achieved: true,
+          district: true,
+          village: true,
+          block: true,
+          beneficiaryMale: true,
+          beneficiaryFemale: true,
+          remarks: true,
+          imageUrl: true,
+          pdfKey: true,
+          units: true,
+          createdAt: true,
+          updatedAt: true,
+          User: {
+            select: {
+              id: true,
+              name: true
+            }
+          }
+        }
       });
 
-      console.info(
-        `Training updated: ${updatedTraining.id} by user ${user.id}`
-      );
+      console.log("Training updated:", updatedTraining);
 
       res.status(200).json({
         message: "Training updated successfully",
         success: true,
-        data: {
-          id: updatedTraining.id,
-          title: updatedTraining.title,
-          trainingId: updatedTraining.trainingId
-        },
+        data: updatedTraining,
         code: "RESOURCE_UPDATED"
       });
       return;

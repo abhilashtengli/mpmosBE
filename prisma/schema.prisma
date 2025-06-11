@@ -116,7 +116,7 @@ model Quarter {
 
 model InputDistribution {
   id           String   @id @default(uuid())
-  inputDistId  String   
+  inputDistId  String
   project      Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
   projectId    String   @map("project_id")
   quarter      Quarter  @relation(fields: [quarterId], references: [id])
