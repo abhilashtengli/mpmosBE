@@ -507,47 +507,54 @@ projectRouter.delete(
         existingProject._count.inputDistributions;
 
       // Get related record details for audit logging
-      const relatedRecords = await prisma.$transaction([
-        prisma.training.findMany({
-          where: { projectId: id },
-          select: { id: true, title: true }
-        }),
-        prisma.fLD.findMany({
-          where: { projectId: id },
-          select: { id: true, project: true }
-        }),
-        prisma.awarenessProgram.findMany({
-          where: { projectId: id },
-          select: { id: true, project: true }
-        }),
-        prisma.infrastructureDevelopment.findMany({
-          where: { projectId: id },
-          select: { id: true, project: true }
-        }),
-        prisma.inputDistribution.findMany({
-          where: { projectId: id },
-          select: { id: true, project: true }
-        })
-      ]);
+      let relatedRecords;
+      if (totalRelatedRecords > 0) {
+        relatedRecords = await prisma.$transaction([
+          prisma.training.findMany({
+            where: { projectId: id },
+            select: { id: true, title: true }
+          }),
+          prisma.fLD.findMany({
+            where: { projectId: id },
+            select: { id: true, project: true }
+          }),
+          prisma.awarenessProgram.findMany({
+            where: { projectId: id },
+            select: { id: true, project: true }
+          }),
+          prisma.infrastructureDevelopment.findMany({
+            where: { projectId: id },
+            select: { id: true, project: true }
+          }),
+          prisma.inputDistribution.findMany({
+            where: { projectId: id },
+            select: { id: true, project: true }
+          })
+        ]);
+      }
 
-      // Perform deletion with cascading (handled by Prisma)
       // Note: This will delete all related records in the child tables
-      // The cascade must be set up in your database schema
-      const deletedProject = await prisma.project.delete({
-        where: { id }
+      // Perform deletion with transaction for data integrity
+      const deletedProject = await prisma.$transaction(async (tx) => {
+        // Delete the project (cascading deletes should handle related records)
+        const project = await tx.project.delete({
+          where: { id }
+        });
+
+        return project;
       });
 
       // Log the deletion and its cascading effects
-      console.info(`Project deleted: ${deletedProject.id} by user ${user.id}`);
-      console.info(`Cascade deleted ${totalRelatedRecords} related records`);
+      // console.info(`Project deleted: ${deletedProject.id} by user ${user.id}`);
+      // console.info(`Cascade deleted ${totalRelatedRecords} related records`);
 
       // If needed, log detailed information about deleted related records
-      if (totalRelatedRecords > 0) {
-        console.info(
-          "Deleted related records:",
-          JSON.stringify(relatedRecords)
-        );
-      }
+      // if (totalRelatedRecords > 0) {
+      //   console.info(
+      //     "Deleted related records:",
+      //     JSON.stringify(relatedRecords)
+      //   );
+      // }
 
       // Return success response with details about what was deleted
       res.status(200).json({
@@ -563,6 +570,40 @@ projectRouter.delete(
       return;
     } catch (err) {
       console.error(`Error deleting project:`, err);
+      // Handle specific Prisma errors
+      const error = err as any; // or create a proper error interface
+
+      if (error.code === "P2002") {
+        res.status(409).json({
+          success: false,
+          message: "Cannot delete project due to database constraints",
+          code: "DATABASE_CONSTRAINT",
+          status: 409
+        });
+        return;
+      }
+
+      if (error.code === "P2025") {
+        res.status(404).json({
+          success: false,
+          message: "Project not found or already deleted",
+          code: "RESOURCE_NOT_FOUND",
+          status: 404
+        });
+        return;
+      }
+
+      // Handle transaction errors
+      if (error.message && error.message.includes("transaction")) {
+        res.status(500).json({
+          success: false,
+          message: "Database transaction failed. Please try again",
+          code: "TRANSACTION_FAILED",
+          status: 500
+        });
+        return;
+      }
+
       res.status(500).json({
         success: false,
         message: "Something went wrong, Please try again later",
