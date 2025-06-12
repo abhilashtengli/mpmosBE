@@ -119,6 +119,28 @@ infrastructureRouter.post(
           imageUrl,
           imageKey,
           userId: user.id
+        },
+        select: {
+          id: true,
+          InfraDevId: true,
+          project: true,
+          quarter: true,
+          target: true,
+          achieved: true,
+          district: true,
+          village: true,
+          block: true,
+          remarks: true,
+          imageUrl: true,
+          createdAt: true,
+          imageKey: true,
+          updatedAt: true,
+          User: {
+            select: {
+              id: true,
+              name: true
+            }
+          }
         }
       });
 
@@ -291,12 +313,34 @@ infrastructureRouter.put(
       // Perform the update
       const updatedInfra = await prisma.infrastructureDevelopment.update({
         where: { id },
-        data: updateData
+        data: updateData,
+        select: {
+          id: true,
+          InfraDevId: true,
+          project: true,
+          quarter: true,
+          target: true,
+          achieved: true,
+          district: true,
+          village: true,
+          block: true,
+          remarks: true,
+          imageUrl: true,
+          createdAt: true,
+          imageKey: true,
+          updatedAt: true,
+          User: {
+            select: {
+              id: true,
+              name: true
+            }
+          }
+        }
       });
 
-      // console.info(
-      //   `Infrastructure Development updated: ${updatedInfra.id} by user ${user.id}`
-      // );
+      console.log(
+        `Infrastructure Development updated: ${updatedInfra.id} by user ${user.id}`
+      );
 
       res.status(200).json({
         message: "Infrastructure Development updated successfully",
