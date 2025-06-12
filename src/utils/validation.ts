@@ -249,11 +249,11 @@ export const createTrainingValidation = z
     units: z
       .string()
       .trim()
-      .transform((val) => (val === "" ? undefined : val))
-      .optional()
-      .refine((val) => val === undefined || val.length >= 1, {
-        message: "Units must be specified"
+      .refine((val) => val === "" || val.length >= 1, {
+        message: "Units must be specified if provided"
       })
+      .transform((val) => (val === "" ? null : val))
+      .optional()
       .nullable()
   })
   .refine(
@@ -379,11 +379,11 @@ export const updateTrainingValidation = z
     units: z
       .string()
       .trim()
-      .transform((val) => (val === "" ? undefined : val))
-      .optional()
-      .refine((val) => val === undefined || val.length >= 1, {
-        message: "Units must be specified"
+      .refine((val) => val === "" || val.length >= 1, {
+        message: "Units must be specified if provided"
       })
+      .transform((val) => (val === "" ? null : val))
+      .optional()
       .nullable()
   })
   .refine(
@@ -508,11 +508,11 @@ export const createAwarenessProgramValidation = z
     units: z
       .string()
       .trim()
-      .transform((val) => (val === "" ? undefined : val))
-      .optional()
-      .refine((val) => val === undefined || val.length >= 1, {
-        message: "Units must be specified"
+      .refine((val) => val === "" || val.length >= 1, {
+        message: "Units must be specified if provided"
       })
+      .transform((val) => (val === "" ? null : val))
+      .optional()
       .nullable()
   })
   .refine(
@@ -617,11 +617,11 @@ export const updateAwarenessProgramValidation = z
     units: z
       .string()
       .trim()
-      .transform((val) => (val === "" ? undefined : val))
-      .optional()
-      .refine((val) => val === undefined || val.length >= 1, {
-        message: "Units must be specified"
+      .refine((val) => val === "" || val.length >= 1, {
+        message: "Units must be specified if provided"
       })
+      .transform((val) => (val === "" ? null : val))
+      .optional()
       .nullable()
   })
   .refine(
@@ -689,7 +689,15 @@ export const createFldValidation = z
       .number()
       .int()
       .nonnegative({ message: "Achieved must be a non-negative integer" }),
-    units: z.string().optional()
+    units: z
+      .string()
+      .trim()
+      .refine((val) => val === "" || val.length >= 1, {
+        message: "Units must be specified if provided"
+      })
+      .transform((val) => (val === "" ? null : val))
+      .optional()
+      .nullable()
   })
   .refine(
     (data) => {
@@ -740,7 +748,15 @@ export const updateFldValidation = z
       .int()
       .nonnegative({ message: "Achieved must be a non-negative integer" })
       .optional(),
-    units: z.string().optional()
+    units: z
+      .string()
+      .trim()
+      .refine((val) => val === "" || val.length >= 1, {
+        message: "Units must be specified if provided"
+      })
+      .transform((val) => (val === "" ? null : val))
+      .optional()
+      .nullable()
   })
   .refine(
     (data) => {

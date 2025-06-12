@@ -108,6 +108,27 @@ fldRouter.post("/create-fld", userAuth, async (req: Request, res: Response) => {
         achieved,
         units,
         userId: user.id
+      },
+      select: {
+        id: true,
+        fldId: true,
+        project: true,
+        quarter: true,
+        remarks: true,
+        target: true,
+        achieved: true,
+        district: true,
+        village: true,
+        block: true,
+        units: true,
+        createdAt: true,
+        updatedAt: true,
+        User: {
+          select: {
+            id: true,
+            name: true
+          }
+        }
       }
     });
 
@@ -277,7 +298,28 @@ fldRouter.put(
       // Perform the update
       const updatedFld = await prisma.fLD.update({
         where: { id },
-        data: updateData
+        data: updateData,
+        select: {
+          id: true,
+          fldId: true,
+          project: true,
+          quarter: true,
+          remarks: true,
+          target: true,
+          achieved: true,
+          district: true,
+          village: true,
+          block: true,
+          units: true,
+          createdAt: true,
+          updatedAt: true,
+          User: {
+            select: {
+              id: true,
+              name: true
+            }
+          }
+        }
       });
 
       console.info(`FLD updated: ${updatedFld.id} by user ${user.id}`);
@@ -285,10 +327,7 @@ fldRouter.put(
       res.status(200).json({
         message: "FLD updated successfully",
         success: true,
-        data: {
-          id: updatedFld.id,
-          fldId: updatedFld.fldId
-        },
+        data: updatedFld,
         code: "RESOURCE_UPDATED"
       });
       return;
