@@ -62,7 +62,8 @@ awarenessProgramRouter.post(
         beneficiaryFemale,
         imageUrl,
         imageKey,
-        units
+        units,
+        remarks
       } = result.data;
 
       const project = await prisma.project.findUnique({
@@ -120,7 +121,34 @@ awarenessProgramRouter.post(
           imageUrl,
           imageKey,
           units,
+          remarks,
           userId: user.id
+        },
+        select: {
+          id: true,
+          awarnessprogramId: true,
+          project: true,
+          quarter: true,
+          title: true,
+          target: true,
+          achieved: true,
+          district: true,
+          village: true,
+          block: true,
+          beneficiaryMale: true,
+          beneficiaryFemale: true,
+          imageUrl: true,
+          remarks: true,
+          imageKey: true,
+          units: true,
+          createdAt: true,
+          updatedAt: true,
+          User: {
+            select: {
+              id: true,
+              name: true
+            }
+          }
         }
       });
 
@@ -254,12 +282,14 @@ awarenessProgramRouter.put(
         beneficiaryFemale,
         imageUrl,
         imageKey,
+        remarks,
         units
       } = result.data;
 
       if (projectId !== undefined) updateData.projectId = projectId;
       if (quarterId !== undefined) updateData.quarterId = quarterId;
       if (title !== undefined) updateData.title = title;
+      if (remarks !== undefined) updateData.remarks = remarks;
       if (target !== undefined) updateData.target = target;
       if (achieved && !target) {
         if (achieved > existingProgram.target) {
@@ -302,7 +332,33 @@ awarenessProgramRouter.put(
       // Perform the update
       const updatedProgram = await prisma.awarenessProgram.update({
         where: { id },
-        data: updateData
+        data: updateData,
+        select: {
+          id: true,
+          awarnessprogramId: true,
+          project: true,
+          quarter: true,
+          title: true,
+          target: true,
+          achieved: true,
+          district: true,
+          village: true,
+          block: true,
+          beneficiaryMale: true,
+          beneficiaryFemale: true,
+          imageUrl: true,
+          remarks: true,
+          imageKey: true,
+          units: true,
+          createdAt: true,
+          updatedAt: true,
+          User: {
+            select: {
+              id: true,
+              name: true
+            }
+          }
+        }
       });
 
       console.info(
@@ -312,11 +368,7 @@ awarenessProgramRouter.put(
       res.status(200).json({
         message: "Awareness Program updated successfully",
         success: true,
-        data: {
-          id: updatedProgram.id,
-          title: updatedProgram.title,
-          awarnessprogramId: updatedProgram.awarnessprogramId
-        },
+        data: updatedProgram,
         code: "RESOURCE_UPDATED"
       });
       return;
@@ -431,6 +483,7 @@ awarenessProgramRouter.get(
           awarnessprogramId: true,
           project: {
             select: {
+              title: true,
               implementingAgency: true,
               director: true,
               locationState: true,
@@ -439,6 +492,7 @@ awarenessProgramRouter.get(
           },
           quarter: {
             select: {
+              id: true,
               number: true,
               year: true
             }
@@ -454,6 +508,7 @@ awarenessProgramRouter.get(
           imageUrl: true,
           imageKey: true,
           units: true,
+          remarks: true,
           createdAt: true,
           updatedAt: true
         }
@@ -520,6 +575,7 @@ awarenessProgramRouter.get(
           beneficiaryMale: true,
           beneficiaryFemale: true,
           imageUrl: true,
+          remarks: true,
           imageKey: true,
           units: true,
           createdAt: true,

@@ -47,7 +47,7 @@ fldRouter.post("/create-fld", userAuth, async (req: Request, res: Response) => {
     const {
       projectId,
       quarterId,
-      description,
+      remarks,
       district,
       village,
       block,
@@ -100,7 +100,7 @@ fldRouter.post("/create-fld", userAuth, async (req: Request, res: Response) => {
         fldId: newFLDId,
         projectId,
         quarterId,
-        description,
+        remarks,
         district,
         village,
         block,
@@ -230,7 +230,7 @@ fldRouter.put(
       const {
         projectId,
         quarterId,
-        description,
+        remarks,
         district,
         village,
         block,
@@ -241,7 +241,7 @@ fldRouter.put(
 
       if (projectId !== undefined) updateData.projectId = projectId;
       if (quarterId !== undefined) updateData.quarterId = quarterId;
-      if (description !== undefined) updateData.description = description;
+      if (remarks !== undefined) updateData.remarks = remarks;
       if (district !== undefined) updateData.district = district;
       if (village !== undefined) updateData.village = village;
       if (block !== undefined) updateData.block = block;
@@ -417,7 +417,7 @@ fldRouter.get(
               year: true
             }
           },
-          description: true,
+          remarks: true,
           target: true,
           achieved: true,
           district: true,
@@ -482,7 +482,7 @@ fldRouter.get(
           fldId: true,
           project: true,
           quarter: true,
-          description: true,
+          remarks: true,
           target: true,
           achieved: true,
           district: true,

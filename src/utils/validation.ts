@@ -246,7 +246,15 @@ export const createTrainingValidation = z
       .optional()
       .nullable(),
     pdfKey: z.string().trim().optional().nullable(),
-    units: z.string().trim().optional().nullable()
+    units: z
+      .string()
+      .trim()
+      .transform((val) => (val === "" ? undefined : val))
+      .optional()
+      .refine((val) => val === undefined || val.length >= 1, {
+        message: "Units must be specified"
+      })
+      .nullable()
   })
   .refine(
     (data) => {
@@ -368,7 +376,15 @@ export const updateTrainingValidation = z
       .optional()
       .nullable(),
     pdfKey: z.string().trim().optional().nullable(),
-    units: z.string().trim().optional().nullable()
+    units: z
+      .string()
+      .trim()
+      .transform((val) => (val === "" ? undefined : val))
+      .optional()
+      .refine((val) => val === undefined || val.length >= 1, {
+        message: "Units must be specified"
+      })
+      .nullable()
   })
   .refine(
     (data) => {
@@ -450,6 +466,12 @@ export const createAwarenessProgramValidation = z
       .trim()
       .min(2, { message: "District must be at least 2 characters" })
       .max(100, { message: "District cannot exceed 100 characters" }),
+    remarks: z
+      .string()
+      .trim()
+      .max(300, { message: "Remarks cannot exceed 300 characters" })
+      .optional()
+      .nullable(),
     village: z
       .string()
       .trim()
@@ -483,7 +505,15 @@ export const createAwarenessProgramValidation = z
       .optional()
       .nullable(),
     imageKey: z.string().trim().optional().nullable(),
-    units: z.string().trim().optional().nullable()
+    units: z
+      .string()
+      .trim()
+      .transform((val) => (val === "" ? undefined : val))
+      .optional()
+      .refine((val) => val === undefined || val.length >= 1, {
+        message: "Units must be specified"
+      })
+      .nullable()
   })
   .refine(
     (data) => {
@@ -537,6 +567,12 @@ export const updateAwarenessProgramValidation = z
       .int({ message: "Achieved must be an integer" })
       .nonnegative({ message: "Achieved must be zero or positive" })
       .optional(),
+    remarks: z
+      .string()
+      .trim()
+      .max(300, { message: "Remarks cannot exceed 300 characters" })
+      .optional()
+      .nullable(),
     district: z
       .string()
       .trim()
@@ -578,7 +614,15 @@ export const updateAwarenessProgramValidation = z
       .optional()
       .nullable(),
     imageKey: z.string().trim().optional().nullable(),
-    units: z.string().trim().optional().nullable()
+    units: z
+      .string()
+      .trim()
+      .transform((val) => (val === "" ? undefined : val))
+      .optional()
+      .refine((val) => val === undefined || val.length >= 1, {
+        message: "Units must be specified"
+      })
+      .nullable()
   })
   .refine(
     (data) => {
@@ -621,7 +665,13 @@ export const createFldValidation = z
   .object({
     projectId: z.string().uuid({ message: "Valid project ID is required" }),
     quarterId: z.string().uuid({ message: "Valid quarter ID is required" }),
-    description: z.string().max(200).optional(),
+    remarks: z
+      .string()
+      .trim()
+      .max(300, { message: "Remarks cannot exceed 300 characters" })
+      .optional()
+      .nullable(),
+
     district: z
       .string()
       .max(100, { message: "District must be 100 characters or less" }),
@@ -662,7 +712,12 @@ export const updateFldValidation = z
       .string()
       .uuid({ message: "Valid quarter ID is required" })
       .optional(),
-    description: z.string().max(200).optional(),
+    remarks: z
+      .string()
+      .trim()
+      .max(300, { message: "Remarks cannot exceed 300 characters" })
+      .optional()
+      .nullable(),
     district: z
       .string()
       .max(100, { message: "District must be 100 characters or less" })

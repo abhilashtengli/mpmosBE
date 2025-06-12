@@ -216,7 +216,7 @@ exports.Prisma.FLDScalarFieldEnum = {
   fldId: 'fldId',
   projectId: 'projectId',
   quarterId: 'quarterId',
-  description: 'description',
+  remarks: 'remarks',
   district: 'district',
   village: 'village',
   block: 'block',
@@ -244,6 +244,7 @@ exports.Prisma.AwarenessProgramScalarFieldEnum = {
   imageUrl: 'imageUrl',
   imageKey: 'imageKey',
   units: 'units',
+  remarks: 'remarks',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   userId: 'userId'

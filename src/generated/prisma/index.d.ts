@@ -10015,7 +10015,7 @@ export namespace Prisma {
     fldId: string | null
     projectId: string | null
     quarterId: string | null
-    description: string | null
+    remarks: string | null
     district: string | null
     village: string | null
     block: string | null
@@ -10032,7 +10032,7 @@ export namespace Prisma {
     fldId: string | null
     projectId: string | null
     quarterId: string | null
-    description: string | null
+    remarks: string | null
     district: string | null
     village: string | null
     block: string | null
@@ -10049,7 +10049,7 @@ export namespace Prisma {
     fldId: number
     projectId: number
     quarterId: number
-    description: number
+    remarks: number
     district: number
     village: number
     block: number
@@ -10078,7 +10078,7 @@ export namespace Prisma {
     fldId?: true
     projectId?: true
     quarterId?: true
-    description?: true
+    remarks?: true
     district?: true
     village?: true
     block?: true
@@ -10095,7 +10095,7 @@ export namespace Prisma {
     fldId?: true
     projectId?: true
     quarterId?: true
-    description?: true
+    remarks?: true
     district?: true
     village?: true
     block?: true
@@ -10112,7 +10112,7 @@ export namespace Prisma {
     fldId?: true
     projectId?: true
     quarterId?: true
-    description?: true
+    remarks?: true
     district?: true
     village?: true
     block?: true
@@ -10216,7 +10216,7 @@ export namespace Prisma {
     fldId: string
     projectId: string
     quarterId: string
-    description: string | null
+    remarks: string | null
     district: string
     village: string
     block: string
@@ -10252,7 +10252,7 @@ export namespace Prisma {
     fldId?: boolean
     projectId?: boolean
     quarterId?: boolean
-    description?: boolean
+    remarks?: boolean
     district?: boolean
     village?: boolean
     block?: boolean
@@ -10272,7 +10272,7 @@ export namespace Prisma {
     fldId?: boolean
     projectId?: boolean
     quarterId?: boolean
-    description?: boolean
+    remarks?: boolean
     district?: boolean
     village?: boolean
     block?: boolean
@@ -10292,7 +10292,7 @@ export namespace Prisma {
     fldId?: boolean
     projectId?: boolean
     quarterId?: boolean
-    description?: boolean
+    remarks?: boolean
     district?: boolean
     village?: boolean
     block?: boolean
@@ -10312,7 +10312,7 @@ export namespace Prisma {
     fldId?: boolean
     projectId?: boolean
     quarterId?: boolean
-    description?: boolean
+    remarks?: boolean
     district?: boolean
     village?: boolean
     block?: boolean
@@ -10324,7 +10324,7 @@ export namespace Prisma {
     userId?: boolean
   }
 
-  export type FLDOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "fldId" | "projectId" | "quarterId" | "description" | "district" | "village" | "block" | "target" | "achieved" | "units" | "createdAt" | "updatedAt" | "userId", ExtArgs["result"]["fLD"]>
+  export type FLDOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "fldId" | "projectId" | "quarterId" | "remarks" | "district" | "village" | "block" | "target" | "achieved" | "units" | "createdAt" | "updatedAt" | "userId", ExtArgs["result"]["fLD"]>
   export type FLDInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     project?: boolean | ProjectDefaultArgs<ExtArgs>
     quarter?: boolean | QuarterDefaultArgs<ExtArgs>
@@ -10353,7 +10353,7 @@ export namespace Prisma {
       fldId: string
       projectId: string
       quarterId: string
-      description: string | null
+      remarks: string | null
       district: string
       village: string
       block: string
@@ -10793,7 +10793,7 @@ export namespace Prisma {
     readonly fldId: FieldRef<"FLD", 'String'>
     readonly projectId: FieldRef<"FLD", 'String'>
     readonly quarterId: FieldRef<"FLD", 'String'>
-    readonly description: FieldRef<"FLD", 'String'>
+    readonly remarks: FieldRef<"FLD", 'String'>
     readonly district: FieldRef<"FLD", 'String'>
     readonly village: FieldRef<"FLD", 'String'>
     readonly block: FieldRef<"FLD", 'String'>
@@ -11278,6 +11278,7 @@ export namespace Prisma {
     imageUrl: string | null
     imageKey: string | null
     units: string | null
+    remarks: string | null
     createdAt: Date | null
     updatedAt: Date | null
     userId: string | null
@@ -11299,6 +11300,7 @@ export namespace Prisma {
     imageUrl: string | null
     imageKey: string | null
     units: string | null
+    remarks: string | null
     createdAt: Date | null
     updatedAt: Date | null
     userId: string | null
@@ -11320,6 +11322,7 @@ export namespace Prisma {
     imageUrl: number
     imageKey: number
     units: number
+    remarks: number
     createdAt: number
     updatedAt: number
     userId: number
@@ -11357,6 +11360,7 @@ export namespace Prisma {
     imageUrl?: true
     imageKey?: true
     units?: true
+    remarks?: true
     createdAt?: true
     updatedAt?: true
     userId?: true
@@ -11378,6 +11382,7 @@ export namespace Prisma {
     imageUrl?: true
     imageKey?: true
     units?: true
+    remarks?: true
     createdAt?: true
     updatedAt?: true
     userId?: true
@@ -11399,6 +11404,7 @@ export namespace Prisma {
     imageUrl?: true
     imageKey?: true
     units?: true
+    remarks?: true
     createdAt?: true
     updatedAt?: true
     userId?: true
@@ -11507,6 +11513,7 @@ export namespace Prisma {
     imageUrl: string | null
     imageKey: string | null
     units: string | null
+    remarks: string | null
     createdAt: Date
     updatedAt: Date
     userId: string | null
@@ -11547,6 +11554,7 @@ export namespace Prisma {
     imageUrl?: boolean
     imageKey?: boolean
     units?: boolean
+    remarks?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     userId?: boolean
@@ -11571,6 +11579,7 @@ export namespace Prisma {
     imageUrl?: boolean
     imageKey?: boolean
     units?: boolean
+    remarks?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     userId?: boolean
@@ -11595,6 +11604,7 @@ export namespace Prisma {
     imageUrl?: boolean
     imageKey?: boolean
     units?: boolean
+    remarks?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     userId?: boolean
@@ -11619,12 +11629,13 @@ export namespace Prisma {
     imageUrl?: boolean
     imageKey?: boolean
     units?: boolean
+    remarks?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     userId?: boolean
   }
 
-  export type AwarenessProgramOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "awarnessprogramId" | "projectId" | "quarterId" | "title" | "target" | "achieved" | "district" | "village" | "block" | "beneficiaryMale" | "beneficiaryFemale" | "imageUrl" | "imageKey" | "units" | "createdAt" | "updatedAt" | "userId", ExtArgs["result"]["awarenessProgram"]>
+  export type AwarenessProgramOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "awarnessprogramId" | "projectId" | "quarterId" | "title" | "target" | "achieved" | "district" | "village" | "block" | "beneficiaryMale" | "beneficiaryFemale" | "imageUrl" | "imageKey" | "units" | "remarks" | "createdAt" | "updatedAt" | "userId", ExtArgs["result"]["awarenessProgram"]>
   export type AwarenessProgramInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     project?: boolean | ProjectDefaultArgs<ExtArgs>
     quarter?: boolean | QuarterDefaultArgs<ExtArgs>
@@ -11664,6 +11675,7 @@ export namespace Prisma {
       imageUrl: string | null
       imageKey: string | null
       units: string | null
+      remarks: string | null
       createdAt: Date
       updatedAt: Date
       userId: string | null
@@ -12108,6 +12120,7 @@ export namespace Prisma {
     readonly imageUrl: FieldRef<"AwarenessProgram", 'String'>
     readonly imageKey: FieldRef<"AwarenessProgram", 'String'>
     readonly units: FieldRef<"AwarenessProgram", 'String'>
+    readonly remarks: FieldRef<"AwarenessProgram", 'String'>
     readonly createdAt: FieldRef<"AwarenessProgram", 'DateTime'>
     readonly updatedAt: FieldRef<"AwarenessProgram", 'DateTime'>
     readonly userId: FieldRef<"AwarenessProgram", 'String'>
@@ -18527,7 +18540,7 @@ export namespace Prisma {
     fldId: 'fldId',
     projectId: 'projectId',
     quarterId: 'quarterId',
-    description: 'description',
+    remarks: 'remarks',
     district: 'district',
     village: 'village',
     block: 'block',
@@ -18558,6 +18571,7 @@ export namespace Prisma {
     imageUrl: 'imageUrl',
     imageKey: 'imageKey',
     units: 'units',
+    remarks: 'remarks',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
     userId: 'userId'
@@ -19421,7 +19435,7 @@ export namespace Prisma {
     fldId?: StringFilter<"FLD"> | string
     projectId?: StringFilter<"FLD"> | string
     quarterId?: StringFilter<"FLD"> | string
-    description?: StringNullableFilter<"FLD"> | string | null
+    remarks?: StringNullableFilter<"FLD"> | string | null
     district?: StringFilter<"FLD"> | string
     village?: StringFilter<"FLD"> | string
     block?: StringFilter<"FLD"> | string
@@ -19441,7 +19455,7 @@ export namespace Prisma {
     fldId?: SortOrder
     projectId?: SortOrder
     quarterId?: SortOrder
-    description?: SortOrderInput | SortOrder
+    remarks?: SortOrderInput | SortOrder
     district?: SortOrder
     village?: SortOrder
     block?: SortOrder
@@ -19464,7 +19478,7 @@ export namespace Prisma {
     NOT?: FLDWhereInput | FLDWhereInput[]
     projectId?: StringFilter<"FLD"> | string
     quarterId?: StringFilter<"FLD"> | string
-    description?: StringNullableFilter<"FLD"> | string | null
+    remarks?: StringNullableFilter<"FLD"> | string | null
     district?: StringFilter<"FLD"> | string
     village?: StringFilter<"FLD"> | string
     block?: StringFilter<"FLD"> | string
@@ -19484,7 +19498,7 @@ export namespace Prisma {
     fldId?: SortOrder
     projectId?: SortOrder
     quarterId?: SortOrder
-    description?: SortOrderInput | SortOrder
+    remarks?: SortOrderInput | SortOrder
     district?: SortOrder
     village?: SortOrder
     block?: SortOrder
@@ -19509,7 +19523,7 @@ export namespace Prisma {
     fldId?: StringWithAggregatesFilter<"FLD"> | string
     projectId?: StringWithAggregatesFilter<"FLD"> | string
     quarterId?: StringWithAggregatesFilter<"FLD"> | string
-    description?: StringNullableWithAggregatesFilter<"FLD"> | string | null
+    remarks?: StringNullableWithAggregatesFilter<"FLD"> | string | null
     district?: StringWithAggregatesFilter<"FLD"> | string
     village?: StringWithAggregatesFilter<"FLD"> | string
     block?: StringWithAggregatesFilter<"FLD"> | string
@@ -19540,6 +19554,7 @@ export namespace Prisma {
     imageUrl?: StringNullableFilter<"AwarenessProgram"> | string | null
     imageKey?: StringNullableFilter<"AwarenessProgram"> | string | null
     units?: StringNullableFilter<"AwarenessProgram"> | string | null
+    remarks?: StringNullableFilter<"AwarenessProgram"> | string | null
     createdAt?: DateTimeFilter<"AwarenessProgram"> | Date | string
     updatedAt?: DateTimeFilter<"AwarenessProgram"> | Date | string
     userId?: StringNullableFilter<"AwarenessProgram"> | string | null
@@ -19564,6 +19579,7 @@ export namespace Prisma {
     imageUrl?: SortOrderInput | SortOrder
     imageKey?: SortOrderInput | SortOrder
     units?: SortOrderInput | SortOrder
+    remarks?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     userId?: SortOrderInput | SortOrder
@@ -19591,6 +19607,7 @@ export namespace Prisma {
     imageUrl?: StringNullableFilter<"AwarenessProgram"> | string | null
     imageKey?: StringNullableFilter<"AwarenessProgram"> | string | null
     units?: StringNullableFilter<"AwarenessProgram"> | string | null
+    remarks?: StringNullableFilter<"AwarenessProgram"> | string | null
     createdAt?: DateTimeFilter<"AwarenessProgram"> | Date | string
     updatedAt?: DateTimeFilter<"AwarenessProgram"> | Date | string
     userId?: StringNullableFilter<"AwarenessProgram"> | string | null
@@ -19615,6 +19632,7 @@ export namespace Prisma {
     imageUrl?: SortOrderInput | SortOrder
     imageKey?: SortOrderInput | SortOrder
     units?: SortOrderInput | SortOrder
+    remarks?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     userId?: SortOrderInput | SortOrder
@@ -19644,6 +19662,7 @@ export namespace Prisma {
     imageUrl?: StringNullableWithAggregatesFilter<"AwarenessProgram"> | string | null
     imageKey?: StringNullableWithAggregatesFilter<"AwarenessProgram"> | string | null
     units?: StringNullableWithAggregatesFilter<"AwarenessProgram"> | string | null
+    remarks?: StringNullableWithAggregatesFilter<"AwarenessProgram"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"AwarenessProgram"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"AwarenessProgram"> | Date | string
     userId?: StringNullableWithAggregatesFilter<"AwarenessProgram"> | string | null
@@ -20800,7 +20819,7 @@ export namespace Prisma {
   export type FLDCreateInput = {
     id?: string
     fldId: string
-    description?: string | null
+    remarks?: string | null
     district: string
     village: string
     block: string
@@ -20819,7 +20838,7 @@ export namespace Prisma {
     fldId: string
     projectId: string
     quarterId: string
-    description?: string | null
+    remarks?: string | null
     district: string
     village: string
     block: string
@@ -20834,7 +20853,7 @@ export namespace Prisma {
   export type FLDUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     fldId?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
     block?: StringFieldUpdateOperationsInput | string
@@ -20853,7 +20872,7 @@ export namespace Prisma {
     fldId?: StringFieldUpdateOperationsInput | string
     projectId?: StringFieldUpdateOperationsInput | string
     quarterId?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
     block?: StringFieldUpdateOperationsInput | string
@@ -20870,7 +20889,7 @@ export namespace Prisma {
     fldId: string
     projectId: string
     quarterId: string
-    description?: string | null
+    remarks?: string | null
     district: string
     village: string
     block: string
@@ -20885,7 +20904,7 @@ export namespace Prisma {
   export type FLDUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     fldId?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
     block?: StringFieldUpdateOperationsInput | string
@@ -20901,7 +20920,7 @@ export namespace Prisma {
     fldId?: StringFieldUpdateOperationsInput | string
     projectId?: StringFieldUpdateOperationsInput | string
     quarterId?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
     block?: StringFieldUpdateOperationsInput | string
@@ -20927,6 +20946,7 @@ export namespace Prisma {
     imageUrl?: string | null
     imageKey?: string | null
     units?: string | null
+    remarks?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     project: ProjectCreateNestedOneWithoutAwarenessProgramsInput
@@ -20950,6 +20970,7 @@ export namespace Prisma {
     imageUrl?: string | null
     imageKey?: string | null
     units?: string | null
+    remarks?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     userId?: string | null
@@ -20969,6 +20990,7 @@ export namespace Prisma {
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     imageKey?: NullableStringFieldUpdateOperationsInput | string | null
     units?: NullableStringFieldUpdateOperationsInput | string | null
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     project?: ProjectUpdateOneRequiredWithoutAwarenessProgramsNestedInput
@@ -20992,6 +21014,7 @@ export namespace Prisma {
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     imageKey?: NullableStringFieldUpdateOperationsInput | string | null
     units?: NullableStringFieldUpdateOperationsInput | string | null
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -21013,6 +21036,7 @@ export namespace Prisma {
     imageUrl?: string | null
     imageKey?: string | null
     units?: string | null
+    remarks?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     userId?: string | null
@@ -21032,6 +21056,7 @@ export namespace Prisma {
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     imageKey?: NullableStringFieldUpdateOperationsInput | string | null
     units?: NullableStringFieldUpdateOperationsInput | string | null
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -21052,6 +21077,7 @@ export namespace Prisma {
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     imageKey?: NullableStringFieldUpdateOperationsInput | string | null
     units?: NullableStringFieldUpdateOperationsInput | string | null
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -22252,7 +22278,7 @@ export namespace Prisma {
     fldId?: SortOrder
     projectId?: SortOrder
     quarterId?: SortOrder
-    description?: SortOrder
+    remarks?: SortOrder
     district?: SortOrder
     village?: SortOrder
     block?: SortOrder
@@ -22274,7 +22300,7 @@ export namespace Prisma {
     fldId?: SortOrder
     projectId?: SortOrder
     quarterId?: SortOrder
-    description?: SortOrder
+    remarks?: SortOrder
     district?: SortOrder
     village?: SortOrder
     block?: SortOrder
@@ -22291,7 +22317,7 @@ export namespace Prisma {
     fldId?: SortOrder
     projectId?: SortOrder
     quarterId?: SortOrder
-    description?: SortOrder
+    remarks?: SortOrder
     district?: SortOrder
     village?: SortOrder
     block?: SortOrder
@@ -22324,6 +22350,7 @@ export namespace Prisma {
     imageUrl?: SortOrder
     imageKey?: SortOrder
     units?: SortOrder
+    remarks?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     userId?: SortOrder
@@ -22352,6 +22379,7 @@ export namespace Prisma {
     imageUrl?: SortOrder
     imageKey?: SortOrder
     units?: SortOrder
+    remarks?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     userId?: SortOrder
@@ -22373,6 +22401,7 @@ export namespace Prisma {
     imageUrl?: SortOrder
     imageKey?: SortOrder
     units?: SortOrder
+    remarks?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     userId?: SortOrder
@@ -24338,7 +24367,7 @@ export namespace Prisma {
   export type FLDCreateWithoutUserInput = {
     id?: string
     fldId: string
-    description?: string | null
+    remarks?: string | null
     district: string
     village: string
     block: string
@@ -24356,7 +24385,7 @@ export namespace Prisma {
     fldId: string
     projectId: string
     quarterId: string
-    description?: string | null
+    remarks?: string | null
     district: string
     village: string
     block: string
@@ -24391,6 +24420,7 @@ export namespace Prisma {
     imageUrl?: string | null
     imageKey?: string | null
     units?: string | null
+    remarks?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     project: ProjectCreateNestedOneWithoutAwarenessProgramsInput
@@ -24413,6 +24443,7 @@ export namespace Prisma {
     imageUrl?: string | null
     imageKey?: string | null
     units?: string | null
+    remarks?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -24786,7 +24817,7 @@ export namespace Prisma {
     fldId?: StringFilter<"FLD"> | string
     projectId?: StringFilter<"FLD"> | string
     quarterId?: StringFilter<"FLD"> | string
-    description?: StringNullableFilter<"FLD"> | string | null
+    remarks?: StringNullableFilter<"FLD"> | string | null
     district?: StringFilter<"FLD"> | string
     village?: StringFilter<"FLD"> | string
     block?: StringFilter<"FLD"> | string
@@ -24833,6 +24864,7 @@ export namespace Prisma {
     imageUrl?: StringNullableFilter<"AwarenessProgram"> | string | null
     imageKey?: StringNullableFilter<"AwarenessProgram"> | string | null
     units?: StringNullableFilter<"AwarenessProgram"> | string | null
+    remarks?: StringNullableFilter<"AwarenessProgram"> | string | null
     createdAt?: DateTimeFilter<"AwarenessProgram"> | Date | string
     updatedAt?: DateTimeFilter<"AwarenessProgram"> | Date | string
     userId?: StringNullableFilter<"AwarenessProgram"> | string | null
@@ -25222,7 +25254,7 @@ export namespace Prisma {
   export type FLDCreateWithoutProjectInput = {
     id?: string
     fldId: string
-    description?: string | null
+    remarks?: string | null
     district: string
     village: string
     block: string
@@ -25239,7 +25271,7 @@ export namespace Prisma {
     id?: string
     fldId: string
     quarterId: string
-    description?: string | null
+    remarks?: string | null
     district: string
     village: string
     block: string
@@ -25275,6 +25307,7 @@ export namespace Prisma {
     imageUrl?: string | null
     imageKey?: string | null
     units?: string | null
+    remarks?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     quarter: QuarterCreateNestedOneWithoutAwarenessProgramsInput
@@ -25296,6 +25329,7 @@ export namespace Prisma {
     imageUrl?: string | null
     imageKey?: string | null
     units?: string | null
+    remarks?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     userId?: string | null
@@ -25664,7 +25698,7 @@ export namespace Prisma {
   export type FLDCreateWithoutQuarterInput = {
     id?: string
     fldId: string
-    description?: string | null
+    remarks?: string | null
     district: string
     village: string
     block: string
@@ -25681,7 +25715,7 @@ export namespace Prisma {
     id?: string
     fldId: string
     projectId: string
-    description?: string | null
+    remarks?: string | null
     district: string
     village: string
     block: string
@@ -25717,6 +25751,7 @@ export namespace Prisma {
     imageUrl?: string | null
     imageKey?: string | null
     units?: string | null
+    remarks?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     project: ProjectCreateNestedOneWithoutAwarenessProgramsInput
@@ -25738,6 +25773,7 @@ export namespace Prisma {
     imageUrl?: string | null
     imageKey?: string | null
     units?: string | null
+    remarks?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     userId?: string | null
@@ -27797,7 +27833,7 @@ export namespace Prisma {
     fldId: string
     projectId: string
     quarterId: string
-    description?: string | null
+    remarks?: string | null
     district: string
     village: string
     block: string
@@ -27824,6 +27860,7 @@ export namespace Prisma {
     imageUrl?: string | null
     imageKey?: string | null
     units?: string | null
+    remarks?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -28061,7 +28098,7 @@ export namespace Prisma {
   export type FLDUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     fldId?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
     block?: StringFieldUpdateOperationsInput | string
@@ -28079,7 +28116,7 @@ export namespace Prisma {
     fldId?: StringFieldUpdateOperationsInput | string
     projectId?: StringFieldUpdateOperationsInput | string
     quarterId?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
     block?: StringFieldUpdateOperationsInput | string
@@ -28095,7 +28132,7 @@ export namespace Prisma {
     fldId?: StringFieldUpdateOperationsInput | string
     projectId?: StringFieldUpdateOperationsInput | string
     quarterId?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
     block?: StringFieldUpdateOperationsInput | string
@@ -28120,6 +28157,7 @@ export namespace Prisma {
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     imageKey?: NullableStringFieldUpdateOperationsInput | string | null
     units?: NullableStringFieldUpdateOperationsInput | string | null
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     project?: ProjectUpdateOneRequiredWithoutAwarenessProgramsNestedInput
@@ -28142,6 +28180,7 @@ export namespace Prisma {
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     imageKey?: NullableStringFieldUpdateOperationsInput | string | null
     units?: NullableStringFieldUpdateOperationsInput | string | null
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -28162,6 +28201,7 @@ export namespace Prisma {
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     imageKey?: NullableStringFieldUpdateOperationsInput | string | null
     units?: NullableStringFieldUpdateOperationsInput | string | null
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -28448,7 +28488,7 @@ export namespace Prisma {
     id?: string
     fldId: string
     quarterId: string
-    description?: string | null
+    remarks?: string | null
     district: string
     village: string
     block: string
@@ -28475,6 +28515,7 @@ export namespace Prisma {
     imageUrl?: string | null
     imageKey?: string | null
     units?: string | null
+    remarks?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     userId?: string | null
@@ -28589,7 +28630,7 @@ export namespace Prisma {
   export type FLDUpdateWithoutProjectInput = {
     id?: StringFieldUpdateOperationsInput | string
     fldId?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
     block?: StringFieldUpdateOperationsInput | string
@@ -28606,7 +28647,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     fldId?: StringFieldUpdateOperationsInput | string
     quarterId?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
     block?: StringFieldUpdateOperationsInput | string
@@ -28622,7 +28663,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     fldId?: StringFieldUpdateOperationsInput | string
     quarterId?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
     block?: StringFieldUpdateOperationsInput | string
@@ -28648,6 +28689,7 @@ export namespace Prisma {
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     imageKey?: NullableStringFieldUpdateOperationsInput | string | null
     units?: NullableStringFieldUpdateOperationsInput | string | null
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     quarter?: QuarterUpdateOneRequiredWithoutAwarenessProgramsNestedInput
@@ -28669,6 +28711,7 @@ export namespace Prisma {
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     imageKey?: NullableStringFieldUpdateOperationsInput | string | null
     units?: NullableStringFieldUpdateOperationsInput | string | null
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -28689,6 +28732,7 @@ export namespace Prisma {
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     imageKey?: NullableStringFieldUpdateOperationsInput | string | null
     units?: NullableStringFieldUpdateOperationsInput | string | null
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -28832,7 +28876,7 @@ export namespace Prisma {
     id?: string
     fldId: string
     projectId: string
-    description?: string | null
+    remarks?: string | null
     district: string
     village: string
     block: string
@@ -28859,6 +28903,7 @@ export namespace Prisma {
     imageUrl?: string | null
     imageKey?: string | null
     units?: string | null
+    remarks?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     userId?: string | null
@@ -28973,7 +29018,7 @@ export namespace Prisma {
   export type FLDUpdateWithoutQuarterInput = {
     id?: StringFieldUpdateOperationsInput | string
     fldId?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
     block?: StringFieldUpdateOperationsInput | string
@@ -28990,7 +29035,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     fldId?: StringFieldUpdateOperationsInput | string
     projectId?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
     block?: StringFieldUpdateOperationsInput | string
@@ -29006,7 +29051,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     fldId?: StringFieldUpdateOperationsInput | string
     projectId?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
     block?: StringFieldUpdateOperationsInput | string
@@ -29032,6 +29077,7 @@ export namespace Prisma {
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     imageKey?: NullableStringFieldUpdateOperationsInput | string | null
     units?: NullableStringFieldUpdateOperationsInput | string | null
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     project?: ProjectUpdateOneRequiredWithoutAwarenessProgramsNestedInput
@@ -29053,6 +29099,7 @@ export namespace Prisma {
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     imageKey?: NullableStringFieldUpdateOperationsInput | string | null
     units?: NullableStringFieldUpdateOperationsInput | string | null
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -29073,6 +29120,7 @@ export namespace Prisma {
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     imageKey?: NullableStringFieldUpdateOperationsInput | string | null
     units?: NullableStringFieldUpdateOperationsInput | string | null
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: NullableStringFieldUpdateOperationsInput | string | null

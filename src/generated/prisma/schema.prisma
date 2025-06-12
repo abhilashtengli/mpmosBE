@@ -185,23 +185,23 @@ model Training {
 }
 
 model FLD {
-  id          String   @id @default(uuid())
-  fldId       String
-  project     Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
-  projectId   String   @map("project_id")
-  quarter     Quarter  @relation(fields: [quarterId], references: [id])
-  quarterId   String   @map("quarter_id")
-  description String?  @db.VarChar(200)
-  district    String   @db.VarChar(100)
-  village     String   @db.VarChar(100)
-  block       String   @db.VarChar(100)
-  target      Int
-  achieved    Int
-  units       String?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  User        User?    @relation(fields: [userId], references: [id])
-  userId      String?  @map("user_id")
+  id        String   @id @default(uuid())
+  fldId     String
+  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  projectId String   @map("project_id")
+  quarter   Quarter  @relation(fields: [quarterId], references: [id])
+  quarterId String   @map("quarter_id")
+  remarks   String?  @db.VarChar(300)
+  district  String   @db.VarChar(100)
+  village   String   @db.VarChar(100)
+  block     String   @db.VarChar(100)
+  target    Int
+  achieved  Int
+  units     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  User      User?    @relation(fields: [userId], references: [id])
+  userId    String?  @map("user_id")
 
   // Indexes for foreign keys
   @@unique([fldId])
@@ -229,6 +229,7 @@ model AwarenessProgram {
   imageUrl          String?
   imageKey          String?
   units             String?
+  remarks           String?  @db.VarChar(300)
   createdAt         DateTime @default(now())
   updatedAt         DateTime @updatedAt
   User              User?    @relation(fields: [userId], references: [id])

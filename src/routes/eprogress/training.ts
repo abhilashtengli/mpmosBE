@@ -418,6 +418,7 @@ trainingRouter.get(
           trainingId: true,
           project: {
             select: {
+              title: true,
               implementingAgency: true,
               director: true,
               locationState: true,
@@ -426,6 +427,7 @@ trainingRouter.get(
           },
           quarter: {
             select: {
+              id: true,
               number: true,
               year: true
             }
