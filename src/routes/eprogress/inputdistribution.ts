@@ -125,6 +125,30 @@ inputDistributionRouter.post(
           imageUrl,
           imageKey,
           userId: user.id
+        },
+        select: {
+          id: true,
+          inputDistId: true,
+          project: true,
+          quarter: true,
+          activityType: true,
+          name: true,
+          target: true,
+          achieved: true,
+          district: true,
+          village: true,
+          block: true,
+          remarks: true,
+          units: true,
+          imageUrl: true,
+          createdAt: true,
+          updatedAt: true,
+          User: {
+            select: {
+              id: true,
+              name: true
+            }
+          }
         }
       });
 
@@ -303,7 +327,31 @@ inputDistributionRouter.put(
       // Perform the update
       const updatedInputDist = await prisma.inputDistribution.update({
         where: { id },
-        data: updateData
+        data: updateData,
+        select: {
+          id: true,
+          inputDistId: true,
+          project: true,
+          quarter: true,
+          activityType: true,
+          name: true,
+          target: true,
+          achieved: true,
+          district: true,
+          village: true,
+          block: true,
+          remarks: true,
+          units: true,
+          imageUrl: true,
+          createdAt: true,
+          updatedAt: true,
+          User: {
+            select: {
+              id: true,
+              name: true
+            }
+          }
+        }
       });
 
       console.info(
@@ -413,7 +461,7 @@ inputDistributionRouter.get(
 
 //get admin input dist
 inputDistributionRouter.get(
-  "/get-user-inputdist",
+  "/get-admin-inputdist",
   userAuth,
   async (req: Request, res: Response) => {
     try {
