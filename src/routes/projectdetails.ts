@@ -74,6 +74,27 @@ projectDetailsRouter.post(
           coDirectors,
           achievements,
           userId: user.id
+        },
+        select: {
+          id: true,
+          title: true,
+          region: true,
+          year: true,
+          budget: true,
+          center: true,
+          location: true,
+          objectives: true,
+          director: true,
+          coDirectors: true,
+          achievements: true,
+          createdAt: true,
+          updatedAt: true,
+          User: {
+            select: {
+              id: true,
+              name: true
+            }
+          }
         }
       });
 
@@ -228,7 +249,28 @@ projectDetailsRouter.put(
 
       const updatedProjectDetails = await prisma.projectDetails.update({
         where: { id },
-        data: updateData
+        data: updateData,
+        select: {
+          id: true,
+          title: true,
+          region: true,
+          year: true,
+          budget: true,
+          center: true,
+          location: true,
+          objectives: true,
+          director: true,
+          coDirectors: true,
+          achievements: true,
+          createdAt: true,
+          updatedAt: true,
+          User: {
+            select: {
+              id: true,
+              name: true
+            }
+          }
+        }
       });
 
       res.status(200).json({
@@ -309,7 +351,13 @@ projectDetailsRouter.get(
           coDirectors: true,
           achievements: true,
           createdAt: true,
-          updatedAt: true
+          updatedAt: true,
+          User: {
+            select: {
+              id: true,
+              name: true
+            }
+          }
         }
       });
 
@@ -360,6 +408,7 @@ projectDetailsRouter.get(
           coDirectors: true,
           achievements: true,
           createdAt: true,
+          updatedAt: true,
           User: {
             select: {
               id: true,
