@@ -54,6 +54,21 @@ upcomingEventsRouter.post(
           location,
           description,
           userId: user.id
+        },
+        select: {
+          id: true,
+          title: true,
+          location: true,
+          description: true,
+          date: true,
+          createdAt: true,
+          updatedAt: true,
+          User: {
+            select: {
+              id: true,
+              name: true
+            }
+          }
         }
       });
       res.status(201).json({
@@ -176,7 +191,22 @@ upcomingEventsRouter.put(
 
       const updateEvent = await prisma.upcomingEvent.update({
         where: { id },
-        data: updateData
+        data: updateData,
+        select: {
+          id: true,
+          title: true,
+          location: true,
+          description: true,
+          date: true,
+          createdAt: true,
+          updatedAt: true,
+          User: {
+            select: {
+              id: true,
+              name: true
+            }
+          }
+        }
       });
       res.status(200).json({
         message: "Event updated successfully",
@@ -250,7 +280,14 @@ upcomingEventsRouter.get(
           location: true,
           description: true,
           date: true,
-          createdAt: true
+          createdAt: true,
+          updatedAt: true,
+          User: {
+            select: {
+              id: true,
+              name: true
+            }
+          }
         }
       });
       if (events.length === 0) {
@@ -296,6 +333,7 @@ upcomingEventsRouter.get(
           description: true,
           date: true,
           createdAt: true,
+          updatedAt: true,
           User: {
             select: {
               id: true,
