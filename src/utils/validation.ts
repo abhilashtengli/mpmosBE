@@ -1436,7 +1436,7 @@ export const createProjectDetailsValidation = z.object({
     .string()
     .trim()
     .min(5, { message: "Title must be at least 5 characters" })
-    .max(100, { message: "Title cannot exceed 100 characters" }),
+    .max(300, { message: "Title cannot exceed 100 characters" }),
   region: z
     .string()
     .trim()
@@ -1457,14 +1457,14 @@ export const createProjectDetailsValidation = z.object({
     .string()
     .trim()
     .min(2, { message: "Center must be at least 2 characters" })
-    .max(100, { message: "Center cannot exceed 100 characters" })
+    .max(300, { message: "Center cannot exceed 100 characters" })
     .optional()
     .nullable(),
   location: z
     .string()
     .trim()
     .min(2, { message: "Location must be at least 2 characters" })
-    .max(100, { message: "Location cannot exceed 100 characters" })
+    .max(200, { message: "Location cannot exceed 100 characters" })
     .optional()
     .nullable(),
   objectives: z
@@ -1494,7 +1494,7 @@ export const updateProjectDetailsValidation = z.object({
     .string()
     .trim()
     .min(5, { message: "Title must be at least 5 characters" })
-    .max(100, { message: "Title cannot exceed 100 characters" })
+    .max(300, { message: "Title cannot exceed 100 characters" })
     .optional(),
   region: z
     .string()
@@ -1518,14 +1518,14 @@ export const updateProjectDetailsValidation = z.object({
     .string()
     .trim()
     .min(2, { message: "Center must be at least 2 characters" })
-    .max(100, { message: "Center cannot exceed 100 characters" })
+    .max(300, { message: "Center cannot exceed 100 characters" })
     .optional()
     .nullable(),
   location: z
     .string()
     .trim()
     .min(2, { message: "Location must be at least 2 characters" })
-    .max(100, { message: "Location cannot exceed 100 characters" })
+    .max(200, { message: "Location cannot exceed 100 characters" })
     .optional()
     .nullable(),
   objectives: z

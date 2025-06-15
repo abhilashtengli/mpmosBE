@@ -327,12 +327,12 @@ model Gallery {
 
 model ProjectDetails {
   id           String   @id @default(uuid())
-  title        String   @db.VarChar(100)
+  title        String   @db.VarChar(300)
   region       String // NEH or AICRP 
   year         Int
   budget       Float?
-  center       String?  @db.VarChar(100)
-  location     String?  @db.VarChar(100)
+  center       String?  @db.VarChar(300)
+  location     String?  @db.VarChar(200)
   objectives   String[] // Array of objectives
   director     String   @db.VarChar(100)
   coDirectors  String[] // Array of co-directors
