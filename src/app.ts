@@ -13,6 +13,8 @@ import inputDistributionRouter from "./routes/eprogress/inputdistribution";
 import projectRouter from "./routes/eprogress/project";
 import trainingRouter from "./routes/eprogress/training";
 import sseRouter from "./routes/sseRoute";
+import signedUrlRouter from "./routes/cloudflare/signedUrl";
+import cloudflareRouter from "./routes/cloudflare/cloudflare";
 const app = express();
 app.use(cookieParser());
 
@@ -28,6 +30,8 @@ app.use(
 );
 app.use("/", authRouter);
 app.use("/", sseRouter);
+app.use("/", signedUrlRouter);
+app.use("/", cloudflareRouter);
 //content
 app.use("/", galleryRouter);
 app.use("/", projectDetailsRouter);
