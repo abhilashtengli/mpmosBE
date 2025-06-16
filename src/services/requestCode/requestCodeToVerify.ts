@@ -11,13 +11,13 @@ export const RequestVerification = async (
     const response = await resend.emails.send({
       from:
         serviceFor === "emailService"
-          ? "MPMOS  <no-reply@searchyourworkflow.com>"
-          : "MPMOS : Reset your password <no-reply@searchyourworkflow.com>",
+          ? "MPMOS  <no-reply@milletpmos.in>"
+          : "MPMOS - Reset your password <no-reply@milletpmos.in>",
       to: [email],
       subject:
         serviceFor === "emailService"
-          ? "MPMOS: Verify your email address"
-          : "MPMOS: Your Password Reset Code",
+          ? "MPMOS - Verify your email address"
+          : "MPMOS - Your Password Reset Code",
       react: VerificationEmail({ name, code: verifyCode, serviceFor })
     });
 

@@ -54,7 +54,8 @@ authRouter.post(
 
       if (existingUser) {
         res.status(409).json({
-          message: "User already exists"
+          message: `User already exists with this email : ${email}`,
+          code: "INVALID"
         });
       }
       const passwordHash = await bcrypt.hash(password, 10);
@@ -254,6 +255,7 @@ authRouter.post(
   }
 );
 
+//verify email
 authRouter.post(
   "/verify-email",
   verifyEmailLimiter,
@@ -351,6 +353,7 @@ authRouter.post(
   }
 );
 
+//resend-code
 authRouter.post(
   "/resend-code",
   resendCodeLimiter,
@@ -471,11 +474,13 @@ authRouter.post(
   }
 );
 
+//forgot-password-request-code
 authRouter.post(
   "/forgot-password",
   forgetPasswordLimiter,
   async (req: Request, res: Response) => {
     const { email } = req.body;
+    console.log("email : ", email);
     try {
       if (!email || typeof email !== "string") {
         res.status(400).json({
@@ -536,6 +541,8 @@ authRouter.post(
           verificationCode,
           serviceFor
         );
+
+        console.log("EMAIL RESULT : ", emailResult);
 
         if (!emailResult.success) {
           res.status(500).json({
@@ -642,6 +649,9 @@ authRouter.post(
       }
 
       if (user.verificationExpires < new Date()) {
+        console.log("Expires At:", user.verificationExpires);
+        console.log("Current Time:", new Date());
+        console.log("Has Expired:", user.verificationExpires < new Date());
         res.status(400).json({
           message: "Verification code has expired",
           code: "VERIFICATION_CODE_EXPIRED"
