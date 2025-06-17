@@ -361,9 +361,7 @@ awarenessProgramRouter.put(
         }
       });
 
-      console.info(
-        `Awareness Program updated: ${updatedProgram.id} by user ${user.id}`
-      );
+      
 
       res.status(200).json({
         message: "Awareness Program updated successfully",

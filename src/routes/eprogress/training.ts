@@ -368,7 +368,6 @@ trainingRouter.put(
         }
       });
 
-      console.log("Training updated:", updatedTraining);
 
       res.status(200).json({
         message: "Training updated successfully",

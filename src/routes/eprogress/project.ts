@@ -100,7 +100,6 @@ projectRouter.post(
         data: projectData
       });
 
-      // console.info(`Project created: ${newProject.id} by user ${user.id}`);
 
       res.status(201).json({
         message: "Project created successfully",
@@ -410,7 +409,6 @@ projectRouter.put(
         data: updateData
       });
 
-      console.info(`Project updated: ${updatedProject.id} by user ${user.id}`);
 
       res.status(200).json({
         message: "Project updated successfully",

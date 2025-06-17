@@ -141,6 +141,7 @@ inputDistributionRouter.post(
           remarks: true,
           units: true,
           imageUrl: true,
+          imageKey: true,
           createdAt: true,
           updatedAt: true,
           User: {
@@ -343,6 +344,7 @@ inputDistributionRouter.put(
           remarks: true,
           units: true,
           imageUrl: true,
+          imageKey: true,
           createdAt: true,
           updatedAt: true,
           User: {
@@ -354,9 +356,7 @@ inputDistributionRouter.put(
         }
       });
 
-      console.info(
-        `Input Distribution updated: ${updatedInputDist.id} by user ${user.id}`
-      );
+    
 
       res.status(200).json({
         message: "Input Distribution updated successfully",
@@ -425,8 +425,9 @@ inputDistributionRouter.get(
           village: true,
           block: true,
           remarks: true,
-          units: true,
           imageUrl: true,
+          imageKey: true,
+          units: true,
           createdAt: true,
           updatedAt: true
         }
@@ -494,6 +495,7 @@ inputDistributionRouter.get(
           remarks: true,
           units: true,
           imageUrl: true,
+          imageKey: true,
           createdAt: true,
           updatedAt: true,
           User: {

@@ -338,7 +338,6 @@ infrastructureRouter.put(
         }
       });
 
-      
       res.status(200).json({
         message: "Infrastructure Development updated successfully",
         success: true,

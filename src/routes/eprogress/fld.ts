@@ -322,7 +322,6 @@ fldRouter.put(
         }
       });
 
-      console.info(`FLD updated: ${updatedFld.id} by user ${user.id}`);
 
       res.status(200).json({
         message: "FLD updated successfully",
