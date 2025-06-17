@@ -326,8 +326,8 @@ infrastructureRouter.put(
           block: true,
           remarks: true,
           imageUrl: true,
-          createdAt: true,
           imageKey: true,
+          createdAt: true,
           updatedAt: true,
           User: {
             select: {
@@ -338,10 +338,7 @@ infrastructureRouter.put(
         }
       });
 
-      console.log(
-        `Infrastructure Development updated: ${updatedInfra.id} by user ${user.id}`
-      );
-
+      
       res.status(200).json({
         message: "Infrastructure Development updated successfully",
         success: true,
@@ -409,6 +406,7 @@ infrastructureRouter.get(
             block: true,
             remarks: true,
             imageUrl: true,
+            imageKey: true,
             createdAt: true,
             updatedAt: true
           }
@@ -474,6 +472,7 @@ infrastructureRouter.get(
             block: true,
             remarks: true,
             imageUrl: true,
+            imageKey: true,
             createdAt: true,
             updatedAt: true,
             User: {

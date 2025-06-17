@@ -9,10 +9,8 @@ cloudflareRouter.delete(
   userAuth,
   async (req: Request, res: Response) => {
     const { key } = req.body; // Notice req.params[0] here
-    // console.log("Key received:", key);
 
     const deletionResult = await deleteContent(key);
-
     if (!deletionResult.success) {
       res.status(500).json({
         message: "Something went wrong",
