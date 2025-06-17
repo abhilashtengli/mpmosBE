@@ -143,6 +143,8 @@ trainingRouter.post(
           beneficiaryFemale: true,
           remarks: true,
           imageUrl: true,
+          imageKey: true,
+          pdfUrl: true,
           pdfKey: true,
           units: true,
           createdAt: true,
@@ -355,6 +357,8 @@ trainingRouter.put(
           beneficiaryFemale: true,
           remarks: true,
           imageUrl: true,
+          imageKey: true,
+          pdfUrl: true,
           pdfKey: true,
           units: true,
           createdAt: true,
@@ -367,7 +371,6 @@ trainingRouter.put(
           }
         }
       });
-
 
       res.status(200).json({
         message: "Training updated successfully",
@@ -441,6 +444,8 @@ trainingRouter.get(
           beneficiaryFemale: true,
           remarks: true,
           imageUrl: true,
+          imageKey: true,
+          pdfUrl: true,
           pdfKey: true,
           units: true,
           createdAt: true,
@@ -511,6 +516,8 @@ trainingRouter.get(
           beneficiaryFemale: true,
           remarks: true,
           imageUrl: true,
+          imageKey: true,
+          pdfUrl: true,
           pdfKey: true,
           units: true,
           createdAt: true,
