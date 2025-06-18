@@ -1,5 +1,6 @@
 import { prisma } from "@lib/prisma";
 import { userAuth } from "@middleware/auth";
+import { deleteContent } from "@services/Cloudflare/cloudflare";
 import { generateFormattedId } from "@services/general";
 import {
   createInputDistributionValidation,
@@ -356,8 +357,6 @@ inputDistributionRouter.put(
         }
       });
 
-    
-
       res.status(200).json({
         message: "Input Distribution updated successfully",
         success: true,
@@ -579,14 +578,45 @@ inputDistributionRouter.delete(
         });
         return;
       }
+      let fileDeleteWarning = null;
+      // Try to delete the file first, but continue even if it fails
+      if (
+        existingInputDistribution.imageUrl &&
+        existingInputDistribution.imageKey
+      ) {
+        try {
+          const deletionResult = await deleteContent(
+            existingInputDistribution.imageKey
+          );
+
+          if (!deletionResult.success) {
+            console.warn(
+              `Failed to delete file for Input dist image ${id}:`,
+              deletionResult.error
+            );
+            fileDeleteWarning =
+              "File deletion failed but record will be removed from database";
+          }
+        } catch (fileError) {
+          console.error(
+            `Error during file deletion for Input dist ${id}:`,
+            fileError
+          );
+          fileDeleteWarning =
+            "File deletion encountered an error but record will be removed from database";
+        }
+      }
 
       await prisma.inputDistribution.delete({
         where: { id }
       });
       res.status(200).json({
         success: true,
-        message: "Input distribution field deleted successfully",
-        code: "RESOURCE_DELETED"
+        message: fileDeleteWarning
+          ? "Input distribution deleted successfully (with file deletion warning)"
+          : "Input distribution deleted successfully",
+        code: "RESOURCE_DELETED",
+        ...(fileDeleteWarning && { warning: fileDeleteWarning })
       });
       return;
     } catch (err) {

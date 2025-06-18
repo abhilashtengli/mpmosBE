@@ -1,5 +1,6 @@
 import { prisma } from "@lib/prisma";
 import { userAuth } from "@middleware/auth";
+import { deleteContent } from "@services/Cloudflare/cloudflare";
 import { generateFormattedId } from "@services/general";
 import {
   createInfrastructureValidation,
@@ -556,14 +557,40 @@ infrastructureRouter.delete(
         });
         return;
       }
+      let fileDeleteWarning = null;
+      // Try to delete the file first, but continue even if it fails
+      if (existingInfra.imageUrl && existingInfra.imageKey) {
+        try {
+          const deletionResult = await deleteContent(existingInfra.imageKey);
+
+          if (!deletionResult.success) {
+            console.warn(
+              `Failed to delete file for Infra image ${id}:`,
+              deletionResult.error
+            );
+            fileDeleteWarning =
+              "File deletion failed but record will be removed from database";
+          }
+        } catch (fileError) {
+          console.error(
+            `Error during file deletion for Infra ${id}:`,
+            fileError
+          );
+          fileDeleteWarning =
+            "File deletion encountered an error but record will be removed from database";
+        }
+      }
       //Delete
       await prisma.infrastructureDevelopment.delete({
         where: { id }
       });
       res.status(200).json({
         success: true,
-        message: "Infra development field deleted successfully",
-        code: "RESOURCE_DELETED"
+        message: fileDeleteWarning
+          ? "Infrastructure details deleted successfully (with file deletion warning)"
+          : "Infrastructure details deleted successfully",
+        code: "RESOURCE_DELETED",
+        ...(fileDeleteWarning && { warning: fileDeleteWarning })
       });
       return;
     } catch (err) {

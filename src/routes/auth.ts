@@ -185,16 +185,22 @@ authRouter.post(
         const logoutMessage = {
           type: "force-logout" as const,
           reason: "new-device-login",
+          message:
+            "You have been logged out because you signed in from another location.",
           timestamp: new Date().toISOString()
         };
 
         // Send logout message to all existing sessions
         existingSessions.forEach((session) => {
-          sseService.sendToUserExceptSession(
-            user.id,
-            session.id,
-            logoutMessage
-          );
+          try {
+            sseService.sendToUserExceptSession(
+              user.id,
+              session.id,
+              logoutMessage
+            );
+          } catch (sseError) {
+            console.error("Failed to send SSE logout message:", sseError);
+          }
         });
 
         // Small delay to ensure message is sent before deleting sessions
@@ -246,6 +252,39 @@ authRouter.post(
 
       return;
     } catch (err) {
+      // Type guard for error handling
+      const error = err as any;
+
+      // Check for specific error types
+      if (error?.code === "ENOTFOUND" || error?.code === "ECONNREFUSED") {
+        res.status(503).json({
+          success: false,
+          message:
+            "Network connectivity issue. Please check your connection and try again.",
+          code: "NETWORK_ERROR"
+        });
+        return;
+      }
+
+      if (error?.code === "ETIMEDOUT") {
+        res.status(504).json({
+          success: false,
+          message: "Request timed out. Please try again later.",
+          code: "TIMEOUT_ERROR"
+        });
+        return;
+      }
+
+      // Check if it's a Prisma error
+      if (error?.code?.startsWith("P")) {
+        res.status(503).json({
+          success: false,
+          message:
+            "Database service temporarily unavailable. Please try again later.",
+          code: "DATABASE_ERROR"
+        });
+        return;
+      }
       res.status(500).json({
         success: false,
         message: "Sign In Failed, Internal server error",

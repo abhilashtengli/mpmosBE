@@ -85,25 +85,37 @@ export const userAuth = async (
       return;
     }
 
+    const userActiveSessions = await prisma.session.count({
+      where: {
+        userId: id,
+        expiresAt: { gt: new Date() }
+      }
+    });
+    if (userActiveSessions > 1) {
+      console.warn(
+        `User ${id} has ${userActiveSessions} active sessions. Cleaning up...`
+      );
+
+      // Keep only the current session, delete others
+      await prisma.session.deleteMany({
+        where: {
+          userId: id,
+          id: { not: sessionId },
+          expiresAt: { gt: new Date() }
+        }
+      });
+    }
+
     // Enhanced security checks
     const currentIP = req.ip || "unknown";
     const currentUserAgent = req.headers["user-agent"] || "unknown";
 
     // IP address check (with some flexibility for internal networks)
-    if (session.ipAddress && session.ipAddress !== currentIP) {
-      // For internal apps, you might want to be less strict
-      // Only log as warning instead of blocking
-      // console.warn(
-      //   `IP change detected for user ${session.userId}: ${session.ipAddress} → ${currentIP}`
-      // );
-
-      // Uncomment the lines below if you want strict IP enforcement
-      res.status(401).json({
-        success: false,
-        message: "IP address mismatch",
-        code: "IP_MISMATCH"
+    if (session.ipAddress !== currentIP) {
+      await prisma.session.update({
+        where: { id: sessionId },
+        data: { ipAddress: currentIP }
       });
-      return;
     }
 
     // User-Agent check (optional for internal apps)
@@ -116,29 +128,29 @@ export const userAuth = async (
     //   return;
     // }
 
-    const user = await prisma.user.findUnique({
-      where: { id },
-      select: {
-        id: true,
-        name: true,
-        email: true,
-        role: true,
-        isVerified: true
-      }
-    });
+    // const user = await prisma.user.findUnique({
+    //   where: { id },
+    //   select: {
+    //     id: true,
+    //     name: true,
+    //     email: true,
+    //     role: true,
+    //     isVerified: true
+    //   }
+    // });
 
-    if (!user) {
+    if (!session.user) {
       res.status(404).json({ message: "User not found", code: "UNAUTHORIZED" });
       return;
     }
-    if (!user?.isVerified) {
+    if (!session.user?.isVerified) {
       res.status(401).json({
         message: "Please verify you account to perform this action",
         code: "UNAUTHORIZED"
       });
       return;
     }
-    (req as RequestWithUser).user = user || null;
+    (req as RequestWithUser).user = session.user || null;
     next();
   } catch (err: any) {
     if (err.name === "TokenExpiredError") {

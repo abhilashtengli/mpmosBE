@@ -1,5 +1,6 @@
 import { prisma } from "@lib/prisma";
 import { userAuth } from "@middleware/auth";
+import { deleteContent } from "@services/Cloudflare/cloudflare";
 import { generateFormattedId } from "@services/general";
 import {
   createTrainingValidation,
@@ -608,16 +609,63 @@ trainingRouter.delete(
         return;
       }
 
+      const fileDeleteWarnings: string[] = [];
+
+      // Helper function to safely delete files
+      const safeDeleteFile = async (
+        fileKey: string,
+        fileType: string
+      ): Promise<boolean> => {
+        try {
+          const deletionResult = await deleteContent(fileKey);
+          if (!deletionResult.success) {
+            console.warn(
+              `Failed to delete ${fileType} for training ${id}:`,
+              deletionResult.error
+            );
+            fileDeleteWarnings.push(`${fileType} deletion failed`);
+            return false;
+          }
+          return true;
+        } catch (error) {
+          console.error(
+            `Error during ${fileType} deletion for training ${id}:`,
+            error
+          );
+          fileDeleteWarnings.push(`${fileType} deletion encountered an error`);
+          return false;
+        }
+      };
+
+      // Delete image file if exists
+      if (existingTraining.imageUrl && existingTraining.imageKey) {
+        await safeDeleteFile(existingTraining.imageKey, "image");
+      }
+
+      // Delete PDF file if exists
+      if (existingTraining.pdfUrl && existingTraining.pdfKey) {
+        await safeDeleteFile(existingTraining.pdfKey, "PDF");
+      }
+
       // Delete the training
       await prisma.training.delete({
         where: { id }
       });
-
-      res.status(200).json({
+      const hasWarnings = fileDeleteWarnings.length > 0;
+      const response = {
         success: true,
-        message: "Training deleted successfully",
-        code: "RESOURCE_DELETED"
-      });
+        message: hasWarnings
+          ? "Training deleted successfully (with file deletion warnings)"
+          : "Training deleted successfully",
+        code: "RESOURCE_DELETED",
+        ...(hasWarnings && {
+          warning:
+            fileDeleteWarnings.length === 1
+              ? fileDeleteWarnings[0]
+              : `Multiple issues: ${fileDeleteWarnings.join(", ")}`
+        })
+      };
+      res.status(200).json(response);
       return;
     } catch (err) {
       console.error(`Error deleting training :`, err);

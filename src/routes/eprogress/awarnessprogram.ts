@@ -1,5 +1,6 @@
 import { prisma } from "@lib/prisma";
 import { userAuth } from "@middleware/auth";
+import { deleteContent } from "@services/Cloudflare/cloudflare";
 import { generateFormattedId } from "@services/general";
 import {
   createAwarenessProgramValidation,
@@ -361,8 +362,6 @@ awarenessProgramRouter.put(
         }
       });
 
-      
-
       res.status(200).json({
         message: "Awareness Program updated successfully",
         success: true,
@@ -431,17 +430,52 @@ awarenessProgramRouter.delete(
         });
         return;
       }
+      let fileDeleteWarning = null;
+      // Try to delete the file first, but continue even if it fails
+      if (
+        existingAwarnessProgram.imageUrl &&
+        existingAwarnessProgram.imageKey
+      ) {
+        try {
+          const deletionResult = await deleteContent(
+            existingAwarnessProgram.imageKey
+          );
+
+          if (!deletionResult.success) {
+            console.warn(
+              `Failed to delete file for awareness program ${id}:`,
+              deletionResult.error
+            );
+            fileDeleteWarning =
+              "File deletion failed but record will be removed from database";
+          }
+        } catch (fileError) {
+          console.error(
+            `Error during file deletion for awareness program ${id}:`,
+            fileError
+          );
+          fileDeleteWarning =
+            "File deletion encountered an error but record will be removed from database";
+        }
+      }
 
       // Delete the Awarness program
       await prisma.awarenessProgram.delete({
         where: { id }
       });
 
-      res.status(200).json({
+      // Prepare response based on whether file deletion succeeded
+      const response = {
         success: true,
-        message: "Awarness program deleted successfully",
-        code: "RESOURCE_DELETED"
-      });
+        message: fileDeleteWarning
+          ? "Awareness program deleted successfully (with file deletion warning)"
+          : "Awareness program deleted successfully",
+        code: "RESOURCE_DELETED",
+        ...(fileDeleteWarning && { warning: fileDeleteWarning })
+      };
+
+      res.status(200).json(response);
+      return;
     } catch (err) {
       console.error(`Error deleting awarness program:`, err);
       res.status(500).json({
