@@ -1,5 +1,6 @@
 import { prisma } from "@lib/prisma";
 import { userAuth } from "@middleware/auth";
+import { deleteContent } from "@services/Cloudflare/cloudflare";
 import {
   createPublicationValidation,
   updatePublicationValidation
@@ -68,6 +69,24 @@ publicationRouter.post(
           pdfUrl,
           pdfKey,
           userId: user.id
+        },
+        select: {
+          id: true,
+          title: true,
+          type: true,
+          category: true,
+          thumbnailUrl: true,
+          thumbnailKey: true,
+          pdfUrl: true,
+          pdfKey: true,
+          createdAt: true,
+          updatedAt: true,
+          User: {
+            select: {
+              id: true,
+              name: true
+            }
+          }
         }
       });
 
@@ -213,7 +232,25 @@ publicationRouter.put(
 
       const updatedPublication = await prisma.publication.update({
         where: { id },
-        data: updateData
+        data: updateData,
+        select: {
+          id: true,
+          title: true,
+          type: true,
+          category: true,
+          thumbnailUrl: true,
+          thumbnailKey: true,
+          pdfUrl: true,
+          pdfKey: true,
+          createdAt: true,
+          updatedAt: true,
+          User: {
+            select: {
+              id: true,
+              name: true
+            }
+          }
+        }
       });
 
       res.status(200).json({
@@ -287,9 +324,17 @@ publicationRouter.get(
           type: true,
           category: true,
           thumbnailUrl: true,
+          thumbnailKey: true,
           pdfUrl: true,
+          pdfKey: true,
           createdAt: true,
-          updatedAt: true
+          updatedAt: true,
+          User: {
+            select: {
+              id: true,
+              name: true
+            }
+          }
         }
       });
 
@@ -334,8 +379,11 @@ publicationRouter.get(
           type: true,
           category: true,
           thumbnailUrl: true,
+          thumbnailKey: true,
           pdfUrl: true,
+          pdfKey: true,
           createdAt: true,
+          updatedAt: true,
           User: {
             select: {
               id: true,
@@ -379,6 +427,7 @@ publicationRouter.delete(
   async (req: Request, res: Response) => {
     try {
       const { id } = req.params;
+      // console.log("Step-0 : ", id);
 
       // Validate publication ID format (UUID)
       if (!id || typeof id !== "string") {
@@ -403,6 +452,7 @@ publicationRouter.delete(
       const existingPublication = await prisma.publication.findUnique({
         where: { id }
       });
+      // console.log("STEP-1 : ", existingPublication);
 
       if (!existingPublication) {
         res.status(404).json({
@@ -421,16 +471,67 @@ publicationRouter.delete(
         });
         return;
       }
+      const fileDeleteWarnings: string[] = [];
+
+      // Helper function to safely delete files
+      const safeDeleteFile = async (
+        fileKey: string,
+        fileType: string
+      ): Promise<boolean> => {
+        try {
+          // console.log("STEP-2 : ", fileKey);
+          const deletionResult = await deleteContent(fileKey);
+          if (!deletionResult.success) {
+            console.warn(
+              `Failed to delete ${fileType} for publication ${id}:`,
+              deletionResult.error
+            );
+            fileDeleteWarnings.push(`${fileType} deletion failed`);
+            return false;
+          }
+          return true;
+        } catch (error) {
+          console.error(
+            `Error during ${fileType} deletion for publication ${id}:`,
+            error
+          );
+          fileDeleteWarnings.push(`${fileType} deletion encountered an error`);
+          return false;
+        }
+      };
+      // Delete image file if exists
+      if (
+        existingPublication.thumbnailUrl &&
+        existingPublication.thumbnailKey
+      ) {
+        await safeDeleteFile(existingPublication.thumbnailKey, "image");
+      }
+
+      // Delete PDF file if exists
+      if (existingPublication.pdfUrl && existingPublication.pdfKey) {
+        await safeDeleteFile(existingPublication.pdfKey, "PDF");
+      }
 
       await prisma.publication.delete({
         where: { id }
       });
 
-      res.status(200).json({
+      const hasWarnings = fileDeleteWarnings.length > 0;
+      const response = {
         success: true,
-        message: "Publication deleted successfully",
-        code: "RESOURCE_DELETED"
-      });
+        message: hasWarnings
+          ? "Publication deleted successfully (with file deletion warnings)"
+          : "Publication deleted successfully",
+        code: "RESOURCE_DELETED",
+        ...(hasWarnings && {
+          warning:
+            fileDeleteWarnings.length === 1
+              ? fileDeleteWarnings[0]
+              : `Multiple issues: ${fileDeleteWarnings.join(", ")}`
+        })
+      };
+      res.status(200).json(response);
+      return;
     } catch (err) {
       console.error(`Error deleting Publication:`, err);
 

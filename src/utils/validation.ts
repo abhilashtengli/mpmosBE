@@ -1279,15 +1279,15 @@ export const createPublicationValidation = z
   )
   .refine(
     (data) => {
-      // Ensure at least one content type is provided (thumbnail or PDF)
-      if (!data.thumbnailUrl && !data.pdfUrl) {
+      // Ensure BOTH thumbnail and PDF are provided
+      if (!data.thumbnailUrl || !data.pdfUrl) {
         return false;
       }
       return true;
     },
     {
-      message: "At least one content type (thumbnail or PDF) must be provided",
-      path: ["pdfUrl"]
+      message: "Both thumbnail and PDF must be provided",
+      path: ["thumbnailUrl", "pdfUrl"] // Show error on both fields
     }
   );
 
@@ -1330,15 +1330,15 @@ export const updatePublicationValidation = z
   })
   .refine(
     (data) => {
-      // Skip if thumbnailUrl is not being updated
+      // ✅ GOOD: Handles undefined (not being updated)
       if (data.thumbnailUrl === undefined) {
         return true;
       }
-      // If thumbnailUrl is null, we don't need to check for thumbnailKey
+      // ✅ GOOD: Handles null (removing thumbnail)
       if (data.thumbnailUrl === null) {
         return true;
       }
-      // If setting a new thumbnailUrl, ensure thumbnailKey is also set
+      // ✅ GOOD: Ensures key is provided when URL is set
       if (data.thumbnailUrl && !data.thumbnailKey) {
         return false;
       }
@@ -1351,15 +1351,13 @@ export const updatePublicationValidation = z
   )
   .refine(
     (data) => {
-      // Skip if pdfUrl is not being updated
+      // ✅ GOOD: Same logic for PDF
       if (data.pdfUrl === undefined) {
         return true;
       }
-      // If pdfUrl is null, we don't need to check for pdfKey
       if (data.pdfUrl === null) {
         return true;
       }
-      // If setting a new pdfUrl, ensure pdfKey is also set
       if (data.pdfUrl && !data.pdfKey) {
         return false;
       }
