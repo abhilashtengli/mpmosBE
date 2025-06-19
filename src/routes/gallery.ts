@@ -1,5 +1,6 @@
 import { prisma } from "@lib/prisma";
 import { userAuth } from "@middleware/auth";
+import { deleteContent } from "@services/Cloudflare/cloudflare";
 import {
   createGalleryValidation,
   updateGalleryValidation
@@ -56,6 +57,20 @@ galleryRouter.post(
           imageUrl,
           imageKey,
           userId: user.id
+        },
+        select: {
+          id: true,
+          title: true,
+          imageUrl: true,
+          imageKey: true,
+          createdAt: true,
+          updatedAt: true,
+          User: {
+            select: {
+              id: true,
+              name: true
+            }
+          }
         }
       });
 
@@ -185,7 +200,21 @@ galleryRouter.put(
 
       const updatedGallery = await prisma.gallery.update({
         where: { id },
-        data: updateData
+        data: updateData,
+        select: {
+          id: true,
+          title: true,
+          imageUrl: true,
+          imageKey: true,
+          createdAt: true,
+          updatedAt: true,
+          User: {
+            select: {
+              id: true,
+              name: true
+            }
+          }
+        }
       });
 
       res.status(200).json({
@@ -257,8 +286,15 @@ galleryRouter.get(
           id: true,
           title: true,
           imageUrl: true,
+          imageKey: true,
           createdAt: true,
-          updatedAt: true
+          updatedAt: true,
+          User: {
+            select: {
+              id: true,
+              name: true
+            }
+          }
         }
       });
 
@@ -298,7 +334,9 @@ galleryRouter.get("/get-all-gallery", async (req: Request, res: Response) => {
         id: true,
         title: true,
         imageUrl: true,
+        imageKey: true,
         createdAt: true,
+        updatedAt: true,
         User: {
           select: {
             id: true,
@@ -374,16 +412,44 @@ galleryRouter.delete(
         });
         return;
       }
+      let fileDeleteWarning = null;
+      // Try to delete the file first, but continue even if it fails
+      if (existingGallery.imageUrl && existingGallery.imageKey) {
+        try {
+          const deletionResult = await deleteContent(existingGallery.imageKey);
+
+          if (!deletionResult.success) {
+            console.warn(
+              `Failed to delete file for Image${id}:`,
+              deletionResult.error
+            );
+            fileDeleteWarning =
+              "Image deletion failed but record will be removed from database";
+          }
+        } catch (fileError) {
+          console.error(
+            `Error during file deletion for image ${id}:`,
+            fileError
+          );
+          fileDeleteWarning =
+            "Image deletion encountered an error but record will be removed from database";
+        }
+      }
 
       await prisma.gallery.delete({
         where: { id }
       });
-
-      res.status(200).json({
+      const response = {
         success: true,
-        message: "Gallery item deleted successfully",
-        code: "RESOURCE_DELETED"
-      });
+        message: fileDeleteWarning
+          ? "Image deleted successfully (with file deletion warning)"
+          : "Image deleted successfully",
+        code: "RESOURCE_DELETED",
+        ...(fileDeleteWarning && { warning: fileDeleteWarning })
+      };
+
+      res.status(200).json(response);
+      return;
     } catch (err) {
       console.error(`Error deleting Gallery:`, err);
 
