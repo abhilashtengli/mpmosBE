@@ -497,7 +497,7 @@ awarenessProgramRouter.get(
       if (!user) {
         res.status(401).json({
           success: false,
-          message: "Please Sign in to create a New Project",
+          message: "Please Sign in ",
           code: "UNAUTHORIZED"
         });
         return;
@@ -583,7 +583,7 @@ awarenessProgramRouter.get(
       if (!user) {
         res.status(401).json({
           success: false,
-          message: "Please Sign in to create a New Project",
+          message: "Please Sign in ",
           code: "UNAUTHORIZED"
         });
         return;

@@ -1556,3 +1556,19 @@ export const updateProjectDetailsValidation = z.object({
     .max(50, { message: "Cannot have more than 50 achievements" })
     .optional()
 });
+
+export const createActivityCategoryValidation = z.object({
+  name: z
+    .string()
+    .trim()
+    .min(5, { message: "Activity category must be at least 2 characters" })
+    .max(300, { message: "Activity category cannot exceed 100 characters" })
+});
+export const updateActivityCategoryValidation = z.object({
+  name: z
+    .string()
+    .trim()
+    .min(5, { message: "Activity category must be at least 2 characters" })
+    .max(300, { message: "Activity category cannot exceed 100 characters" })
+    .optional()
+});
