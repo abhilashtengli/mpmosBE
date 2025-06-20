@@ -30,7 +30,7 @@ trainingRouter.post(
       if (!user) {
         res.status(401).json({
           success: false,
-          message: "Please Sign in to create a New Project",
+          message: "Please Sign in to create a New Training",
           code: "UNAUTHORIZED"
         });
         return;

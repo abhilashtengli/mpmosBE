@@ -1572,3 +1572,203 @@ export const updateActivityCategoryValidation = z.object({
     .max(300, { message: "Activity category cannot exceed 100 characters" })
     .optional()
 });
+
+export const createActivityValidation = z
+  .object({
+    activityCategoryId: z
+      .string()
+      .trim()
+      .uuid({ message: "Invalid activity category ID format" }),
+
+    projectId: z.string().trim().uuid({ message: "Invalid project ID format" }),
+
+    quarterId: z.string().trim().uuid({ message: "Invalid quarter ID format" }),
+
+    title: z
+      .string()
+      .trim()
+      .min(2, { message: "Title must be at least 2 characters" })
+      .max(255, { message: "Title cannot exceed 255 characters" }),
+
+    target: z
+      .number({ invalid_type_error: "Target must be a number" })
+      .int({ message: "Target must be an integer" })
+      .nonnegative({ message: "Target must be zero or positive" }),
+
+    achieved: z
+      .number({ invalid_type_error: "Achieved must be a number" })
+      .int({ message: "Achieved must be an integer" })
+      .nonnegative({ message: "Achieved must be zero or positive" }),
+
+    district: z
+      .string()
+      .trim()
+      .min(2, { message: "District must be at least 2 characters" })
+      .max(100, { message: "District cannot exceed 100 characters" }),
+
+    village: z
+      .string()
+      .trim()
+      .min(2, { message: "Village must be at least 2 characters" })
+      .max(100, { message: "Village cannot exceed 100 characters" }),
+
+    block: z
+      .string()
+      .trim()
+      .min(2, { message: "Block must be at least 2 characters" })
+      .max(100, { message: "Block cannot exceed 100 characters" }),
+
+    beneficiaryMale: z
+      .number({ invalid_type_error: "Male beneficiary count must be a number" })
+      .int()
+      .nonnegative()
+      .default(0),
+
+    beneficiaryFemale: z
+      .number({
+        invalid_type_error: "Female beneficiary count must be a number"
+      })
+      .int()
+      .nonnegative()
+      .default(0),
+
+    remarks: z.string().trim().max(300).optional().nullable(),
+
+    imageUrl: z.string().trim().url().optional().nullable(),
+
+    imageKey: z.string().trim().optional().nullable(),
+
+    pdfUrl: z.string().trim().url().optional().nullable(),
+
+    pdfKey: z.string().trim().optional().nullable(),
+
+    units: z
+      .string()
+      .trim()
+      .refine((val) => val === "" || val.length >= 1, {
+        message: "Units must be specified if provided"
+      })
+      .transform((val) => (val === "" ? null : val))
+      .optional()
+      .nullable()
+  })
+  .refine((data) => data.achieved <= data.target, {
+    message: "Achieved count cannot exceed target count",
+    path: ["achieved"]
+  })
+  .refine(
+    (data) => {
+      if (data.imageUrl && !data.imageKey) return false;
+      return true;
+    },
+    {
+      message: "Image key is required when image URL is provided",
+      path: ["imageKey"]
+    }
+  )
+  .refine(
+    (data) => {
+      if (data.pdfUrl && !data.pdfKey) return false;
+      return true;
+    },
+    {
+      message: "PDF key is required when PDF URL is provided",
+      path: ["pdfKey"]
+    }
+  );
+
+export const updateActivityValidation = z
+  .object({
+    activityCategoryId: z.string().trim().uuid().optional(),
+    projectId: z.string().trim().uuid().optional(),
+    quarterId: z.string().trim().uuid().optional(),
+
+    title: z
+      .string()
+      .trim()
+      .min(2, { message: "Title must be at least 2 characters" })
+      .max(255, { message: "Title cannot exceed 255 characters" })
+      .optional(),
+
+    target: z
+      .number({ invalid_type_error: "Target must be a number" })
+      .int()
+      .nonnegative()
+      .optional(),
+
+    achieved: z
+      .number({ invalid_type_error: "Achieved must be a number" })
+      .int()
+      .nonnegative()
+      .optional(),
+
+    district: z.string().trim().min(2).max(100).optional(),
+
+    village: z.string().trim().min(2).max(100).optional(),
+
+    block: z.string().trim().min(2).max(100).optional(),
+
+    beneficiaryMale: z
+      .number({ invalid_type_error: "Male beneficiary count must be a number" })
+      .int()
+      .nonnegative()
+      .optional(),
+
+    beneficiaryFemale: z
+      .number({
+        invalid_type_error: "Female beneficiary count must be a number"
+      })
+      .int()
+      .nonnegative()
+      .optional(),
+
+    remarks: z.string().trim().max(300).optional().nullable(),
+
+    imageUrl: z.string().trim().url().optional().nullable(),
+
+    imageKey: z.string().trim().optional().nullable(),
+
+    pdfUrl: z.string().trim().url().optional().nullable(),
+
+    pdfKey: z.string().trim().optional().nullable(),
+
+    units: z
+      .string()
+      .trim()
+      .refine((val) => val === "" || val.length >= 1, {
+        message: "Units must be specified if provided"
+      })
+      .transform((val) => (val === "" ? null : val))
+      .optional()
+      .nullable()
+  })
+  .refine(
+    (data) => {
+      if (data.target === undefined || data.achieved === undefined) return true;
+      return data.achieved <= data.target;
+    },
+    {
+      message: "Achieved count cannot exceed target count",
+      path: ["achieved"]
+    }
+  )
+  .refine(
+    (data) => {
+      if (data.imageUrl === undefined || data.imageUrl === null) return true;
+      return !!data.imageKey;
+    },
+    {
+      message: "Image key is required when image URL is provided",
+      path: ["imageKey"]
+    }
+  )
+  .refine(
+    (data) => {
+      if (data.pdfUrl === undefined || data.pdfUrl === null) return true;
+      return !!data.pdfKey;
+    },
+    {
+      message: "PDF key is required when PDF URL is provided",
+      path: ["pdfKey"]
+    }
+  );
