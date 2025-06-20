@@ -321,6 +321,39 @@ exports.Prisma.ProjectDetailsScalarFieldEnum = {
   userId: 'userId'
 };
 
+exports.Prisma.ActivitiesCategoryScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  userId: 'userId'
+};
+
+exports.Prisma.ActivitiesScalarFieldEnum = {
+  id: 'id',
+  activityId: 'activityId',
+  activityCategoryId: 'activityCategoryId',
+  projectId: 'projectId',
+  quarterId: 'quarterId',
+  title: 'title',
+  target: 'target',
+  achieved: 'achieved',
+  district: 'district',
+  village: 'village',
+  block: 'block',
+  beneficiaryMale: 'beneficiaryMale',
+  beneficiaryFemale: 'beneficiaryFemale',
+  remarks: 'remarks',
+  imageUrl: 'imageUrl',
+  imageKey: 'imageKey',
+  pdfUrl: 'pdfUrl',
+  pdfKey: 'pdfKey',
+  units: 'units',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  userId: 'userId'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -358,7 +391,9 @@ exports.Prisma.ModelName = {
   UpcomingEvent: 'UpcomingEvent',
   Publication: 'Publication',
   Gallery: 'Gallery',
-  ProjectDetails: 'ProjectDetails'
+  ProjectDetails: 'ProjectDetails',
+  ActivitiesCategory: 'ActivitiesCategory',
+  Activities: 'Activities'
 };
 
 /**
