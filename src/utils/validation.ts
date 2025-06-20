@@ -779,7 +779,11 @@ export const createInfrastructureValidation = z
     projectId: z.string().uuid({ message: "Valid project ID is required" }),
 
     quarterId: z.string().uuid({ message: "Valid quarter ID is required" }),
-
+    title: z
+      .string()
+      .trim()
+      .min(2, { message: "Title must be at least 2 characters" })
+      .max(100, { message: "Title cannot exceed 100 characters" }),
     target: z
       .number({ invalid_type_error: "Target must be a number" })
       .int({ message: "Target must be an integer" })
@@ -852,12 +856,16 @@ export const updateInfrastructureValidation = z
       .string()
       .uuid({ message: "Valid project ID is required" })
       .optional(),
-
     quarterId: z
       .string()
       .uuid({ message: "Valid quarter ID is required" })
       .optional(),
-
+    title: z
+      .string()
+      .trim()
+      .min(2, { message: "Title must be at least 2 characters" })
+      .max(100, { message: "Title cannot exceed 100 characters" })
+      .optional(),
     target: z
       .number({ invalid_type_error: "Target must be a number" })
       .int({ message: "Target must be an integer" })

@@ -253,6 +253,7 @@ exports.Prisma.AwarenessProgramScalarFieldEnum = {
 exports.Prisma.InfrastructureDevelopmentScalarFieldEnum = {
   id: 'id',
   InfraDevId: 'InfraDevId',
+  title: 'title',
   projectId: 'projectId',
   quarterId: 'quarterId',
   target: 'target',

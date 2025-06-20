@@ -57,6 +57,7 @@ infrastructureRouter.post(
         target,
         achieved,
         district,
+        title,
         village,
         block,
         remarks,
@@ -115,6 +116,7 @@ infrastructureRouter.post(
           achieved,
           district,
           village,
+          title,
           block,
           remarks,
           imageUrl,
@@ -129,6 +131,7 @@ infrastructureRouter.post(
           target: true,
           achieved: true,
           district: true,
+          title: true,
           village: true,
           block: true,
           remarks: true,
@@ -269,6 +272,7 @@ infrastructureRouter.put(
         achieved,
         district,
         village,
+        title,
         block,
         remarks,
         imageUrl,
@@ -295,6 +299,7 @@ infrastructureRouter.put(
         if (achieved !== undefined) updateData.achieved = achieved;
       }
       if (district !== undefined) updateData.district = district;
+      if (title !== undefined) updateData.title = title;
       if (village !== undefined) updateData.village = village;
       if (block !== undefined) updateData.block = block;
       if (remarks !== undefined) updateData.remarks = remarks;
@@ -324,6 +329,7 @@ infrastructureRouter.put(
           achieved: true,
           district: true,
           village: true,
+          title: true,
           block: true,
           remarks: true,
           imageUrl: true,
@@ -403,6 +409,7 @@ infrastructureRouter.get(
             achieved: true,
             district: true,
             village: true,
+            title: true,
             block: true,
             remarks: true,
             imageUrl: true,
@@ -470,6 +477,7 @@ infrastructureRouter.get(
             district: true,
             village: true,
             block: true,
+            title: true,
             remarks: true,
             imageUrl: true,
             imageKey: true,

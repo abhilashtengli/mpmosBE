@@ -247,6 +247,7 @@ model AwarenessProgram {
 model InfrastructureDevelopment {
   id         String   @id @default(uuid())
   InfraDevId String
+  title      String   @db.VarChar(100)
   project    Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
   projectId  String   @map("project_id")
   quarter    Quarter  @relation(fields: [quarterId], references: [id])

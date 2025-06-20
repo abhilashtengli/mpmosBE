@@ -12582,6 +12582,7 @@ export namespace Prisma {
   export type InfrastructureDevelopmentMinAggregateOutputType = {
     id: string | null
     InfraDevId: string | null
+    title: string | null
     projectId: string | null
     quarterId: string | null
     target: number | null
@@ -12600,6 +12601,7 @@ export namespace Prisma {
   export type InfrastructureDevelopmentMaxAggregateOutputType = {
     id: string | null
     InfraDevId: string | null
+    title: string | null
     projectId: string | null
     quarterId: string | null
     target: number | null
@@ -12618,6 +12620,7 @@ export namespace Prisma {
   export type InfrastructureDevelopmentCountAggregateOutputType = {
     id: number
     InfraDevId: number
+    title: number
     projectId: number
     quarterId: number
     target: number
@@ -12648,6 +12651,7 @@ export namespace Prisma {
   export type InfrastructureDevelopmentMinAggregateInputType = {
     id?: true
     InfraDevId?: true
+    title?: true
     projectId?: true
     quarterId?: true
     target?: true
@@ -12666,6 +12670,7 @@ export namespace Prisma {
   export type InfrastructureDevelopmentMaxAggregateInputType = {
     id?: true
     InfraDevId?: true
+    title?: true
     projectId?: true
     quarterId?: true
     target?: true
@@ -12684,6 +12689,7 @@ export namespace Prisma {
   export type InfrastructureDevelopmentCountAggregateInputType = {
     id?: true
     InfraDevId?: true
+    title?: true
     projectId?: true
     quarterId?: true
     target?: true
@@ -12789,6 +12795,7 @@ export namespace Prisma {
   export type InfrastructureDevelopmentGroupByOutputType = {
     id: string
     InfraDevId: string
+    title: string
     projectId: string
     quarterId: string
     target: number
@@ -12826,6 +12833,7 @@ export namespace Prisma {
   export type InfrastructureDevelopmentSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     InfraDevId?: boolean
+    title?: boolean
     projectId?: boolean
     quarterId?: boolean
     target?: boolean
@@ -12847,6 +12855,7 @@ export namespace Prisma {
   export type InfrastructureDevelopmentSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     InfraDevId?: boolean
+    title?: boolean
     projectId?: boolean
     quarterId?: boolean
     target?: boolean
@@ -12868,6 +12877,7 @@ export namespace Prisma {
   export type InfrastructureDevelopmentSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     InfraDevId?: boolean
+    title?: boolean
     projectId?: boolean
     quarterId?: boolean
     target?: boolean
@@ -12889,6 +12899,7 @@ export namespace Prisma {
   export type InfrastructureDevelopmentSelectScalar = {
     id?: boolean
     InfraDevId?: boolean
+    title?: boolean
     projectId?: boolean
     quarterId?: boolean
     target?: boolean
@@ -12904,7 +12915,7 @@ export namespace Prisma {
     userId?: boolean
   }
 
-  export type InfrastructureDevelopmentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "InfraDevId" | "projectId" | "quarterId" | "target" | "achieved" | "district" | "village" | "block" | "remarks" | "imageUrl" | "imageKey" | "createdAt" | "updatedAt" | "userId", ExtArgs["result"]["infrastructureDevelopment"]>
+  export type InfrastructureDevelopmentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "InfraDevId" | "title" | "projectId" | "quarterId" | "target" | "achieved" | "district" | "village" | "block" | "remarks" | "imageUrl" | "imageKey" | "createdAt" | "updatedAt" | "userId", ExtArgs["result"]["infrastructureDevelopment"]>
   export type InfrastructureDevelopmentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     project?: boolean | ProjectDefaultArgs<ExtArgs>
     quarter?: boolean | QuarterDefaultArgs<ExtArgs>
@@ -12931,6 +12942,7 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: string
       InfraDevId: string
+      title: string
       projectId: string
       quarterId: string
       target: number
@@ -13372,6 +13384,7 @@ export namespace Prisma {
   interface InfrastructureDevelopmentFieldRefs {
     readonly id: FieldRef<"InfrastructureDevelopment", 'String'>
     readonly InfraDevId: FieldRef<"InfrastructureDevelopment", 'String'>
+    readonly title: FieldRef<"InfrastructureDevelopment", 'String'>
     readonly projectId: FieldRef<"InfrastructureDevelopment", 'String'>
     readonly quarterId: FieldRef<"InfrastructureDevelopment", 'String'>
     readonly target: FieldRef<"InfrastructureDevelopment", 'Int'>
@@ -18583,6 +18596,7 @@ export namespace Prisma {
   export const InfrastructureDevelopmentScalarFieldEnum: {
     id: 'id',
     InfraDevId: 'InfraDevId',
+    title: 'title',
     projectId: 'projectId',
     quarterId: 'quarterId',
     target: 'target',
@@ -19674,6 +19688,7 @@ export namespace Prisma {
     NOT?: InfrastructureDevelopmentWhereInput | InfrastructureDevelopmentWhereInput[]
     id?: StringFilter<"InfrastructureDevelopment"> | string
     InfraDevId?: StringFilter<"InfrastructureDevelopment"> | string
+    title?: StringFilter<"InfrastructureDevelopment"> | string
     projectId?: StringFilter<"InfrastructureDevelopment"> | string
     quarterId?: StringFilter<"InfrastructureDevelopment"> | string
     target?: IntFilter<"InfrastructureDevelopment"> | number
@@ -19695,6 +19710,7 @@ export namespace Prisma {
   export type InfrastructureDevelopmentOrderByWithRelationInput = {
     id?: SortOrder
     InfraDevId?: SortOrder
+    title?: SortOrder
     projectId?: SortOrder
     quarterId?: SortOrder
     target?: SortOrder
@@ -19719,6 +19735,7 @@ export namespace Prisma {
     AND?: InfrastructureDevelopmentWhereInput | InfrastructureDevelopmentWhereInput[]
     OR?: InfrastructureDevelopmentWhereInput[]
     NOT?: InfrastructureDevelopmentWhereInput | InfrastructureDevelopmentWhereInput[]
+    title?: StringFilter<"InfrastructureDevelopment"> | string
     projectId?: StringFilter<"InfrastructureDevelopment"> | string
     quarterId?: StringFilter<"InfrastructureDevelopment"> | string
     target?: IntFilter<"InfrastructureDevelopment"> | number
@@ -19740,6 +19757,7 @@ export namespace Prisma {
   export type InfrastructureDevelopmentOrderByWithAggregationInput = {
     id?: SortOrder
     InfraDevId?: SortOrder
+    title?: SortOrder
     projectId?: SortOrder
     quarterId?: SortOrder
     target?: SortOrder
@@ -19766,6 +19784,7 @@ export namespace Prisma {
     NOT?: InfrastructureDevelopmentScalarWhereWithAggregatesInput | InfrastructureDevelopmentScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"InfrastructureDevelopment"> | string
     InfraDevId?: StringWithAggregatesFilter<"InfrastructureDevelopment"> | string
+    title?: StringWithAggregatesFilter<"InfrastructureDevelopment"> | string
     projectId?: StringWithAggregatesFilter<"InfrastructureDevelopment"> | string
     quarterId?: StringWithAggregatesFilter<"InfrastructureDevelopment"> | string
     target?: IntWithAggregatesFilter<"InfrastructureDevelopment"> | number
@@ -21086,6 +21105,7 @@ export namespace Prisma {
   export type InfrastructureDevelopmentCreateInput = {
     id?: string
     InfraDevId: string
+    title: string
     target: number
     achieved: number
     district: string
@@ -21104,6 +21124,7 @@ export namespace Prisma {
   export type InfrastructureDevelopmentUncheckedCreateInput = {
     id?: string
     InfraDevId: string
+    title: string
     projectId: string
     quarterId: string
     target: number
@@ -21122,6 +21143,7 @@ export namespace Prisma {
   export type InfrastructureDevelopmentUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     InfraDevId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
     target?: IntFieldUpdateOperationsInput | number
     achieved?: IntFieldUpdateOperationsInput | number
     district?: StringFieldUpdateOperationsInput | string
@@ -21140,6 +21162,7 @@ export namespace Prisma {
   export type InfrastructureDevelopmentUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     InfraDevId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
     projectId?: StringFieldUpdateOperationsInput | string
     quarterId?: StringFieldUpdateOperationsInput | string
     target?: IntFieldUpdateOperationsInput | number
@@ -21158,6 +21181,7 @@ export namespace Prisma {
   export type InfrastructureDevelopmentCreateManyInput = {
     id?: string
     InfraDevId: string
+    title: string
     projectId: string
     quarterId: string
     target: number
@@ -21176,6 +21200,7 @@ export namespace Prisma {
   export type InfrastructureDevelopmentUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     InfraDevId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
     target?: IntFieldUpdateOperationsInput | number
     achieved?: IntFieldUpdateOperationsInput | number
     district?: StringFieldUpdateOperationsInput | string
@@ -21191,6 +21216,7 @@ export namespace Prisma {
   export type InfrastructureDevelopmentUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     InfraDevId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
     projectId?: StringFieldUpdateOperationsInput | string
     quarterId?: StringFieldUpdateOperationsInput | string
     target?: IntFieldUpdateOperationsInput | number
@@ -22417,6 +22443,7 @@ export namespace Prisma {
   export type InfrastructureDevelopmentCountOrderByAggregateInput = {
     id?: SortOrder
     InfraDevId?: SortOrder
+    title?: SortOrder
     projectId?: SortOrder
     quarterId?: SortOrder
     target?: SortOrder
@@ -22440,6 +22467,7 @@ export namespace Prisma {
   export type InfrastructureDevelopmentMaxOrderByAggregateInput = {
     id?: SortOrder
     InfraDevId?: SortOrder
+    title?: SortOrder
     projectId?: SortOrder
     quarterId?: SortOrder
     target?: SortOrder
@@ -22458,6 +22486,7 @@ export namespace Prisma {
   export type InfrastructureDevelopmentMinOrderByAggregateInput = {
     id?: SortOrder
     InfraDevId?: SortOrder
+    title?: SortOrder
     projectId?: SortOrder
     quarterId?: SortOrder
     target?: SortOrder
@@ -24461,6 +24490,7 @@ export namespace Prisma {
   export type InfrastructureDevelopmentCreateWithoutUserInput = {
     id?: string
     InfraDevId: string
+    title: string
     target: number
     achieved: number
     district: string
@@ -24478,6 +24508,7 @@ export namespace Prisma {
   export type InfrastructureDevelopmentUncheckedCreateWithoutUserInput = {
     id?: string
     InfraDevId: string
+    title: string
     projectId: string
     quarterId: string
     target: number
@@ -24892,6 +24923,7 @@ export namespace Prisma {
     NOT?: InfrastructureDevelopmentScalarWhereInput | InfrastructureDevelopmentScalarWhereInput[]
     id?: StringFilter<"InfrastructureDevelopment"> | string
     InfraDevId?: StringFilter<"InfrastructureDevelopment"> | string
+    title?: StringFilter<"InfrastructureDevelopment"> | string
     projectId?: StringFilter<"InfrastructureDevelopment"> | string
     quarterId?: StringFilter<"InfrastructureDevelopment"> | string
     target?: IntFilter<"InfrastructureDevelopment"> | number
@@ -25348,6 +25380,7 @@ export namespace Prisma {
   export type InfrastructureDevelopmentCreateWithoutProjectInput = {
     id?: string
     InfraDevId: string
+    title: string
     target: number
     achieved: number
     district: string
@@ -25365,6 +25398,7 @@ export namespace Prisma {
   export type InfrastructureDevelopmentUncheckedCreateWithoutProjectInput = {
     id?: string
     InfraDevId: string
+    title: string
     quarterId: string
     target: number
     achieved: number
@@ -25842,6 +25876,7 @@ export namespace Prisma {
   export type InfrastructureDevelopmentCreateWithoutQuarterInput = {
     id?: string
     InfraDevId: string
+    title: string
     target: number
     achieved: number
     district: string
@@ -25859,6 +25894,7 @@ export namespace Prisma {
   export type InfrastructureDevelopmentUncheckedCreateWithoutQuarterInput = {
     id?: string
     InfraDevId: string
+    title: string
     projectId: string
     target: number
     achieved: number
@@ -27868,6 +27904,7 @@ export namespace Prisma {
   export type InfrastructureDevelopmentCreateManyUserInput = {
     id?: string
     InfraDevId: string
+    title: string
     projectId: string
     quarterId: string
     target: number
@@ -28209,6 +28246,7 @@ export namespace Prisma {
   export type InfrastructureDevelopmentUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     InfraDevId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
     target?: IntFieldUpdateOperationsInput | number
     achieved?: IntFieldUpdateOperationsInput | number
     district?: StringFieldUpdateOperationsInput | string
@@ -28226,6 +28264,7 @@ export namespace Prisma {
   export type InfrastructureDevelopmentUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     InfraDevId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
     projectId?: StringFieldUpdateOperationsInput | string
     quarterId?: StringFieldUpdateOperationsInput | string
     target?: IntFieldUpdateOperationsInput | number
@@ -28243,6 +28282,7 @@ export namespace Prisma {
   export type InfrastructureDevelopmentUncheckedUpdateManyWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     InfraDevId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
     projectId?: StringFieldUpdateOperationsInput | string
     quarterId?: StringFieldUpdateOperationsInput | string
     target?: IntFieldUpdateOperationsInput | number
@@ -28524,6 +28564,7 @@ export namespace Prisma {
   export type InfrastructureDevelopmentCreateManyProjectInput = {
     id?: string
     InfraDevId: string
+    title: string
     quarterId: string
     target: number
     achieved: number
@@ -28741,6 +28782,7 @@ export namespace Prisma {
   export type InfrastructureDevelopmentUpdateWithoutProjectInput = {
     id?: StringFieldUpdateOperationsInput | string
     InfraDevId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
     target?: IntFieldUpdateOperationsInput | number
     achieved?: IntFieldUpdateOperationsInput | number
     district?: StringFieldUpdateOperationsInput | string
@@ -28758,6 +28800,7 @@ export namespace Prisma {
   export type InfrastructureDevelopmentUncheckedUpdateWithoutProjectInput = {
     id?: StringFieldUpdateOperationsInput | string
     InfraDevId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
     quarterId?: StringFieldUpdateOperationsInput | string
     target?: IntFieldUpdateOperationsInput | number
     achieved?: IntFieldUpdateOperationsInput | number
@@ -28775,6 +28818,7 @@ export namespace Prisma {
   export type InfrastructureDevelopmentUncheckedUpdateManyWithoutProjectInput = {
     id?: StringFieldUpdateOperationsInput | string
     InfraDevId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
     quarterId?: StringFieldUpdateOperationsInput | string
     target?: IntFieldUpdateOperationsInput | number
     achieved?: IntFieldUpdateOperationsInput | number
@@ -28932,6 +28976,7 @@ export namespace Prisma {
   export type InfrastructureDevelopmentCreateManyQuarterInput = {
     id?: string
     InfraDevId: string
+    title: string
     projectId: string
     target: number
     achieved: number
@@ -29189,6 +29234,7 @@ export namespace Prisma {
   export type InfrastructureDevelopmentUpdateWithoutQuarterInput = {
     id?: StringFieldUpdateOperationsInput | string
     InfraDevId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
     target?: IntFieldUpdateOperationsInput | number
     achieved?: IntFieldUpdateOperationsInput | number
     district?: StringFieldUpdateOperationsInput | string
@@ -29206,6 +29252,7 @@ export namespace Prisma {
   export type InfrastructureDevelopmentUncheckedUpdateWithoutQuarterInput = {
     id?: StringFieldUpdateOperationsInput | string
     InfraDevId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
     projectId?: StringFieldUpdateOperationsInput | string
     target?: IntFieldUpdateOperationsInput | number
     achieved?: IntFieldUpdateOperationsInput | number
@@ -29223,6 +29270,7 @@ export namespace Prisma {
   export type InfrastructureDevelopmentUncheckedUpdateManyWithoutQuarterInput = {
     id?: StringFieldUpdateOperationsInput | string
     InfraDevId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
     projectId?: StringFieldUpdateOperationsInput | string
     target?: IntFieldUpdateOperationsInput | number
     achieved?: IntFieldUpdateOperationsInput | number
