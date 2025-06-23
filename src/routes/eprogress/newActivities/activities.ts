@@ -95,7 +95,7 @@ activityRouter.post(
         where: { id: activityCategoryId },
         select: { id: true, name: true }
       });
-      const activityCategoryName = actcatName?.name.slice(0, 3);
+      const activityCategoryName = actcatName?.name.slice(0, 3).toUpperCase();
 
       const latestActivity = await prisma.activities.findFirst({
         orderBy: { createdAt: "desc" },
@@ -194,11 +194,11 @@ activityRouter.put(
     try {
       const { id } = req.params;
 
-      // Validate training ID
+      // Validate activity ID
       if (!id || typeof id !== "string") {
         res.status(400).json({
           success: false,
-          message: "Valid training ID is required",
+          message: "Valid activity ID is required",
           code: "INVALID_INPUT"
         });
         return;
@@ -213,7 +213,7 @@ activityRouter.put(
         return;
       }
 
-      // Find the training and check existence
+      // Find the activity and check existence
       const existingActivities = await prisma.activities.findUnique({
         where: { id }
       });
@@ -352,6 +352,7 @@ activityRouter.put(
           quarter: true,
           title: true,
           target: true,
+          activityId: true,
           achieved: true,
           district: true,
           village: true,
@@ -395,10 +396,21 @@ activityRouter.put(
 
 // Get Activities for user
 activityRouter.get(
-  "/get-user-activites",
+  "/get-user-activites/:id",
   userAuth,
   async (req: Request, res: Response) => {
     try {
+      const { id } = req.params;
+
+      // Validate activity ID
+      if (!id || typeof id !== "string") {
+        res.status(400).json({
+          success: false,
+          message: "Valid activity category ID is required",
+          code: "INVALID_INPUT"
+        });
+        return;
+      }
       const user = (req as RequestWithUser).user;
 
       if (!user) {
@@ -412,6 +424,7 @@ activityRouter.get(
 
       const activityData = await prisma.activities.findMany({
         where: {
+          activityCategoryId: id,
           userId: user.id
         },
         orderBy: {
@@ -420,24 +433,11 @@ activityRouter.get(
         select: {
           id: true,
           activityCategoryId: true,
-          project: {
-            select: {
-              title: true,
-              implementingAgency: true,
-              director: true,
-              locationState: true,
-              status: true
-            }
-          },
-          quarter: {
-            select: {
-              id: true,
-              number: true,
-              year: true
-            }
-          },
+          project: true,
+          quarter: true,
           title: true,
           target: true,
+          activityId: true,
           achieved: true,
           district: true,
           village: true,
@@ -451,7 +451,13 @@ activityRouter.get(
           pdfKey: true,
           units: true,
           createdAt: true,
-          updatedAt: true
+          updatedAt: true,
+          User: {
+            select: {
+              id: true,
+              name: true
+            }
+          }
         }
       });
 
@@ -475,7 +481,7 @@ activityRouter.get(
       console.error("Error getting the activity info", err);
       res.status(500).json({
         success: false,
-        message: "Could not fetch Training info, please try again later",
+        message: "Could not fetch Activity info, please try again later",
         code: "INTERNAL_SERVER_ERROR"
       });
       return;
@@ -485,10 +491,21 @@ activityRouter.get(
 
 // Get Activities for admin
 activityRouter.get(
-  "/get-admin-activites",
+  "/get-admin-activites/:id",
   userAuth,
   async (req: Request, res: Response) => {
     try {
+      const { id } = req.params;
+
+      // Validate activity ID
+      if (!id || typeof id !== "string") {
+        res.status(400).json({
+          success: false,
+          message: "Valid activity category ID is required",
+          code: "INVALID_INPUT"
+        });
+        return;
+      }
       const user = (req as RequestWithUser).user;
 
       if (!user) {
@@ -501,30 +518,20 @@ activityRouter.get(
       }
 
       const activityData = await prisma.activities.findMany({
+        where: {
+          activityCategoryId: id
+        },
         orderBy: {
           createdAt: "desc" // Default ordering by most recent
         },
         select: {
           id: true,
           activityCategoryId: true,
-          project: {
-            select: {
-              title: true,
-              implementingAgency: true,
-              director: true,
-              locationState: true,
-              status: true
-            }
-          },
-          quarter: {
-            select: {
-              id: true,
-              number: true,
-              year: true
-            }
-          },
+          project: true,
+          quarter: true,
           title: true,
           target: true,
+          activityId: true,
           achieved: true,
           district: true,
           village: true,
@@ -538,7 +545,13 @@ activityRouter.get(
           pdfKey: true,
           units: true,
           createdAt: true,
-          updatedAt: true
+          updatedAt: true,
+          User: {
+            select: {
+              id: true,
+              name: true
+            }
+          }
         }
       });
 
@@ -562,7 +575,7 @@ activityRouter.get(
       console.error("Error getting the activity info", err);
       res.status(500).json({
         success: false,
-        message: "Could not fetch Training info, please try again later",
+        message: "Could not fetch Activity info, please try again later",
         code: "INTERNAL_SERVER_ERROR"
       });
       return;
@@ -570,6 +583,7 @@ activityRouter.get(
   }
 );
 
+// Delete activity
 activityRouter.delete(
   "/delete-activity/:id",
   userAuth,
@@ -596,15 +610,15 @@ activityRouter.delete(
         return;
       }
 
-      // Check if training exists
-      const existingActivity = await prisma.training.findUnique({
+      // Check if activity exists
+      const existingActivity = await prisma.activities.findUnique({
         where: { id }
       });
 
       if (!existingActivity) {
         res.status(404).json({
           success: false,
-          message: "Training not found",
+          message: "Activities not found",
           code: "RESOURCE_NOT_FOUND"
         });
         return;
@@ -613,7 +627,7 @@ activityRouter.delete(
       if (existingActivity.userId !== user.id) {
         res.status(403).json({
           success: false,
-          message: "You don't have permission to delete this training",
+          message: "You don't have permission to delete this activity",
           code: "FORBIDDEN"
         });
         return;
@@ -656,8 +670,8 @@ activityRouter.delete(
         await safeDeleteFile(existingActivity.pdfKey, "PDF");
       }
 
-      // Delete the training
-      await prisma.training.delete({
+      // Delete the activity
+      await prisma.activities.delete({
         where: { id }
       });
       const hasWarnings = fileDeleteWarnings.length > 0;
@@ -686,3 +700,5 @@ activityRouter.delete(
     }
   }
 );
+
+export default activityRouter;

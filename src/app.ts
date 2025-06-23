@@ -15,6 +15,8 @@ import trainingRouter from "./routes/eprogress/training";
 import sseRouter from "./routes/sseRoute";
 import signedUrlRouter from "./routes/cloudflare/signedUrl";
 import cloudflareRouter from "./routes/cloudflare/cloudflare";
+import activityRouter from "./routes/eprogress/newActivities/activities";
+import activityCategoryRouter from "./routes/eprogress/newActivities/activityCategory";
 const app = express();
 app.use(cookieParser());
 
@@ -44,6 +46,8 @@ app.use("/", infrastructureRouter);
 app.use("/", inputDistributionRouter);
 app.use("/", projectRouter);
 app.use("/", trainingRouter);
+app.use("/", activityRouter);
+app.use("/", activityCategoryRouter);
 app.listen(process.env.PORT, async () => {
   // console.log("Server running on the port : ", process.env.PORT);
 });

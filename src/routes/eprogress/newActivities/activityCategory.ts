@@ -302,7 +302,7 @@ activityCategoryRouter.get(
   }
 );
 
-// Delete Awarness program
+// Delete Activity program
 activityCategoryRouter.delete(
   "/delete-activity-category/:id",
   userAuth,
@@ -329,7 +329,7 @@ activityCategoryRouter.delete(
         return;
       }
 
-      // Check if awarness program exists
+      // Check if Activity program exists
       const existinActcat = await prisma.activitiesCategory.findUnique({
         where: { id }
       });
@@ -346,14 +346,14 @@ activityCategoryRouter.delete(
       if (existinActcat.userId !== user.id) {
         res.status(403).json({
           success: false,
-          message: "You don't have permission to delete this Awarness program",
+          message: "You don't have permission to delete this Activity category",
           code: "FORBIDDEN"
         });
         return;
       }
 
-      // Delete the Awarness program
-      await prisma.awarenessProgram.delete({
+      // Delete the Activity program
+      await prisma.activitiesCategory.delete({
         where: { id }
       });
 
@@ -376,3 +376,5 @@ activityCategoryRouter.delete(
     }
   }
 );
+
+export default activityCategoryRouter;
