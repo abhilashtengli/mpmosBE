@@ -356,6 +356,9 @@ generateReportRouter.post(
           project: true,
           quarter: true,
           year: true,
+          fileUrl: true,
+          fileKey: true,
+          fileName: true,
           createdAt: true,
           updatedAt: true,
           User: {
@@ -369,8 +372,7 @@ generateReportRouter.post(
       console.log("Public Url : ", publicUrl);
       res.json({
         success: true,
-        fileUrl: publicUrl,
-        reportId: generatedReport.id
+        data: generatedReport
       });
       return;
     } catch (error) {

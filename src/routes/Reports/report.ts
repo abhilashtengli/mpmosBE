@@ -64,14 +64,14 @@ reportRouter.get(
           success: true,
           message: "No Reports found",
           data: [],
-          code: "NO_TRAININGS_FOUND"
+          code: "NO_REPORTS_FOUND"
         });
         return;
       }
       res.status(200).json({
         success: true,
         data: reportData,
-        code: "GET_TRAININGS_SUCCESSFULL"
+        code: "GET_REPORTS_SUCCESSFULL"
       });
       return;
     } catch (err) {
