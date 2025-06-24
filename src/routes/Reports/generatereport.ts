@@ -71,7 +71,17 @@ generateReportRouter.post(
 
       const project = await prisma.project.findFirst({
         where: { id: projectId, userId: user.id },
-        select: { id: true, title: true, locationState: true }
+        select: {
+          id: true,
+          title: true,
+          locationState: true,
+          User: {
+            select: {
+              id: true,
+              name: true
+            }
+          }
+        }
       });
       if (!project) {
         res.status(403).json({
@@ -294,7 +304,16 @@ generateReportRouter.post(
         name: project.title,
         state: project.locationState,
         quarter: quarter.number,
-        year: quarter.year
+        year: quarter.year,
+        reportGeneratedAt: new Date().toLocaleString("en-IN", {
+          day: "2-digit",
+          month: "2-digit",
+          year: "numeric",
+          hour: "2-digit",
+          minute: "2-digit",
+          hour12: true
+        }),
+        projectDirector: project.User?.name
       };
 
       const buffer = await generateDocxReportBuffer(activities, projectInfo);
@@ -331,6 +350,20 @@ generateReportRouter.post(
           fileKey: key,
           fileUrl: publicUrl,
           userId: user.id
+        },
+        select: {
+          id: true,
+          project: true,
+          quarter: true,
+          year: true,
+          createdAt: true,
+          updatedAt: true,
+          User: {
+            select: {
+              id: true,
+              name: true
+            }
+          }
         }
       });
       console.log("Public Url : ", publicUrl);
