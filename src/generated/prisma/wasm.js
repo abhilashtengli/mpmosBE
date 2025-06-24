@@ -354,6 +354,19 @@ exports.Prisma.ActivitiesScalarFieldEnum = {
   userId: 'userId'
 };
 
+exports.Prisma.GeneratedReportScalarFieldEnum = {
+  id: 'id',
+  projectId: 'projectId',
+  quarter: 'quarter',
+  year: 'year',
+  fileName: 'fileName',
+  fileKey: 'fileKey',
+  fileUrl: 'fileUrl',
+  userId: 'userId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -393,7 +406,8 @@ exports.Prisma.ModelName = {
   Gallery: 'Gallery',
   ProjectDetails: 'ProjectDetails',
   ActivitiesCategory: 'ActivitiesCategory',
-  Activities: 'Activities'
+  Activities: 'Activities',
+  GeneratedReport: 'GeneratedReport'
 };
 
 /**

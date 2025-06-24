@@ -17,6 +17,7 @@ import signedUrlRouter from "./routes/cloudflare/signedUrl";
 import cloudflareRouter from "./routes/cloudflare/cloudflare";
 import activityRouter from "./routes/eprogress/newActivities/activities";
 import activityCategoryRouter from "./routes/eprogress/newActivities/activityCategory";
+import generateReportRouter from "./routes/Reports/generatereport";
 const app = express();
 app.use(cookieParser());
 
@@ -40,6 +41,7 @@ app.use("/", projectDetailsRouter);
 app.use("/", publicationRouter);
 app.use("/", upcomingEventsRouter);
 //e-progress
+app.use("/", generateReportRouter);
 app.use("/", awarenessProgramRouter);
 app.use("/", fldRouter);
 app.use("/", infrastructureRouter);

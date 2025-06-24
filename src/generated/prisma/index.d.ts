@@ -88,6 +88,11 @@ export type ActivitiesCategory = $Result.DefaultSelection<Prisma.$ActivitiesCate
  * 
  */
 export type Activities = $Result.DefaultSelection<Prisma.$ActivitiesPayload>
+/**
+ * Model GeneratedReport
+ * 
+ */
+export type GeneratedReport = $Result.DefaultSelection<Prisma.$GeneratedReportPayload>
 
 /**
  * Enums
@@ -392,6 +397,16 @@ export class PrismaClient<
     * ```
     */
   get activities(): Prisma.ActivitiesDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.generatedReport`: Exposes CRUD operations for the **GeneratedReport** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more GeneratedReports
+    * const generatedReports = await prisma.generatedReport.findMany()
+    * ```
+    */
+  get generatedReport(): Prisma.GeneratedReportDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -846,7 +861,8 @@ export namespace Prisma {
     Gallery: 'Gallery',
     ProjectDetails: 'ProjectDetails',
     ActivitiesCategory: 'ActivitiesCategory',
-    Activities: 'Activities'
+    Activities: 'Activities',
+    GeneratedReport: 'GeneratedReport'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -865,7 +881,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "session" | "project" | "quarter" | "inputDistribution" | "training" | "fLD" | "awarenessProgram" | "infrastructureDevelopment" | "upcomingEvent" | "publication" | "gallery" | "projectDetails" | "activitiesCategory" | "activities"
+      modelProps: "user" | "session" | "project" | "quarter" | "inputDistribution" | "training" | "fLD" | "awarenessProgram" | "infrastructureDevelopment" | "upcomingEvent" | "publication" | "gallery" | "projectDetails" | "activitiesCategory" | "activities" | "generatedReport"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1979,6 +1995,80 @@ export namespace Prisma {
           }
         }
       }
+      GeneratedReport: {
+        payload: Prisma.$GeneratedReportPayload<ExtArgs>
+        fields: Prisma.GeneratedReportFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.GeneratedReportFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GeneratedReportPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.GeneratedReportFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GeneratedReportPayload>
+          }
+          findFirst: {
+            args: Prisma.GeneratedReportFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GeneratedReportPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.GeneratedReportFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GeneratedReportPayload>
+          }
+          findMany: {
+            args: Prisma.GeneratedReportFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GeneratedReportPayload>[]
+          }
+          create: {
+            args: Prisma.GeneratedReportCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GeneratedReportPayload>
+          }
+          createMany: {
+            args: Prisma.GeneratedReportCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.GeneratedReportCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GeneratedReportPayload>[]
+          }
+          delete: {
+            args: Prisma.GeneratedReportDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GeneratedReportPayload>
+          }
+          update: {
+            args: Prisma.GeneratedReportUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GeneratedReportPayload>
+          }
+          deleteMany: {
+            args: Prisma.GeneratedReportDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.GeneratedReportUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.GeneratedReportUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GeneratedReportPayload>[]
+          }
+          upsert: {
+            args: Prisma.GeneratedReportUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GeneratedReportPayload>
+          }
+          aggregate: {
+            args: Prisma.GeneratedReportAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateGeneratedReport>
+          }
+          groupBy: {
+            args: Prisma.GeneratedReportGroupByArgs<ExtArgs>
+            result: $Utils.Optional<GeneratedReportGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.GeneratedReportCountArgs<ExtArgs>
+            result: $Utils.Optional<GeneratedReportCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -2078,6 +2168,7 @@ export namespace Prisma {
     projectDetails?: ProjectDetailsOmit
     activitiesCategory?: ActivitiesCategoryOmit
     activities?: ActivitiesOmit
+    generatedReport?: GeneratedReportOmit
   }
 
   /* Types for Logging */
@@ -2185,6 +2276,7 @@ export namespace Prisma {
     projectDetails: number
     activities: number
     ActivitiesCategory: number
+    GeneratedReport: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2201,6 +2293,7 @@ export namespace Prisma {
     projectDetails?: boolean | UserCountOutputTypeCountProjectDetailsArgs
     activities?: boolean | UserCountOutputTypeCountActivitiesArgs
     ActivitiesCategory?: boolean | UserCountOutputTypeCountActivitiesCategoryArgs
+    GeneratedReport?: boolean | UserCountOutputTypeCountGeneratedReportArgs
   }
 
   // Custom InputTypes
@@ -2305,6 +2398,13 @@ export namespace Prisma {
     where?: ActivitiesCategoryWhereInput
   }
 
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountGeneratedReportArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: GeneratedReportWhereInput
+  }
+
 
   /**
    * Count Type ProjectCountOutputType
@@ -2317,6 +2417,7 @@ export namespace Prisma {
     infrastructureDevelopments: number
     inputDistributions: number
     activities: number
+    GeneratedReport: number
   }
 
   export type ProjectCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2326,6 +2427,7 @@ export namespace Prisma {
     infrastructureDevelopments?: boolean | ProjectCountOutputTypeCountInfrastructureDevelopmentsArgs
     inputDistributions?: boolean | ProjectCountOutputTypeCountInputDistributionsArgs
     activities?: boolean | ProjectCountOutputTypeCountActivitiesArgs
+    GeneratedReport?: boolean | ProjectCountOutputTypeCountGeneratedReportArgs
   }
 
   // Custom InputTypes
@@ -2379,6 +2481,13 @@ export namespace Prisma {
    */
   export type ProjectCountOutputTypeCountActivitiesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ActivitiesWhereInput
+  }
+
+  /**
+   * ProjectCountOutputType without action
+   */
+  export type ProjectCountOutputTypeCountGeneratedReportArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: GeneratedReportWhereInput
   }
 
 
@@ -2768,6 +2877,7 @@ export namespace Prisma {
     projectDetails?: boolean | User$projectDetailsArgs<ExtArgs>
     activities?: boolean | User$activitiesArgs<ExtArgs>
     ActivitiesCategory?: boolean | User$ActivitiesCategoryArgs<ExtArgs>
+    GeneratedReport?: boolean | User$GeneratedReportArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -2834,6 +2944,7 @@ export namespace Prisma {
     projectDetails?: boolean | User$projectDetailsArgs<ExtArgs>
     activities?: boolean | User$activitiesArgs<ExtArgs>
     ActivitiesCategory?: boolean | User$ActivitiesCategoryArgs<ExtArgs>
+    GeneratedReport?: boolean | User$GeneratedReportArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -2855,6 +2966,7 @@ export namespace Prisma {
       projectDetails: Prisma.$ProjectDetailsPayload<ExtArgs>[]
       activities: Prisma.$ActivitiesPayload<ExtArgs>[]
       ActivitiesCategory: Prisma.$ActivitiesCategoryPayload<ExtArgs>[]
+      GeneratedReport: Prisma.$GeneratedReportPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -3277,6 +3389,7 @@ export namespace Prisma {
     projectDetails<T extends User$projectDetailsArgs<ExtArgs> = {}>(args?: Subset<T, User$projectDetailsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProjectDetailsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     activities<T extends User$activitiesArgs<ExtArgs> = {}>(args?: Subset<T, User$activitiesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActivitiesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     ActivitiesCategory<T extends User$ActivitiesCategoryArgs<ExtArgs> = {}>(args?: Subset<T, User$ActivitiesCategoryArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActivitiesCategoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    GeneratedReport<T extends User$GeneratedReportArgs<ExtArgs> = {}>(args?: Subset<T, User$GeneratedReportArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GeneratedReportPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4016,6 +4129,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ActivitiesCategoryScalarFieldEnum | ActivitiesCategoryScalarFieldEnum[]
+  }
+
+  /**
+   * User.GeneratedReport
+   */
+  export type User$GeneratedReportArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GeneratedReport
+     */
+    select?: GeneratedReportSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GeneratedReport
+     */
+    omit?: GeneratedReportOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GeneratedReportInclude<ExtArgs> | null
+    where?: GeneratedReportWhereInput
+    orderBy?: GeneratedReportOrderByWithRelationInput | GeneratedReportOrderByWithRelationInput[]
+    cursor?: GeneratedReportWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: GeneratedReportScalarFieldEnum | GeneratedReportScalarFieldEnum[]
   }
 
   /**
@@ -5369,6 +5506,7 @@ export namespace Prisma {
     inputDistributions?: boolean | Project$inputDistributionsArgs<ExtArgs>
     activities?: boolean | Project$activitiesArgs<ExtArgs>
     User?: boolean | Project$UserArgs<ExtArgs>
+    GeneratedReport?: boolean | Project$GeneratedReportArgs<ExtArgs>
     _count?: boolean | ProjectCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["project"]>
 
@@ -5428,6 +5566,7 @@ export namespace Prisma {
     inputDistributions?: boolean | Project$inputDistributionsArgs<ExtArgs>
     activities?: boolean | Project$activitiesArgs<ExtArgs>
     User?: boolean | Project$UserArgs<ExtArgs>
+    GeneratedReport?: boolean | Project$GeneratedReportArgs<ExtArgs>
     _count?: boolean | ProjectCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ProjectIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5447,6 +5586,7 @@ export namespace Prisma {
       inputDistributions: Prisma.$InputDistributionPayload<ExtArgs>[]
       activities: Prisma.$ActivitiesPayload<ExtArgs>[]
       User: Prisma.$UserPayload<ExtArgs> | null
+      GeneratedReport: Prisma.$GeneratedReportPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -5862,6 +6002,7 @@ export namespace Prisma {
     inputDistributions<T extends Project$inputDistributionsArgs<ExtArgs> = {}>(args?: Subset<T, Project$inputDistributionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InputDistributionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     activities<T extends Project$activitiesArgs<ExtArgs> = {}>(args?: Subset<T, Project$activitiesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActivitiesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     User<T extends Project$UserArgs<ExtArgs> = {}>(args?: Subset<T, Project$UserArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    GeneratedReport<T extends Project$GeneratedReportArgs<ExtArgs> = {}>(args?: Subset<T, Project$GeneratedReportArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GeneratedReportPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6459,6 +6600,30 @@ export namespace Prisma {
      */
     include?: UserInclude<ExtArgs> | null
     where?: UserWhereInput
+  }
+
+  /**
+   * Project.GeneratedReport
+   */
+  export type Project$GeneratedReportArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GeneratedReport
+     */
+    select?: GeneratedReportSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GeneratedReport
+     */
+    omit?: GeneratedReportOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GeneratedReportInclude<ExtArgs> | null
+    where?: GeneratedReportWhereInput
+    orderBy?: GeneratedReportOrderByWithRelationInput | GeneratedReportOrderByWithRelationInput[]
+    cursor?: GeneratedReportWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: GeneratedReportScalarFieldEnum | GeneratedReportScalarFieldEnum[]
   }
 
   /**
@@ -21262,6 +21427,1190 @@ export namespace Prisma {
 
 
   /**
+   * Model GeneratedReport
+   */
+
+  export type AggregateGeneratedReport = {
+    _count: GeneratedReportCountAggregateOutputType | null
+    _avg: GeneratedReportAvgAggregateOutputType | null
+    _sum: GeneratedReportSumAggregateOutputType | null
+    _min: GeneratedReportMinAggregateOutputType | null
+    _max: GeneratedReportMaxAggregateOutputType | null
+  }
+
+  export type GeneratedReportAvgAggregateOutputType = {
+    year: number | null
+  }
+
+  export type GeneratedReportSumAggregateOutputType = {
+    year: number | null
+  }
+
+  export type GeneratedReportMinAggregateOutputType = {
+    id: string | null
+    projectId: string | null
+    quarter: string | null
+    year: number | null
+    fileName: string | null
+    fileKey: string | null
+    fileUrl: string | null
+    userId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type GeneratedReportMaxAggregateOutputType = {
+    id: string | null
+    projectId: string | null
+    quarter: string | null
+    year: number | null
+    fileName: string | null
+    fileKey: string | null
+    fileUrl: string | null
+    userId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type GeneratedReportCountAggregateOutputType = {
+    id: number
+    projectId: number
+    quarter: number
+    year: number
+    fileName: number
+    fileKey: number
+    fileUrl: number
+    userId: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type GeneratedReportAvgAggregateInputType = {
+    year?: true
+  }
+
+  export type GeneratedReportSumAggregateInputType = {
+    year?: true
+  }
+
+  export type GeneratedReportMinAggregateInputType = {
+    id?: true
+    projectId?: true
+    quarter?: true
+    year?: true
+    fileName?: true
+    fileKey?: true
+    fileUrl?: true
+    userId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type GeneratedReportMaxAggregateInputType = {
+    id?: true
+    projectId?: true
+    quarter?: true
+    year?: true
+    fileName?: true
+    fileKey?: true
+    fileUrl?: true
+    userId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type GeneratedReportCountAggregateInputType = {
+    id?: true
+    projectId?: true
+    quarter?: true
+    year?: true
+    fileName?: true
+    fileKey?: true
+    fileUrl?: true
+    userId?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type GeneratedReportAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which GeneratedReport to aggregate.
+     */
+    where?: GeneratedReportWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of GeneratedReports to fetch.
+     */
+    orderBy?: GeneratedReportOrderByWithRelationInput | GeneratedReportOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: GeneratedReportWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` GeneratedReports from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` GeneratedReports.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned GeneratedReports
+    **/
+    _count?: true | GeneratedReportCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: GeneratedReportAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: GeneratedReportSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: GeneratedReportMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: GeneratedReportMaxAggregateInputType
+  }
+
+  export type GetGeneratedReportAggregateType<T extends GeneratedReportAggregateArgs> = {
+        [P in keyof T & keyof AggregateGeneratedReport]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateGeneratedReport[P]>
+      : GetScalarType<T[P], AggregateGeneratedReport[P]>
+  }
+
+
+
+
+  export type GeneratedReportGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: GeneratedReportWhereInput
+    orderBy?: GeneratedReportOrderByWithAggregationInput | GeneratedReportOrderByWithAggregationInput[]
+    by: GeneratedReportScalarFieldEnum[] | GeneratedReportScalarFieldEnum
+    having?: GeneratedReportScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: GeneratedReportCountAggregateInputType | true
+    _avg?: GeneratedReportAvgAggregateInputType
+    _sum?: GeneratedReportSumAggregateInputType
+    _min?: GeneratedReportMinAggregateInputType
+    _max?: GeneratedReportMaxAggregateInputType
+  }
+
+  export type GeneratedReportGroupByOutputType = {
+    id: string
+    projectId: string
+    quarter: string
+    year: number
+    fileName: string
+    fileKey: string
+    fileUrl: string
+    userId: string | null
+    createdAt: Date
+    updatedAt: Date
+    _count: GeneratedReportCountAggregateOutputType | null
+    _avg: GeneratedReportAvgAggregateOutputType | null
+    _sum: GeneratedReportSumAggregateOutputType | null
+    _min: GeneratedReportMinAggregateOutputType | null
+    _max: GeneratedReportMaxAggregateOutputType | null
+  }
+
+  type GetGeneratedReportGroupByPayload<T extends GeneratedReportGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<GeneratedReportGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof GeneratedReportGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], GeneratedReportGroupByOutputType[P]>
+            : GetScalarType<T[P], GeneratedReportGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type GeneratedReportSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    projectId?: boolean
+    quarter?: boolean
+    year?: boolean
+    fileName?: boolean
+    fileKey?: boolean
+    fileUrl?: boolean
+    userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    project?: boolean | ProjectDefaultArgs<ExtArgs>
+    User?: boolean | GeneratedReport$UserArgs<ExtArgs>
+  }, ExtArgs["result"]["generatedReport"]>
+
+  export type GeneratedReportSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    projectId?: boolean
+    quarter?: boolean
+    year?: boolean
+    fileName?: boolean
+    fileKey?: boolean
+    fileUrl?: boolean
+    userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    project?: boolean | ProjectDefaultArgs<ExtArgs>
+    User?: boolean | GeneratedReport$UserArgs<ExtArgs>
+  }, ExtArgs["result"]["generatedReport"]>
+
+  export type GeneratedReportSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    projectId?: boolean
+    quarter?: boolean
+    year?: boolean
+    fileName?: boolean
+    fileKey?: boolean
+    fileUrl?: boolean
+    userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    project?: boolean | ProjectDefaultArgs<ExtArgs>
+    User?: boolean | GeneratedReport$UserArgs<ExtArgs>
+  }, ExtArgs["result"]["generatedReport"]>
+
+  export type GeneratedReportSelectScalar = {
+    id?: boolean
+    projectId?: boolean
+    quarter?: boolean
+    year?: boolean
+    fileName?: boolean
+    fileKey?: boolean
+    fileUrl?: boolean
+    userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type GeneratedReportOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "projectId" | "quarter" | "year" | "fileName" | "fileKey" | "fileUrl" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["generatedReport"]>
+  export type GeneratedReportInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    project?: boolean | ProjectDefaultArgs<ExtArgs>
+    User?: boolean | GeneratedReport$UserArgs<ExtArgs>
+  }
+  export type GeneratedReportIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    project?: boolean | ProjectDefaultArgs<ExtArgs>
+    User?: boolean | GeneratedReport$UserArgs<ExtArgs>
+  }
+  export type GeneratedReportIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    project?: boolean | ProjectDefaultArgs<ExtArgs>
+    User?: boolean | GeneratedReport$UserArgs<ExtArgs>
+  }
+
+  export type $GeneratedReportPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "GeneratedReport"
+    objects: {
+      project: Prisma.$ProjectPayload<ExtArgs>
+      User: Prisma.$UserPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      projectId: string
+      quarter: string
+      year: number
+      fileName: string
+      fileKey: string
+      fileUrl: string
+      userId: string | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["generatedReport"]>
+    composites: {}
+  }
+
+  type GeneratedReportGetPayload<S extends boolean | null | undefined | GeneratedReportDefaultArgs> = $Result.GetResult<Prisma.$GeneratedReportPayload, S>
+
+  type GeneratedReportCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<GeneratedReportFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: GeneratedReportCountAggregateInputType | true
+    }
+
+  export interface GeneratedReportDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['GeneratedReport'], meta: { name: 'GeneratedReport' } }
+    /**
+     * Find zero or one GeneratedReport that matches the filter.
+     * @param {GeneratedReportFindUniqueArgs} args - Arguments to find a GeneratedReport
+     * @example
+     * // Get one GeneratedReport
+     * const generatedReport = await prisma.generatedReport.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends GeneratedReportFindUniqueArgs>(args: SelectSubset<T, GeneratedReportFindUniqueArgs<ExtArgs>>): Prisma__GeneratedReportClient<$Result.GetResult<Prisma.$GeneratedReportPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one GeneratedReport that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {GeneratedReportFindUniqueOrThrowArgs} args - Arguments to find a GeneratedReport
+     * @example
+     * // Get one GeneratedReport
+     * const generatedReport = await prisma.generatedReport.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends GeneratedReportFindUniqueOrThrowArgs>(args: SelectSubset<T, GeneratedReportFindUniqueOrThrowArgs<ExtArgs>>): Prisma__GeneratedReportClient<$Result.GetResult<Prisma.$GeneratedReportPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first GeneratedReport that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GeneratedReportFindFirstArgs} args - Arguments to find a GeneratedReport
+     * @example
+     * // Get one GeneratedReport
+     * const generatedReport = await prisma.generatedReport.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends GeneratedReportFindFirstArgs>(args?: SelectSubset<T, GeneratedReportFindFirstArgs<ExtArgs>>): Prisma__GeneratedReportClient<$Result.GetResult<Prisma.$GeneratedReportPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first GeneratedReport that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GeneratedReportFindFirstOrThrowArgs} args - Arguments to find a GeneratedReport
+     * @example
+     * // Get one GeneratedReport
+     * const generatedReport = await prisma.generatedReport.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends GeneratedReportFindFirstOrThrowArgs>(args?: SelectSubset<T, GeneratedReportFindFirstOrThrowArgs<ExtArgs>>): Prisma__GeneratedReportClient<$Result.GetResult<Prisma.$GeneratedReportPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more GeneratedReports that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GeneratedReportFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all GeneratedReports
+     * const generatedReports = await prisma.generatedReport.findMany()
+     * 
+     * // Get first 10 GeneratedReports
+     * const generatedReports = await prisma.generatedReport.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const generatedReportWithIdOnly = await prisma.generatedReport.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends GeneratedReportFindManyArgs>(args?: SelectSubset<T, GeneratedReportFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GeneratedReportPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a GeneratedReport.
+     * @param {GeneratedReportCreateArgs} args - Arguments to create a GeneratedReport.
+     * @example
+     * // Create one GeneratedReport
+     * const GeneratedReport = await prisma.generatedReport.create({
+     *   data: {
+     *     // ... data to create a GeneratedReport
+     *   }
+     * })
+     * 
+     */
+    create<T extends GeneratedReportCreateArgs>(args: SelectSubset<T, GeneratedReportCreateArgs<ExtArgs>>): Prisma__GeneratedReportClient<$Result.GetResult<Prisma.$GeneratedReportPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many GeneratedReports.
+     * @param {GeneratedReportCreateManyArgs} args - Arguments to create many GeneratedReports.
+     * @example
+     * // Create many GeneratedReports
+     * const generatedReport = await prisma.generatedReport.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends GeneratedReportCreateManyArgs>(args?: SelectSubset<T, GeneratedReportCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many GeneratedReports and returns the data saved in the database.
+     * @param {GeneratedReportCreateManyAndReturnArgs} args - Arguments to create many GeneratedReports.
+     * @example
+     * // Create many GeneratedReports
+     * const generatedReport = await prisma.generatedReport.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many GeneratedReports and only return the `id`
+     * const generatedReportWithIdOnly = await prisma.generatedReport.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends GeneratedReportCreateManyAndReturnArgs>(args?: SelectSubset<T, GeneratedReportCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GeneratedReportPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a GeneratedReport.
+     * @param {GeneratedReportDeleteArgs} args - Arguments to delete one GeneratedReport.
+     * @example
+     * // Delete one GeneratedReport
+     * const GeneratedReport = await prisma.generatedReport.delete({
+     *   where: {
+     *     // ... filter to delete one GeneratedReport
+     *   }
+     * })
+     * 
+     */
+    delete<T extends GeneratedReportDeleteArgs>(args: SelectSubset<T, GeneratedReportDeleteArgs<ExtArgs>>): Prisma__GeneratedReportClient<$Result.GetResult<Prisma.$GeneratedReportPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one GeneratedReport.
+     * @param {GeneratedReportUpdateArgs} args - Arguments to update one GeneratedReport.
+     * @example
+     * // Update one GeneratedReport
+     * const generatedReport = await prisma.generatedReport.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends GeneratedReportUpdateArgs>(args: SelectSubset<T, GeneratedReportUpdateArgs<ExtArgs>>): Prisma__GeneratedReportClient<$Result.GetResult<Prisma.$GeneratedReportPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more GeneratedReports.
+     * @param {GeneratedReportDeleteManyArgs} args - Arguments to filter GeneratedReports to delete.
+     * @example
+     * // Delete a few GeneratedReports
+     * const { count } = await prisma.generatedReport.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends GeneratedReportDeleteManyArgs>(args?: SelectSubset<T, GeneratedReportDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more GeneratedReports.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GeneratedReportUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many GeneratedReports
+     * const generatedReport = await prisma.generatedReport.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends GeneratedReportUpdateManyArgs>(args: SelectSubset<T, GeneratedReportUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more GeneratedReports and returns the data updated in the database.
+     * @param {GeneratedReportUpdateManyAndReturnArgs} args - Arguments to update many GeneratedReports.
+     * @example
+     * // Update many GeneratedReports
+     * const generatedReport = await prisma.generatedReport.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more GeneratedReports and only return the `id`
+     * const generatedReportWithIdOnly = await prisma.generatedReport.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends GeneratedReportUpdateManyAndReturnArgs>(args: SelectSubset<T, GeneratedReportUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GeneratedReportPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one GeneratedReport.
+     * @param {GeneratedReportUpsertArgs} args - Arguments to update or create a GeneratedReport.
+     * @example
+     * // Update or create a GeneratedReport
+     * const generatedReport = await prisma.generatedReport.upsert({
+     *   create: {
+     *     // ... data to create a GeneratedReport
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the GeneratedReport we want to update
+     *   }
+     * })
+     */
+    upsert<T extends GeneratedReportUpsertArgs>(args: SelectSubset<T, GeneratedReportUpsertArgs<ExtArgs>>): Prisma__GeneratedReportClient<$Result.GetResult<Prisma.$GeneratedReportPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of GeneratedReports.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GeneratedReportCountArgs} args - Arguments to filter GeneratedReports to count.
+     * @example
+     * // Count the number of GeneratedReports
+     * const count = await prisma.generatedReport.count({
+     *   where: {
+     *     // ... the filter for the GeneratedReports we want to count
+     *   }
+     * })
+    **/
+    count<T extends GeneratedReportCountArgs>(
+      args?: Subset<T, GeneratedReportCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], GeneratedReportCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a GeneratedReport.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GeneratedReportAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends GeneratedReportAggregateArgs>(args: Subset<T, GeneratedReportAggregateArgs>): Prisma.PrismaPromise<GetGeneratedReportAggregateType<T>>
+
+    /**
+     * Group by GeneratedReport.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GeneratedReportGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends GeneratedReportGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: GeneratedReportGroupByArgs['orderBy'] }
+        : { orderBy?: GeneratedReportGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, GeneratedReportGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetGeneratedReportGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the GeneratedReport model
+   */
+  readonly fields: GeneratedReportFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for GeneratedReport.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__GeneratedReportClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    project<T extends ProjectDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ProjectDefaultArgs<ExtArgs>>): Prisma__ProjectClient<$Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    User<T extends GeneratedReport$UserArgs<ExtArgs> = {}>(args?: Subset<T, GeneratedReport$UserArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the GeneratedReport model
+   */
+  interface GeneratedReportFieldRefs {
+    readonly id: FieldRef<"GeneratedReport", 'String'>
+    readonly projectId: FieldRef<"GeneratedReport", 'String'>
+    readonly quarter: FieldRef<"GeneratedReport", 'String'>
+    readonly year: FieldRef<"GeneratedReport", 'Int'>
+    readonly fileName: FieldRef<"GeneratedReport", 'String'>
+    readonly fileKey: FieldRef<"GeneratedReport", 'String'>
+    readonly fileUrl: FieldRef<"GeneratedReport", 'String'>
+    readonly userId: FieldRef<"GeneratedReport", 'String'>
+    readonly createdAt: FieldRef<"GeneratedReport", 'DateTime'>
+    readonly updatedAt: FieldRef<"GeneratedReport", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * GeneratedReport findUnique
+   */
+  export type GeneratedReportFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GeneratedReport
+     */
+    select?: GeneratedReportSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GeneratedReport
+     */
+    omit?: GeneratedReportOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GeneratedReportInclude<ExtArgs> | null
+    /**
+     * Filter, which GeneratedReport to fetch.
+     */
+    where: GeneratedReportWhereUniqueInput
+  }
+
+  /**
+   * GeneratedReport findUniqueOrThrow
+   */
+  export type GeneratedReportFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GeneratedReport
+     */
+    select?: GeneratedReportSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GeneratedReport
+     */
+    omit?: GeneratedReportOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GeneratedReportInclude<ExtArgs> | null
+    /**
+     * Filter, which GeneratedReport to fetch.
+     */
+    where: GeneratedReportWhereUniqueInput
+  }
+
+  /**
+   * GeneratedReport findFirst
+   */
+  export type GeneratedReportFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GeneratedReport
+     */
+    select?: GeneratedReportSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GeneratedReport
+     */
+    omit?: GeneratedReportOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GeneratedReportInclude<ExtArgs> | null
+    /**
+     * Filter, which GeneratedReport to fetch.
+     */
+    where?: GeneratedReportWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of GeneratedReports to fetch.
+     */
+    orderBy?: GeneratedReportOrderByWithRelationInput | GeneratedReportOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for GeneratedReports.
+     */
+    cursor?: GeneratedReportWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` GeneratedReports from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` GeneratedReports.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of GeneratedReports.
+     */
+    distinct?: GeneratedReportScalarFieldEnum | GeneratedReportScalarFieldEnum[]
+  }
+
+  /**
+   * GeneratedReport findFirstOrThrow
+   */
+  export type GeneratedReportFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GeneratedReport
+     */
+    select?: GeneratedReportSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GeneratedReport
+     */
+    omit?: GeneratedReportOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GeneratedReportInclude<ExtArgs> | null
+    /**
+     * Filter, which GeneratedReport to fetch.
+     */
+    where?: GeneratedReportWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of GeneratedReports to fetch.
+     */
+    orderBy?: GeneratedReportOrderByWithRelationInput | GeneratedReportOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for GeneratedReports.
+     */
+    cursor?: GeneratedReportWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` GeneratedReports from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` GeneratedReports.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of GeneratedReports.
+     */
+    distinct?: GeneratedReportScalarFieldEnum | GeneratedReportScalarFieldEnum[]
+  }
+
+  /**
+   * GeneratedReport findMany
+   */
+  export type GeneratedReportFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GeneratedReport
+     */
+    select?: GeneratedReportSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GeneratedReport
+     */
+    omit?: GeneratedReportOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GeneratedReportInclude<ExtArgs> | null
+    /**
+     * Filter, which GeneratedReports to fetch.
+     */
+    where?: GeneratedReportWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of GeneratedReports to fetch.
+     */
+    orderBy?: GeneratedReportOrderByWithRelationInput | GeneratedReportOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing GeneratedReports.
+     */
+    cursor?: GeneratedReportWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` GeneratedReports from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` GeneratedReports.
+     */
+    skip?: number
+    distinct?: GeneratedReportScalarFieldEnum | GeneratedReportScalarFieldEnum[]
+  }
+
+  /**
+   * GeneratedReport create
+   */
+  export type GeneratedReportCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GeneratedReport
+     */
+    select?: GeneratedReportSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GeneratedReport
+     */
+    omit?: GeneratedReportOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GeneratedReportInclude<ExtArgs> | null
+    /**
+     * The data needed to create a GeneratedReport.
+     */
+    data: XOR<GeneratedReportCreateInput, GeneratedReportUncheckedCreateInput>
+  }
+
+  /**
+   * GeneratedReport createMany
+   */
+  export type GeneratedReportCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many GeneratedReports.
+     */
+    data: GeneratedReportCreateManyInput | GeneratedReportCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * GeneratedReport createManyAndReturn
+   */
+  export type GeneratedReportCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GeneratedReport
+     */
+    select?: GeneratedReportSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the GeneratedReport
+     */
+    omit?: GeneratedReportOmit<ExtArgs> | null
+    /**
+     * The data used to create many GeneratedReports.
+     */
+    data: GeneratedReportCreateManyInput | GeneratedReportCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GeneratedReportIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * GeneratedReport update
+   */
+  export type GeneratedReportUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GeneratedReport
+     */
+    select?: GeneratedReportSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GeneratedReport
+     */
+    omit?: GeneratedReportOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GeneratedReportInclude<ExtArgs> | null
+    /**
+     * The data needed to update a GeneratedReport.
+     */
+    data: XOR<GeneratedReportUpdateInput, GeneratedReportUncheckedUpdateInput>
+    /**
+     * Choose, which GeneratedReport to update.
+     */
+    where: GeneratedReportWhereUniqueInput
+  }
+
+  /**
+   * GeneratedReport updateMany
+   */
+  export type GeneratedReportUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update GeneratedReports.
+     */
+    data: XOR<GeneratedReportUpdateManyMutationInput, GeneratedReportUncheckedUpdateManyInput>
+    /**
+     * Filter which GeneratedReports to update
+     */
+    where?: GeneratedReportWhereInput
+    /**
+     * Limit how many GeneratedReports to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * GeneratedReport updateManyAndReturn
+   */
+  export type GeneratedReportUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GeneratedReport
+     */
+    select?: GeneratedReportSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the GeneratedReport
+     */
+    omit?: GeneratedReportOmit<ExtArgs> | null
+    /**
+     * The data used to update GeneratedReports.
+     */
+    data: XOR<GeneratedReportUpdateManyMutationInput, GeneratedReportUncheckedUpdateManyInput>
+    /**
+     * Filter which GeneratedReports to update
+     */
+    where?: GeneratedReportWhereInput
+    /**
+     * Limit how many GeneratedReports to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GeneratedReportIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * GeneratedReport upsert
+   */
+  export type GeneratedReportUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GeneratedReport
+     */
+    select?: GeneratedReportSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GeneratedReport
+     */
+    omit?: GeneratedReportOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GeneratedReportInclude<ExtArgs> | null
+    /**
+     * The filter to search for the GeneratedReport to update in case it exists.
+     */
+    where: GeneratedReportWhereUniqueInput
+    /**
+     * In case the GeneratedReport found by the `where` argument doesn't exist, create a new GeneratedReport with this data.
+     */
+    create: XOR<GeneratedReportCreateInput, GeneratedReportUncheckedCreateInput>
+    /**
+     * In case the GeneratedReport was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<GeneratedReportUpdateInput, GeneratedReportUncheckedUpdateInput>
+  }
+
+  /**
+   * GeneratedReport delete
+   */
+  export type GeneratedReportDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GeneratedReport
+     */
+    select?: GeneratedReportSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GeneratedReport
+     */
+    omit?: GeneratedReportOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GeneratedReportInclude<ExtArgs> | null
+    /**
+     * Filter which GeneratedReport to delete.
+     */
+    where: GeneratedReportWhereUniqueInput
+  }
+
+  /**
+   * GeneratedReport deleteMany
+   */
+  export type GeneratedReportDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which GeneratedReports to delete
+     */
+    where?: GeneratedReportWhereInput
+    /**
+     * Limit how many GeneratedReports to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * GeneratedReport.User
+   */
+  export type GeneratedReport$UserArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+  }
+
+  /**
+   * GeneratedReport without action
+   */
+  export type GeneratedReportDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GeneratedReport
+     */
+    select?: GeneratedReportSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GeneratedReport
+     */
+    omit?: GeneratedReportOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GeneratedReportInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -21554,6 +22903,22 @@ export namespace Prisma {
   export type ActivitiesScalarFieldEnum = (typeof ActivitiesScalarFieldEnum)[keyof typeof ActivitiesScalarFieldEnum]
 
 
+  export const GeneratedReportScalarFieldEnum: {
+    id: 'id',
+    projectId: 'projectId',
+    quarter: 'quarter',
+    year: 'year',
+    fileName: 'fileName',
+    fileKey: 'fileKey',
+    fileUrl: 'fileUrl',
+    userId: 'userId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type GeneratedReportScalarFieldEnum = (typeof GeneratedReportScalarFieldEnum)[keyof typeof GeneratedReportScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
@@ -21721,6 +23086,7 @@ export namespace Prisma {
     projectDetails?: ProjectDetailsListRelationFilter
     activities?: ActivitiesListRelationFilter
     ActivitiesCategory?: ActivitiesCategoryListRelationFilter
+    GeneratedReport?: GeneratedReportListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -21750,6 +23116,7 @@ export namespace Prisma {
     projectDetails?: ProjectDetailsOrderByRelationAggregateInput
     activities?: ActivitiesOrderByRelationAggregateInput
     ActivitiesCategory?: ActivitiesCategoryOrderByRelationAggregateInput
+    GeneratedReport?: GeneratedReportOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -21782,6 +23149,7 @@ export namespace Prisma {
     projectDetails?: ProjectDetailsListRelationFilter
     activities?: ActivitiesListRelationFilter
     ActivitiesCategory?: ActivitiesCategoryListRelationFilter
+    GeneratedReport?: GeneratedReportListRelationFilter
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -21907,6 +23275,7 @@ export namespace Prisma {
     inputDistributions?: InputDistributionListRelationFilter
     activities?: ActivitiesListRelationFilter
     User?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+    GeneratedReport?: GeneratedReportListRelationFilter
   }
 
   export type ProjectOrderByWithRelationInput = {
@@ -21929,6 +23298,7 @@ export namespace Prisma {
     inputDistributions?: InputDistributionOrderByRelationAggregateInput
     activities?: ActivitiesOrderByRelationAggregateInput
     User?: UserOrderByWithRelationInput
+    GeneratedReport?: GeneratedReportOrderByRelationAggregateInput
   }
 
   export type ProjectWhereUniqueInput = Prisma.AtLeast<{
@@ -21954,6 +23324,7 @@ export namespace Prisma {
     inputDistributions?: InputDistributionListRelationFilter
     activities?: ActivitiesListRelationFilter
     User?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+    GeneratedReport?: GeneratedReportListRelationFilter
   }, "id">
 
   export type ProjectOrderByWithAggregationInput = {
@@ -23218,6 +24589,91 @@ export namespace Prisma {
     userId?: StringNullableWithAggregatesFilter<"Activities"> | string | null
   }
 
+  export type GeneratedReportWhereInput = {
+    AND?: GeneratedReportWhereInput | GeneratedReportWhereInput[]
+    OR?: GeneratedReportWhereInput[]
+    NOT?: GeneratedReportWhereInput | GeneratedReportWhereInput[]
+    id?: StringFilter<"GeneratedReport"> | string
+    projectId?: StringFilter<"GeneratedReport"> | string
+    quarter?: StringFilter<"GeneratedReport"> | string
+    year?: IntFilter<"GeneratedReport"> | number
+    fileName?: StringFilter<"GeneratedReport"> | string
+    fileKey?: StringFilter<"GeneratedReport"> | string
+    fileUrl?: StringFilter<"GeneratedReport"> | string
+    userId?: StringNullableFilter<"GeneratedReport"> | string | null
+    createdAt?: DateTimeFilter<"GeneratedReport"> | Date | string
+    updatedAt?: DateTimeFilter<"GeneratedReport"> | Date | string
+    project?: XOR<ProjectScalarRelationFilter, ProjectWhereInput>
+    User?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+  }
+
+  export type GeneratedReportOrderByWithRelationInput = {
+    id?: SortOrder
+    projectId?: SortOrder
+    quarter?: SortOrder
+    year?: SortOrder
+    fileName?: SortOrder
+    fileKey?: SortOrder
+    fileUrl?: SortOrder
+    userId?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    project?: ProjectOrderByWithRelationInput
+    User?: UserOrderByWithRelationInput
+  }
+
+  export type GeneratedReportWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: GeneratedReportWhereInput | GeneratedReportWhereInput[]
+    OR?: GeneratedReportWhereInput[]
+    NOT?: GeneratedReportWhereInput | GeneratedReportWhereInput[]
+    projectId?: StringFilter<"GeneratedReport"> | string
+    quarter?: StringFilter<"GeneratedReport"> | string
+    year?: IntFilter<"GeneratedReport"> | number
+    fileName?: StringFilter<"GeneratedReport"> | string
+    fileKey?: StringFilter<"GeneratedReport"> | string
+    fileUrl?: StringFilter<"GeneratedReport"> | string
+    userId?: StringNullableFilter<"GeneratedReport"> | string | null
+    createdAt?: DateTimeFilter<"GeneratedReport"> | Date | string
+    updatedAt?: DateTimeFilter<"GeneratedReport"> | Date | string
+    project?: XOR<ProjectScalarRelationFilter, ProjectWhereInput>
+    User?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+  }, "id">
+
+  export type GeneratedReportOrderByWithAggregationInput = {
+    id?: SortOrder
+    projectId?: SortOrder
+    quarter?: SortOrder
+    year?: SortOrder
+    fileName?: SortOrder
+    fileKey?: SortOrder
+    fileUrl?: SortOrder
+    userId?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: GeneratedReportCountOrderByAggregateInput
+    _avg?: GeneratedReportAvgOrderByAggregateInput
+    _max?: GeneratedReportMaxOrderByAggregateInput
+    _min?: GeneratedReportMinOrderByAggregateInput
+    _sum?: GeneratedReportSumOrderByAggregateInput
+  }
+
+  export type GeneratedReportScalarWhereWithAggregatesInput = {
+    AND?: GeneratedReportScalarWhereWithAggregatesInput | GeneratedReportScalarWhereWithAggregatesInput[]
+    OR?: GeneratedReportScalarWhereWithAggregatesInput[]
+    NOT?: GeneratedReportScalarWhereWithAggregatesInput | GeneratedReportScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"GeneratedReport"> | string
+    projectId?: StringWithAggregatesFilter<"GeneratedReport"> | string
+    quarter?: StringWithAggregatesFilter<"GeneratedReport"> | string
+    year?: IntWithAggregatesFilter<"GeneratedReport"> | number
+    fileName?: StringWithAggregatesFilter<"GeneratedReport"> | string
+    fileKey?: StringWithAggregatesFilter<"GeneratedReport"> | string
+    fileUrl?: StringWithAggregatesFilter<"GeneratedReport"> | string
+    userId?: StringNullableWithAggregatesFilter<"GeneratedReport"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"GeneratedReport"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"GeneratedReport"> | Date | string
+  }
+
   export type UserCreateInput = {
     id?: string
     name: string
@@ -23245,6 +24701,7 @@ export namespace Prisma {
     projectDetails?: ProjectDetailsCreateNestedManyWithoutUserInput
     activities?: ActivitiesCreateNestedManyWithoutUserInput
     ActivitiesCategory?: ActivitiesCategoryCreateNestedManyWithoutUserInput
+    GeneratedReport?: GeneratedReportCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -23274,6 +24731,7 @@ export namespace Prisma {
     projectDetails?: ProjectDetailsUncheckedCreateNestedManyWithoutUserInput
     activities?: ActivitiesUncheckedCreateNestedManyWithoutUserInput
     ActivitiesCategory?: ActivitiesCategoryUncheckedCreateNestedManyWithoutUserInput
+    GeneratedReport?: GeneratedReportUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -23303,6 +24761,7 @@ export namespace Prisma {
     projectDetails?: ProjectDetailsUpdateManyWithoutUserNestedInput
     activities?: ActivitiesUpdateManyWithoutUserNestedInput
     ActivitiesCategory?: ActivitiesCategoryUpdateManyWithoutUserNestedInput
+    GeneratedReport?: GeneratedReportUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -23332,6 +24791,7 @@ export namespace Prisma {
     projectDetails?: ProjectDetailsUncheckedUpdateManyWithoutUserNestedInput
     activities?: ActivitiesUncheckedUpdateManyWithoutUserNestedInput
     ActivitiesCategory?: ActivitiesCategoryUncheckedUpdateManyWithoutUserNestedInput
+    GeneratedReport?: GeneratedReportUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -23463,6 +24923,7 @@ export namespace Prisma {
     inputDistributions?: InputDistributionCreateNestedManyWithoutProjectInput
     activities?: ActivitiesCreateNestedManyWithoutProjectInput
     User?: UserCreateNestedOneWithoutProjectsInput
+    GeneratedReport?: GeneratedReportCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectUncheckedCreateInput = {
@@ -23484,6 +24945,7 @@ export namespace Prisma {
     infrastructureDevelopments?: InfrastructureDevelopmentUncheckedCreateNestedManyWithoutProjectInput
     inputDistributions?: InputDistributionUncheckedCreateNestedManyWithoutProjectInput
     activities?: ActivitiesUncheckedCreateNestedManyWithoutProjectInput
+    GeneratedReport?: GeneratedReportUncheckedCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectUpdateInput = {
@@ -23505,6 +24967,7 @@ export namespace Prisma {
     inputDistributions?: InputDistributionUpdateManyWithoutProjectNestedInput
     activities?: ActivitiesUpdateManyWithoutProjectNestedInput
     User?: UserUpdateOneWithoutProjectsNestedInput
+    GeneratedReport?: GeneratedReportUpdateManyWithoutProjectNestedInput
   }
 
   export type ProjectUncheckedUpdateInput = {
@@ -23526,6 +24989,7 @@ export namespace Prisma {
     infrastructureDevelopments?: InfrastructureDevelopmentUncheckedUpdateManyWithoutProjectNestedInput
     inputDistributions?: InputDistributionUncheckedUpdateManyWithoutProjectNestedInput
     activities?: ActivitiesUncheckedUpdateManyWithoutProjectNestedInput
+    GeneratedReport?: GeneratedReportUncheckedUpdateManyWithoutProjectNestedInput
   }
 
   export type ProjectCreateManyInput = {
@@ -24934,6 +26398,95 @@ export namespace Prisma {
     userId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
+  export type GeneratedReportCreateInput = {
+    id?: string
+    quarter: string
+    year: number
+    fileName: string
+    fileKey: string
+    fileUrl: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    project: ProjectCreateNestedOneWithoutGeneratedReportInput
+    User?: UserCreateNestedOneWithoutGeneratedReportInput
+  }
+
+  export type GeneratedReportUncheckedCreateInput = {
+    id?: string
+    projectId: string
+    quarter: string
+    year: number
+    fileName: string
+    fileKey: string
+    fileUrl: string
+    userId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type GeneratedReportUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    quarter?: StringFieldUpdateOperationsInput | string
+    year?: IntFieldUpdateOperationsInput | number
+    fileName?: StringFieldUpdateOperationsInput | string
+    fileKey?: StringFieldUpdateOperationsInput | string
+    fileUrl?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    project?: ProjectUpdateOneRequiredWithoutGeneratedReportNestedInput
+    User?: UserUpdateOneWithoutGeneratedReportNestedInput
+  }
+
+  export type GeneratedReportUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    projectId?: StringFieldUpdateOperationsInput | string
+    quarter?: StringFieldUpdateOperationsInput | string
+    year?: IntFieldUpdateOperationsInput | number
+    fileName?: StringFieldUpdateOperationsInput | string
+    fileKey?: StringFieldUpdateOperationsInput | string
+    fileUrl?: StringFieldUpdateOperationsInput | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GeneratedReportCreateManyInput = {
+    id?: string
+    projectId: string
+    quarter: string
+    year: number
+    fileName: string
+    fileKey: string
+    fileUrl: string
+    userId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type GeneratedReportUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    quarter?: StringFieldUpdateOperationsInput | string
+    year?: IntFieldUpdateOperationsInput | number
+    fileName?: StringFieldUpdateOperationsInput | string
+    fileKey?: StringFieldUpdateOperationsInput | string
+    fileUrl?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GeneratedReportUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    projectId?: StringFieldUpdateOperationsInput | string
+    quarter?: StringFieldUpdateOperationsInput | string
+    year?: IntFieldUpdateOperationsInput | number
+    fileName?: StringFieldUpdateOperationsInput | string
+    fileKey?: StringFieldUpdateOperationsInput | string
+    fileUrl?: StringFieldUpdateOperationsInput | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -25087,6 +26640,12 @@ export namespace Prisma {
     none?: ActivitiesCategoryWhereInput
   }
 
+  export type GeneratedReportListRelationFilter = {
+    every?: GeneratedReportWhereInput
+    some?: GeneratedReportWhereInput
+    none?: GeneratedReportWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -25141,6 +26700,10 @@ export namespace Prisma {
   }
 
   export type ActivitiesCategoryOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type GeneratedReportOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -26182,6 +27745,53 @@ export namespace Prisma {
     beneficiaryFemale?: SortOrder
   }
 
+  export type GeneratedReportCountOrderByAggregateInput = {
+    id?: SortOrder
+    projectId?: SortOrder
+    quarter?: SortOrder
+    year?: SortOrder
+    fileName?: SortOrder
+    fileKey?: SortOrder
+    fileUrl?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type GeneratedReportAvgOrderByAggregateInput = {
+    year?: SortOrder
+  }
+
+  export type GeneratedReportMaxOrderByAggregateInput = {
+    id?: SortOrder
+    projectId?: SortOrder
+    quarter?: SortOrder
+    year?: SortOrder
+    fileName?: SortOrder
+    fileKey?: SortOrder
+    fileUrl?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type GeneratedReportMinOrderByAggregateInput = {
+    id?: SortOrder
+    projectId?: SortOrder
+    quarter?: SortOrder
+    year?: SortOrder
+    fileName?: SortOrder
+    fileKey?: SortOrder
+    fileUrl?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type GeneratedReportSumOrderByAggregateInput = {
+    year?: SortOrder
+  }
+
   export type SessionCreateNestedManyWithoutUserInput = {
     create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
     connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
@@ -26273,6 +27883,13 @@ export namespace Prisma {
     connect?: ActivitiesCategoryWhereUniqueInput | ActivitiesCategoryWhereUniqueInput[]
   }
 
+  export type GeneratedReportCreateNestedManyWithoutUserInput = {
+    create?: XOR<GeneratedReportCreateWithoutUserInput, GeneratedReportUncheckedCreateWithoutUserInput> | GeneratedReportCreateWithoutUserInput[] | GeneratedReportUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: GeneratedReportCreateOrConnectWithoutUserInput | GeneratedReportCreateOrConnectWithoutUserInput[]
+    createMany?: GeneratedReportCreateManyUserInputEnvelope
+    connect?: GeneratedReportWhereUniqueInput | GeneratedReportWhereUniqueInput[]
+  }
+
   export type SessionUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
     connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
@@ -26362,6 +27979,13 @@ export namespace Prisma {
     connectOrCreate?: ActivitiesCategoryCreateOrConnectWithoutUserInput | ActivitiesCategoryCreateOrConnectWithoutUserInput[]
     createMany?: ActivitiesCategoryCreateManyUserInputEnvelope
     connect?: ActivitiesCategoryWhereUniqueInput | ActivitiesCategoryWhereUniqueInput[]
+  }
+
+  export type GeneratedReportUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<GeneratedReportCreateWithoutUserInput, GeneratedReportUncheckedCreateWithoutUserInput> | GeneratedReportCreateWithoutUserInput[] | GeneratedReportUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: GeneratedReportCreateOrConnectWithoutUserInput | GeneratedReportCreateOrConnectWithoutUserInput[]
+    createMany?: GeneratedReportCreateManyUserInputEnvelope
+    connect?: GeneratedReportWhereUniqueInput | GeneratedReportWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -26578,6 +28202,20 @@ export namespace Prisma {
     deleteMany?: ActivitiesCategoryScalarWhereInput | ActivitiesCategoryScalarWhereInput[]
   }
 
+  export type GeneratedReportUpdateManyWithoutUserNestedInput = {
+    create?: XOR<GeneratedReportCreateWithoutUserInput, GeneratedReportUncheckedCreateWithoutUserInput> | GeneratedReportCreateWithoutUserInput[] | GeneratedReportUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: GeneratedReportCreateOrConnectWithoutUserInput | GeneratedReportCreateOrConnectWithoutUserInput[]
+    upsert?: GeneratedReportUpsertWithWhereUniqueWithoutUserInput | GeneratedReportUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: GeneratedReportCreateManyUserInputEnvelope
+    set?: GeneratedReportWhereUniqueInput | GeneratedReportWhereUniqueInput[]
+    disconnect?: GeneratedReportWhereUniqueInput | GeneratedReportWhereUniqueInput[]
+    delete?: GeneratedReportWhereUniqueInput | GeneratedReportWhereUniqueInput[]
+    connect?: GeneratedReportWhereUniqueInput | GeneratedReportWhereUniqueInput[]
+    update?: GeneratedReportUpdateWithWhereUniqueWithoutUserInput | GeneratedReportUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: GeneratedReportUpdateManyWithWhereWithoutUserInput | GeneratedReportUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: GeneratedReportScalarWhereInput | GeneratedReportScalarWhereInput[]
+  }
+
   export type SessionUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
     connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
@@ -26760,6 +28398,20 @@ export namespace Prisma {
     deleteMany?: ActivitiesCategoryScalarWhereInput | ActivitiesCategoryScalarWhereInput[]
   }
 
+  export type GeneratedReportUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<GeneratedReportCreateWithoutUserInput, GeneratedReportUncheckedCreateWithoutUserInput> | GeneratedReportCreateWithoutUserInput[] | GeneratedReportUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: GeneratedReportCreateOrConnectWithoutUserInput | GeneratedReportCreateOrConnectWithoutUserInput[]
+    upsert?: GeneratedReportUpsertWithWhereUniqueWithoutUserInput | GeneratedReportUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: GeneratedReportCreateManyUserInputEnvelope
+    set?: GeneratedReportWhereUniqueInput | GeneratedReportWhereUniqueInput[]
+    disconnect?: GeneratedReportWhereUniqueInput | GeneratedReportWhereUniqueInput[]
+    delete?: GeneratedReportWhereUniqueInput | GeneratedReportWhereUniqueInput[]
+    connect?: GeneratedReportWhereUniqueInput | GeneratedReportWhereUniqueInput[]
+    update?: GeneratedReportUpdateWithWhereUniqueWithoutUserInput | GeneratedReportUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: GeneratedReportUpdateManyWithWhereWithoutUserInput | GeneratedReportUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: GeneratedReportScalarWhereInput | GeneratedReportScalarWhereInput[]
+  }
+
   export type UserCreateNestedOneWithoutSessionsInput = {
     create?: XOR<UserCreateWithoutSessionsInput, UserUncheckedCreateWithoutSessionsInput>
     connectOrCreate?: UserCreateOrConnectWithoutSessionsInput
@@ -26822,6 +28474,13 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
+  export type GeneratedReportCreateNestedManyWithoutProjectInput = {
+    create?: XOR<GeneratedReportCreateWithoutProjectInput, GeneratedReportUncheckedCreateWithoutProjectInput> | GeneratedReportCreateWithoutProjectInput[] | GeneratedReportUncheckedCreateWithoutProjectInput[]
+    connectOrCreate?: GeneratedReportCreateOrConnectWithoutProjectInput | GeneratedReportCreateOrConnectWithoutProjectInput[]
+    createMany?: GeneratedReportCreateManyProjectInputEnvelope
+    connect?: GeneratedReportWhereUniqueInput | GeneratedReportWhereUniqueInput[]
+  }
+
   export type TrainingUncheckedCreateNestedManyWithoutProjectInput = {
     create?: XOR<TrainingCreateWithoutProjectInput, TrainingUncheckedCreateWithoutProjectInput> | TrainingCreateWithoutProjectInput[] | TrainingUncheckedCreateWithoutProjectInput[]
     connectOrCreate?: TrainingCreateOrConnectWithoutProjectInput | TrainingCreateOrConnectWithoutProjectInput[]
@@ -26862,6 +28521,13 @@ export namespace Prisma {
     connectOrCreate?: ActivitiesCreateOrConnectWithoutProjectInput | ActivitiesCreateOrConnectWithoutProjectInput[]
     createMany?: ActivitiesCreateManyProjectInputEnvelope
     connect?: ActivitiesWhereUniqueInput | ActivitiesWhereUniqueInput[]
+  }
+
+  export type GeneratedReportUncheckedCreateNestedManyWithoutProjectInput = {
+    create?: XOR<GeneratedReportCreateWithoutProjectInput, GeneratedReportUncheckedCreateWithoutProjectInput> | GeneratedReportCreateWithoutProjectInput[] | GeneratedReportUncheckedCreateWithoutProjectInput[]
+    connectOrCreate?: GeneratedReportCreateOrConnectWithoutProjectInput | GeneratedReportCreateOrConnectWithoutProjectInput[]
+    createMany?: GeneratedReportCreateManyProjectInputEnvelope
+    connect?: GeneratedReportWhereUniqueInput | GeneratedReportWhereUniqueInput[]
   }
 
   export type NullableDecimalFieldUpdateOperationsInput = {
@@ -26970,6 +28636,20 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutProjectsInput, UserUpdateWithoutProjectsInput>, UserUncheckedUpdateWithoutProjectsInput>
   }
 
+  export type GeneratedReportUpdateManyWithoutProjectNestedInput = {
+    create?: XOR<GeneratedReportCreateWithoutProjectInput, GeneratedReportUncheckedCreateWithoutProjectInput> | GeneratedReportCreateWithoutProjectInput[] | GeneratedReportUncheckedCreateWithoutProjectInput[]
+    connectOrCreate?: GeneratedReportCreateOrConnectWithoutProjectInput | GeneratedReportCreateOrConnectWithoutProjectInput[]
+    upsert?: GeneratedReportUpsertWithWhereUniqueWithoutProjectInput | GeneratedReportUpsertWithWhereUniqueWithoutProjectInput[]
+    createMany?: GeneratedReportCreateManyProjectInputEnvelope
+    set?: GeneratedReportWhereUniqueInput | GeneratedReportWhereUniqueInput[]
+    disconnect?: GeneratedReportWhereUniqueInput | GeneratedReportWhereUniqueInput[]
+    delete?: GeneratedReportWhereUniqueInput | GeneratedReportWhereUniqueInput[]
+    connect?: GeneratedReportWhereUniqueInput | GeneratedReportWhereUniqueInput[]
+    update?: GeneratedReportUpdateWithWhereUniqueWithoutProjectInput | GeneratedReportUpdateWithWhereUniqueWithoutProjectInput[]
+    updateMany?: GeneratedReportUpdateManyWithWhereWithoutProjectInput | GeneratedReportUpdateManyWithWhereWithoutProjectInput[]
+    deleteMany?: GeneratedReportScalarWhereInput | GeneratedReportScalarWhereInput[]
+  }
+
   export type TrainingUncheckedUpdateManyWithoutProjectNestedInput = {
     create?: XOR<TrainingCreateWithoutProjectInput, TrainingUncheckedCreateWithoutProjectInput> | TrainingCreateWithoutProjectInput[] | TrainingUncheckedCreateWithoutProjectInput[]
     connectOrCreate?: TrainingCreateOrConnectWithoutProjectInput | TrainingCreateOrConnectWithoutProjectInput[]
@@ -27052,6 +28732,20 @@ export namespace Prisma {
     update?: ActivitiesUpdateWithWhereUniqueWithoutProjectInput | ActivitiesUpdateWithWhereUniqueWithoutProjectInput[]
     updateMany?: ActivitiesUpdateManyWithWhereWithoutProjectInput | ActivitiesUpdateManyWithWhereWithoutProjectInput[]
     deleteMany?: ActivitiesScalarWhereInput | ActivitiesScalarWhereInput[]
+  }
+
+  export type GeneratedReportUncheckedUpdateManyWithoutProjectNestedInput = {
+    create?: XOR<GeneratedReportCreateWithoutProjectInput, GeneratedReportUncheckedCreateWithoutProjectInput> | GeneratedReportCreateWithoutProjectInput[] | GeneratedReportUncheckedCreateWithoutProjectInput[]
+    connectOrCreate?: GeneratedReportCreateOrConnectWithoutProjectInput | GeneratedReportCreateOrConnectWithoutProjectInput[]
+    upsert?: GeneratedReportUpsertWithWhereUniqueWithoutProjectInput | GeneratedReportUpsertWithWhereUniqueWithoutProjectInput[]
+    createMany?: GeneratedReportCreateManyProjectInputEnvelope
+    set?: GeneratedReportWhereUniqueInput | GeneratedReportWhereUniqueInput[]
+    disconnect?: GeneratedReportWhereUniqueInput | GeneratedReportWhereUniqueInput[]
+    delete?: GeneratedReportWhereUniqueInput | GeneratedReportWhereUniqueInput[]
+    connect?: GeneratedReportWhereUniqueInput | GeneratedReportWhereUniqueInput[]
+    update?: GeneratedReportUpdateWithWhereUniqueWithoutProjectInput | GeneratedReportUpdateWithWhereUniqueWithoutProjectInput[]
+    updateMany?: GeneratedReportUpdateManyWithWhereWithoutProjectInput | GeneratedReportUpdateManyWithWhereWithoutProjectInput[]
+    deleteMany?: GeneratedReportScalarWhereInput | GeneratedReportScalarWhereInput[]
   }
 
   export type TrainingCreateNestedManyWithoutQuarterInput = {
@@ -27749,6 +29443,36 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutActivitiesInput, UserUpdateWithoutActivitiesInput>, UserUncheckedUpdateWithoutActivitiesInput>
   }
 
+  export type ProjectCreateNestedOneWithoutGeneratedReportInput = {
+    create?: XOR<ProjectCreateWithoutGeneratedReportInput, ProjectUncheckedCreateWithoutGeneratedReportInput>
+    connectOrCreate?: ProjectCreateOrConnectWithoutGeneratedReportInput
+    connect?: ProjectWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutGeneratedReportInput = {
+    create?: XOR<UserCreateWithoutGeneratedReportInput, UserUncheckedCreateWithoutGeneratedReportInput>
+    connectOrCreate?: UserCreateOrConnectWithoutGeneratedReportInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type ProjectUpdateOneRequiredWithoutGeneratedReportNestedInput = {
+    create?: XOR<ProjectCreateWithoutGeneratedReportInput, ProjectUncheckedCreateWithoutGeneratedReportInput>
+    connectOrCreate?: ProjectCreateOrConnectWithoutGeneratedReportInput
+    upsert?: ProjectUpsertWithoutGeneratedReportInput
+    connect?: ProjectWhereUniqueInput
+    update?: XOR<XOR<ProjectUpdateToOneWithWhereWithoutGeneratedReportInput, ProjectUpdateWithoutGeneratedReportInput>, ProjectUncheckedUpdateWithoutGeneratedReportInput>
+  }
+
+  export type UserUpdateOneWithoutGeneratedReportNestedInput = {
+    create?: XOR<UserCreateWithoutGeneratedReportInput, UserUncheckedCreateWithoutGeneratedReportInput>
+    connectOrCreate?: UserCreateOrConnectWithoutGeneratedReportInput
+    upsert?: UserUpsertWithoutGeneratedReportInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutGeneratedReportInput, UserUpdateWithoutGeneratedReportInput>, UserUncheckedUpdateWithoutGeneratedReportInput>
+  }
+
   export type NestedStringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -28071,6 +29795,7 @@ export namespace Prisma {
     infrastructureDevelopments?: InfrastructureDevelopmentCreateNestedManyWithoutProjectInput
     inputDistributions?: InputDistributionCreateNestedManyWithoutProjectInput
     activities?: ActivitiesCreateNestedManyWithoutProjectInput
+    GeneratedReport?: GeneratedReportCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectUncheckedCreateWithoutUserInput = {
@@ -28091,6 +29816,7 @@ export namespace Prisma {
     infrastructureDevelopments?: InfrastructureDevelopmentUncheckedCreateNestedManyWithoutProjectInput
     inputDistributions?: InputDistributionUncheckedCreateNestedManyWithoutProjectInput
     activities?: ActivitiesUncheckedCreateNestedManyWithoutProjectInput
+    GeneratedReport?: GeneratedReportUncheckedCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectCreateOrConnectWithoutUserInput = {
@@ -28569,6 +30295,40 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type GeneratedReportCreateWithoutUserInput = {
+    id?: string
+    quarter: string
+    year: number
+    fileName: string
+    fileKey: string
+    fileUrl: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    project: ProjectCreateNestedOneWithoutGeneratedReportInput
+  }
+
+  export type GeneratedReportUncheckedCreateWithoutUserInput = {
+    id?: string
+    projectId: string
+    quarter: string
+    year: number
+    fileName: string
+    fileKey: string
+    fileUrl: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type GeneratedReportCreateOrConnectWithoutUserInput = {
+    where: GeneratedReportWhereUniqueInput
+    create: XOR<GeneratedReportCreateWithoutUserInput, GeneratedReportUncheckedCreateWithoutUserInput>
+  }
+
+  export type GeneratedReportCreateManyUserInputEnvelope = {
+    data: GeneratedReportCreateManyUserInput | GeneratedReportCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
   export type SessionUpsertWithWhereUniqueWithoutUserInput = {
     where: SessionWhereUniqueInput
     update: XOR<SessionUpdateWithoutUserInput, SessionUncheckedUpdateWithoutUserInput>
@@ -29028,6 +30788,38 @@ export namespace Prisma {
     userId?: StringNullableFilter<"ActivitiesCategory"> | string | null
   }
 
+  export type GeneratedReportUpsertWithWhereUniqueWithoutUserInput = {
+    where: GeneratedReportWhereUniqueInput
+    update: XOR<GeneratedReportUpdateWithoutUserInput, GeneratedReportUncheckedUpdateWithoutUserInput>
+    create: XOR<GeneratedReportCreateWithoutUserInput, GeneratedReportUncheckedCreateWithoutUserInput>
+  }
+
+  export type GeneratedReportUpdateWithWhereUniqueWithoutUserInput = {
+    where: GeneratedReportWhereUniqueInput
+    data: XOR<GeneratedReportUpdateWithoutUserInput, GeneratedReportUncheckedUpdateWithoutUserInput>
+  }
+
+  export type GeneratedReportUpdateManyWithWhereWithoutUserInput = {
+    where: GeneratedReportScalarWhereInput
+    data: XOR<GeneratedReportUpdateManyMutationInput, GeneratedReportUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type GeneratedReportScalarWhereInput = {
+    AND?: GeneratedReportScalarWhereInput | GeneratedReportScalarWhereInput[]
+    OR?: GeneratedReportScalarWhereInput[]
+    NOT?: GeneratedReportScalarWhereInput | GeneratedReportScalarWhereInput[]
+    id?: StringFilter<"GeneratedReport"> | string
+    projectId?: StringFilter<"GeneratedReport"> | string
+    quarter?: StringFilter<"GeneratedReport"> | string
+    year?: IntFilter<"GeneratedReport"> | number
+    fileName?: StringFilter<"GeneratedReport"> | string
+    fileKey?: StringFilter<"GeneratedReport"> | string
+    fileUrl?: StringFilter<"GeneratedReport"> | string
+    userId?: StringNullableFilter<"GeneratedReport"> | string | null
+    createdAt?: DateTimeFilter<"GeneratedReport"> | Date | string
+    updatedAt?: DateTimeFilter<"GeneratedReport"> | Date | string
+  }
+
   export type UserCreateWithoutSessionsInput = {
     id?: string
     name: string
@@ -29054,6 +30846,7 @@ export namespace Prisma {
     projectDetails?: ProjectDetailsCreateNestedManyWithoutUserInput
     activities?: ActivitiesCreateNestedManyWithoutUserInput
     ActivitiesCategory?: ActivitiesCategoryCreateNestedManyWithoutUserInput
+    GeneratedReport?: GeneratedReportCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSessionsInput = {
@@ -29082,6 +30875,7 @@ export namespace Prisma {
     projectDetails?: ProjectDetailsUncheckedCreateNestedManyWithoutUserInput
     activities?: ActivitiesUncheckedCreateNestedManyWithoutUserInput
     ActivitiesCategory?: ActivitiesCategoryUncheckedCreateNestedManyWithoutUserInput
+    GeneratedReport?: GeneratedReportUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSessionsInput = {
@@ -29126,6 +30920,7 @@ export namespace Prisma {
     projectDetails?: ProjectDetailsUpdateManyWithoutUserNestedInput
     activities?: ActivitiesUpdateManyWithoutUserNestedInput
     ActivitiesCategory?: ActivitiesCategoryUpdateManyWithoutUserNestedInput
+    GeneratedReport?: GeneratedReportUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -29154,6 +30949,7 @@ export namespace Prisma {
     projectDetails?: ProjectDetailsUncheckedUpdateManyWithoutUserNestedInput
     activities?: ActivitiesUncheckedUpdateManyWithoutUserNestedInput
     ActivitiesCategory?: ActivitiesCategoryUncheckedUpdateManyWithoutUserNestedInput
+    GeneratedReport?: GeneratedReportUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type TrainingCreateWithoutProjectInput = {
@@ -29486,6 +31282,7 @@ export namespace Prisma {
     projectDetails?: ProjectDetailsCreateNestedManyWithoutUserInput
     activities?: ActivitiesCreateNestedManyWithoutUserInput
     ActivitiesCategory?: ActivitiesCategoryCreateNestedManyWithoutUserInput
+    GeneratedReport?: GeneratedReportCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutProjectsInput = {
@@ -29514,11 +31311,46 @@ export namespace Prisma {
     projectDetails?: ProjectDetailsUncheckedCreateNestedManyWithoutUserInput
     activities?: ActivitiesUncheckedCreateNestedManyWithoutUserInput
     ActivitiesCategory?: ActivitiesCategoryUncheckedCreateNestedManyWithoutUserInput
+    GeneratedReport?: GeneratedReportUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutProjectsInput = {
     where: UserWhereUniqueInput
     create: XOR<UserCreateWithoutProjectsInput, UserUncheckedCreateWithoutProjectsInput>
+  }
+
+  export type GeneratedReportCreateWithoutProjectInput = {
+    id?: string
+    quarter: string
+    year: number
+    fileName: string
+    fileKey: string
+    fileUrl: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    User?: UserCreateNestedOneWithoutGeneratedReportInput
+  }
+
+  export type GeneratedReportUncheckedCreateWithoutProjectInput = {
+    id?: string
+    quarter: string
+    year: number
+    fileName: string
+    fileKey: string
+    fileUrl: string
+    userId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type GeneratedReportCreateOrConnectWithoutProjectInput = {
+    where: GeneratedReportWhereUniqueInput
+    create: XOR<GeneratedReportCreateWithoutProjectInput, GeneratedReportUncheckedCreateWithoutProjectInput>
+  }
+
+  export type GeneratedReportCreateManyProjectInputEnvelope = {
+    data: GeneratedReportCreateManyProjectInput | GeneratedReportCreateManyProjectInput[]
+    skipDuplicates?: boolean
   }
 
   export type TrainingUpsertWithWhereUniqueWithoutProjectInput = {
@@ -29654,6 +31486,7 @@ export namespace Prisma {
     projectDetails?: ProjectDetailsUpdateManyWithoutUserNestedInput
     activities?: ActivitiesUpdateManyWithoutUserNestedInput
     ActivitiesCategory?: ActivitiesCategoryUpdateManyWithoutUserNestedInput
+    GeneratedReport?: GeneratedReportUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutProjectsInput = {
@@ -29682,6 +31515,23 @@ export namespace Prisma {
     projectDetails?: ProjectDetailsUncheckedUpdateManyWithoutUserNestedInput
     activities?: ActivitiesUncheckedUpdateManyWithoutUserNestedInput
     ActivitiesCategory?: ActivitiesCategoryUncheckedUpdateManyWithoutUserNestedInput
+    GeneratedReport?: GeneratedReportUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type GeneratedReportUpsertWithWhereUniqueWithoutProjectInput = {
+    where: GeneratedReportWhereUniqueInput
+    update: XOR<GeneratedReportUpdateWithoutProjectInput, GeneratedReportUncheckedUpdateWithoutProjectInput>
+    create: XOR<GeneratedReportCreateWithoutProjectInput, GeneratedReportUncheckedCreateWithoutProjectInput>
+  }
+
+  export type GeneratedReportUpdateWithWhereUniqueWithoutProjectInput = {
+    where: GeneratedReportWhereUniqueInput
+    data: XOR<GeneratedReportUpdateWithoutProjectInput, GeneratedReportUncheckedUpdateWithoutProjectInput>
+  }
+
+  export type GeneratedReportUpdateManyWithWhereWithoutProjectInput = {
+    where: GeneratedReportScalarWhereInput
+    data: XOR<GeneratedReportUpdateManyMutationInput, GeneratedReportUncheckedUpdateManyWithoutProjectInput>
   }
 
   export type TrainingCreateWithoutQuarterInput = {
@@ -30102,6 +31952,7 @@ export namespace Prisma {
     infrastructureDevelopments?: InfrastructureDevelopmentCreateNestedManyWithoutProjectInput
     activities?: ActivitiesCreateNestedManyWithoutProjectInput
     User?: UserCreateNestedOneWithoutProjectsInput
+    GeneratedReport?: GeneratedReportCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectUncheckedCreateWithoutInputDistributionsInput = {
@@ -30122,6 +31973,7 @@ export namespace Prisma {
     awarenessPrograms?: AwarenessProgramUncheckedCreateNestedManyWithoutProjectInput
     infrastructureDevelopments?: InfrastructureDevelopmentUncheckedCreateNestedManyWithoutProjectInput
     activities?: ActivitiesUncheckedCreateNestedManyWithoutProjectInput
+    GeneratedReport?: GeneratedReportUncheckedCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectCreateOrConnectWithoutInputDistributionsInput = {
@@ -30182,6 +32034,7 @@ export namespace Prisma {
     projectDetails?: ProjectDetailsCreateNestedManyWithoutUserInput
     activities?: ActivitiesCreateNestedManyWithoutUserInput
     ActivitiesCategory?: ActivitiesCategoryCreateNestedManyWithoutUserInput
+    GeneratedReport?: GeneratedReportCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutInputDistributionsInput = {
@@ -30210,6 +32063,7 @@ export namespace Prisma {
     projectDetails?: ProjectDetailsUncheckedCreateNestedManyWithoutUserInput
     activities?: ActivitiesUncheckedCreateNestedManyWithoutUserInput
     ActivitiesCategory?: ActivitiesCategoryUncheckedCreateNestedManyWithoutUserInput
+    GeneratedReport?: GeneratedReportUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutInputDistributionsInput = {
@@ -30246,6 +32100,7 @@ export namespace Prisma {
     infrastructureDevelopments?: InfrastructureDevelopmentUpdateManyWithoutProjectNestedInput
     activities?: ActivitiesUpdateManyWithoutProjectNestedInput
     User?: UserUpdateOneWithoutProjectsNestedInput
+    GeneratedReport?: GeneratedReportUpdateManyWithoutProjectNestedInput
   }
 
   export type ProjectUncheckedUpdateWithoutInputDistributionsInput = {
@@ -30266,6 +32121,7 @@ export namespace Prisma {
     awarenessPrograms?: AwarenessProgramUncheckedUpdateManyWithoutProjectNestedInput
     infrastructureDevelopments?: InfrastructureDevelopmentUncheckedUpdateManyWithoutProjectNestedInput
     activities?: ActivitiesUncheckedUpdateManyWithoutProjectNestedInput
+    GeneratedReport?: GeneratedReportUncheckedUpdateManyWithoutProjectNestedInput
   }
 
   export type QuarterUpsertWithoutInputDistributionsInput = {
@@ -30338,6 +32194,7 @@ export namespace Prisma {
     projectDetails?: ProjectDetailsUpdateManyWithoutUserNestedInput
     activities?: ActivitiesUpdateManyWithoutUserNestedInput
     ActivitiesCategory?: ActivitiesCategoryUpdateManyWithoutUserNestedInput
+    GeneratedReport?: GeneratedReportUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutInputDistributionsInput = {
@@ -30366,6 +32223,7 @@ export namespace Prisma {
     projectDetails?: ProjectDetailsUncheckedUpdateManyWithoutUserNestedInput
     activities?: ActivitiesUncheckedUpdateManyWithoutUserNestedInput
     ActivitiesCategory?: ActivitiesCategoryUncheckedUpdateManyWithoutUserNestedInput
+    GeneratedReport?: GeneratedReportUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ProjectCreateWithoutTrainingsInput = {
@@ -30386,6 +32244,7 @@ export namespace Prisma {
     inputDistributions?: InputDistributionCreateNestedManyWithoutProjectInput
     activities?: ActivitiesCreateNestedManyWithoutProjectInput
     User?: UserCreateNestedOneWithoutProjectsInput
+    GeneratedReport?: GeneratedReportCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectUncheckedCreateWithoutTrainingsInput = {
@@ -30406,6 +32265,7 @@ export namespace Prisma {
     infrastructureDevelopments?: InfrastructureDevelopmentUncheckedCreateNestedManyWithoutProjectInput
     inputDistributions?: InputDistributionUncheckedCreateNestedManyWithoutProjectInput
     activities?: ActivitiesUncheckedCreateNestedManyWithoutProjectInput
+    GeneratedReport?: GeneratedReportUncheckedCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectCreateOrConnectWithoutTrainingsInput = {
@@ -30466,6 +32326,7 @@ export namespace Prisma {
     projectDetails?: ProjectDetailsCreateNestedManyWithoutUserInput
     activities?: ActivitiesCreateNestedManyWithoutUserInput
     ActivitiesCategory?: ActivitiesCategoryCreateNestedManyWithoutUserInput
+    GeneratedReport?: GeneratedReportCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutTrainingsInput = {
@@ -30494,6 +32355,7 @@ export namespace Prisma {
     projectDetails?: ProjectDetailsUncheckedCreateNestedManyWithoutUserInput
     activities?: ActivitiesUncheckedCreateNestedManyWithoutUserInput
     ActivitiesCategory?: ActivitiesCategoryUncheckedCreateNestedManyWithoutUserInput
+    GeneratedReport?: GeneratedReportUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutTrainingsInput = {
@@ -30530,6 +32392,7 @@ export namespace Prisma {
     inputDistributions?: InputDistributionUpdateManyWithoutProjectNestedInput
     activities?: ActivitiesUpdateManyWithoutProjectNestedInput
     User?: UserUpdateOneWithoutProjectsNestedInput
+    GeneratedReport?: GeneratedReportUpdateManyWithoutProjectNestedInput
   }
 
   export type ProjectUncheckedUpdateWithoutTrainingsInput = {
@@ -30550,6 +32413,7 @@ export namespace Prisma {
     infrastructureDevelopments?: InfrastructureDevelopmentUncheckedUpdateManyWithoutProjectNestedInput
     inputDistributions?: InputDistributionUncheckedUpdateManyWithoutProjectNestedInput
     activities?: ActivitiesUncheckedUpdateManyWithoutProjectNestedInput
+    GeneratedReport?: GeneratedReportUncheckedUpdateManyWithoutProjectNestedInput
   }
 
   export type QuarterUpsertWithoutTrainingsInput = {
@@ -30622,6 +32486,7 @@ export namespace Prisma {
     projectDetails?: ProjectDetailsUpdateManyWithoutUserNestedInput
     activities?: ActivitiesUpdateManyWithoutUserNestedInput
     ActivitiesCategory?: ActivitiesCategoryUpdateManyWithoutUserNestedInput
+    GeneratedReport?: GeneratedReportUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutTrainingsInput = {
@@ -30650,6 +32515,7 @@ export namespace Prisma {
     projectDetails?: ProjectDetailsUncheckedUpdateManyWithoutUserNestedInput
     activities?: ActivitiesUncheckedUpdateManyWithoutUserNestedInput
     ActivitiesCategory?: ActivitiesCategoryUncheckedUpdateManyWithoutUserNestedInput
+    GeneratedReport?: GeneratedReportUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ProjectCreateWithoutFldsInput = {
@@ -30670,6 +32536,7 @@ export namespace Prisma {
     inputDistributions?: InputDistributionCreateNestedManyWithoutProjectInput
     activities?: ActivitiesCreateNestedManyWithoutProjectInput
     User?: UserCreateNestedOneWithoutProjectsInput
+    GeneratedReport?: GeneratedReportCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectUncheckedCreateWithoutFldsInput = {
@@ -30690,6 +32557,7 @@ export namespace Prisma {
     infrastructureDevelopments?: InfrastructureDevelopmentUncheckedCreateNestedManyWithoutProjectInput
     inputDistributions?: InputDistributionUncheckedCreateNestedManyWithoutProjectInput
     activities?: ActivitiesUncheckedCreateNestedManyWithoutProjectInput
+    GeneratedReport?: GeneratedReportUncheckedCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectCreateOrConnectWithoutFldsInput = {
@@ -30750,6 +32618,7 @@ export namespace Prisma {
     projectDetails?: ProjectDetailsCreateNestedManyWithoutUserInput
     activities?: ActivitiesCreateNestedManyWithoutUserInput
     ActivitiesCategory?: ActivitiesCategoryCreateNestedManyWithoutUserInput
+    GeneratedReport?: GeneratedReportCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutFldsInput = {
@@ -30778,6 +32647,7 @@ export namespace Prisma {
     projectDetails?: ProjectDetailsUncheckedCreateNestedManyWithoutUserInput
     activities?: ActivitiesUncheckedCreateNestedManyWithoutUserInput
     ActivitiesCategory?: ActivitiesCategoryUncheckedCreateNestedManyWithoutUserInput
+    GeneratedReport?: GeneratedReportUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutFldsInput = {
@@ -30814,6 +32684,7 @@ export namespace Prisma {
     inputDistributions?: InputDistributionUpdateManyWithoutProjectNestedInput
     activities?: ActivitiesUpdateManyWithoutProjectNestedInput
     User?: UserUpdateOneWithoutProjectsNestedInput
+    GeneratedReport?: GeneratedReportUpdateManyWithoutProjectNestedInput
   }
 
   export type ProjectUncheckedUpdateWithoutFldsInput = {
@@ -30834,6 +32705,7 @@ export namespace Prisma {
     infrastructureDevelopments?: InfrastructureDevelopmentUncheckedUpdateManyWithoutProjectNestedInput
     inputDistributions?: InputDistributionUncheckedUpdateManyWithoutProjectNestedInput
     activities?: ActivitiesUncheckedUpdateManyWithoutProjectNestedInput
+    GeneratedReport?: GeneratedReportUncheckedUpdateManyWithoutProjectNestedInput
   }
 
   export type QuarterUpsertWithoutFldsInput = {
@@ -30906,6 +32778,7 @@ export namespace Prisma {
     projectDetails?: ProjectDetailsUpdateManyWithoutUserNestedInput
     activities?: ActivitiesUpdateManyWithoutUserNestedInput
     ActivitiesCategory?: ActivitiesCategoryUpdateManyWithoutUserNestedInput
+    GeneratedReport?: GeneratedReportUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutFldsInput = {
@@ -30934,6 +32807,7 @@ export namespace Prisma {
     projectDetails?: ProjectDetailsUncheckedUpdateManyWithoutUserNestedInput
     activities?: ActivitiesUncheckedUpdateManyWithoutUserNestedInput
     ActivitiesCategory?: ActivitiesCategoryUncheckedUpdateManyWithoutUserNestedInput
+    GeneratedReport?: GeneratedReportUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ProjectCreateWithoutAwarenessProgramsInput = {
@@ -30954,6 +32828,7 @@ export namespace Prisma {
     inputDistributions?: InputDistributionCreateNestedManyWithoutProjectInput
     activities?: ActivitiesCreateNestedManyWithoutProjectInput
     User?: UserCreateNestedOneWithoutProjectsInput
+    GeneratedReport?: GeneratedReportCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectUncheckedCreateWithoutAwarenessProgramsInput = {
@@ -30974,6 +32849,7 @@ export namespace Prisma {
     infrastructureDevelopments?: InfrastructureDevelopmentUncheckedCreateNestedManyWithoutProjectInput
     inputDistributions?: InputDistributionUncheckedCreateNestedManyWithoutProjectInput
     activities?: ActivitiesUncheckedCreateNestedManyWithoutProjectInput
+    GeneratedReport?: GeneratedReportUncheckedCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectCreateOrConnectWithoutAwarenessProgramsInput = {
@@ -31034,6 +32910,7 @@ export namespace Prisma {
     projectDetails?: ProjectDetailsCreateNestedManyWithoutUserInput
     activities?: ActivitiesCreateNestedManyWithoutUserInput
     ActivitiesCategory?: ActivitiesCategoryCreateNestedManyWithoutUserInput
+    GeneratedReport?: GeneratedReportCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAwarenessProgramsInput = {
@@ -31062,6 +32939,7 @@ export namespace Prisma {
     projectDetails?: ProjectDetailsUncheckedCreateNestedManyWithoutUserInput
     activities?: ActivitiesUncheckedCreateNestedManyWithoutUserInput
     ActivitiesCategory?: ActivitiesCategoryUncheckedCreateNestedManyWithoutUserInput
+    GeneratedReport?: GeneratedReportUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAwarenessProgramsInput = {
@@ -31098,6 +32976,7 @@ export namespace Prisma {
     inputDistributions?: InputDistributionUpdateManyWithoutProjectNestedInput
     activities?: ActivitiesUpdateManyWithoutProjectNestedInput
     User?: UserUpdateOneWithoutProjectsNestedInput
+    GeneratedReport?: GeneratedReportUpdateManyWithoutProjectNestedInput
   }
 
   export type ProjectUncheckedUpdateWithoutAwarenessProgramsInput = {
@@ -31118,6 +32997,7 @@ export namespace Prisma {
     infrastructureDevelopments?: InfrastructureDevelopmentUncheckedUpdateManyWithoutProjectNestedInput
     inputDistributions?: InputDistributionUncheckedUpdateManyWithoutProjectNestedInput
     activities?: ActivitiesUncheckedUpdateManyWithoutProjectNestedInput
+    GeneratedReport?: GeneratedReportUncheckedUpdateManyWithoutProjectNestedInput
   }
 
   export type QuarterUpsertWithoutAwarenessProgramsInput = {
@@ -31190,6 +33070,7 @@ export namespace Prisma {
     projectDetails?: ProjectDetailsUpdateManyWithoutUserNestedInput
     activities?: ActivitiesUpdateManyWithoutUserNestedInput
     ActivitiesCategory?: ActivitiesCategoryUpdateManyWithoutUserNestedInput
+    GeneratedReport?: GeneratedReportUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAwarenessProgramsInput = {
@@ -31218,6 +33099,7 @@ export namespace Prisma {
     projectDetails?: ProjectDetailsUncheckedUpdateManyWithoutUserNestedInput
     activities?: ActivitiesUncheckedUpdateManyWithoutUserNestedInput
     ActivitiesCategory?: ActivitiesCategoryUncheckedUpdateManyWithoutUserNestedInput
+    GeneratedReport?: GeneratedReportUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ProjectCreateWithoutInfrastructureDevelopmentsInput = {
@@ -31238,6 +33120,7 @@ export namespace Prisma {
     inputDistributions?: InputDistributionCreateNestedManyWithoutProjectInput
     activities?: ActivitiesCreateNestedManyWithoutProjectInput
     User?: UserCreateNestedOneWithoutProjectsInput
+    GeneratedReport?: GeneratedReportCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectUncheckedCreateWithoutInfrastructureDevelopmentsInput = {
@@ -31258,6 +33141,7 @@ export namespace Prisma {
     awarenessPrograms?: AwarenessProgramUncheckedCreateNestedManyWithoutProjectInput
     inputDistributions?: InputDistributionUncheckedCreateNestedManyWithoutProjectInput
     activities?: ActivitiesUncheckedCreateNestedManyWithoutProjectInput
+    GeneratedReport?: GeneratedReportUncheckedCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectCreateOrConnectWithoutInfrastructureDevelopmentsInput = {
@@ -31318,6 +33202,7 @@ export namespace Prisma {
     projectDetails?: ProjectDetailsCreateNestedManyWithoutUserInput
     activities?: ActivitiesCreateNestedManyWithoutUserInput
     ActivitiesCategory?: ActivitiesCategoryCreateNestedManyWithoutUserInput
+    GeneratedReport?: GeneratedReportCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutInfrastructureDevelopmentsInput = {
@@ -31346,6 +33231,7 @@ export namespace Prisma {
     projectDetails?: ProjectDetailsUncheckedCreateNestedManyWithoutUserInput
     activities?: ActivitiesUncheckedCreateNestedManyWithoutUserInput
     ActivitiesCategory?: ActivitiesCategoryUncheckedCreateNestedManyWithoutUserInput
+    GeneratedReport?: GeneratedReportUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutInfrastructureDevelopmentsInput = {
@@ -31382,6 +33268,7 @@ export namespace Prisma {
     inputDistributions?: InputDistributionUpdateManyWithoutProjectNestedInput
     activities?: ActivitiesUpdateManyWithoutProjectNestedInput
     User?: UserUpdateOneWithoutProjectsNestedInput
+    GeneratedReport?: GeneratedReportUpdateManyWithoutProjectNestedInput
   }
 
   export type ProjectUncheckedUpdateWithoutInfrastructureDevelopmentsInput = {
@@ -31402,6 +33289,7 @@ export namespace Prisma {
     awarenessPrograms?: AwarenessProgramUncheckedUpdateManyWithoutProjectNestedInput
     inputDistributions?: InputDistributionUncheckedUpdateManyWithoutProjectNestedInput
     activities?: ActivitiesUncheckedUpdateManyWithoutProjectNestedInput
+    GeneratedReport?: GeneratedReportUncheckedUpdateManyWithoutProjectNestedInput
   }
 
   export type QuarterUpsertWithoutInfrastructureDevelopmentsInput = {
@@ -31474,6 +33362,7 @@ export namespace Prisma {
     projectDetails?: ProjectDetailsUpdateManyWithoutUserNestedInput
     activities?: ActivitiesUpdateManyWithoutUserNestedInput
     ActivitiesCategory?: ActivitiesCategoryUpdateManyWithoutUserNestedInput
+    GeneratedReport?: GeneratedReportUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutInfrastructureDevelopmentsInput = {
@@ -31502,6 +33391,7 @@ export namespace Prisma {
     projectDetails?: ProjectDetailsUncheckedUpdateManyWithoutUserNestedInput
     activities?: ActivitiesUncheckedUpdateManyWithoutUserNestedInput
     ActivitiesCategory?: ActivitiesCategoryUncheckedUpdateManyWithoutUserNestedInput
+    GeneratedReport?: GeneratedReportUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutUpcomingEventsInput = {
@@ -31530,6 +33420,7 @@ export namespace Prisma {
     projectDetails?: ProjectDetailsCreateNestedManyWithoutUserInput
     activities?: ActivitiesCreateNestedManyWithoutUserInput
     ActivitiesCategory?: ActivitiesCategoryCreateNestedManyWithoutUserInput
+    GeneratedReport?: GeneratedReportCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutUpcomingEventsInput = {
@@ -31558,6 +33449,7 @@ export namespace Prisma {
     projectDetails?: ProjectDetailsUncheckedCreateNestedManyWithoutUserInput
     activities?: ActivitiesUncheckedCreateNestedManyWithoutUserInput
     ActivitiesCategory?: ActivitiesCategoryUncheckedCreateNestedManyWithoutUserInput
+    GeneratedReport?: GeneratedReportUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutUpcomingEventsInput = {
@@ -31602,6 +33494,7 @@ export namespace Prisma {
     projectDetails?: ProjectDetailsUpdateManyWithoutUserNestedInput
     activities?: ActivitiesUpdateManyWithoutUserNestedInput
     ActivitiesCategory?: ActivitiesCategoryUpdateManyWithoutUserNestedInput
+    GeneratedReport?: GeneratedReportUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutUpcomingEventsInput = {
@@ -31630,6 +33523,7 @@ export namespace Prisma {
     projectDetails?: ProjectDetailsUncheckedUpdateManyWithoutUserNestedInput
     activities?: ActivitiesUncheckedUpdateManyWithoutUserNestedInput
     ActivitiesCategory?: ActivitiesCategoryUncheckedUpdateManyWithoutUserNestedInput
+    GeneratedReport?: GeneratedReportUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutPublicationsInput = {
@@ -31658,6 +33552,7 @@ export namespace Prisma {
     projectDetails?: ProjectDetailsCreateNestedManyWithoutUserInput
     activities?: ActivitiesCreateNestedManyWithoutUserInput
     ActivitiesCategory?: ActivitiesCategoryCreateNestedManyWithoutUserInput
+    GeneratedReport?: GeneratedReportCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutPublicationsInput = {
@@ -31686,6 +33581,7 @@ export namespace Prisma {
     projectDetails?: ProjectDetailsUncheckedCreateNestedManyWithoutUserInput
     activities?: ActivitiesUncheckedCreateNestedManyWithoutUserInput
     ActivitiesCategory?: ActivitiesCategoryUncheckedCreateNestedManyWithoutUserInput
+    GeneratedReport?: GeneratedReportUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutPublicationsInput = {
@@ -31730,6 +33626,7 @@ export namespace Prisma {
     projectDetails?: ProjectDetailsUpdateManyWithoutUserNestedInput
     activities?: ActivitiesUpdateManyWithoutUserNestedInput
     ActivitiesCategory?: ActivitiesCategoryUpdateManyWithoutUserNestedInput
+    GeneratedReport?: GeneratedReportUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPublicationsInput = {
@@ -31758,6 +33655,7 @@ export namespace Prisma {
     projectDetails?: ProjectDetailsUncheckedUpdateManyWithoutUserNestedInput
     activities?: ActivitiesUncheckedUpdateManyWithoutUserNestedInput
     ActivitiesCategory?: ActivitiesCategoryUncheckedUpdateManyWithoutUserNestedInput
+    GeneratedReport?: GeneratedReportUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutGalleriesInput = {
@@ -31786,6 +33684,7 @@ export namespace Prisma {
     projectDetails?: ProjectDetailsCreateNestedManyWithoutUserInput
     activities?: ActivitiesCreateNestedManyWithoutUserInput
     ActivitiesCategory?: ActivitiesCategoryCreateNestedManyWithoutUserInput
+    GeneratedReport?: GeneratedReportCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutGalleriesInput = {
@@ -31814,6 +33713,7 @@ export namespace Prisma {
     projectDetails?: ProjectDetailsUncheckedCreateNestedManyWithoutUserInput
     activities?: ActivitiesUncheckedCreateNestedManyWithoutUserInput
     ActivitiesCategory?: ActivitiesCategoryUncheckedCreateNestedManyWithoutUserInput
+    GeneratedReport?: GeneratedReportUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutGalleriesInput = {
@@ -31858,6 +33758,7 @@ export namespace Prisma {
     projectDetails?: ProjectDetailsUpdateManyWithoutUserNestedInput
     activities?: ActivitiesUpdateManyWithoutUserNestedInput
     ActivitiesCategory?: ActivitiesCategoryUpdateManyWithoutUserNestedInput
+    GeneratedReport?: GeneratedReportUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutGalleriesInput = {
@@ -31886,6 +33787,7 @@ export namespace Prisma {
     projectDetails?: ProjectDetailsUncheckedUpdateManyWithoutUserNestedInput
     activities?: ActivitiesUncheckedUpdateManyWithoutUserNestedInput
     ActivitiesCategory?: ActivitiesCategoryUncheckedUpdateManyWithoutUserNestedInput
+    GeneratedReport?: GeneratedReportUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutProjectDetailsInput = {
@@ -31914,6 +33816,7 @@ export namespace Prisma {
     galleries?: GalleryCreateNestedManyWithoutUserInput
     activities?: ActivitiesCreateNestedManyWithoutUserInput
     ActivitiesCategory?: ActivitiesCategoryCreateNestedManyWithoutUserInput
+    GeneratedReport?: GeneratedReportCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutProjectDetailsInput = {
@@ -31942,6 +33845,7 @@ export namespace Prisma {
     galleries?: GalleryUncheckedCreateNestedManyWithoutUserInput
     activities?: ActivitiesUncheckedCreateNestedManyWithoutUserInput
     ActivitiesCategory?: ActivitiesCategoryUncheckedCreateNestedManyWithoutUserInput
+    GeneratedReport?: GeneratedReportUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutProjectDetailsInput = {
@@ -31986,6 +33890,7 @@ export namespace Prisma {
     galleries?: GalleryUpdateManyWithoutUserNestedInput
     activities?: ActivitiesUpdateManyWithoutUserNestedInput
     ActivitiesCategory?: ActivitiesCategoryUpdateManyWithoutUserNestedInput
+    GeneratedReport?: GeneratedReportUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutProjectDetailsInput = {
@@ -32014,6 +33919,7 @@ export namespace Prisma {
     galleries?: GalleryUncheckedUpdateManyWithoutUserNestedInput
     activities?: ActivitiesUncheckedUpdateManyWithoutUserNestedInput
     ActivitiesCategory?: ActivitiesCategoryUncheckedUpdateManyWithoutUserNestedInput
+    GeneratedReport?: GeneratedReportUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ActivitiesCreateWithoutActivityCategoryInput = {
@@ -32100,6 +34006,7 @@ export namespace Prisma {
     galleries?: GalleryCreateNestedManyWithoutUserInput
     projectDetails?: ProjectDetailsCreateNestedManyWithoutUserInput
     activities?: ActivitiesCreateNestedManyWithoutUserInput
+    GeneratedReport?: GeneratedReportCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutActivitiesCategoryInput = {
@@ -32128,6 +34035,7 @@ export namespace Prisma {
     galleries?: GalleryUncheckedCreateNestedManyWithoutUserInput
     projectDetails?: ProjectDetailsUncheckedCreateNestedManyWithoutUserInput
     activities?: ActivitiesUncheckedCreateNestedManyWithoutUserInput
+    GeneratedReport?: GeneratedReportUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutActivitiesCategoryInput = {
@@ -32188,6 +34096,7 @@ export namespace Prisma {
     galleries?: GalleryUpdateManyWithoutUserNestedInput
     projectDetails?: ProjectDetailsUpdateManyWithoutUserNestedInput
     activities?: ActivitiesUpdateManyWithoutUserNestedInput
+    GeneratedReport?: GeneratedReportUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutActivitiesCategoryInput = {
@@ -32216,6 +34125,7 @@ export namespace Prisma {
     galleries?: GalleryUncheckedUpdateManyWithoutUserNestedInput
     projectDetails?: ProjectDetailsUncheckedUpdateManyWithoutUserNestedInput
     activities?: ActivitiesUncheckedUpdateManyWithoutUserNestedInput
+    GeneratedReport?: GeneratedReportUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ActivitiesCategoryCreateWithoutActivitiesInput = {
@@ -32257,6 +34167,7 @@ export namespace Prisma {
     infrastructureDevelopments?: InfrastructureDevelopmentCreateNestedManyWithoutProjectInput
     inputDistributions?: InputDistributionCreateNestedManyWithoutProjectInput
     User?: UserCreateNestedOneWithoutProjectsInput
+    GeneratedReport?: GeneratedReportCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectUncheckedCreateWithoutActivitiesInput = {
@@ -32277,6 +34188,7 @@ export namespace Prisma {
     awarenessPrograms?: AwarenessProgramUncheckedCreateNestedManyWithoutProjectInput
     infrastructureDevelopments?: InfrastructureDevelopmentUncheckedCreateNestedManyWithoutProjectInput
     inputDistributions?: InputDistributionUncheckedCreateNestedManyWithoutProjectInput
+    GeneratedReport?: GeneratedReportUncheckedCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectCreateOrConnectWithoutActivitiesInput = {
@@ -32337,6 +34249,7 @@ export namespace Prisma {
     galleries?: GalleryCreateNestedManyWithoutUserInput
     projectDetails?: ProjectDetailsCreateNestedManyWithoutUserInput
     ActivitiesCategory?: ActivitiesCategoryCreateNestedManyWithoutUserInput
+    GeneratedReport?: GeneratedReportCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutActivitiesInput = {
@@ -32365,6 +34278,7 @@ export namespace Prisma {
     galleries?: GalleryUncheckedCreateNestedManyWithoutUserInput
     projectDetails?: ProjectDetailsUncheckedCreateNestedManyWithoutUserInput
     ActivitiesCategory?: ActivitiesCategoryUncheckedCreateNestedManyWithoutUserInput
+    GeneratedReport?: GeneratedReportUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutActivitiesInput = {
@@ -32428,6 +34342,7 @@ export namespace Prisma {
     infrastructureDevelopments?: InfrastructureDevelopmentUpdateManyWithoutProjectNestedInput
     inputDistributions?: InputDistributionUpdateManyWithoutProjectNestedInput
     User?: UserUpdateOneWithoutProjectsNestedInput
+    GeneratedReport?: GeneratedReportUpdateManyWithoutProjectNestedInput
   }
 
   export type ProjectUncheckedUpdateWithoutActivitiesInput = {
@@ -32448,6 +34363,7 @@ export namespace Prisma {
     awarenessPrograms?: AwarenessProgramUncheckedUpdateManyWithoutProjectNestedInput
     infrastructureDevelopments?: InfrastructureDevelopmentUncheckedUpdateManyWithoutProjectNestedInput
     inputDistributions?: InputDistributionUncheckedUpdateManyWithoutProjectNestedInput
+    GeneratedReport?: GeneratedReportUncheckedUpdateManyWithoutProjectNestedInput
   }
 
   export type QuarterUpsertWithoutActivitiesInput = {
@@ -32520,6 +34436,7 @@ export namespace Prisma {
     galleries?: GalleryUpdateManyWithoutUserNestedInput
     projectDetails?: ProjectDetailsUpdateManyWithoutUserNestedInput
     ActivitiesCategory?: ActivitiesCategoryUpdateManyWithoutUserNestedInput
+    GeneratedReport?: GeneratedReportUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutActivitiesInput = {
@@ -32547,6 +34464,239 @@ export namespace Prisma {
     publications?: PublicationUncheckedUpdateManyWithoutUserNestedInput
     galleries?: GalleryUncheckedUpdateManyWithoutUserNestedInput
     projectDetails?: ProjectDetailsUncheckedUpdateManyWithoutUserNestedInput
+    ActivitiesCategory?: ActivitiesCategoryUncheckedUpdateManyWithoutUserNestedInput
+    GeneratedReport?: GeneratedReportUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type ProjectCreateWithoutGeneratedReportInput = {
+    id?: string
+    implementingAgency: string
+    title: string
+    locationState: string
+    director: string
+    budget?: Decimal | DecimalJsLike | number | string | null
+    status?: $Enums.Status
+    startDate?: Date | string | null
+    endDate?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    trainings?: TrainingCreateNestedManyWithoutProjectInput
+    flds?: FLDCreateNestedManyWithoutProjectInput
+    awarenessPrograms?: AwarenessProgramCreateNestedManyWithoutProjectInput
+    infrastructureDevelopments?: InfrastructureDevelopmentCreateNestedManyWithoutProjectInput
+    inputDistributions?: InputDistributionCreateNestedManyWithoutProjectInput
+    activities?: ActivitiesCreateNestedManyWithoutProjectInput
+    User?: UserCreateNestedOneWithoutProjectsInput
+  }
+
+  export type ProjectUncheckedCreateWithoutGeneratedReportInput = {
+    id?: string
+    implementingAgency: string
+    title: string
+    locationState: string
+    director: string
+    budget?: Decimal | DecimalJsLike | number | string | null
+    status?: $Enums.Status
+    startDate?: Date | string | null
+    endDate?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userId?: string | null
+    trainings?: TrainingUncheckedCreateNestedManyWithoutProjectInput
+    flds?: FLDUncheckedCreateNestedManyWithoutProjectInput
+    awarenessPrograms?: AwarenessProgramUncheckedCreateNestedManyWithoutProjectInput
+    infrastructureDevelopments?: InfrastructureDevelopmentUncheckedCreateNestedManyWithoutProjectInput
+    inputDistributions?: InputDistributionUncheckedCreateNestedManyWithoutProjectInput
+    activities?: ActivitiesUncheckedCreateNestedManyWithoutProjectInput
+  }
+
+  export type ProjectCreateOrConnectWithoutGeneratedReportInput = {
+    where: ProjectWhereUniqueInput
+    create: XOR<ProjectCreateWithoutGeneratedReportInput, ProjectUncheckedCreateWithoutGeneratedReportInput>
+  }
+
+  export type UserCreateWithoutGeneratedReportInput = {
+    id?: string
+    name: string
+    email: string
+    password: string
+    role: $Enums.Role
+    isVerified?: boolean
+    verificationCode?: string | null
+    resetPasswordToken?: string | null
+    resetTokenExpires?: Date | string | null
+    verificationExpires?: Date | string | null
+    createdAt?: Date | string
+    updateAt?: Date | string
+    verificationAttempts?: number | null
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    projects?: ProjectCreateNestedManyWithoutUserInput
+    trainings?: TrainingCreateNestedManyWithoutUserInput
+    flds?: FLDCreateNestedManyWithoutUserInput
+    awarenessPrograms?: AwarenessProgramCreateNestedManyWithoutUserInput
+    infrastructureDevelopments?: InfrastructureDevelopmentCreateNestedManyWithoutUserInput
+    inputDistributions?: InputDistributionCreateNestedManyWithoutUserInput
+    upcomingEvents?: UpcomingEventCreateNestedManyWithoutUserInput
+    publications?: PublicationCreateNestedManyWithoutUserInput
+    galleries?: GalleryCreateNestedManyWithoutUserInput
+    projectDetails?: ProjectDetailsCreateNestedManyWithoutUserInput
+    activities?: ActivitiesCreateNestedManyWithoutUserInput
+    ActivitiesCategory?: ActivitiesCategoryCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutGeneratedReportInput = {
+    id?: string
+    name: string
+    email: string
+    password: string
+    role: $Enums.Role
+    isVerified?: boolean
+    verificationCode?: string | null
+    resetPasswordToken?: string | null
+    resetTokenExpires?: Date | string | null
+    verificationExpires?: Date | string | null
+    createdAt?: Date | string
+    updateAt?: Date | string
+    verificationAttempts?: number | null
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    projects?: ProjectUncheckedCreateNestedManyWithoutUserInput
+    trainings?: TrainingUncheckedCreateNestedManyWithoutUserInput
+    flds?: FLDUncheckedCreateNestedManyWithoutUserInput
+    awarenessPrograms?: AwarenessProgramUncheckedCreateNestedManyWithoutUserInput
+    infrastructureDevelopments?: InfrastructureDevelopmentUncheckedCreateNestedManyWithoutUserInput
+    inputDistributions?: InputDistributionUncheckedCreateNestedManyWithoutUserInput
+    upcomingEvents?: UpcomingEventUncheckedCreateNestedManyWithoutUserInput
+    publications?: PublicationUncheckedCreateNestedManyWithoutUserInput
+    galleries?: GalleryUncheckedCreateNestedManyWithoutUserInput
+    projectDetails?: ProjectDetailsUncheckedCreateNestedManyWithoutUserInput
+    activities?: ActivitiesUncheckedCreateNestedManyWithoutUserInput
+    ActivitiesCategory?: ActivitiesCategoryUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutGeneratedReportInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutGeneratedReportInput, UserUncheckedCreateWithoutGeneratedReportInput>
+  }
+
+  export type ProjectUpsertWithoutGeneratedReportInput = {
+    update: XOR<ProjectUpdateWithoutGeneratedReportInput, ProjectUncheckedUpdateWithoutGeneratedReportInput>
+    create: XOR<ProjectCreateWithoutGeneratedReportInput, ProjectUncheckedCreateWithoutGeneratedReportInput>
+    where?: ProjectWhereInput
+  }
+
+  export type ProjectUpdateToOneWithWhereWithoutGeneratedReportInput = {
+    where?: ProjectWhereInput
+    data: XOR<ProjectUpdateWithoutGeneratedReportInput, ProjectUncheckedUpdateWithoutGeneratedReportInput>
+  }
+
+  export type ProjectUpdateWithoutGeneratedReportInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    implementingAgency?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    locationState?: StringFieldUpdateOperationsInput | string
+    director?: StringFieldUpdateOperationsInput | string
+    budget?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    trainings?: TrainingUpdateManyWithoutProjectNestedInput
+    flds?: FLDUpdateManyWithoutProjectNestedInput
+    awarenessPrograms?: AwarenessProgramUpdateManyWithoutProjectNestedInput
+    infrastructureDevelopments?: InfrastructureDevelopmentUpdateManyWithoutProjectNestedInput
+    inputDistributions?: InputDistributionUpdateManyWithoutProjectNestedInput
+    activities?: ActivitiesUpdateManyWithoutProjectNestedInput
+    User?: UserUpdateOneWithoutProjectsNestedInput
+  }
+
+  export type ProjectUncheckedUpdateWithoutGeneratedReportInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    implementingAgency?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    locationState?: StringFieldUpdateOperationsInput | string
+    director?: StringFieldUpdateOperationsInput | string
+    budget?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
+    trainings?: TrainingUncheckedUpdateManyWithoutProjectNestedInput
+    flds?: FLDUncheckedUpdateManyWithoutProjectNestedInput
+    awarenessPrograms?: AwarenessProgramUncheckedUpdateManyWithoutProjectNestedInput
+    infrastructureDevelopments?: InfrastructureDevelopmentUncheckedUpdateManyWithoutProjectNestedInput
+    inputDistributions?: InputDistributionUncheckedUpdateManyWithoutProjectNestedInput
+    activities?: ActivitiesUncheckedUpdateManyWithoutProjectNestedInput
+  }
+
+  export type UserUpsertWithoutGeneratedReportInput = {
+    update: XOR<UserUpdateWithoutGeneratedReportInput, UserUncheckedUpdateWithoutGeneratedReportInput>
+    create: XOR<UserCreateWithoutGeneratedReportInput, UserUncheckedCreateWithoutGeneratedReportInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutGeneratedReportInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutGeneratedReportInput, UserUncheckedUpdateWithoutGeneratedReportInput>
+  }
+
+  export type UserUpdateWithoutGeneratedReportInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    verificationCode?: NullableStringFieldUpdateOperationsInput | string | null
+    resetPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verificationExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    verificationAttempts?: NullableIntFieldUpdateOperationsInput | number | null
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    projects?: ProjectUpdateManyWithoutUserNestedInput
+    trainings?: TrainingUpdateManyWithoutUserNestedInput
+    flds?: FLDUpdateManyWithoutUserNestedInput
+    awarenessPrograms?: AwarenessProgramUpdateManyWithoutUserNestedInput
+    infrastructureDevelopments?: InfrastructureDevelopmentUpdateManyWithoutUserNestedInput
+    inputDistributions?: InputDistributionUpdateManyWithoutUserNestedInput
+    upcomingEvents?: UpcomingEventUpdateManyWithoutUserNestedInput
+    publications?: PublicationUpdateManyWithoutUserNestedInput
+    galleries?: GalleryUpdateManyWithoutUserNestedInput
+    projectDetails?: ProjectDetailsUpdateManyWithoutUserNestedInput
+    activities?: ActivitiesUpdateManyWithoutUserNestedInput
+    ActivitiesCategory?: ActivitiesCategoryUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutGeneratedReportInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    verificationCode?: NullableStringFieldUpdateOperationsInput | string | null
+    resetPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verificationExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    verificationAttempts?: NullableIntFieldUpdateOperationsInput | number | null
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    projects?: ProjectUncheckedUpdateManyWithoutUserNestedInput
+    trainings?: TrainingUncheckedUpdateManyWithoutUserNestedInput
+    flds?: FLDUncheckedUpdateManyWithoutUserNestedInput
+    awarenessPrograms?: AwarenessProgramUncheckedUpdateManyWithoutUserNestedInput
+    infrastructureDevelopments?: InfrastructureDevelopmentUncheckedUpdateManyWithoutUserNestedInput
+    inputDistributions?: InputDistributionUncheckedUpdateManyWithoutUserNestedInput
+    upcomingEvents?: UpcomingEventUncheckedUpdateManyWithoutUserNestedInput
+    publications?: PublicationUncheckedUpdateManyWithoutUserNestedInput
+    galleries?: GalleryUncheckedUpdateManyWithoutUserNestedInput
+    projectDetails?: ProjectDetailsUncheckedUpdateManyWithoutUserNestedInput
+    activities?: ActivitiesUncheckedUpdateManyWithoutUserNestedInput
     ActivitiesCategory?: ActivitiesCategoryUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -32749,6 +34899,18 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
+  export type GeneratedReportCreateManyUserInput = {
+    id?: string
+    projectId: string
+    quarter: string
+    year: number
+    fileName: string
+    fileKey: string
+    fileUrl: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type SessionUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     userAgent?: NullableStringFieldUpdateOperationsInput | string | null
@@ -32791,6 +34953,7 @@ export namespace Prisma {
     infrastructureDevelopments?: InfrastructureDevelopmentUpdateManyWithoutProjectNestedInput
     inputDistributions?: InputDistributionUpdateManyWithoutProjectNestedInput
     activities?: ActivitiesUpdateManyWithoutProjectNestedInput
+    GeneratedReport?: GeneratedReportUpdateManyWithoutProjectNestedInput
   }
 
   export type ProjectUncheckedUpdateWithoutUserInput = {
@@ -32811,6 +34974,7 @@ export namespace Prisma {
     infrastructureDevelopments?: InfrastructureDevelopmentUncheckedUpdateManyWithoutProjectNestedInput
     inputDistributions?: InputDistributionUncheckedUpdateManyWithoutProjectNestedInput
     activities?: ActivitiesUncheckedUpdateManyWithoutProjectNestedInput
+    GeneratedReport?: GeneratedReportUncheckedUpdateManyWithoutProjectNestedInput
   }
 
   export type ProjectUncheckedUpdateManyWithoutUserInput = {
@@ -33360,6 +35524,42 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type GeneratedReportUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    quarter?: StringFieldUpdateOperationsInput | string
+    year?: IntFieldUpdateOperationsInput | number
+    fileName?: StringFieldUpdateOperationsInput | string
+    fileKey?: StringFieldUpdateOperationsInput | string
+    fileUrl?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    project?: ProjectUpdateOneRequiredWithoutGeneratedReportNestedInput
+  }
+
+  export type GeneratedReportUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    projectId?: StringFieldUpdateOperationsInput | string
+    quarter?: StringFieldUpdateOperationsInput | string
+    year?: IntFieldUpdateOperationsInput | number
+    fileName?: StringFieldUpdateOperationsInput | string
+    fileKey?: StringFieldUpdateOperationsInput | string
+    fileUrl?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GeneratedReportUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    projectId?: StringFieldUpdateOperationsInput | string
+    quarter?: StringFieldUpdateOperationsInput | string
+    year?: IntFieldUpdateOperationsInput | number
+    fileName?: StringFieldUpdateOperationsInput | string
+    fileKey?: StringFieldUpdateOperationsInput | string
+    fileUrl?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type TrainingCreateManyProjectInput = {
     id?: string
     trainingId: string
@@ -33480,6 +35680,18 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     userId?: string | null
+  }
+
+  export type GeneratedReportCreateManyProjectInput = {
+    id?: string
+    quarter: string
+    year: number
+    fileName: string
+    fileKey: string
+    fileUrl: string
+    userId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type TrainingUpdateWithoutProjectInput = {
@@ -33846,6 +36058,42 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type GeneratedReportUpdateWithoutProjectInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    quarter?: StringFieldUpdateOperationsInput | string
+    year?: IntFieldUpdateOperationsInput | number
+    fileName?: StringFieldUpdateOperationsInput | string
+    fileKey?: StringFieldUpdateOperationsInput | string
+    fileUrl?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    User?: UserUpdateOneWithoutGeneratedReportNestedInput
+  }
+
+  export type GeneratedReportUncheckedUpdateWithoutProjectInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    quarter?: StringFieldUpdateOperationsInput | string
+    year?: IntFieldUpdateOperationsInput | number
+    fileName?: StringFieldUpdateOperationsInput | string
+    fileKey?: StringFieldUpdateOperationsInput | string
+    fileUrl?: StringFieldUpdateOperationsInput | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GeneratedReportUncheckedUpdateManyWithoutProjectInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    quarter?: StringFieldUpdateOperationsInput | string
+    year?: IntFieldUpdateOperationsInput | number
+    fileName?: StringFieldUpdateOperationsInput | string
+    fileKey?: StringFieldUpdateOperationsInput | string
+    fileUrl?: StringFieldUpdateOperationsInput | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type TrainingCreateManyQuarterInput = {

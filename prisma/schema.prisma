@@ -51,6 +51,7 @@ model User {
   projectDetails             ProjectDetails[]
   activities                 Activities[]
   ActivitiesCategory         ActivitiesCategory[]
+  GeneratedReport            GeneratedReport[]
 
   @@index([email])
   @@index([role])
@@ -86,8 +87,9 @@ model Project {
   inputDistributions         InputDistribution[]
   activities                 Activities[]
 
-  User   User?   @relation(fields: [userId], references: [id])
-  userId String? @map("user_id")
+  User               User?                @relation(fields: [userId], references: [id])
+  userId             String?              @map("user_id")
+  GeneratedReport    GeneratedReport[]
 
   // Indexes for frequently queried fields
   @@index([title])
@@ -403,4 +405,23 @@ model Activities {
   @@index([district, village, block])
   @@index([createdAt])
   @@map("activities")
+}
+
+model GeneratedReport {
+  id        String   @id @default(uuid())
+  projectId String
+  quarter   String
+  year      Int
+  fileName  String
+  fileKey   String
+  fileUrl   String
+  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  User      User?    @relation(fields: [userId], references: [id])
+  userId    String?  @map("user_id")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId]) // Index for faster user-based queries
+  @@index([projectId, userId]) // Compound index for project + user queries
+  @@map("generated_reports")
 }
