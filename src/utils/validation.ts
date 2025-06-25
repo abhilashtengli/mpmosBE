@@ -285,8 +285,7 @@ export const createTrainingValidation = z
   )
   .refine(
     (data) => {
-      // If both are present, ensure achieved <= target
-      if (data.target !== undefined && data.achieved !== undefined) {
+      if (data.target != null && data.achieved != null) {
         return data.achieved <= data.target;
       }
       return true;
@@ -343,15 +342,21 @@ export const updateTrainingValidation = z
       .max(255, { message: "Title cannot exceed 255 characters" })
       .optional(),
     target: z
-      .number({ invalid_type_error: "Target must be a number" })
-      .int({ message: "Target must be an integer" })
-      .nonnegative({ message: "Target must be zero or positive" })
-      .optional(),
+      .union([z.number().int().nonnegative(), z.null()])
+      .optional()
+      .transform((val) => {
+        // If explicitly set to null or undefined, return null to clear the field
+        if (val === null || val === undefined) return null;
+        return val;
+      }),
     achieved: z
-      .number({ invalid_type_error: "Achieved must be a number" })
-      .int({ message: "Achieved must be an integer" })
-      .nonnegative({ message: "Achieved must be zero or positive" })
-      .optional(),
+      .union([z.number().int().nonnegative(), z.null()])
+      .optional()
+      .transform((val) => {
+        // If explicitly set to null or undefined, return null to clear the field
+        if (val === null || val === undefined) return null;
+        return val;
+      }),
     targetSentence: z
       .array(z.string().trim())
       .max(20, { message: "Cannot have more than 20 target points" })
@@ -428,12 +433,10 @@ export const updateTrainingValidation = z
   })
   .refine(
     (data) => {
-      // Skip refinement if we don't have both target and achieved
-      if (data.target === undefined || data.achieved === undefined) {
-        return true;
+      if (data.target != null && data.achieved != null) {
+        return data.achieved <= data.target;
       }
-      // For update validation, we need to compare the values only if both are provided
-      return data.achieved <= data.target;
+      return true;
     },
     {
       message: "Achieved count cannot exceed target count",
@@ -483,6 +486,7 @@ export const updateTrainingValidation = z
     }
   );
 
+//Backend validation
 // Create validation schema awarness-------------------------------------------------------
 export const createAwarenessProgramValidation = z
   .object({
@@ -497,12 +501,14 @@ export const createAwarenessProgramValidation = z
       .number({ invalid_type_error: "Target must be a number" })
       .int({ message: "Target must be an integer" })
       .nonnegative({ message: "Target must be zero or positive" })
-      .optional(),
+      .optional()
+      .nullable(),
     achieved: z
       .number({ invalid_type_error: "Achieved must be a number" })
       .int({ message: "Achieved must be an integer" })
       .nonnegative({ message: "Achieved must be zero or positive" })
-      .optional(),
+      .optional()
+      .nullable(),
     targetSentence: z
       .array(z.string().trim())
       .max(20, { message: "Cannot have more than 20 target points" })
@@ -584,8 +590,7 @@ export const createAwarenessProgramValidation = z
   )
   .refine(
     (data) => {
-      // If both are present, ensure achieved <= target
-      if (data.target !== undefined && data.achieved !== undefined) {
+      if (data.target != null && data.achieved != null) {
         return data.achieved <= data.target;
       }
       return true;
@@ -627,17 +632,24 @@ export const updateAwarenessProgramValidation = z
       .trim()
       .min(2, { message: "Title must be at least 2 characters" })
       .max(100, { message: "Title cannot exceed 100 characters" })
-      .optional(),
+      .optional()
+      .nullable(),
     target: z
-      .number({ invalid_type_error: "Target must be a number" })
-      .int({ message: "Target must be an integer" })
-      .nonnegative({ message: "Target must be zero or positive" })
-      .optional(),
+      .union([z.number().int().nonnegative(), z.null()])
+      .optional()
+      .transform((val) => {
+        // If explicitly set to null or undefined, return null to clear the field
+        if (val === null || val === undefined) return null;
+        return val;
+      }),
     achieved: z
-      .number({ invalid_type_error: "Achieved must be a number" })
-      .int({ message: "Achieved must be an integer" })
-      .nonnegative({ message: "Achieved must be zero or positive" })
-      .optional(),
+      .union([z.number().int().nonnegative(), z.null()])
+      .optional()
+      .transform((val) => {
+        // If explicitly set to null or undefined, return null to clear the field
+        if (val === null || val === undefined) return null;
+        return val;
+      }),
     targetSentence: z
       .array(z.string().trim())
       .max(20, { message: "Cannot have more than 20 target points" })
@@ -707,12 +719,10 @@ export const updateAwarenessProgramValidation = z
   })
   .refine(
     (data) => {
-      // Skip refinement if we don't have both target and achieved
-      if (data.target === undefined || data.achieved === undefined) {
-        return true;
+      if (data.target != null && data.achieved != null) {
+        return data.achieved <= data.target;
       }
-      // For update validation, we need to compare the values only if both are provided
-      return data.achieved <= data.target;
+      return true;
     },
     {
       message: "Achieved count cannot exceed target count",
@@ -809,8 +819,7 @@ export const createFldValidation = z
   )
   .refine(
     (data) => {
-      // If both are present, ensure achieved <= target
-      if (data.target !== undefined && data.achieved !== undefined) {
+      if (data.target != null && data.achieved != null) {
         return data.achieved <= data.target;
       }
       return true;
@@ -850,15 +859,21 @@ export const updateFldValidation = z
       .max(100, { message: "Block must be 100 characters or less" })
       .optional(),
     target: z
-      .number({ invalid_type_error: "Target must be a number" })
-      .int({ message: "Target must be an integer" })
-      .nonnegative({ message: "Target must be zero or positive" })
-      .optional(),
+      .union([z.number().int().nonnegative(), z.null()])
+      .optional()
+      .transform((val) => {
+        // If explicitly set to null or undefined, return null to clear the field
+        if (val === null || val === undefined) return null;
+        return val;
+      }),
     achieved: z
-      .number({ invalid_type_error: "Target must be a number" })
-      .int({ message: "Target must be an integer" })
-      .nonnegative({ message: "Target must be zero or positive" })
-      .optional(),
+      .union([z.number().int().nonnegative(), z.null()])
+      .optional()
+      .transform((val) => {
+        // If explicitly set to null or undefined, return null to clear the field
+        if (val === null || val === undefined) return null;
+        return val;
+      }),
     targetSentence: z
       .array(z.string().trim())
       .max(20, { message: "Cannot have more than 20 target points" })
@@ -881,12 +896,10 @@ export const updateFldValidation = z
   })
   .refine(
     (data) => {
-      // Skip refinement if we don't have both target and achieved
-      if (data.target === undefined || data.achieved === undefined) {
-        return true;
+      if (data.target != null && data.achieved != null) {
+        return data.achieved <= data.target;
       }
-      // For update validation, we need to compare the values only if both are provided
-      return data.achieved <= data.target;
+      return true;
     },
     {
       message: "Achieved count cannot exceed target count",
@@ -976,8 +989,7 @@ export const createInfrastructureValidation = z
   )
   .refine(
     (data) => {
-      // If both are present, ensure achieved <= target
-      if (data.target !== undefined && data.achieved !== undefined) {
+      if (data.target != null && data.achieved != null) {
         return data.achieved <= data.target;
       }
       return true;
@@ -1018,16 +1030,21 @@ export const updateInfrastructureValidation = z
       .max(100, { message: "Title cannot exceed 100 characters" })
       .optional(),
     target: z
-      .number({ invalid_type_error: "Target must be a number" })
-      .int({ message: "Target must be an integer" })
-      .positive({ message: "Target must be a positive number" })
-      .optional(),
-
+      .union([z.number().int().nonnegative(), z.null()])
+      .optional()
+      .transform((val) => {
+        // If explicitly set to null or undefined, return null to clear the field
+        if (val === null || val === undefined) return null;
+        return val;
+      }),
     achieved: z
-      .number({ invalid_type_error: "Achieved must be a number" })
-      .int({ message: "Achieved must be an integer" })
-      .nonnegative({ message: "Achieved must be zero or positive" })
-      .optional(),
+      .union([z.number().int().nonnegative(), z.null()])
+      .optional()
+      .transform((val) => {
+        // If explicitly set to null or undefined, return null to clear the field
+        if (val === null || val === undefined) return null;
+        return val;
+      }),
     targetSentence: z
       .array(z.string().trim())
       .max(20, { message: "Cannot have more than 20 target points" })
@@ -1076,12 +1093,10 @@ export const updateInfrastructureValidation = z
   })
   .refine(
     (data) => {
-      // Skip refinement if we don't have both target and achieved
-      if (data.target === undefined || data.achieved === undefined) {
-        return true;
+      if (data.target != null && data.achieved != null) {
+        return data.achieved <= data.target;
       }
-      // For update validation, we need to compare the values only if both are provided
-      return data.achieved <= data.target;
+      return true;
     },
     {
       message: "Achieved count cannot exceed target count",
@@ -1207,8 +1222,7 @@ export const createInputDistributionValidation = z
   )
   .refine(
     (data) => {
-      // If both are present, ensure achieved <= target
-      if (data.target !== undefined && data.achieved !== undefined) {
+      if (data.target != null && data.achieved != null) {
         return data.achieved <= data.target;
       }
       return true;
@@ -1257,18 +1271,22 @@ export const updateInputDistributionValidation = z
       .min(2, { message: "Name must be at least 2 characters" })
       .max(200, { message: "Name cannot exceed 200 characters" })
       .optional(),
-
     target: z
-      .number({ invalid_type_error: "Target must be a number" })
-      .int({ message: "Target must be an integer" })
-      .positive({ message: "Target must be a positive number" })
-      .optional(),
-
+      .union([z.number().int().nonnegative(), z.null()])
+      .optional()
+      .transform((val) => {
+        // If explicitly set to null or undefined, return null to clear the field
+        if (val === null || val === undefined) return null;
+        return val;
+      }),
     achieved: z
-      .number({ invalid_type_error: "Achieved must be a number" })
-      .int({ message: "Achieved must be an integer" })
-      .nonnegative({ message: "Achieved must be zero or positive" })
-      .optional(),
+      .union([z.number().int().nonnegative(), z.null()])
+      .optional()
+      .transform((val) => {
+        // If explicitly set to null or undefined, return null to clear the field
+        if (val === null || val === undefined) return null;
+        return val;
+      }),
     targetSentence: z
       .array(z.string().trim())
       .max(20, { message: "Cannot have more than 20 target points" })
@@ -1324,12 +1342,10 @@ export const updateInputDistributionValidation = z
   })
   .refine(
     (data) => {
-      // Skip refinement if we don't have both target and achieved
-      if (data.target === undefined || data.achieved === undefined) {
-        return true;
+      if (data.target != null && data.achieved != null) {
+        return data.achieved <= data.target;
       }
-      // For update validation, we need to compare the values only if both are provided
-      return data.achieved <= data.target;
+      return true;
     },
     {
       message: "Achieved count cannot exceed target count",
@@ -1879,8 +1895,7 @@ export const createActivityValidation = z
   )
   .refine(
     (data) => {
-      // If both are present, ensure achieved <= target
-      if (data.target !== undefined && data.achieved !== undefined) {
+      if (data.target != null && data.achieved != null) {
         return data.achieved <= data.target;
       }
       return true;
@@ -1925,16 +1940,21 @@ export const updateActivityValidation = z
       .optional(),
 
     target: z
-      .number({ invalid_type_error: "Target must be a number" })
-      .int()
-      .nonnegative()
-      .optional(),
-
+      .union([z.number().int().nonnegative(), z.null()])
+      .optional()
+      .transform((val) => {
+        // If explicitly set to null or undefined, return null to clear the field
+        if (val === null || val === undefined) return null;
+        return val;
+      }),
     achieved: z
-      .number({ invalid_type_error: "Achieved must be a number" })
-      .int()
-      .nonnegative()
-      .optional(),
+      .union([z.number().int().nonnegative(), z.null()])
+      .optional()
+      .transform((val) => {
+        // If explicitly set to null or undefined, return null to clear the field
+        if (val === null || val === undefined) return null;
+        return val;
+      }),
     targetSentence: z
       .array(z.string().trim())
       .max(20, { message: "Cannot have more than 20 target points" })
@@ -1988,8 +2008,10 @@ export const updateActivityValidation = z
   })
   .refine(
     (data) => {
-      if (data.target === undefined || data.achieved === undefined) return true;
-      return data.achieved <= data.target;
+      if (data.target != null && data.achieved != null) {
+        return data.achieved <= data.target;
+      }
+      return true;
     },
     {
       message: "Achieved count cannot exceed target count",
