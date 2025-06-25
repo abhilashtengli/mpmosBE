@@ -206,10 +206,39 @@ export const generateDocxReportBuffer = async (
   activities.forEach((activity, index) => {
     // Check if this is a header row
     if (activity.isHeader) {
-      // Header rows like "Input Distribution" - single cell spanning all columns
+      // Header rows like "Input Distribution" - show as main activity with serial number
+      const isEvenRow = (serialNumber - 1) % 2 === 0;
+      const rowShading = isEvenRow ? "FFFFFF" : "F8F9FA";
+
       rows.push(
         new TableRow({
           children: [
+            // Serial number cell
+            new TableCell({
+              children: [
+                new Paragraph({
+                  children: [
+                    new TextRun({
+                      text: `${serialNumber}`,
+                      size: 24,
+                      bold: true
+                    })
+                  ],
+                  alignment: AlignmentType.CENTER,
+                  spacing: { after: 120 }
+                })
+              ],
+              margins: {
+                top: convertInchesToTwip(0.15),
+                bottom: convertInchesToTwip(0.15),
+                left: convertInchesToTwip(0.08),
+                right: convertInchesToTwip(0.08)
+              },
+              shading: {
+                fill: rowShading
+              }
+            }),
+            // Activity name cell
             new TableCell({
               children: [
                 new Paragraph({
@@ -217,15 +246,12 @@ export const generateDocxReportBuffer = async (
                     new TextRun({
                       text: activity.title,
                       bold: true,
-                      size: 24,
-                      color: "E8F4FD"
+                      size: 24
                     })
                   ],
-                  alignment: AlignmentType.LEFT,
                   spacing: { after: 120 }
                 })
               ],
-              columnSpan: 7, // Span across all 7 columns
               margins: {
                 top: convertInchesToTwip(0.15),
                 bottom: convertInchesToTwip(0.15),
@@ -233,13 +259,43 @@ export const generateDocxReportBuffer = async (
                 right: convertInchesToTwip(0.12)
               },
               shading: {
-                fill: "E8F4FD"
+                fill: rowShading
               }
-            })
+            }),
+            // Empty cells for remaining columns (Units, Target, Achievement, Beneficiaries, Location)
+            ...Array(5)
+              .fill(null)
+              .map(
+                () =>
+                  new TableCell({
+                    children: [
+                      new Paragraph({
+                        children: [new TextRun({ text: "", size: 24 })],
+                        spacing: { after: 120 }
+                      })
+                    ],
+                    margins: {
+                      top: convertInchesToTwip(0.15),
+                      bottom: convertInchesToTwip(0.15),
+                      left: convertInchesToTwip(0.08),
+                      right: convertInchesToTwip(0.08)
+                    },
+                    shading: {
+                      fill: rowShading
+                    },
+                    borders: {
+                      top: { style: BorderStyle.NONE, size: 0 },
+                      bottom: { style: BorderStyle.NONE, size: 0 },
+                      left: { style: BorderStyle.NONE, size: 0 },
+                      right: { style: BorderStyle.NONE, size: 0 }
+                    }
+                  })
+              )
           ]
         })
       );
-      // Don't increment serial number for header activities
+      // Increment serial number for header activities
+      serialNumber++;
     } else {
       // Regular data row with enhanced styling and alternating row colors
       const isEvenRow = (serialNumber - 1) % 2 === 0;
