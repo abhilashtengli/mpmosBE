@@ -732,13 +732,7 @@ export const updateAwarenessProgramValidation = z
   .refine(
     (data) => {
       // Skip if imageUrl is not being updated
-      if (data.imageUrl === undefined) {
-        return true;
-      }
-      // If imageUrl is null, we don't need to check for imageKey
-      if (data.imageUrl === null) {
-        return true;
-      }
+      if (data.imageUrl === undefined || data.imageUrl === null) return true;
       // If setting a new imageUrl, ensure imageKey is also set
       if (data.imageUrl && !data.imageKey) {
         return false;
