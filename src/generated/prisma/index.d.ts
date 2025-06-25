@@ -7940,6 +7940,8 @@ export namespace Prisma {
     name: number
     target: number
     achieved: number
+    targetSentence: number
+    achievedSentence: number
     district: number
     village: number
     block: number
@@ -8015,6 +8017,8 @@ export namespace Prisma {
     name?: true
     target?: true
     achieved?: true
+    targetSentence?: true
+    achievedSentence?: true
     district?: true
     village?: true
     block?: true
@@ -8121,8 +8125,10 @@ export namespace Prisma {
     quarterId: string
     activityType: string
     name: string
-    target: number
-    achieved: number
+    target: number | null
+    achieved: number | null
+    targetSentence: string[]
+    achievedSentence: string[]
     district: string
     village: string
     block: string
@@ -8163,6 +8169,8 @@ export namespace Prisma {
     name?: boolean
     target?: boolean
     achieved?: boolean
+    targetSentence?: boolean
+    achievedSentence?: boolean
     district?: boolean
     village?: boolean
     block?: boolean
@@ -8187,6 +8195,8 @@ export namespace Prisma {
     name?: boolean
     target?: boolean
     achieved?: boolean
+    targetSentence?: boolean
+    achievedSentence?: boolean
     district?: boolean
     village?: boolean
     block?: boolean
@@ -8211,6 +8221,8 @@ export namespace Prisma {
     name?: boolean
     target?: boolean
     achieved?: boolean
+    targetSentence?: boolean
+    achievedSentence?: boolean
     district?: boolean
     village?: boolean
     block?: boolean
@@ -8235,6 +8247,8 @@ export namespace Prisma {
     name?: boolean
     target?: boolean
     achieved?: boolean
+    targetSentence?: boolean
+    achievedSentence?: boolean
     district?: boolean
     village?: boolean
     block?: boolean
@@ -8247,7 +8261,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type InputDistributionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "inputDistId" | "projectId" | "quarterId" | "activityType" | "name" | "target" | "achieved" | "district" | "village" | "block" | "remarks" | "units" | "imageUrl" | "imageKey" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["inputDistribution"]>
+  export type InputDistributionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "inputDistId" | "projectId" | "quarterId" | "activityType" | "name" | "target" | "achieved" | "targetSentence" | "achievedSentence" | "district" | "village" | "block" | "remarks" | "units" | "imageUrl" | "imageKey" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["inputDistribution"]>
   export type InputDistributionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     project?: boolean | ProjectDefaultArgs<ExtArgs>
     quarter?: boolean | QuarterDefaultArgs<ExtArgs>
@@ -8278,8 +8292,10 @@ export namespace Prisma {
       quarterId: string
       activityType: string
       name: string
-      target: number
-      achieved: number
+      target: number | null
+      achieved: number | null
+      targetSentence: string[]
+      achievedSentence: string[]
       district: string
       village: string
       block: string
@@ -8724,6 +8740,8 @@ export namespace Prisma {
     readonly name: FieldRef<"InputDistribution", 'String'>
     readonly target: FieldRef<"InputDistribution", 'Int'>
     readonly achieved: FieldRef<"InputDistribution", 'Int'>
+    readonly targetSentence: FieldRef<"InputDistribution", 'String[]'>
+    readonly achievedSentence: FieldRef<"InputDistribution", 'String[]'>
     readonly district: FieldRef<"InputDistribution", 'String'>
     readonly village: FieldRef<"InputDistribution", 'String'>
     readonly block: FieldRef<"InputDistribution", 'String'>
@@ -9249,6 +9267,8 @@ export namespace Prisma {
     title: number
     target: number
     achieved: number
+    targetSentence: number
+    achievedSentence: number
     district: number
     village: number
     block: number
@@ -9337,6 +9357,8 @@ export namespace Prisma {
     title?: true
     target?: true
     achieved?: true
+    targetSentence?: true
+    achievedSentence?: true
     district?: true
     village?: true
     block?: true
@@ -9446,8 +9468,10 @@ export namespace Prisma {
     projectId: string
     quarterId: string
     title: string
-    target: number
-    achieved: number
+    target: number | null
+    achieved: number | null
+    targetSentence: string[]
+    achievedSentence: string[]
     district: string
     village: string
     block: string
@@ -9491,6 +9515,8 @@ export namespace Prisma {
     title?: boolean
     target?: boolean
     achieved?: boolean
+    targetSentence?: boolean
+    achievedSentence?: boolean
     district?: boolean
     village?: boolean
     block?: boolean
@@ -9518,6 +9544,8 @@ export namespace Prisma {
     title?: boolean
     target?: boolean
     achieved?: boolean
+    targetSentence?: boolean
+    achievedSentence?: boolean
     district?: boolean
     village?: boolean
     block?: boolean
@@ -9545,6 +9573,8 @@ export namespace Prisma {
     title?: boolean
     target?: boolean
     achieved?: boolean
+    targetSentence?: boolean
+    achievedSentence?: boolean
     district?: boolean
     village?: boolean
     block?: boolean
@@ -9572,6 +9602,8 @@ export namespace Prisma {
     title?: boolean
     target?: boolean
     achieved?: boolean
+    targetSentence?: boolean
+    achievedSentence?: boolean
     district?: boolean
     village?: boolean
     block?: boolean
@@ -9588,7 +9620,7 @@ export namespace Prisma {
     userId?: boolean
   }
 
-  export type TrainingOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "trainingId" | "projectId" | "quarterId" | "title" | "target" | "achieved" | "district" | "village" | "block" | "beneficiaryMale" | "beneficiaryFemale" | "remarks" | "imageUrl" | "imageKey" | "pdfUrl" | "pdfKey" | "units" | "createdAt" | "updatedAt" | "userId", ExtArgs["result"]["training"]>
+  export type TrainingOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "trainingId" | "projectId" | "quarterId" | "title" | "target" | "achieved" | "targetSentence" | "achievedSentence" | "district" | "village" | "block" | "beneficiaryMale" | "beneficiaryFemale" | "remarks" | "imageUrl" | "imageKey" | "pdfUrl" | "pdfKey" | "units" | "createdAt" | "updatedAt" | "userId", ExtArgs["result"]["training"]>
   export type TrainingInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     project?: boolean | ProjectDefaultArgs<ExtArgs>
     quarter?: boolean | QuarterDefaultArgs<ExtArgs>
@@ -9618,8 +9650,10 @@ export namespace Prisma {
       projectId: string
       quarterId: string
       title: string
-      target: number
-      achieved: number
+      target: number | null
+      achieved: number | null
+      targetSentence: string[]
+      achievedSentence: string[]
       district: string
       village: string
       block: string
@@ -10067,6 +10101,8 @@ export namespace Prisma {
     readonly title: FieldRef<"Training", 'String'>
     readonly target: FieldRef<"Training", 'Int'>
     readonly achieved: FieldRef<"Training", 'Int'>
+    readonly targetSentence: FieldRef<"Training", 'String[]'>
+    readonly achievedSentence: FieldRef<"Training", 'String[]'>
     readonly district: FieldRef<"Training", 'String'>
     readonly village: FieldRef<"Training", 'String'>
     readonly block: FieldRef<"Training", 'String'>
@@ -10581,6 +10617,8 @@ export namespace Prisma {
     block: number
     target: number
     achieved: number
+    targetSentence: number
+    achievedSentence: number
     units: number
     createdAt: number
     updatedAt: number
@@ -10644,6 +10682,8 @@ export namespace Prisma {
     block?: true
     target?: true
     achieved?: true
+    targetSentence?: true
+    achievedSentence?: true
     units?: true
     createdAt?: true
     updatedAt?: true
@@ -10746,8 +10786,10 @@ export namespace Prisma {
     district: string
     village: string
     block: string
-    target: number
-    achieved: number
+    target: number | null
+    achieved: number | null
+    targetSentence: string[]
+    achievedSentence: string[]
     units: string | null
     createdAt: Date
     updatedAt: Date
@@ -10784,6 +10826,8 @@ export namespace Prisma {
     block?: boolean
     target?: boolean
     achieved?: boolean
+    targetSentence?: boolean
+    achievedSentence?: boolean
     units?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -10804,6 +10848,8 @@ export namespace Prisma {
     block?: boolean
     target?: boolean
     achieved?: boolean
+    targetSentence?: boolean
+    achievedSentence?: boolean
     units?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -10824,6 +10870,8 @@ export namespace Prisma {
     block?: boolean
     target?: boolean
     achieved?: boolean
+    targetSentence?: boolean
+    achievedSentence?: boolean
     units?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -10844,13 +10892,15 @@ export namespace Prisma {
     block?: boolean
     target?: boolean
     achieved?: boolean
+    targetSentence?: boolean
+    achievedSentence?: boolean
     units?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     userId?: boolean
   }
 
-  export type FLDOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "fldId" | "projectId" | "quarterId" | "remarks" | "district" | "village" | "block" | "target" | "achieved" | "units" | "createdAt" | "updatedAt" | "userId", ExtArgs["result"]["fLD"]>
+  export type FLDOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "fldId" | "projectId" | "quarterId" | "remarks" | "district" | "village" | "block" | "target" | "achieved" | "targetSentence" | "achievedSentence" | "units" | "createdAt" | "updatedAt" | "userId", ExtArgs["result"]["fLD"]>
   export type FLDInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     project?: boolean | ProjectDefaultArgs<ExtArgs>
     quarter?: boolean | QuarterDefaultArgs<ExtArgs>
@@ -10883,8 +10933,10 @@ export namespace Prisma {
       district: string
       village: string
       block: string
-      target: number
-      achieved: number
+      target: number | null
+      achieved: number | null
+      targetSentence: string[]
+      achievedSentence: string[]
       units: string | null
       createdAt: Date
       updatedAt: Date
@@ -11325,6 +11377,8 @@ export namespace Prisma {
     readonly block: FieldRef<"FLD", 'String'>
     readonly target: FieldRef<"FLD", 'Int'>
     readonly achieved: FieldRef<"FLD", 'Int'>
+    readonly targetSentence: FieldRef<"FLD", 'String[]'>
+    readonly achievedSentence: FieldRef<"FLD", 'String[]'>
     readonly units: FieldRef<"FLD", 'String'>
     readonly createdAt: FieldRef<"FLD", 'DateTime'>
     readonly updatedAt: FieldRef<"FLD", 'DateTime'>
@@ -11840,6 +11894,8 @@ export namespace Prisma {
     title: number
     target: number
     achieved: number
+    targetSentence: number
+    achievedSentence: number
     district: number
     village: number
     block: number
@@ -11922,6 +11978,8 @@ export namespace Prisma {
     title?: true
     target?: true
     achieved?: true
+    targetSentence?: true
+    achievedSentence?: true
     district?: true
     village?: true
     block?: true
@@ -12029,8 +12087,10 @@ export namespace Prisma {
     projectId: string
     quarterId: string
     title: string
-    target: number
-    achieved: number
+    target: number | null
+    achieved: number | null
+    targetSentence: string[]
+    achievedSentence: string[]
     district: string
     village: string
     block: string
@@ -12072,6 +12132,8 @@ export namespace Prisma {
     title?: boolean
     target?: boolean
     achieved?: boolean
+    targetSentence?: boolean
+    achievedSentence?: boolean
     district?: boolean
     village?: boolean
     block?: boolean
@@ -12097,6 +12159,8 @@ export namespace Prisma {
     title?: boolean
     target?: boolean
     achieved?: boolean
+    targetSentence?: boolean
+    achievedSentence?: boolean
     district?: boolean
     village?: boolean
     block?: boolean
@@ -12122,6 +12186,8 @@ export namespace Prisma {
     title?: boolean
     target?: boolean
     achieved?: boolean
+    targetSentence?: boolean
+    achievedSentence?: boolean
     district?: boolean
     village?: boolean
     block?: boolean
@@ -12147,6 +12213,8 @@ export namespace Prisma {
     title?: boolean
     target?: boolean
     achieved?: boolean
+    targetSentence?: boolean
+    achievedSentence?: boolean
     district?: boolean
     village?: boolean
     block?: boolean
@@ -12161,7 +12229,7 @@ export namespace Prisma {
     userId?: boolean
   }
 
-  export type AwarenessProgramOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "awarnessprogramId" | "projectId" | "quarterId" | "title" | "target" | "achieved" | "district" | "village" | "block" | "beneficiaryMale" | "beneficiaryFemale" | "imageUrl" | "imageKey" | "units" | "remarks" | "createdAt" | "updatedAt" | "userId", ExtArgs["result"]["awarenessProgram"]>
+  export type AwarenessProgramOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "awarnessprogramId" | "projectId" | "quarterId" | "title" | "target" | "achieved" | "targetSentence" | "achievedSentence" | "district" | "village" | "block" | "beneficiaryMale" | "beneficiaryFemale" | "imageUrl" | "imageKey" | "units" | "remarks" | "createdAt" | "updatedAt" | "userId", ExtArgs["result"]["awarenessProgram"]>
   export type AwarenessProgramInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     project?: boolean | ProjectDefaultArgs<ExtArgs>
     quarter?: boolean | QuarterDefaultArgs<ExtArgs>
@@ -12191,8 +12259,10 @@ export namespace Prisma {
       projectId: string
       quarterId: string
       title: string
-      target: number
-      achieved: number
+      target: number | null
+      achieved: number | null
+      targetSentence: string[]
+      achievedSentence: string[]
       district: string
       village: string
       block: string
@@ -12638,6 +12708,8 @@ export namespace Prisma {
     readonly title: FieldRef<"AwarenessProgram", 'String'>
     readonly target: FieldRef<"AwarenessProgram", 'Int'>
     readonly achieved: FieldRef<"AwarenessProgram", 'Int'>
+    readonly targetSentence: FieldRef<"AwarenessProgram", 'String[]'>
+    readonly achievedSentence: FieldRef<"AwarenessProgram", 'String[]'>
     readonly district: FieldRef<"AwarenessProgram", 'String'>
     readonly village: FieldRef<"AwarenessProgram", 'String'>
     readonly block: FieldRef<"AwarenessProgram", 'String'>
@@ -13151,6 +13223,8 @@ export namespace Prisma {
     quarterId: number
     target: number
     achieved: number
+    targetSentence: number
+    achievedSentence: number
     district: number
     village: number
     block: number
@@ -13220,6 +13294,8 @@ export namespace Prisma {
     quarterId?: true
     target?: true
     achieved?: true
+    targetSentence?: true
+    achievedSentence?: true
     district?: true
     village?: true
     block?: true
@@ -13324,8 +13400,10 @@ export namespace Prisma {
     title: string
     projectId: string
     quarterId: string
-    target: number
-    achieved: number
+    target: number | null
+    achieved: number | null
+    targetSentence: string[]
+    achievedSentence: string[]
     district: string
     village: string
     block: string
@@ -13364,6 +13442,8 @@ export namespace Prisma {
     quarterId?: boolean
     target?: boolean
     achieved?: boolean
+    targetSentence?: boolean
+    achievedSentence?: boolean
     district?: boolean
     village?: boolean
     block?: boolean
@@ -13386,6 +13466,8 @@ export namespace Prisma {
     quarterId?: boolean
     target?: boolean
     achieved?: boolean
+    targetSentence?: boolean
+    achievedSentence?: boolean
     district?: boolean
     village?: boolean
     block?: boolean
@@ -13408,6 +13490,8 @@ export namespace Prisma {
     quarterId?: boolean
     target?: boolean
     achieved?: boolean
+    targetSentence?: boolean
+    achievedSentence?: boolean
     district?: boolean
     village?: boolean
     block?: boolean
@@ -13430,6 +13514,8 @@ export namespace Prisma {
     quarterId?: boolean
     target?: boolean
     achieved?: boolean
+    targetSentence?: boolean
+    achievedSentence?: boolean
     district?: boolean
     village?: boolean
     block?: boolean
@@ -13441,7 +13527,7 @@ export namespace Prisma {
     userId?: boolean
   }
 
-  export type InfrastructureDevelopmentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "InfraDevId" | "title" | "projectId" | "quarterId" | "target" | "achieved" | "district" | "village" | "block" | "remarks" | "imageUrl" | "imageKey" | "createdAt" | "updatedAt" | "userId", ExtArgs["result"]["infrastructureDevelopment"]>
+  export type InfrastructureDevelopmentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "InfraDevId" | "title" | "projectId" | "quarterId" | "target" | "achieved" | "targetSentence" | "achievedSentence" | "district" | "village" | "block" | "remarks" | "imageUrl" | "imageKey" | "createdAt" | "updatedAt" | "userId", ExtArgs["result"]["infrastructureDevelopment"]>
   export type InfrastructureDevelopmentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     project?: boolean | ProjectDefaultArgs<ExtArgs>
     quarter?: boolean | QuarterDefaultArgs<ExtArgs>
@@ -13471,8 +13557,10 @@ export namespace Prisma {
       title: string
       projectId: string
       quarterId: string
-      target: number
-      achieved: number
+      target: number | null
+      achieved: number | null
+      targetSentence: string[]
+      achievedSentence: string[]
       district: string
       village: string
       block: string
@@ -13915,6 +14003,8 @@ export namespace Prisma {
     readonly quarterId: FieldRef<"InfrastructureDevelopment", 'String'>
     readonly target: FieldRef<"InfrastructureDevelopment", 'Int'>
     readonly achieved: FieldRef<"InfrastructureDevelopment", 'Int'>
+    readonly targetSentence: FieldRef<"InfrastructureDevelopment", 'String[]'>
+    readonly achievedSentence: FieldRef<"InfrastructureDevelopment", 'String[]'>
     readonly district: FieldRef<"InfrastructureDevelopment", 'String'>
     readonly village: FieldRef<"InfrastructureDevelopment", 'String'>
     readonly block: FieldRef<"InfrastructureDevelopment", 'String'>
@@ -20143,6 +20233,8 @@ export namespace Prisma {
     title: number
     target: number
     achieved: number
+    targetSentence: number
+    achievedSentence: number
     district: number
     village: number
     block: number
@@ -20234,6 +20326,8 @@ export namespace Prisma {
     title?: true
     target?: true
     achieved?: true
+    targetSentence?: true
+    achievedSentence?: true
     district?: true
     village?: true
     block?: true
@@ -20344,8 +20438,10 @@ export namespace Prisma {
     projectId: string
     quarterId: string
     title: string
-    target: number
-    achieved: number
+    target: number | null
+    achieved: number | null
+    targetSentence: string[]
+    achievedSentence: string[]
     district: string
     village: string
     block: string
@@ -20390,6 +20486,8 @@ export namespace Prisma {
     title?: boolean
     target?: boolean
     achieved?: boolean
+    targetSentence?: boolean
+    achievedSentence?: boolean
     district?: boolean
     village?: boolean
     block?: boolean
@@ -20419,6 +20517,8 @@ export namespace Prisma {
     title?: boolean
     target?: boolean
     achieved?: boolean
+    targetSentence?: boolean
+    achievedSentence?: boolean
     district?: boolean
     village?: boolean
     block?: boolean
@@ -20448,6 +20548,8 @@ export namespace Prisma {
     title?: boolean
     target?: boolean
     achieved?: boolean
+    targetSentence?: boolean
+    achievedSentence?: boolean
     district?: boolean
     village?: boolean
     block?: boolean
@@ -20477,6 +20579,8 @@ export namespace Prisma {
     title?: boolean
     target?: boolean
     achieved?: boolean
+    targetSentence?: boolean
+    achievedSentence?: boolean
     district?: boolean
     village?: boolean
     block?: boolean
@@ -20493,7 +20597,7 @@ export namespace Prisma {
     userId?: boolean
   }
 
-  export type ActivitiesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "activityId" | "activityCategoryId" | "projectId" | "quarterId" | "title" | "target" | "achieved" | "district" | "village" | "block" | "beneficiaryMale" | "beneficiaryFemale" | "remarks" | "imageUrl" | "imageKey" | "pdfUrl" | "pdfKey" | "units" | "createdAt" | "updatedAt" | "userId", ExtArgs["result"]["activities"]>
+  export type ActivitiesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "activityId" | "activityCategoryId" | "projectId" | "quarterId" | "title" | "target" | "achieved" | "targetSentence" | "achievedSentence" | "district" | "village" | "block" | "beneficiaryMale" | "beneficiaryFemale" | "remarks" | "imageUrl" | "imageKey" | "pdfUrl" | "pdfKey" | "units" | "createdAt" | "updatedAt" | "userId", ExtArgs["result"]["activities"]>
   export type ActivitiesInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     activityCategory?: boolean | ActivitiesCategoryDefaultArgs<ExtArgs>
     project?: boolean | ProjectDefaultArgs<ExtArgs>
@@ -20528,8 +20632,10 @@ export namespace Prisma {
       projectId: string
       quarterId: string
       title: string
-      target: number
-      achieved: number
+      target: number | null
+      achieved: number | null
+      targetSentence: string[]
+      achievedSentence: string[]
       district: string
       village: string
       block: string
@@ -20979,6 +21085,8 @@ export namespace Prisma {
     readonly title: FieldRef<"Activities", 'String'>
     readonly target: FieldRef<"Activities", 'Int'>
     readonly achieved: FieldRef<"Activities", 'Int'>
+    readonly targetSentence: FieldRef<"Activities", 'String[]'>
+    readonly achievedSentence: FieldRef<"Activities", 'String[]'>
     readonly district: FieldRef<"Activities", 'String'>
     readonly village: FieldRef<"Activities", 'String'>
     readonly block: FieldRef<"Activities", 'String'>
@@ -22691,6 +22799,8 @@ export namespace Prisma {
     name: 'name',
     target: 'target',
     achieved: 'achieved',
+    targetSentence: 'targetSentence',
+    achievedSentence: 'achievedSentence',
     district: 'district',
     village: 'village',
     block: 'block',
@@ -22714,6 +22824,8 @@ export namespace Prisma {
     title: 'title',
     target: 'target',
     achieved: 'achieved',
+    targetSentence: 'targetSentence',
+    achievedSentence: 'achievedSentence',
     district: 'district',
     village: 'village',
     block: 'block',
@@ -22744,6 +22856,8 @@ export namespace Prisma {
     block: 'block',
     target: 'target',
     achieved: 'achieved',
+    targetSentence: 'targetSentence',
+    achievedSentence: 'achievedSentence',
     units: 'units',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
@@ -22761,6 +22875,8 @@ export namespace Prisma {
     title: 'title',
     target: 'target',
     achieved: 'achieved',
+    targetSentence: 'targetSentence',
+    achievedSentence: 'achievedSentence',
     district: 'district',
     village: 'village',
     block: 'block',
@@ -22786,6 +22902,8 @@ export namespace Prisma {
     quarterId: 'quarterId',
     target: 'target',
     achieved: 'achieved',
+    targetSentence: 'targetSentence',
+    achievedSentence: 'achievedSentence',
     district: 'district',
     village: 'village',
     block: 'block',
@@ -22884,6 +23002,8 @@ export namespace Prisma {
     title: 'title',
     target: 'target',
     achieved: 'achieved',
+    targetSentence: 'targetSentence',
+    achievedSentence: 'achievedSentence',
     district: 'district',
     village: 'village',
     block: 'block',
@@ -23438,8 +23558,10 @@ export namespace Prisma {
     quarterId?: StringFilter<"InputDistribution"> | string
     activityType?: StringFilter<"InputDistribution"> | string
     name?: StringFilter<"InputDistribution"> | string
-    target?: IntFilter<"InputDistribution"> | number
-    achieved?: IntFilter<"InputDistribution"> | number
+    target?: IntNullableFilter<"InputDistribution"> | number | null
+    achieved?: IntNullableFilter<"InputDistribution"> | number | null
+    targetSentence?: StringNullableListFilter<"InputDistribution">
+    achievedSentence?: StringNullableListFilter<"InputDistribution">
     district?: StringFilter<"InputDistribution"> | string
     village?: StringFilter<"InputDistribution"> | string
     block?: StringFilter<"InputDistribution"> | string
@@ -23462,8 +23584,10 @@ export namespace Prisma {
     quarterId?: SortOrder
     activityType?: SortOrder
     name?: SortOrder
-    target?: SortOrder
-    achieved?: SortOrder
+    target?: SortOrderInput | SortOrder
+    achieved?: SortOrderInput | SortOrder
+    targetSentence?: SortOrder
+    achievedSentence?: SortOrder
     district?: SortOrder
     village?: SortOrder
     block?: SortOrder
@@ -23489,8 +23613,10 @@ export namespace Prisma {
     quarterId?: StringFilter<"InputDistribution"> | string
     activityType?: StringFilter<"InputDistribution"> | string
     name?: StringFilter<"InputDistribution"> | string
-    target?: IntFilter<"InputDistribution"> | number
-    achieved?: IntFilter<"InputDistribution"> | number
+    target?: IntNullableFilter<"InputDistribution"> | number | null
+    achieved?: IntNullableFilter<"InputDistribution"> | number | null
+    targetSentence?: StringNullableListFilter<"InputDistribution">
+    achievedSentence?: StringNullableListFilter<"InputDistribution">
     district?: StringFilter<"InputDistribution"> | string
     village?: StringFilter<"InputDistribution"> | string
     block?: StringFilter<"InputDistribution"> | string
@@ -23513,8 +23639,10 @@ export namespace Prisma {
     quarterId?: SortOrder
     activityType?: SortOrder
     name?: SortOrder
-    target?: SortOrder
-    achieved?: SortOrder
+    target?: SortOrderInput | SortOrder
+    achieved?: SortOrderInput | SortOrder
+    targetSentence?: SortOrder
+    achievedSentence?: SortOrder
     district?: SortOrder
     village?: SortOrder
     block?: SortOrder
@@ -23542,8 +23670,10 @@ export namespace Prisma {
     quarterId?: StringWithAggregatesFilter<"InputDistribution"> | string
     activityType?: StringWithAggregatesFilter<"InputDistribution"> | string
     name?: StringWithAggregatesFilter<"InputDistribution"> | string
-    target?: IntWithAggregatesFilter<"InputDistribution"> | number
-    achieved?: IntWithAggregatesFilter<"InputDistribution"> | number
+    target?: IntNullableWithAggregatesFilter<"InputDistribution"> | number | null
+    achieved?: IntNullableWithAggregatesFilter<"InputDistribution"> | number | null
+    targetSentence?: StringNullableListFilter<"InputDistribution">
+    achievedSentence?: StringNullableListFilter<"InputDistribution">
     district?: StringWithAggregatesFilter<"InputDistribution"> | string
     village?: StringWithAggregatesFilter<"InputDistribution"> | string
     block?: StringWithAggregatesFilter<"InputDistribution"> | string
@@ -23565,8 +23695,10 @@ export namespace Prisma {
     projectId?: StringFilter<"Training"> | string
     quarterId?: StringFilter<"Training"> | string
     title?: StringFilter<"Training"> | string
-    target?: IntFilter<"Training"> | number
-    achieved?: IntFilter<"Training"> | number
+    target?: IntNullableFilter<"Training"> | number | null
+    achieved?: IntNullableFilter<"Training"> | number | null
+    targetSentence?: StringNullableListFilter<"Training">
+    achievedSentence?: StringNullableListFilter<"Training">
     district?: StringFilter<"Training"> | string
     village?: StringFilter<"Training"> | string
     block?: StringFilter<"Training"> | string
@@ -23592,8 +23724,10 @@ export namespace Prisma {
     projectId?: SortOrder
     quarterId?: SortOrder
     title?: SortOrder
-    target?: SortOrder
-    achieved?: SortOrder
+    target?: SortOrderInput | SortOrder
+    achieved?: SortOrderInput | SortOrder
+    targetSentence?: SortOrder
+    achievedSentence?: SortOrder
     district?: SortOrder
     village?: SortOrder
     block?: SortOrder
@@ -23622,8 +23756,10 @@ export namespace Prisma {
     projectId?: StringFilter<"Training"> | string
     quarterId?: StringFilter<"Training"> | string
     title?: StringFilter<"Training"> | string
-    target?: IntFilter<"Training"> | number
-    achieved?: IntFilter<"Training"> | number
+    target?: IntNullableFilter<"Training"> | number | null
+    achieved?: IntNullableFilter<"Training"> | number | null
+    targetSentence?: StringNullableListFilter<"Training">
+    achievedSentence?: StringNullableListFilter<"Training">
     district?: StringFilter<"Training"> | string
     village?: StringFilter<"Training"> | string
     block?: StringFilter<"Training"> | string
@@ -23649,8 +23785,10 @@ export namespace Prisma {
     projectId?: SortOrder
     quarterId?: SortOrder
     title?: SortOrder
-    target?: SortOrder
-    achieved?: SortOrder
+    target?: SortOrderInput | SortOrder
+    achieved?: SortOrderInput | SortOrder
+    targetSentence?: SortOrder
+    achievedSentence?: SortOrder
     district?: SortOrder
     village?: SortOrder
     block?: SortOrder
@@ -23681,8 +23819,10 @@ export namespace Prisma {
     projectId?: StringWithAggregatesFilter<"Training"> | string
     quarterId?: StringWithAggregatesFilter<"Training"> | string
     title?: StringWithAggregatesFilter<"Training"> | string
-    target?: IntWithAggregatesFilter<"Training"> | number
-    achieved?: IntWithAggregatesFilter<"Training"> | number
+    target?: IntNullableWithAggregatesFilter<"Training"> | number | null
+    achieved?: IntNullableWithAggregatesFilter<"Training"> | number | null
+    targetSentence?: StringNullableListFilter<"Training">
+    achievedSentence?: StringNullableListFilter<"Training">
     district?: StringWithAggregatesFilter<"Training"> | string
     village?: StringWithAggregatesFilter<"Training"> | string
     block?: StringWithAggregatesFilter<"Training"> | string
@@ -23711,8 +23851,10 @@ export namespace Prisma {
     district?: StringFilter<"FLD"> | string
     village?: StringFilter<"FLD"> | string
     block?: StringFilter<"FLD"> | string
-    target?: IntFilter<"FLD"> | number
-    achieved?: IntFilter<"FLD"> | number
+    target?: IntNullableFilter<"FLD"> | number | null
+    achieved?: IntNullableFilter<"FLD"> | number | null
+    targetSentence?: StringNullableListFilter<"FLD">
+    achievedSentence?: StringNullableListFilter<"FLD">
     units?: StringNullableFilter<"FLD"> | string | null
     createdAt?: DateTimeFilter<"FLD"> | Date | string
     updatedAt?: DateTimeFilter<"FLD"> | Date | string
@@ -23731,8 +23873,10 @@ export namespace Prisma {
     district?: SortOrder
     village?: SortOrder
     block?: SortOrder
-    target?: SortOrder
-    achieved?: SortOrder
+    target?: SortOrderInput | SortOrder
+    achieved?: SortOrderInput | SortOrder
+    targetSentence?: SortOrder
+    achievedSentence?: SortOrder
     units?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -23754,8 +23898,10 @@ export namespace Prisma {
     district?: StringFilter<"FLD"> | string
     village?: StringFilter<"FLD"> | string
     block?: StringFilter<"FLD"> | string
-    target?: IntFilter<"FLD"> | number
-    achieved?: IntFilter<"FLD"> | number
+    target?: IntNullableFilter<"FLD"> | number | null
+    achieved?: IntNullableFilter<"FLD"> | number | null
+    targetSentence?: StringNullableListFilter<"FLD">
+    achievedSentence?: StringNullableListFilter<"FLD">
     units?: StringNullableFilter<"FLD"> | string | null
     createdAt?: DateTimeFilter<"FLD"> | Date | string
     updatedAt?: DateTimeFilter<"FLD"> | Date | string
@@ -23774,8 +23920,10 @@ export namespace Prisma {
     district?: SortOrder
     village?: SortOrder
     block?: SortOrder
-    target?: SortOrder
-    achieved?: SortOrder
+    target?: SortOrderInput | SortOrder
+    achieved?: SortOrderInput | SortOrder
+    targetSentence?: SortOrder
+    achievedSentence?: SortOrder
     units?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -23799,8 +23947,10 @@ export namespace Prisma {
     district?: StringWithAggregatesFilter<"FLD"> | string
     village?: StringWithAggregatesFilter<"FLD"> | string
     block?: StringWithAggregatesFilter<"FLD"> | string
-    target?: IntWithAggregatesFilter<"FLD"> | number
-    achieved?: IntWithAggregatesFilter<"FLD"> | number
+    target?: IntNullableWithAggregatesFilter<"FLD"> | number | null
+    achieved?: IntNullableWithAggregatesFilter<"FLD"> | number | null
+    targetSentence?: StringNullableListFilter<"FLD">
+    achievedSentence?: StringNullableListFilter<"FLD">
     units?: StringNullableWithAggregatesFilter<"FLD"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"FLD"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"FLD"> | Date | string
@@ -23816,8 +23966,10 @@ export namespace Prisma {
     projectId?: StringFilter<"AwarenessProgram"> | string
     quarterId?: StringFilter<"AwarenessProgram"> | string
     title?: StringFilter<"AwarenessProgram"> | string
-    target?: IntFilter<"AwarenessProgram"> | number
-    achieved?: IntFilter<"AwarenessProgram"> | number
+    target?: IntNullableFilter<"AwarenessProgram"> | number | null
+    achieved?: IntNullableFilter<"AwarenessProgram"> | number | null
+    targetSentence?: StringNullableListFilter<"AwarenessProgram">
+    achievedSentence?: StringNullableListFilter<"AwarenessProgram">
     district?: StringFilter<"AwarenessProgram"> | string
     village?: StringFilter<"AwarenessProgram"> | string
     block?: StringFilter<"AwarenessProgram"> | string
@@ -23841,8 +23993,10 @@ export namespace Prisma {
     projectId?: SortOrder
     quarterId?: SortOrder
     title?: SortOrder
-    target?: SortOrder
-    achieved?: SortOrder
+    target?: SortOrderInput | SortOrder
+    achieved?: SortOrderInput | SortOrder
+    targetSentence?: SortOrder
+    achievedSentence?: SortOrder
     district?: SortOrder
     village?: SortOrder
     block?: SortOrder
@@ -23869,8 +24023,10 @@ export namespace Prisma {
     projectId?: StringFilter<"AwarenessProgram"> | string
     quarterId?: StringFilter<"AwarenessProgram"> | string
     title?: StringFilter<"AwarenessProgram"> | string
-    target?: IntFilter<"AwarenessProgram"> | number
-    achieved?: IntFilter<"AwarenessProgram"> | number
+    target?: IntNullableFilter<"AwarenessProgram"> | number | null
+    achieved?: IntNullableFilter<"AwarenessProgram"> | number | null
+    targetSentence?: StringNullableListFilter<"AwarenessProgram">
+    achievedSentence?: StringNullableListFilter<"AwarenessProgram">
     district?: StringFilter<"AwarenessProgram"> | string
     village?: StringFilter<"AwarenessProgram"> | string
     block?: StringFilter<"AwarenessProgram"> | string
@@ -23894,8 +24050,10 @@ export namespace Prisma {
     projectId?: SortOrder
     quarterId?: SortOrder
     title?: SortOrder
-    target?: SortOrder
-    achieved?: SortOrder
+    target?: SortOrderInput | SortOrder
+    achieved?: SortOrderInput | SortOrder
+    targetSentence?: SortOrder
+    achievedSentence?: SortOrder
     district?: SortOrder
     village?: SortOrder
     block?: SortOrder
@@ -23924,8 +24082,10 @@ export namespace Prisma {
     projectId?: StringWithAggregatesFilter<"AwarenessProgram"> | string
     quarterId?: StringWithAggregatesFilter<"AwarenessProgram"> | string
     title?: StringWithAggregatesFilter<"AwarenessProgram"> | string
-    target?: IntWithAggregatesFilter<"AwarenessProgram"> | number
-    achieved?: IntWithAggregatesFilter<"AwarenessProgram"> | number
+    target?: IntNullableWithAggregatesFilter<"AwarenessProgram"> | number | null
+    achieved?: IntNullableWithAggregatesFilter<"AwarenessProgram"> | number | null
+    targetSentence?: StringNullableListFilter<"AwarenessProgram">
+    achievedSentence?: StringNullableListFilter<"AwarenessProgram">
     district?: StringWithAggregatesFilter<"AwarenessProgram"> | string
     village?: StringWithAggregatesFilter<"AwarenessProgram"> | string
     block?: StringWithAggregatesFilter<"AwarenessProgram"> | string
@@ -23949,8 +24109,10 @@ export namespace Prisma {
     title?: StringFilter<"InfrastructureDevelopment"> | string
     projectId?: StringFilter<"InfrastructureDevelopment"> | string
     quarterId?: StringFilter<"InfrastructureDevelopment"> | string
-    target?: IntFilter<"InfrastructureDevelopment"> | number
-    achieved?: IntFilter<"InfrastructureDevelopment"> | number
+    target?: IntNullableFilter<"InfrastructureDevelopment"> | number | null
+    achieved?: IntNullableFilter<"InfrastructureDevelopment"> | number | null
+    targetSentence?: StringNullableListFilter<"InfrastructureDevelopment">
+    achievedSentence?: StringNullableListFilter<"InfrastructureDevelopment">
     district?: StringFilter<"InfrastructureDevelopment"> | string
     village?: StringFilter<"InfrastructureDevelopment"> | string
     block?: StringFilter<"InfrastructureDevelopment"> | string
@@ -23971,8 +24133,10 @@ export namespace Prisma {
     title?: SortOrder
     projectId?: SortOrder
     quarterId?: SortOrder
-    target?: SortOrder
-    achieved?: SortOrder
+    target?: SortOrderInput | SortOrder
+    achieved?: SortOrderInput | SortOrder
+    targetSentence?: SortOrder
+    achievedSentence?: SortOrder
     district?: SortOrder
     village?: SortOrder
     block?: SortOrder
@@ -23996,8 +24160,10 @@ export namespace Prisma {
     title?: StringFilter<"InfrastructureDevelopment"> | string
     projectId?: StringFilter<"InfrastructureDevelopment"> | string
     quarterId?: StringFilter<"InfrastructureDevelopment"> | string
-    target?: IntFilter<"InfrastructureDevelopment"> | number
-    achieved?: IntFilter<"InfrastructureDevelopment"> | number
+    target?: IntNullableFilter<"InfrastructureDevelopment"> | number | null
+    achieved?: IntNullableFilter<"InfrastructureDevelopment"> | number | null
+    targetSentence?: StringNullableListFilter<"InfrastructureDevelopment">
+    achievedSentence?: StringNullableListFilter<"InfrastructureDevelopment">
     district?: StringFilter<"InfrastructureDevelopment"> | string
     village?: StringFilter<"InfrastructureDevelopment"> | string
     block?: StringFilter<"InfrastructureDevelopment"> | string
@@ -24018,8 +24184,10 @@ export namespace Prisma {
     title?: SortOrder
     projectId?: SortOrder
     quarterId?: SortOrder
-    target?: SortOrder
-    achieved?: SortOrder
+    target?: SortOrderInput | SortOrder
+    achieved?: SortOrderInput | SortOrder
+    targetSentence?: SortOrder
+    achievedSentence?: SortOrder
     district?: SortOrder
     village?: SortOrder
     block?: SortOrder
@@ -24045,8 +24213,10 @@ export namespace Prisma {
     title?: StringWithAggregatesFilter<"InfrastructureDevelopment"> | string
     projectId?: StringWithAggregatesFilter<"InfrastructureDevelopment"> | string
     quarterId?: StringWithAggregatesFilter<"InfrastructureDevelopment"> | string
-    target?: IntWithAggregatesFilter<"InfrastructureDevelopment"> | number
-    achieved?: IntWithAggregatesFilter<"InfrastructureDevelopment"> | number
+    target?: IntNullableWithAggregatesFilter<"InfrastructureDevelopment"> | number | null
+    achieved?: IntNullableWithAggregatesFilter<"InfrastructureDevelopment"> | number | null
+    targetSentence?: StringNullableListFilter<"InfrastructureDevelopment">
+    achievedSentence?: StringNullableListFilter<"InfrastructureDevelopment">
     district?: StringWithAggregatesFilter<"InfrastructureDevelopment"> | string
     village?: StringWithAggregatesFilter<"InfrastructureDevelopment"> | string
     block?: StringWithAggregatesFilter<"InfrastructureDevelopment"> | string
@@ -24448,8 +24618,10 @@ export namespace Prisma {
     projectId?: StringFilter<"Activities"> | string
     quarterId?: StringFilter<"Activities"> | string
     title?: StringFilter<"Activities"> | string
-    target?: IntFilter<"Activities"> | number
-    achieved?: IntFilter<"Activities"> | number
+    target?: IntNullableFilter<"Activities"> | number | null
+    achieved?: IntNullableFilter<"Activities"> | number | null
+    targetSentence?: StringNullableListFilter<"Activities">
+    achievedSentence?: StringNullableListFilter<"Activities">
     district?: StringFilter<"Activities"> | string
     village?: StringFilter<"Activities"> | string
     block?: StringFilter<"Activities"> | string
@@ -24477,8 +24649,10 @@ export namespace Prisma {
     projectId?: SortOrder
     quarterId?: SortOrder
     title?: SortOrder
-    target?: SortOrder
-    achieved?: SortOrder
+    target?: SortOrderInput | SortOrder
+    achieved?: SortOrderInput | SortOrder
+    targetSentence?: SortOrder
+    achievedSentence?: SortOrder
     district?: SortOrder
     village?: SortOrder
     block?: SortOrder
@@ -24509,8 +24683,10 @@ export namespace Prisma {
     projectId?: StringFilter<"Activities"> | string
     quarterId?: StringFilter<"Activities"> | string
     title?: StringFilter<"Activities"> | string
-    target?: IntFilter<"Activities"> | number
-    achieved?: IntFilter<"Activities"> | number
+    target?: IntNullableFilter<"Activities"> | number | null
+    achieved?: IntNullableFilter<"Activities"> | number | null
+    targetSentence?: StringNullableListFilter<"Activities">
+    achievedSentence?: StringNullableListFilter<"Activities">
     district?: StringFilter<"Activities"> | string
     village?: StringFilter<"Activities"> | string
     block?: StringFilter<"Activities"> | string
@@ -24538,8 +24714,10 @@ export namespace Prisma {
     projectId?: SortOrder
     quarterId?: SortOrder
     title?: SortOrder
-    target?: SortOrder
-    achieved?: SortOrder
+    target?: SortOrderInput | SortOrder
+    achieved?: SortOrderInput | SortOrder
+    targetSentence?: SortOrder
+    achievedSentence?: SortOrder
     district?: SortOrder
     village?: SortOrder
     block?: SortOrder
@@ -24571,8 +24749,10 @@ export namespace Prisma {
     projectId?: StringWithAggregatesFilter<"Activities"> | string
     quarterId?: StringWithAggregatesFilter<"Activities"> | string
     title?: StringWithAggregatesFilter<"Activities"> | string
-    target?: IntWithAggregatesFilter<"Activities"> | number
-    achieved?: IntWithAggregatesFilter<"Activities"> | number
+    target?: IntNullableWithAggregatesFilter<"Activities"> | number | null
+    achieved?: IntNullableWithAggregatesFilter<"Activities"> | number | null
+    targetSentence?: StringNullableListFilter<"Activities">
+    achievedSentence?: StringNullableListFilter<"Activities">
     district?: StringWithAggregatesFilter<"Activities"> | string
     village?: StringWithAggregatesFilter<"Activities"> | string
     block?: StringWithAggregatesFilter<"Activities"> | string
@@ -25107,8 +25287,10 @@ export namespace Prisma {
     inputDistId: string
     activityType: string
     name: string
-    target: number
-    achieved: number
+    target?: number | null
+    achieved?: number | null
+    targetSentence?: InputDistributionCreatetargetSentenceInput | string[]
+    achievedSentence?: InputDistributionCreateachievedSentenceInput | string[]
     district: string
     village: string
     block: string
@@ -25130,8 +25312,10 @@ export namespace Prisma {
     quarterId: string
     activityType: string
     name: string
-    target: number
-    achieved: number
+    target?: number | null
+    achieved?: number | null
+    targetSentence?: InputDistributionCreatetargetSentenceInput | string[]
+    achievedSentence?: InputDistributionCreateachievedSentenceInput | string[]
     district: string
     village: string
     block: string
@@ -25149,8 +25333,10 @@ export namespace Prisma {
     inputDistId?: StringFieldUpdateOperationsInput | string
     activityType?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    target?: IntFieldUpdateOperationsInput | number
-    achieved?: IntFieldUpdateOperationsInput | number
+    target?: NullableIntFieldUpdateOperationsInput | number | null
+    achieved?: NullableIntFieldUpdateOperationsInput | number | null
+    targetSentence?: InputDistributionUpdatetargetSentenceInput | string[]
+    achievedSentence?: InputDistributionUpdateachievedSentenceInput | string[]
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
     block?: StringFieldUpdateOperationsInput | string
@@ -25172,8 +25358,10 @@ export namespace Prisma {
     quarterId?: StringFieldUpdateOperationsInput | string
     activityType?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    target?: IntFieldUpdateOperationsInput | number
-    achieved?: IntFieldUpdateOperationsInput | number
+    target?: NullableIntFieldUpdateOperationsInput | number | null
+    achieved?: NullableIntFieldUpdateOperationsInput | number | null
+    targetSentence?: InputDistributionUpdatetargetSentenceInput | string[]
+    achievedSentence?: InputDistributionUpdateachievedSentenceInput | string[]
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
     block?: StringFieldUpdateOperationsInput | string
@@ -25193,8 +25381,10 @@ export namespace Prisma {
     quarterId: string
     activityType: string
     name: string
-    target: number
-    achieved: number
+    target?: number | null
+    achieved?: number | null
+    targetSentence?: InputDistributionCreatetargetSentenceInput | string[]
+    achievedSentence?: InputDistributionCreateachievedSentenceInput | string[]
     district: string
     village: string
     block: string
@@ -25212,8 +25402,10 @@ export namespace Prisma {
     inputDistId?: StringFieldUpdateOperationsInput | string
     activityType?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    target?: IntFieldUpdateOperationsInput | number
-    achieved?: IntFieldUpdateOperationsInput | number
+    target?: NullableIntFieldUpdateOperationsInput | number | null
+    achieved?: NullableIntFieldUpdateOperationsInput | number | null
+    targetSentence?: InputDistributionUpdatetargetSentenceInput | string[]
+    achievedSentence?: InputDistributionUpdateachievedSentenceInput | string[]
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
     block?: StringFieldUpdateOperationsInput | string
@@ -25232,8 +25424,10 @@ export namespace Prisma {
     quarterId?: StringFieldUpdateOperationsInput | string
     activityType?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    target?: IntFieldUpdateOperationsInput | number
-    achieved?: IntFieldUpdateOperationsInput | number
+    target?: NullableIntFieldUpdateOperationsInput | number | null
+    achieved?: NullableIntFieldUpdateOperationsInput | number | null
+    targetSentence?: InputDistributionUpdatetargetSentenceInput | string[]
+    achievedSentence?: InputDistributionUpdateachievedSentenceInput | string[]
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
     block?: StringFieldUpdateOperationsInput | string
@@ -25250,8 +25444,10 @@ export namespace Prisma {
     id?: string
     trainingId: string
     title: string
-    target: number
-    achieved: number
+    target?: number | null
+    achieved?: number | null
+    targetSentence?: TrainingCreatetargetSentenceInput | string[]
+    achievedSentence?: TrainingCreateachievedSentenceInput | string[]
     district: string
     village: string
     block: string
@@ -25276,8 +25472,10 @@ export namespace Prisma {
     projectId: string
     quarterId: string
     title: string
-    target: number
-    achieved: number
+    target?: number | null
+    achieved?: number | null
+    targetSentence?: TrainingCreatetargetSentenceInput | string[]
+    achievedSentence?: TrainingCreateachievedSentenceInput | string[]
     district: string
     village: string
     block: string
@@ -25298,8 +25496,10 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     trainingId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
-    target?: IntFieldUpdateOperationsInput | number
-    achieved?: IntFieldUpdateOperationsInput | number
+    target?: NullableIntFieldUpdateOperationsInput | number | null
+    achieved?: NullableIntFieldUpdateOperationsInput | number | null
+    targetSentence?: TrainingUpdatetargetSentenceInput | string[]
+    achievedSentence?: TrainingUpdateachievedSentenceInput | string[]
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
     block?: StringFieldUpdateOperationsInput | string
@@ -25324,8 +25524,10 @@ export namespace Prisma {
     projectId?: StringFieldUpdateOperationsInput | string
     quarterId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
-    target?: IntFieldUpdateOperationsInput | number
-    achieved?: IntFieldUpdateOperationsInput | number
+    target?: NullableIntFieldUpdateOperationsInput | number | null
+    achieved?: NullableIntFieldUpdateOperationsInput | number | null
+    targetSentence?: TrainingUpdatetargetSentenceInput | string[]
+    achievedSentence?: TrainingUpdateachievedSentenceInput | string[]
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
     block?: StringFieldUpdateOperationsInput | string
@@ -25348,8 +25550,10 @@ export namespace Prisma {
     projectId: string
     quarterId: string
     title: string
-    target: number
-    achieved: number
+    target?: number | null
+    achieved?: number | null
+    targetSentence?: TrainingCreatetargetSentenceInput | string[]
+    achievedSentence?: TrainingCreateachievedSentenceInput | string[]
     district: string
     village: string
     block: string
@@ -25370,8 +25574,10 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     trainingId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
-    target?: IntFieldUpdateOperationsInput | number
-    achieved?: IntFieldUpdateOperationsInput | number
+    target?: NullableIntFieldUpdateOperationsInput | number | null
+    achieved?: NullableIntFieldUpdateOperationsInput | number | null
+    targetSentence?: TrainingUpdatetargetSentenceInput | string[]
+    achievedSentence?: TrainingUpdateachievedSentenceInput | string[]
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
     block?: StringFieldUpdateOperationsInput | string
@@ -25393,8 +25599,10 @@ export namespace Prisma {
     projectId?: StringFieldUpdateOperationsInput | string
     quarterId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
-    target?: IntFieldUpdateOperationsInput | number
-    achieved?: IntFieldUpdateOperationsInput | number
+    target?: NullableIntFieldUpdateOperationsInput | number | null
+    achieved?: NullableIntFieldUpdateOperationsInput | number | null
+    targetSentence?: TrainingUpdatetargetSentenceInput | string[]
+    achievedSentence?: TrainingUpdateachievedSentenceInput | string[]
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
     block?: StringFieldUpdateOperationsInput | string
@@ -25418,8 +25626,10 @@ export namespace Prisma {
     district: string
     village: string
     block: string
-    target: number
-    achieved: number
+    target?: number | null
+    achieved?: number | null
+    targetSentence?: FLDCreatetargetSentenceInput | string[]
+    achievedSentence?: FLDCreateachievedSentenceInput | string[]
     units?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -25437,8 +25647,10 @@ export namespace Prisma {
     district: string
     village: string
     block: string
-    target: number
-    achieved: number
+    target?: number | null
+    achieved?: number | null
+    targetSentence?: FLDCreatetargetSentenceInput | string[]
+    achievedSentence?: FLDCreateachievedSentenceInput | string[]
     units?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -25452,8 +25664,10 @@ export namespace Prisma {
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
     block?: StringFieldUpdateOperationsInput | string
-    target?: IntFieldUpdateOperationsInput | number
-    achieved?: IntFieldUpdateOperationsInput | number
+    target?: NullableIntFieldUpdateOperationsInput | number | null
+    achieved?: NullableIntFieldUpdateOperationsInput | number | null
+    targetSentence?: FLDUpdatetargetSentenceInput | string[]
+    achievedSentence?: FLDUpdateachievedSentenceInput | string[]
     units?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -25471,8 +25685,10 @@ export namespace Prisma {
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
     block?: StringFieldUpdateOperationsInput | string
-    target?: IntFieldUpdateOperationsInput | number
-    achieved?: IntFieldUpdateOperationsInput | number
+    target?: NullableIntFieldUpdateOperationsInput | number | null
+    achieved?: NullableIntFieldUpdateOperationsInput | number | null
+    targetSentence?: FLDUpdatetargetSentenceInput | string[]
+    achievedSentence?: FLDUpdateachievedSentenceInput | string[]
     units?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -25488,8 +25704,10 @@ export namespace Prisma {
     district: string
     village: string
     block: string
-    target: number
-    achieved: number
+    target?: number | null
+    achieved?: number | null
+    targetSentence?: FLDCreatetargetSentenceInput | string[]
+    achievedSentence?: FLDCreateachievedSentenceInput | string[]
     units?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -25503,8 +25721,10 @@ export namespace Prisma {
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
     block?: StringFieldUpdateOperationsInput | string
-    target?: IntFieldUpdateOperationsInput | number
-    achieved?: IntFieldUpdateOperationsInput | number
+    target?: NullableIntFieldUpdateOperationsInput | number | null
+    achieved?: NullableIntFieldUpdateOperationsInput | number | null
+    targetSentence?: FLDUpdatetargetSentenceInput | string[]
+    achievedSentence?: FLDUpdateachievedSentenceInput | string[]
     units?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -25519,8 +25739,10 @@ export namespace Prisma {
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
     block?: StringFieldUpdateOperationsInput | string
-    target?: IntFieldUpdateOperationsInput | number
-    achieved?: IntFieldUpdateOperationsInput | number
+    target?: NullableIntFieldUpdateOperationsInput | number | null
+    achieved?: NullableIntFieldUpdateOperationsInput | number | null
+    targetSentence?: FLDUpdatetargetSentenceInput | string[]
+    achievedSentence?: FLDUpdateachievedSentenceInput | string[]
     units?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -25531,8 +25753,10 @@ export namespace Prisma {
     id?: string
     awarnessprogramId: string
     title: string
-    target: number
-    achieved: number
+    target?: number | null
+    achieved?: number | null
+    targetSentence?: AwarenessProgramCreatetargetSentenceInput | string[]
+    achievedSentence?: AwarenessProgramCreateachievedSentenceInput | string[]
     district: string
     village: string
     block: string
@@ -25555,8 +25779,10 @@ export namespace Prisma {
     projectId: string
     quarterId: string
     title: string
-    target: number
-    achieved: number
+    target?: number | null
+    achieved?: number | null
+    targetSentence?: AwarenessProgramCreatetargetSentenceInput | string[]
+    achievedSentence?: AwarenessProgramCreateachievedSentenceInput | string[]
     district: string
     village: string
     block: string
@@ -25575,8 +25801,10 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     awarnessprogramId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
-    target?: IntFieldUpdateOperationsInput | number
-    achieved?: IntFieldUpdateOperationsInput | number
+    target?: NullableIntFieldUpdateOperationsInput | number | null
+    achieved?: NullableIntFieldUpdateOperationsInput | number | null
+    targetSentence?: AwarenessProgramUpdatetargetSentenceInput | string[]
+    achievedSentence?: AwarenessProgramUpdateachievedSentenceInput | string[]
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
     block?: StringFieldUpdateOperationsInput | string
@@ -25599,8 +25827,10 @@ export namespace Prisma {
     projectId?: StringFieldUpdateOperationsInput | string
     quarterId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
-    target?: IntFieldUpdateOperationsInput | number
-    achieved?: IntFieldUpdateOperationsInput | number
+    target?: NullableIntFieldUpdateOperationsInput | number | null
+    achieved?: NullableIntFieldUpdateOperationsInput | number | null
+    targetSentence?: AwarenessProgramUpdatetargetSentenceInput | string[]
+    achievedSentence?: AwarenessProgramUpdateachievedSentenceInput | string[]
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
     block?: StringFieldUpdateOperationsInput | string
@@ -25621,8 +25851,10 @@ export namespace Prisma {
     projectId: string
     quarterId: string
     title: string
-    target: number
-    achieved: number
+    target?: number | null
+    achieved?: number | null
+    targetSentence?: AwarenessProgramCreatetargetSentenceInput | string[]
+    achievedSentence?: AwarenessProgramCreateachievedSentenceInput | string[]
     district: string
     village: string
     block: string
@@ -25641,8 +25873,10 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     awarnessprogramId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
-    target?: IntFieldUpdateOperationsInput | number
-    achieved?: IntFieldUpdateOperationsInput | number
+    target?: NullableIntFieldUpdateOperationsInput | number | null
+    achieved?: NullableIntFieldUpdateOperationsInput | number | null
+    targetSentence?: AwarenessProgramUpdatetargetSentenceInput | string[]
+    achievedSentence?: AwarenessProgramUpdateachievedSentenceInput | string[]
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
     block?: StringFieldUpdateOperationsInput | string
@@ -25662,8 +25896,10 @@ export namespace Prisma {
     projectId?: StringFieldUpdateOperationsInput | string
     quarterId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
-    target?: IntFieldUpdateOperationsInput | number
-    achieved?: IntFieldUpdateOperationsInput | number
+    target?: NullableIntFieldUpdateOperationsInput | number | null
+    achieved?: NullableIntFieldUpdateOperationsInput | number | null
+    targetSentence?: AwarenessProgramUpdatetargetSentenceInput | string[]
+    achievedSentence?: AwarenessProgramUpdateachievedSentenceInput | string[]
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
     block?: StringFieldUpdateOperationsInput | string
@@ -25682,8 +25918,10 @@ export namespace Prisma {
     id?: string
     InfraDevId: string
     title: string
-    target: number
-    achieved: number
+    target?: number | null
+    achieved?: number | null
+    targetSentence?: InfrastructureDevelopmentCreatetargetSentenceInput | string[]
+    achievedSentence?: InfrastructureDevelopmentCreateachievedSentenceInput | string[]
     district: string
     village: string
     block: string
@@ -25703,8 +25941,10 @@ export namespace Prisma {
     title: string
     projectId: string
     quarterId: string
-    target: number
-    achieved: number
+    target?: number | null
+    achieved?: number | null
+    targetSentence?: InfrastructureDevelopmentCreatetargetSentenceInput | string[]
+    achievedSentence?: InfrastructureDevelopmentCreateachievedSentenceInput | string[]
     district: string
     village: string
     block: string
@@ -25720,8 +25960,10 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     InfraDevId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
-    target?: IntFieldUpdateOperationsInput | number
-    achieved?: IntFieldUpdateOperationsInput | number
+    target?: NullableIntFieldUpdateOperationsInput | number | null
+    achieved?: NullableIntFieldUpdateOperationsInput | number | null
+    targetSentence?: InfrastructureDevelopmentUpdatetargetSentenceInput | string[]
+    achievedSentence?: InfrastructureDevelopmentUpdateachievedSentenceInput | string[]
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
     block?: StringFieldUpdateOperationsInput | string
@@ -25741,8 +25983,10 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     projectId?: StringFieldUpdateOperationsInput | string
     quarterId?: StringFieldUpdateOperationsInput | string
-    target?: IntFieldUpdateOperationsInput | number
-    achieved?: IntFieldUpdateOperationsInput | number
+    target?: NullableIntFieldUpdateOperationsInput | number | null
+    achieved?: NullableIntFieldUpdateOperationsInput | number | null
+    targetSentence?: InfrastructureDevelopmentUpdatetargetSentenceInput | string[]
+    achievedSentence?: InfrastructureDevelopmentUpdateachievedSentenceInput | string[]
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
     block?: StringFieldUpdateOperationsInput | string
@@ -25760,8 +26004,10 @@ export namespace Prisma {
     title: string
     projectId: string
     quarterId: string
-    target: number
-    achieved: number
+    target?: number | null
+    achieved?: number | null
+    targetSentence?: InfrastructureDevelopmentCreatetargetSentenceInput | string[]
+    achievedSentence?: InfrastructureDevelopmentCreateachievedSentenceInput | string[]
     district: string
     village: string
     block: string
@@ -25777,8 +26023,10 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     InfraDevId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
-    target?: IntFieldUpdateOperationsInput | number
-    achieved?: IntFieldUpdateOperationsInput | number
+    target?: NullableIntFieldUpdateOperationsInput | number | null
+    achieved?: NullableIntFieldUpdateOperationsInput | number | null
+    targetSentence?: InfrastructureDevelopmentUpdatetargetSentenceInput | string[]
+    achievedSentence?: InfrastructureDevelopmentUpdateachievedSentenceInput | string[]
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
     block?: StringFieldUpdateOperationsInput | string
@@ -25795,8 +26043,10 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     projectId?: StringFieldUpdateOperationsInput | string
     quarterId?: StringFieldUpdateOperationsInput | string
-    target?: IntFieldUpdateOperationsInput | number
-    achieved?: IntFieldUpdateOperationsInput | number
+    target?: NullableIntFieldUpdateOperationsInput | number | null
+    achieved?: NullableIntFieldUpdateOperationsInput | number | null
+    targetSentence?: InfrastructureDevelopmentUpdatetargetSentenceInput | string[]
+    achievedSentence?: InfrastructureDevelopmentUpdateachievedSentenceInput | string[]
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
     block?: StringFieldUpdateOperationsInput | string
@@ -26231,8 +26481,10 @@ export namespace Prisma {
     id?: string
     activityId: string
     title: string
-    target: number
-    achieved: number
+    target?: number | null
+    achieved?: number | null
+    targetSentence?: ActivitiesCreatetargetSentenceInput | string[]
+    achievedSentence?: ActivitiesCreateachievedSentenceInput | string[]
     district: string
     village: string
     block: string
@@ -26259,8 +26511,10 @@ export namespace Prisma {
     projectId: string
     quarterId: string
     title: string
-    target: number
-    achieved: number
+    target?: number | null
+    achieved?: number | null
+    targetSentence?: ActivitiesCreatetargetSentenceInput | string[]
+    achievedSentence?: ActivitiesCreateachievedSentenceInput | string[]
     district: string
     village: string
     block: string
@@ -26281,8 +26535,10 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     activityId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
-    target?: IntFieldUpdateOperationsInput | number
-    achieved?: IntFieldUpdateOperationsInput | number
+    target?: NullableIntFieldUpdateOperationsInput | number | null
+    achieved?: NullableIntFieldUpdateOperationsInput | number | null
+    targetSentence?: ActivitiesUpdatetargetSentenceInput | string[]
+    achievedSentence?: ActivitiesUpdateachievedSentenceInput | string[]
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
     block?: StringFieldUpdateOperationsInput | string
@@ -26309,8 +26565,10 @@ export namespace Prisma {
     projectId?: StringFieldUpdateOperationsInput | string
     quarterId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
-    target?: IntFieldUpdateOperationsInput | number
-    achieved?: IntFieldUpdateOperationsInput | number
+    target?: NullableIntFieldUpdateOperationsInput | number | null
+    achieved?: NullableIntFieldUpdateOperationsInput | number | null
+    targetSentence?: ActivitiesUpdatetargetSentenceInput | string[]
+    achievedSentence?: ActivitiesUpdateachievedSentenceInput | string[]
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
     block?: StringFieldUpdateOperationsInput | string
@@ -26334,8 +26592,10 @@ export namespace Prisma {
     projectId: string
     quarterId: string
     title: string
-    target: number
-    achieved: number
+    target?: number | null
+    achieved?: number | null
+    targetSentence?: ActivitiesCreatetargetSentenceInput | string[]
+    achievedSentence?: ActivitiesCreateachievedSentenceInput | string[]
     district: string
     village: string
     block: string
@@ -26356,8 +26616,10 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     activityId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
-    target?: IntFieldUpdateOperationsInput | number
-    achieved?: IntFieldUpdateOperationsInput | number
+    target?: NullableIntFieldUpdateOperationsInput | number | null
+    achieved?: NullableIntFieldUpdateOperationsInput | number | null
+    targetSentence?: ActivitiesUpdatetargetSentenceInput | string[]
+    achievedSentence?: ActivitiesUpdateachievedSentenceInput | string[]
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
     block?: StringFieldUpdateOperationsInput | string
@@ -26380,8 +26642,10 @@ export namespace Prisma {
     projectId?: StringFieldUpdateOperationsInput | string
     quarterId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
-    target?: IntFieldUpdateOperationsInput | number
-    achieved?: IntFieldUpdateOperationsInput | number
+    target?: NullableIntFieldUpdateOperationsInput | number | null
+    achieved?: NullableIntFieldUpdateOperationsInput | number | null
+    targetSentence?: ActivitiesUpdatetargetSentenceInput | string[]
+    achievedSentence?: ActivitiesUpdateachievedSentenceInput | string[]
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
     block?: StringFieldUpdateOperationsInput | string
@@ -27055,6 +27319,14 @@ export namespace Prisma {
     _max?: NestedIntFilter<$PrismaModel>
   }
 
+  export type StringNullableListFilter<$PrismaModel = never> = {
+    equals?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    has?: string | StringFieldRefInput<$PrismaModel> | null
+    hasEvery?: string[] | ListStringFieldRefInput<$PrismaModel>
+    hasSome?: string[] | ListStringFieldRefInput<$PrismaModel>
+    isEmpty?: boolean
+  }
+
   export type ProjectScalarRelationFilter = {
     is?: ProjectWhereInput
     isNot?: ProjectWhereInput
@@ -27074,6 +27346,8 @@ export namespace Prisma {
     name?: SortOrder
     target?: SortOrder
     achieved?: SortOrder
+    targetSentence?: SortOrder
+    achievedSentence?: SortOrder
     district?: SortOrder
     village?: SortOrder
     block?: SortOrder
@@ -27146,6 +27420,8 @@ export namespace Prisma {
     title?: SortOrder
     target?: SortOrder
     achieved?: SortOrder
+    targetSentence?: SortOrder
+    achievedSentence?: SortOrder
     district?: SortOrder
     village?: SortOrder
     block?: SortOrder
@@ -27235,6 +27511,8 @@ export namespace Prisma {
     block?: SortOrder
     target?: SortOrder
     achieved?: SortOrder
+    targetSentence?: SortOrder
+    achievedSentence?: SortOrder
     units?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -27293,6 +27571,8 @@ export namespace Prisma {
     title?: SortOrder
     target?: SortOrder
     achieved?: SortOrder
+    targetSentence?: SortOrder
+    achievedSentence?: SortOrder
     district?: SortOrder
     village?: SortOrder
     block?: SortOrder
@@ -27373,6 +27653,8 @@ export namespace Prisma {
     quarterId?: SortOrder
     target?: SortOrder
     achieved?: SortOrder
+    targetSentence?: SortOrder
+    achievedSentence?: SortOrder
     district?: SortOrder
     village?: SortOrder
     block?: SortOrder
@@ -27548,14 +27830,6 @@ export namespace Prisma {
     not?: NestedFloatNullableFilter<$PrismaModel> | number | null
   }
 
-  export type StringNullableListFilter<$PrismaModel = never> = {
-    equals?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    has?: string | StringFieldRefInput<$PrismaModel> | null
-    hasEvery?: string[] | ListStringFieldRefInput<$PrismaModel>
-    hasSome?: string[] | ListStringFieldRefInput<$PrismaModel>
-    isEmpty?: boolean
-  }
-
   export type ProjectDetailsCountOrderByAggregateInput = {
     id?: SortOrder
     title?: SortOrder
@@ -27665,6 +27939,8 @@ export namespace Prisma {
     title?: SortOrder
     target?: SortOrder
     achieved?: SortOrder
+    targetSentence?: SortOrder
+    achievedSentence?: SortOrder
     district?: SortOrder
     village?: SortOrder
     block?: SortOrder
@@ -29008,6 +29284,14 @@ export namespace Prisma {
     deleteMany?: ActivitiesScalarWhereInput | ActivitiesScalarWhereInput[]
   }
 
+  export type InputDistributionCreatetargetSentenceInput = {
+    set: string[]
+  }
+
+  export type InputDistributionCreateachievedSentenceInput = {
+    set: string[]
+  }
+
   export type ProjectCreateNestedOneWithoutInputDistributionsInput = {
     create?: XOR<ProjectCreateWithoutInputDistributionsInput, ProjectUncheckedCreateWithoutInputDistributionsInput>
     connectOrCreate?: ProjectCreateOrConnectWithoutInputDistributionsInput
@@ -29024,6 +29308,16 @@ export namespace Prisma {
     create?: XOR<UserCreateWithoutInputDistributionsInput, UserUncheckedCreateWithoutInputDistributionsInput>
     connectOrCreate?: UserCreateOrConnectWithoutInputDistributionsInput
     connect?: UserWhereUniqueInput
+  }
+
+  export type InputDistributionUpdatetargetSentenceInput = {
+    set?: string[]
+    push?: string | string[]
+  }
+
+  export type InputDistributionUpdateachievedSentenceInput = {
+    set?: string[]
+    push?: string | string[]
   }
 
   export type ProjectUpdateOneRequiredWithoutInputDistributionsNestedInput = {
@@ -29052,6 +29346,14 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutInputDistributionsInput, UserUpdateWithoutInputDistributionsInput>, UserUncheckedUpdateWithoutInputDistributionsInput>
   }
 
+  export type TrainingCreatetargetSentenceInput = {
+    set: string[]
+  }
+
+  export type TrainingCreateachievedSentenceInput = {
+    set: string[]
+  }
+
   export type ProjectCreateNestedOneWithoutTrainingsInput = {
     create?: XOR<ProjectCreateWithoutTrainingsInput, ProjectUncheckedCreateWithoutTrainingsInput>
     connectOrCreate?: ProjectCreateOrConnectWithoutTrainingsInput
@@ -29068,6 +29370,16 @@ export namespace Prisma {
     create?: XOR<UserCreateWithoutTrainingsInput, UserUncheckedCreateWithoutTrainingsInput>
     connectOrCreate?: UserCreateOrConnectWithoutTrainingsInput
     connect?: UserWhereUniqueInput
+  }
+
+  export type TrainingUpdatetargetSentenceInput = {
+    set?: string[]
+    push?: string | string[]
+  }
+
+  export type TrainingUpdateachievedSentenceInput = {
+    set?: string[]
+    push?: string | string[]
   }
 
   export type ProjectUpdateOneRequiredWithoutTrainingsNestedInput = {
@@ -29096,6 +29408,14 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutTrainingsInput, UserUpdateWithoutTrainingsInput>, UserUncheckedUpdateWithoutTrainingsInput>
   }
 
+  export type FLDCreatetargetSentenceInput = {
+    set: string[]
+  }
+
+  export type FLDCreateachievedSentenceInput = {
+    set: string[]
+  }
+
   export type ProjectCreateNestedOneWithoutFldsInput = {
     create?: XOR<ProjectCreateWithoutFldsInput, ProjectUncheckedCreateWithoutFldsInput>
     connectOrCreate?: ProjectCreateOrConnectWithoutFldsInput
@@ -29112,6 +29432,16 @@ export namespace Prisma {
     create?: XOR<UserCreateWithoutFldsInput, UserUncheckedCreateWithoutFldsInput>
     connectOrCreate?: UserCreateOrConnectWithoutFldsInput
     connect?: UserWhereUniqueInput
+  }
+
+  export type FLDUpdatetargetSentenceInput = {
+    set?: string[]
+    push?: string | string[]
+  }
+
+  export type FLDUpdateachievedSentenceInput = {
+    set?: string[]
+    push?: string | string[]
   }
 
   export type ProjectUpdateOneRequiredWithoutFldsNestedInput = {
@@ -29140,6 +29470,14 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutFldsInput, UserUpdateWithoutFldsInput>, UserUncheckedUpdateWithoutFldsInput>
   }
 
+  export type AwarenessProgramCreatetargetSentenceInput = {
+    set: string[]
+  }
+
+  export type AwarenessProgramCreateachievedSentenceInput = {
+    set: string[]
+  }
+
   export type ProjectCreateNestedOneWithoutAwarenessProgramsInput = {
     create?: XOR<ProjectCreateWithoutAwarenessProgramsInput, ProjectUncheckedCreateWithoutAwarenessProgramsInput>
     connectOrCreate?: ProjectCreateOrConnectWithoutAwarenessProgramsInput
@@ -29156,6 +29494,16 @@ export namespace Prisma {
     create?: XOR<UserCreateWithoutAwarenessProgramsInput, UserUncheckedCreateWithoutAwarenessProgramsInput>
     connectOrCreate?: UserCreateOrConnectWithoutAwarenessProgramsInput
     connect?: UserWhereUniqueInput
+  }
+
+  export type AwarenessProgramUpdatetargetSentenceInput = {
+    set?: string[]
+    push?: string | string[]
+  }
+
+  export type AwarenessProgramUpdateachievedSentenceInput = {
+    set?: string[]
+    push?: string | string[]
   }
 
   export type ProjectUpdateOneRequiredWithoutAwarenessProgramsNestedInput = {
@@ -29184,6 +29532,14 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutAwarenessProgramsInput, UserUpdateWithoutAwarenessProgramsInput>, UserUncheckedUpdateWithoutAwarenessProgramsInput>
   }
 
+  export type InfrastructureDevelopmentCreatetargetSentenceInput = {
+    set: string[]
+  }
+
+  export type InfrastructureDevelopmentCreateachievedSentenceInput = {
+    set: string[]
+  }
+
   export type ProjectCreateNestedOneWithoutInfrastructureDevelopmentsInput = {
     create?: XOR<ProjectCreateWithoutInfrastructureDevelopmentsInput, ProjectUncheckedCreateWithoutInfrastructureDevelopmentsInput>
     connectOrCreate?: ProjectCreateOrConnectWithoutInfrastructureDevelopmentsInput
@@ -29200,6 +29556,16 @@ export namespace Prisma {
     create?: XOR<UserCreateWithoutInfrastructureDevelopmentsInput, UserUncheckedCreateWithoutInfrastructureDevelopmentsInput>
     connectOrCreate?: UserCreateOrConnectWithoutInfrastructureDevelopmentsInput
     connect?: UserWhereUniqueInput
+  }
+
+  export type InfrastructureDevelopmentUpdatetargetSentenceInput = {
+    set?: string[]
+    push?: string | string[]
+  }
+
+  export type InfrastructureDevelopmentUpdateachievedSentenceInput = {
+    set?: string[]
+    push?: string | string[]
   }
 
   export type ProjectUpdateOneRequiredWithoutInfrastructureDevelopmentsNestedInput = {
@@ -29385,6 +29751,14 @@ export namespace Prisma {
     deleteMany?: ActivitiesScalarWhereInput | ActivitiesScalarWhereInput[]
   }
 
+  export type ActivitiesCreatetargetSentenceInput = {
+    set: string[]
+  }
+
+  export type ActivitiesCreateachievedSentenceInput = {
+    set: string[]
+  }
+
   export type ActivitiesCategoryCreateNestedOneWithoutActivitiesInput = {
     create?: XOR<ActivitiesCategoryCreateWithoutActivitiesInput, ActivitiesCategoryUncheckedCreateWithoutActivitiesInput>
     connectOrCreate?: ActivitiesCategoryCreateOrConnectWithoutActivitiesInput
@@ -29407,6 +29781,16 @@ export namespace Prisma {
     create?: XOR<UserCreateWithoutActivitiesInput, UserUncheckedCreateWithoutActivitiesInput>
     connectOrCreate?: UserCreateOrConnectWithoutActivitiesInput
     connect?: UserWhereUniqueInput
+  }
+
+  export type ActivitiesUpdatetargetSentenceInput = {
+    set?: string[]
+    push?: string | string[]
+  }
+
+  export type ActivitiesUpdateachievedSentenceInput = {
+    set?: string[]
+    push?: string | string[]
   }
 
   export type ActivitiesCategoryUpdateOneRequiredWithoutActivitiesNestedInput = {
@@ -29833,8 +30217,10 @@ export namespace Prisma {
     id?: string
     trainingId: string
     title: string
-    target: number
-    achieved: number
+    target?: number | null
+    achieved?: number | null
+    targetSentence?: TrainingCreatetargetSentenceInput | string[]
+    achievedSentence?: TrainingCreateachievedSentenceInput | string[]
     district: string
     village: string
     block: string
@@ -29858,8 +30244,10 @@ export namespace Prisma {
     projectId: string
     quarterId: string
     title: string
-    target: number
-    achieved: number
+    target?: number | null
+    achieved?: number | null
+    targetSentence?: TrainingCreatetargetSentenceInput | string[]
+    achievedSentence?: TrainingCreateachievedSentenceInput | string[]
     district: string
     village: string
     block: string
@@ -29892,8 +30280,10 @@ export namespace Prisma {
     district: string
     village: string
     block: string
-    target: number
-    achieved: number
+    target?: number | null
+    achieved?: number | null
+    targetSentence?: FLDCreatetargetSentenceInput | string[]
+    achievedSentence?: FLDCreateachievedSentenceInput | string[]
     units?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -29910,8 +30300,10 @@ export namespace Prisma {
     district: string
     village: string
     block: string
-    target: number
-    achieved: number
+    target?: number | null
+    achieved?: number | null
+    targetSentence?: FLDCreatetargetSentenceInput | string[]
+    achievedSentence?: FLDCreateachievedSentenceInput | string[]
     units?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -29931,8 +30323,10 @@ export namespace Prisma {
     id?: string
     awarnessprogramId: string
     title: string
-    target: number
-    achieved: number
+    target?: number | null
+    achieved?: number | null
+    targetSentence?: AwarenessProgramCreatetargetSentenceInput | string[]
+    achievedSentence?: AwarenessProgramCreateachievedSentenceInput | string[]
     district: string
     village: string
     block: string
@@ -29954,8 +30348,10 @@ export namespace Prisma {
     projectId: string
     quarterId: string
     title: string
-    target: number
-    achieved: number
+    target?: number | null
+    achieved?: number | null
+    targetSentence?: AwarenessProgramCreatetargetSentenceInput | string[]
+    achievedSentence?: AwarenessProgramCreateachievedSentenceInput | string[]
     district: string
     village: string
     block: string
@@ -29983,8 +30379,10 @@ export namespace Prisma {
     id?: string
     InfraDevId: string
     title: string
-    target: number
-    achieved: number
+    target?: number | null
+    achieved?: number | null
+    targetSentence?: InfrastructureDevelopmentCreatetargetSentenceInput | string[]
+    achievedSentence?: InfrastructureDevelopmentCreateachievedSentenceInput | string[]
     district: string
     village: string
     block: string
@@ -30003,8 +30401,10 @@ export namespace Prisma {
     title: string
     projectId: string
     quarterId: string
-    target: number
-    achieved: number
+    target?: number | null
+    achieved?: number | null
+    targetSentence?: InfrastructureDevelopmentCreatetargetSentenceInput | string[]
+    achievedSentence?: InfrastructureDevelopmentCreateachievedSentenceInput | string[]
     district: string
     village: string
     block: string
@@ -30030,8 +30430,10 @@ export namespace Prisma {
     inputDistId: string
     activityType: string
     name: string
-    target: number
-    achieved: number
+    target?: number | null
+    achieved?: number | null
+    targetSentence?: InputDistributionCreatetargetSentenceInput | string[]
+    achievedSentence?: InputDistributionCreateachievedSentenceInput | string[]
     district: string
     village: string
     block: string
@@ -30052,8 +30454,10 @@ export namespace Prisma {
     quarterId: string
     activityType: string
     name: string
-    target: number
-    achieved: number
+    target?: number | null
+    achieved?: number | null
+    targetSentence?: InputDistributionCreatetargetSentenceInput | string[]
+    achievedSentence?: InputDistributionCreateachievedSentenceInput | string[]
     district: string
     village: string
     block: string
@@ -30215,8 +30619,10 @@ export namespace Prisma {
     id?: string
     activityId: string
     title: string
-    target: number
-    achieved: number
+    target?: number | null
+    achieved?: number | null
+    targetSentence?: ActivitiesCreatetargetSentenceInput | string[]
+    achievedSentence?: ActivitiesCreateachievedSentenceInput | string[]
     district: string
     village: string
     block: string
@@ -30242,8 +30648,10 @@ export namespace Prisma {
     projectId: string
     quarterId: string
     title: string
-    target: number
-    achieved: number
+    target?: number | null
+    achieved?: number | null
+    targetSentence?: ActivitiesCreatetargetSentenceInput | string[]
+    achievedSentence?: ActivitiesCreateachievedSentenceInput | string[]
     district: string
     village: string
     block: string
@@ -30416,8 +30824,10 @@ export namespace Prisma {
     projectId?: StringFilter<"Training"> | string
     quarterId?: StringFilter<"Training"> | string
     title?: StringFilter<"Training"> | string
-    target?: IntFilter<"Training"> | number
-    achieved?: IntFilter<"Training"> | number
+    target?: IntNullableFilter<"Training"> | number | null
+    achieved?: IntNullableFilter<"Training"> | number | null
+    targetSentence?: StringNullableListFilter<"Training">
+    achievedSentence?: StringNullableListFilter<"Training">
     district?: StringFilter<"Training"> | string
     village?: StringFilter<"Training"> | string
     block?: StringFilter<"Training"> | string
@@ -30462,8 +30872,10 @@ export namespace Prisma {
     district?: StringFilter<"FLD"> | string
     village?: StringFilter<"FLD"> | string
     block?: StringFilter<"FLD"> | string
-    target?: IntFilter<"FLD"> | number
-    achieved?: IntFilter<"FLD"> | number
+    target?: IntNullableFilter<"FLD"> | number | null
+    achieved?: IntNullableFilter<"FLD"> | number | null
+    targetSentence?: StringNullableListFilter<"FLD">
+    achievedSentence?: StringNullableListFilter<"FLD">
     units?: StringNullableFilter<"FLD"> | string | null
     createdAt?: DateTimeFilter<"FLD"> | Date | string
     updatedAt?: DateTimeFilter<"FLD"> | Date | string
@@ -30495,8 +30907,10 @@ export namespace Prisma {
     projectId?: StringFilter<"AwarenessProgram"> | string
     quarterId?: StringFilter<"AwarenessProgram"> | string
     title?: StringFilter<"AwarenessProgram"> | string
-    target?: IntFilter<"AwarenessProgram"> | number
-    achieved?: IntFilter<"AwarenessProgram"> | number
+    target?: IntNullableFilter<"AwarenessProgram"> | number | null
+    achieved?: IntNullableFilter<"AwarenessProgram"> | number | null
+    targetSentence?: StringNullableListFilter<"AwarenessProgram">
+    achievedSentence?: StringNullableListFilter<"AwarenessProgram">
     district?: StringFilter<"AwarenessProgram"> | string
     village?: StringFilter<"AwarenessProgram"> | string
     block?: StringFilter<"AwarenessProgram"> | string
@@ -30536,8 +30950,10 @@ export namespace Prisma {
     title?: StringFilter<"InfrastructureDevelopment"> | string
     projectId?: StringFilter<"InfrastructureDevelopment"> | string
     quarterId?: StringFilter<"InfrastructureDevelopment"> | string
-    target?: IntFilter<"InfrastructureDevelopment"> | number
-    achieved?: IntFilter<"InfrastructureDevelopment"> | number
+    target?: IntNullableFilter<"InfrastructureDevelopment"> | number | null
+    achieved?: IntNullableFilter<"InfrastructureDevelopment"> | number | null
+    targetSentence?: StringNullableListFilter<"InfrastructureDevelopment">
+    achievedSentence?: StringNullableListFilter<"InfrastructureDevelopment">
     district?: StringFilter<"InfrastructureDevelopment"> | string
     village?: StringFilter<"InfrastructureDevelopment"> | string
     block?: StringFilter<"InfrastructureDevelopment"> | string
@@ -30575,8 +30991,10 @@ export namespace Prisma {
     quarterId?: StringFilter<"InputDistribution"> | string
     activityType?: StringFilter<"InputDistribution"> | string
     name?: StringFilter<"InputDistribution"> | string
-    target?: IntFilter<"InputDistribution"> | number
-    achieved?: IntFilter<"InputDistribution"> | number
+    target?: IntNullableFilter<"InputDistribution"> | number | null
+    achieved?: IntNullableFilter<"InputDistribution"> | number | null
+    targetSentence?: StringNullableListFilter<"InputDistribution">
+    achievedSentence?: StringNullableListFilter<"InputDistribution">
     district?: StringFilter<"InputDistribution"> | string
     village?: StringFilter<"InputDistribution"> | string
     block?: StringFilter<"InputDistribution"> | string
@@ -30743,8 +31161,10 @@ export namespace Prisma {
     projectId?: StringFilter<"Activities"> | string
     quarterId?: StringFilter<"Activities"> | string
     title?: StringFilter<"Activities"> | string
-    target?: IntFilter<"Activities"> | number
-    achieved?: IntFilter<"Activities"> | number
+    target?: IntNullableFilter<"Activities"> | number | null
+    achieved?: IntNullableFilter<"Activities"> | number | null
+    targetSentence?: StringNullableListFilter<"Activities">
+    achievedSentence?: StringNullableListFilter<"Activities">
     district?: StringFilter<"Activities"> | string
     village?: StringFilter<"Activities"> | string
     block?: StringFilter<"Activities"> | string
@@ -30956,8 +31376,10 @@ export namespace Prisma {
     id?: string
     trainingId: string
     title: string
-    target: number
-    achieved: number
+    target?: number | null
+    achieved?: number | null
+    targetSentence?: TrainingCreatetargetSentenceInput | string[]
+    achievedSentence?: TrainingCreateachievedSentenceInput | string[]
     district: string
     village: string
     block: string
@@ -30980,8 +31402,10 @@ export namespace Prisma {
     trainingId: string
     quarterId: string
     title: string
-    target: number
-    achieved: number
+    target?: number | null
+    achieved?: number | null
+    targetSentence?: TrainingCreatetargetSentenceInput | string[]
+    achievedSentence?: TrainingCreateachievedSentenceInput | string[]
     district: string
     village: string
     block: string
@@ -31015,8 +31439,10 @@ export namespace Prisma {
     district: string
     village: string
     block: string
-    target: number
-    achieved: number
+    target?: number | null
+    achieved?: number | null
+    targetSentence?: FLDCreatetargetSentenceInput | string[]
+    achievedSentence?: FLDCreateachievedSentenceInput | string[]
     units?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -31032,8 +31458,10 @@ export namespace Prisma {
     district: string
     village: string
     block: string
-    target: number
-    achieved: number
+    target?: number | null
+    achieved?: number | null
+    targetSentence?: FLDCreatetargetSentenceInput | string[]
+    achievedSentence?: FLDCreateachievedSentenceInput | string[]
     units?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -31054,8 +31482,10 @@ export namespace Prisma {
     id?: string
     awarnessprogramId: string
     title: string
-    target: number
-    achieved: number
+    target?: number | null
+    achieved?: number | null
+    targetSentence?: AwarenessProgramCreatetargetSentenceInput | string[]
+    achievedSentence?: AwarenessProgramCreateachievedSentenceInput | string[]
     district: string
     village: string
     block: string
@@ -31076,8 +31506,10 @@ export namespace Prisma {
     awarnessprogramId: string
     quarterId: string
     title: string
-    target: number
-    achieved: number
+    target?: number | null
+    achieved?: number | null
+    targetSentence?: AwarenessProgramCreatetargetSentenceInput | string[]
+    achievedSentence?: AwarenessProgramCreateachievedSentenceInput | string[]
     district: string
     village: string
     block: string
@@ -31106,8 +31538,10 @@ export namespace Prisma {
     id?: string
     InfraDevId: string
     title: string
-    target: number
-    achieved: number
+    target?: number | null
+    achieved?: number | null
+    targetSentence?: InfrastructureDevelopmentCreatetargetSentenceInput | string[]
+    achievedSentence?: InfrastructureDevelopmentCreateachievedSentenceInput | string[]
     district: string
     village: string
     block: string
@@ -31125,8 +31559,10 @@ export namespace Prisma {
     InfraDevId: string
     title: string
     quarterId: string
-    target: number
-    achieved: number
+    target?: number | null
+    achieved?: number | null
+    targetSentence?: InfrastructureDevelopmentCreatetargetSentenceInput | string[]
+    achievedSentence?: InfrastructureDevelopmentCreateachievedSentenceInput | string[]
     district: string
     village: string
     block: string
@@ -31153,8 +31589,10 @@ export namespace Prisma {
     inputDistId: string
     activityType: string
     name: string
-    target: number
-    achieved: number
+    target?: number | null
+    achieved?: number | null
+    targetSentence?: InputDistributionCreatetargetSentenceInput | string[]
+    achievedSentence?: InputDistributionCreateachievedSentenceInput | string[]
     district: string
     village: string
     block: string
@@ -31174,8 +31612,10 @@ export namespace Prisma {
     quarterId: string
     activityType: string
     name: string
-    target: number
-    achieved: number
+    target?: number | null
+    achieved?: number | null
+    targetSentence?: InputDistributionCreatetargetSentenceInput | string[]
+    achievedSentence?: InputDistributionCreateachievedSentenceInput | string[]
     district: string
     village: string
     block: string
@@ -31202,8 +31642,10 @@ export namespace Prisma {
     id?: string
     activityId: string
     title: string
-    target: number
-    achieved: number
+    target?: number | null
+    achieved?: number | null
+    targetSentence?: ActivitiesCreatetargetSentenceInput | string[]
+    achievedSentence?: ActivitiesCreateachievedSentenceInput | string[]
     district: string
     village: string
     block: string
@@ -31228,8 +31670,10 @@ export namespace Prisma {
     activityCategoryId: string
     quarterId: string
     title: string
-    target: number
-    achieved: number
+    target?: number | null
+    achieved?: number | null
+    targetSentence?: ActivitiesCreatetargetSentenceInput | string[]
+    achievedSentence?: ActivitiesCreateachievedSentenceInput | string[]
     district: string
     village: string
     block: string
@@ -31538,8 +31982,10 @@ export namespace Prisma {
     id?: string
     trainingId: string
     title: string
-    target: number
-    achieved: number
+    target?: number | null
+    achieved?: number | null
+    targetSentence?: TrainingCreatetargetSentenceInput | string[]
+    achievedSentence?: TrainingCreateachievedSentenceInput | string[]
     district: string
     village: string
     block: string
@@ -31562,8 +32008,10 @@ export namespace Prisma {
     trainingId: string
     projectId: string
     title: string
-    target: number
-    achieved: number
+    target?: number | null
+    achieved?: number | null
+    targetSentence?: TrainingCreatetargetSentenceInput | string[]
+    achievedSentence?: TrainingCreateachievedSentenceInput | string[]
     district: string
     village: string
     block: string
@@ -31597,8 +32045,10 @@ export namespace Prisma {
     district: string
     village: string
     block: string
-    target: number
-    achieved: number
+    target?: number | null
+    achieved?: number | null
+    targetSentence?: FLDCreatetargetSentenceInput | string[]
+    achievedSentence?: FLDCreateachievedSentenceInput | string[]
     units?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -31614,8 +32064,10 @@ export namespace Prisma {
     district: string
     village: string
     block: string
-    target: number
-    achieved: number
+    target?: number | null
+    achieved?: number | null
+    targetSentence?: FLDCreatetargetSentenceInput | string[]
+    achievedSentence?: FLDCreateachievedSentenceInput | string[]
     units?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -31636,8 +32088,10 @@ export namespace Prisma {
     id?: string
     awarnessprogramId: string
     title: string
-    target: number
-    achieved: number
+    target?: number | null
+    achieved?: number | null
+    targetSentence?: AwarenessProgramCreatetargetSentenceInput | string[]
+    achievedSentence?: AwarenessProgramCreateachievedSentenceInput | string[]
     district: string
     village: string
     block: string
@@ -31658,8 +32112,10 @@ export namespace Prisma {
     awarnessprogramId: string
     projectId: string
     title: string
-    target: number
-    achieved: number
+    target?: number | null
+    achieved?: number | null
+    targetSentence?: AwarenessProgramCreatetargetSentenceInput | string[]
+    achievedSentence?: AwarenessProgramCreateachievedSentenceInput | string[]
     district: string
     village: string
     block: string
@@ -31689,8 +32145,10 @@ export namespace Prisma {
     inputDistId: string
     activityType: string
     name: string
-    target: number
-    achieved: number
+    target?: number | null
+    achieved?: number | null
+    targetSentence?: InputDistributionCreatetargetSentenceInput | string[]
+    achievedSentence?: InputDistributionCreateachievedSentenceInput | string[]
     district: string
     village: string
     block: string
@@ -31710,8 +32168,10 @@ export namespace Prisma {
     projectId: string
     activityType: string
     name: string
-    target: number
-    achieved: number
+    target?: number | null
+    achieved?: number | null
+    targetSentence?: InputDistributionCreatetargetSentenceInput | string[]
+    achievedSentence?: InputDistributionCreateachievedSentenceInput | string[]
     district: string
     village: string
     block: string
@@ -31738,8 +32198,10 @@ export namespace Prisma {
     id?: string
     InfraDevId: string
     title: string
-    target: number
-    achieved: number
+    target?: number | null
+    achieved?: number | null
+    targetSentence?: InfrastructureDevelopmentCreatetargetSentenceInput | string[]
+    achievedSentence?: InfrastructureDevelopmentCreateachievedSentenceInput | string[]
     district: string
     village: string
     block: string
@@ -31757,8 +32219,10 @@ export namespace Prisma {
     InfraDevId: string
     title: string
     projectId: string
-    target: number
-    achieved: number
+    target?: number | null
+    achieved?: number | null
+    targetSentence?: InfrastructureDevelopmentCreatetargetSentenceInput | string[]
+    achievedSentence?: InfrastructureDevelopmentCreateachievedSentenceInput | string[]
     district: string
     village: string
     block: string
@@ -31784,8 +32248,10 @@ export namespace Prisma {
     id?: string
     activityId: string
     title: string
-    target: number
-    achieved: number
+    target?: number | null
+    achieved?: number | null
+    targetSentence?: ActivitiesCreatetargetSentenceInput | string[]
+    achievedSentence?: ActivitiesCreateachievedSentenceInput | string[]
     district: string
     village: string
     block: string
@@ -31810,8 +32276,10 @@ export namespace Prisma {
     activityCategoryId: string
     projectId: string
     title: string
-    target: number
-    achieved: number
+    target?: number | null
+    achieved?: number | null
+    targetSentence?: ActivitiesCreatetargetSentenceInput | string[]
+    achievedSentence?: ActivitiesCreateachievedSentenceInput | string[]
     district: string
     village: string
     block: string
@@ -33926,8 +34394,10 @@ export namespace Prisma {
     id?: string
     activityId: string
     title: string
-    target: number
-    achieved: number
+    target?: number | null
+    achieved?: number | null
+    targetSentence?: ActivitiesCreatetargetSentenceInput | string[]
+    achievedSentence?: ActivitiesCreateachievedSentenceInput | string[]
     district: string
     village: string
     block: string
@@ -33952,8 +34422,10 @@ export namespace Prisma {
     projectId: string
     quarterId: string
     title: string
-    target: number
-    achieved: number
+    target?: number | null
+    achieved?: number | null
+    targetSentence?: ActivitiesCreatetargetSentenceInput | string[]
+    achievedSentence?: ActivitiesCreateachievedSentenceInput | string[]
     district: string
     village: string
     block: string
@@ -34728,8 +35200,10 @@ export namespace Prisma {
     projectId: string
     quarterId: string
     title: string
-    target: number
-    achieved: number
+    target?: number | null
+    achieved?: number | null
+    targetSentence?: TrainingCreatetargetSentenceInput | string[]
+    achievedSentence?: TrainingCreateachievedSentenceInput | string[]
     district: string
     village: string
     block: string
@@ -34754,8 +35228,10 @@ export namespace Prisma {
     district: string
     village: string
     block: string
-    target: number
-    achieved: number
+    target?: number | null
+    achieved?: number | null
+    targetSentence?: FLDCreatetargetSentenceInput | string[]
+    achievedSentence?: FLDCreateachievedSentenceInput | string[]
     units?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -34767,8 +35243,10 @@ export namespace Prisma {
     projectId: string
     quarterId: string
     title: string
-    target: number
-    achieved: number
+    target?: number | null
+    achieved?: number | null
+    targetSentence?: AwarenessProgramCreatetargetSentenceInput | string[]
+    achievedSentence?: AwarenessProgramCreateachievedSentenceInput | string[]
     district: string
     village: string
     block: string
@@ -34788,8 +35266,10 @@ export namespace Prisma {
     title: string
     projectId: string
     quarterId: string
-    target: number
-    achieved: number
+    target?: number | null
+    achieved?: number | null
+    targetSentence?: InfrastructureDevelopmentCreatetargetSentenceInput | string[]
+    achievedSentence?: InfrastructureDevelopmentCreateachievedSentenceInput | string[]
     district: string
     village: string
     block: string
@@ -34807,8 +35287,10 @@ export namespace Prisma {
     quarterId: string
     activityType: string
     name: string
-    target: number
-    achieved: number
+    target?: number | null
+    achieved?: number | null
+    targetSentence?: InputDistributionCreatetargetSentenceInput | string[]
+    achievedSentence?: InputDistributionCreateachievedSentenceInput | string[]
     district: string
     village: string
     block: string
@@ -34875,8 +35357,10 @@ export namespace Prisma {
     projectId: string
     quarterId: string
     title: string
-    target: number
-    achieved: number
+    target?: number | null
+    achieved?: number | null
+    targetSentence?: ActivitiesCreatetargetSentenceInput | string[]
+    achievedSentence?: ActivitiesCreateachievedSentenceInput | string[]
     district: string
     village: string
     block: string
@@ -34995,8 +35479,10 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     trainingId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
-    target?: IntFieldUpdateOperationsInput | number
-    achieved?: IntFieldUpdateOperationsInput | number
+    target?: NullableIntFieldUpdateOperationsInput | number | null
+    achieved?: NullableIntFieldUpdateOperationsInput | number | null
+    targetSentence?: TrainingUpdatetargetSentenceInput | string[]
+    achievedSentence?: TrainingUpdateachievedSentenceInput | string[]
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
     block?: StringFieldUpdateOperationsInput | string
@@ -35020,8 +35506,10 @@ export namespace Prisma {
     projectId?: StringFieldUpdateOperationsInput | string
     quarterId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
-    target?: IntFieldUpdateOperationsInput | number
-    achieved?: IntFieldUpdateOperationsInput | number
+    target?: NullableIntFieldUpdateOperationsInput | number | null
+    achieved?: NullableIntFieldUpdateOperationsInput | number | null
+    targetSentence?: TrainingUpdatetargetSentenceInput | string[]
+    achievedSentence?: TrainingUpdateachievedSentenceInput | string[]
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
     block?: StringFieldUpdateOperationsInput | string
@@ -35043,8 +35531,10 @@ export namespace Prisma {
     projectId?: StringFieldUpdateOperationsInput | string
     quarterId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
-    target?: IntFieldUpdateOperationsInput | number
-    achieved?: IntFieldUpdateOperationsInput | number
+    target?: NullableIntFieldUpdateOperationsInput | number | null
+    achieved?: NullableIntFieldUpdateOperationsInput | number | null
+    targetSentence?: TrainingUpdatetargetSentenceInput | string[]
+    achievedSentence?: TrainingUpdateachievedSentenceInput | string[]
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
     block?: StringFieldUpdateOperationsInput | string
@@ -35067,8 +35557,10 @@ export namespace Prisma {
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
     block?: StringFieldUpdateOperationsInput | string
-    target?: IntFieldUpdateOperationsInput | number
-    achieved?: IntFieldUpdateOperationsInput | number
+    target?: NullableIntFieldUpdateOperationsInput | number | null
+    achieved?: NullableIntFieldUpdateOperationsInput | number | null
+    targetSentence?: FLDUpdatetargetSentenceInput | string[]
+    achievedSentence?: FLDUpdateachievedSentenceInput | string[]
     units?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -35085,8 +35577,10 @@ export namespace Prisma {
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
     block?: StringFieldUpdateOperationsInput | string
-    target?: IntFieldUpdateOperationsInput | number
-    achieved?: IntFieldUpdateOperationsInput | number
+    target?: NullableIntFieldUpdateOperationsInput | number | null
+    achieved?: NullableIntFieldUpdateOperationsInput | number | null
+    targetSentence?: FLDUpdatetargetSentenceInput | string[]
+    achievedSentence?: FLDUpdateachievedSentenceInput | string[]
     units?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -35101,8 +35595,10 @@ export namespace Prisma {
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
     block?: StringFieldUpdateOperationsInput | string
-    target?: IntFieldUpdateOperationsInput | number
-    achieved?: IntFieldUpdateOperationsInput | number
+    target?: NullableIntFieldUpdateOperationsInput | number | null
+    achieved?: NullableIntFieldUpdateOperationsInput | number | null
+    targetSentence?: FLDUpdatetargetSentenceInput | string[]
+    achievedSentence?: FLDUpdateachievedSentenceInput | string[]
     units?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -35112,8 +35608,10 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     awarnessprogramId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
-    target?: IntFieldUpdateOperationsInput | number
-    achieved?: IntFieldUpdateOperationsInput | number
+    target?: NullableIntFieldUpdateOperationsInput | number | null
+    achieved?: NullableIntFieldUpdateOperationsInput | number | null
+    targetSentence?: AwarenessProgramUpdatetargetSentenceInput | string[]
+    achievedSentence?: AwarenessProgramUpdateachievedSentenceInput | string[]
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
     block?: StringFieldUpdateOperationsInput | string
@@ -35135,8 +35633,10 @@ export namespace Prisma {
     projectId?: StringFieldUpdateOperationsInput | string
     quarterId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
-    target?: IntFieldUpdateOperationsInput | number
-    achieved?: IntFieldUpdateOperationsInput | number
+    target?: NullableIntFieldUpdateOperationsInput | number | null
+    achieved?: NullableIntFieldUpdateOperationsInput | number | null
+    targetSentence?: AwarenessProgramUpdatetargetSentenceInput | string[]
+    achievedSentence?: AwarenessProgramUpdateachievedSentenceInput | string[]
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
     block?: StringFieldUpdateOperationsInput | string
@@ -35156,8 +35656,10 @@ export namespace Prisma {
     projectId?: StringFieldUpdateOperationsInput | string
     quarterId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
-    target?: IntFieldUpdateOperationsInput | number
-    achieved?: IntFieldUpdateOperationsInput | number
+    target?: NullableIntFieldUpdateOperationsInput | number | null
+    achieved?: NullableIntFieldUpdateOperationsInput | number | null
+    targetSentence?: AwarenessProgramUpdatetargetSentenceInput | string[]
+    achievedSentence?: AwarenessProgramUpdateachievedSentenceInput | string[]
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
     block?: StringFieldUpdateOperationsInput | string
@@ -35175,8 +35677,10 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     InfraDevId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
-    target?: IntFieldUpdateOperationsInput | number
-    achieved?: IntFieldUpdateOperationsInput | number
+    target?: NullableIntFieldUpdateOperationsInput | number | null
+    achieved?: NullableIntFieldUpdateOperationsInput | number | null
+    targetSentence?: InfrastructureDevelopmentUpdatetargetSentenceInput | string[]
+    achievedSentence?: InfrastructureDevelopmentUpdateachievedSentenceInput | string[]
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
     block?: StringFieldUpdateOperationsInput | string
@@ -35195,8 +35699,10 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     projectId?: StringFieldUpdateOperationsInput | string
     quarterId?: StringFieldUpdateOperationsInput | string
-    target?: IntFieldUpdateOperationsInput | number
-    achieved?: IntFieldUpdateOperationsInput | number
+    target?: NullableIntFieldUpdateOperationsInput | number | null
+    achieved?: NullableIntFieldUpdateOperationsInput | number | null
+    targetSentence?: InfrastructureDevelopmentUpdatetargetSentenceInput | string[]
+    achievedSentence?: InfrastructureDevelopmentUpdateachievedSentenceInput | string[]
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
     block?: StringFieldUpdateOperationsInput | string
@@ -35213,8 +35719,10 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     projectId?: StringFieldUpdateOperationsInput | string
     quarterId?: StringFieldUpdateOperationsInput | string
-    target?: IntFieldUpdateOperationsInput | number
-    achieved?: IntFieldUpdateOperationsInput | number
+    target?: NullableIntFieldUpdateOperationsInput | number | null
+    achieved?: NullableIntFieldUpdateOperationsInput | number | null
+    targetSentence?: InfrastructureDevelopmentUpdatetargetSentenceInput | string[]
+    achievedSentence?: InfrastructureDevelopmentUpdateachievedSentenceInput | string[]
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
     block?: StringFieldUpdateOperationsInput | string
@@ -35230,8 +35738,10 @@ export namespace Prisma {
     inputDistId?: StringFieldUpdateOperationsInput | string
     activityType?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    target?: IntFieldUpdateOperationsInput | number
-    achieved?: IntFieldUpdateOperationsInput | number
+    target?: NullableIntFieldUpdateOperationsInput | number | null
+    achieved?: NullableIntFieldUpdateOperationsInput | number | null
+    targetSentence?: InputDistributionUpdatetargetSentenceInput | string[]
+    achievedSentence?: InputDistributionUpdateachievedSentenceInput | string[]
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
     block?: StringFieldUpdateOperationsInput | string
@@ -35252,8 +35762,10 @@ export namespace Prisma {
     quarterId?: StringFieldUpdateOperationsInput | string
     activityType?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    target?: IntFieldUpdateOperationsInput | number
-    achieved?: IntFieldUpdateOperationsInput | number
+    target?: NullableIntFieldUpdateOperationsInput | number | null
+    achieved?: NullableIntFieldUpdateOperationsInput | number | null
+    targetSentence?: InputDistributionUpdatetargetSentenceInput | string[]
+    achievedSentence?: InputDistributionUpdateachievedSentenceInput | string[]
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
     block?: StringFieldUpdateOperationsInput | string
@@ -35272,8 +35784,10 @@ export namespace Prisma {
     quarterId?: StringFieldUpdateOperationsInput | string
     activityType?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    target?: IntFieldUpdateOperationsInput | number
-    achieved?: IntFieldUpdateOperationsInput | number
+    target?: NullableIntFieldUpdateOperationsInput | number | null
+    achieved?: NullableIntFieldUpdateOperationsInput | number | null
+    targetSentence?: InputDistributionUpdatetargetSentenceInput | string[]
+    achievedSentence?: InputDistributionUpdateachievedSentenceInput | string[]
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
     block?: StringFieldUpdateOperationsInput | string
@@ -35433,8 +35947,10 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     activityId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
-    target?: IntFieldUpdateOperationsInput | number
-    achieved?: IntFieldUpdateOperationsInput | number
+    target?: NullableIntFieldUpdateOperationsInput | number | null
+    achieved?: NullableIntFieldUpdateOperationsInput | number | null
+    targetSentence?: ActivitiesUpdatetargetSentenceInput | string[]
+    achievedSentence?: ActivitiesUpdateachievedSentenceInput | string[]
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
     block?: StringFieldUpdateOperationsInput | string
@@ -35460,8 +35976,10 @@ export namespace Prisma {
     projectId?: StringFieldUpdateOperationsInput | string
     quarterId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
-    target?: IntFieldUpdateOperationsInput | number
-    achieved?: IntFieldUpdateOperationsInput | number
+    target?: NullableIntFieldUpdateOperationsInput | number | null
+    achieved?: NullableIntFieldUpdateOperationsInput | number | null
+    targetSentence?: ActivitiesUpdatetargetSentenceInput | string[]
+    achievedSentence?: ActivitiesUpdateachievedSentenceInput | string[]
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
     block?: StringFieldUpdateOperationsInput | string
@@ -35484,8 +36002,10 @@ export namespace Prisma {
     projectId?: StringFieldUpdateOperationsInput | string
     quarterId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
-    target?: IntFieldUpdateOperationsInput | number
-    achieved?: IntFieldUpdateOperationsInput | number
+    target?: NullableIntFieldUpdateOperationsInput | number | null
+    achieved?: NullableIntFieldUpdateOperationsInput | number | null
+    targetSentence?: ActivitiesUpdatetargetSentenceInput | string[]
+    achievedSentence?: ActivitiesUpdateachievedSentenceInput | string[]
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
     block?: StringFieldUpdateOperationsInput | string
@@ -35565,8 +36085,10 @@ export namespace Prisma {
     trainingId: string
     quarterId: string
     title: string
-    target: number
-    achieved: number
+    target?: number | null
+    achieved?: number | null
+    targetSentence?: TrainingCreatetargetSentenceInput | string[]
+    achievedSentence?: TrainingCreateachievedSentenceInput | string[]
     district: string
     village: string
     block: string
@@ -35591,8 +36113,10 @@ export namespace Prisma {
     district: string
     village: string
     block: string
-    target: number
-    achieved: number
+    target?: number | null
+    achieved?: number | null
+    targetSentence?: FLDCreatetargetSentenceInput | string[]
+    achievedSentence?: FLDCreateachievedSentenceInput | string[]
     units?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -35604,8 +36128,10 @@ export namespace Prisma {
     awarnessprogramId: string
     quarterId: string
     title: string
-    target: number
-    achieved: number
+    target?: number | null
+    achieved?: number | null
+    targetSentence?: AwarenessProgramCreatetargetSentenceInput | string[]
+    achievedSentence?: AwarenessProgramCreateachievedSentenceInput | string[]
     district: string
     village: string
     block: string
@@ -35625,8 +36151,10 @@ export namespace Prisma {
     InfraDevId: string
     title: string
     quarterId: string
-    target: number
-    achieved: number
+    target?: number | null
+    achieved?: number | null
+    targetSentence?: InfrastructureDevelopmentCreatetargetSentenceInput | string[]
+    achievedSentence?: InfrastructureDevelopmentCreateachievedSentenceInput | string[]
     district: string
     village: string
     block: string
@@ -35644,8 +36172,10 @@ export namespace Prisma {
     quarterId: string
     activityType: string
     name: string
-    target: number
-    achieved: number
+    target?: number | null
+    achieved?: number | null
+    targetSentence?: InputDistributionCreatetargetSentenceInput | string[]
+    achievedSentence?: InputDistributionCreateachievedSentenceInput | string[]
     district: string
     village: string
     block: string
@@ -35664,8 +36194,10 @@ export namespace Prisma {
     activityCategoryId: string
     quarterId: string
     title: string
-    target: number
-    achieved: number
+    target?: number | null
+    achieved?: number | null
+    targetSentence?: ActivitiesCreatetargetSentenceInput | string[]
+    achievedSentence?: ActivitiesCreateachievedSentenceInput | string[]
     district: string
     village: string
     block: string
@@ -35698,8 +36230,10 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     trainingId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
-    target?: IntFieldUpdateOperationsInput | number
-    achieved?: IntFieldUpdateOperationsInput | number
+    target?: NullableIntFieldUpdateOperationsInput | number | null
+    achieved?: NullableIntFieldUpdateOperationsInput | number | null
+    targetSentence?: TrainingUpdatetargetSentenceInput | string[]
+    achievedSentence?: TrainingUpdateachievedSentenceInput | string[]
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
     block?: StringFieldUpdateOperationsInput | string
@@ -35722,8 +36256,10 @@ export namespace Prisma {
     trainingId?: StringFieldUpdateOperationsInput | string
     quarterId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
-    target?: IntFieldUpdateOperationsInput | number
-    achieved?: IntFieldUpdateOperationsInput | number
+    target?: NullableIntFieldUpdateOperationsInput | number | null
+    achieved?: NullableIntFieldUpdateOperationsInput | number | null
+    targetSentence?: TrainingUpdatetargetSentenceInput | string[]
+    achievedSentence?: TrainingUpdateachievedSentenceInput | string[]
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
     block?: StringFieldUpdateOperationsInput | string
@@ -35745,8 +36281,10 @@ export namespace Prisma {
     trainingId?: StringFieldUpdateOperationsInput | string
     quarterId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
-    target?: IntFieldUpdateOperationsInput | number
-    achieved?: IntFieldUpdateOperationsInput | number
+    target?: NullableIntFieldUpdateOperationsInput | number | null
+    achieved?: NullableIntFieldUpdateOperationsInput | number | null
+    targetSentence?: TrainingUpdatetargetSentenceInput | string[]
+    achievedSentence?: TrainingUpdateachievedSentenceInput | string[]
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
     block?: StringFieldUpdateOperationsInput | string
@@ -35770,8 +36308,10 @@ export namespace Prisma {
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
     block?: StringFieldUpdateOperationsInput | string
-    target?: IntFieldUpdateOperationsInput | number
-    achieved?: IntFieldUpdateOperationsInput | number
+    target?: NullableIntFieldUpdateOperationsInput | number | null
+    achieved?: NullableIntFieldUpdateOperationsInput | number | null
+    targetSentence?: FLDUpdatetargetSentenceInput | string[]
+    achievedSentence?: FLDUpdateachievedSentenceInput | string[]
     units?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -35787,8 +36327,10 @@ export namespace Prisma {
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
     block?: StringFieldUpdateOperationsInput | string
-    target?: IntFieldUpdateOperationsInput | number
-    achieved?: IntFieldUpdateOperationsInput | number
+    target?: NullableIntFieldUpdateOperationsInput | number | null
+    achieved?: NullableIntFieldUpdateOperationsInput | number | null
+    targetSentence?: FLDUpdatetargetSentenceInput | string[]
+    achievedSentence?: FLDUpdateachievedSentenceInput | string[]
     units?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -35803,8 +36345,10 @@ export namespace Prisma {
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
     block?: StringFieldUpdateOperationsInput | string
-    target?: IntFieldUpdateOperationsInput | number
-    achieved?: IntFieldUpdateOperationsInput | number
+    target?: NullableIntFieldUpdateOperationsInput | number | null
+    achieved?: NullableIntFieldUpdateOperationsInput | number | null
+    targetSentence?: FLDUpdatetargetSentenceInput | string[]
+    achievedSentence?: FLDUpdateachievedSentenceInput | string[]
     units?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -35815,8 +36359,10 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     awarnessprogramId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
-    target?: IntFieldUpdateOperationsInput | number
-    achieved?: IntFieldUpdateOperationsInput | number
+    target?: NullableIntFieldUpdateOperationsInput | number | null
+    achieved?: NullableIntFieldUpdateOperationsInput | number | null
+    targetSentence?: AwarenessProgramUpdatetargetSentenceInput | string[]
+    achievedSentence?: AwarenessProgramUpdateachievedSentenceInput | string[]
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
     block?: StringFieldUpdateOperationsInput | string
@@ -35837,8 +36383,10 @@ export namespace Prisma {
     awarnessprogramId?: StringFieldUpdateOperationsInput | string
     quarterId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
-    target?: IntFieldUpdateOperationsInput | number
-    achieved?: IntFieldUpdateOperationsInput | number
+    target?: NullableIntFieldUpdateOperationsInput | number | null
+    achieved?: NullableIntFieldUpdateOperationsInput | number | null
+    targetSentence?: AwarenessProgramUpdatetargetSentenceInput | string[]
+    achievedSentence?: AwarenessProgramUpdateachievedSentenceInput | string[]
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
     block?: StringFieldUpdateOperationsInput | string
@@ -35858,8 +36406,10 @@ export namespace Prisma {
     awarnessprogramId?: StringFieldUpdateOperationsInput | string
     quarterId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
-    target?: IntFieldUpdateOperationsInput | number
-    achieved?: IntFieldUpdateOperationsInput | number
+    target?: NullableIntFieldUpdateOperationsInput | number | null
+    achieved?: NullableIntFieldUpdateOperationsInput | number | null
+    targetSentence?: AwarenessProgramUpdatetargetSentenceInput | string[]
+    achievedSentence?: AwarenessProgramUpdateachievedSentenceInput | string[]
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
     block?: StringFieldUpdateOperationsInput | string
@@ -35878,8 +36428,10 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     InfraDevId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
-    target?: IntFieldUpdateOperationsInput | number
-    achieved?: IntFieldUpdateOperationsInput | number
+    target?: NullableIntFieldUpdateOperationsInput | number | null
+    achieved?: NullableIntFieldUpdateOperationsInput | number | null
+    targetSentence?: InfrastructureDevelopmentUpdatetargetSentenceInput | string[]
+    achievedSentence?: InfrastructureDevelopmentUpdateachievedSentenceInput | string[]
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
     block?: StringFieldUpdateOperationsInput | string
@@ -35897,8 +36449,10 @@ export namespace Prisma {
     InfraDevId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     quarterId?: StringFieldUpdateOperationsInput | string
-    target?: IntFieldUpdateOperationsInput | number
-    achieved?: IntFieldUpdateOperationsInput | number
+    target?: NullableIntFieldUpdateOperationsInput | number | null
+    achieved?: NullableIntFieldUpdateOperationsInput | number | null
+    targetSentence?: InfrastructureDevelopmentUpdatetargetSentenceInput | string[]
+    achievedSentence?: InfrastructureDevelopmentUpdateachievedSentenceInput | string[]
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
     block?: StringFieldUpdateOperationsInput | string
@@ -35915,8 +36469,10 @@ export namespace Prisma {
     InfraDevId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     quarterId?: StringFieldUpdateOperationsInput | string
-    target?: IntFieldUpdateOperationsInput | number
-    achieved?: IntFieldUpdateOperationsInput | number
+    target?: NullableIntFieldUpdateOperationsInput | number | null
+    achieved?: NullableIntFieldUpdateOperationsInput | number | null
+    targetSentence?: InfrastructureDevelopmentUpdatetargetSentenceInput | string[]
+    achievedSentence?: InfrastructureDevelopmentUpdateachievedSentenceInput | string[]
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
     block?: StringFieldUpdateOperationsInput | string
@@ -35933,8 +36489,10 @@ export namespace Prisma {
     inputDistId?: StringFieldUpdateOperationsInput | string
     activityType?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    target?: IntFieldUpdateOperationsInput | number
-    achieved?: IntFieldUpdateOperationsInput | number
+    target?: NullableIntFieldUpdateOperationsInput | number | null
+    achieved?: NullableIntFieldUpdateOperationsInput | number | null
+    targetSentence?: InputDistributionUpdatetargetSentenceInput | string[]
+    achievedSentence?: InputDistributionUpdateachievedSentenceInput | string[]
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
     block?: StringFieldUpdateOperationsInput | string
@@ -35954,8 +36512,10 @@ export namespace Prisma {
     quarterId?: StringFieldUpdateOperationsInput | string
     activityType?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    target?: IntFieldUpdateOperationsInput | number
-    achieved?: IntFieldUpdateOperationsInput | number
+    target?: NullableIntFieldUpdateOperationsInput | number | null
+    achieved?: NullableIntFieldUpdateOperationsInput | number | null
+    targetSentence?: InputDistributionUpdatetargetSentenceInput | string[]
+    achievedSentence?: InputDistributionUpdateachievedSentenceInput | string[]
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
     block?: StringFieldUpdateOperationsInput | string
@@ -35974,8 +36534,10 @@ export namespace Prisma {
     quarterId?: StringFieldUpdateOperationsInput | string
     activityType?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    target?: IntFieldUpdateOperationsInput | number
-    achieved?: IntFieldUpdateOperationsInput | number
+    target?: NullableIntFieldUpdateOperationsInput | number | null
+    achieved?: NullableIntFieldUpdateOperationsInput | number | null
+    targetSentence?: InputDistributionUpdatetargetSentenceInput | string[]
+    achievedSentence?: InputDistributionUpdateachievedSentenceInput | string[]
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
     block?: StringFieldUpdateOperationsInput | string
@@ -35992,8 +36554,10 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     activityId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
-    target?: IntFieldUpdateOperationsInput | number
-    achieved?: IntFieldUpdateOperationsInput | number
+    target?: NullableIntFieldUpdateOperationsInput | number | null
+    achieved?: NullableIntFieldUpdateOperationsInput | number | null
+    targetSentence?: ActivitiesUpdatetargetSentenceInput | string[]
+    achievedSentence?: ActivitiesUpdateachievedSentenceInput | string[]
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
     block?: StringFieldUpdateOperationsInput | string
@@ -36018,8 +36582,10 @@ export namespace Prisma {
     activityCategoryId?: StringFieldUpdateOperationsInput | string
     quarterId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
-    target?: IntFieldUpdateOperationsInput | number
-    achieved?: IntFieldUpdateOperationsInput | number
+    target?: NullableIntFieldUpdateOperationsInput | number | null
+    achieved?: NullableIntFieldUpdateOperationsInput | number | null
+    targetSentence?: ActivitiesUpdatetargetSentenceInput | string[]
+    achievedSentence?: ActivitiesUpdateachievedSentenceInput | string[]
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
     block?: StringFieldUpdateOperationsInput | string
@@ -36042,8 +36608,10 @@ export namespace Prisma {
     activityCategoryId?: StringFieldUpdateOperationsInput | string
     quarterId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
-    target?: IntFieldUpdateOperationsInput | number
-    achieved?: IntFieldUpdateOperationsInput | number
+    target?: NullableIntFieldUpdateOperationsInput | number | null
+    achieved?: NullableIntFieldUpdateOperationsInput | number | null
+    targetSentence?: ActivitiesUpdatetargetSentenceInput | string[]
+    achievedSentence?: ActivitiesUpdateachievedSentenceInput | string[]
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
     block?: StringFieldUpdateOperationsInput | string
@@ -36101,8 +36669,10 @@ export namespace Prisma {
     trainingId: string
     projectId: string
     title: string
-    target: number
-    achieved: number
+    target?: number | null
+    achieved?: number | null
+    targetSentence?: TrainingCreatetargetSentenceInput | string[]
+    achievedSentence?: TrainingCreateachievedSentenceInput | string[]
     district: string
     village: string
     block: string
@@ -36127,8 +36697,10 @@ export namespace Prisma {
     district: string
     village: string
     block: string
-    target: number
-    achieved: number
+    target?: number | null
+    achieved?: number | null
+    targetSentence?: FLDCreatetargetSentenceInput | string[]
+    achievedSentence?: FLDCreateachievedSentenceInput | string[]
     units?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -36140,8 +36712,10 @@ export namespace Prisma {
     awarnessprogramId: string
     projectId: string
     title: string
-    target: number
-    achieved: number
+    target?: number | null
+    achieved?: number | null
+    targetSentence?: AwarenessProgramCreatetargetSentenceInput | string[]
+    achievedSentence?: AwarenessProgramCreateachievedSentenceInput | string[]
     district: string
     village: string
     block: string
@@ -36162,8 +36736,10 @@ export namespace Prisma {
     projectId: string
     activityType: string
     name: string
-    target: number
-    achieved: number
+    target?: number | null
+    achieved?: number | null
+    targetSentence?: InputDistributionCreatetargetSentenceInput | string[]
+    achievedSentence?: InputDistributionCreateachievedSentenceInput | string[]
     district: string
     village: string
     block: string
@@ -36181,8 +36757,10 @@ export namespace Prisma {
     InfraDevId: string
     title: string
     projectId: string
-    target: number
-    achieved: number
+    target?: number | null
+    achieved?: number | null
+    targetSentence?: InfrastructureDevelopmentCreatetargetSentenceInput | string[]
+    achievedSentence?: InfrastructureDevelopmentCreateachievedSentenceInput | string[]
     district: string
     village: string
     block: string
@@ -36200,8 +36778,10 @@ export namespace Prisma {
     activityCategoryId: string
     projectId: string
     title: string
-    target: number
-    achieved: number
+    target?: number | null
+    achieved?: number | null
+    targetSentence?: ActivitiesCreatetargetSentenceInput | string[]
+    achievedSentence?: ActivitiesCreateachievedSentenceInput | string[]
     district: string
     village: string
     block: string
@@ -36222,8 +36802,10 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     trainingId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
-    target?: IntFieldUpdateOperationsInput | number
-    achieved?: IntFieldUpdateOperationsInput | number
+    target?: NullableIntFieldUpdateOperationsInput | number | null
+    achieved?: NullableIntFieldUpdateOperationsInput | number | null
+    targetSentence?: TrainingUpdatetargetSentenceInput | string[]
+    achievedSentence?: TrainingUpdateachievedSentenceInput | string[]
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
     block?: StringFieldUpdateOperationsInput | string
@@ -36246,8 +36828,10 @@ export namespace Prisma {
     trainingId?: StringFieldUpdateOperationsInput | string
     projectId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
-    target?: IntFieldUpdateOperationsInput | number
-    achieved?: IntFieldUpdateOperationsInput | number
+    target?: NullableIntFieldUpdateOperationsInput | number | null
+    achieved?: NullableIntFieldUpdateOperationsInput | number | null
+    targetSentence?: TrainingUpdatetargetSentenceInput | string[]
+    achievedSentence?: TrainingUpdateachievedSentenceInput | string[]
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
     block?: StringFieldUpdateOperationsInput | string
@@ -36269,8 +36853,10 @@ export namespace Prisma {
     trainingId?: StringFieldUpdateOperationsInput | string
     projectId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
-    target?: IntFieldUpdateOperationsInput | number
-    achieved?: IntFieldUpdateOperationsInput | number
+    target?: NullableIntFieldUpdateOperationsInput | number | null
+    achieved?: NullableIntFieldUpdateOperationsInput | number | null
+    targetSentence?: TrainingUpdatetargetSentenceInput | string[]
+    achievedSentence?: TrainingUpdateachievedSentenceInput | string[]
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
     block?: StringFieldUpdateOperationsInput | string
@@ -36294,8 +36880,10 @@ export namespace Prisma {
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
     block?: StringFieldUpdateOperationsInput | string
-    target?: IntFieldUpdateOperationsInput | number
-    achieved?: IntFieldUpdateOperationsInput | number
+    target?: NullableIntFieldUpdateOperationsInput | number | null
+    achieved?: NullableIntFieldUpdateOperationsInput | number | null
+    targetSentence?: FLDUpdatetargetSentenceInput | string[]
+    achievedSentence?: FLDUpdateachievedSentenceInput | string[]
     units?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -36311,8 +36899,10 @@ export namespace Prisma {
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
     block?: StringFieldUpdateOperationsInput | string
-    target?: IntFieldUpdateOperationsInput | number
-    achieved?: IntFieldUpdateOperationsInput | number
+    target?: NullableIntFieldUpdateOperationsInput | number | null
+    achieved?: NullableIntFieldUpdateOperationsInput | number | null
+    targetSentence?: FLDUpdatetargetSentenceInput | string[]
+    achievedSentence?: FLDUpdateachievedSentenceInput | string[]
     units?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -36327,8 +36917,10 @@ export namespace Prisma {
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
     block?: StringFieldUpdateOperationsInput | string
-    target?: IntFieldUpdateOperationsInput | number
-    achieved?: IntFieldUpdateOperationsInput | number
+    target?: NullableIntFieldUpdateOperationsInput | number | null
+    achieved?: NullableIntFieldUpdateOperationsInput | number | null
+    targetSentence?: FLDUpdatetargetSentenceInput | string[]
+    achievedSentence?: FLDUpdateachievedSentenceInput | string[]
     units?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -36339,8 +36931,10 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     awarnessprogramId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
-    target?: IntFieldUpdateOperationsInput | number
-    achieved?: IntFieldUpdateOperationsInput | number
+    target?: NullableIntFieldUpdateOperationsInput | number | null
+    achieved?: NullableIntFieldUpdateOperationsInput | number | null
+    targetSentence?: AwarenessProgramUpdatetargetSentenceInput | string[]
+    achievedSentence?: AwarenessProgramUpdateachievedSentenceInput | string[]
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
     block?: StringFieldUpdateOperationsInput | string
@@ -36361,8 +36955,10 @@ export namespace Prisma {
     awarnessprogramId?: StringFieldUpdateOperationsInput | string
     projectId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
-    target?: IntFieldUpdateOperationsInput | number
-    achieved?: IntFieldUpdateOperationsInput | number
+    target?: NullableIntFieldUpdateOperationsInput | number | null
+    achieved?: NullableIntFieldUpdateOperationsInput | number | null
+    targetSentence?: AwarenessProgramUpdatetargetSentenceInput | string[]
+    achievedSentence?: AwarenessProgramUpdateachievedSentenceInput | string[]
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
     block?: StringFieldUpdateOperationsInput | string
@@ -36382,8 +36978,10 @@ export namespace Prisma {
     awarnessprogramId?: StringFieldUpdateOperationsInput | string
     projectId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
-    target?: IntFieldUpdateOperationsInput | number
-    achieved?: IntFieldUpdateOperationsInput | number
+    target?: NullableIntFieldUpdateOperationsInput | number | null
+    achieved?: NullableIntFieldUpdateOperationsInput | number | null
+    targetSentence?: AwarenessProgramUpdatetargetSentenceInput | string[]
+    achievedSentence?: AwarenessProgramUpdateachievedSentenceInput | string[]
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
     block?: StringFieldUpdateOperationsInput | string
@@ -36403,8 +37001,10 @@ export namespace Prisma {
     inputDistId?: StringFieldUpdateOperationsInput | string
     activityType?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    target?: IntFieldUpdateOperationsInput | number
-    achieved?: IntFieldUpdateOperationsInput | number
+    target?: NullableIntFieldUpdateOperationsInput | number | null
+    achieved?: NullableIntFieldUpdateOperationsInput | number | null
+    targetSentence?: InputDistributionUpdatetargetSentenceInput | string[]
+    achievedSentence?: InputDistributionUpdateachievedSentenceInput | string[]
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
     block?: StringFieldUpdateOperationsInput | string
@@ -36424,8 +37024,10 @@ export namespace Prisma {
     projectId?: StringFieldUpdateOperationsInput | string
     activityType?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    target?: IntFieldUpdateOperationsInput | number
-    achieved?: IntFieldUpdateOperationsInput | number
+    target?: NullableIntFieldUpdateOperationsInput | number | null
+    achieved?: NullableIntFieldUpdateOperationsInput | number | null
+    targetSentence?: InputDistributionUpdatetargetSentenceInput | string[]
+    achievedSentence?: InputDistributionUpdateachievedSentenceInput | string[]
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
     block?: StringFieldUpdateOperationsInput | string
@@ -36444,8 +37046,10 @@ export namespace Prisma {
     projectId?: StringFieldUpdateOperationsInput | string
     activityType?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    target?: IntFieldUpdateOperationsInput | number
-    achieved?: IntFieldUpdateOperationsInput | number
+    target?: NullableIntFieldUpdateOperationsInput | number | null
+    achieved?: NullableIntFieldUpdateOperationsInput | number | null
+    targetSentence?: InputDistributionUpdatetargetSentenceInput | string[]
+    achievedSentence?: InputDistributionUpdateachievedSentenceInput | string[]
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
     block?: StringFieldUpdateOperationsInput | string
@@ -36462,8 +37066,10 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     InfraDevId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
-    target?: IntFieldUpdateOperationsInput | number
-    achieved?: IntFieldUpdateOperationsInput | number
+    target?: NullableIntFieldUpdateOperationsInput | number | null
+    achieved?: NullableIntFieldUpdateOperationsInput | number | null
+    targetSentence?: InfrastructureDevelopmentUpdatetargetSentenceInput | string[]
+    achievedSentence?: InfrastructureDevelopmentUpdateachievedSentenceInput | string[]
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
     block?: StringFieldUpdateOperationsInput | string
@@ -36481,8 +37087,10 @@ export namespace Prisma {
     InfraDevId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     projectId?: StringFieldUpdateOperationsInput | string
-    target?: IntFieldUpdateOperationsInput | number
-    achieved?: IntFieldUpdateOperationsInput | number
+    target?: NullableIntFieldUpdateOperationsInput | number | null
+    achieved?: NullableIntFieldUpdateOperationsInput | number | null
+    targetSentence?: InfrastructureDevelopmentUpdatetargetSentenceInput | string[]
+    achievedSentence?: InfrastructureDevelopmentUpdateachievedSentenceInput | string[]
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
     block?: StringFieldUpdateOperationsInput | string
@@ -36499,8 +37107,10 @@ export namespace Prisma {
     InfraDevId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     projectId?: StringFieldUpdateOperationsInput | string
-    target?: IntFieldUpdateOperationsInput | number
-    achieved?: IntFieldUpdateOperationsInput | number
+    target?: NullableIntFieldUpdateOperationsInput | number | null
+    achieved?: NullableIntFieldUpdateOperationsInput | number | null
+    targetSentence?: InfrastructureDevelopmentUpdatetargetSentenceInput | string[]
+    achievedSentence?: InfrastructureDevelopmentUpdateachievedSentenceInput | string[]
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
     block?: StringFieldUpdateOperationsInput | string
@@ -36516,8 +37126,10 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     activityId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
-    target?: IntFieldUpdateOperationsInput | number
-    achieved?: IntFieldUpdateOperationsInput | number
+    target?: NullableIntFieldUpdateOperationsInput | number | null
+    achieved?: NullableIntFieldUpdateOperationsInput | number | null
+    targetSentence?: ActivitiesUpdatetargetSentenceInput | string[]
+    achievedSentence?: ActivitiesUpdateachievedSentenceInput | string[]
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
     block?: StringFieldUpdateOperationsInput | string
@@ -36542,8 +37154,10 @@ export namespace Prisma {
     activityCategoryId?: StringFieldUpdateOperationsInput | string
     projectId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
-    target?: IntFieldUpdateOperationsInput | number
-    achieved?: IntFieldUpdateOperationsInput | number
+    target?: NullableIntFieldUpdateOperationsInput | number | null
+    achieved?: NullableIntFieldUpdateOperationsInput | number | null
+    targetSentence?: ActivitiesUpdatetargetSentenceInput | string[]
+    achievedSentence?: ActivitiesUpdateachievedSentenceInput | string[]
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
     block?: StringFieldUpdateOperationsInput | string
@@ -36566,8 +37180,10 @@ export namespace Prisma {
     activityCategoryId?: StringFieldUpdateOperationsInput | string
     projectId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
-    target?: IntFieldUpdateOperationsInput | number
-    achieved?: IntFieldUpdateOperationsInput | number
+    target?: NullableIntFieldUpdateOperationsInput | number | null
+    achieved?: NullableIntFieldUpdateOperationsInput | number | null
+    targetSentence?: ActivitiesUpdatetargetSentenceInput | string[]
+    achievedSentence?: ActivitiesUpdateachievedSentenceInput | string[]
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
     block?: StringFieldUpdateOperationsInput | string
@@ -36590,8 +37206,10 @@ export namespace Prisma {
     projectId: string
     quarterId: string
     title: string
-    target: number
-    achieved: number
+    target?: number | null
+    achieved?: number | null
+    targetSentence?: ActivitiesCreatetargetSentenceInput | string[]
+    achievedSentence?: ActivitiesCreateachievedSentenceInput | string[]
     district: string
     village: string
     block: string
@@ -36612,8 +37230,10 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     activityId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
-    target?: IntFieldUpdateOperationsInput | number
-    achieved?: IntFieldUpdateOperationsInput | number
+    target?: NullableIntFieldUpdateOperationsInput | number | null
+    achieved?: NullableIntFieldUpdateOperationsInput | number | null
+    targetSentence?: ActivitiesUpdatetargetSentenceInput | string[]
+    achievedSentence?: ActivitiesUpdateachievedSentenceInput | string[]
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
     block?: StringFieldUpdateOperationsInput | string
@@ -36638,8 +37258,10 @@ export namespace Prisma {
     projectId?: StringFieldUpdateOperationsInput | string
     quarterId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
-    target?: IntFieldUpdateOperationsInput | number
-    achieved?: IntFieldUpdateOperationsInput | number
+    target?: NullableIntFieldUpdateOperationsInput | number | null
+    achieved?: NullableIntFieldUpdateOperationsInput | number | null
+    targetSentence?: ActivitiesUpdatetargetSentenceInput | string[]
+    achievedSentence?: ActivitiesUpdateachievedSentenceInput | string[]
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
     block?: StringFieldUpdateOperationsInput | string
@@ -36662,8 +37284,10 @@ export namespace Prisma {
     projectId?: StringFieldUpdateOperationsInput | string
     quarterId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
-    target?: IntFieldUpdateOperationsInput | number
-    achieved?: IntFieldUpdateOperationsInput | number
+    target?: NullableIntFieldUpdateOperationsInput | number | null
+    achieved?: NullableIntFieldUpdateOperationsInput | number | null
+    targetSentence?: ActivitiesUpdatetargetSentenceInput | string[]
+    achievedSentence?: ActivitiesUpdateachievedSentenceInput | string[]
     district?: StringFieldUpdateOperationsInput | string
     village?: StringFieldUpdateOperationsInput | string
     block?: StringFieldUpdateOperationsInput | string

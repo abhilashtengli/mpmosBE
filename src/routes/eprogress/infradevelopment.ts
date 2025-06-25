@@ -283,20 +283,24 @@ infrastructureRouter.put(
       if (quarterId !== undefined) updateData.quarterId = quarterId;
       if (target !== undefined) updateData.target = target;
       if (achieved && !target) {
-        if (achieved > existingInfra.target) {
-          res.status(400).json({
-            success: false,
-            message:
-              "Achieved count cannot exceed target count, the target is : " +
-              existingInfra.target,
-            code: "INVALID_INPUT"
-          });
-          return;
-        } else {
-          if (achieved !== undefined) updateData.achieved = achieved;
+        if (existingInfra.target) {
+          if (achieved > existingInfra.target) {
+            res.status(400).json({
+              success: false,
+              message:
+                "Achieved count cannot exceed the existing target. Current target is: " +
+                existingInfra.target,
+              code: "INVALID_INPUT"
+            });
+            return;
+          } else {
+            updateData.achieved = achieved;
+          }
         }
       } else {
-        if (achieved !== undefined) updateData.achieved = achieved;
+        if (achieved !== undefined) {
+          updateData.achieved = achieved;
+        }
       }
       if (district !== undefined) updateData.district = district;
       if (title !== undefined) updateData.title = title;

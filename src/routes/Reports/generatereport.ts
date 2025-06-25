@@ -230,8 +230,8 @@ generateReportRouter.post(
             units: a.units ?? undefined,
             quarter: a.quarter.number,
             year: a.quarter.year,
-            target: a.target,
-            achievement: a.achieved,
+            target: a.target || 0,
+            achievement: a.achieved || 0,
             beneficiaries: { male: 0, female: 0, total: 0 },
             location: {
               state: project.locationState ?? "N/A",

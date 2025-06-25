@@ -87,9 +87,9 @@ model Project {
   inputDistributions         InputDistribution[]
   activities                 Activities[]
 
-  User               User?                @relation(fields: [userId], references: [id])
-  userId             String?              @map("user_id")
-  GeneratedReport    GeneratedReport[]
+  User            User?             @relation(fields: [userId], references: [id])
+  userId          String?           @map("user_id")
+  GeneratedReport GeneratedReport[]
 
   // Indexes for frequently queried fields
   @@index([title])
@@ -120,27 +120,29 @@ model Quarter {
 }
 
 model InputDistribution {
-  id           String   @id @default(uuid())
-  inputDistId  String
-  project      Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
-  projectId    String   @map("project_id")
-  quarter      Quarter  @relation(fields: [quarterId], references: [id])
-  quarterId    String   @map("quarter_id")
-  activityType String   @db.VarChar(100) // Seed Distribution/Planting materials/Fertilizers/etc.
-  name         String   @db.VarChar(200)
-  target       Int
-  achieved     Int
-  district     String   @db.VarChar(100)
-  village      String   @db.VarChar(100)
-  block        String   @db.VarChar(100)
-  remarks      String?  @db.VarChar(300)
-  units        String?  @db.VarChar(20)
-  imageUrl     String?
-  imageKey     String?
-  User         User?    @relation(fields: [userId], references: [id])
-  userId       String?  @map("user_id")
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  id               String   @id @default(uuid())
+  inputDistId      String
+  project          Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  projectId        String   @map("project_id")
+  quarter          Quarter  @relation(fields: [quarterId], references: [id])
+  quarterId        String   @map("quarter_id")
+  activityType     String   @db.VarChar(100) // Seed Distribution/Planting materials/Fertilizers/etc.
+  name             String   @db.VarChar(200)
+  target           Int?
+  achieved         Int?
+  targetSentence   String[] @default([])
+  achievedSentence String[] @default([])
+  district         String   @db.VarChar(100)
+  village          String   @db.VarChar(100)
+  block            String   @db.VarChar(100)
+  remarks          String?  @db.VarChar(300)
+  units            String?  @db.VarChar(20)
+  imageUrl         String?
+  imageKey         String?
+  User             User?    @relation(fields: [userId], references: [id])
+  userId           String?  @map("user_id")
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
 
   @@unique([inputDistId])
   @@index([projectId])
@@ -160,8 +162,10 @@ model Training {
   quarter           Quarter  @relation(fields: [quarterId], references: [id])
   quarterId         String   @map("quarter_id")
   title             String   @db.VarChar(255)
-  target            Int
-  achieved          Int
+  target            Int?
+  achieved          Int?
+  targetSentence    String[] @default([])
+  achievedSentence  String[] @default([])
   district          String   @db.VarChar(100)
   village           String   @db.VarChar(100)
   block             String   @db.VarChar(100)
@@ -190,23 +194,25 @@ model Training {
 }
 
 model FLD {
-  id        String   @id @default(uuid())
-  fldId     String
-  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
-  projectId String   @map("project_id")
-  quarter   Quarter  @relation(fields: [quarterId], references: [id])
-  quarterId String   @map("quarter_id")
-  remarks   String?  @db.VarChar(300)
-  district  String   @db.VarChar(100)
-  village   String   @db.VarChar(100)
-  block     String   @db.VarChar(100)
-  target    Int
-  achieved  Int
-  units     String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  User      User?    @relation(fields: [userId], references: [id])
-  userId    String?  @map("user_id")
+  id               String   @id @default(uuid())
+  fldId            String
+  project          Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  projectId        String   @map("project_id")
+  quarter          Quarter  @relation(fields: [quarterId], references: [id])
+  quarterId        String   @map("quarter_id")
+  remarks          String?  @db.VarChar(300)
+  district         String   @db.VarChar(100)
+  village          String   @db.VarChar(100)
+  block            String   @db.VarChar(100)
+  target           Int?
+  achieved         Int?
+  targetSentence   String[] @default([])
+  achievedSentence String[] @default([])
+  units            String?
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+  User             User?    @relation(fields: [userId], references: [id])
+  userId           String?  @map("user_id")
 
   // Indexes for foreign keys
   @@unique([fldId])
@@ -224,8 +230,10 @@ model AwarenessProgram {
   quarter           Quarter  @relation(fields: [quarterId], references: [id])
   quarterId         String   @map("quarter_id")
   title             String   @db.VarChar(100)
-  target            Int
-  achieved          Int
+  target            Int?
+  achieved          Int?
+  targetSentence    String[] @default([])
+  achievedSentence  String[] @default([])
   district          String   @db.VarChar(100)
   village           String   @db.VarChar(100)
   block             String   @db.VarChar(100)
@@ -250,25 +258,27 @@ model AwarenessProgram {
 }
 
 model InfrastructureDevelopment {
-  id         String   @id @default(uuid())
-  InfraDevId String
-  title      String   @db.VarChar(100)
-  project    Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
-  projectId  String   @map("project_id")
-  quarter    Quarter  @relation(fields: [quarterId], references: [id])
-  quarterId  String   @map("quarter_id")
-  target     Int
-  achieved   Int
-  district   String   @db.VarChar(100)
-  village    String   @db.VarChar(100)
-  block      String   @db.VarChar(100)
-  remarks    String?  @db.VarChar(300)
-  imageUrl   String?
-  imageKey   String?
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-  User       User?    @relation(fields: [userId], references: [id])
-  userId     String?  @map("user_id")
+  id               String   @id @default(uuid())
+  InfraDevId       String
+  title            String   @db.VarChar(100)
+  project          Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  projectId        String   @map("project_id")
+  quarter          Quarter  @relation(fields: [quarterId], references: [id])
+  quarterId        String   @map("quarter_id")
+  target           Int?
+  achieved         Int?
+  targetSentence   String[] @default([])
+  achievedSentence String[] @default([])
+  district         String   @db.VarChar(100)
+  village          String   @db.VarChar(100)
+  block            String   @db.VarChar(100)
+  remarks          String?  @db.VarChar(300)
+  imageUrl         String?
+  imageKey         String?
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+  User             User?    @relation(fields: [userId], references: [id])
+  userId           String?  @map("user_id")
 
   // Indexes for better query performance
   @@unique([InfraDevId])
@@ -378,8 +388,10 @@ model Activities {
   quarter            Quarter            @relation(fields: [quarterId], references: [id])
   quarterId          String             @map("quarter_id")
   title              String             @db.VarChar(255)
-  target             Int
-  achieved           Int
+  target             Int?
+  achieved           Int?
+  targetSentence     String[]           @default([])
+  achievedSentence   String[]           @default([])
   district           String             @db.VarChar(100)
   village            String             @db.VarChar(100)
   block              String             @db.VarChar(100)

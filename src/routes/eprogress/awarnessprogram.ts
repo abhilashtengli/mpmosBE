@@ -293,22 +293,25 @@ awarenessProgramRouter.put(
       if (remarks !== undefined) updateData.remarks = remarks;
       if (target !== undefined) updateData.target = target;
       if (achieved && !target) {
-        if (achieved > existingProgram.target) {
-          res.status(400).json({
-            success: false,
-            message:
-              "Achieved count cannot exceed target count, the target is : " +
-              existingProgram.target,
-            code: "INVALID_INPUT"
-          });
-          return;
-        } else {
-          if (achieved !== undefined) updateData.achieved = achieved;
+        if (existingProgram.target) {
+          if (achieved > existingProgram.target) {
+            res.status(400).json({
+              success: false,
+              message:
+                "Achieved count cannot exceed the existing target. Current target is: " +
+                existingProgram.target,
+              code: "INVALID_INPUT"
+            });
+            return;
+          } else {
+            updateData.achieved = achieved;
+          }
         }
       } else {
-        if (achieved !== undefined) updateData.achieved = achieved;
+        if (achieved !== undefined) {
+          updateData.achieved = achieved;
+        }
       }
-      if (achieved !== undefined) updateData.achieved = achieved;
       if (district !== undefined) updateData.district = district;
       if (village !== undefined) updateData.village = village;
       if (block !== undefined) updateData.block = block;

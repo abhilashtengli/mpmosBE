@@ -190,11 +190,23 @@ export const createTrainingValidation = z
     target: z
       .number({ invalid_type_error: "Target must be a number" })
       .int({ message: "Target must be an integer" })
-      .nonnegative({ message: "Target must be zero or positive" }),
+      .nonnegative({ message: "Target must be zero or positive" })
+      .optional(),
     achieved: z
       .number({ invalid_type_error: "Achieved must be a number" })
       .int({ message: "Achieved must be an integer" })
-      .nonnegative({ message: "Achieved must be zero or positive" }),
+      .nonnegative({ message: "Achieved must be zero or positive" })
+      .optional(),
+    targetSentence: z
+      .array(z.string().trim())
+      .max(20, { message: "Cannot have more than 20 target points" })
+      .default([])
+      .optional(),
+    achievedSentence: z
+      .array(z.string().trim())
+      .max(20, { message: "Cannot have more than 20 achievements" })
+      .default([])
+      .optional(),
     district: z
       .string()
       .trim()
@@ -258,8 +270,26 @@ export const createTrainingValidation = z
   })
   .refine(
     (data) => {
-      // Ensure achieved doesn't exceed target
-      return data.achieved <= data.target;
+      const bothPresent =
+        data.target !== undefined && data.achieved !== undefined;
+      const bothAbsent =
+        data.target === undefined && data.achieved === undefined;
+
+      // Either both should be present or both should be absent
+      return bothPresent || bothAbsent;
+    },
+    {
+      message: "Either both target and achieved must be provided, or neither",
+      path: ["target"]
+    }
+  )
+  .refine(
+    (data) => {
+      // If both are present, ensure achieved <= target
+      if (data.target !== undefined && data.achieved !== undefined) {
+        return data.achieved <= data.target;
+      }
+      return true;
     },
     {
       message: "Achieved count cannot exceed target count",
@@ -321,6 +351,16 @@ export const updateTrainingValidation = z
       .number({ invalid_type_error: "Achieved must be a number" })
       .int({ message: "Achieved must be an integer" })
       .nonnegative({ message: "Achieved must be zero or positive" })
+      .optional(),
+    targetSentence: z
+      .array(z.string().trim())
+      .max(20, { message: "Cannot have more than 20 target points" })
+      .default([])
+      .optional(),
+    achievedSentence: z
+      .array(z.string().trim())
+      .max(20, { message: "Cannot have more than 20 achievements" })
+      .default([])
       .optional(),
     district: z
       .string()
@@ -456,11 +496,23 @@ export const createAwarenessProgramValidation = z
     target: z
       .number({ invalid_type_error: "Target must be a number" })
       .int({ message: "Target must be an integer" })
-      .nonnegative({ message: "Target must be zero or positive" }),
+      .nonnegative({ message: "Target must be zero or positive" })
+      .optional(),
     achieved: z
       .number({ invalid_type_error: "Achieved must be a number" })
       .int({ message: "Achieved must be an integer" })
-      .nonnegative({ message: "Achieved must be zero or positive" }),
+      .nonnegative({ message: "Achieved must be zero or positive" })
+      .optional(),
+    targetSentence: z
+      .array(z.string().trim())
+      .max(20, { message: "Cannot have more than 20 target points" })
+      .default([])
+      .optional(),
+    achievedSentence: z
+      .array(z.string().trim())
+      .max(20, { message: "Cannot have more than 20 achievements" })
+      .default([])
+      .optional(),
     district: z
       .string()
       .trim()
@@ -517,7 +569,26 @@ export const createAwarenessProgramValidation = z
   })
   .refine(
     (data) => {
-      return data.achieved <= data.target;
+      const bothPresent =
+        data.target !== undefined && data.achieved !== undefined;
+      const bothAbsent =
+        data.target === undefined && data.achieved === undefined;
+
+      // Either both should be present or both should be absent
+      return bothPresent || bothAbsent;
+    },
+    {
+      message: "Either both target and achieved must be provided, or neither",
+      path: ["target"]
+    }
+  )
+  .refine(
+    (data) => {
+      // If both are present, ensure achieved <= target
+      if (data.target !== undefined && data.achieved !== undefined) {
+        return data.achieved <= data.target;
+      }
+      return true;
     },
     {
       message: "Achieved count cannot exceed target count",
@@ -566,6 +637,16 @@ export const updateAwarenessProgramValidation = z
       .number({ invalid_type_error: "Achieved must be a number" })
       .int({ message: "Achieved must be an integer" })
       .nonnegative({ message: "Achieved must be zero or positive" })
+      .optional(),
+    targetSentence: z
+      .array(z.string().trim())
+      .max(20, { message: "Cannot have more than 20 target points" })
+      .default([])
+      .optional(),
+    achievedSentence: z
+      .array(z.string().trim())
+      .max(20, { message: "Cannot have more than 20 achievements" })
+      .default([])
       .optional(),
     remarks: z
       .string()
@@ -682,13 +763,25 @@ export const createFldValidation = z
       .string()
       .max(100, { message: "Block must be 100 characters or less" }),
     target: z
-      .number()
-      .int()
-      .positive({ message: "Target must be a positive integer" }),
+      .number({ invalid_type_error: "Target must be a number" })
+      .int({ message: "Target must be an integer" })
+      .nonnegative({ message: "Target must be zero or positive" })
+      .optional(),
     achieved: z
-      .number()
-      .int()
-      .nonnegative({ message: "Achieved must be a non-negative integer" }),
+      .number({ invalid_type_error: "Achieved must be a number" })
+      .int({ message: "Achieved must be an integer" })
+      .nonnegative({ message: "Achieved must be zero or positive" })
+      .optional(),
+    targetSentence: z
+      .array(z.string().trim())
+      .max(20, { message: "Cannot have more than 20 target points" })
+      .default([])
+      .optional(),
+    achievedSentence: z
+      .array(z.string().trim())
+      .max(20, { message: "Cannot have more than 20 achievements" })
+      .default([])
+      .optional(),
     units: z
       .string()
       .trim()
@@ -701,8 +794,26 @@ export const createFldValidation = z
   })
   .refine(
     (data) => {
-      // Ensure achieved doesn't exceed target
-      return data.achieved <= data.target;
+      const bothPresent =
+        data.target !== undefined && data.achieved !== undefined;
+      const bothAbsent =
+        data.target === undefined && data.achieved === undefined;
+
+      // Either both should be present or both should be absent
+      return bothPresent || bothAbsent;
+    },
+    {
+      message: "Either both target and achieved must be provided, or neither",
+      path: ["target"]
+    }
+  )
+  .refine(
+    (data) => {
+      // If both are present, ensure achieved <= target
+      if (data.target !== undefined && data.achieved !== undefined) {
+        return data.achieved <= data.target;
+      }
+      return true;
     },
     {
       message: "Achieved count cannot exceed target count",
@@ -739,14 +850,24 @@ export const updateFldValidation = z
       .max(100, { message: "Block must be 100 characters or less" })
       .optional(),
     target: z
-      .number()
-      .int()
-      .positive({ message: "Target must be a positive integer" })
+      .number({ invalid_type_error: "Target must be a number" })
+      .int({ message: "Target must be an integer" })
+      .nonnegative({ message: "Target must be zero or positive" })
       .optional(),
     achieved: z
-      .number()
-      .int()
-      .nonnegative({ message: "Achieved must be a non-negative integer" })
+      .number({ invalid_type_error: "Target must be a number" })
+      .int({ message: "Target must be an integer" })
+      .nonnegative({ message: "Target must be zero or positive" })
+      .optional(),
+    targetSentence: z
+      .array(z.string().trim())
+      .max(20, { message: "Cannot have more than 20 target points" })
+      .default([])
+      .optional(),
+    achievedSentence: z
+      .array(z.string().trim())
+      .max(20, { message: "Cannot have more than 20 achievements" })
+      .default([])
       .optional(),
     units: z
       .string()
@@ -787,12 +908,23 @@ export const createInfrastructureValidation = z
     target: z
       .number({ invalid_type_error: "Target must be a number" })
       .int({ message: "Target must be an integer" })
-      .positive({ message: "Target must be a positive number" }),
-
+      .positive({ message: "Target must be a positive number" })
+      .optional(),
     achieved: z
       .number({ invalid_type_error: "Achieved must be a number" })
       .int({ message: "Achieved must be an integer" })
-      .nonnegative({ message: "Achieved must be zero or positive" }),
+      .nonnegative({ message: "Achieved must be zero or positive" })
+      .optional(),
+    targetSentence: z
+      .array(z.string().trim())
+      .max(20, { message: "Cannot have more than 20 target points" })
+      .default([])
+      .optional(),
+    achievedSentence: z
+      .array(z.string().trim())
+      .max(20, { message: "Cannot have more than 20 achievements" })
+      .default([])
+      .optional(),
 
     district: z
       .string()
@@ -829,7 +961,26 @@ export const createInfrastructureValidation = z
   })
   .refine(
     (data) => {
-      return data.achieved <= data.target;
+      const bothPresent =
+        data.target !== undefined && data.achieved !== undefined;
+      const bothAbsent =
+        data.target === undefined && data.achieved === undefined;
+
+      // Either both should be present or both should be absent
+      return bothPresent || bothAbsent;
+    },
+    {
+      message: "Either both target and achieved must be provided, or neither",
+      path: ["target"]
+    }
+  )
+  .refine(
+    (data) => {
+      // If both are present, ensure achieved <= target
+      if (data.target !== undefined && data.achieved !== undefined) {
+        return data.achieved <= data.target;
+      }
+      return true;
     },
     {
       message: "Achieved count cannot exceed target count",
@@ -877,7 +1028,16 @@ export const updateInfrastructureValidation = z
       .int({ message: "Achieved must be an integer" })
       .nonnegative({ message: "Achieved must be zero or positive" })
       .optional(),
-
+    targetSentence: z
+      .array(z.string().trim())
+      .max(20, { message: "Cannot have more than 20 target points" })
+      .default([])
+      .optional(),
+    achievedSentence: z
+      .array(z.string().trim())
+      .max(20, { message: "Cannot have more than 20 achievements" })
+      .default([])
+      .optional(),
     district: z
       .string()
       .trim()
@@ -972,12 +1132,23 @@ export const createInputDistributionValidation = z
     target: z
       .number({ invalid_type_error: "Target must be a number" })
       .int({ message: "Target must be an integer" })
-      .positive({ message: "Target must be a positive number" }),
-
+      .positive({ message: "Target must be a positive number" })
+      .optional(),
     achieved: z
       .number({ invalid_type_error: "Achieved must be a number" })
       .int({ message: "Achieved must be an integer" })
-      .nonnegative({ message: "Achieved must be zero or positive" }),
+      .nonnegative({ message: "Achieved must be zero or positive" })
+      .optional(),
+    targetSentence: z
+      .array(z.string().trim())
+      .max(20, { message: "Cannot have more than 20 target points" })
+      .default([])
+      .optional(),
+    achievedSentence: z
+      .array(z.string().trim())
+      .max(20, { message: "Cannot have more than 20 achievements" })
+      .default([])
+      .optional(),
 
     district: z
       .string()
@@ -1021,7 +1192,26 @@ export const createInputDistributionValidation = z
   })
   .refine(
     (data) => {
-      return data.achieved <= data.target;
+      const bothPresent =
+        data.target !== undefined && data.achieved !== undefined;
+      const bothAbsent =
+        data.target === undefined && data.achieved === undefined;
+
+      // Either both should be present or both should be absent
+      return bothPresent || bothAbsent;
+    },
+    {
+      message: "Either both target and achieved must be provided, or neither",
+      path: ["target"]
+    }
+  )
+  .refine(
+    (data) => {
+      // If both are present, ensure achieved <= target
+      if (data.target !== undefined && data.achieved !== undefined) {
+        return data.achieved <= data.target;
+      }
+      return true;
     },
     {
       message: "Achieved count cannot exceed target count",
@@ -1079,7 +1269,16 @@ export const updateInputDistributionValidation = z
       .int({ message: "Achieved must be an integer" })
       .nonnegative({ message: "Achieved must be zero or positive" })
       .optional(),
-
+    targetSentence: z
+      .array(z.string().trim())
+      .max(20, { message: "Cannot have more than 20 target points" })
+      .default([])
+      .optional(),
+    achievedSentence: z
+      .array(z.string().trim())
+      .max(20, { message: "Cannot have more than 20 achievements" })
+      .default([])
+      .optional(),
     district: z
       .string()
       .trim()
