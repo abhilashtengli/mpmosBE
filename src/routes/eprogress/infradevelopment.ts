@@ -58,6 +58,8 @@ infrastructureRouter.post(
         achieved,
         district,
         title,
+        targetSentence,
+        achievedSentence,
         village,
         block,
         remarks,
@@ -116,6 +118,8 @@ infrastructureRouter.post(
           achieved,
           district,
           village,
+          targetSentence,
+          achievedSentence,
           title,
           block,
           remarks,
@@ -130,6 +134,8 @@ infrastructureRouter.post(
           quarter: true,
           target: true,
           achieved: true,
+          targetSentence: true,
+          achievedSentence: true,
           district: true,
           title: true,
           village: true,
@@ -273,6 +279,8 @@ infrastructureRouter.put(
         district,
         village,
         title,
+        targetSentence,
+        achievedSentence,
         block,
         remarks,
         imageUrl,
@@ -281,6 +289,10 @@ infrastructureRouter.put(
 
       if (projectId !== undefined) updateData.projectId = projectId;
       if (quarterId !== undefined) updateData.quarterId = quarterId;
+      if (targetSentence !== undefined)
+        updateData.targetSentence = targetSentence;
+      if (achievedSentence !== undefined)
+        updateData.achievedSentence = achievedSentence;
       if (target !== undefined) updateData.target = target;
       if (achieved && !target) {
         if (existingInfra.target) {
@@ -331,6 +343,8 @@ infrastructureRouter.put(
           quarter: true,
           target: true,
           achieved: true,
+          targetSentence: true,
+          achievedSentence: true,
           district: true,
           village: true,
           title: true,
@@ -411,6 +425,8 @@ infrastructureRouter.get(
             },
             target: true,
             achieved: true,
+            targetSentence: true,
+            achievedSentence: true,
             district: true,
             village: true,
             title: true,
@@ -478,6 +494,8 @@ infrastructureRouter.get(
             quarter: true,
             target: true,
             achieved: true,
+            targetSentence: true,
+            achievedSentence: true,
             district: true,
             village: true,
             block: true,

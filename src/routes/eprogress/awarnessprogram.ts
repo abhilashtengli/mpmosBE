@@ -56,6 +56,8 @@ awarenessProgramRouter.post(
         title,
         target,
         achieved,
+        targetSentence,
+        achievedSentence,
         district,
         village,
         block,
@@ -116,6 +118,8 @@ awarenessProgramRouter.post(
           achieved,
           district,
           village,
+          targetSentence,
+          achievedSentence,
           block,
           beneficiaryMale,
           beneficiaryFemale,
@@ -135,6 +139,8 @@ awarenessProgramRouter.post(
           achieved: true,
           district: true,
           village: true,
+          targetSentence: true,
+          achievedSentence: true,
           block: true,
           beneficiaryMale: true,
           beneficiaryFemale: true,
@@ -277,6 +283,8 @@ awarenessProgramRouter.put(
         target,
         achieved,
         district,
+        targetSentence,
+        achievedSentence,
         village,
         block,
         beneficiaryMale,
@@ -289,6 +297,10 @@ awarenessProgramRouter.put(
 
       if (projectId !== undefined) updateData.projectId = projectId;
       if (quarterId !== undefined) updateData.quarterId = quarterId;
+      if (targetSentence !== undefined)
+        updateData.targetSentence = targetSentence;
+      if (achievedSentence !== undefined)
+        updateData.achievedSentence = achievedSentence;
       if (title !== undefined) updateData.title = title;
       if (remarks !== undefined) updateData.remarks = remarks;
       if (target !== undefined) updateData.target = target;
@@ -345,6 +357,8 @@ awarenessProgramRouter.put(
           title: true,
           target: true,
           achieved: true,
+          targetSentence: true,
+          achievedSentence: true,
           district: true,
           village: true,
           block: true,
@@ -538,6 +552,8 @@ awarenessProgramRouter.get(
           district: true,
           village: true,
           block: true,
+          targetSentence: true,
+          achievedSentence: true,
           beneficiaryMale: true,
           beneficiaryFemale: true,
           imageUrl: true,
@@ -604,6 +620,8 @@ awarenessProgramRouter.get(
           title: true,
           target: true,
           achieved: true,
+          targetSentence: true,
+          achievedSentence: true,
           district: true,
           village: true,
           block: true,

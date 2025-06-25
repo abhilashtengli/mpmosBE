@@ -56,6 +56,8 @@ activityRouter.post(
         title,
         target,
         achieved,
+        targetSentence,
+        achievedSentence,
         district,
         village,
         block,
@@ -124,6 +126,8 @@ activityRouter.post(
           title,
           target,
           achieved,
+          targetSentence,
+          achievedSentence,
           district,
           village,
           block,
@@ -146,6 +150,8 @@ activityRouter.post(
           title: true,
           target: true,
           achieved: true,
+          targetSentence: true,
+          achievedSentence: true,
           district: true,
           village: true,
           block: true,
@@ -286,6 +292,8 @@ activityRouter.put(
         achieved,
         district,
         village,
+        targetSentence,
+        achievedSentence,
         block,
         beneficiaryFemale,
         beneficiaryMale,
@@ -301,6 +309,10 @@ activityRouter.put(
         updateData.activityCategoryId = activityCategoryId;
       if (projectId !== undefined) updateData.projectId = projectId;
       if (quarterId !== undefined) updateData.quarterId = quarterId;
+      if (targetSentence !== undefined)
+        updateData.targetSentence = targetSentence;
+      if (achievedSentence !== undefined)
+        updateData.achievedSentence = achievedSentence;
       if (title !== undefined) updateData.title = title;
       if (target !== undefined) updateData.target = target;
       if (achieved && !target) {
@@ -358,6 +370,8 @@ activityRouter.put(
           target: true,
           activityId: true,
           achieved: true,
+          targetSentence: true,
+          achievedSentence: true,
           district: true,
           village: true,
           block: true,
@@ -443,6 +457,8 @@ activityRouter.get(
           target: true,
           activityId: true,
           achieved: true,
+          targetSentence: true,
+          achievedSentence: true,
           district: true,
           village: true,
           block: true,
@@ -537,6 +553,8 @@ activityRouter.get(
           target: true,
           activityId: true,
           achieved: true,
+          targetSentence: true,
+          achievedSentence: true,
           district: true,
           village: true,
           block: true,

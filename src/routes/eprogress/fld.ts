@@ -48,6 +48,8 @@ fldRouter.post("/create-fld", userAuth, async (req: Request, res: Response) => {
       projectId,
       quarterId,
       remarks,
+      targetSentence,
+      achievedSentence,
       district,
       village,
       block,
@@ -104,6 +106,8 @@ fldRouter.post("/create-fld", userAuth, async (req: Request, res: Response) => {
         district,
         village,
         block,
+        targetSentence,
+        achievedSentence,
         target,
         achieved,
         units,
@@ -113,6 +117,8 @@ fldRouter.post("/create-fld", userAuth, async (req: Request, res: Response) => {
         id: true,
         fldId: true,
         project: true,
+        targetSentence: true,
+        achievedSentence: true,
         quarter: true,
         remarks: true,
         target: true,
@@ -253,6 +259,8 @@ fldRouter.put(
         quarterId,
         remarks,
         district,
+        targetSentence,
+        achievedSentence,
         village,
         block,
         target,
@@ -262,6 +270,10 @@ fldRouter.put(
 
       if (projectId !== undefined) updateData.projectId = projectId;
       if (quarterId !== undefined) updateData.quarterId = quarterId;
+      if (targetSentence !== undefined)
+        updateData.targetSentence = targetSentence;
+      if (achievedSentence !== undefined)
+        updateData.achievedSentence = achievedSentence;
       if (remarks !== undefined) updateData.remarks = remarks;
       if (district !== undefined) updateData.district = district;
       if (village !== undefined) updateData.village = village;
@@ -311,6 +323,8 @@ fldRouter.put(
           remarks: true,
           target: true,
           achieved: true,
+          targetSentence: true,
+          achievedSentence: true,
           district: true,
           village: true,
           block: true,
@@ -461,6 +475,8 @@ fldRouter.get(
           remarks: true,
           target: true,
           achieved: true,
+          targetSentence: true,
+          achievedSentence: true,
           district: true,
           village: true,
           block: true,
@@ -532,6 +548,8 @@ fldRouter.get(
           remarks: true,
           target: true,
           achieved: true,
+          targetSentence: true,
+          achievedSentence: true,
           district: true,
           village: true,
           block: true,

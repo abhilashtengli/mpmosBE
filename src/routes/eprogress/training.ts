@@ -55,6 +55,8 @@ trainingRouter.post(
         title,
         target,
         achieved,
+        targetSentence,
+        achievedSentence,
         district,
         village,
         block,
@@ -116,6 +118,8 @@ trainingRouter.post(
           title,
           target,
           achieved,
+          targetSentence,
+          achievedSentence,
           district,
           village,
           block,
@@ -137,6 +141,8 @@ trainingRouter.post(
           title: true,
           target: true,
           achieved: true,
+          targetSentence: true,
+          achievedSentence: true,
           district: true,
           village: true,
           block: true,
@@ -285,6 +291,8 @@ trainingRouter.put(
         district,
         village,
         block,
+        targetSentence,
+        achievedSentence,
         beneficiaryMale,
         beneficiaryFemale,
         remarks,
@@ -297,6 +305,10 @@ trainingRouter.put(
 
       if (projectId !== undefined) updateData.projectId = projectId;
       if (quarterId !== undefined) updateData.quarterId = quarterId;
+      if (targetSentence !== undefined)
+        updateData.targetSentence = targetSentence;
+      if (achievedSentence !== undefined)
+        updateData.achievedSentence = achievedSentence;
       if (title !== undefined) updateData.title = title;
       if (target !== undefined) updateData.target = target;
       if (achieved && !target) {
@@ -358,6 +370,8 @@ trainingRouter.put(
           district: true,
           village: true,
           block: true,
+          targetSentence: true,
+          achievedSentence: true,
           beneficiaryMale: true,
           beneficiaryFemale: true,
           remarks: true,
@@ -448,6 +462,8 @@ trainingRouter.get(
           beneficiaryMale: true,
           beneficiaryFemale: true,
           remarks: true,
+          targetSentence: true,
+          achievedSentence: true,
           imageUrl: true,
           imageKey: true,
           pdfUrl: true,
@@ -517,6 +533,8 @@ trainingRouter.get(
           district: true,
           village: true,
           block: true,
+          targetSentence: true,
+          achievedSentence: true,
           beneficiaryMale: true,
           beneficiaryFemale: true,
           remarks: true,

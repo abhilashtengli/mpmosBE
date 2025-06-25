@@ -57,6 +57,8 @@ inputDistributionRouter.post(
         name,
         target,
         achieved,
+        targetSentence,
+        achievedSentence,
         district,
         village,
         block,
@@ -118,6 +120,8 @@ inputDistributionRouter.post(
           name,
           target,
           achieved,
+          targetSentence,
+          achievedSentence,
           district,
           village,
           block,
@@ -136,6 +140,8 @@ inputDistributionRouter.post(
           name: true,
           target: true,
           achieved: true,
+          targetSentence: true,
+          achievedSentence: true,
           district: true,
           village: true,
           block: true,
@@ -278,6 +284,8 @@ inputDistributionRouter.put(
         name,
         target,
         achieved,
+        targetSentence,
+        achievedSentence,
         district,
         village,
         block,
@@ -289,6 +297,10 @@ inputDistributionRouter.put(
 
       if (projectId !== undefined) updateData.projectId = projectId;
       if (quarterId !== undefined) updateData.quarterId = quarterId;
+      if (targetSentence !== undefined)
+        updateData.targetSentence = targetSentence;
+      if (achievedSentence !== undefined)
+        updateData.achievedSentence = achievedSentence;
       if (activityType !== undefined) updateData.activityType = activityType;
       if (name !== undefined) updateData.name = name;
       if (target !== undefined) updateData.target = target;
@@ -343,6 +355,8 @@ inputDistributionRouter.put(
           name: true,
           target: true,
           achieved: true,
+          targetSentence: true,
+          achievedSentence: true,
           district: true,
           village: true,
           block: true,
@@ -424,6 +438,8 @@ inputDistributionRouter.get(
           name: true,
           target: true,
           achieved: true,
+          targetSentence: true,
+          achievedSentence: true,
           district: true,
           village: true,
           block: true,
@@ -492,6 +508,8 @@ inputDistributionRouter.get(
           name: true,
           target: true,
           achieved: true,
+          targetSentence: true,
+          achievedSentence: true,
           district: true,
           village: true,
           block: true,
