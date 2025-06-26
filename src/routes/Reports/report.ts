@@ -12,6 +12,8 @@ interface RequestWithUser extends Request {
     isVerified: boolean;
   } | null;
 }
+
+// Project reports
 reportRouter.get(
   "/get-project-reports",
   userAuth,
