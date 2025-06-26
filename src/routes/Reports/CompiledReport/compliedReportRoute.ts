@@ -1,7 +1,9 @@
 import { prisma } from "@lib/prisma";
 import { userAuth } from "@middleware/auth";
+import { generatePresignedUrl } from "@services/Cloudflare/cloudflare";
 
 import express, { Request, Response } from "express";
+import { generateCompliedDocxReportBuffer } from "./generateCompiledDocxReport";
 
 const generateCompliedReportRouter = express.Router();
 
@@ -339,9 +341,75 @@ generateCompliedReportRouter.post(
       const customActivities = Array.from(customActivityMap.values());
 
       const activities = [...staticActivities, ...customActivities];
+
+      const reportInfo = {
+        quarter: quarter.number,
+        year: quarter.year,
+        reportGeneratedAt: new Date().toLocaleString("en-IN", {
+          day: "2-digit",
+          month: "2-digit",
+          year: "numeric",
+          hour: "2-digit",
+          minute: "2-digit",
+          hour12: true
+        })
+      };
+      const buffer = await generateCompliedDocxReportBuffer(
+        activities,
+        reportInfo
+      );
+
+      const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
+      const fileName = `compiled-report-Q${quarter.number}-${quarter.year}-${timestamp}.docx`;
+      const { signedUrl, key, publicUrl } = await generatePresignedUrl(
+        fileName,
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+      );
+      const uploadResponse = await fetch(signedUrl, {
+        method: "PUT",
+        headers: {
+          "Content-Type":
+            "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+          "Content-Length": buffer.length.toString()
+        },
+        body: buffer
+      });
+
+      if (!uploadResponse.ok) {
+        throw new Error(
+          `Upload failed: ${uploadResponse.status} ${uploadResponse.statusText}`
+        );
+      }
+      const compliedReport = await prisma.compliedReport.create({
+        data: {
+          quarter: `Q${quarter.number}`,
+          year: quarter.year,
+          fileName,
+          fileKey: key,
+          fileUrl: publicUrl,
+          userId: user.id
+        },
+        select: {
+          id: true,
+          quarter: true,
+          year: true,
+          fileUrl: true,
+          fileKey: true,
+          fileName: true,
+          createdAt: true,
+          updatedAt: true,
+          User: {
+            select: {
+              id: true,
+              name: true
+            }
+          }
+        }
+      });
       res.json({
         success: true,
-        data: activities
+        data: compliedReport,
+        publicUrl: publicUrl
       });
       return;
     } catch (error) {

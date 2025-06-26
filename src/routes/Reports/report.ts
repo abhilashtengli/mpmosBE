@@ -38,7 +38,7 @@ reportRouter.get(
         return;
       }
 
-      const reportData = await prisma.generatedReport.findMany({
+      const reportData = await prisma.projectReport.findMany({
         orderBy: {
           createdAt: "desc" // Default ordering by most recent
         },

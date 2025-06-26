@@ -51,7 +51,8 @@ model User {
   projectDetails             ProjectDetails[]
   activities                 Activities[]
   ActivitiesCategory         ActivitiesCategory[]
-  GeneratedReport            GeneratedReport[]
+  projectReport              ProjectReport[]
+  compliedReport             CompliedReport[]
 
   @@index([email])
   @@index([role])
@@ -87,9 +88,9 @@ model Project {
   inputDistributions         InputDistribution[]
   activities                 Activities[]
 
-  User            User?             @relation(fields: [userId], references: [id])
-  userId          String?           @map("user_id")
-  GeneratedReport GeneratedReport[]
+  User            User?           @relation(fields: [userId], references: [id])
+  userId          String?         @map("user_id")
+  GeneratedReport ProjectReport[]
 
   // Indexes for frequently queried fields
   @@index([title])
@@ -419,7 +420,7 @@ model Activities {
   @@map("activities")
 }
 
-model GeneratedReport {
+model ProjectReport {
   id        String   @id @default(uuid())
   projectId String
   quarter   String
@@ -433,7 +434,22 @@ model GeneratedReport {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  @@index([userId]) // Index for faster user-based queries
   @@index([projectId, userId]) // Compound index for project + user queries
-  @@map("generated_reports")
+  @@map("project_reports")
+}
+
+model CompliedReport {
+  id        String   @id @default(uuid())
+  quarter   String
+  year      Int
+  fileName  String
+  fileKey   String
+  fileUrl   String
+  User      User?    @relation(fields: [userId], references: [id])
+  userId    String?  @map("user_id")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId]) // Compound index for project + user queries
+  @@map("complied_reports")
 }

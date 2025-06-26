@@ -298,7 +298,6 @@ generateReportRouter.post(
         return;
       }
 
-      //   console.log("Act : ", activities);
 
       const projectInfo = {
         name: project.title,
@@ -341,7 +340,7 @@ generateReportRouter.post(
         );
       }
 
-      const generatedReport = await prisma.generatedReport.create({
+      const generatedReport = await prisma.projectReport.create({
         data: {
           projectId,
           quarter: `Q${quarter.number}`,
@@ -369,7 +368,6 @@ generateReportRouter.post(
           }
         }
       });
-      console.log("Public Url : ", publicUrl);
       res.json({
         success: true,
         data: generatedReport

@@ -366,9 +366,21 @@ exports.Prisma.ActivitiesScalarFieldEnum = {
   userId: 'userId'
 };
 
-exports.Prisma.GeneratedReportScalarFieldEnum = {
+exports.Prisma.ProjectReportScalarFieldEnum = {
   id: 'id',
   projectId: 'projectId',
+  quarter: 'quarter',
+  year: 'year',
+  fileName: 'fileName',
+  fileKey: 'fileKey',
+  fileUrl: 'fileUrl',
+  userId: 'userId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.CompliedReportScalarFieldEnum = {
+  id: 'id',
   quarter: 'quarter',
   year: 'year',
   fileName: 'fileName',
@@ -419,7 +431,8 @@ exports.Prisma.ModelName = {
   ProjectDetails: 'ProjectDetails',
   ActivitiesCategory: 'ActivitiesCategory',
   Activities: 'Activities',
-  GeneratedReport: 'GeneratedReport'
+  ProjectReport: 'ProjectReport',
+  CompliedReport: 'CompliedReport'
 };
 
 /**

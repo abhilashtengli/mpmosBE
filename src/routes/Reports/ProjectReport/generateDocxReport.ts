@@ -49,7 +49,6 @@ export const generateDocxReportBuffer = async (
   activities: Activity[],
   projectInfo: ProjectInfo = {}
 ): Promise<Buffer> => {
-  console.log("PI : ", projectInfo);
   const rows: TableRow[] = [];
 
   // Enhanced header row with larger text and better styling
