@@ -5,5 +5,4 @@ import express, { Request, Response } from "express";
 const globalRouter = express.Router();
 
 
-//GET 
 

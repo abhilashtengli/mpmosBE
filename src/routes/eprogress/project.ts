@@ -127,9 +127,7 @@ projectRouter.get(
   userAuth,
   async (req: Request, res: Response) => {
     try {
-      console.log("entered");
       const user = (req as RequestWithUser).user;
-      console.log("User : ", user);
       if (!user) {
         res.status(401).json({
           success: false,
@@ -194,10 +192,8 @@ projectRouter.get(
   "/get-admin-projects",
   userAuth,
   async (req: Request, res: Response) => {
-    console.log("entered");
     try {
       const user = (req as RequestWithUser).user;
-      console.log("entered", user);
 
       if (!user) {
         res.status(401).json({
