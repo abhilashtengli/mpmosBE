@@ -87,5 +87,77 @@ reportRouter.get(
     }
   }
 );
+reportRouter.get(
+  "/get-compiled-reports",
+  userAuth,
+  async (req: Request, res: Response) => {
+    try {
+      const user = (req as RequestWithUser).user;
+
+      if (!user) {
+        res.status(401).json({
+          success: false,
+          message: "Please Sign in to view your Projects",
+          code: "UNAUTHORIZED"
+        });
+        return;
+      }
+      if (user.role !== "admin") {
+        res.status(401).json({
+          success: false,
+          message: "You are not authorised",
+          code: "UNAUTHORIZED"
+        });
+        return;
+      }
+
+      const reportData = await prisma.compliedReport.findMany({
+        orderBy: {
+          createdAt: "desc" 
+        },
+        select: {
+          id: true,
+          quarter: true,
+          year: true,
+          fileUrl: true,
+          fileKey: true,
+          fileName: true,
+          createdAt: true,
+          updatedAt: true,
+          User: {
+            select: {
+              id: true,
+              name: true
+            }
+          }
+        }
+      });
+
+      if (reportData.length === 0) {
+        res.status(200).json({
+          success: true,
+          message: "No Reports found",
+          data: [],
+          code: "NO_REPORTS_FOUND"
+        });
+        return;
+      }
+      res.status(200).json({
+        success: true,
+        data: reportData,
+        code: "GET_REPORTS_SUCCESSFULL"
+      });
+      return;
+    } catch (err) {
+      console.error("Error getting the reports", err);
+      res.status(500).json({
+        success: false,
+        message: "Could not fetch Reports, please try again later",
+        code: "INTERNAL_SERVER_ERROR"
+      });
+      return;
+    }
+  }
+);
 
 export default reportRouter;

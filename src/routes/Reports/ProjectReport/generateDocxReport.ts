@@ -45,6 +45,7 @@ interface ProjectInfo {
   projectDirector?: string;
 }
 
+
 export const generateDocxReportBuffer = async (
   activities: Activity[],
   projectInfo: ProjectInfo = {}

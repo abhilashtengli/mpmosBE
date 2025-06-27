@@ -4,6 +4,7 @@ import { generatePresignedUrl } from "@services/Cloudflare/cloudflare";
 import { z } from "zod"; // Add zod for validation
 import express, { Request, Response } from "express";
 import { generateCompliedDocxReportBuffer } from "./generateCompiledDocxReport";
+import { cleanupOldCompiledReports } from "./cleanUpReports";
 
 const generateCompliedReportRouter = express.Router();
 
@@ -38,6 +39,7 @@ enum ErrorCodes {
   VALIDATION_ERROR = "VALIDATION_ERROR",
   QUARTER_NOT_FOUND = "QUARTER_NOT_FOUND",
   DATABASE_ERROR = "DATABASE_ERROR",
+  NO_ACTIVITIES_FOUND = "NO_ACTIVITIES_FOUND",
   FILE_UPLOAD_ERROR = "FILE_UPLOAD_ERROR",
   INTERNAL_ERROR = "INTERNAL_ERROR"
 }
@@ -55,6 +57,7 @@ interface SuccessResponse {
   success: true;
   data: any;
   publicUrl: string;
+  cleanupWarnings?: string[];
 }
 interface RequestWithUser extends Request {
   user?: {
@@ -452,6 +455,18 @@ generateCompliedReportRouter.post(
         return;
       }
 
+      if (activities.length === 0) {
+        const errorResponse: ErrorResponse = {
+          success: false,
+          error: {
+            code: ErrorCodes.NO_ACTIVITIES_FOUND,
+            message: "No activities found for the given quarter"
+          }
+        };
+        res.status(404).json(errorResponse);
+        return;
+      }
+
       let buffer;
       try {
         const reportInfo = {
@@ -517,7 +532,7 @@ generateCompliedReportRouter.post(
       }
       let compliedReport;
       try {
-         compliedReport = await prisma.compliedReport.create({
+        compliedReport = await prisma.compliedReport.create({
           data: {
             quarter: `Q${quarter.number}`,
             year: quarter.year,
@@ -556,13 +571,38 @@ generateCompliedReportRouter.post(
         res.status(500).json(errorResponse);
         return;
       }
+      let cleanupWarnings: string[] = [];
+      try {
+        console.log(
+          "Starting global report cleanup after successful report creation"
+        );
+        const cleanupResult = await cleanupOldCompiledReports();
+
+        if (!cleanupResult.success) {
+          console.warn(
+            "Report cleanup completed with warnings:",
+            cleanupResult.warnings
+          );
+          cleanupWarnings = cleanupResult.warnings;
+        } else {
+          console.log("Report cleanup completed successfully");
+        }
+      } catch (cleanupError) {
+        console.error("Critical error during report cleanup:", cleanupError);
+        cleanupWarnings.push(
+          "Report cleanup process failed - old reports may still exist"
+        );
+      }
 
       const successResponse: SuccessResponse = {
         success: true,
         data: compliedReport,
         publicUrl: fileInfo.publicUrl
       };
-
+      // Add cleanup warnings if any exist
+      if (cleanupWarnings.length > 0) {
+        successResponse.cleanupWarnings = cleanupWarnings;
+      }
       res.status(201).json(successResponse);
       return;
     } catch (error) {
