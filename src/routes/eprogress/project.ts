@@ -60,7 +60,7 @@ projectRouter.post(
       if (existingProject) {
         res.status(409).json({
           success: false,
-          message: "A project with this title already existis",
+          message: "A project with this title already exists",
           code: "DUPLICATE_RESOURCE"
         });
         return;
@@ -81,8 +81,7 @@ projectRouter.post(
         locationState,
         director,
         status,
-        // userId: user.id
-        userId: "1edf5b60-f916-47cf-ba4e-d66d5d1ae4aa" //--REMOVE IN PRODUCTION--
+        userId: user.id
       };
 
       // Add optional fields only if they have actual values
@@ -99,7 +98,6 @@ projectRouter.post(
       const newProject = await prisma.project.create({
         data: projectData
       });
-
 
       res.status(201).json({
         message: "Project created successfully",
@@ -408,7 +406,6 @@ projectRouter.put(
         where: { id },
         data: updateData
       });
-
 
       res.status(200).json({
         message: "Project updated successfully",

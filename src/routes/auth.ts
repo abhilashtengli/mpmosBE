@@ -26,6 +26,7 @@ interface RequestWithUser extends Request {
     name: string;
     role: string;
     isVerified: boolean;
+    sessionId: string;
   } | null;
 }
 
@@ -178,9 +179,9 @@ authRouter.post(
       });
 
       if (existingSessions.length > 0) {
-        console.log(
-          `User ${user.email} logging in from new device. Terminating ${existingSessions.length} existing session(s).`
-        );
+        // console.log(
+        //   `User ${user.email} logging in from new device. Terminating ${existingSessions.length} existing session(s).`
+        // );
         // IMPORTANT: Send logout message to other devices BEFORE deleting sessions
         const logoutMessage = {
           type: "force-logout" as const,
@@ -792,6 +793,58 @@ authRouter.get("/get-me", userAuth, async (req: Request, res: Response) => {
       success: false,
       message: "Failed to retrieve user, Internal server error",
       code: "GET_USER_FAILED"
+    });
+  }
+});
+
+//Logout
+authRouter.post("/logout", userAuth, async (req: Request, res: Response) => {
+  try {
+    const user = (req as RequestWithUser).user;
+    console.log("USEr : ", user);
+    if (!user || !user.sessionId) {
+      res.status(400).json({
+        success: false,
+        message: "Session ID missing or unauthorized",
+        code: "UNAUTHORIZED"
+      });
+      return;
+    }
+
+    // Delete session (with safe fallback)
+    try {
+      await prisma.session.delete({
+        where: { id: user.sessionId }
+      });
+    } catch (error: any) {
+      if (error.code === "P2025") {
+        console.warn("Session already deleted.");
+      } else {
+        throw error;
+      }
+    }
+
+    // Remove SSE connection (already guarded internally)
+    sseService.removeConnection(user.id, user.sessionId);
+
+    // Clear auth cookie
+    res.clearCookie("token", {
+      httpOnly: true,
+      secure: true,
+      sameSite: "strict"
+    });
+
+    res.status(200).json({
+      success: true,
+      message: "Logout successful",
+      code: "LOGOUT_SUCCESSFUL"
+    });
+  } catch (err) {
+    console.error("Logout Error:", err);
+    res.status(500).json({
+      success: false,
+      message: "Logout failed, internal server error",
+      code: "LOGOUT_FAILED"
     });
   }
 });

@@ -13,6 +13,7 @@ interface RequestWithUser extends Request {
     name: string;
     role: string;
     isVerified: boolean;
+    sessionId: string;
   } | null;
 }
 
@@ -150,7 +151,10 @@ export const userAuth = async (
       });
       return;
     }
-    (req as RequestWithUser).user = session.user || null;
+    (req as RequestWithUser).user = {
+      ...session.user,
+      sessionId
+    };
     next();
   } catch (err: any) {
     if (err.name === "TokenExpiredError") {
