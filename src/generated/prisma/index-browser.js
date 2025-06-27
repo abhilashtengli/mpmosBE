@@ -168,37 +168,34 @@ exports.Prisma.QuarterScalarFieldEnum = {
 
 exports.Prisma.InputDistributionScalarFieldEnum = {
   id: 'id',
-  inputDistId: 'inputDistId',
   projectId: 'projectId',
   quarterId: 'quarterId',
-  activityType: 'activityType',
-  name: 'name',
-  target: 'target',
-  achieved: 'achieved',
-  targetSentence: 'targetSentence',
-  achievedSentence: 'achievedSentence',
-  district: 'district',
-  village: 'village',
-  block: 'block',
-  remarks: 'remarks',
-  units: 'units',
-  imageUrl: 'imageUrl',
-  imageKey: 'imageKey',
   userId: 'userId',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  inputDistId: 'inputDistId',
+  achieved: 'achieved',
+  activityType: 'activityType',
+  block: 'block',
+  district: 'district',
+  imageKey: 'imageKey',
+  imageUrl: 'imageUrl',
+  name: 'name',
+  remarks: 'remarks',
+  target: 'target',
+  units: 'units',
+  village: 'village',
+  achievedSentence: 'achievedSentence',
+  targetSentence: 'targetSentence'
 };
 
 exports.Prisma.TrainingScalarFieldEnum = {
   id: 'id',
-  trainingId: 'trainingId',
   projectId: 'projectId',
   quarterId: 'quarterId',
   title: 'title',
   target: 'target',
   achieved: 'achieved',
-  targetSentence: 'targetSentence',
-  achievedSentence: 'achievedSentence',
   district: 'district',
   village: 'village',
   block: 'block',
@@ -212,62 +209,61 @@ exports.Prisma.TrainingScalarFieldEnum = {
   units: 'units',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  userId: 'userId'
+  userId: 'userId',
+  trainingId: 'trainingId',
+  achievedSentence: 'achievedSentence',
+  targetSentence: 'targetSentence'
 };
 
 exports.Prisma.FLDScalarFieldEnum = {
   id: 'id',
-  fldId: 'fldId',
   projectId: 'projectId',
   quarterId: 'quarterId',
-  remarks: 'remarks',
   district: 'district',
   village: 'village',
   block: 'block',
   target: 'target',
   achieved: 'achieved',
-  targetSentence: 'targetSentence',
-  achievedSentence: 'achievedSentence',
   units: 'units',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  userId: 'userId'
+  userId: 'userId',
+  fldId: 'fldId',
+  remarks: 'remarks',
+  achievedSentence: 'achievedSentence',
+  targetSentence: 'targetSentence'
 };
 
 exports.Prisma.AwarenessProgramScalarFieldEnum = {
   id: 'id',
-  awarnessprogramId: 'awarnessprogramId',
-  projectId: 'projectId',
-  quarterId: 'quarterId',
   title: 'title',
   target: 'target',
   achieved: 'achieved',
-  targetSentence: 'targetSentence',
-  achievedSentence: 'achievedSentence',
   district: 'district',
   village: 'village',
   block: 'block',
-  beneficiaryMale: 'beneficiaryMale',
-  beneficiaryFemale: 'beneficiaryFemale',
   imageUrl: 'imageUrl',
   imageKey: 'imageKey',
   units: 'units',
-  remarks: 'remarks',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  userId: 'userId'
+  beneficiaryFemale: 'beneficiaryFemale',
+  beneficiaryMale: 'beneficiaryMale',
+  projectId: 'projectId',
+  quarterId: 'quarterId',
+  userId: 'userId',
+  awarnessprogramId: 'awarnessprogramId',
+  remarks: 'remarks',
+  achievedSentence: 'achievedSentence',
+  targetSentence: 'targetSentence'
 };
 
 exports.Prisma.InfrastructureDevelopmentScalarFieldEnum = {
   id: 'id',
-  InfraDevId: 'InfraDevId',
-  title: 'title',
   projectId: 'projectId',
   quarterId: 'quarterId',
   target: 'target',
   achieved: 'achieved',
-  targetSentence: 'targetSentence',
-  achievedSentence: 'achievedSentence',
   district: 'district',
   village: 'village',
   block: 'block',
@@ -276,7 +272,11 @@ exports.Prisma.InfrastructureDevelopmentScalarFieldEnum = {
   imageKey: 'imageKey',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  userId: 'userId'
+  userId: 'userId',
+  InfraDevId: 'InfraDevId',
+  title: 'title',
+  achievedSentence: 'achievedSentence',
+  targetSentence: 'targetSentence'
 };
 
 exports.Prisma.UpcomingEventScalarFieldEnum = {
@@ -348,8 +348,6 @@ exports.Prisma.ActivitiesScalarFieldEnum = {
   title: 'title',
   target: 'target',
   achieved: 'achieved',
-  targetSentence: 'targetSentence',
-  achievedSentence: 'achievedSentence',
   district: 'district',
   village: 'village',
   block: 'block',
@@ -363,7 +361,9 @@ exports.Prisma.ActivitiesScalarFieldEnum = {
   units: 'units',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  userId: 'userId'
+  userId: 'userId',
+  achievedSentence: 'achievedSentence',
+  targetSentence: 'targetSentence'
 };
 
 exports.Prisma.ProjectReportScalarFieldEnum = {
@@ -388,6 +388,12 @@ exports.Prisma.CompliedReportScalarFieldEnum = {
   fileUrl: 'fileUrl',
   userId: 'userId',
   createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ReportCountScalarFieldEnum = {
+  id: 'id',
+  count: 'count',
   updatedAt: 'updatedAt'
 };
 
@@ -432,7 +438,8 @@ exports.Prisma.ModelName = {
   ActivitiesCategory: 'ActivitiesCategory',
   Activities: 'Activities',
   ProjectReport: 'ProjectReport',
-  CompliedReport: 'CompliedReport'
+  CompliedReport: 'CompliedReport',
+  ReportCount: 'ReportCount'
 };
 
 /**

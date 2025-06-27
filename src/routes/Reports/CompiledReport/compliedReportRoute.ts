@@ -5,6 +5,7 @@ import { z } from "zod"; // Add zod for validation
 import express, { Request, Response } from "express";
 import { generateCompliedDocxReportBuffer } from "./generateCompiledDocxReport";
 import { cleanupOldCompiledReports } from "./cleanUpReports";
+import { incrementReportCounter } from "@lib/constants";
 
 const generateCompliedReportRouter = express.Router();
 
@@ -52,12 +53,18 @@ interface ErrorResponse {
   };
 }
 
+interface ReportCount {
+  id: string;
+  count: number;
+  updatedAt: Date;
+}
 // Success response type
 interface SuccessResponse {
   success: true;
   data: any;
   publicUrl: string;
   cleanupWarnings?: string[];
+  reportCount: ReportCount | null;
 }
 interface RequestWithUser extends Request {
   user?: {
@@ -531,6 +538,7 @@ generateCompliedReportRouter.post(
         return;
       }
       let compliedReport;
+      let reportCount;
       try {
         compliedReport = await prisma.compliedReport.create({
           data: {
@@ -558,6 +566,7 @@ generateCompliedReportRouter.post(
             }
           }
         });
+        reportCount = await incrementReportCounter();
       } catch (dbError) {
         console.error("Database error saving report:", dbError);
         // TODO: Consider cleanup of uploaded file here
@@ -597,7 +606,8 @@ generateCompliedReportRouter.post(
       const successResponse: SuccessResponse = {
         success: true,
         data: compliedReport,
-        publicUrl: fileInfo.publicUrl
+        publicUrl: fileInfo.publicUrl,
+        reportCount: reportCount
       };
       // Add cleanup warnings if any exist
       if (cleanupWarnings.length > 0) {

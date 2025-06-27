@@ -7,7 +7,8 @@ import {
   deleteContent,
   generatePresignedUrl
 } from "@services/Cloudflare/cloudflare";
-import { cleanupOldProjectReports } from "./cleanUpreport";
+import { cleanupOldProjectReports } from "./cleanUpReport";
+import { incrementReportCounter } from "@lib/constants";
 
 const generateReportRouter = express.Router();
 
@@ -70,12 +71,18 @@ interface ErrorResponse {
   };
 }
 
+interface ReportCount {
+  id: string;
+  count: number;
+  updatedAt: Date;
+}
 // Success response interface
 interface SuccessResponse {
   success: true;
   data: any;
   publicUrl: string;
   cleanupWarnings?: string[];
+  reportCount: ReportCount | null;
 }
 
 generateReportRouter.post(
@@ -522,6 +529,7 @@ generateReportRouter.post(
         return;
       }
       let generatedReport;
+      let reportCount;
       try {
         generatedReport = await prisma.projectReport.create({
           data: {
@@ -551,6 +559,7 @@ generateReportRouter.post(
             }
           }
         });
+        reportCount = await incrementReportCounter();
       } catch (dbError) {
         console.error("Database error saving report:", dbError);
         // TODO: Consider cleanup of uploaded file here
@@ -591,7 +600,8 @@ generateReportRouter.post(
       const successResponse: SuccessResponse = {
         success: true,
         data: generatedReport,
-        publicUrl: fileInfo.publicUrl
+        publicUrl: fileInfo.publicUrl,
+        reportCount: reportCount
       };
       // Add cleanup warnings if any exist
       if (cleanupWarnings.length > 0) {
