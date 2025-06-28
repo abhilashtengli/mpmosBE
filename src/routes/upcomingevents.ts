@@ -1,4 +1,5 @@
 import { prisma } from "@lib/prisma";
+import { contentRateLimit } from "@lib/ratelimits";
 import { userAuth } from "@middleware/auth";
 import {
   upcomingEventUpdateValidation,
@@ -320,6 +321,7 @@ upcomingEventsRouter.get(
 //get all events
 upcomingEventsRouter.get(
   "/get-all-events",
+  contentRateLimit,
   async (req: Request, res: Response) => {
     try {
       const events = await prisma.upcomingEvent.findMany({

@@ -1,4 +1,5 @@
 import { prisma } from "@lib/prisma";
+import { contentRateLimit } from "@lib/ratelimits";
 import { userAuth } from "@middleware/auth";
 import {
   createProjectDetailsValidation,
@@ -391,6 +392,7 @@ projectDetailsRouter.get(
 // Get All Project Details (Public endpoint)
 projectDetailsRouter.get(
   "/get-all-project-details",
+  contentRateLimit,
   async (req: Request, res: Response) => {
     try {
       const projectDetails = await prisma.projectDetails.findMany({

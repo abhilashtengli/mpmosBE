@@ -1,10 +1,18 @@
 import { prisma } from "@lib/prisma";
+import {
+  contentRateLimit,
+  heavyDataRateLimit,
+  statsRateLimit
+} from "@lib/ratelimits";
 import express, { Request, Response } from "express";
+import rateLimit from "express-rate-limit";
 
 const globalRouter = express.Router();
 
+// Apply rate limiting to the stats endpoint (moderate usage expected)
 globalRouter.get(
   "/get-stats-promo-meter",
+  statsRateLimit,
   async (req: Request, res: Response) => {
     try {
       const [
@@ -117,138 +125,161 @@ globalRouter.get(
     }
   }
 );
-globalRouter.get("/upcoming-events", async (req: Request, res: Response) => {
-  try {
-    const events = await prisma.upcomingEvent.findMany({
-      orderBy: {
-        date: "asc" // Show upcoming events first
-      },
-      include: {
-        User: {
-          select: {
-            id: true,
-            name: true,
-            email: true
+
+// Apply content rate limiting to upcoming events
+globalRouter.get(
+  "/upcoming-events",
+  contentRateLimit,
+  async (req: Request, res: Response) => {
+    try {
+      const events = await prisma.upcomingEvent.findMany({
+        orderBy: {
+          date: "asc" // Show upcoming events first
+        },
+        include: {
+          User: {
+            select: {
+              id: true,
+              name: true,
+              email: true
+            }
           }
         }
-      }
-    });
+      });
 
-    res.status(200).json({
-      success: true,
-      count: events.length,
-      data: events
-    });
-    return;
-  } catch (error) {
-    console.error("Failed to fetch upcoming events:", error);
-    res.status(500).json({
-      success: false,
-      message: "Something went wrong while fetching events.",
-      error: error instanceof Error ? error.message : "Unknown error"
-    });
-    return;
+      res.status(200).json({
+        success: true,
+        count: events.length,
+        data: events
+      });
+      return;
+    } catch (error) {
+      console.error("Failed to fetch upcoming events:", error);
+      res.status(500).json({
+        success: false,
+        message: "Something went wrong while fetching events.",
+        error: error instanceof Error ? error.message : "Unknown error"
+      });
+      return;
+    }
   }
-});
+);
 
-globalRouter.get("/publications", async (req: Request, res: Response) => {
-  try {
-    const publications = await prisma.publication.findMany({
-      orderBy: {
-        createdAt: "desc" // Show most recent first
-      },
-      include: {
-        User: {
-          select: {
-            id: true,
-            name: true,
-            email: true
+// Apply content rate limiting to publications
+globalRouter.get(
+  "/publications",
+  contentRateLimit,
+  async (req: Request, res: Response) => {
+    try {
+      const publications = await prisma.publication.findMany({
+        orderBy: {
+          createdAt: "desc" // Show most recent first
+        },
+        include: {
+          User: {
+            select: {
+              id: true,
+              name: true,
+              email: true
+            }
           }
         }
-      }
-    });
+      });
 
-    res.status(200).json({
-      success: true,
-      count: publications.length,
-      data: publications
-    });
-    return;
-  } catch (error) {
-    console.error("Failed to fetch publications:", error);
-    res.status(500).json({
-      success: false,
-      message: "Failed to fetch publications",
-      error: error instanceof Error ? error.message : "Unknown error"
-    });
-    return;
+      res.status(200).json({
+        success: true,
+        count: publications.length,
+        data: publications
+      });
+      return;
+    } catch (error) {
+      console.error("Failed to fetch publications:", error);
+      res.status(500).json({
+        success: false,
+        message: "Failed to fetch publications",
+        error: error instanceof Error ? error.message : "Unknown error"
+      });
+      return;
+    }
   }
-});
-globalRouter.get("/gallery", async (req: Request, res: Response) => {
-  try {
-    const images = await prisma.gallery.findMany({
-      orderBy: {
-        createdAt: "desc"
-      },
-      include: {
-        User: {
-          select: {
-            id: true,
-            name: true,
-            email: true
+);
+
+// Apply heavy data rate limiting to gallery (images can be large)
+globalRouter.get(
+  "/gallery",
+  heavyDataRateLimit,
+  async (req: Request, res: Response) => {
+    try {
+      const images = await prisma.gallery.findMany({
+        orderBy: {
+          createdAt: "desc"
+        },
+        include: {
+          User: {
+            select: {
+              id: true,
+              name: true,
+              email: true
+            }
           }
         }
-      }
-    });
+      });
 
-    res.status(200).json({
-      success: true,
-      count: images.length,
-      data: images
-    });
-    return;
-  } catch (error) {
-    console.error("Failed to fetch gallery images:", error);
-    res.status(500).json({
-      success: false,
-      message: "Failed to fetch gallery images",
-      error: error instanceof Error ? error.message : "Unknown error"
-    });
-    return;
+      res.status(200).json({
+        success: true,
+        count: images.length,
+        data: images
+      });
+      return;
+    } catch (error) {
+      console.error("Failed to fetch gallery images:", error);
+      res.status(500).json({
+        success: false,
+        message: "Failed to fetch gallery images",
+        error: error instanceof Error ? error.message : "Unknown error"
+      });
+      return;
+    }
   }
-});
-globalRouter.get("/project-details", async (req: Request, res: Response) => {
-  try {
-    const projects = await prisma.projectDetails.findMany({
-      orderBy: {
-        year: "desc" // Most recent projects first
-      },
-      include: {
-        User: {
-          select: {
-            id: true,
-            name: true,
-            email: true
+);
+
+// Apply content rate limiting to project details
+globalRouter.get(
+  "/project-details",
+  contentRateLimit,
+  async (req: Request, res: Response) => {
+    try {
+      const projects = await prisma.projectDetails.findMany({
+        orderBy: {
+          year: "desc" // Most recent projects first
+        },
+        include: {
+          User: {
+            select: {
+              id: true,
+              name: true,
+              email: true
+            }
           }
         }
-      }
-    });
+      });
 
-    res.status(200).json({
-      success: true,
-      count: projects.length,
-      data: projects
-    });
-    return;
-  } catch (error) {
-    console.error("Failed to fetch project details:", error);
-    res.status(500).json({
-      success: false,
-      message: "Failed to fetch project details",
-      error: error instanceof Error ? error.message : "Unknown error"
-    });
-    return;
+      res.status(200).json({
+        success: true,
+        count: projects.length,
+        data: projects
+      });
+      return;
+    } catch (error) {
+      console.error("Failed to fetch project details:", error);
+      res.status(500).json({
+        success: false,
+        message: "Failed to fetch project details",
+        error: error instanceof Error ? error.message : "Unknown error"
+      });
+      return;
+    }
   }
-});
+);
 
 export default globalRouter;

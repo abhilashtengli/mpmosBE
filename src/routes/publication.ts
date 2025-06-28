@@ -1,4 +1,5 @@
 import { prisma } from "@lib/prisma";
+import { contentRateLimit } from "@lib/ratelimits";
 import { userAuth } from "@middleware/auth";
 import { deleteContent } from "@services/Cloudflare/cloudflare";
 import {
@@ -369,6 +370,7 @@ publicationRouter.get(
 // Get All Publications (Public endpoint)
 publicationRouter.get(
   "/get-all-publications",
+  contentRateLimit,
   async (req: Request, res: Response) => {
     try {
       const publications = await prisma.publication.findMany({

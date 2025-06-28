@@ -21,6 +21,7 @@ import generateReportRouter from "./routes/Reports/ProjectReport/projectReportRo
 import reportRouter from "./routes/Reports/report";
 import dashboardRoute from "./routes/eprogress/dashboardRoutes";
 import generateCompliedReportRouter from "./routes/Reports/CompiledReport/compliedReportRoute";
+import globalRouter from "./routes/global/global";
 const app = express();
 app.use(cookieParser());
 
@@ -39,6 +40,7 @@ app.use("/", sseRouter);
 app.use("/", signedUrlRouter);
 app.use("/", cloudflareRouter);
 //content
+app.use("/", globalRouter);
 app.use("/", galleryRouter);
 app.use("/", projectDetailsRouter);
 app.use("/", publicationRouter);

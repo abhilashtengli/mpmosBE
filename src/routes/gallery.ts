@@ -1,4 +1,5 @@
 import { prisma } from "@lib/prisma";
+import { heavyDataRateLimit } from "@lib/ratelimits";
 import { userAuth } from "@middleware/auth";
 import { deleteContent } from "@services/Cloudflare/cloudflare";
 import {
@@ -326,51 +327,55 @@ galleryRouter.get(
 );
 
 // Get All Gallery Items (Public endpoint)
-galleryRouter.get("/get-all-gallery", async (req: Request, res: Response) => {
-  try {
-    const gallery = await prisma.gallery.findMany({
-      orderBy: { createdAt: "desc" },
-      select: {
-        id: true,
-        title: true,
-        imageUrl: true,
-        imageKey: true,
-        createdAt: true,
-        updatedAt: true,
-        User: {
-          select: {
-            id: true,
-            name: true
+galleryRouter.get(
+  "/get-all-gallery",
+  heavyDataRateLimit,
+  async (req: Request, res: Response) => {
+    try {
+      const gallery = await prisma.gallery.findMany({
+        orderBy: { createdAt: "desc" },
+        select: {
+          id: true,
+          title: true,
+          imageUrl: true,
+          imageKey: true,
+          createdAt: true,
+          updatedAt: true,
+          User: {
+            select: {
+              id: true,
+              name: true
+            }
           }
         }
-      }
-    });
+      });
 
-    if (gallery.length === 0) {
+      if (gallery.length === 0) {
+        res.status(200).json({
+          success: true,
+          message: "No gallery items found",
+          data: [],
+          code: "SUCCESS"
+        });
+        return;
+      }
+
       res.status(200).json({
         success: true,
-        message: "No gallery items found",
-        data: [],
+        data: gallery,
         code: "SUCCESS"
       });
-      return;
+    } catch (err) {
+      console.error("Error getting all gallery items:", err);
+      res.status(500).json({
+        success: false,
+        message:
+          "Something went wrong, Could not get gallery items, please try again later",
+        code: "INTERNAL_SERVER_ERROR"
+      });
     }
-
-    res.status(200).json({
-      success: true,
-      data: gallery,
-      code: "SUCCESS"
-    });
-  } catch (err) {
-    console.error("Error getting all gallery items:", err);
-    res.status(500).json({
-      success: false,
-      message:
-        "Something went wrong, Could not get gallery items, please try again later",
-      code: "INTERNAL_SERVER_ERROR"
-    });
   }
-});
+);
 
 // Delete Gallery Item
 galleryRouter.delete(
