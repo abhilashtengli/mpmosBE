@@ -575,9 +575,9 @@ generateReportRouter.post(
       }
       let cleanupWarnings: string[] = [];
       try {
-        console.log(
-          "Starting global report cleanup after successful report creation"
-        );
+        // console.log(
+        //   "Starting global report cleanup after successful report creation"
+        // );
         const cleanupResult = await cleanupOldProjectReports();
 
         if (!cleanupResult.success) {

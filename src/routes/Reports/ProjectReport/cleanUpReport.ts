@@ -51,9 +51,9 @@ export const cleanupOldProjectReports = async (): Promise<{
 
     // If we have MAX_REPORTS_TO_KEEP or fewer, no cleanup needed
     if (allReports.length <= MAX_REPORTS_TO_KEEP) {
-      console.log(
-        `No cleanup needed. Report count (${allReports.length}) is within limit (${MAX_REPORTS_TO_KEEP})`
-      );
+    //   console.log(
+    //     `No cleanup needed. Report count (${allReports.length}) is within limit (${MAX_REPORTS_TO_KEEP})`
+    //   );
       return { success: true, warnings: [] };
     }
 
@@ -84,7 +84,7 @@ export const cleanupOldProjectReports = async (): Promise<{
           where: { id: report.id }
         });
 
-        console.log(`Successfully deleted report ${report.fileName}`);
+        // console.log(`Successfully deleted report ${report.fileName}`);
       } catch (error) {
         const errorMsg = `Failed to delete report ${report.fileName}`;
         console.error(errorMsg, error);
@@ -92,9 +92,9 @@ export const cleanupOldProjectReports = async (): Promise<{
       }
     }
 
-    console.log(
-      `Cleanup completed: ${reportsToDelete.length} reports processed`
-    );
+    // console.log(
+    //   `Cleanup completed: ${reportsToDelete.length} reports processed`
+    // );
     return { success: warnings.length === 0, warnings };
   } catch (error) {
     const errorMsg = `Critical error during cleanup process`;

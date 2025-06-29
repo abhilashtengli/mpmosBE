@@ -17,9 +17,9 @@ class SSEService {
     }
 
     this.connections.get(userId)?.push(connection);
-    console.log(
-      `SSE connection added for user ${userId}, session ${sessionId}`
-    );
+    // console.log(
+    //   `SSE connection added for user ${userId}, session ${sessionId}`
+    // );
   }
 
   // Remove connection when client disconnects
@@ -36,9 +36,9 @@ class SSEService {
         this.connections.set(userId, filteredConnections);
       }
     }
-    console.log(
-      `SSE connection removed for user ${userId}, session ${sessionId}`
-    );
+    // console.log(
+    //   `SSE connection removed for user ${userId}, session ${sessionId}`
+    // );
   }
 
   // Send message to all connections of a user EXCEPT the current session
@@ -65,9 +65,9 @@ class SSEService {
       }
     });
 
-    console.log(
-      `SSE message sent to ${connectionsToNotify.length} connections for user ${userId}`
-    );
+    // console.log(
+    //   `SSE message sent to ${connectionsToNotify.length} connections for user ${userId}`
+    // );
   }
 
   // Send message to all connections of a user
@@ -93,7 +93,7 @@ class SSEService {
 
   // Clean up dead connections
   cleanup(): void {
-    console.log("Cleaning up SSE connections...");
+    // console.log("Cleaning up SSE connections...");
     this.connections.clear();
   }
 }

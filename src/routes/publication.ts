@@ -429,7 +429,6 @@ publicationRouter.delete(
   async (req: Request, res: Response) => {
     try {
       const { id } = req.params;
-      // console.log("Step-0 : ", id);
 
       // Validate publication ID format (UUID)
       if (!id || typeof id !== "string") {
@@ -454,7 +453,6 @@ publicationRouter.delete(
       const existingPublication = await prisma.publication.findUnique({
         where: { id }
       });
-      // console.log("STEP-1 : ", existingPublication);
 
       if (!existingPublication) {
         res.status(404).json({
@@ -481,7 +479,6 @@ publicationRouter.delete(
         fileType: string
       ): Promise<boolean> => {
         try {
-          // console.log("STEP-2 : ", fileKey);
           const deletionResult = await deleteContent(fileKey);
           if (!deletionResult.success) {
             console.warn(

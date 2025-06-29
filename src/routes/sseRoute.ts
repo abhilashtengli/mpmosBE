@@ -45,9 +45,9 @@ sseRouter.get("/session-events", userAuth, (req: Request, res: Response) => {
 
   // Handle client disconnect
   req.on("close", () => {
-    console.log(
-      `SSE connection closed for user ${user.id}, session ${sessionId}`
-    );
+    // console.log(
+    //   `SSE connection closed for user ${user.id}, session ${sessionId}`
+    // );
     sseService.removeConnection(user.id, sessionId);
   });
 

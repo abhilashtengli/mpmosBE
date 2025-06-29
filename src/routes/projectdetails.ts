@@ -447,6 +447,128 @@ projectDetailsRouter.get(
   }
 );
 
+//neh projects
+projectDetailsRouter.get(
+  "/get-all-neh-project-details",
+  contentRateLimit,
+  async (req: Request, res: Response) => {
+    try {
+      const projectDetails = await prisma.projectDetails.findMany({
+        where: {
+          region: "NEH"
+        },
+        orderBy: { createdAt: "desc" },
+        select: {
+          id: true,
+          title: true,
+          region: true,
+          year: true,
+          budget: true,
+          center: true,
+          location: true,
+          objectives: true,
+          director: true,
+          coDirectors: true,
+          achievements: true,
+          createdAt: true,
+          updatedAt: true,
+          User: {
+            select: {
+              id: true,
+              name: true
+            }
+          }
+        }
+      });
+
+      if (projectDetails.length === 0) {
+        res.status(200).json({
+          success: true,
+          message: "No project details found",
+          data: [],
+          code: "SUCCESS"
+        });
+        return;
+      }
+
+      res.status(200).json({
+        success: true,
+        data: projectDetails,
+        code: "SUCCESS"
+      });
+    } catch (err) {
+      console.error("Error getting all project details:", err);
+      res.status(500).json({
+        success: false,
+        message:
+          "Something went wrong, Could not get project details, please try again later",
+        code: "INTERNAL_SERVER_ERROR"
+      });
+    }
+  }
+);
+
+//aicrp projects
+projectDetailsRouter.get(
+  "/get-all-aicrp-project-details",
+  contentRateLimit,
+  async (req: Request, res: Response) => {
+    try {
+      const projectDetails = await prisma.projectDetails.findMany({
+        where: {
+          region: "AICRP"
+        },
+        orderBy: { createdAt: "desc" },
+        select: {
+          id: true,
+          title: true,
+          region: true,
+          year: true,
+          budget: true,
+          center: true,
+          location: true,
+          objectives: true,
+          director: true,
+          coDirectors: true,
+          achievements: true,
+          createdAt: true,
+          updatedAt: true,
+          User: {
+            select: {
+              id: true,
+              name: true
+            }
+          }
+        }
+      });
+
+      if (projectDetails.length === 0) {
+        res.status(200).json({
+          success: true,
+          message: "No project details found",
+          data: [],
+          code: "SUCCESS"
+        });
+        return;
+      }
+
+      res.status(200).json({
+        success: true,
+        data: projectDetails,
+        code: "SUCCESS"
+      });
+    } catch (err) {
+      console.error("Error getting all project details:", err);
+      res.status(500).json({
+        success: false,
+        message:
+          "Something went wrong, Could not get project details, please try again later",
+        code: "INTERNAL_SERVER_ERROR"
+      });
+    }
+  }
+);
+
 // Delete Project Details
 projectDetailsRouter.delete(
   "/delete-project-details/:id",

@@ -520,7 +520,7 @@ authRouter.post(
   forgetPasswordLimiter,
   async (req: Request, res: Response) => {
     const { email } = req.body;
-    console.log("email : ", email);
+    // console.log("email : ", email);
     try {
       if (!email || typeof email !== "string") {
         res.status(400).json({
@@ -582,7 +582,7 @@ authRouter.post(
           serviceFor
         );
 
-        console.log("EMAIL RESULT : ", emailResult);
+        // console.log("EMAIL RESULT : ", emailResult);
 
         if (!emailResult.success) {
           res.status(500).json({
@@ -689,9 +689,9 @@ authRouter.post(
       }
 
       if (user.verificationExpires < new Date()) {
-        console.log("Expires At:", user.verificationExpires);
-        console.log("Current Time:", new Date());
-        console.log("Has Expired:", user.verificationExpires < new Date());
+        // console.log("Expires At:", user.verificationExpires);
+        // console.log("Current Time:", new Date());
+        // console.log("Has Expired:", user.verificationExpires < new Date());
         res.status(400).json({
           message: "Verification code has expired",
           code: "VERIFICATION_CODE_EXPIRED"
@@ -801,7 +801,7 @@ authRouter.get("/get-me", userAuth, async (req: Request, res: Response) => {
 authRouter.post("/logout", userAuth, async (req: Request, res: Response) => {
   try {
     const user = (req as RequestWithUser).user;
-    console.log("USEr : ", user);
+    // console.log("USEr : ", user);
     if (!user || !user.sessionId) {
       res.status(400).json({
         success: false,
