@@ -154,8 +154,8 @@ generateReportRouter.post(
       // Fetch project with error handling
       let project;
       try {
-        project = await prisma.project.findFirst({
-          where: { id: projectId, userId: user.id },
+        project = await prisma.project.findUnique({
+          where: { id: projectId },
           select: {
             id: true,
             title: true,
@@ -168,7 +168,6 @@ generateReportRouter.post(
             }
           }
         });
-
         if (!project) {
           const errorResponse: ErrorResponse = {
             success: false,
