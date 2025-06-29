@@ -30,14 +30,7 @@ reportRouter.get(
         });
         return;
       }
-      if (user.role !== "admin") {
-        res.status(403).json({
-          success: false,
-          message: "You are not authorised",
-          code: "UNAUTHORIZED"
-        });
-        return;
-      }
+    
 
       const reportData = await prisma.projectReport.findMany({
         orderBy: {
@@ -88,6 +81,7 @@ reportRouter.get(
     }
   }
 );
+
 reportRouter.get(
   "/get-compiled-reports",
   userAuth,
@@ -103,14 +97,7 @@ reportRouter.get(
         });
         return;
       }
-      if (user.role !== "admin") {
-        res.status(403).json({
-          success: false,
-          message: "You are not authorised",
-          code: "UNAUTHORIZED"
-        });
-        return;
-      }
+    
 
       const reportData = await prisma.compliedReport.findMany({
         orderBy: {
