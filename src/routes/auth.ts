@@ -2,7 +2,6 @@ import express, { Request, Response } from "express";
 import bcrypt from "bcrypt";
 import { prisma } from "@lib/prisma";
 import validator from "validator";
-import TokenService from "@services/tokenservice";
 import {
   forgetPasswordLimiter,
   loginLimiter,
@@ -16,6 +15,7 @@ import { createSessionId } from "@utils/session";
 import { userAuth } from "@middleware/auth";
 import { signupValidation } from "@utils/validation";
 import { sseService } from "@services/sseService";
+import TokenService from "@services/tokenservice";
 
 const authRouter = express.Router();
 
