@@ -29,7 +29,7 @@ dotenv.config();
 
 app.use(express.json());
 
-app.set('trust proxy', true);
+app.set("trust proxy", true);
 
 app.use(
   cors({
@@ -63,6 +63,6 @@ app.use("/", projectRouter);
 app.use("/", trainingRouter);
 app.use("/", activityRouter);
 app.use("/", activityCategoryRouter);
-app.listen(process.env.PORT, async () => {
-  // console.log("Server running on the port : ", process.env.PORT);
+app.listen(Number(process.env.PORT) || 3000, "0.0.0.0", () => {
+  console.log(`Server running on http://0.0.0.0:${process.env.PORT}`);
 });
