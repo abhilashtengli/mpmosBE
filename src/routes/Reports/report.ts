@@ -30,7 +30,6 @@ reportRouter.get(
         });
         return;
       }
-    
 
       const reportData = await prisma.projectReport.findMany({
         orderBy: {
@@ -97,7 +96,6 @@ reportRouter.get(
         });
         return;
       }
-    
 
       const reportData = await prisma.compliedReport.findMany({
         orderBy: {
