@@ -424,7 +424,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "D:\\Client Projects\\Mpmos files\\mpmosBE\\src\\generated\\prisma",
+      "value": "d:\\Client Projects\\Mpmos-files\\mpmosBE\\src\\generated\\prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -438,7 +438,7 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "D:\\Client Projects\\Mpmos files\\mpmosBE\\prisma\\schema.prisma",
+    "sourceFilePath": "d:\\Client Projects\\Mpmos-files\\mpmosBE\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
@@ -452,6 +452,7 @@ const config = {
     "db"
   ],
   "activeProvider": "postgresql",
+  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
