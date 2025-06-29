@@ -2,14 +2,7 @@ import express, { Request, Response } from "express";
 import bcrypt from "bcrypt";
 import { prisma } from "@lib/prisma";
 import validator from "validator";
-import {
-  forgetPasswordLimiter,
-  loginLimiter,
-  passwordResetLimiter,
-  resendCodeLimiter,
-  signupLimiter,
-  verifyEmailLimiter
-} from "@services/ratelimiter";
+
 import { RequestVerification } from "@services/requestCode/requestCodeToVerify";
 import { createSessionId } from "@utils/session";
 import { userAuth } from "@middleware/auth";
@@ -35,7 +28,6 @@ interface RequestWithUser extends Request {
 authRouter.post(
   "/signup",
   // userAuth,
-  signupLimiter,
   async (req: Request, res: Response) => {
     try {
       // await signupValidation(req);
@@ -123,7 +115,6 @@ authRouter.post(
 
 authRouter.post(
   "/signin",
-  loginLimiter,
   async (req: Request, res: Response) => {
     try {
       const { email, password } = req.body;
@@ -300,7 +291,6 @@ authRouter.post(
 //verify email
 authRouter.post(
   "/verify-email",
-  verifyEmailLimiter,
   async (req: Request, res: Response) => {
     const { email, code } = req.body;
 
@@ -398,7 +388,6 @@ authRouter.post(
 //resend-code
 authRouter.post(
   "/resend-code",
-  resendCodeLimiter,
   async (req: Request, res: Response) => {
     try {
       const { email } = req.body;
@@ -519,7 +508,6 @@ authRouter.post(
 //forgot-password-request-code
 authRouter.post(
   "/forgot-password",
-  forgetPasswordLimiter,
   async (req: Request, res: Response) => {
     const { email } = req.body;
     // console.log("email : ", email);
@@ -624,7 +612,6 @@ authRouter.post(
 
 authRouter.post(
   "/forget-password-verify-code",
-  passwordResetLimiter,
   async (req: Request, res: Response) => {
     const { email, code, newPassword } = req.body;
 
