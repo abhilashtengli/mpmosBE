@@ -9,7 +9,8 @@ import {
 } from "@services/Cloudflare/cloudflare";
 import { cleanupOldProjectReports } from "./cleanUpReport";
 import { incrementReportCounter } from "@lib/constants";
-
+import dotenv from "dotenv";
+dotenv.config();
 const generateReportRouter = express.Router();
 
 interface NormalizedActivity {

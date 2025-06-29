@@ -16,6 +16,8 @@ import { userAuth } from "@middleware/auth";
 import { signupValidation } from "@utils/validation";
 import { sseService } from "@services/sseService";
 import TokenService from "@services/tokenservice";
+import dotenv from "dotenv";
+dotenv.config();
 
 const authRouter = express.Router();
 

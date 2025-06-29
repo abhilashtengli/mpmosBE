@@ -24,6 +24,8 @@ import generateCompliedReportRouter from "./routes/Reports/CompiledReport/compli
 import globalRouter from "./routes/global/global";
 const app = express();
 app.use(cookieParser());
+import dotenv from "dotenv";
+dotenv.config();
 
 app.use(express.json());
 

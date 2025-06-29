@@ -6,7 +6,8 @@ import express, { Request, Response } from "express";
 import { generateCompliedDocxReportBuffer } from "./generateCompiledDocxReport";
 import { cleanupOldCompiledReports } from "./cleanUpReports";
 import { incrementReportCounter } from "@lib/constants";
-
+import dotenv from "dotenv";
+dotenv.config();
 const generateCompliedReportRouter = express.Router();
 
 interface NormalizedActivity {
