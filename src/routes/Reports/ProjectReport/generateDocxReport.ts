@@ -45,7 +45,6 @@ interface ProjectInfo {
   projectDirector?: string;
 }
 
-
 export const generateDocxReportBuffer = async (
   activities: Activity[],
   projectInfo: ProjectInfo = {}
@@ -632,7 +631,17 @@ export const generateDocxReportBuffer = async (
           new Paragraph({
             children: [
               new TextRun({
-                text: `Report Generated: ${projectInfo.reportGeneratedAt || "N/A"}`,
+                text: `Report Generated: ${
+                  projectInfo.reportGeneratedAt ||
+                  new Date().toLocaleDateString("en-IN", {
+                    timeZone: "Asia/Kolkata"
+                  }) +
+                    ", " +
+                    new Date().toLocaleTimeString("en-IN", {
+                      hour12: true,
+                      timeZone: "Asia/Kolkata"
+                    })
+                }`,
                 size: 22,
                 color: "888888",
                 italics: true

@@ -732,7 +732,17 @@ export const generateCompliedDocxReportBuffer = async (
           new Paragraph({
             children: [
               new TextRun({
-                text: `Report Generated: ${reportInfo.reportGeneratedAt || new Date().toLocaleDateString("en-GB") + ", " + new Date().toLocaleTimeString("en-GB", { hour12: false })}`,
+                text: `Report Generated: ${
+                  reportInfo.reportGeneratedAt ||
+                  new Date().toLocaleDateString("en-IN", {
+                    timeZone: "Asia/Kolkata"
+                  }) +
+                    ", " +
+                    new Date().toLocaleTimeString("en-IN", {
+                      hour12: true,
+                      timeZone: "Asia/Kolkata"
+                    })
+                }`,
                 size: 22,
                 color: "888888",
                 italics: true
