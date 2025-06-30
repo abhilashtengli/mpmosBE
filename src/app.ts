@@ -33,7 +33,11 @@ app.set("trust proxy", true);
 
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: [
+      "http://localhost:5173", // for local dev
+      "https://milletpmos.in", // production domain
+      "https://www.milletpmos.in" // if www subdomain also used
+    ],
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"]
