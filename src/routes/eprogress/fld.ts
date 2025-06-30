@@ -460,6 +460,8 @@ fldRouter.get(
           fldId: true,
           project: {
             select: {
+              id: true,
+              title : true,
               implementingAgency: true,
               director: true,
               locationState: true,
