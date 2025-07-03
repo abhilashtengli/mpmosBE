@@ -58,6 +58,7 @@ class SSEService {
       try {
         const data = `data: ${JSON.stringify(message)}\n\n`;
         connection.response.write(data);
+        console.log("SENDING DATA : ", data);
       } catch (error) {
         console.error(`Failed to send SSE message to user ${userId}:`, error);
         // Remove dead connection

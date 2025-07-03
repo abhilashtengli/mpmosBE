@@ -174,16 +174,17 @@ authRouter.post("/signin", async (req: Request, res: Response) => {
       //   `User ${user.email} logging in from new device. Terminating ${existingSessions.length} existing session(s).`
       // );
       // IMPORTANT: Send logout message to other devices BEFORE deleting sessions
-      const logoutMessage = {
-        type: "force-logout" as const,
-        reason: "new-device-login",
-        message:
-          "You have been logged out because you signed in from another location.",
-        timestamp: new Date().toISOString()
-      };
 
       // Send logout message to all existing sessions
       existingSessions.forEach((session) => {
+        const logoutMessage = {
+          type: "force-logout" as const,
+          reason: "new-device-login",
+          sessionId: session.id,
+          message:
+            "You have been logged out because you signed in from another location.",
+          timestamp: new Date().toISOString()
+        };
         try {
           sseService.sendToUserExceptSession(
             user.id,
