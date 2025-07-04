@@ -6,7 +6,7 @@ import validator from "validator";
 import { RequestVerification } from "@services/requestCode/requestCodeToVerify";
 import { createSessionId } from "@utils/session";
 import { userAuth } from "@middleware/auth";
-import { signupValidation } from "@utils/validation";
+import { signupValidation, updateUserValidation } from "@utils/validation";
 import { sseService } from "@services/sseService";
 import TokenService from "@services/tokenservice";
 import dotenv from "dotenv";
@@ -25,93 +25,89 @@ interface RequestWithUser extends Request {
   } | null;
 }
 
-authRouter.post(
-  "/signup",
-  // userAuth,
-  async (req: Request, res: Response) => {
-    try {
-      // await signupValidation(req);
-      const result = await signupValidation.safeParse(req.body);
-      if (!result.success) {
-        res.status(400).json({
-          message: "Invalid Input",
-          errors: result.error.format(),
-          code: "VALIDATION_ERROR",
-          success: false
-        });
-        return;
-      }
-      const { name, email, password, role } = req.body;
-      const existingUser = await prisma.user.findUnique({
-        where: { email },
-        select: { id: true }
-      });
-
-      if (existingUser) {
-        res.status(409).json({
-          message: `User already exists with this email : ${email}`,
-          code: "INVALID"
-        });
-      }
-      const passwordHash = await bcrypt.hash(password, 10);
-      const verificationCode = Math.floor(
-        100000 + Math.random() * 900000
-      ).toString();
-
-      const user = await prisma.user.create({
-        data: {
-          name: name,
-          password: passwordHash,
-          email: email,
-          role: role,
-          verificationCode,
-          verificationExpires: new Date(Date.now() + 10 * 60 * 1000)
-        },
-        select: {
-          id: true,
-          name: true,
-          email: true,
-          role: true
-        }
-      });
-      try {
-        const serviceFor = "emailService";
-        const emailResult = await RequestVerification(
-          email,
-          name,
-          verificationCode,
-          serviceFor
-        );
-
-        res.status(201).json({
-          message:
-            "Please verify your account by entering the code sent to you email : " +
-            email,
-          success: true,
-          data: user
-        });
-        return;
-      } catch (emailError) {
-        console.error("Email verification error:", emailError);
-        res.status(201).json({
-          success: true,
-          message:
-            "Account created successfully, but verification email could not be sent. Please contact support.",
-          code: "EMAIL_SEND_FAILED",
-          data: user
-        });
-        return;
-      }
-    } catch (err) {
-      console.error("ERROR :", err);
-      res.status(500).json({
-        message: "Error Sign up, Please try again later",
-        code: "SIGNUP_FAILED",
+authRouter.post("/signup", userAuth, async (req: Request, res: Response) => {
+  try {
+    // await signupValidation(req);
+    const result = await signupValidation.safeParse(req.body);
+    if (!result.success) {
+      res.status(400).json({
+        message: "Invalid Input",
+        errors: result.error.format(),
+        code: "VALIDATION_ERROR",
         success: false
       });
+      return;
     }
+    const { name, email, password, role } = req.body;
+    const existingUser = await prisma.user.findUnique({
+      where: { email },
+      select: { id: true }
+    });
+
+    if (existingUser) {
+      res.status(409).json({
+        message: `User already exists with this email : ${email}`,
+        code: "INVALID"
+      });
+    }
+    const passwordHash = await bcrypt.hash(password, 10);
+    const verificationCode = Math.floor(
+      100000 + Math.random() * 900000
+    ).toString();
+
+    const user = await prisma.user.create({
+      data: {
+        name: name,
+        password: passwordHash,
+        email: email,
+        role: role,
+        verificationCode,
+        verificationExpires: new Date(Date.now() + 10 * 60 * 1000)
+      },
+      select: {
+        id: true,
+        name: true,
+        email: true,
+        role: true
+      }
+    });
+    try {
+      const serviceFor = "emailService";
+      const emailResult = await RequestVerification(
+        email,
+        name,
+        verificationCode,
+        serviceFor
+      );
+
+      res.status(201).json({
+        message:
+          "Please verify your account by entering the code sent to you email : " +
+          email,
+        success: true,
+        data: user
+      });
+      return;
+    } catch (emailError) {
+      console.error("Email verification error:", emailError);
+      res.status(201).json({
+        success: true,
+        message:
+          "Account created successfully, but verification email could not be sent. Please contact support.",
+        code: "EMAIL_SEND_FAILED",
+        data: user
+      });
+      return;
+    }
+  } catch (err) {
+    console.error("ERROR :", err);
+    res.status(500).json({
+      message: "Error Sign up, Please try again later",
+      code: "SIGNUP_FAILED",
+      success: false
+    });
   }
-);
+});
 
 authRouter.post("/signin", async (req: Request, res: Response) => {
   try {
@@ -366,6 +362,7 @@ authRouter.post("/verify-email", async (req: Request, res: Response) => {
       }
     });
     res.status(200).json({
+      success: true,
       message: "Email verified successfully",
       code: "EMAIL_VERIFIED"
     });
@@ -476,7 +473,7 @@ authRouter.post("/resend-code", async (req: Request, res: Response) => {
       console.error("Email service error:", emailError);
       res.status(500).json({
         success: false,
-        message: "Failed to send verification email. Please try again later.",
+        message: "Failed to send verification code. Please try again later.",
         code: "EMAIL_SEND_FAILED"
       });
       return;
@@ -824,5 +821,107 @@ authRouter.post("/logout", userAuth, async (req: Request, res: Response) => {
     });
   }
 });
+
+//update user
+authRouter.put(
+  "/update-profile",
+  userAuth,
+  async (req: Request, res: Response) => {
+    try {
+      // Validate input using Zod
+      const result = updateUserValidation.safeParse(req.body);
+      if (!result.success) {
+        res.status(400).json({
+          message: "Invalid Input",
+          errors: result.error.format(),
+          code: "VALIDATION_ERROR",
+          success: false
+        });
+        return;
+      }
+
+      // Get user ID from the authenticated user (assuming userAuth middleware adds user to req)
+      const userId = (req as any).user?.id; // Adjust based on your auth middleware structure
+
+      if (!userId) {
+        res.status(401).json({
+          message: "User not authenticated",
+          code: "UNAUTHORIZED",
+          success: false
+        });
+        return;
+      }
+
+      // Check if user exists and get current password hash
+      const existingUser = await prisma.user.findUnique({
+        where: { id: userId },
+        select: { id: true, name: true, email: true, password: true }
+      });
+
+      if (!existingUser) {
+        res.status(404).json({
+          message: "User not found",
+          code: "USER_NOT_FOUND",
+          success: false
+        });
+        return;
+      }
+
+      const { currentPassword, name, password } = req.body;
+
+      // Verify current password
+      const isCurrentPasswordValid = await bcrypt.compare(
+        currentPassword,
+        existingUser.password
+      );
+      if (!isCurrentPasswordValid) {
+        res.status(401).json({
+          message: "Current password is incorrect",
+          code: "INVALID_PASSWORD",
+          success: false
+        });
+        return;
+      }
+
+      // Prepare update data
+      const updateData: any = {};
+
+      if (name) {
+        updateData.name = name;
+      }
+
+      if (password) {
+        // Hash the new password
+        updateData.password = await bcrypt.hash(password, 10);
+      }
+
+      // Update user in database
+      const updatedUser = await prisma.user.update({
+        where: { id: userId },
+        data: updateData,
+        select: {
+          id: true,
+          name: true,
+          email: true,
+          role: true
+        }
+      });
+
+      res.status(200).json({
+        message: "User profile updated successfully",
+        success: true,
+        data: updatedUser
+      });
+      return;
+    } catch (err) {
+      console.error("ERROR :", err);
+      res.status(500).json({
+        message: "Error updating profile, Please try again later",
+        code: "UPDATE_FAILED",
+        success: false
+      });
+    }
+  }
+);
 
 export default authRouter;

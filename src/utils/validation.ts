@@ -7,6 +7,7 @@ interface User {
   role: string;
 }
 
+//Create user
 export const signupValidation = z.object({
   name: z.string().min(1, { message: "Invalid first name or last name" }),
   email: z.string().email({ message: "Invalid email address" }),
@@ -25,6 +26,33 @@ export const signupValidation = z.object({
     ),
   role: z.string().min(1, { message: "Please select a role" })
 });
+
+//update user
+export const updateUserValidation = z
+  .object({
+    currentPassword: z
+      .string()
+      .min(1, { message: "Current password is required" }),
+    name: z.string().min(1, { message: "Invalid name" }).optional(),
+    password: z
+      .string()
+      .min(1)
+      .refine(
+        (val) =>
+          z
+            .string()
+            .refine(() => true)
+            .safeParse(val).success &&
+          require("validator").isStrongPassword(val),
+        {
+          message: "Enter a strong password"
+        }
+      )
+      .optional()
+  })
+  .refine((data) => data.name || data.password, {
+    message: "At least one field (name or password) must be provided"
+  });
 
 // create project validation
 export const createProjectValidation = z
