@@ -282,6 +282,129 @@ authRouter.post("/signin", async (req: Request, res: Response) => {
   }
 });
 
+//request verify email
+authRouter.post(
+  "/request-verify-email",
+  async (req: Request, res: Response) => {
+    try {
+      const { email } = req.body;
+
+      if (!email || typeof email !== "string") {
+        res.status(400).json({
+          message: "Email is required",
+          code: "EMAIL_MISSING_FIELD"
+        });
+        return;
+      }
+
+      if (!validator.isEmail(email)) {
+        res.status(400).json({
+          success: false,
+          message: "Please enter a valid email address",
+          code: "INVALID_EMAIL"
+        });
+        return;
+      }
+
+      // Find the user
+      const user = await prisma.user.findUnique({
+        where: { email },
+        select: {
+          id: true,
+          name: true,
+          email: true,
+          isVerified: true
+        }
+      });
+
+      if (!user) {
+        res.status(200).json({
+          success: true,
+          message:
+            "If your email exists in our system, a verification code has been sent.",
+          code: "VERIFICATION_CODE_REQUESTED"
+        });
+        return;
+      }
+
+      if (user.isVerified) {
+        res.status(400).json({
+          success: false,
+          message: "Email is already verified",
+          code: "EMAIL_ALREADY_VERIFIED"
+        });
+        return;
+      }
+
+      // Generate a new verification code
+      const verificationCode = Math.floor(
+        100000 + Math.random() * 900000
+      ).toString();
+
+      // Update the user with new verification code
+      await prisma.user.update({
+        where: { email },
+        data: {
+          verificationCode,
+          verificationExpires: new Date(Date.now() + 10 * 60 * 1000) // 10 minutes
+        }
+      });
+
+      try {
+        // Send the email
+        const serviceFor = "emailService";
+        const emailResult = await RequestVerification(
+          email,
+          user.name,
+          verificationCode,
+          serviceFor
+        );
+
+        if (!emailResult.success) {
+          console.error(
+            "Failed to send verification email:",
+            emailResult.message
+          );
+          res.status(500).json({
+            success: false,
+            message:
+              "Failed to send verification email. Please try again later.",
+            code: "EMAIL_SEND_FAILED"
+          });
+          return;
+        }
+
+        res.status(200).json({
+          message: "Verification code has been sent to your email",
+          success: true,
+          code: "VERIFICATION_CODE_SENT"
+        });
+        return;
+      } catch (emailError) {
+        console.error("Email service error:", emailError);
+        res.status(500).json({
+          success: false,
+          message: "Failed to send verification code. Please try again later.",
+          code: "EMAIL_SEND_FAILED"
+        });
+        return;
+      }
+    } catch (err) {
+      const errorId = Math.random().toString(36).substring(2, 9);
+      res.status(500).json({
+        message: "Internal server error",
+        success: false,
+        code: "INTERNAL_SERVER_ERROR",
+        errorId,
+        ...(process.env.NODE_ENV !== "production" && {
+          details: err instanceof Error ? err.message : "Unknown error"
+        })
+      });
+      return;
+    }
+  }
+);
+
 //verify email
 authRouter.post("/verify-email", async (req: Request, res: Response) => {
   const { email, code } = req.body;
